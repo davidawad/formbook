@@ -562,7 +562,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Appellate Panel of The Ninth Circuit](courts/ninth-circuit/bankruptcy-appellate-panel) | `bap9` | up for review | 3/3 | — | 3/3 | 14 |
-| [Court of Appeals for the Ninth Circuit](courts/ninth-circuit/court-of-appeals) | `ca9` | up for review | 3/3 | 3/3 | 3/3 | 100 |
+| [Court of Appeals for the Ninth Circuit](courts/ninth-circuit/court-of-appeals) | `ca9` | up for review | 4/4 | 3/3 | 4/4 | 100 |
 
 ### Alaska
 
@@ -874,10 +874,10 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Sixth Circuit | 100 | 100 | 100 | 100 | 96 | 96 | 96.0% | 100 |
 | Seventh Circuit | 65 | 65 | 65 | 65 | 65 | 65 | 100.0% | 65 |
 | Eighth Circuit | 134 | 134 | 134 | 134 | 133 | 133 | 99.2% | 134 |
-| Ninth Circuit | 212 | 212 | 211 | 211 | 208 | 208 | 98.1% | 211 |
+| Ninth Circuit | 213 | 213 | 212 | 212 | 209 | 209 | 98.1% | 212 |
 | Tenth Circuit | 106 | 106 | 106 | 106 | 103 | 103 | 97.1% | 106 |
 | Eleventh Circuit | 129 | 129 | 129 | 129 | 128 | 128 | 99.2% | 129 |
 | D.C. Circuit | 14 | 14 | 14 | 14 | 14 | 14 | 100.0% | 14 |
 | Fifth Circuit | 5 | 5 | 5 | 5 | 5 | 5 | 100.0% | 5 |
-| **Total** | 1194 | 1194 | 1193 | 1193 | 1178 | 1178 | 98.6% | 1193 |
+| **Total** | 1195 | 1195 | 1194 | 1194 | 1179 | 1179 | 98.6% | 1194 |
 <!-- tracker:end -->

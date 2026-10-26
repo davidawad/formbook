@@ -1,0 +1,791 @@
+-- ca9.lua (docx engine): a ca9 motion, response or reply (FRAP 27) as Word paragraphs and sections (typst:
+-- ca9-motion-brief.typ). Scaffolded from ../answering-brief/docx/ca9.lua and changed where a motion differs, as the
+-- typst template does: the word limit is FRAP 27(d)(2) by `motion_kind`; the tables of contents and authorities are
+-- written only with `tables: true` or over 2,500 words; the certificate of compliance is FRAP 32(g)(1) in Form 6
+-- wording; the statement of related cases only when the metadata has `related_cases`. pandoc writes the body text (paragraphs, quotations, lists,
+-- footnotes) with
+-- docx/reference.docx; this filter writes what needs Word formatting:
+--   * the cover (FRAP 32(a)(2)), the table of contents, the table of authorities, the signature block, the
+--     statement of related cases (Form 17), the certificate of compliance (Form 8), the certificate of service
+--     (Form 15) and the addendum (Circuit Rule 28-2.7), as paragraphs with explicit spacing, indents and tabs;
+--   * the heading labels (I., A., 1., a. in the Argument; A., 1., a., (1) elsewhere) and each heading's outline
+--     level (Heading 1-5 styles, so the PDF has bookmarks);
+--   * the pages in the two tables. fb render (tools/fb/src/docxpass.rs) renders the document once, finds the page of every heading and
+--     citation in that PDF (the needles this filter writes), and renders again with those pages (the pages file
+--     this filter reads);
+--   * the sections whose footers number the pages: cover (none), front matter (i, ii ...), body and
+--     certificates (1, 2 ...), addendum (Add-1 ...). fb render writes the footers; this filter writes the last section (FORMBOOK_FINAL).
+-- Word may paginate slightly differently from the LibreOffice PDF the page numbers come from (docs/DOCX.md).
+
+local TOC_DEPTH = 5    -- heading levels listed in the table of contents (typst: toc-depth; all five argument levels)
+local PASSIM = 7       -- an authority cited on this many pages or more is "passim" (typst: passim-threshold)
+local LIMITS = {       -- FRAP 27(d)(2): the most words by `motion_kind` (typst: motion-limits)
+  motion = { 5200, "27(d)(2)(A)" }, response = { 5200, "27(d)(2)(A)" }, reply = { 2600, "27(d)(2)(C)" } }
+local TABLES_OVER = 2500 -- Circuit Advisory Committee Note (1) to Rule 27-1 (typst: words > 2500)
+local TAB = 720        -- half an inch (para-indent, label width), in twips
+local TEXT_W = 9360    -- the text width, 6.5 in
+local TAB_R = 9360     -- the right tab of the tables: at the margin (typst sets the page numbers flush with it)
+local PNUM_TOC = 720   -- the column the contents' page numbers keep to themselves (latex: \ca@rtoc, 36 bp)
+local PNUM_TOA = 1120  -- the column of the authorities' page lists (latex: \ca@rtoa, 56 bp)
+local HALF_W = 4680    -- the middle of the text: designations, counsel and signature blocks start here
+local SINGLE = 340     -- single-spaced material (headings, cover, tables, certificates): 17 pt line (typst pitch-single)
+local DOUBLE = 588     -- body text (reference.docx Body Text): 29.4 pt, 2.1 x 14 pt (CA9-FORM-003; typst pitch-double)
+local HEAD = 400       -- section headings: 20 pt line (typst pitch-heading)
+local HEAD_SZ = 32     -- section headings: 16 pt (half points; typst heading-size)
+-- Exact line spacing throughout: Word sets each line in a box of that height, the baseline at 0.8 of it, which is
+-- the layout the typst and LaTeX engines reproduce (docs/EVAL-LOOP.md, "Cross-engine gate"). Spacing between
+-- paragraphs is the larger of the one's after and the next one's before, and is dropped at the top of a page.
+local NEEDLE_MAX = 60  -- a needle is a prefix of the text (letters and digits only)
+
+local stringify = pandoc.utils.stringify
+
+-- ---------------------------------------------------------------------------
+-- XML helpers: the shared ones of the cross-engine layout model (lib/docx/xengine.lua: runs with the break rules
+-- of typst, paragraph properties in the schema's order, exact line spacing, the leader rows, the list items)
+-- ---------------------------------------------------------------------------
+
+local xe = require("docx.xengine")
+local runs, inl = xe.runs, xe.inl
+local para, raw, style, ind, jc = xe.para, xe.raw, xe.style, xe.ind, xe.jc
+local KEEP, LINES, BREAK, BR, LEAD = xe.KEEP, xe.LINES, xe.BREAK, xe.BR, xe.LEAD
+local list_items = xe.list_items
+
+-- Exact line spacing; single-spaced unless another pitch is given.
+local function spacing(before, after, line)
+  return xe.spacing(before, after, line or SINGLE)
+end
+
+-- A dot leader to the right margin (the page number follows the last tab).
+local function dot_tabs()
+  return xe.leader_tab(TAB_R)
+end
+
+-- A horizontal rule: an empty paragraph with a bottom border. `left`/`right` narrow it (the 2 in rules).
+local function rule(kind, before, left_right)
+  local b = kind == "double"
+      and '<w:pBdr><w:bottom w:val="thickThinSmallGap" w:sz="12" w:space="1" w:color="000000"/></w:pBdr>'
+      or '<w:pBdr><w:bottom w:val="single" w:sz="6" w:space="1" w:color="000000"/></w:pBdr>'
+  return para({ b, spacing(before, 0, 120), ind(left_right or 0, nil, nil, left_right or 0) }, "")
+end
+
+-- The paragraph that ends a section: its sectPr is the section's (footer, page number format and start).
+-- A section's properties: its footer (rIdFtrNone, rIdFtrPage or rIdFtrAdd, written by fb render), page number
+-- format and start, letter paper with 1 in margins.
+local function sect_pr(footer, fmt, start)
+  local pg = ""
+  if fmt then pg = '<w:pgNumType w:fmt="' .. fmt .. '" w:start="' .. (start or 1) .. '"/>' end
+  return '<w:sectPr><w:footerReference w:type="default" r:id="' .. footer .. '"/>'
+    .. '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" '
+    .. 'w:header="720" w:footer="676" w:gutter="0"/>' .. pg .. "</w:sectPr>"
+end
+
+-- The paragraph that ends a section and carries its properties.
+local function section(footer, fmt, start)
+  return raw('<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/>'
+    .. sect_pr(footer, fmt, start) .. "</w:pPr></w:p>")
+end
+
+local function group_digits(n)
+  local s = tostring(n)
+  local out = s:reverse():gsub("(%d%d%d)", "%1,"):reverse()
+  return (out:gsub("^,", ""))
+end
+
+-- ---------------------------------------------------------------------------
+-- Numbers, needles and pages
+-- ---------------------------------------------------------------------------
+
+local function roman(n)
+  local out = ""
+  for _, v in ipairs({ { 10, "X" }, { 9, "IX" }, { 5, "V" }, { 4, "IV" }, { 1, "I" } }) do
+    while n >= v[1] do
+      out = out .. v[2]
+      n = n - v[1]
+    end
+  end
+  return out
+end
+
+-- Letters and digits only, lower case: fb render (docxpages.rs) normalizes the PDF text the same way.
+local function norm(s)
+  return (s:lower():gsub("[^a-z0-9]", ""))
+end
+
+-- A needle: { id, kind, needle, fallback }. Kind B (body, in document order: moves the search on), N (inside a
+-- footnote: searched from the page the body has reached, moves nothing).
+local needles = {}
+-- The fallback is the text's first words (at least 8 letters and digits): a needle that runs over a page break
+-- is not found whole, because the page's footnotes come between its two halves in the PDF text.
+local function opening(text)
+  local out = ""
+  for w in text:gmatch("%S+") do
+    out = out .. norm(w)
+    if #out >= 8 then break end
+  end
+  return out:sub(1, NEEDLE_MAX)
+end
+
+local function need(id, kind, text, context)
+  local short = opening(text)
+  local long = norm(text .. " " .. (context or "")):sub(1, NEEDLE_MAX)
+  if short == "" then short = long end
+  needles[#needles + 1] = { id = id, kind = kind, needle = long, fallback = short }
+end
+
+-- The pages of the first pass: id -> { page, label }. Absent on the first pass itself.
+local labels = {}
+local function load_pages()
+  local path = os.getenv("FORMBOOK_PAGES")
+  if not path or path == "" then return end
+  local f = io.open(path, "r")
+  if not f then return end
+  for line in f:lines() do
+    local id, page, label = line:match("^([^\t]+)\t([^\t]*)\t(.*)$")
+    if id then labels[id] = { page = tonumber(page) or 0, label = label } end
+  end
+  f:close()
+end
+
+local function label_of(id)
+  local l = labels[id]
+  if l then return l.label end
+  return "00" -- the first pass: a placeholder of the final width
+end
+
+local function write_file(env, text)
+  local path = os.getenv(env)
+  if not path or path == "" then return end
+  local f = assert(io.open(path, "w"))
+  f:write(text)
+  f:close()
+end
+
+-- ---------------------------------------------------------------------------
+-- Headings
+-- ---------------------------------------------------------------------------
+
+-- The label of a numbered heading (typst heading-label). The Argument: I. / A. / 1. / a.; elsewhere: A. / 1. / a. / (1).
+local function label(level, n, arg)
+  if arg then
+    if level == 2 then return roman(n) .. "." end
+    if level == 3 then return string.char(64 + n) .. "." end
+    if level == 4 then return n .. "." end
+    return string.char(96 + n) .. "."
+  end
+  if level == 2 then return string.char(64 + n) .. "." end
+  if level == 3 then return n .. "." end
+  if level == 4 then return string.char(96 + n) .. "." end
+  return "(" .. n .. ")"
+end
+
+-- The indent of a sub-heading's label, in half inches (latex: \ca@subhead): the Argument's point is centered.
+local function step(level, arg)
+  if arg then return level - 2 end
+  return level - 1
+end
+
+local function hstyle(level)
+  return style("Heading" .. level)
+end
+
+-- A section heading (level 1, the tables, the certificates): bold capitals, centered (CA9-FORM-009).
+-- `top`: the heading opens a page (no space above); `brk`: it also breaks the page (not after a section break).
+-- typst `space`: the spacing above and below each kind of heading, in twips (21 / 15.4, 16.8 / 14, 15.4 / 12.6 pt).
+local SPACE = {
+  section = { 420, 308 },
+  point = { 336, 280 },
+  sub = { 308, 252 },
+  plain = { 336, 252 },
+}
+
+local function section_heading(text, top, brk, plain)
+  return para({ plain and "" or hstyle(1), KEEP, brk and BREAK or "", spacing(top and 0 or SPACE.section[1], SPACE.section[2], HEAD),
+    ind(0, nil, 0), jc("center") }, runs(text:upper(), { b = true, sz = HEAD_SZ }))
+end
+
+-- A body heading (latex: \ca@hone .. \ca@hfive).
+local function heading_xml(level, content, lab, arg)
+  if level == 1 then return section_heading(stringify(content), false) end
+  if arg and level == 2 then
+    return para({ hstyle(2), KEEP, spacing(SPACE.point[1], SPACE.point[2]), ind(0, nil, 0), jc("center") },
+      runs(lab .. " ", { b = true }) .. inl(content, { b = true }))
+  end
+  local k = step(level, arg)
+  local o = { b = true, i = level >= 4 }
+  return para({ hstyle(level), KEEP, spacing(SPACE.sub[1], SPACE.sub[2]), ind(TAB * (k + 1), TAB) },
+    runs(lab .. "\t", o) .. inl(content, o))
+end
+
+-- One row of a table of contents (typst listing-row): label, title, a dot leader from the end of the title and the
+-- page. The title wraps before the page column (the right indent); the right tab sits beyond it.
+local function toc_row(item)
+  local title = item.level == 1 and item.title:upper() or item.title
+  local left, hanging, lead = 0, nil, ""
+  if item.label then
+    left, hanging = TAB * item.step + TAB, TAB
+    lead = runs(item.label .. "\t", {})
+  end
+  return para({ LINES, dot_tabs(), spacing(item.level == 1 and 168 or 98, 0), ind(left, hanging, nil, PNUM_TOC) },
+    lead .. runs(title .. LEAD .. label_of(item.id), {}))
+end
+
+-- ---------------------------------------------------------------------------
+-- The table of authorities (latex: toa_block)
+-- ---------------------------------------------------------------------------
+
+local GROUPS = {
+  { "case", "Cases:" },
+  { "constitution", "Constitutional Provisions:" },
+  { "statute", "Statutes:" },
+  { "regulation", "Regulations:" },
+  { "rule", "Rules:" },
+  { "other", "Other Authorities:" },
+}
+
+local occurrences = {} -- the authority links, in document order: { key, index }
+
+local function sort_key(a)
+  local s = a.sort and stringify(a.sort) or (stringify(a.name or "") .. " " .. stringify(a.cite))
+  return (s:lower():gsub("[^a-z0-9 ]", ""))
+end
+
+local function toa_rows(authorities)
+  local used = {}
+  for _, o in ipairs(occurrences) do used[o.key] = true end
+  local out = {}
+  for _, g in ipairs(GROUPS) do
+    local members = {}
+    for key, a in pairs(authorities) do
+      if used[key] and a.kind and stringify(a.kind) == g[1] then
+        members[#members + 1] = { key = key, a = a, sort = sort_key(a) }
+      end
+    end
+    if #members > 0 then
+      table.sort(members, function(x, y)
+        if x.sort ~= y.sort then return x.sort < y.sort end
+        return x.key < y.key
+      end)
+      -- the group title; the first one carries the column heading "Page(s)" at the right margin (typst toa-section)
+      local head = runs(g[2], { b = true })
+      if #out == 0 then head = head .. runs("\t", {}) .. runs("Page(s)", { b = true, u = true }) end
+      out[#out + 1] = para({ KEEP, '<w:tabs><w:tab w:val="right" w:pos="' .. TAB_R .. '"/></w:tabs>',
+        spacing(#out == 0 and 280 or 392, 56) }, head)
+      for _, m in ipairs(members) do
+        -- the distinct pages of the authority, in page order
+        local pages, seen = {}, {}
+        for _, o in ipairs(occurrences) do
+          if o.key == m.key then
+            local l = labels["T:" .. o.index]
+            local k = l and l.page or -o.index
+            if not seen[k] then
+              seen[k] = true
+              pages[#pages + 1] = { page = l and l.page or 0, label = l and l.label or "00" }
+            end
+          end
+        end
+        table.sort(pages, function(x, y) return x.page < y.page end)
+        local list
+        local list_w = 0
+        if #pages >= PASSIM then
+          list = runs("passim", { i = true })
+        else
+          local l = {}
+          for _, p in ipairs(pages) do l[#l + 1] = p.label end
+          list = runs(table.concat(l, ", "), {})
+          -- a list wider than the column widens the column (typst: the larger of 56 pt and the list): Times New
+          -- Roman digits are 0.5 em (140 twips at 14 pt), a comma and a space 0.25 em each
+          local s = table.concat(l, ", ")
+          list_w = 0
+          for c in s:gmatch(".") do list_w = list_w + (c:match("%d") and 140 or 70) end
+        end
+        local name = ""
+        if m.a.name then
+          name = inl(m.a.name, { i = g[1] == "case" }) .. runs(",", {}) .. BR
+        end
+        out[#out + 1] = para({ LINES, dot_tabs(), spacing(196, 0), ind(504, 504, nil, math.max(PNUM_TOA, list_w)) },
+          name .. inl(m.a.cite, {}) .. runs(LEAD, {}) .. list)
+      end
+    end
+  end
+  return table.concat(out)
+end
+
+-- ---------------------------------------------------------------------------
+-- Cover (lib/typst/ca9-cover.typ, latex: the cover)
+-- ---------------------------------------------------------------------------
+
+local function need_meta(meta, k)
+  if meta[k] == nil then error("ca9.lua: missing required metadata field `" .. k .. "`") end
+  return meta[k]
+end
+
+-- Lines a text takes in a column of `chars` characters (an estimate: Times New Roman 14 pt averages about
+-- 6.3 pt a character, so 6.5 in holds about 74).
+local function est_lines(text, chars)
+  return math.max(1, math.ceil(#stringify(text) / chars))
+end
+
+local function cover(meta)
+  local sides = need_meta(meta, "caption")
+  local counsel = need_meta(meta, "counsel")
+  -- The gap between the cover's parts is the largest that keeps it on one page (typst: ca9-cover); the type
+  -- size and line pitch never shrink. 9 in of text height = 648 pt, less a safety margin for the estimate.
+  local lines = 1 + 2 + est_lines(need_meta(meta, "proceeding"), 70) + est_lines(need_meta(meta, "brief_title"), 60)
+  if meta.district_court_case or meta.judge then lines = lines + 1 end
+  for i, side in ipairs(sides) do
+    for _, n in ipairs(side.names) do lines = lines + est_lines(n, 70) end
+    lines = lines + 1 + (i < #sides and 1 or 0)
+  end
+  for _, g in ipairs(counsel) do
+    for _, n in ipairs(g.names or {}) do lines = lines + est_lines(n, 32) end
+    for _, l in ipairs(g.lines or {}) do lines = lines + est_lines(l, 32) end
+  end
+  lines = lines + 1 -- the telephone
+  local free = (612 - lines * SINGLE / 20 - 6 * 6) * 20 -- twips left for the 12 gaps
+  local gap = math.max(0, math.min(320, math.floor(free / 12.6)))
+
+  local out = {}
+  local function add(x) out[#out + 1] = x end
+  add(para({ KEEP, spacing(0, 0), jc("center") }, runs("No. ", { b = true }) .. inl(meta.case_number, { b = true })))
+  add(rule("double", math.floor(gap * 0.6)))
+  -- the court's name on two lines, broken after APPEALS (lib/typst/ca9-cover.typ)
+  add(para({ spacing(gap, 0), jc("center") },
+    runs("IN THE UNITED STATES COURT OF APPEALS", { b = true }) .. BR .. runs("FOR THE NINTH CIRCUIT", { b = true })))
+  add(rule("short", gap, 3240))
+  for i, side in ipairs(sides) do
+    for k, n in ipairs(side.names) do
+      add(para({ spacing((i == 1 and k == 1) and gap or 0, 0), jc("center") }, inl(n, {})))
+    end
+    add(para({ spacing(0, 0), ind(HALF_W) }, inl(side.designation, {})))
+    if i < #sides then
+      add(para({ spacing(math.floor(gap * 0.3), math.floor(gap * 0.3)), jc("center") }, runs("v.", {})))
+    end
+  end
+  add(rule("short", gap, 3240))
+  add(para({ spacing(gap, 0), jc("center") }, inl(meta.proceeding, {})))
+  if meta.district_court_case or meta.judge then
+    local x = ""
+    if meta.district_court_case then x = runs("D.C. No. ", {}) .. inl(meta.district_court_case, {}) end
+    if meta.district_court_case and meta.judge then x = x .. runs("; ", {}) end
+    if meta.judge then x = x .. inl(meta.judge, {}) end
+    add(para({ spacing(0, 0), jc("center") }, x))
+  end
+  add(rule("short", gap, 3240))
+  add(para({ spacing(gap, 0), jc("center") }, inl(meta.brief_title, { b = true, caps = true })))
+  add(rule("short", gap, 3240))
+  -- counsel (FRAP 32(a)(2)(F)): name, office address and telephone number
+  for gi, g in ipairs(counsel) do
+    local first = true
+    local function cl(body, first_ind)
+      add(para({ LINES, spacing(first and (gi == 1 and gap or 100) or 0, 0), ind(HALF_W, nil, first_ind) }, body))
+      first = false
+    end
+    for _, n in ipairs(g.names or {}) do cl(inl(n, {})) end
+    local ls = {}
+    for _, l in ipairs(g.lines or {}) do ls[#ls + 1] = l end
+    if g.phone then ls[#ls + 1] = g.phone elseif gi == #counsel then ls[#ls + 1] = need_meta(meta, "phone") end
+    for _, l in ipairs(ls) do cl(inl(l, { i = true }), 140) end -- typst: half an em in
+  end
+  add(rule("double", gap))
+  local blocks = {}
+  for _, x in ipairs(out) do blocks[#blocks + 1] = raw(x) end
+  return blocks
+end
+
+-- ---------------------------------------------------------------------------
+-- Signature blocks and certificates (latex: the signature block, Forms 17, 8 and 15)
+-- ---------------------------------------------------------------------------
+
+local function signature(meta)
+  local sig = need_meta(meta, "signature")
+  local signer = stringify(need_meta(sig, "signer"))
+  local out = {}
+  -- typst signature-block: "Respectfully submitted," then 16.8 pt, the signature and the signer's lines in the right
+  -- half (each further line 0.5 em in), then 11.2 pt and the date at the margin
+  out[#out + 1] = para({ KEEP, spacing(392, 0), ind(HALF_W) }, runs("Respectfully submitted,", {}))
+  out[#out + 1] = para({ KEEP, spacing(336, 0), ind(HALF_W) }, runs("s/ " .. signer, {}))
+  out[#out + 1] = para({ KEEP, spacing(0, 0), ind(HALF_W) }, runs(signer:upper(), {}))
+  for _, l in ipairs(sig.lines or {}) do
+    out[#out + 1] = para({ KEEP, spacing(0, 0), ind(HALF_W, nil, 140) }, inl(l, { i = true }))
+  end
+  if meta.date then
+    out[#out + 1] = para({ LINES, spacing(224, 0), ind(0) }, inl(meta.date, {}))
+  end
+  return table.concat(out)
+end
+
+-- The signature under a court form (typst form-sig-line): two columns, "s/ Name" over "Signature" at the margin and
+-- the date over "Date" in the right one (the columns are 1fr with a 1 em gutter: the right one starts 241 pt in).
+local FORM_COL = 4820
+local function form_signature(meta)
+  local signer = stringify(meta.signature.signer)
+  local tab = '<w:tabs><w:tab w:val="left" w:pos="' .. FORM_COL .. '"/></w:tabs>'
+  local date = meta.date and inl(meta.date, {}) or ""
+  return para({ KEEP, tab, spacing(448, 0), ind(0) }, runs("s/ " .. signer .. "\t", {}) .. date)
+    .. para({ LINES, tab, spacing(0, 0), ind(0) }, runs("Signature\tDate", {}))
+end
+
+local function case_line(meta)
+  return para({ spacing(0, 280), ind(0) }, runs("9th Cir. Case Number(s) ", {}) .. inl(meta.case_number, {}))
+end
+
+local function text_para(body, after)
+  return para({ spacing(0, after or 280), ind(0) }, body)
+end
+
+-- A row of a form (typst option-row): a drawn box (a bordered run: no symbol font, so no fallback face), X when
+-- selected, in a 1.6 em column; the text hangs under the text.
+local function option(checked, body, keep, indent)
+  indent = indent or 0
+  local box = runs(checked and "X" or "\u{00A0}\u{00A0}\u{00A0}", { box = true })
+  local left = indent + 448
+  local tabs, lead = "", ""
+  if indent > 0 then
+    tabs = '<w:tabs><w:tab w:val="left" w:pos="' .. indent .. '"/></w:tabs>'
+    lead = runs("\t", {})
+  end
+  return para({ keep and KEEP or LINES, tabs, spacing(224, 0), ind(left, left) }, lead .. box .. runs("\t", {}) .. body)
+end
+
+local function related_cases(meta)
+  local rc = meta.related_cases or {}
+  local status = rc.status and stringify(rc.status) or "none"
+  local out = { section_heading("Statement of Related Cases", true, true), case_line(meta),
+    text_para(runs("The undersigned attorney or self-represented party states the following:", {}), 0) }
+  out[#out + 1] = option(status == "none", runs("I am unaware of any related cases currently pending in this court.", {}))
+  out[#out + 1] = option(status == "other-briefs", runs("I am unaware of any related cases currently pending in this "
+    .. "court other than the case(s) identified in the initial brief(s) filed by the other party or parties.", {}))
+  out[#out + 1] = option(status == "pending", runs("I am aware of one or more related cases currently pending in "
+    .. "this court. The case number and name of each related case and its relationship to this case are:", {}), true)
+  if status == "pending" then
+    for _, c in ipairs(rc.cases or {}) do
+      out[#out + 1] = para({ KEEP, spacing(196, 0), ind(896, 448) }, runs("No. ", {}) .. inl(c.number, {})
+        .. runs(", ", {}) .. inl(c.name, { i = true }) .. runs(" (", {}) .. inl(c.relationship, {}) .. runs(").", {}))
+    end
+  end
+  out[#out + 1] = form_signature(meta)
+  return table.concat(out)
+end
+
+-- Certificate of compliance for a motion (FRAP 32(g)(1)), in Form 6 wording (typst certificate-of-compliance): each
+-- item's number in a half-inch box, its text hanging under the text.
+local function compliance(meta, words)
+  local lim = LIMITS[meta.motion_kind and stringify(meta.motion_kind) or "motion"]
+  local tool = meta.word_processor and (" using " .. stringify(meta.word_processor)) or ""
+  local function item(n, text)
+    return para({ LINES, spacing(0, 280), ind(TAB, TAB) }, runs(n .. ".\t" .. text, {}))
+  end
+  local out = { section_heading("Certificate of Compliance", true, true),
+    item(1, "This document complies with the word limit of Fed. R. App. P. " .. lim[2] .. " because, excluding the "
+      .. "parts of the document exempted by Fed. R. App. P. 32(f), this document contains " .. group_digits(words) .. " words."),
+    item(2, "This document complies with the typeface requirements of Fed. R. App. P. 32(a)(5) and the type-style "
+      .. "requirements of Fed. R. App. P. 32(a)(6) because this document has been prepared in a proportionally spaced "
+      .. "typeface" .. tool .. " in 14-point Times New Roman.") }
+  out[#out + 1] = form_signature(meta)
+  return table.concat(out)
+end
+
+local function service(meta)
+  local svc = meta.service or {}
+  local out = { section_heading("Certificate of Service", true, true), case_line(meta),
+    text_para(runs("I hereby certify that I electronically filed the foregoing/attached document(s) on this date with "
+      .. "the Clerk of the Court for the United States Court of Appeals for the Ninth Circuit using the Appellate "
+      .. "Electronic Filing system.", {})) }
+  if svc.unregistered and #svc.unregistered > 0 then
+    out[#out + 1] = text_para(runs("Service on Case Participants Who Are NOT Registered for Electronic Filing:", { b = true }))
+    out[#out + 1] = text_para(runs("I certify that I served the foregoing/attached document(s) on this date by hand "
+      .. "delivery, mail, third party commercial carrier for delivery within 3 calendar days, or, having obtained prior "
+      .. "consent, by email to the following unregistered case participants (list each name and mailing/email address):", {}), 0)
+    for _, u in ipairs(svc.unregistered) do
+      out[#out + 1] = para({ LINES, spacing(200, 0), ind(TAB) }, inl(u.name, {}) .. runs(", ", {}) .. inl(u.address, {}))
+    end
+  end
+  out[#out + 1] = para({ spacing(280, 280), ind(0) },
+    runs("Description of Document(s) (required for all documents):", { b = true }))
+  out[#out + 1] = para({ KEEP, spacing(0, 0), ind(0) }, inl(meta.brief_title, {}))
+  out[#out + 1] = form_signature(meta)
+  return table.concat(out)
+end
+
+-- ---------------------------------------------------------------------------
+-- Word count (latex ca9.lua: the same count, so every engine certifies the same number)
+-- ---------------------------------------------------------------------------
+
+local function words_in(s)
+  s = s:gsub("\194\160", " ")
+  local n = 0
+  for _ in s:gmatch("%S+") do n = n + 1 end
+  return n
+end
+
+local function count_words(blocks)
+  local n = 0
+  for _, b in ipairs(blocks) do
+    if b.t == "BulletList" or b.t == "OrderedList" then
+      for _, item in ipairs(b.content) do n = n + count_words(item) end
+    elseif b.t == "BlockQuote" then
+      n = n + count_words(b.content)
+    else
+      n = n + words_in(stringify(b))
+      pandoc.Pandoc({ b }):walk({ Note = function(note) n = n + count_words(note.content) end })
+    end
+  end
+  return n
+end
+
+-- ---------------------------------------------------------------------------
+-- Citations, in document order (the needles of the table of authorities)
+-- ---------------------------------------------------------------------------
+
+local scan_blocks
+
+local function scan_inlines(list, in_note)
+  for i, el in ipairs(list) do
+    if el.t == "Link" and el.target:match("^toa:") then
+      local key = el.target:sub(5)
+      occurrences[#occurrences + 1] = { key = key, index = #occurrences + 1 }
+      local rest = {}
+      for j = i + 1, #list do rest[#rest + 1] = list[j] end
+      need("T:" .. #occurrences, in_note and "N" or "B", stringify(el.content), stringify(rest))
+    elseif el.t == "Note" then
+      scan_blocks(el.content, true)
+    elseif el.content and type(el.content) ~= "string" and el.t ~= "Link" then
+      scan_inlines(el.content, in_note)
+    end
+  end
+end
+
+scan_blocks = function(blocks, in_note)
+  for _, b in ipairs(blocks) do
+    if b.t == "Para" or b.t == "Plain" then
+      scan_inlines(b.content, in_note)
+    elseif b.t == "BlockQuote" then
+      scan_blocks(b.content, in_note)
+    elseif b.t == "BulletList" or b.t == "OrderedList" then
+      for _, item in ipairs(b.content) do scan_blocks(item, in_note) end
+    end
+  end
+end
+
+local function strip_links(blocks)
+  return pandoc.Pandoc(blocks):walk({
+    Link = function(el)
+      if el.target:match("^toa:") then return el.content end
+      return nil
+    end,
+    Inlines = xe.inlines,
+  }).blocks
+end
+
+local function has_note(el)
+  local found = false
+  pandoc.Pandoc({ el }):walk({ Note = function() found = true end })
+  return found
+end
+
+-- The text a heading's needle continues with: the start of the block after it.
+local function next_text(blocks, i)
+  local b = blocks[i + 1]
+  if not b then return "" end
+  return stringify(b):sub(1, 40)
+end
+
+-- ---------------------------------------------------------------------------
+-- The document
+-- ---------------------------------------------------------------------------
+
+function Pandoc(doc)
+  load_pages()
+  local meta = doc.meta
+  for _, k in ipairs({ "case_number", "caption", "proceeding", "brief_title", "counsel", "phone", "signature" }) do
+    need_meta(meta, k)
+  end
+  local authorities = meta.authorities or {}
+
+  -- the body and the addendum
+  local body_in, add_in, in_add = {}, {}, false
+  for _, b in ipairs(doc.blocks) do
+    if not in_add and b.t == "Header" and b.level == 1 and norm(stringify(b.content)) == "addendum" then
+      in_add = true
+    elseif in_add then
+      add_in[#add_in + 1] = b
+    else
+      body_in[#body_in + 1] = b
+    end
+  end
+  local words = count_words(body_in)
+  local kind = meta.motion_kind and stringify(meta.motion_kind) or "motion"
+  local lim = LIMITS[kind]
+  if not lim then error("ca9.lua: motion_kind must be motion, response or reply, not " .. kind) end
+  if words > lim[1] then
+    error("ca9.lua: the " .. kind .. " has " .. words .. " words; FRAP " .. lim[2] .. " allows " .. lim[1])
+  end
+  local tables = words > TABLES_OVER
+  if meta.tables ~= nil then tables = meta.tables == true or stringify(meta.tables) == "true" end
+
+  if tables then
+    need("S:toc", "B", "Table of Contents", "Page")
+    need("S:toa", "B", "Table of Authorities", "Page(s)")
+  end
+
+  -- The body's first page: its first heading, or (a motion often has none) its first paragraph.
+  local body_start = "H:1"
+  if body_in[1] and body_in[1].t ~= "Header" then
+    body_start = "S:body"
+    need(body_start, "B", stringify(body_in[1]):sub(1, 80), "")
+  end
+
+  -- The body, in order: headings (labels, outline, needles, contents entries) and citations (needles).
+  local headings = {}
+  local body = {}
+  local in_arg = false
+  local counts = { 0, 0, 0, 0, 0, 0 }
+  local h_n = 0
+  for i, b in ipairs(body_in) do
+    if b.t == "Header" then
+      if b.level > 5 then error("ca9.lua: headings deeper than level 5 are not supported") end
+      counts[b.level] = counts[b.level] + 1
+      for k = b.level + 1, 6 do counts[k] = 0 end
+      if b.level == 1 then in_arg = norm(stringify(b.content)) == "argument" end
+      local lab = b.level == 1 and "" or label(b.level, counts[b.level], in_arg)
+      h_n = h_n + 1
+      local id = "H:" .. h_n
+      need(id, "B", lab .. stringify(b.content), next_text(body_in, i))
+      if b.level <= TOC_DEPTH then
+        local point = in_arg and b.level == 2
+        headings[#headings + 1] = { id = id, level = b.level, label = b.level > 1 and lab or nil,
+          title = stringify(b.content), step = point and 0 or step(b.level, in_arg) }
+      end
+      local x = heading_xml(b.level, b.content, lab, in_arg)
+      -- the body opens a section (a new page): Word keeps space above there, typst drops it at the top of a page
+      if #body == 0 then x = x:gsub('w:before="%d+"', 'w:before="0"', 1) end
+      body[#body + 1] = raw(x)
+    else
+      scan_blocks({ b }, false)
+      for _, x in ipairs(list_items(b)) do body[#body + 1] = x end
+    end
+  end
+  for _, o in ipairs(occurrences) do
+    if not authorities[o.key] then
+      error("ca9.lua: link `toa:" .. o.key .. "` has no entry under `authorities:` in the frontmatter")
+    end
+  end
+  -- the table of authorities' needle goes on with its first group title (the contents list the same title)
+  for _, g in ipairs(GROUPS) do
+    local used = false
+    for _, o in ipairs(occurrences) do
+      local a = authorities[o.key]
+      if a and a.kind and stringify(a.kind) == g[1] then used = true end
+    end
+    if used then
+      for _, n in ipairs(needles) do
+        if n.id == "S:toa" then n.needle = norm("Table of Authorities " .. g[2]):sub(1, NEEDLE_MAX) end
+      end
+      break
+    end
+  end
+  body = strip_links(body)
+  -- The last paragraph stays with the signature block (typst: the tail block is kept with the signature).
+  local last = body[#body]
+  if last and last.t == "Para" and not has_note(last) then
+    body[#body] = raw(para({ KEEP, spacing(0, 0, DOUBLE), ind(0, nil, TAB) }, inl(last.content, {})))
+  end
+
+  local svc = meta.service and meta.service.certificate
+  local with_service = svc == true or (svc ~= nil and stringify(svc) == "true")
+  -- Cir. R. 28-2.6 asks for the statement in an initial brief; a later one carries it only when the metadata has it
+  local with_related = meta.related_cases ~= nil
+  if with_related then need("H:related", "B", "Statement of Related Cases", "9th Cir. Case Number") end
+  need("H:compliance", "B", "Certificate of Compliance", "This document complies")
+  if with_service then need("H:service", "B", "Certificate of Service", "9th Cir. Case Number") end
+
+  -- The addendum: unnumbered headings; its level-2 headings are listed in its own contents.
+  local add_items, add_body = {}, {}
+  if #add_in > 0 then
+    need("S:add", "B", "Addendum", "Table of Contents")
+    for i, b in ipairs(add_in) do
+      if b.t == "Header" then
+        local id = "A:" .. i
+        if b.level == 2 then
+          add_items[#add_items + 1] = { id = id, level = 2, title = stringify(b.content) }
+          need(id, "B", stringify(b.content), next_text(add_in, i))
+        end
+        -- typst: the addendum's headings are unnumbered: a section heading at level 1, a plain one below
+        if b.level == 1 then
+          add_body[#add_body + 1] = raw(section_heading(stringify(b.content), false))
+        else
+          add_body[#add_body + 1] = raw(para({ hstyle(math.min(b.level, 5)), KEEP,
+            spacing(SPACE.plain[1], SPACE.plain[2]), ind(0, nil, 0) }, inl(b.content, { b = true })))
+        end
+      else
+        scan_blocks({ b }, false)
+        for _, x in ipairs(list_items(b)) do add_body[#add_body + 1] = x end
+      end
+    end
+    add_body = strip_links(add_body)
+  end
+  local nl = {}
+  for _, n in ipairs(needles) do nl[#nl + 1] = table.concat({ n.id, n.kind, n.needle, n.fallback }, "\t") end
+  -- how fb render labels pages: each section starts at the page of a needle (format, prefix)
+  if tables then nl[#nl + 1] = "#section\tS:toc\tlower-roman\t" end
+  nl[#nl + 1] = "#section\t" .. body_start .. "\tdecimal\t"
+  if #add_in > 0 then nl[#nl + 1] = "#section\tS:add\tdecimal\tAdd-" end
+  write_file("FORMBOOK_NEEDLES", table.concat(nl, "\n") .. "\n")
+  -- the last section is the document's own sectPr: arabic from 1, or Add-1 when the addendum ends the brief
+  write_file("FORMBOOK_FINAL", sect_pr(#add_in > 0 and "rIdFtrAdd" or "rIdFtrPage", "decimal", 1))
+
+  local out = {}
+  local function add(x) out[#out + 1] = x end
+
+  -- Section 1: the cover (no page number)
+  for _, x in ipairs(cover(meta)) do add(x) end
+  add(section("rIdFtrNone"))
+
+  -- Section 2: the front matter (i, ii ...): the table of contents, the table of authorities; only with the tables
+  if tables then
+  -- typst toc-section: the title (a section heading that is not itself listed) and "Page" over the page column
+  add(raw(section_heading("Table of Contents", true, false, true)))
+  add(raw(para({ KEEP, spacing(84, 0), ind(0, nil, nil, 20), jc("right") }, runs("Page", { b = true, u = true })))) -- 1 pt in: LibreOffice lets the underlined word overhang its advance
+  local items = { { id = "S:toa", level = 1, title = "Table of Authorities" } }
+  for _, h in ipairs(headings) do items[#items + 1] = h end
+  if with_related then items[#items + 1] = { id = "H:related", level = 1, title = "Statement of Related Cases" } end
+  items[#items + 1] = { id = "H:compliance", level = 1, title = "Certificate of Compliance" }
+  if with_service then items[#items + 1] = { id = "H:service", level = 1, title = "Certificate of Service" } end
+  if #add_in > 0 then items[#items + 1] = { id = "S:add", level = 1, title = "Addendum" } end
+  for _, it in ipairs(items) do add(raw(toc_row(it))) end
+  add(raw(section_heading("Table of Authorities", true, true)))
+  add(raw(toa_rows(authorities)))
+  add(section("rIdFtrPage", "lowerRoman", 1))
+  end
+
+  -- Section 3: the body (1, 2 ...), the signature, and the statement and certificates, which continue its numbering
+  for _, x in ipairs(body) do add(x) end
+  add(raw(signature(meta)))
+  if with_related then add(raw(related_cases(meta))) end
+  add(raw(compliance(meta, words)))
+  if with_service then add(raw(service(meta))) end
+
+  -- Section 4: the addendum (Add-1 ...), with its own contents; FORMBOOK_FINAL closes it with the last section's footer
+  if #add_in > 0 then
+    add(section("rIdFtrPage", "decimal", 1))
+    add(raw(section_heading("Addendum", true)))
+    add(raw(section_heading("Table of Contents", false, false, true)))
+    for _, it in ipairs(add_items) do
+      add(raw(para({ LINES, dot_tabs(), spacing(98, 0), ind(0, nil, nil, PNUM_TOC) }, runs(it.title .. LEAD .. label_of(it.id), {}))))
+    end
+    -- the items start on the page after the addendum's contents (typst and latex do the same)
+    if add_body[1] and add_body[1].t == "RawBlock" then
+      -- Word keeps the space above a paragraph that breaks the page; typst drops it at the top of a page
+      local x = add_body[1].text:gsub("<w:keepLines/>", "<w:keepLines/>" .. BREAK, 1):gsub('w:before="%d+"', 'w:before="0"', 1)
+      add_body[1] = raw(x)
+    else
+      add(raw(para({ BREAK, spacing(0, 0, 20) }, "")))
+    end
+    for _, x in ipairs(add_body) do add(x) end
+  end
+
+  doc.blocks = out
+  doc.meta.date = nil -- the date is printed by the signature blocks only, not by pandoc at the top
+  doc.meta.title = nil
+  return doc
+end
