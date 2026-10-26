@@ -134,6 +134,10 @@
   pad(left: caption-gutter, {
     line-block("Case No. " + meta.case_number)
     line-block(above: pitch-single, text(weight: "bold", inl(meta.brief_title)))
+    // An answer's dates and judge under the title ("Complaint Filed: July 17, 2026"), plain.
+    for (i, l) in meta.at("caption_lines", default: ()).enumerate() {
+      line-block(above: if i == 0 { pitch-single } else { 0pt }, inl(l))
+    }
     if "legend" in meta and meta.legend != none {
       line-block(above: pitch-single, text(weight: "bold", upper(meta.legend)))
     }
@@ -147,7 +151,15 @@
   counsel-block(meta)
   court-title(meta, calc.max(0pt, counsel-lines * pitch - drop - meta.counsel.len() * pitch-single))
   caption(meta)
-  pagebreak()
+  // An answer's body starts on the first page, on the numbered line after the one below the caption (the filed
+  // answers in usage/): the caption ends between lines, so snap to the line grid (lines start at the top margin). The
+  // marker block gives the caption's true end; `here()` inside the cross-engine line boxes does not.
+  block(width: 100%, height: 0pt, above: 0pt, below: 0pt, [#metadata(none) <answer-caption-end>])
+  context {
+    let y = locate(<answer-caption-end>).position().y
+    let past = calc.rem((y - top-margin) / 1pt, pitch / 1pt)
+    v(pitch * 2 - past * 1pt)
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -176,18 +188,31 @@
     content
   }))
 
-/// Numbered allegations. Each blank-line-separated chunk of markdown that is neither a heading nor a list is one
-/// numbered paragraph (Fed. R. Civ. P. 10(b)). Headings and lists are rendered unnumbered; a heading is sticky
-/// (kept with what follows it), as is the last block (kept with the signature block).
+/// The level-1 headings after which paragraphs are no longer numbered responses: the jury demand, the affirmative
+/// defenses and the prayer (the filed answers number only the paragraph-by-paragraph responses).
+#let unnumbered-from = regex("(?i)^#\\s+.*(affirmative defenses|jury|prayer)")
+
+/// An unnumbered paragraph: first-line indent, double spaced.
+#let plain-para(content, keep: false) = block(width: 100%, above: 0pt, below: 0pt, sticky: keep,
+  breakable: not keep, par(first-line-indent: (amount: para-indent, all: true), content))
+
+/// Numbered responses. Each blank-line-separated chunk of markdown that is neither a heading nor a list is one
+/// numbered paragraph (Fed. R. Civ. P. 10(b)), answering the complaint's paragraph of the same number, until a
+/// level-1 heading matching `unnumbered-from`; after it paragraphs are unnumbered. Headings and lists are rendered
+/// unnumbered; a heading is sticky (kept with what follows it), as is the last block (kept with the signature block).
 #let allegations(body) = {
   let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).map(c => c.trim()).filter(c => c != "")
   let n = 0
+  let numbered = true
   for (i, t) in chunks.enumerate() {
     let last = i == chunks.len() - 1
     if t.starts-with("#") {
+      if t.match(unnumbered-from) != none { numbered = false }
       md(t)
     } else if t.starts-with(regex("^(\\d+\\.|[-*+])[ \\t]")) {
       block(width: 100%, above: 0pt, below: 0pt, sticky: last, pad(left: list-indent, md(t)))
+    } else if not numbered {
+      plain-para(md(t), keep: last)
     } else {
       n += 1
       allegation(n, md(t), keep: last)
@@ -237,8 +262,8 @@
     else if it.level == 2 { align(center, it.body) }
     else { text(style: "italic", it.body) }
   })
-  // Prayer items are lettered (a), (b), ...
-  set enum(numbering: "(a)")
+  // Prayer items are numbered 1., 2., ... (the filed answers in usage/)
+  set enum(numbering: "1.")
 
   cover(meta)
 

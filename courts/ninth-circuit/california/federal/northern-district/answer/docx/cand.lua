@@ -2,7 +2,7 @@
 -- and breaks as typst/cand-answer.typ does (see ../README.md): the pleading page (27 numbered lines, the line
 -- numbers and rules, the footer with the page number, the paper's title and the case number; Civil L.R. 3-4(c)), the
 -- counsel block, the court title on line 8 and the caption (Civil L.R. 3-4(a)), the numbered allegations (Fed. R.
--- Civ. P. 10(b)), the headings, the lettered prayer items and the signature block. Everything printed comes from the
+-- Civ. P. 10(b)), the headings, the numbered prayer items and the signature block. Everything printed comes from the
 -- sample's frontmatter and body: no case text lives in this file. Caption and signature are OOXML tables; the line
 -- numbers and rules are page-anchored VML shapes in the footer, so they take no room in the text.
 --
@@ -160,6 +160,10 @@ local function cover(meta, out)
   local right = { p(xe.runs("Case No. ") .. xe.inl(meta.case_number)) }
   local function bold(x) right[#right + 1] = p(x, { before = SINGLE }) end
   bold(xe.inl(meta.brief_title, { b = true }))
+  -- an answer's dates and judge under the title, plain (typst caption_lines)
+  for i, l in ipairs(meta.caption_lines or {}) do
+    right[#right + 1] = p(xe.inl(l), { before = i == 1 and SINGLE or nil })
+  end
   if meta.legend then bold(xe.runs(pandoc.text.upper(plain(meta.legend)), { b = true })) end
   if meta.jury_demand then bold(xe.runs("DEMAND FOR JURY TRIAL", { b = true })) end
   local r = 'w:val="single" w:sz="6" w:space="0" w:color="000000"'
@@ -208,16 +212,17 @@ local function heading(el, brk)
     xe.jc(lvl <= 2 and "center" or "left") }, xe.inl(content, { b = true, i = lvl == 3 }))
 end
 
--- Prayer items: the label (a), (b), ... half an inch in, in a box of half an inch, the text hanging after it.
+-- Prayer items: the label 1., 2., ... half an inch in, in a box of half an inch, the text hanging after it. When the list is the last block every item keeps with the next, so the whole list
+-- moves with the signature block, as typst's sticky list block does.
 local function items(list, out, keep_last, brk)
   for j, item in ipairs(list.content) do
     if #item ~= 1 or (item[1].t ~= "Plain" and item[1].t ~= "Para") then
       error("cand.lua: a list item holds one paragraph")
     end
-    local lab = "(" .. string.char(96 + list.listAttributes.start + j - 1) .. ")"
+    local lab = (list.listAttributes.start + j - 1) .. "."
     out[#out + 1] = p(xe.runs(lab .. "\t") .. xe.inl(item[1].content),
       { line = BODY, left = 2 * INDENT, hanging = INDENT, tab = 2 * INDENT,
-        keep = keep_last and j == #list.content, brk = brk and j == 1 })
+        keep = keep_last, brk = brk and j == 1 })
   end
 end
 
@@ -265,20 +270,26 @@ function Pandoc(doc)
   doc.blocks = doc.blocks:walk({ Str = breaks }):walk({ Inlines = bind_double_signs })
   local out = {}
   cover(meta, out)
-  -- the body opens the second page with the unnumbered lead-in
-  local brk = true
+  -- an answer's body starts on the first page, one numbered line below the caption (typst v(pitch))
+  out[#out + 1] = p("", { line = BODY })
+  local brk = false
   if meta.lead_in then
-    out[#out + 1] = p(xe.inl(meta.lead_in), { line = BODY, first = INDENT, brk = true })
-    brk = false
+    out[#out + 1] = p(xe.inl(meta.lead_in), { line = BODY, first = INDENT })
   end
   local blocks = doc.blocks
   local n = 0
+  local numbered = true
   for i, b in ipairs(blocks) do
     local last = i == #blocks
     if b.t == "Header" then
+      -- after the jury demand, affirmative defenses or prayer heading, paragraphs are unnumbered (typst unnumbered-from)
+      local h = pandoc.text.lower(pandoc.utils.stringify(b.content))
+      if b.level == 1 and (h:find("affirmative defenses") or h:find("jury") or h:find("prayer")) then numbered = false end
       out[#out + 1] = heading(b, brk)
     elseif b.t == "OrderedList" or b.t == "BulletList" then
       items(b, out, last, brk)
+    elseif (b.t == "Para" or b.t == "Plain") and not numbered then
+      out[#out + 1] = p(xe.inl(b.content), { line = BODY, first = INDENT, keep = last })
     elseif b.t == "Para" or b.t == "Plain" then
       -- a numbered allegation: the number after the first-line indent, a tab to the next half inch, the text; the
       -- last paragraph stays whole with the signature block (typst: a sticky, unbreakable block)
