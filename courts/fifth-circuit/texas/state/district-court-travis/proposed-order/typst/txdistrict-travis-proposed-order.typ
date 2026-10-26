@@ -14,11 +14,14 @@
 #let box-mark = box(width: 0.7em, height: 0.7em, stroke: 0.6pt, baseline: 0.05em)
 
 /// The title between two horizontal rules (two of the three exemplars).
-#let order-title(meta) = block(width: 100%, above: sign-gap, below: sign-gap, {
-  line(length: 100%, stroke: 0.8pt)
-  block(width: 100%, above: 6pt, below: 6pt, single(align(center, strong(upper(inl(need(meta, "title")))))))
-  line(length: 100%, stroke: 0.5pt)
-})
+/// `title_underline: true` instead prints the title underlined with no rules, to match the other papers in a case.
+#let order-title(meta) = if meta.at("title_underline", default: false) == true { title-block(meta) } else {
+  block(width: 100%, above: sign-gap, below: sign-gap, {
+    line(length: 100%, stroke: 0.8pt)
+    block(width: 100%, above: 6pt, below: 6pt, single(align(center, strong(upper(inl(need(meta, "title")))))))
+    line(length: 100%, stroke: 0.5pt)
+  })
+}
 
 #let order-heading(level, t) = block(width: 100%, sticky: true, above: heading-gap, below: heading-gap, single({
   set text(weight: "bold")

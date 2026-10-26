@@ -42,3 +42,5 @@ Required frontmatter: `cause_number`, `judicial_district` (e.g. "459th"), `capti
 - Lib candidates: a non-bold small-caps caption option; `order-paper` in the lib is superseded by this template for new orders. Nothing in lib was changed.
 - Not read: the Standing Orders and individual judges' proposed-order procedures (rules.md gap).
 - `data/doctypes.json` already lists `proposed-order`; not edited.
+
+Option `title_underline: true` (added 2026-10-25): the title prints underlined, with no rules, so a set of papers in one case can match (the original-answer template has the same key).

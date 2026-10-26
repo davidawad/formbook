@@ -13,8 +13,13 @@
 
 #let rule-stroke = 1pt                 // style: the rules above and below the title (both exemplars)
 
+// `title_underline: true` instead prints the title underlined with no rules, to match the other papers in a case.
 #let title-rules(meta, default-title) = {
   let t = meta.at("title", default: default-title)
+  if meta.at("title_underline", default: false) == true {
+    return align(center, block(above: sign-gap, below: sign-gap, width: 100%,
+      single(strong(underline(offset: title-underline-offset, upper(inl(t)))))))
+  }
   block(width: 100%, above: sign-gap, below: sign-gap, stroke: (top: rule-stroke, bottom: rule-stroke),
     inset: (y: 0.4 * pitch-single), single(align(center, strong(upper(inl(t))))))
 }

@@ -78,3 +78,5 @@ Sample 1, 2 pp.: p.1 caption (parties wrap in the 47% column), title between rul
 ## Candidates for lib
 
 `title-rules` (title between two rules), `notice-signature` (attorney-in-charge label, `officials` column, per-attorney title and phone) and `notice-service` (optional recipients, own page) are defined in this folder's template; the proposed-order and notice-of-hearing papers may want the same. Also: a salutation-free `head` that takes a title between rules.
+
+Option `title_underline: true` (added 2026-10-25): the title prints underlined, with no rules, so a set of papers in one case can match (the original-answer template has the same key).
