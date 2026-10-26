@@ -28,6 +28,8 @@ Frontmatter (YAML), then the body. Unknown keys are ignored.
 | `caption` | yes | list of sides joined by "v.": `names` (bold capitals), `designation` (italic, optional) |
 | `title` | yes | the paper's title, bold capitals |
 | `footer_title` | no | footer "TITLE - Page N" (else "Page N") |
+| `footer` | no | `none` drops the footer (no rule requires one); default prints it |
+| `title_underline` | no | `true` underlines the title (original-answer exemplar 2); default off |
 | `numbered_paragraphs` | no | default `true`: paragraphs after the first heading numbered 1., 2., ... continuously |
 | `signature` | yes (answer, motion) | `signer`, `bar_no`, `phone`, `email` (TRCP 57, 21(f)(2)); optional `firm`, `lines` (address), `fax`, `date`, `role`, `others: [{name, bar_no, email}]` |
 | `service` | yes (answer, motion) | `date`, optional `method` (text after "by"; default electronic service through the electronic filing manager), `recipients: [{name, lines}]` |
@@ -45,21 +47,23 @@ Render: `just render-filing courts/fifth-circuit/texas/state/district-court-trav
 | `INPUT-motion-brief.md` | Rule 91a motion to dismiss, 201st (Chamberlain McHaney) | 5 | dispositive motion, footnotes, two lawyers, long closing paragraph with signature |
 | `INPUT-motion-brief-2.md` | the order on that motion | 1 | proposed-order document |
 | `INPUT-motion-brief-4.md` | fictional notice of appearance | 1 | notice document |
+| `INPUT-motion-brief-5.md` | opposed motion to quash and for protective order, Texas Attorney General, 459th (2026-02-12; post Local Rule 2.2) | 8 (exemplar 7) | non-dispositive motion with certificate of conference, four signers, headings |
 | `INPUT-motion-brief-3.md` | none (fictional) | 3 | non-dispositive motion, efforts certificates with detail, block quote, list, sub-headings, prayer, two recipients |
 
 ## Page-by-page review (every page viewed)
 
-Sample 1: p.1 caption, opening, part I, footnote 1; p.2 part II, notes 2-4; p.3 paragraph 5 with notes 5-6 (white space below: the next block is the conclusion with its signature, kept together); p.4 conclusion, signature, two counsel; p.5 certificates of conference and service. Sample 2: 1 p., caption, order text, SIGNED line, JUDGE PRESIDING. Sample 3: p.1 caption, parts I-II, quotation, note; p.2 sub-headings A-B, list, prayer, signature; p.3 certificates. Overlay: the exemplar motion sets its text 1.5-1.8 lines tighter per page and puts the clerk's stamp top right; the exemplar order has a typed judge's name; tier 3. `fb check`: 24 passed, 0 failed.
+Exemplar 5 (added 2026-10-25): 7 filed pages and 8 rendered pages viewed side by side at 70 dpi; differences in Known gaps. Sample 1: p.1 caption, opening, part I, footnote 1; p.2 part II, notes 2-4; p.3 paragraph 5 with notes 5-6 (white space below: the next block is the conclusion with its signature, kept together); p.4 conclusion, signature, two counsel; p.5 certificates of conference and service. Sample 2: 1 p., caption, order text, SIGNED line, JUDGE PRESIDING. Sample 3: p.1 caption, parts I-II, quotation, note; p.2 sub-headings A-B, list, prayer, signature; p.3 certificates. Overlay: the exemplar motion sets its text 1.5-1.8 lines tighter per page and puts the clerk's stamp top right; the exemplar order has a typed judge's name; tier 3. `fb check`: 24 passed, 0 failed.
 
 ## Known gaps
 
-- The exemplar motion predates Local Rule 2.2 (effective 2024-11-15), so the certificate of conference is rule-derived; no public post-2024 Travis motion with the certificate was found.
+- Exemplar 1 predates Local Rule 2.2 (effective 2024-11-15), so its certificate of conference is rule-derived. Exemplar 5 (2026) has a certificate of conference, but not in the Local Rule 2.2 words (one paragraph: conferred on 2026-02-12 in a good-faith effort to resolve or narrow the issues; opposed). It has no separate certification about the date, time and format of the setting. The template prints both Local Rule 2.2 certifications and cannot print only the filer's one paragraph, so its output differs from the exemplar there. No exemplar carries the Local Rule 2.2 wording.
+- Exemplar 5 against the template: the template prints Roman numerals above the headings ("I. INTRODUCTION"); the filed motion has underlined small-capital headings without numerals. The signature certificates in the exemplar are signed by a different lawyer than the motion's signer; the template prints one signer.
 - Local rules after 2024-11-15 (amended by 2026-10-31), the Master Calendar standing order (2026-07-01), the summary-judgment standing order (2026-06-29, not read) and individual judges' procedures are not reflected.
-- No notice-of-hearing, table of contents or table of authorities (none is required in a Texas district court).
+- No table of contents or table of authorities (none is required in a Texas district court). Filed notices of hearing and of appearance and proposed orders are now exemplars in their own folders (`../notice-of-hearing`, `../notice-of-appearance`, `../proposed-order`); this template's `document: notice` and `proposed-order` modes remain.
 - Fonts are embedded (TS 3.1(E), see `../rules.md` TXTRAVIS-FORM-003); typst only; same signature-keeping behavior as the answer.
 - 91a deadlines (60 days, 21 days, 14 days' notice, 45-day ruling) are not computed.
 
 ## Open questions (conservative default taken)
 
 1. Whether to ship an engine-parity docx; default: typst only.
-2. Whether a notice of hearing deserves its own doc type; default: body part.
+2. Whether notices of hearing and of appearance and proposed orders deserve their own doc type: decided by David (2026-10-25), each has its own folder with exemplars and a template to be written; the `document:` modes here stay until those templates exist.

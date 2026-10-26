@@ -27,6 +27,8 @@ Frontmatter (YAML), then the body. Unknown keys are ignored.
 | `caption` | yes | list of sides joined by "v.": `names` (bold capitals), `designation` (italic, optional) |
 | `title` | yes | the paper's title, bold capitals |
 | `footer_title` | no | footer "TITLE - Page N" (else "Page N") |
+| `footer` | no | `none` drops the footer (no rule requires one); default prints it |
+| `title_underline` | no | `true` underlines the title (original-answer exemplar 2); default off |
 | `numbered_paragraphs` | no | default `true`: paragraphs after the first heading numbered 1., 2., ... continuously |
 | `signature` | yes (answer, motion) | `signer`, `bar_no`, `phone`, `email` (TRCP 57, 21(f)(2)); optional `firm`, `lines` (address), `fax`, `date`, `role`, `others: [{name, bar_no, email}]` |
 | `service` | yes (answer, motion) | `date`, optional `method` (text after "by"; default electronic service through the electronic filing manager), `recipients: [{name, lines}]` |
@@ -52,6 +54,7 @@ Sample 1, 3 pp.: p.1 caption grid, title, salutation, parts I-II; p.2 parts III-
 ## Known gaps
 
 - Fonts are embedded; TS 3.1(E) says a PDF "may not contain embedded fonts" (rules.md TXTRAVIS-FORM-003). Every formbook Typst template embeds; see Open questions.
+- Typeface: exemplar 2 sets its cause number and caption in Garamond (about 14 pt) over a Times New Roman body. That is one filer's style, not reproduced; the template stays in Liberation Serif (Times widths). Survey and reasons: ../README.md, "Typeface".
 - Typst only; no latex or docx engine.
 - The last paragraph of the body travels with the signature block (never a signature alone on a page); a long last paragraph can leave white space at the foot of the previous page.
 - Not generated: Rule 47(c) relief category, Rule 193.7 notice, jury fee note, designated e-service email, Rule 194 note, disclosures. Body text.

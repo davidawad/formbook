@@ -26,6 +26,22 @@ Public papers filed in a Travis County district court, reproduced in the appendi
 | Text layer | Partly (a scan with the clerk's file stamp; the order's printed text layer is imperfect) |
 | Transcribed as | `INPUT-motion-brief-2.md` (`document: proposed-order`; the judge's name and the stamps are not transcribed) |
 
-Both exemplars are from one case and one filer's side. A second filer's motion with a certificate of conference under Travis Local Rule 2.2 (in force since 2024-11-15) was not found in public form; the filed exemplars predate it, so the certificate of conference is rule-derived (rules.md TXTRAVIS-MOT-001 to -003), not exemplar-derived. This is listed under Known gaps in the README.
+Exemplars 1 and 2 are from one case and one filer's side and predate Local Rule 2.2 (in force since 2024-11-15), so the certificate of conference of INPUT 1 is rule-derived (rules.md TXTRAVIS-MOT-004, -005), not exemplar-derived. Exemplar 9 is a post-2024 Travis motion with a certificate of conference (not the Local Rule 2.2 wording; README Known gaps).
 
 `INPUT-motion-brief-3.md` is fictional (no exemplar): a non-dispositive motion, to test the template against a second structure.
+
+## FILED-EXAMPLE-motion-brief-5.pdf
+
+A post-2024 Travis motion. Retrieved 2026-10-25; the URL returned HTTP 200 the same day. The paper is a state-court filing (Travis County District Clerk e-filing stamp) attached to a removal file in the W.D. Tex. (Austin) and published in CourtListener RECAP; only the motion's pages are stored (`qpdf --pages`). The CourtListener docket page returns 403 to non-browser clients (context only).
+
+| Field | Value |
+|---|---|
+| Case, court, cause no. | *Texas Precious Metals, LLC v. Hancock & Douglas*; 459th District Court, Travis County; D-1-GN-26-000754 |
+| Document | State Defendants' Opposed Motion to Quash Nonparty Subpoena and for Entry of Protective Order, with certificate of conference and certificate of service (7 pp.: pp. 91-97 of a 346-page PDF) |
+| Filer | Office of the Texas Attorney General, Special Litigation Division (David Bryant, signing; Ali M. Thorburn, signing the certificates), for the defendants |
+| Date filed | 2026-02-12 (stamp 2/12/2026 4:45 PM) |
+| Where obtained | https://storage.courtlistener.com/recap/gov.uscourts.txwd.1172893103/gov.uscourts.txwd.1172893103.1.5.pdf (W.D. Tex. No. 1:26-cv-00513, doc. 1-5; docket https://www.courtlistener.com/docket/72352948/texas-precious-metals-llc-v-hancock/) |
+| Text layer | Yes |
+| Transcribed as | `INPUT-motion-brief-5.md` |
+
+Notices of hearing, notices of appearance and proposed orders have their own folders (`../../notice-of-hearing/`, `../../notice-of-appearance/`, `../../proposed-order/`).

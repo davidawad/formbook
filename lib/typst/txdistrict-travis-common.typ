@@ -29,7 +29,8 @@
 #let caption-left = 47%                // style: the parties' column; the section-sign column and the court column follow
 #let caption-mid = 0.4in               // style: the column of section signs between them
 #let note-size = 12pt                  // style: footnotes in the body size
-#let footer-size = 10pt                // style: the footer title
+#let footer-size = 10pt
+#let title-underline-offset = 2.5pt  // style: underline below the descenders of bold capitals (font default sits about 1.3pt below the baseline and touches them)                // style: the footer title
 #let heading-gap = 12pt                // style: space above and below a heading
 #let sign-gap = 18pt                   // style: space above the date line, the signature block, a certificate
 #let court-name = "Travis County, Texas"   // the court's constant text; the number of the district is the filer's
@@ -108,8 +109,11 @@
   })
 }
 
-#let title-block(meta) = align(center, block(above: sign-gap, below: sign-gap, width: 100%,
-  single(strong(upper(inl(need(meta, "title")))))))
+// `title_underline: true` underlines the title (as in original-answer exemplar 2); default off.
+#let title-block(meta) = align(center, block(above: sign-gap, below: sign-gap, width: 100%, {
+  let t = strong(upper(inl(need(meta, "title"))))
+  single(if meta.at("title_underline", default: false) == true { underline(offset: title-underline-offset, t) } else { t })
+}))
 
 // ---------------------------------------------------------------------------
 // The body: each blank-line-separated chunk of markdown is a heading, a block quotation, a list or a paragraph.
@@ -283,14 +287,15 @@
   set page(
     width: page-w, height: page-h,
     margin: (top: margin-top, bottom: margin-bottom, left: margin-side, right: margin-side),
-    footer: context {
+    // `footer: none` (YAML `footer: none`) drops the footer; no rule requires one. Default: page number, with footer_title.
+    footer: if str(meta.at("footer", default: "page")) == "none" { none } else { context {
       set text(size: footer-size)
       set par(first-line-indent: 0pt)
       align(center, {
         if "footer_title" in meta { upper(inl(meta.footer_title)); [ #sym.dash.en ] }
         [Page #counter(page).display("1")]
       })
-    },
+    } },
   )
   set text(font: font-family, size: type-size, lang: "en", region: "us", fallback: false, ..edges(pitch))
   set par(first-line-indent: 0pt, leading: 0pt, spacing: 0pt, justify: false)
