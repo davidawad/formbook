@@ -118,7 +118,7 @@
 
 
 // TRCP 21(d), 21a(e): certificate over signature, stating date and manner; recipients optional ("all counsel of record").
-#let nh-service(meta) = block(width: 100%, above: sign-gap, breakable: false, {
+#let nh-service(meta) = {
   let s = need(meta, "service")
   let method = s.at("method", default: "electronic service through the electronic filing manager")
   let rs = as-list(s.at("recipients", default: ()))
@@ -126,18 +126,12 @@
   let who = if rs.len() == 0 { [all counsel of record] }
     else if listed { [the following counsel of record or parties:] }
     else { rs.map(r => inl(need(r, "name"))).join("; ") }
-  cert-heading[Certificate of Service]
-  block(width: 100%, body-par(none, [I certify that on #inl(need(s, "date")), a true and correct copy of the foregoing document was served in accordance with Texas Rule of Civil Procedure 21a, by #inl(method), on #who#if not listed [.]]))
-  if listed {
-    for r in rs {
-      block(width: 100%, above: pitch-single, breakable: false, single(pad(left: 0.5in, {
-        block(inl(need(r, "name")))
-        for l in as-list(r.at("lines", default: ())) { block(inl(l)) }
-      })))
-    }
-  }
-  cert-sign(meta)
-})
+  // `cert-flow` (shared): a long recipient list may run onto another page.
+  cert-flow({
+    cert-heading[Certificate of Service]
+    block(width: 100%, body-par(none, [I certify that on #inl(need(s, "date")), a true and correct copy of the foregoing document was served in accordance with Texas Rule of Civil Procedure 21a, by #inl(method), on #who#if not listed [.]]))
+  }, if listed { rs.map(recipient-block) } else { () }, cert-sign(meta))
+}
 
 // The generated opening, from `hearing:` (TRCP 21(b): when, where, how to join), as body-blocks-style paragraphs.
 #let nh-opening(meta) = {
@@ -151,13 +145,15 @@
     else if hg.at("central_docket", default: false) [on the Central Docket in the Travis County Civil District Courts]
     else [in the Travis County Civil District Courts]
   let length = [ and is estimated to take #inl(hg.length)]
-  let fmt = hg.at("format", default: none)
+  // TRCP 21(b) and Local Rule 1.4: the notice must say where to appear or how to join; a generated opening therefore
+  // requires `format`, a `location` for an in-person hearing, and `joining` instructions for a remote one.
+  let fmt = need(hg, "format")
   let out = (body-par(none, [PLEASE TAKE NOTICE that #inl(hg.motion) has been set for #kind on #strong[#inl(hg.date), at #inl(hg.time)] #where#length.]),)
   if fmt == "in-person" {
-    out.push(body-par(none, [This #kind will take place #strong[in person]#if "location" in hg [ at #inl(hg.location)].#if "joining" in hg [ #inl(hg.joining)]]))
+    out.push(body-par(none, [This #kind will take place #strong[in person] at #inl(need(hg, "location")).#if "joining" in hg [ #inl(hg.joining)]]))
   } else if fmt == "remote" {
-    out.push(body-par(none, [This #kind will take place #strong[#inl(need(hg, "remote"))].#if "joining" in hg [ #inl(hg.joining)]]))
-  } else if fmt != none { panic("txdistrict-travis: hearing.format must be `in-person` or `remote`") }
+    out.push(body-par(none, [This #kind will take place #strong[#inl(need(hg, "remote"))]. #inl(need(hg, "joining"))]))
+  } else { panic("txdistrict-travis: hearing.format must be `in-person` or `remote`") }
   out
 }
 
@@ -170,7 +166,7 @@
   let pieces = nh-opening(meta) + body-blocks(body, numbered: meta.at("numbered_paragraphs", default: false))
   for p in pieces.slice(0, calc.max(0, pieces.len() - 1)) { p }
   let (sig-head, sig-rest) = nh-signature(meta)
-  block(width: 100%, breakable: false, { if pieces.len() > 0 { pieces.last() }; sig-head })
+  keep-tail(if pieces.len() > 0 { pieces.last() } else { none }, sig-head, gap: sign-gap)
   for r in sig-rest { r }
   nh-service(meta)
 }

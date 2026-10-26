@@ -2,6 +2,8 @@
 
 Doc type `notice-of-appearance` for the civil district courts of Travis County, Texas (alias `txdistrict-travis`): a notice of appearance of counsel, optionally with the designation of an attorney in charge (TRCP 8) and optionally with reservation language (a special appearance under TRCP 120a, a motion to transfer venue under TRCP 86). A notice asks the court for no ruling: no salutation, no certificate of conference (Local Rule 2.2 reaches motions), unnumbered paragraphs. Template: `typst/txdistrict-travis-notice-of-appearance.typ` over `/lib/typst/txdistrict-travis-common.typ` (caption, body, footer, `cert-heading`, `cert-sign` are imported; nothing in lib is edited); entry `typst/main.typ`. Engines: typst only. Exemplar provenance: `usage/SOURCE.md`. Court-wide sources and the date they were read: `../rules.md`.
 
+**Not ready to e-file as rendered.** Technology Standards 3.1(E) says an e-filed PDF "may not contain embedded fonts"; every PDF this template renders embeds its fonts (rules.md TXTRAVIS-FORM-003, kind M, not met), and no un-embedding step ships with formbook. A green `fb check` does not test TS 3.1(E) and does not make the output filing-compliant. Before filing, check the PDF with `pdffonts`, and run it through a conforming PDF workflow or confirm with the e-filing service provider. Do not file the output directly.
+
 ## Governing rules
 
 `../rules.md` now has TXTRAVIS-NOA-001 (TRCP 8) and NOA-002 (no LR 2.2 certification; signature and service); it has no row for TRCP 86 or 120a. The text below was read 2026-10-25 from the official TRCP PDF (https://www.txcourts.gov/media/1463426/texas-rules-of-civil-procedure.pdf, HTTP 200). Rows for 86 and 120a are candidates for rules.md.
@@ -33,7 +35,7 @@ Frontmatter, then an optional markdown body (more paragraphs after the generated
 | `footer_title` | no | footer "TITLE - Page N" |
 | `numbered_paragraphs` | no | default `false`; `true` numbers body paragraphs after the first heading |
 | `signature` | yes | `signer`, `bar_no`, `phone`, `email`; optional `date` (a "Date:" line, left), `firm`, `title` (under the name), `lines` (address), `fax`, `role` (bold closing line), `others: [{name, bar_no, email, phone, title}]`, `officials: [{name, title}]` (a left column beside the block, as in exemplar 1) |
-| `service` | yes | `date`; optional `method` (text after "by"), `recipients: [{name, lines, side}]` (`side`: lines in a right column beside the recipient; absent: "on all parties and counsel of record"), `columns: 1|2` (default 2 for two or more recipients), `own_page: true` (certificate starts a new page) |
+| `service` | yes | `date`; optional `method` (text after "by"), `recipients: [{name, lines, side}]` (`side`: lines in a right column beside the recipient; absent: "on all parties and counsel of record"), `columns: 1\|2` (default 2 for two or more recipients), `own_page: true` (certificate starts a new page) |
 
 Render: `tools/fb/target/release/fb render <dir> <INPUT>` (or `just render <dir>`, which builds fb with cargo).
 

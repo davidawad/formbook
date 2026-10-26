@@ -2,6 +2,8 @@
 
 Doc type `original-answer` for the civil district courts of Travis County, Texas (alias `txdistrict-travis`): an original answer with any special exceptions, verified denials, affirmative defenses, counterclaim, jury demand and prayer, a signature block (TRCP 57), a certificate of service (TRCP 21a(e)) and, when the frontmatter has `verification:`, an unsworn-declaration verification (Tex. Civ. Prac. & Rem. Code 132.001). Template: `typst/txdistrict-travis-original-answer.typ` over `/lib/typst/txdistrict-travis-common.typ`; entry `typst/main.typ`. Engines: typst only (no latex or docx).
 
+**Not ready to e-file as rendered.** Technology Standards 3.1(E) says an e-filed PDF "may not contain embedded fonts"; every PDF this template renders embeds its fonts (rules.md TXTRAVIS-FORM-003, kind M, not met), and no un-embedding step ships with formbook. A green `fb check` does not test TS 3.1(E) and does not make the output filing-compliant. Before filing, check the PDF with `pdffonts`, and run it through a conforming PDF workflow or confirm with the e-filing service provider. Do not file the output directly.
+
 ## Governing rules
 
 Full table with sources, URLs and the date read: `../rules.md`. The ones this template acts on:

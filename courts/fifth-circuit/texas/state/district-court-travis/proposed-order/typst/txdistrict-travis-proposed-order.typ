@@ -3,8 +3,8 @@
 // Rule-driven and content-agnostic; shared parts in /lib/typst/txdistrict-travis-common.typ, rules in ../../rules.md.
 // Local Rule 11.4: a draft order is not typed on a page with a pleading, motion or certificate of service, carries the
 // cause number, style of the case and court, and its judge's signature line is on a page with other text; Local Rule
-// 11.5: the date an order is signed is never shown with the word "entered"; Technology Standards 3.1(E): a proposed
-// order is its own PDF. An order needs no filer's signature or certificate of service (TRCP 21, 21a, 57 reach filed
+// 11.5: the date an order is signed is never shown with the word "entered"; Local Rule 11.1: a proposed order is
+// not filed stand-alone, only as an attachment to the motion or other pleading; it is its own PDF. An order needs no filer's signature or certificate of service (TRCP 21, 21a, 57 reach filed
 // papers of a party); the optional "approved as to form" blocks are the filers' convention (usage/SOURCE.md).
 // The title, the recitals, the findings and the decretal paragraphs are the filer's: the template typesets them and
 // prints the caption, the signed-on line with a blank date, the judge's line and any approval blocks.
@@ -115,12 +115,11 @@
   caption(meta)
   order-title(meta)
   let pieces = blocks-of(body)
-  let ending(last) = block(width: 100%, breakable: false, {
-    if last != none { last }
+  let ending(last) = keep-tail(last, {
     choices-block(meta)
     block(width: 100%, above: sign-gap, single(date-line(meta)))
     judge-block(meta)
-  })
+  }, gap: if as-list(meta.at("choices", default: none)).len() > 0 { pitch-single } else { sign-gap })
   // Local Rule 11.4: the judge's signature line shares a page with the last paragraph.
   for p in pieces.slice(0, calc.max(0, pieces.len() - 1)) { p }
   ending(if pieces.len() > 0 { pieces.last() } else { none })

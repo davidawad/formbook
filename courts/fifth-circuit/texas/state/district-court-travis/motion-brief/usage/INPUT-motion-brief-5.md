@@ -6,6 +6,8 @@
 # (good-faith effort to resolve or narrow the issues; opposed) does not carry the Local Rule 2.2 words about the date,
 # time and format of the setting: the template prints both Local Rule 2.2 certifications, so `conference` below is the
 # nearest variant and the printed certificates differ from the exemplar's (README Known gaps).
+# Transcription note: the filed paper dates the subpoena "February 9, 2025" in Factual Background (the suit was filed 2026-02-04;
+# the filed paper has the typo, and its proposed order says February 9, 2026). Kept as filed.
 cause_number: "D-1-GN-26-000754"
 judicial_district: "459th"
 caption:

@@ -2,13 +2,15 @@
 
 Doc type `proposed-order` for the civil district courts of Travis County, Texas: a proposed order (or a signed order) as its own paper. Template: `typst/txdistrict-travis-proposed-order.typ` over `/lib/typst/txdistrict-travis-common.typ` (caption, body paragraphs, page setup); entry `typst/main.typ`. Engines: typst only. Rules: `../rules.md` (TXTRAVIS-ORD-001 to -004). Provenance of exemplars: `usage/SOURCE.md`.
 
+**Not ready to e-file as rendered.** Technology Standards 3.1(E) says an e-filed PDF "may not contain embedded fonts"; every PDF this template renders embeds its fonts (rules.md TXTRAVIS-FORM-003, kind M, not met), and no un-embedding step ships with formbook. A green `fb check` does not test TS 3.1(E) and does not make the output filing-compliant. Before filing, check the PDF with `pdffonts`, and run it through a conforming PDF workflow or confirm with the e-filing service provider. Do not file the output directly.
+
 ## Rules carried (tier 1)
 
 | Rule | What the template does |
 |---|---|
 | Local Rule 11.4 (ORD-001, ORD-002) | caption with cause number, style and court; the order is its own paper (no motion, certificate of service); the last paragraph is kept on the page with the judge's signature line |
 | Local Rule 11.5 (ORD-003) | date line reads "SIGNED on this ___ day of ___, 20__." or (`date_line: so-ordered`) "SO ORDERED on this ..."; never "entered" |
-| Technology Standards 3.1(E) | the order is rendered from its own sample, a standalone PDF |
+| Local Rule 11.1; Technology Standards 3.1(E) | the order is rendered from its own sample, its own PDF; it must not be filed stand-alone, only as an attachment to the motion or other pleading (author responsibility) |
 | Local Rule 2.5 (ORD-004) | an order setting a case (a show-cause order) is a separate page not combined with a pleading: satisfied, the order is always its own paper; the setting itself (Court Administrator) is the filer's responsibility, kind A |
 | TRCP 21, 21a, 57 | not applied: an order has no filer's signature and no certificate of service; optional "approved as to form" blocks carry the TRCP 57 data of each approving attorney |
 

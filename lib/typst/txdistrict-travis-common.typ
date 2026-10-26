@@ -127,10 +127,10 @@
 
 /// Level 1: centered bold capitals with a Roman numeral counted by the template (style: the exemplars number their
 /// parts I., II., ...). Level 2: bold, the author's label ("A.") hanging. Level 3: bold italic.
-#let heading-block(level, t, n) = block(width: 100%, sticky: true, above: heading-gap, below: heading-gap, single({
+#let heading-block(level, t, n, parts: true) = block(width: 100%, sticky: true, above: heading-gap, below: heading-gap, single({
   set text(weight: "bold")
   if level == 1 {
-    align(center, { block[#roman(n).]; block(upper(inl(t))) })
+    align(center, { if parts { block[#roman(n).] }; block(upper(inl(t))) })
   } else {
     let (lab, rest) = split-label(t)
     let ind = (level - 2) * 0.5in
@@ -154,7 +154,8 @@
 /// The markdown body as an array of typeset blocks. Paragraphs after the first heading are numbered 1., 2., ... through the
 /// whole body when `numbered` (the exemplars number every paragraph of the pleading under its parts). Not numbered: the paragraphs
 /// before the first heading (the opening), those under a heading that begins "Prayer", and one that begins "WHEREFORE".
-#let body-blocks(body, numbered: true) = {
+/// `parts: false` leaves the Roman numeral off level-one headings (the text of an order is not numbered).
+#let body-blocks(body, numbered: true, parts: true) = {
   let notes = (:)
   for m in body.matches(regex("(?m)^\\[\\^([^\\]]+)\\]:[ \\t]*(.*)$")) { notes.insert(m.captures.at(0), m.captures.at(1)) }
   let chunks = body.split(regex("\\r?\\n[ \\t]*\\r?\\n")).map(c => c.trim()).filter(c => c != "")
@@ -170,7 +171,7 @@
     if m != none {
       let level = m.captures.at(0).len()
       if level == 1 { h += 1; prayer = lower(m.captures.at(1).trim()).starts-with("prayer") }
-      out.push(heading-block(level, m.captures.at(1).trim(), h))
+      out.push(heading-block(level, m.captures.at(1).trim(), h, parts: parts))
     } else if t.starts-with(">") {
       out.push(block-quote(render(t.replace(regex("(?m)^>[ \\t]?"), "") + defs)))
     } else if t.starts-with(regex("^([-*+]|\\d+\\.)[ \\t]")) {
@@ -200,7 +201,7 @@
       block(above: pitch-single, [By: /s/ #inl(need(sig, "signer"))])
       block(upper(inl(need(sig, "signer"))))
       block([State Bar of Texas No. #inl(need(sig, "bar_no"))])
-      for l in as-list(sig.at("lines", default: ())) { block(inl(l)) }
+      for l in as-list(need(sig, "lines")) { block(inl(l)) }
       block([Telephone: #inl(need(sig, "phone"))])
       if "fax" in sig { block([Fax: #inl(sig.fax)]) }
       block([Email: #inl(need(sig, "email"))])
@@ -233,12 +234,12 @@
 #let conference-certificate(meta) = block(width: 100%, above: sign-gap, breakable: false, {
   let c = need(meta, "conference")
   let with-all = (conferred: "conferred with", efforts: "made reasonable efforts to confer with")
-  let setting = c.at("setting", default: "conferred")
+  let setting = need(c, "setting")
   if setting not in with-all { panic("txdistrict-travis: conference.setting must be `conferred` or `efforts`") }
   cert-heading[Certificate of Conference]
   block(width: 100%, body-par(none, [I certify that counsel has #with-all.at(setting) all parties about the date, time, and format of the setting.]))
   if not c.at("dispositive", default: false) {
-    let issues = c.at("issues", default: "conferred")
+    let issues = need(c, "issues")
     if issues == "conferred" {
       block(width: 100%, body-par(none, [Counsel has conferred with all parties who may be affected by the relief sought in this motion in a good faith effort to resolve or narrow the issues raised.]))
     } else if issues == "efforts" {
@@ -249,21 +250,36 @@
   cert-sign(meta)
 })
 
+/// A certificate of service laid out so that a long list of recipients can run onto another page (an unbreakable block
+/// taller than a page loses its overflow): `top` (heading and statement) stays whole with the first recipient, the middle
+/// recipients flow, and the last recipient stays whole with the signature line. Each recipient is its own unbreakable block.
+#let cert-flow(top, items, sign) = {
+  let item-gap = pitch-single
+  if items.len() <= 1 {
+    block(width: 100%, above: sign-gap, breakable: false, { top; for r in items { r }; sign })
+  } else {
+    block(width: 100%, above: sign-gap, breakable: false, { top; items.first() })
+    for r in items.slice(1, items.len() - 1) { r }
+    block(width: 100%, above: item-gap, breakable: false, { items.last(); sign })
+  }
+}
+
+/// A recipient of a certificate of service: the name and address lines, indented.
+#let recipient-block(r) = block(width: 100%, above: pitch-single, breakable: false, single(pad(left: 0.5in, {
+  block(inl(need(r, "name")))
+  for l in as-list(r.at("lines", default: ())) { block(inl(l)) }
+})))
+
 /// TRCP 21(d), 21a(e): the party or attorney certifies compliance in writing over signature on the filed paper,
 /// stating the date and manner of service and whom it reached.
-#let service-certificate(meta) = block(width: 100%, above: sign-gap, breakable: false, {
+#let service-certificate(meta) = {
   let s = need(meta, "service")
   let method = s.at("method", default: "electronic service through the electronic filing manager")
-  cert-heading[Certificate of Service]
-  block(width: 100%, body-par(none, [I certify that on #inl(need(s, "date")), a true and correct copy of the foregoing document was served in accordance with Texas Rule of Civil Procedure 21a, by #inl(method), on the following counsel of record or parties:]))
-  for r in as-list(need(s, "recipients")) {
-    block(width: 100%, above: pitch-single, breakable: false, single(pad(left: 0.5in, {
-      block(inl(need(r, "name")))
-      for l in as-list(r.at("lines", default: ())) { block(inl(l)) }
-    })))
-  }
-  cert-sign(meta)
-})
+  cert-flow({
+    cert-heading[Certificate of Service]
+    block(width: 100%, body-par(none, [I certify that on #inl(need(s, "date")), a true and correct copy of the foregoing document was served in accordance with Texas Rule of Civil Procedure 21a, by #inl(method), on the following counsel of record or parties:]))
+  }, as-list(need(s, "recipients")).map(recipient-block), cert-sign(meta))
+}
 
 /// Tex. Civ. Prac. & Rem. Code 132.001: an unsworn declaration in place of a verification, with the statutory jurat.
 #let verification(meta) = block(width: 100%, above: sign-gap, breakable: false, {
@@ -317,27 +333,34 @@
   if salute { block(width: 100%, [#salutation]) }
 }
 
+/// `last` (the final block of the body, which may be a long list) flows and may break across pages; `tail` (the signature
+/// material) stays whole. `last` is sticky, so it travels with the tail and the signature never stands alone on a page
+/// (Local Rule 11.4); an unbreakable block taller than a page would lose its overflow, so `last` is never made unbreakable.
+/// `above` and `gap` are the space before `last` and between `last` and `tail` (a block's own `above` is dropped at the
+/// start of the wrapper, so the caller names it).
+#let keep-tail(last, tail, above: 0pt, gap: 0pt) = {
+  if last != none { block(width: 100%, sticky: true, above: above, last) }
+  block(width: 100%, breakable: false, above: gap, tail)
+}
+
 /// A proposed order (Travis Local Rule 11.4): its own paper with the cause number, the style of the case and the
 /// court; its judge's signature line on a page with other text; the date signed (Local Rule 11.5: never "entered").
 #let order-paper(meta, body) = {
   head(meta, salute: false)
-  let pieces = body-blocks(body, numbered: false)
+  let pieces = body-blocks(body, numbered: false, parts: false)
   for b in pieces.slice(0, calc.max(0, pieces.len() - 1)) { b }
-  block(width: 100%, above: sign-gap, breakable: false, {
-    if pieces.len() > 0 { pieces.last() }
-    block(width: 100%, above: 2 * sign-gap, single({
+  keep-tail(if pieces.len() > 0 { pieces.last() } else { none }, block(width: 100%, above: 2 * sign-gap, single({
     block(below: 2 * pitch-single, [SIGNED on #box(width: 2in, line(length: 100%, stroke: 0.5pt)), 20#box(width: 0.5in, line(length: 100%, stroke: 0.5pt)).])
     pad(left: sig-col, {
       block(line(length: 100%, stroke: 0.5pt))
       block[JUDGE PRESIDING]
     })
-  }))
-  })
+  })), above: sign-gap, gap: 2 * sign-gap)
 }
 
 /// The body's blocks with the signature block, the last block kept on the same page as the signature (a signature
 /// alone on a page is not a convention in any exemplar).
 #let with-signature(pieces, sig) = {
   for p in pieces.slice(0, calc.max(0, pieces.len() - 1)) { p }
-  block(width: 100%, breakable: false, { if pieces.len() > 0 { pieces.last() }; sig })
+  keep-tail(if pieces.len() > 0 { pieces.last() } else { none }, sig, gap: sign-gap)
 }

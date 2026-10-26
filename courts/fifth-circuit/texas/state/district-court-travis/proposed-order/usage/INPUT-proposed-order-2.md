@@ -12,6 +12,9 @@ caption:
   - names: "Kelly Hancock, in his official capacity as Acting Texas Comptroller of Public Accounts, and Macy Douglas, in her official capacity as Administrator of the Texas Bullion Depository"
     designation: "Defendants."
 title: "[Proposed] Order Granting State Defendants' Motion to Quash Nonparty Subpoena and for Entry of Protective Order"
+date_line: so-ordered
+month: February
+year: "2026"
 ---
 
 Before this Court is Defendants Kelly Hancock, in his official capacity as Acting Texas Comptroller of Public Accounts, and Macy Douglas, in her official capacity as Administrator of the Texas Bullion Depository's Motion to Quash Nonparty Subpoena and for Entry of Protective Order. Having reviewed the Motion, applicable law, and arguments of the Parties, the Court is of the opinion that the Motion to Quash Nonparty Subpoena and for Entry of Protective Order is meritorious and should be GRANTED.

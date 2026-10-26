@@ -46,4 +46,4 @@ service:
         - "*Counsel for Plaintiff*"
 ---
 
-Under Texas Rule of Civil Procedure 91a.6, Plaintiff may file a response to the motion no later than seven days before the hearing. The motion was filed more than 21 days before the hearing date.
+Under Texas Rule of Civil Procedure 91a.4, Plaintiff may file a response to the motion no later than seven days before the hearing. The motion was filed more than 21 days before the hearing date.
