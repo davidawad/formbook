@@ -109,9 +109,18 @@
   })
 }
 
+/// Capitals for a title, except inside a bracketed drafting marker ("[VERIFY: ...]"), which prints as typed.
+#let upper-markers(s) = {
+  let s = str(s)
+  let out = []
+  let pos = 0
+  for m in s.matches(regex("\\[[^\\]]*\\]")) { out += upper(inl(s.slice(pos, m.start))); if m.start > 0 { out += [ ] }; out += inl(m.text); pos = m.end }
+  out + upper(inl(s.slice(pos)))
+}
+
 // `title_underline: true` underlines the title (as in original-answer exemplar 2); default off.
 #let title-block(meta) = align(center, block(above: sign-gap, below: sign-gap, width: 100%, {
-  let t = strong(upper(inl(need(meta, "title"))))
+  let t = strong(upper-markers(need(meta, "title")))
   single(if meta.at("title_underline", default: false) == true { underline(offset: title-underline-offset, t) } else { t })
 }))
 
@@ -241,6 +250,10 @@
   let setting = need(c, "setting")
   if setting not in with-all { panic("txdistrict-travis: conference.setting must be `conferred` or `efforts`") }
   cert-heading[Certificate of Conference]
+  // `text` replaces the Local Rule 2.2 sentences (for example a joint or agreed motion, where every party conferred and agrees).
+  if "text" in c {
+    block(width: 100%, body-par(none, inl(c.text)))
+  } else {
   block(width: 100%, body-par(none, [I certify that counsel has #with-all.at(setting) all parties about the date, time, and format of the setting.]))
   if not c.at("dispositive", default: false) {
     let issues = need(c, "issues")
@@ -249,6 +262,7 @@
     } else if issues == "efforts" {
       block(width: 100%, body-par(none, [Counsel has made reasonable efforts to confer with all parties who may be affected by the relief sought in this motion but has been unable to do so.]))
     } else { panic("txdistrict-travis: conference.issues must be `conferred` or `efforts`") }
+  }
   }
   if "detail" in c { block(width: 100%, body-par(none, inl(c.detail))) }
   cert-sign(meta)

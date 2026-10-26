@@ -99,7 +99,7 @@
     block(inl(s.at("closing", default: "Very truly yours,")))
     block(width: 100%, above: pitch-single, strong(upper(inl(need(s, "firm")))))
     sign-block(s, esign: true)
-  }, gap: gap)
+  }, above: gap, gap: gap)
   for a in as-list(meta.agreed) {
     block(width: 100%, above: 2 * pitch-single, breakable: false, {
       strong(inl(meta.at("agreed_heading", default: "AGREED:")))
