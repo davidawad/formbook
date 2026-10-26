@@ -45,3 +45,19 @@ A post-2024 Travis motion. Retrieved 2026-10-25; the URL returned HTTP 200 the s
 | Transcribed as | `INPUT-motion-brief-5.md` |
 
 Notices of hearing, notices of appearance and proposed orders have their own folders (`../../notice-of-hearing/`, `../../notice-of-appearance/`, `../../proposed-order/`).
+
+## FILED-EXAMPLE-motion-brief-6.pdf
+
+A post-2024 Travis settlement dismissal on a joint motion, a format source for the Datics joint motion to dismiss. Retrieved 2026-10-26; the URL returned HTTP 200 the same day. A public paper the Texas Attorney General posted with a press release; only the motion's pages (1-3 of the 6-page PDF) are stored here, the order and the "AGREED TO:" pages are `../../proposed-order/usage/FILED-EXAMPLE-proposed-order-5.pdf`.
+
+| Field | Value |
+|---|---|
+| Case, court, cause no. | *Seattle Children's Hospital v. Office of the Attorney General of the State of Texas*; 98th Judicial District, Travis County; D-1-GN-23-008855 |
+| Document | Joint Motion to Dismiss (3 pp.: pp. 1-3 of a 6-page PDF; clerk stamp 04/19/2024 10:33:30 AM, Velva L. Price, on the order page) |
+| Filers | Germer Beaman & Brown PLLC and Corr Cronin LLP for the plaintiff; the Office of the Attorney General, Consumer Protection Division, for the defendant |
+| Date filed | 2024-04-19 |
+| Where obtained | https://www.texasattorneygeneral.gov/sites/default/files/images/press/Seattle%20Childrens%20Joint%20Motion%20and%20Agreed%20Order.pdf |
+| Text layer | Yes for pp. 1-3 (the order and approval pages are scans) |
+| Transcribed as | `INPUT-motion-brief-6.md` |
+
+What the exemplar shows: the title "Joint Motion to Dismiss" (underlined); the salutation "TO THE HONORABLE JUDGE OF SAID COURT:"; an unnumbered opening paragraph; Roman-numeral parts "I." and "II." with no heading text; unnumbered paragraphs; "WHEREFORE, PREMISES CONSIDERED ... move the court to dismiss this cause, with costs taxed against the party incurring those costs."; "Respectfully submitted," and one block per firm, ending "ATTORNEYS FOR PLAINTIFF". **Format source, not a content source:** this motion recites the settlement's terms (a registration withdrawal, rescission of a civil investigative demand) because that settlement was with a state agency. A settlement the parties want to keep out of the public record, such as the Datics drafts, uses the exemplar's structure with no terms. The exemplar has no certificate of conference or of service; the template prints both (rules.md TXTRAVIS-MOT-007).

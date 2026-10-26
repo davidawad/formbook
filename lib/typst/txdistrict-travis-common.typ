@@ -130,7 +130,7 @@
 #let heading-block(level, t, n, parts: true) = block(width: 100%, sticky: true, above: heading-gap, below: heading-gap, single({
   set text(weight: "bold")
   if level == 1 {
-    align(center, { if parts { block[#roman(n).] }; block(upper(inl(t))) })
+    align(center, { if parts { block[#roman(n).] }; if t != "(none)" { block(upper(inl(t))) } })
   } else {
     let (lab, rest) = split-label(t)
     let ind = (level - 2) * 0.5in
@@ -168,7 +168,11 @@
     let defs = ""
     for r in t.matches(regex("\\[\\^([^\\]]+)\\]")) { defs += "\n\n[^" + r.captures.at(0) + "]: " + notes.at(r.captures.at(0), default: "") }
     let m = t.match(regex("^(#+)[ \\t]+(.*)$"))
-    if m != none {
+    if t == "---" {
+      // A thematic break is a part with a numeral and no heading text (the Seattle Children's joint motion: "I.", "II.").
+      h += 1; prayer = false
+      out.push(heading-block(1, "(none)", h, parts: parts))
+    } else if m != none {
       let level = m.captures.at(0).len()
       if level == 1 { h += 1; prayer = lower(m.captures.at(1).trim()).starts-with("prayer") }
       out.push(heading-block(level, m.captures.at(1).trim(), h, parts: parts))
