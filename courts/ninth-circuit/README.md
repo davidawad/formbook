@@ -17,7 +17,7 @@ Courts under `courts/ninth-circuit` (61).
 | [United States Bankruptcy Court, S.D. California](california/federal/bankruptcy-southern-district) | `casb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the Central District of California](california/federal/central-district) | `cacd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the Eastern District of California](california/federal/eastern-district) | `caed` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Northern District of California](california/federal/northern-district) | `cand` | up for review | 3/3 | — | 1/2 | 14 |
+| [United States District Court for the Northern District of California](california/federal/northern-district) | `cand` | up for review | 5/5 | — | 4/4 | 14 |
 | [United States District Court for the Southern District of California](california/federal/southern-district) | `casd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Guam](guam/federal/bankruptcy-district) | `gub` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Guam](guam/federal/district) | `gud` | up for review | 2/2 | — | 2/2 | 14 |

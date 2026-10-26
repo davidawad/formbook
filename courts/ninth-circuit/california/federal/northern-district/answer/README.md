@@ -12,7 +12,7 @@ answer-specific changes below were made and calibrated against two filed answers
 | exemplars | 2 filers, in `usage/` (`SOURCE.md`): Gordon Rees for Rhombus Power (19 pages) and Wilkinson Stekloff / O'Melveny for Paramount Skydance and Warner Bros. Discovery (39 pages); found with `legal-writer exemplar-search` (free RECAP copies) |
 | sample md | `usage/INPUT-answer.md`: a portion of exemplar 1 (pages 1 to 3, the jury demand response, the first five defenses, the prayer, the signature) |
 | render | typst `usage/OUTPUT-answer.typst.pdf`, 5 pages; docx `usage/OUTPUT-answer.docx` (+ `.docx.pdf`), 5 pages |
-| checks | typst `RESULT: 8 checks passed, 0 failed`; docx `RESULT: 11 checks passed, 1 failed` (DEF-FONT-002, see Known gaps); XENG-003 (every typst line breaks after the same word in docx) passes |
+| checks | typst `RESULT: 8 checks passed, 0 failed`; docx `RESULT: 12 checks passed, 0 failed` (2026-10-26, macOS LibreOffice, after the shared no-break hyphen fix); XENG-003 (every typst line breaks after the same word in docx) passes |
 | pages reviewed | pages 1 and 4 of the typst render viewed against exemplar 1 pages 1 and 9 |
 
 ## What differs from the complaint template
@@ -41,9 +41,9 @@ L.R. 3-4(a)(1), (a)(3), (c)(1)-(3). For an answer also:
 
 ## Known gaps
 
-1. **DEF-FONT-002 on docx**: LibreOffice embeds `LinuxLibertineG` on every page of the docx render. The complaint
-   template's docx shows the same font when re-rendered today (2026-10-25), so it is an environment or shared-filter
-   issue, not this template's. Typst embeds only Times New Roman.
+1. **DEF-FONT-002 on docx (fixed 2026-10-26)**: LibreOffice embedded `LinuxLibertineG` on every page because
+   `lib/docx/xengine.lua` held a hyphen before a digit with Word's `<w:noBreakHyphen/>`, which LibreOffice draws as
+   U+2011, a glyph Times New Roman lacks. The filter now writes a hyphen and a word joiner (U+2060) instead.
 2. **Lead-in line**: exemplar 1 starts the lead-in on line 18 after a taller caption; ours on line 16 because the
    sample caption is shorter. Tier 3.
 3. **Defense sub-headings**: exemplar 1 sets the parenthetical sub-heading bold like the defense title; both are

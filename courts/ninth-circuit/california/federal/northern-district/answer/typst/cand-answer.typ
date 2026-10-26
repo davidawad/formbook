@@ -134,7 +134,7 @@
   pad(left: caption-gutter, {
     line-block("Case No. " + meta.case_number)
     line-block(above: pitch-single, text(weight: "bold", inl(meta.brief_title)))
-    // An answer's dates and judge under the title ("Complaint Filed: July 17, 2026"), plain.
+    // An answer's dates and judge under the title (e.g. "Complaint Filed:" and its date), plain.
     for (i, l) in meta.at("caption_lines", default: ()).enumerate() {
       line-block(above: if i == 0 { pitch-single } else { 0pt }, inl(l))
     }

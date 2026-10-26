@@ -1,3 +1,50 @@
+<!-- fb:generated:start -->
+# District Courts of Travis County, Texas (Austin)
+
+- Alias: `txdistrict-travis`
+- CourtListener: none (not a CourtListener id)
+- Level: state-trial
+- Circuit: `ca5`
+- State / territory: Texas
+- Status: **up for review** (14%); manual status in `court.json`: `todo`
+
+## Checklist
+
+- [x] `rules.md` present
+- [ ] `usage/SOURCE.md` names at least 2 FILED-EXAMPLE PDFs (different filers)
+- [ ] `usage/` has at least 2 INPUT .md samples
+- [ ] typst engine passes (`usage/.check-typst.txt` valid)
+- [ ] latex engine passes (`usage/.check-latex.txt` valid)
+- [ ] docx engine passes (`usage/.check-docx.txt` valid)
+- [ ] a review file in `reviews/`
+
+Engines (doc folders passing / with that template): typst `5/5`, latex `—`, docx `—`.
+
+`done` is set by a human in `court.json` (`"status": "done"`); nothing automated writes it.
+A court is `up for review` when `rules.md` is present and every doc folder under it with a `usage/INPUT-*.md` has a valid `usage/.check-typst.txt` stamp (`just eval` writes them; the default checks are `data/checks-default.yaml`).
+
+## Doc folders
+
+5 of 5 doc folders with an INPUT pass the typst eval.
+
+| Doc type | Status | Typst | LaTeX | DOCX |
+|---|---|---|---|---|
+| [motion-brief](motion-brief) | up for review | pass | — | — |
+| [notice-of-appearance](notice-of-appearance) | up for review | pass | — | — |
+| [notice-of-hearing](notice-of-hearing) | up for review | pass | — | — |
+| [original-answer](original-answer) | up for review | pass | — | — |
+| [proposed-order](proposed-order) | up for review | pass | — | — |
+
+## Folders
+
+- `typst/` Typst template (primary)
+- `latex/` LaTeX template
+- `docx/` Word template (`reference.xml`, or a committed `reference.docx`, plus `*.lua` filters; `fb render --engine docx` builds it)
+- `usage/` filed examples `FILED-EXAMPLE-<doctype>[-<n>].pdf` from different filers and `SOURCE.md`; sample inputs `INPUT-<doctype>[-<n>].md`; renders `OUTPUT-<doctype>[-<n>].typst.pdf`, `.latex.pdf`, `.docx`, `.docx.pdf` (same id as the INPUT); stamps `.check-<engine>.txt`
+
+[Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)
+<!-- fb:generated:end -->
+
 # District Courts of Travis County, Texas (txdistrict-travis)
 
 Doc types: `original-answer`, `motion-brief`, `proposed-order`, `notice-of-hearing`, `notice-of-appearance`. Rules, sources and date read: `rules.md`. Shared template code: `/lib/typst/txdistrict-travis-common.typ`. Alias choice: the Texas district courts have no CourtListener id; the alias follows the `calsuperct-sandiego` pattern (`tx` + `district` + county). Status is `todo` (never set `done`; the owner does).
@@ -14,7 +61,6 @@ No Texas rule or Travis local rule names a typeface (rules.md). The templates us
 | original-answer, motion-brief-2, proposed-order (Dobson), notice-of-appearance-2 | scans; OCR font only, original face unknown |
 
 Arial and Liberation Sans appear only in the clerk's e-file stamp. The Garamond caption is one filer's style (tier 3), so it is not reproduced. Garamond itself is a licensed Monotype face, and the repo bars system fonts. If a Garamond caption is ever wanted, the route is a vendored open face (EB Garamond, SIL OFL) behind an opt-in caption option. It would not be the default.
-
 
 ## Open questions (conservative default taken)
 

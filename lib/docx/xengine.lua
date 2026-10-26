@@ -57,8 +57,9 @@ local function runs(text, o)
       pos = pos + 1
     else
       local e = text:find("\t", pos, true) or (#text + 1)
-      -- a hyphen before a digit does not end a line ("ER-178-82"; Unicode line breaking, as typst breaks)
-      local t = esc(text:sub(pos, e - 1)):gsub("%-(%d)", '</w:t><w:noBreakHyphen/><w:t xml:space="preserve">%1')
+      -- a hyphen before a digit does not end a line ("ER-178-82"; Unicode line breaking, as typst breaks): a word
+      -- joiner after it (see NBH below)
+      local t = esc(text:sub(pos, e - 1)):gsub("%-(%d)", "-\u{2060}%1")
       out[#out + 1] = "<w:r>" .. x .. '<w:t xml:space="preserve">' .. t .. "</w:t></w:r>"
       pos = e
     end
@@ -66,9 +67,11 @@ local function runs(text, o)
   return table.concat(out)
 end
 
--- A hyphen before a digit does not end a line ("ER-178-82"): Word's non-breaking hyphen, as typst breaks (Unicode
--- line breaking keeps a hyphen with the number after it) and LibreOffice would not. The hyphen is its own run.
-local NBH = pandoc.RawInline("openxml", "<w:r><w:noBreakHyphen/></w:r>")
+-- A hyphen before a digit does not end a line ("ER-178-82"): the hyphen and a word joiner after it, as typst breaks
+-- (Unicode line breaking keeps a hyphen with the number after it) and LibreOffice would not. Not Word's
+-- <w:noBreakHyphen/>: LibreOffice draws that as U+2011, which Times New Roman lacks, so the PDF embedded a fallback
+-- font (LinuxLibertineG) on every page that had one (DEF-FONT-002). lib/docx/xdoc.lua holds URL hyphens the same way.
+local NBH = pandoc.Str("-\u{2060}")
 local function nobreak_hyphens(inlines)
   local out = pandoc.Inlines({})
   for _, el in ipairs(inlines) do

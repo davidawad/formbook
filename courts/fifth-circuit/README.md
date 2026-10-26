@@ -1,7 +1,7 @@
 <!-- fb:generated:start -->
 # Fifth Circuit
 
-Courts under `courts/fifth-circuit` (26).
+Courts under `courts/fifth-circuit` (27).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
@@ -31,6 +31,7 @@ Courts under `courts/fifth-circuit` (26).
 | [Court of Civil Appeals of Texas](texas/state/court-of-civil-appeals) | `texapp` | up for review | 5/5 | 2/2 | 5/5 | 29 |
 | [Court of Criminal Appeals of Texas](texas/state/court-of-criminal-appeals) | `texcrimapp` | up for review | 5/5 | 2/2 | 4/4 | 29 |
 | [Texas Supreme Court](texas/state/supreme-court) | `tex` | up for review | 2/2 | 2/2 | 2/2 | 29 |
+| [District Courts of Travis County, Texas (Austin)](texas/state/district-court-travis) | `txdistrict-travis` | up for review | 5/5 | — | — | 14 |
 
 [Formbook index](../../README.md)
 <!-- fb:generated:end -->

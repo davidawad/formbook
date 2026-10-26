@@ -11,7 +11,7 @@ Courts under `courts/ninth-circuit/california/federal` (8).
 | [United States Bankruptcy Court, S.D. California](bankruptcy-southern-district) | `casb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the Central District of California](central-district) | `cacd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the Eastern District of California](eastern-district) | `caed` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Northern District of California](northern-district) | `cand` | up for review | 3/3 | — | 1/2 | 14 |
+| [United States District Court for the Northern District of California](northern-district) | `cand` | up for review | 5/5 | — | 4/4 | 14 |
 | [United States District Court for the Southern District of California](southern-district) | `casd` | up for review | 2/2 | — | 2/2 | 14 |
 
 [Formbook index](../../../../README.md)

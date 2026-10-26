@@ -1,0 +1,7 @@
+# Pleading paper (Civil L.R. 3-4(c)(1)-(2)): 28 numbered lines of 24 pt = 672 pt of the 792 pt page, so the top and
+# bottom margins are 60 pt each. The Civil Local Rules set no minimum margin; the 72 pt default is not a rule here.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md): the docx render breaks every line and page where the typst render does.
+params:
+  margin_top_pt: 60
+  margin_bottom_pt: 60
+  cross_engine: gate
