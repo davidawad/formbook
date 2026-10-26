@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The N.D. Cal. complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs) in the face of the
+     typst template ({font}, Times New Roman; Civil L.R. 3-4(c)(2)(A)) at 12 pt (Civil L.R. 3-4(c)(2)(B); size 24 half
+     points); Body Text in exact 24 pt line boxes (typst pitch, Civil L.R. 3-4(c)(2) double spacing, the numbered
+     lines) with a half-inch indent, the headings in them; counsel, caption and signature lines in 12 pt boxes (typst
+     pitch-single, two to a numbered line). docx/cand.lua writes every paragraph's own spacing, and the page: letter
+     paper (Civil L.R. 3-4(c)(1)), 1.5 in left and 1 in right margins, 27 numbered lines of 24 pt from the 1 in top
+     margin, the line numbers and pleading rules, and the footer with the page number, the paper's title and the case
+     number (Civil L.R. 3-4(c)(3)). Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="24" body="480" single="240" indent="720" heading="480" heading-before="0" heading-after="0"/>
