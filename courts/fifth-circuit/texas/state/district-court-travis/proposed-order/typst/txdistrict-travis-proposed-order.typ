@@ -72,12 +72,14 @@
 
 #let date-line(meta) = {
   let word = meta.at("date_line", default: "signed")
-  if word not in ("signed", "so-ordered") { panic("txdistrict-travis: date_line must be `signed` or `so-ordered`") }
-  // Local Rule 11.5: "SIGNED" or "SO ORDERED", never "entered".
-  let lead = if word == "signed" { [SIGNED] } else { [SO ORDERED] }
+  if word not in ("signed", "so-ordered", "signed-this") { panic("txdistrict-travis: date_line must be `signed`, `so-ordered` or `signed-this`") }
+  // Local Rule 11.5: "SIGNED", "Signed" or "SO ORDERED", never "entered". `signed-this` is "Signed this ___ day of ___, 20__."
+  // (the agreed-order exemplar, usage/SOURCE.md); the other two read "SIGNED on this ..." and "SO ORDERED on this ...".
+  let lead = if word == "signed" { [SIGNED] } else if word == "signed-this" { [Signed] } else { [SO ORDERED] }
+  let on = if word == "signed-this" { [] } else { [on ] }
   let month = meta.at("month", default: none)
   let year = meta.at("year", default: none)
-  block(width: 100%, [#lead on this #blank(0.6in) day of #if month != none { inl(month) } else { blank(1.5in) }, #if year != none { inl(year) } else { [20#blank(0.4in)] }.])
+  block(width: 100%, [#lead #on#[this] #blank(0.6in) day of #if month != none { inl(month) } else { blank(1.5in) }, #if year != none { inl(year) } else { [20#blank(0.4in)] }.])
 }
 
 #let judge-block(meta) = {

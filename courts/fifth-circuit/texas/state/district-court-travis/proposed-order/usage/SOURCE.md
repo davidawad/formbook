@@ -39,3 +39,18 @@ Orders and proposed orders on motions in Travis County district courts. Retrieve
 | Transcribed as | `INPUT-proposed-order-3.md` |
 
 The stored pages of 3 carry the federal court's "Case 1:26-cv-01919-RP Document 1-1 Filed 07/13/26 Page 423 of 502" header and a "Copy from re:SearchTX" legend; neither is part of the proposed order.
+
+## FILED-EXAMPLE-proposed-order-5.pdf
+
+A post-2024 Travis agreed order of dismissal with its "AGREED TO:" signature pages. Retrieved 2026-10-26; HTTP 200 the same day. Numbered 5 because `INPUT-proposed-order-4.md` is fictional (no filed example).
+
+| Field | Value |
+|---|---|
+| Case, court, cause no. | *Seattle Children's Hospital v. Office of the Attorney General of the State of Texas*; 98th Judicial District, Travis County; D-1-GN-23-008855 |
+| Document | Agreed Order of Dismissal, signed by Judge Daniella DeSeta Lyttle (261st District Court) on 2024-04-19 (1 p.), followed by two "AGREED TO:" signature pages (pp. 4-6 of the 6-page PDF; pp. 1-3 are the joint motion, `../../motion-brief/usage/FILED-EXAMPLE-motion-brief-6.pdf`) |
+| Filers | the parties' counsel (Germer Beaman & Brown PLLC; Corr Cronin LLP; Office of the Attorney General, Consumer Protection Division); the clerk's stamp 04/19/2024 10:33:30 AM is on the order |
+| Where obtained | https://www.texasattorneygeneral.gov/sites/default/files/images/press/Seattle%20Childrens%20Joint%20Motion%20and%20Agreed%20Order.pdf |
+| Text layer | No (scans) |
+| Transcribed as | `INPUT-proposed-order-5.md` |
+
+What the exemplar shows: title "AGREED ORDER OF DISMISSAL" (underlined); "On the date indicated below came on to be heard the joint motion ...", a finding that the parties "have satisfactorily compromised and settled all matters in dispute", "ORDERED, ADJUDGED and DECREED that the above entitled and numbered cause be, and the same hereby is, dismissed", a ruling on the pending counterclaim motion ("denied as moot"), "all costs be taxed against the party incurring same", "Signed this 19 day of April, 2024." with "Presiding Judge" and the judge's printed name and court, and then the approval pages headed "AGREED TO:" with a signature line, name, State Bar number and email for each attorney and "ATTORNEYS FOR ..." under each firm. The exemplar has no finality sentence and does not say "with prejudice"; **the Datics order adds both** (rules.md TXTRAVIS-ORD-006: *Lehmann*). Format source, not a content source: the exemplar's order recites no settlement terms, and neither does ours.

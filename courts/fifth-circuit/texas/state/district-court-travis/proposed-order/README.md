@@ -16,7 +16,7 @@ Doc type `proposed-order` for the civil district courts of Travis County, Texas:
 
 ## Markdown contract
 
-Required frontmatter: `cause_number`, `judicial_district` (e.g. "459th"), `caption` (list of `{names, designation}`), `title` (typed as the filer wants it, e.g. with "[Proposed]"). Optional: `date_line` (`signed` default | `so-ordered`), `month`, `year` (otherwise blank), `judge_title` (default "Judge Presiding"), `judge_court` (default true: "<district> DISTRICT COURT / TRAVIS COUNTY, TEXAS" under the line), `choices_intro` and `choices` (list; one check box each, printed after the body, for example with/without prejudice), `approved` (list of `{firm, name, bar_no, lines, phone, email, for}`; two-column "approved as to form" blocks) and `approved_heading`, `footer_title`. Body: paragraphs (recitals, findings), `#`/`##` headings (no numbering added), and `1.` / `-` lists (decretal paragraphs, double spaced). No paragraph numbering by default.
+Required frontmatter: `cause_number`, `judicial_district` (e.g. "459th"), `caption` (list of `{names, designation}`), `title` (typed as the filer wants it, e.g. with "[Proposed]"). Optional: `date_line` (`signed` default, "SIGNED on this ..." | `so-ordered` | `signed-this`, "Signed this ___ day of ___, 20__."), `month`, `year` (otherwise blank), `judge_title` (default "Judge Presiding"), `judge_court` (default true: "<district> DISTRICT COURT / TRAVIS COUNTY, TEXAS" under the line), `choices_intro` and `choices` (list; one check box each, printed after the body, for example with/without prejudice), `approved` (list of `{firm, name, bar_no, lines, phone, email, for}`; two-column "approved as to form" blocks) and `approved_heading`, `footer_title`. Body: paragraphs (recitals, findings), `#`/`##` headings (no numbering added), and `1.` / `-` lists (decretal paragraphs, double spaced). No paragraph numbering by default.
 
 ## Samples
 
@@ -26,6 +26,7 @@ Required frontmatter: `cause_number`, `judicial_district` (e.g. "459th"), `capti
 | `INPUT-proposed-order-2.md` | State defendants' [Proposed] order (459th, 2026) | 2 | bracketed title, recital and ORDERED paragraphs; last paragraph moves with the signature |
 | `INPUT-proposed-order-3.md` | Arnold & Itkin proposed order (459th, 2026) | 1 | long caption, bold DENIED/ORDERED |
 | `INPUT-proposed-order-4.md` | fictional | 2 | Rule 91a motion granted, 91a.7 fee paragraph, with/without prejudice choice, two approval blocks |
+| `INPUT-proposed-order-5.md` | Seattle Children's agreed order of dismissal (98th, 2024), with its "AGREED TO:" pages | 2 (exemplar 1 + 2 approval pages) | agreed order: `date_line: signed-this`, `judge_title: Presiding Judge`, `approved_heading: Agreed to:`, three approval blocks |
 
 ## Page review (done, every page of every OUTPUT viewed; overlays for 1-3 run with `just overlay`)
 
@@ -35,8 +36,12 @@ Required frontmatter: `cause_number`, `judicial_district` (e.g. "459th"), `capti
 | OUTPUT 2 p.1-2 | OK; p.1 ends with white space because the last paragraph stays with the signature (LR 11.4); the exemplar fits on one page |
 | OUTPUT 3 p.1 | OK |
 | OUTPUT 4 p.1-2 | OK; "It is therefore ORDERED that:" ends p.1, its list starts p.2 |
+| OUTPUT 5 p.1 | caption, underlined title, three paragraphs, "Signed this ___ day of April, 2024.", judge line: OK; judge block prints the caption court (98th), the exemplar prints the signing judge's name and court (261st) |
+| OUTPUT 5 p.2 | "AGREED TO:" heading and three blocks in two columns: OK; the exemplar sets them single column on two sheets with a signature line each |
 
 ## Known gaps (tier 2/3, ACCEPTED)
+
+- Agreed order (added 2026-10-26, exemplar 5): the exemplar has no finality sentence and does not say "with prejudice"; a filer who needs a final judgment types the finality sentence (rules.md TXTRAVIS-ORD-006). The exemplar's approval blocks are one column with a signature line ("By: /s/" two-column here); its judge's printed name and court are not reproduced; the clerk's stamp is not reproduced.
 
 - Caption names are bold capitals (shared lib), exemplar 2 uses small caps and exemplar 3 plain caps; the court column is bold. Exemplar 2 therefore needs 2 pages where the filed one needs 1.
 - Exemplar 1's clerk stamp and printed judge name, exemplar 3's underlined title and footer "1" (ours: "Page 1") are not reproduced.
