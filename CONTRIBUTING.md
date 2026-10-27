@@ -65,7 +65,7 @@ Passing means the unit is shaped and renders correctly; it does not mean the lay
 
 ## How maintainers review and merge
 
-A maintainer reads the PR body (verify output, exemplar sources, the open tier-2 findings you listed), renders the template against the exemplar, and spot-checks pages. Merging is by a maintainer only, never by the author. After merging, a maintainer runs `just worklist` and `sh tools/tracker.sh` and commits the regenerated files, so unit PRs never conflict on shared files. Court `status: done` is set by the maintainer by hand. Expect changes requested for tier 1 problems; tier 3 differences are accepted and logged.
+A maintainer reads the PR body (verify output, exemplar sources, the open tier-2 findings you listed), renders the template against the exemplar, and spot-checks pages. Merging is by a maintainer only, never by the author. After merging, a maintainer runs `just worklist` and `sh tools/tracker.sh` and commits the regenerated files, so unit PRs never conflict on shared files. Court `status: done` is set by the maintainer by hand, after a licensed attorney's review: `skills/formbook-review/SKILL.md` produces one file, `<court>/attorney-reviews/YYYY-MM-DD-<github-handle>.md`, in a PR that changes nothing else; when every doc type in it is USABLE, the maintainer sets `status` and `reviewed_by` in `court.json`. Attorney reviews stay out of `reviews/`, which holds the per-page Gate 2 reviews the checker reads. Expect changes requested for tier 1 problems; tier 3 differences are accepted and logged.
 
 ## Licensing and sources of exemplars
 

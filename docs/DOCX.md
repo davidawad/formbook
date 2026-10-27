@@ -19,6 +19,16 @@ A court PR may deliver docx as BLOCKED or partial if it lists the exact failing 
 | Block quotations, indentation | Paragraph styles with `w:ind`, not tabs or spaces | |
 | Fonts | Name the font in the styles; the court font must be installed on the machine that opens the file | Word will substitute silently if the font is missing. Embedding (`w:embedTrueTypeFonts`) works in Word but LibreOffice ignores it. The checked PDF must show the declared font; the font name check is the proof. For the PDF conversion the vendored fonts must be visible to LibreOffice (install them for the user running the check, or point `docx/render.sh` at a font directory). |
 
+## Pleading paper: why typst is the reference engine
+
+Pleading paper (California, N.D. Cal. and other courts that ask for numbered lines: a fixed grid of 28 numbered lines per page, a double rule at the left of the text and a single rule at the right) is a page layout, not a text feature. Typst draws it directly: the numbers and rules are page furniture, and the body is set on the grid. Word has no pleading-paper layout of its own, and every way to build one in a modern `.docx` is a workaround:
+
+- **Line numbering** (`w:lnNumType`) numbers the lines of body text, not the page's grid. Tables, text boxes and footnotes are skipped, a single-spaced block (counsel, caption, signature, quotations) puts two text lines on one grid line, and a heading with space before it shifts every number below it. The numbers stop lining up with the 28 positions the court's paper has.
+- **Numbers in a page-anchored text box** (a VML box in the header or footer holding 1 to 28, the approach in `courts/ninth-circuit/california/federal/northern-district/motion-brief/docx/cand.lua`) keeps the grid, but the text is not tied to it: whether a body line sits on its number depends on exact line heights, and Word and LibreOffice place text boxes, page borders and double rules differently.
+- **Page borders or bar tabs** for the rules draw at offsets that differ between Word and LibreOffice (see the table above).
+
+So a pleading-paper DOCX can pass the mechanical gates on the LibreOffice PDF and still look wrong in Word, or drift after the user edits it. Treat DOCX output for these courts as best effort: a starting point to edit, not a file to sign. Where the docx cannot meet a pleading rule, the folder marks it `BLOCKED: <check ID>: <why>` and the README says so; nobody should spend time forcing Word to match typst line for line. Typst stays the reference: it is the engine the templates are written in, reviewed in, and the one an attorney's review (`skills/formbook-review/SKILL.md`) judges.
+
 ## Known limits
 
 - **Pagination differs by renderer.** Word and LibreOffice disagree on line breaks and therefore on page numbers in a TOC or TOA. A TOC/TOA page-number check passes against the LibreOffice PDF and may be off by a page in Word. State this in the PR; do not "fix" it by forcing page breaks.

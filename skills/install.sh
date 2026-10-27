@@ -1,5 +1,6 @@
 #!/bin/sh
-# Install the formbook agent skill: sh skills/install.sh <skills-dir>   (e.g. ~/.claude/skills)
+# Install the formbook agent skills: sh skills/install.sh <skills-dir>   (e.g. ~/.claude/skills)
+# Copies every skill folder here (formbook, formbook-review); an older copy is replaced.
 set -eu
 
 [ $# -eq 1 ] || {
@@ -9,18 +10,20 @@ set -eu
 }
 
 here=$(cd "$(dirname "$0")" && pwd)
-src="$here/formbook"
-dest="$1/formbook"
-
-[ -f "$src/SKILL.md" ] || { echo "Cannot find $src/SKILL.md" >&2; exit 1; }
-
 mkdir -p "$1"
-if [ -e "$dest" ]; then
-  echo "Replacing the existing copy at $dest"
-  rm -rf "$dest"
-fi
-cp -R "$src" "$dest"
 
-echo "Installed the formbook skill to $dest"
-echo "Restart your agent, then ask it to format a court filing, or type /formbook."
-echo "The skill renders with the templates in a formbook checkout: $(dirname "$here")"
+for src in "$here"/*/; do
+  src=${src%/}
+  [ -f "$src/SKILL.md" ] || continue
+  name=$(basename "$src")
+  dest="$1/$name"
+  if [ -e "$dest" ]; then
+    echo "Replacing the existing copy at $dest"
+    rm -rf "$dest"
+  fi
+  cp -R "$src" "$dest"
+  echo "Installed the $name skill to $dest"
+done
+
+echo "Restart your agent, then ask it to format a court filing (/formbook) or to review a court's templates (/formbook-review)."
+echo "The skills render with the templates in a formbook checkout: $(dirname "$here")"

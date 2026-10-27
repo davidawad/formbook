@@ -12,6 +12,7 @@ Every template is checked against public record: each folder's `usage/` carries 
 - 1,307 folders have at least one filed exemplar PDF (2,223 PDFs in all).
 - **v0.2.0 status.** All 224 federal courts (including bankruptcy and the Supreme Court) are *up for review*: each has a `rules.md` written from fetched primary sources, and every doc folder under it passes the default eval in `data/checks-default.yaml`. Renders are pinned (typst 0.15.1, Times New Roman 2.82). Of the 152 state courts, 129 are up for review; the other 23 have no public filed example yet (see [Help wanted](#help-wanted-filed-examples-for-23-state-courts)).
 - **"Up for review" means machine-checked, not human-reviewed.** No court is marked `done`; that status is set by hand, and no court has been human-verified yet.
+- **Typst is the reference engine; DOCX is best effort.** Word has no pleading-paper layout of its own: its line numbering counts only body text, so tables, footnotes and single-spaced blocks fall off the court's 28-line grid, and the workaround (the numbers in a page-anchored text box) draws differently in Word and in LibreOffice. Some DOCX outputs, pleading paper above all, will not look right and may never be able to; that is why the templates are written in Typst. Details: [docs/DOCX.md](docs/DOCX.md#pleading-paper-why-typst-is-the-reference-engine).
 - More pictures, and the command that regenerates each: [docs/showcase/README.md](docs/showcase/README.md). Per-court progress is in the [index](#index) at the bottom.
 
 These templates are not legal advice and do not check your arguments or citations. Verify every output against the court's current rules before you file; the court index below marks what is finished and what is still in progress.
@@ -32,43 +33,55 @@ just contribute verify <id>     # mechanical floor: layout, renders, exemplar so
 just contribute submit <id>     # reruns verify, opens the PR
 ```
 
-**The agent skill.** The [`skills/formbook/`](skills/formbook) folder holds one `SKILL.md` that teaches an agent to use these templates (find the court, start from a sample, render, look at every page) and to write a new one when a court or document type is missing. Install it for Claude Code with one command from this checkout:
+**The agent skills.** The [`skills/formbook/`](skills/formbook) folder holds one `SKILL.md` that teaches an agent to use these templates (find the court, start from a sample, render, look at every page) and to write a new one when a court or document type is missing; [`skills/formbook-review/`](skills/formbook-review) walks an attorney's agent through reviewing a court (see [Looking for reviewers](#looking-for-reviewers)). Install both for Claude Code with one command from this checkout:
 
 ```sh
 sh skills/install.sh ~/.claude/skills
 ```
 
-For other agents (Codex, Cursor, a plain LLM with a shell), point them at `skills/formbook/SKILL.md`. Details: [skills/README.md](skills/README.md). Full contribution rules, quality bar and review process: [CONTRIBUTING.md](CONTRIBUTING.md).
+For other agents (Codex, Cursor, a plain LLM with a shell), point them at `skills/formbook/SKILL.md` or `skills/formbook-review/SKILL.md`. Details: [skills/README.md](skills/README.md). Full contribution rules, quality bar and review process: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Help wanted: filed examples for 23 state courts
 
-These courts have a `rules.md` written from primary sources, but we have not found a single publicly available filing from them to build and check a template against. Most are tax courts, workers' compensation boards and small specialty tribunals whose filings are not on free dockets. If you can point to a public filed brief, petition or motion from one of them (a court website, a public agency record, an appellate record), open an issue or PR with the PDF's source URL; that is all it takes to unblock the court.
+These courts have a `rules.md` written from primary sources, but we have not found a single publicly available filing from them to build and check a template against. Most are tax courts, workers' compensation boards and small specialty tribunals whose filings are not on free dockets. If you can point to a public filed brief, petition or motion from one of them (a court website, a public agency record, an appellate record), comment on the court's issue below (or open a PR) with the PDF's source URL; that is all it takes to unblock the court.
 
-| Court | Alias |
-|---|---|
-| [Arkansas Workers' Compensation Commission](courts/eighth-circuit/arkansas/state/workers-compensation-commission) | `arkworkcompcom` |
-| [California Superior Court, Appellate Division](courts/ninth-circuit/california/state/superior-court-appellate-division) | `calappdeptsuper` |
-| [Colorado Industrial Claim Appeals office](courts/tenth-circuit/colorado/state/industrial-claim-appeals-office) | `coloworkcompcom` |
-| [Connecticut Compensation Review Board](courts/second-circuit/connecticut/state/compensation-review-board) | `connworkcompcom` |
-| [Court for the Trial of Impeachments](courts/second-circuit/new-york/state/court-for-the-trial-of-impeachments) | `nyimpct` |
-| [Court of Chancery of South Carolina](courts/fourth-circuit/south-carolina/state/court-of-chancery) | `ctchansc` |
-| [Court on the Judiciary of Delaware](courts/third-circuit/delaware/state/court-on-the-judiciary) | `deljudct` |
-| [Court on the Judiciary of Oklahoma](courts/tenth-circuit/oklahoma/state/court-on-the-judiciary) | `oklacoj` |
-| [Delaware Family Court](courts/third-circuit/delaware/state/family-court) | `delfamct` |
-| [High Court of American Samoa](courts/ninth-circuit/american-samoa/state/high-court) | `amsamoa` |
-| [Indiana Tax Court](courts/seventh-circuit/indiana/state/tax-court) | `indtc` |
-| [Massachusetts Appellate Tax Board](courts/first-circuit/massachusetts/state/appellate-tax-board) | `masstaxbd` |
-| [Massachusetts Department of Industrial Accidents](courts/first-circuit/massachusetts/state/department-of-industrial-accidents) | `maworkcompcom` |
-| [Massachusetts District Court, Appellate Division](courts/first-circuit/massachusetts/state/district-court-appellate-division) | `massdistctapp` |
-| [Montana Tax Appeal Board](courts/ninth-circuit/montana/state/tax-appeal-board) | `monttc` |
-| [New Jersey Tax Court](courts/third-circuit/new-jersey/state/tax-court) | `njtaxct` |
-| [New York Commission of Appeals](courts/second-circuit/new-york/state/commission-of-appeals) | `nycommnapp` |
-| [North Carolina Industrial Commission](courts/fourth-circuit/north-carolina/state/industrial-commission) | `ncworkcompcom` |
-| [Oklahoma Judicial Ethics Advisory Panel](courts/tenth-circuit/oklahoma/state/judicial-ethics-advisory-panel) | `oklajeap` |
-| [Oregon Tax Court](courts/ninth-circuit/oregon/state/tax-court) | `ortc` |
-| [Saratoga Chancery Court](courts/second-circuit/new-york/state/saratoga-chancery-court) | `nychanctsara` |
-| [Superior Court of Rhode Island](courts/first-circuit/rhode-island/state/superior-court) | `risuperct` |
-| [Texas Court of Review Tribunal](courts/fifth-circuit/texas/state/court-of-review-tribunal) | `texrevtrib` |
+| Court | Alias | Issue |
+|---|---|---|
+| [Arkansas Workers' Compensation Commission](courts/eighth-circuit/arkansas/state/workers-compensation-commission) | `arkworkcompcom` | [#4](https://github.com/davidawad/formbook/issues/4) |
+| [California Superior Court, Appellate Division](courts/ninth-circuit/california/state/superior-court-appellate-division) | `calappdeptsuper` | [#5](https://github.com/davidawad/formbook/issues/5) |
+| [Colorado Industrial Claim Appeals office](courts/tenth-circuit/colorado/state/industrial-claim-appeals-office) | `coloworkcompcom` | [#6](https://github.com/davidawad/formbook/issues/6) |
+| [Connecticut Compensation Review Board](courts/second-circuit/connecticut/state/compensation-review-board) | `connworkcompcom` | [#7](https://github.com/davidawad/formbook/issues/7) |
+| [Court for the Trial of Impeachments](courts/second-circuit/new-york/state/court-for-the-trial-of-impeachments) | `nyimpct` | [#8](https://github.com/davidawad/formbook/issues/8) |
+| [Court of Chancery of South Carolina](courts/fourth-circuit/south-carolina/state/court-of-chancery) | `ctchansc` | [#9](https://github.com/davidawad/formbook/issues/9) |
+| [Court on the Judiciary of Delaware](courts/third-circuit/delaware/state/court-on-the-judiciary) | `deljudct` | [#10](https://github.com/davidawad/formbook/issues/10) |
+| [Court on the Judiciary of Oklahoma](courts/tenth-circuit/oklahoma/state/court-on-the-judiciary) | `oklacoj` | [#11](https://github.com/davidawad/formbook/issues/11) |
+| [Delaware Family Court](courts/third-circuit/delaware/state/family-court) | `delfamct` | [#12](https://github.com/davidawad/formbook/issues/12) |
+| [High Court of American Samoa](courts/ninth-circuit/american-samoa/state/high-court) | `amsamoa` | [#13](https://github.com/davidawad/formbook/issues/13) |
+| [Indiana Tax Court](courts/seventh-circuit/indiana/state/tax-court) | `indtc` | [#14](https://github.com/davidawad/formbook/issues/14) |
+| [Massachusetts Appellate Tax Board](courts/first-circuit/massachusetts/state/appellate-tax-board) | `masstaxbd` | [#15](https://github.com/davidawad/formbook/issues/15) |
+| [Massachusetts Department of Industrial Accidents](courts/first-circuit/massachusetts/state/department-of-industrial-accidents) | `maworkcompcom` | [#16](https://github.com/davidawad/formbook/issues/16) |
+| [Massachusetts District Court, Appellate Division](courts/first-circuit/massachusetts/state/district-court-appellate-division) | `massdistctapp` | [#17](https://github.com/davidawad/formbook/issues/17) |
+| [Montana Tax Appeal Board](courts/ninth-circuit/montana/state/tax-appeal-board) | `monttc` | [#18](https://github.com/davidawad/formbook/issues/18) |
+| [New Jersey Tax Court](courts/third-circuit/new-jersey/state/tax-court) | `njtaxct` | [#19](https://github.com/davidawad/formbook/issues/19) |
+| [New York Commission of Appeals](courts/second-circuit/new-york/state/commission-of-appeals) | `nycommnapp` | [#20](https://github.com/davidawad/formbook/issues/20) |
+| [North Carolina Industrial Commission](courts/fourth-circuit/north-carolina/state/industrial-commission) | `ncworkcompcom` | [#21](https://github.com/davidawad/formbook/issues/21) |
+| [Oklahoma Judicial Ethics Advisory Panel](courts/tenth-circuit/oklahoma/state/judicial-ethics-advisory-panel) | `oklajeap` | [#22](https://github.com/davidawad/formbook/issues/22) |
+| [Oregon Tax Court](courts/ninth-circuit/oregon/state/tax-court) | `ortc` | [#23](https://github.com/davidawad/formbook/issues/23) |
+| [Saratoga Chancery Court](courts/second-circuit/new-york/state/saratoga-chancery-court) | `nychanctsara` | [#24](https://github.com/davidawad/formbook/issues/24) |
+| [Superior Court of Rhode Island](courts/first-circuit/rhode-island/state/superior-court) | `risuperct` | [#25](https://github.com/davidawad/formbook/issues/25) |
+| [Texas Court of Review Tribunal](courts/fifth-circuit/texas/state/court-of-review-tribunal) | `texrevtrib` | [#26](https://github.com/davidawad/formbook/issues/26) |
+
+## Looking for reviewers
+
+Every court above is machine-checked; none is marked `done`, because that takes a licensed attorney looking at the output and saying it is good enough to file. If you practice before a court in the index, you can review it with your own agent:
+
+```sh
+sh skills/install.sh ~/.claude/skills      # installs the formbook-review skill alongside formbook
+```
+
+Then ask your agent to review a court with `/formbook-review` (other agents: "Read skills/formbook-review/SKILL.md and follow it"). It renders every document type for the court, checks each page against the court's current rules, walks you through every page next to a real filed example, and drafts a short record of your verdict (usable, usable with changes, not usable) and findings. You confirm every line and submit it as a pull request that adds one file, `attorney-reviews/<date>-<you>.md`, to the court's folder. A maintainer merges it and marks the court `done` with you as the reviewer.
+
+The review covers form (layout, required parts, limits), not legal substance. To claim a court before you start, or to ask anything first, open an issue titled `review - <full court name>`.
 
 ## Use a template
 
@@ -382,7 +395,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [Court of Civil Appeals of Texas](courts/fifth-circuit/texas/state/court-of-civil-appeals) | `texapp` | up for review | 5/5 | 2/2 | 5/5 | 29 |
 | [Court of Criminal Appeals of Texas](courts/fifth-circuit/texas/state/court-of-criminal-appeals) | `texcrimapp` | up for review | 5/5 | 2/2 | 4/4 | 29 |
 | [Texas Supreme Court](courts/fifth-circuit/texas/state/supreme-court) | `tex` | up for review | 2/2 | 2/2 | 2/2 | 29 |
-| [District Courts of Travis County, Texas (Austin)](courts/fifth-circuit/texas/state/district-court-travis) | `txdistrict-travis` | up for review | 5/5 | — | — | 14 |
+| [District Courts of Travis County, Texas (Austin)](courts/fifth-circuit/texas/state/district-court-travis) | `txdistrict-travis` | up for review | 6/6 | — | — | 14 |
 
 ## Sixth Circuit
 
@@ -878,6 +891,6 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Tenth Circuit | 106 | 106 | 106 | 106 | 103 | 103 | 97.1% | 106 |
 | Eleventh Circuit | 129 | 129 | 129 | 129 | 128 | 128 | 99.2% | 129 |
 | D.C. Circuit | 14 | 14 | 14 | 14 | 14 | 14 | 100.0% | 14 |
-| Fifth Circuit | 5 | 5 | 5 | 5 | 5 | 5 | 100.0% | 5 |
-| **Total** | 1195 | 1195 | 1194 | 1194 | 1179 | 1179 | 98.6% | 1194 |
+| Fifth Circuit | 6 | 6 | 6 | 6 | 6 | 6 | 100.0% | 6 |
+| **Total** | 1196 | 1196 | 1195 | 1195 | 1180 | 1180 | 98.6% | 1195 |
 <!-- tracker:end -->
