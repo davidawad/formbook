@@ -33,7 +33,7 @@ just contribute verify <id>     # mechanical floor: layout, renders, exemplar so
 just contribute submit <id>     # reruns verify, opens the PR
 ```
 
-**The agent skills.** The [`skills/formbook/`](skills/formbook) folder holds one `SKILL.md` that teaches an agent to use these templates (find the court, start from a sample, render, look at every page) and to write a new one when a court or document type is missing; [`skills/formbook-review/`](skills/formbook-review) walks an attorney's agent through reviewing a court (see [Looking for reviewers](#looking-for-reviewers)). Install both for Claude Code with one command from this checkout:
+**The agent skills.** The [`skills/formbook/`](skills/formbook) folder holds one `SKILL.md` that teaches an agent to use these templates (find the court, start from a sample, render, look at every page) and to write a new one when a court or document type is missing; [`skills/formbook-review/`](skills/formbook-review) walks a reviewing attorney's agent through reviewing a template (see [Looking for reviewers](#looking-for-reviewers)). Install both for Claude Code with one command from this checkout:
 
 ```sh
 sh skills/install.sh ~/.claude/skills
@@ -73,15 +73,17 @@ These courts have a `rules.md` written from primary sources, but we have not fou
 
 ## Looking for reviewers
 
-Every court above is machine-checked; none is marked `done`, because that takes a licensed attorney looking at the output and saying it is good enough to file. If you practice before a court in the index, you can review it with your own agent:
+Every court above is machine-checked; none is marked `done`, because that takes a licensed attorney looking at the output and saying it is good enough to file. If you practice before any court in the index, email David Awad at me@davidaw.ad to become a reviewer: say who you are, where you are admitted, and which courts you file in.
+
+Once you are a reviewer, you review the templates you know, one document type at a time (a court's opening brief, a district's motion brief), with your own agent:
 
 ```sh
 sh skills/install.sh ~/.claude/skills      # installs the formbook-review skill alongside formbook
 ```
 
-Then ask your agent to review a court with `/formbook-review` (other agents: "Read skills/formbook-review/SKILL.md and follow it"). It renders every document type for the court, checks each page against the court's current rules, walks you through every page next to a real filed example, and drafts a short record of your verdict (usable, usable with changes, not usable) and findings. You confirm every line and submit it as a pull request that adds one file, `attorney-reviews/<date>-<you>.md`, to the court's folder. A maintainer merges it and marks the court `done` with you as the reviewer.
+Then ask your agent to review a template with `/formbook-review` (other agents: "Read skills/formbook-review/SKILL.md and follow it"). It renders the template's samples, checks each page against the court's current rules, walks you through every page next to a real filed example, and drafts a short record of your verdict (usable, usable with changes, not usable) and findings. You confirm every line and open a pull request that adds that record, `attorney-reviews/<date>-<you>.md`, to the template's folder. Reviews are merged as they come in.
 
-The review covers form (layout, required parts, limits), not legal substance. To claim a court before you start, or to ask anything first, open an issue titled `review - <full court name>`.
+A review covers form (layout, required parts, limits), not legal substance.
 
 ## Use a template
 
