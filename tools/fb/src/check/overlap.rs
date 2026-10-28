@@ -10,8 +10,8 @@
 //! lines whose ems intersect are set closer than solid (baseline to baseline less than the type size), tighter than
 //! the single spacing that is the least any court rule allows (headings, quotations, footnotes); two words of one line
 //! whose boxes intersect are printed over each other. poppler's own box of a word (the font descriptor's ascent to
-//! descent, clamped to 1.05 and 0.4 of the size) runs from 0.9 of the size (Times as typst embeds it) to 1.45 (TeX
-//! Gyre Schola), so it is used only to place the baseline: a quarter of the box height above its bottom. Two words fail
+//! descent) runs from 0.9 of the size (Times as typst embeds it) to 1.66 (TeX Gyre Schola as LibreOffice embeds it),
+//! so it is used only to place the baseline: a quarter of the box height above its bottom. Two words fail
 //! when their ems intersect by more than `EPS_V_PT` vertically and their boxes by more than `EPS_H_PT` horizontally.
 //! A word less than 0.8 the size of the other on another line (a footnote mark, raised above its own line's em) is
 //! not compared with it. One finding is reported per pair of lines.
@@ -26,6 +26,9 @@ use std::process::{Command, ExitCode, Stdio};
 pub const EM_UP: f64 = 0.78;
 /// The em below the baseline.
 pub const EM_DOWN: f64 = 0.22;
+/// The tallest box poppler gives a word, as a fraction of its size (TeX Gyre Schola as LibreOffice embeds it: 21.54 pt
+/// at 13 pt). A word may take no run size below its box height over this.
+pub const BOX_MAX: f64 = 1.7;
 /// Vertical intersection that counts: more than the error of the baseline estimate between two faces.
 pub const EPS_V_PT: f64 = 0.5;
 /// Horizontal intersection that counts: more than the kerning between two words of one line (a small-caps word and
@@ -144,7 +147,7 @@ pub fn parse_words(xhtml: &str) -> Vec<Word> {
 }
 
 /// Each word takes the size of the run its centre lies in (runs are on a 0.5 pt grid, hence the 1 pt slack), held to
-/// what its own box allows: the box is 0.85 (cap height and descender) to 1.45 (poppler's clamp) of the size, so a
+/// what its own box allows: the box is 0.85 (cap height and descender) to `BOX_MAX` of the size, so a
 /// word under a run of another size (a check box glyph in a line of text) cannot take that size. A word in no run
 /// takes its box height.
 pub fn sized(mut words: Vec<Word>, runs: &[Word]) -> Vec<Word> {
@@ -162,7 +165,7 @@ pub fn sized(mut words: Vec<Word>, runs: &[Word]) -> Vec<Word> {
             })
             .map(|r| r.size)
             .unwrap_or(h)
-            .clamp(h / 1.45, h / 0.85);
+            .clamp(h / BOX_MAX, h / 0.85);
     }
     words
 }

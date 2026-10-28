@@ -37,7 +37,7 @@ fn lines_set_solid_do_not_overlap() {
         // 12 pt Times single lines 12 pt apart (the N.D. Cal. complaint now)
         w(83.0, 108.0, 100.0, 10.91, 12.0, "JOSHUA"),
         w(95.0, 108.0, 100.0, 10.91, 12.0, "CHRISTINE"),
-        // 13 pt Schola 13 pt apart (LibreOffice), boxes of 1.45 of the size
+        // 13 pt Schola 13 pt apart (LibreOffice), boxes of 1.65 of the size
         w(488.5, 306.1, 35.6, 21.49, 13.0, "Kaiya"),
         w(501.5, 306.1, 35.6, 21.49, 13.0, "SBN"),
     ];
@@ -140,4 +140,34 @@ fn words_take_the_size_of_their_run() {
             ("alone".into(), 10.899999999999977)
         ]
     );
+}
+
+#[test]
+fn a_tall_box_keeps_the_size_of_its_run() {
+    // TeX Gyre Schola 13 pt as LibreOffice embeds it: poppler boxes 21.54 pt tall (1.66 of the size); the words
+    // keep their run's 13 pt (fb-595.70: held to the box over 1.45, they read 14.86 pt, so lines 13.8 pt apart,
+    // more than solid, were reported closer than solid)
+    let runs = parse_runs(
+        "<page number=\"1\" position=\"absolute\" top=\"0\" left=\"0\" height=\"1584\" width=\"1224\">\n\
+         \t<fontspec id=\"0\" size=\"26\" family=\"BAAAAA+TeXGyreSchola\" color=\"#000000\"/>\n\
+         <text top=\"242\" left=\"216\" width=\"400\" height=\"36\" font=\"0\">ONE</text>\n\
+         <text top=\"270\" left=\"216\" width=\"400\" height=\"36\" font=\"0\">TWO</text>\n\
+         <text top=\"500\" left=\"216\" width=\"400\" height=\"36\" font=\"0\">THREE</text>\n\
+         <text top=\"524\" left=\"216\" width=\"400\" height=\"36\" font=\"0\">FOUR</text>\n\
+         </page>\n",
+    );
+    let words = parse_words(
+        "<doc>\n  <page width=\"612.000000\" height=\"792.000000\">\n\
+         \x20   <word xMin=\"108.0\" yMin=\"121.10\" xMax=\"300.0\" yMax=\"142.64\">ONE</word>\n\
+         \x20   <word xMin=\"108.0\" yMin=\"134.90\" xMax=\"300.0\" yMax=\"156.44\">TWO</word>\n\
+         \x20   <word xMin=\"108.0\" yMin=\"250.00\" xMax=\"300.0\" yMax=\"271.54\">THREE</word>\n\
+         \x20   <word xMin=\"108.0\" yMin=\"262.20\" xMax=\"300.0\" yMax=\"283.74\">FOUR</word>\n\
+         </page>\n</doc>\n",
+    );
+    let words = sized(words, &runs);
+    assert!(words.iter().all(|w| w.size == 13.0), "{words:?}");
+    // 13.8 pt apart passes; 12.2 pt apart (Word's single line in this face) is still closer than solid
+    let found = find(&words);
+    assert_eq!(found.len(), 1, "{found:?}");
+    assert!(found[0].starts_with("p.1: \"THREE\""), "{found:?}");
 }

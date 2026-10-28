@@ -293,8 +293,7 @@
 #let short-rule = align(center, line(length: 2in, stroke: 0.7pt))
 
 #let cover-body(meta, gap) = {
-  set par(first-line-indent: 0pt, leading: 0em, spacing: 0.35em, justify: false)
-  set text(top-edge: "ascender", bottom-edge: "baseline")
+  set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.35em, justify: false)
   set align(center)
   strong[No. #need(meta, "case_number")]
   v(gap)

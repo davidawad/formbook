@@ -21,6 +21,8 @@ local HALF = TEXT_W // 2   -- the signature block starts at the middle of the te
 local TYPEFACE = "TeX Gyre Schola"
 local COURT = "IN THE COURT OF APPEAL OF THE STATE OF CALIFORNIA"
 local NBSP = "\u{00A0}"
+local SINGLE = 276       -- a single line in an exact box of the typst pitch (single-leading: 13.8 pt at 13 pt); Word's
+                          -- single (240 auto) sets TeX Gyre Schola 12.2 pt apart in LibreOffice, closer than solid
 
 local stringify = pandoc.utils.stringify
 
@@ -110,7 +112,7 @@ local function p(body, o)
       .. '" w:space="1" w:color="000000"/></w:pBdr>'
   end
   if o.tabs then s = s .. "<w:tabs>" .. o.tabs .. "</w:tabs>" end
-  local line = o.line and ('w:line="' .. o.line .. '" w:lineRule="exact"') or 'w:line="240" w:lineRule="auto"'
+  local line = o.line and ('w:line="' .. o.line .. '" w:lineRule="exact"') or ('w:line="' .. SINGLE .. '" w:lineRule="exact"')
   s = s .. '<w:spacing w:before="' .. (o.before or 0) .. '" w:after="' .. (o.after or 0) .. '" ' .. line .. "/>"
   s = s .. '<w:ind w:left="' .. (o.left or 0) .. '" w:right="' .. (o.right or 0) .. '"'
   if o.hanging then s = s .. ' w:hanging="' .. o.hanging .. '"' else s = s .. ' w:firstLine="' .. (o.first or 0) .. '"' end
@@ -243,8 +245,9 @@ end
 local function cover(m)
   local out = {}
   local function add(x) out[#out + 1] = x end
-  local gap = 160
-  local short = { rule = "single", left = (TEXT_W - 2880) // 2, right = (TEXT_W - 2880) // 2, after = gap, before = 0 }
+  local gap = 130
+  local RULE = 120   -- a rule paragraph: an empty line box 6 pt tall, its border below it (typst: a line between gaps)
+  local short = { rule = "single", line = RULE, left = (TEXT_W - 2880) // 2, right = (TEXT_W - 2880) // 2, after = gap, before = 0 }
   local function c(body, o)
     o = o or {}
     o.jc = "center"
@@ -252,7 +255,7 @@ local function cover(m)
     return p(body, o)
   end
   add(c(run("No. ", { b = true }) .. mruns(need(m, "case_number"), { b = true }), { after = gap }))
-  add(p("", { rule = "double", after = gap }))
+  add(p("", { rule = "double", line = RULE, after = gap }))
   add(c(run(COURT, { b = true }), { after = 80 }))
   add(c(mruns(need(m, "district"), { b = true, caps = true }), { after = gap }))
   add(p("", short))
@@ -262,7 +265,7 @@ local function cover(m)
     add(c(mruns(side.designation)))
     if i < #sides then add(c(run("v."), { before = 60, after = 60 })) end
   end
-  add(p("", { rule = "single", left = short.left, right = short.right, before = 0, after = gap }))
+  add(p("", { rule = "single", line = RULE, left = short.left, right = short.right, before = 0, after = gap }))
   add(c(mruns(need(m, "proceeding"))))
   add(c(mruns(need(m, "trial_judge")) .. run(" \u{2013} Case No. ") .. mruns(need(m, "trial_case_number")), { after = gap }))
   add(p("", short))
@@ -294,7 +297,7 @@ local function cover(m)
       .. '"/></w:tblGrid>' .. table.concat(rows) .. "</w:tbl>")
   end
   add(c(mruns(need(m, "counsel_for"), { i = true }), { before = gap, after = gap }))
-  add(p("", { rule = "double", after = 0 }))
+  add(p("", { rule = "double", line = RULE, after = 0 }))
   return { raw(table.concat(out)) }
 end
 
