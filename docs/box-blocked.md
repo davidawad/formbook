@@ -845,3 +845,9 @@ BLOCKED third-circuit/pennsylvania/state/superior-court (court-root copies of mo
 BLOCKED third-circuit/pennsylvania/state/supreme-court/amicus-brief: no accessible alternative public text-layer amicus brief found; public indexed material returned decisions and procedure resources.
 BLOCKED third-circuit/pennsylvania/state/supreme-court/petition-for-discretionary-review: no accessible alternative public text-layer petition found; public indexed material returned decisions and procedure resources.
 BLOCKED third-circuit/pennsylvania/state/supreme-court (court-root copies of amicus-brief and petition-for-discretionary-review): no accessible alternative public text-layer party filings found.
+
+## fb-9fyu.3 — Supreme Court cert-petition replacement search (2026-10-28)
+
+Official Supreme Court dockets exposed text-layer merits and amicus briefs, which were added to `usage/` and documented in the court-root and document-folder `SOURCE.md` files. No qualifying cert-petition replacement was found:
+
+BLOCKED supreme-court-of-the-united-states/cert-petition: inspected *Tobien v. Nationwide General Insurance Co.*, No. 25-439 (petition filed 2025-10-08), from the official docket; it is searchable but uses Century Expanded BT, the same unvendored face as the flagged exemplar. An official Times New Roman petition candidate was a scanned/OCR upload, so no qualifying alternative was selected.
