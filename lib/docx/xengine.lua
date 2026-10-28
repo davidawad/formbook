@@ -47,12 +47,7 @@ local function rpr(o)
 end
 
 local function bind_paren_tokens(text)
-  return text:gsub("%S+", function(token)
-    if not token:find("%)%(") then return token end
-    local chars = {}
-    for _, cp in utf8.codes(token) do chars[#chars + 1] = utf8.char(cp) end
-    return table.concat(chars, "\u{2060}")
-  end)
+  return (text:gsub("%)%(", ")\u{2060}("))
 end
 
 -- Text with tabs (\t) as Word runs. No line breaks are ever written: lines wrap where they wrap.
@@ -239,7 +234,10 @@ M.BREAK = "<w:pageBreakBefore/>"
 M.BR = "<w:r><w:br/></w:r>"
 -- Before the leader tab of a table row: three no-break spaces, so the leader is never shorter than that and the
 -- last word takes them along when it wraps (typst: h(0.75em), latex: \xe@leader).
-M.LEAD = "\u{2060}\u{2005}\u{2060}\u{2005}\u{2060}\u{2005}\u{2060}\t"
+-- Some layouts need typst's exact 0.75 em leader gap; use a WJ-bounded three-quarter-em sequence so LibreOffice
+-- cannot wrap at its spaces. The usual constant above remains the 3 NBSP legacy width for other layouts.
+M.LEAD_075EM = "\u{2060}\u{2005}\u{2060}\u{2005}\u{2060}\u{2005}\u{2060}\t"
+M.LEAD = "\u{00A0}\u{00A0}\u{00A0}\t"
 
 -- The break rules on inlines pandoc writes itself (the body text, footnotes, quotations).
 function M.inlines(l)

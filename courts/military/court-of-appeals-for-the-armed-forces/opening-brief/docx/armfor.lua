@@ -21,7 +21,7 @@ local xe = require("docx.xengine")
 local runs, inl = xe.runs, xe.inl
 local para, raw, ind, jc = xe.para, xe.raw, xe.ind, xe.jc
 local KEEP, LINES, BREAK = xe.KEEP, xe.LINES, xe.BREAK
-local LEAD = xe.LEAD
+local LEAD = xe.LEAD_075EM
 local stringify = pandoc.utils.stringify
 
 -- The typst numbers, in twips (20 x pt).
