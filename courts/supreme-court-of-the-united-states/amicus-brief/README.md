@@ -7,7 +7,7 @@ One doc type only. Self-contained: `usage/`, `usage/`, `typst/`, this README.
 
 | Item | Result |
 |---|---|
-| Exemplar | yes: `usage/FILED-EXAMPLE-amicus-brief-2.pdf` (NSSF, merits-stage amicus for petitioners, No. 22-451, filed 2023-07-24) |
+| Exemplar | yes: `usage/FILED-EXAMPLE-amicus-brief.pdf` (NSSF, merits-stage amicus for petitioners, No. 22-451, filed 2023-07-24) |
 | Sample | `usage/INPUT-amicus-brief.md` (excerpt: cover, both tables, Introduction, Summary, Argument I and I.A, I.B to the Guedes discussion, Conclusion, signature, Rule 33.1(h) certificate) |
 | Typeface | Rule 33.1(b) names the Century family. Substitute: **TeX Gyre Schola** (`font-family`; `docs/FONTS.md`). Metric-compatible per upstream, not checked against a commercial Century file here. |
 | Render | ok: `sh tools/render.sh courts/supreme-court-of-the-united-states/amicus-brief usage/INPUT-amicus-brief.md` writes `usage/OUTPUT-amicus-brief.typst.pdf` (14 pages, TeX Gyre Schola only, no typst warnings; was 11 pages in EB Garamond) |
@@ -66,7 +66,7 @@ The body is markdown: `#` for the section headings (Introduction, Summary, Argum
 
 ## Overlay
 
-`OVERLAY-nssf-amicus-brief.pdf` (red = our render, blue = filed exemplar, black = both), run against `usage/FILED-EXAMPLE-amicus-brief-2.pdf` (27 pages). Our cover (p.1) matches the filed cover at 97.8%, our TOC (p.2) at 83.0%. The body pages match at 25.0-100%; the lowest is our p.4 (sub-point A) at 25.0%, which pairs with a filed page holding different text. This is the expected result for an excerpt on a different page size: the filed brief is letter-size, our render is the 6 1/8 x 9 1/4 booklet. The overlay is a diagnostic, not a layout pass.
+`OVERLAY-nssf-amicus-brief.pdf` (red = our render, blue = filed exemplar, black = both), run against `usage/FILED-EXAMPLE-amicus-brief.pdf` (27 pages). Our cover (p.1) matches the filed cover at 97.8%, our TOC (p.2) at 83.0%. The body pages match at 25.0-100%; the lowest is our p.4 (sub-point A) at 25.0%, which pairs with a filed page holding different text. This is the expected result for an excerpt on a different page size: the filed brief is letter-size, our render is the 6 1/8 x 9 1/4 booklet. The overlay is a diagnostic, not a layout pass.
 
 Names differ from the brief's default: `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` writes `OVERLAY-<id>.pdf/.txt`, which is what the shared tools read. The brief's `usage/<id>.pdf` and `<id>-overlay.*` names were not used.
 

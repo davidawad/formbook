@@ -35961,18 +35961,19 @@
       ]
     },
     "courts/supreme-court-of-the-united-states/amicus-brief/usage/FILED-EXAMPLE-amicus-brief-2.pdf": {
-      "body": "centuryschoolbook",
+      "body": "newcenturyschlbklt",
       "body_share": 0.999,
-      "class": "approximate",
+      "class": "metric-exact",
       "face": "TeX Gyre Schola",
-      "why": "Monotype Century Schoolbook; Schola has the Adobe NCS widths",
+      "why": "Adobe New Century Schoolbook metrics",
       "fonts": [
         "Arial-BoldMT",
-        "Calibri",
+        "ArialMT",
         "CenturySchoolbook",
-        "CenturySchoolbook-Bold",
-        "CenturySchoolbook-BoldItalic",
-        "CenturySchoolbook-Italic",
+        "NewCenturySchlbkLT-Bold",
+        "NewCenturySchlbkLT-BoldItalic",
+        "NewCenturySchlbkLT-Italic",
+        "NewCenturySchlbkLT-Roman",
         "OldEnglishTextMT",
         "TimesNewRomanPS-BoldMT",
         "TimesNewRomanPSMT"
@@ -36017,19 +36018,18 @@
       ]
     },
     "courts/supreme-court-of-the-united-states/amicus-brief/usage/FILED-EXAMPLE-amicus-brief.pdf": {
-      "body": "newcenturyschlbklt",
+      "body": "centuryschoolbook",
       "body_share": 0.999,
-      "class": "metric-exact",
+      "class": "approximate",
       "face": "TeX Gyre Schola",
-      "why": "Adobe New Century Schoolbook metrics",
+      "why": "Monotype Century Schoolbook; Schola has the Adobe NCS widths",
       "fonts": [
         "Arial-BoldMT",
-        "ArialMT",
+        "Calibri",
         "CenturySchoolbook",
-        "NewCenturySchlbkLT-Bold",
-        "NewCenturySchlbkLT-BoldItalic",
-        "NewCenturySchlbkLT-Italic",
-        "NewCenturySchlbkLT-Roman",
+        "CenturySchoolbook-Bold",
+        "CenturySchoolbook-BoldItalic",
+        "CenturySchoolbook-Italic",
         "OldEnglishTextMT",
         "TimesNewRomanPS-BoldMT",
         "TimesNewRomanPSMT"

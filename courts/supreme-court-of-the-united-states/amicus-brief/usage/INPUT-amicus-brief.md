@@ -1,5 +1,5 @@
 ---
-# Sample 1 of 1. Transcribed from usage/FILED-EXAMPLE-amicus-brief-2.pdf
+# Sample 1 of 1. Transcribed from usage/FILED-EXAMPLE-amicus-brief.pdf
 # for visual comparison only: cover information, the heading structure, a representative portion of the
 # text, the footnotes and the citations. It is a PORTION of the real brief (Part I.B stops after the
 # Guedes discussion; Part II and the remainder of the argument are omitted), not the whole filing.
