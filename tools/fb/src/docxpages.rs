@@ -349,28 +349,29 @@ pub fn lookup_all(
     // head, or where the tail starts when the find (`text`, an authority's fallback) ends in the tail: typst marks a
     // citation before its last character, so one that runs over a page end is on the next page. Only a head that starts
     // before `until`, of `min_head` characters or more (a split before a whole match, below)
-    let split = |s: &str, text: &str, from: usize, until: usize, min_head: usize| -> Option<usize> {
-        for q in page_at(from)..starts.len() {
-            let (b, a) = (starts[q], starts[q - 1].max(from));
-            if a >= until {
-                break;
-            }
-            if b <= a {
-                continue;
-            }
-            for k in (min_head.max(1)..=s.len().saturating_sub(MIN_TAIL)).rev() {
-                let (head, tail) = s.split_at(k);
-                if all[b..].starts_with(tail) {
-                    if let Some(i) = all[a..b].find(head).filter(|i| a + i < until) {
-                        let ends_in_tail =
-                            !text.is_empty() && s.find(text).is_some_and(|t| t + text.len() > k);
-                        return Some(if ends_in_tail { b } else { a + i });
+    let split =
+        |s: &str, text: &str, from: usize, until: usize, min_head: usize| -> Option<usize> {
+            for q in page_at(from)..starts.len() {
+                let (b, a) = (starts[q], starts[q - 1].max(from));
+                if a >= until {
+                    break;
+                }
+                if b <= a {
+                    continue;
+                }
+                for k in (min_head.max(1)..=s.len().saturating_sub(MIN_TAIL)).rev() {
+                    let (head, tail) = s.split_at(k);
+                    if all[b..].starts_with(tail) {
+                        if let Some(i) = all[a..b].find(head).filter(|i| a + i < until) {
+                            let ends_in_tail = !text.is_empty()
+                                && s.find(text).is_some_and(|t| t + text.len() > k);
+                            return Some(if ends_in_tail { b } else { a + i });
+                        }
                     }
                 }
             }
-        }
-        None
-    };
+            None
+        };
     let mut cur = 0;
     // the last body needle found, where, and its id: a needle equal to it is found at the same place, not after it,
     // when the two are two authorities' (their finds mark the same word) or the last one a section's start (the
@@ -663,7 +664,8 @@ mod tests {
         // words come again whole on page 3: the citation is the one over the page end, on page 2
         let pdf = "the protest filing\n3 See note.\n6\n\u{c}requirements in section 163-182.9. Id. more\n7\n\u{c}failed the protest filing requirements in section 163-182.9 again\n8\n\u{c}";
         let p = page_texts(pdf);
-        let needles = "a38.3\tB\tprotestfilingrequirementsinsection1631829\t1631829\nh6\tB\tmore\tmore\n";
+        let needles =
+            "a38.3\tB\tprotestfilingrequirementsinsection1631829\t1631829\nh6\tB\tmore\tmore\n";
         assert_eq!(lookup(needles, &p).unwrap(), "a38.3\t2\t-\nh6\t2\t-\n");
     }
 
@@ -674,7 +676,10 @@ mod tests {
         let pdf = "mcl 14.102 any action at law\n4\n\u{c}see mcl 14.102 later\n5\n\u{c}";
         let p = page_texts(pdf);
         let needles = "h4\tB\tmcl14102anyactionatlaw\tmcl14102\na32.1\tB\tmcl14102\t14102\nh5\tB\tanyaction\tanyaction\n";
-        assert_eq!(lookup(needles, &p).unwrap(), "h4\t1\t-\na32.1\t1\t-\nh5\t1\t-\n");
+        assert_eq!(
+            lookup(needles, &p).unwrap(),
+            "h4\t1\t-\na32.1\t1\t-\nh5\t1\t-\n"
+        );
     }
 
     #[test]
