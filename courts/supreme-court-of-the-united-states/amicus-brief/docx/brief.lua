@@ -30,6 +30,8 @@ local TOC_DEPTH = 3       -- heading levels in the table of contents (typst: toc
 -- line of this folder's sample breaks as in typst (amicus-brief 1443 twips, merits-brief 1441: one twip either side
 -- moves a line); a line of other text within 0.1 pt of the measure may still break differently (docs/EVAL-LOOP.md).
 local TEXT_W = 5937
+local COVER_RULE = 2520   -- typst cover-rule, 1.75 in: the short rule closing each part of the cover
+local COUNSEL_IND = 2016  -- typst cover-counsel-indent, 1.4 in: counsel set left-aligned from here
 local MARGIN_R = 1443
 local PITCH = 280         -- typst pitch-body: 14 pt (12-point type, 2-point leading; Rule 33.1(b))
 local TOC_COL = 477       -- typst toc-page-col: 24 pt kept for the contents' page numbers, less the margin's extra
@@ -377,28 +379,43 @@ local function cover(meta)
     .. TEXT_W .. '"/>'
   local function add(before, body, o)
     o = o or {}
-    x[#x + 1] = para({ o.frame and FOOT or "", spacing(before), ind(0), jc(o.left and "left" or "center") }, body)
+    x[#x + 1] = para({ o.frame and FOOT or "", spacing(before), ind(o.indent or 0), jc((o.left or o.indent) and "left" or "center") }, body)
+  end
+  -- the short rule closing a part (typst cover rule(): 1.75 in, 1 pt, 8 pt above, no height of its own), an empty
+  -- paragraph's border: 6 pt above, a 1 pt line and the 1 pt border under it fill the same 8 pt
+  local function rule()
+    local side = math.floor((TEXT_W - COVER_RULE) / 2)
+    x[#x + 1] = para({ '<w:pBdr><w:bottom w:val="single" w:sz="8" w:space="0" w:color="000000"/></w:pBdr>',
+      spacing(120, 0, 20), ind(side, nil, side) }, "")
+  end
+  -- counsel, left-aligned from the counsel indent (typst counsel-line)
+  local function counsel(before, body)
+    add(before, body, { frame = true, indent = COUNSEL_IND })
   end
   -- (a) the docket number, (b) the Court, (c) the caption, (d) the proceeding, (e) the title (Rule 34.1)
-  add(0, runs("No. ") .. inl(need_meta(meta, "case_number")), { left = true })
+  add(0, runs("No. ") .. inl(need_meta(meta, "case_number")))
   add(400, runs("In the"))
   add(0, runs("SUPREME COURT OF THE UNITED STATES", { b = true }))
+  rule()
   for i, side in ipairs(need_meta(meta, "caption")) do
     if i > 1 then add(120, runs("v.")) end
     for j, n in ipairs(side.names) do add(j > 1 and 0 or (i == 1 and 280 or 120), inl(n)) end
     add(0, inl(side.designation))
   end
+  rule()
   add(280, inl(need_meta(meta, "proceeding")))
+  rule()
   add(280, inl(upper_il(unlist(need_meta(meta, "brief_title"))), { b = true }))
+  rule()
   -- (f) counsel: the counsel of record is identified with the notation directly under the name
   for gi, g in ipairs(need_meta(meta, "counsel")) do
-    for j, n in ipairs(g.names) do add((gi > 1 and j == 1) and 240 or 0, inl(n), { frame = true }) end
-    if g.role then add(0, inl(g.role, { i = true }), { frame = true }) end
-    for _, l in ipairs(g.lines or {}) do add(0, inl(l), { frame = true }) end
-    if gi == 1 then add(0, inl(need_meta(meta, "phone")), { frame = true }) end
+    for j, n in ipairs(g.names) do counsel((gi > 1 and j == 1) and 240 or 0, inl(n)) end
+    if g.role then counsel(0, inl(g.role, { i = true })) end
+    for _, l in ipairs(g.lines or {}) do counsel(0, inl(l)) end
+    if gi == 1 then counsel(0, inl(need_meta(meta, "phone"))) end
   end
-  add(240, inl(need_meta(meta, "counsel_role"), { i = true }), { frame = true })
-  add(240, inl(need_meta(meta, "date")), { frame = true })
+  counsel(240, inl(need_meta(meta, "counsel_role"), { i = true }))
+  add(240, inl(need_meta(meta, "date")), { frame = true, left = true })
   return raw(table.concat(x))
 end
 

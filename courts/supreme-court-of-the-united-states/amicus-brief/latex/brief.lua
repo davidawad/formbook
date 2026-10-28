@@ -131,31 +131,37 @@ end
 
 -- Front matter ----------------------------------------------------------------------------------
 
--- The cover (typst: cover): one centred line or paragraph per part, the counsel at the foot of the page.
+-- The cover (typst: cover): one centred line or paragraph per part closed by a short rule, the counsel at the foot
+-- of the page from the counsel indent.
 local function cover()
   local out = {}
   local function add(s) out[#out + 1] = s end
   local function line(above, s) add("\\scotusline{" .. above .. "}{" .. s .. "}") end
   add("\\thispagestyle{empty}")
-  add("\\scotusleft{0}{No. " .. tex(need("case_number")) .. "}")
+  line(0, "No. " .. tex(need("case_number")))
   line(20, "In the")
   line(0, "\\textbf{SUPREME COURT OF THE UNITED STATES}")
+  add("\\scotusrule")
   for i, side in ipairs(need("caption")) do
     if i > 1 then line(6, "v.") end
     for j, n in ipairs(side.names) do line(j > 1 and 0 or (i == 1 and 14 or 6), tex(n)) end
     line(0, tex(side.designation))
   end
+  add("\\scotusrule")
   line(14, tex(need("proceeding")))
+  add("\\scotusrule")
   line(14, "\\textbf{\\MakeUppercase{" .. tex(need("brief_title")) .. "}}")
+  add("\\scotusrule")
   add("\\par\\vfill")
+  local function counsel(above, s) add("\\scotuscounsel{" .. above .. "}{" .. s .. "}") end
   for i, g in ipairs(need("counsel")) do
-    for j, n in ipairs(g.names) do line((i > 1 and j == 1) and 12 or 0, tex(n)) end
-    if g.role then line(0, "\\emph{" .. tex(g.role) .. "}") end
-    for _, l in ipairs(g.lines) do line(0, tex(l)) end
-    if i == 1 then line(0, tex(need("phone"))) end
+    for j, n in ipairs(g.names) do counsel((i > 1 and j == 1) and 12 or 0, tex(n)) end
+    if g.role then counsel(0, "\\emph{" .. tex(g.role) .. "}") end
+    for _, l in ipairs(g.lines) do counsel(0, tex(l)) end
+    if i == 1 then counsel(0, tex(need("phone"))) end
   end
-  line(12, "\\emph{" .. tex(need("counsel_role")) .. "}")
-  line(12, tex(need("date")))
+  counsel(12, "\\emph{" .. tex(need("counsel_role")) .. "}")
+  add("\\scotusleft{12}{" .. tex(need("date")) .. "}")
   add("\\clearpage")
   return pandoc.RawBlock("latex", table.concat(out, "\n"))
 end

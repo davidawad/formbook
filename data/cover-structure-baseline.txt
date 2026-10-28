@@ -2131,9 +2131,6 @@ courts/sixth-circuit/tennessee/state/supreme-court/petition-for-review typst
 courts/sixth-circuit/tennessee/state/supreme-court/reply-brief docx
 courts/sixth-circuit/tennessee/state/supreme-court/reply-brief latex
 courts/sixth-circuit/tennessee/state/supreme-court/reply-brief typst
-courts/supreme-court-of-the-united-states/amicus-brief docx
-courts/supreme-court-of-the-united-states/amicus-brief latex
-courts/supreme-court-of-the-united-states/amicus-brief typst
 courts/supreme-court-of-the-united-states/cert-petition docx
 courts/supreme-court-of-the-united-states/cert-petition typst
 courts/supreme-court-of-the-united-states/merits-brief docx

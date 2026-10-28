@@ -117,6 +117,12 @@
 % One line of the cover, signature or certificate: #1 space above (bp), #2 the text. \scotusline centres it.
 \newcommand{\scotusline}[2]{\par\addvspace{#1bp}\begingroup\centering #2\par\endgroup}
 \newcommand{\scotusleft}[2]{\par\addvspace{#1bp}\noindent #2\par}
+% The cover's short rule [typst cover rule()], and a counsel line set left-aligned from the counsel indent
+% [typst counsel-line, cover-counsel-indent].
+% The rule is a box in vertical mode, outside any line box: it costs its own height, as in typst. \raggedright resets
+% \leftskip, so the indent is set after it.
+\newcommand{\scotusrule}{\par\addvspace{8bp}\nointerlineskip\hbox to\linewidth{\hss\rule{1.75in}{1bp}\hss}\nointerlineskip}
+\newcommand{\scotuscounsel}[2]{\par\addvspace{#1bp}\begingroup\raggedright\leftskip=1.4in\noindent #2\par\endgroup}
 
 \makeatother
 \begin{document}

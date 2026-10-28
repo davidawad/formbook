@@ -46,6 +46,11 @@
 #let pitch-note = 12pt                       // Rule 33.1(b): 10-point notes, 2-point leading
 // Rule 34.1(g): the cover may not be set smaller than 11-point (counsel identification excepted).
 #let cover-size = 12pt
+// The cover's layout, as the three filed covers in usage/ set it (DEF-COVER-002): a short rule closes the Court's name,
+// the caption, the proceeding and the title; counsel is set left-aligned from a third of the way across (none of
+// them centers it).
+#let cover-rule = 1.75in
+#let cover-counsel-indent = 1.4in
 #let para-indent = 0.4in
 #let label-tab = 0.4in
 #let toc-page-col = 24pt                     // the contents' page numbers keep this column to themselves
@@ -152,13 +157,15 @@
 #let cover-line(above, body, al: center) = block(width: 100%, above: above, below: 0pt, align(al, body))
 
 #let cover(meta) = {
+  let rule() = cover-line(8pt, line(length: cover-rule, stroke: 1pt))
   set text(size: cover-size, ..edges(pitch-body))
   set par(leading: leading, justify: false, first-line-indent: 0pt)
   // (a) the docket number at the top of the cover
-  cover-line(0pt, al: left)[No. #need(meta, "case_number")]
+  cover-line(0pt)[No. #need(meta, "case_number")]
   // (b) the name of this Court
   cover-line(20pt)[In the]
   cover-line(0pt, strong(upper[Supreme Court of the United States]))
+  rule()
   // (c) the caption
   for (i, side) in need(meta, "caption").enumerate() {
     if i > 0 { cover-line(6pt)[v.] }
@@ -167,20 +174,24 @@
     }
     cover-line(0pt, inl(side.designation))
   }
+  rule()
   // (d) the nature of the proceeding and the court below
   cover-line(14pt, inl(need(meta, "proceeding")))
+  rule()
   // (e) the title of the document; it also identifies the party supported (Rule 37.2, 37.3)
   cover-line(14pt, strong(upper(inl(need(meta, "brief_title")))))
+  rule()
   v(1fr)
   // (f) counsel: the counsel of record is identified with the notation directly under the name
+  let counsel-line(above, body) = cover-line(above, al: left, pad(left: cover-counsel-indent, body))
   for (i, g) in need(meta, "counsel").enumerate() {
-    for (j, n) in g.names.enumerate() { cover-line(if i > 0 and j == 0 { 12pt } else { 0pt }, inl(n)) }
-    if "role" in g { cover-line(0pt, emph(g.role)) }
-    for l in g.lines { cover-line(0pt, inl(l)) }
-    if i == 0 { cover-line(0pt, inl(need(meta, "phone"))) }
+    for (j, n) in g.names.enumerate() { counsel-line(if i > 0 and j == 0 { 12pt } else { 0pt }, inl(n)) }
+    if "role" in g { counsel-line(0pt, emph(g.role)) }
+    for l in g.lines { counsel-line(0pt, inl(l)) }
+    if i == 0 { counsel-line(0pt, inl(need(meta, "phone"))) }
   }
-  cover-line(12pt, emph(need(meta, "counsel_role")))
-  cover-line(12pt, inl(need(meta, "date")))
+  counsel-line(12pt, emph(need(meta, "counsel_role")))
+  cover-line(12pt, al: left, inl(need(meta, "date")))
 }
 
 // ---------------------------------------------------------------------------
