@@ -23,6 +23,7 @@ mod eval;
 mod fetch;
 mod filing;
 mod fontorder;
+mod fontaudit;
 mod fonts;
 mod layout;
 mod lint;

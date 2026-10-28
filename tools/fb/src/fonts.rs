@@ -3,7 +3,6 @@ use crate::{fail, repo_root, Res};
 use serde_json::Value;
 use std::fs;
 use std::path::{Path, PathBuf};
-use std::process::Command;
 
 fn collect_files(dir: &Path, out: &mut Vec<PathBuf>) -> std::io::Result<()> {
     if !dir.is_dir() {
@@ -43,134 +42,6 @@ fn collect_pdfs(dir: &Path, out: &mut Vec<PathBuf>) -> std::io::Result<()> {
     Ok(())
 }
 
-fn attr(line: &str, key: &str) -> Option<String> {
-    let needle = format!("{key}=\"");
-    let start = line.find(&needle)? + needle.len();
-    let end = line[start..].find('"')? + start;
-    Some(line[start..end].to_string())
-}
-
-fn unsuperset(name: &str) -> String {
-    if name.len() > 7
-        && name.as_bytes()[..6].iter().all(u8::is_ascii_uppercase)
-        && name.as_bytes()[6] == b'+'
-    {
-        name[7..].to_string()
-    } else {
-        name.to_string()
-    }
-}
-
-fn body_family(name: &str) -> String {
-    let n = name.to_ascii_lowercase().replace([' ', '-', '_'], "");
-    if n.contains("timesnewroman") || n.contains("liberationserif") {
-        "timesnewroman".into()
-    } else if n.contains("times") || n.contains("nimbusroman") {
-        "times".into()
-    } else if n.contains("liberationsans") {
-        "liberationsans".into()
-    } else if n.contains("garamond") {
-        "garamond".into()
-    } else if n.contains("calisto") {
-        "calisto".into()
-    } else if n.contains("aptos") {
-        "aptos".into()
-    } else if n.contains("century") {
-        "centuryschoolbook".into()
-    } else {
-        n
-    }
-}
-
-fn audit_record(pdf: &Path, root: &Path) -> Res<Value> {
-    let fonts_out = Command::new("pdffonts")
-        .arg(pdf)
-        .output()
-        .map_err(|e| fail(2, format!("pdffonts: {e}")))?;
-    if !fonts_out.status.success() {
-        return Err(fail(2, format!("pdffonts failed for {}", pdf.display())));
-    }
-    let font_text = String::from_utf8_lossy(&fonts_out.stdout);
-    let fonts: Vec<String> = font_text
-        .lines()
-        .skip(2)
-        .filter_map(|line| line.split_whitespace().next())
-        .map(unsuperset)
-        .collect();
-    let html = Command::new("pdftohtml")
-        .args(["-xml", "-i", "-q", "-stdout"])
-        .arg(pdf)
-        .output()
-        .map_err(|e| fail(2, format!("pdftohtml: {e}")))?;
-    let xml = String::from_utf8_lossy(&html.stdout);
-    let mut ids = std::collections::HashMap::new();
-    let mut usage = std::collections::BTreeMap::<String, usize>::new();
-    let mut total = 0usize;
-    for line in xml.lines() {
-        if line.contains("<fontspec ") {
-            if let (Some(id), Some(family)) = (attr(line, "id"), attr(line, "family")) {
-                ids.insert(id, unsuperset(&family));
-            }
-        } else if line.contains("<text ") {
-            if let Some(id) = attr(line, "font") {
-                if let Some(family) = ids.get(&id) {
-                    let text = line.split_once('>').map(|(_, body)| body).unwrap_or("");
-                    let visible = text.chars().filter(|c| c.is_alphanumeric()).count();
-                    if visible > 0 {
-                        *usage.entry(body_family(family)).or_default() += visible;
-                        total += visible;
-                    }
-                }
-            }
-        }
-    }
-    let (body, share) = usage
-        .iter()
-        .max_by_key(|(_, n)| *n)
-        .map(|(body, n)| (body.clone(), *n as f64 / total.max(1) as f64))
-        .unwrap_or_else(|| (String::new(), 0.0));
-    let (class, face, why) = match body.as_str() {
-        "timesnewroman" => (
-            "metric-exact",
-            "Times New Roman",
-            "Times New Roman body face; metric exact.",
-        ),
-        "times" => (
-            "approximate",
-            "Times",
-            "Times-family body face; no exact Times New Roman name.",
-        ),
-        "liberationsans" => (
-            "approximate",
-            "Liberation Sans",
-            "Body face is extractable but is not Times New Roman.",
-        ),
-        "garamond" | "calisto" | "aptos" | "centuryexpandedbt" | "equitya" | "charter" | "" => (
-            "impossible",
-            "",
-            if total == 0 {
-                "No extractable text layer."
-            } else {
-                "No redistributable metric-exact body face is identified."
-            },
-        ),
-        _ => (
-            "impossible",
-            "",
-            "No redistributable metric-exact body face is identified.",
-        ),
-    };
-    let _ = root;
-    Ok(serde_json::json!({
-        "body": body,
-        "body_share": (share * 1000.0).round() / 1000.0,
-        "class": class,
-        "face": face,
-        "why": why,
-        "fonts": fonts,
-    }))
-}
-
 fn replace_in_file(path: &Path, content: &str, changed: &mut usize) -> Res<()> {
     let old = fs::read_to_string(path).map_err(|e| fail(2, format!("{}: {e}", path.display())))?;
     if old == content {
@@ -202,16 +73,14 @@ fn times_doc_dirs(root: &Path) -> Res<Vec<PathBuf>> {
 }
 
 /// True when the audited exemplar calls for Times New Roman in the template (and so for an
-/// embedded `TimesNewRomanPSMT`). A Times New Roman body does. Adobe Times (`body == "times"`)
-/// does only when the audit maps it to Times itself; when the audit maps it to `TeX Gyre Termes`
-/// the template declares Termes (what `fb lint fonts` demands) and no TNR is expected. A recorded
-/// `template_face` of Times New Roman (a ruling over the audit, see [`template_face`]) does too.
+/// embedded `TimesNewRomanPSMT`): the face the template declares ([`template_face`]: a recorded ruling, else the
+/// audited face) is Times New Roman. Adobe Times maps to `TeX Gyre Termes` and needs no TNR; a ruling that names
+/// another face (a court rule over a Times New Roman exemplar) needs none either.
 fn wants_tnr(record: &Value) -> bool {
-    let text = |k: &str| record.get(k).and_then(Value::as_str).unwrap_or("");
-    let body = text("body").to_ascii_lowercase();
-    record.get("template_face").and_then(Value::as_str) == Some("Times New Roman")
-        || body.contains("timesnewroman")
-        || (body == "times" && matches!(text("face"), "Times New Roman" | "Times" | "Times-Roman"))
+    matches!(
+        template_face(record),
+        "Times New Roman" | "Times" | "Times-Roman"
+    )
 }
 
 /// Metric-compatible Times faces the latex engine may embed instead of Times New Roman (fb-595.45): newtxtext
@@ -289,11 +158,11 @@ pub fn has_times_exemplar(root: &Path, doc: &Path) -> Res<bool> {
 
 /// Migrate Typst/Latex declarations for audited Times exemplars.
 pub fn main(args: &[String]) -> Res<std::process::ExitCode> {
-    if args == ["audit-additions".to_string()] {
-        return audit_additions();
-    }
-    if args != ["migrate".to_string()] {
-        return Err(fail(2, "usage: fb fonts migrate|audit-additions"));
+    match args {
+        [a] if a == "audit" => return audit(true),
+        [a] if a == "audit-additions" => return audit(false),
+        [a] if a == "migrate" => {}
+        _ => return Err(fail(2, "usage: fb fonts migrate|audit|audit-additions")),
     }
     let root = repo_root()?;
     let docs = times_doc_dirs(&root)?;
@@ -382,50 +251,86 @@ pub fn main(args: &[String]) -> Res<std::process::ExitCode> {
     Ok(std::process::ExitCode::SUCCESS)
 }
 
-fn audit_additions() -> Res<std::process::ExitCode> {
+/// `fb fonts audit` (every FILED-EXAMPLE) or `audit-additions` (only those not in the audit yet): write
+/// `data/exemplar-fonts.json`. A ruling recorded on an entry (`template_face`, `note`) is kept.
+fn audit(all: bool) -> Res<std::process::ExitCode> {
     let root = repo_root()?;
     let p = root.join("data/exemplar-fonts.json");
     let raw = fs::read_to_string(&p).map_err(|e| fail(2, format!("{}: {e}", p.display())))?;
-    let audit: Value =
+    let mut audit: Value =
         serde_json::from_str(&raw).map_err(|e| fail(2, format!("{}: {e}", p.display())))?;
-    let entries = audit
+    let old = audit
         .get("exemplars")
         .and_then(Value::as_object)
+        .cloned()
         .ok_or_else(|| fail(2, "font audit has no exemplars map"))?;
     let mut pdfs = Vec::new();
     collect_pdfs(&root.join("courts"), &mut pdfs).map_err(|e| fail(2, format!("courts: {e}")))?;
-    let mut additions = Vec::new();
-    for pdf in pdfs {
-        let key = pdf
-            .strip_prefix(&root)
-            .unwrap_or(&pdf)
+    let key = |pdf: &PathBuf| {
+        pdf.strip_prefix(&root)
+            .unwrap_or(pdf)
             .to_string_lossy()
-            .replace('\\', "/");
-        if entries.contains_key(&key) {
-            continue;
+            .replace('\\', "/")
+    };
+    let todo: Vec<PathBuf> = pdfs
+        .iter()
+        .filter(|pdf| all || !old.contains_key(&key(pdf)))
+        .cloned()
+        .collect();
+    let threads = std::thread::available_parallelism().map_or(4, |n| n.get());
+    let chunks: Vec<Vec<PathBuf>> = todo
+        .chunks(todo.len().div_ceil(threads).max(1))
+        .map(<[PathBuf]>::to_vec)
+        .collect();
+    let mut fresh = std::collections::HashMap::new();
+    let results: Vec<Res<Vec<(PathBuf, Value)>>> = std::thread::scope(|s| {
+        let hs: Vec<_> = chunks
+            .iter()
+            .map(|c| {
+                s.spawn(move || {
+                    c.iter()
+                        .map(|pdf| Ok((pdf.clone(), crate::fontaudit::audit_record(pdf)?)))
+                        .collect()
+                })
+            })
+            .collect();
+        hs.into_iter()
+            .map(|h| h.join().expect("audit thread"))
+            .collect()
+    });
+    for r in results {
+        for (pdf, rec) in r? {
+            fresh.insert(key(&pdf), rec);
         }
-        additions.push((key, audit_record(&pdf, &root)?));
     }
-    if !additions.is_empty() {
-        let marker = "\n  }\n}";
-        let at = raw
-            .rfind(marker)
-            .ok_or_else(|| fail(2, "font audit exemplar map closing brace not found"))?;
-        let mut inserted = String::new();
-        for (key, record) in &additions {
-            let key_json =
-                serde_json::to_string(key).map_err(|e| fail(2, format!("serialize path: {e}")))?;
-            let record_json = serde_json::to_string(record)
-                .map_err(|e| fail(2, format!("serialize record: {e}")))?;
-            inserted.push_str(&format!(",\n    {key_json}: {record_json}"));
-        }
-        let mut text = raw;
-        text.insert_str(at, &inserted);
-        fs::write(&p, text).map_err(|e| fail(2, format!("{}: {e}", p.display())))?;
+    let mut keys: Vec<String> = pdfs.iter().map(key).collect();
+    keys.sort();
+    let mut map = serde_json::Map::new();
+    for k in keys {
+        let rec = match (fresh.remove(&k), old.get(&k)) {
+            (Some(mut rec), Some(prev)) => {
+                for ruling in ["template_face", "note"] {
+                    if let Some(v) = prev.get(ruling) {
+                        rec[ruling] = v.clone();
+                    }
+                }
+                rec
+            }
+            (Some(rec), None) => rec,
+            (None, Some(prev)) => prev.clone(),
+            (None, None) => continue,
+        };
+        map.insert(k, rec);
     }
+    audit["generated_by"] = "fb fonts audit (tools/fb/src/fontaudit.rs)".into();
+    audit["exemplars"] = Value::Object(map);
+    let mut text = serde_json::to_string_pretty(&audit)
+        .map_err(|e| fail(2, format!("serialize audit: {e}")))?;
+    text.push('\n');
+    fs::write(&p, text).map_err(|e| fail(2, format!("{}: {e}", p.display())))?;
     println!(
-        "audited {} new FILED-EXAMPLE PDFs with pdffonts and pdftohtml",
-        additions.len()
+        "audited {} FILED-EXAMPLE PDFs with pdffonts, pdftohtml and pdfimages",
+        todo.len()
     );
     Ok(std::process::ExitCode::SUCCESS)
 }
@@ -496,5 +401,9 @@ mod tests {
             template_face(&j(r#"{"body":"georgia","face":"Gelasio"}"#)),
             "Gelasio"
         );
+        // a rule that names another face overrides a Times New Roman exemplar
+        assert!(!wants_tnr(&j(
+            r#"{"body":"timesnewroman","face":"Times New Roman","template_face":"Liberation Sans"}"#
+        )));
     }
 }

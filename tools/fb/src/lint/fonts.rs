@@ -34,27 +34,49 @@ fn family_markers(f: &str) -> &'static [&'static str] {
             "tex-gyre-schola",
             "\\usepackage{tgschola}",
         ],
-        "bonum" => &["TeX Gyre Bonum", "tex-gyre-bonum"],
-        "pagella" => &["TeX Gyre Pagella", "tex-gyre-pagella"],
-        "termes" => &["TeX Gyre Termes", "tex-gyre-termes"],
-        "cursor" => &["TeX Gyre Cursor", "tex-gyre-cursor"],
-        "liberation-serif" => &["Liberation Serif", "liberation-serif"],
-        "liberation-sans" => &["Liberation Sans", "liberation-sans"],
+        "bonum" => &["TeX Gyre Bonum", "tex-gyre-bonum", "\\usepackage{tgbonum}"],
+        "pagella" => &[
+            "TeX Gyre Pagella",
+            "tex-gyre-pagella",
+            "\\usepackage{tgpagella}",
+        ],
+        "termes" => &[
+            "TeX Gyre Termes",
+            "tex-gyre-termes",
+            "\\usepackage{tgtermes}",
+        ],
+        "cursor" => &[
+            "TeX Gyre Cursor",
+            "tex-gyre-cursor",
+            "\\usepackage{tgcursor}",
+        ],
+        // latex: newtx is Liberation Serif's (Times New Roman's) metric twin in stock TeX Live (fb-595.45)
+        "liberation-serif" => &[
+            "Liberation Serif",
+            "liberation-serif",
+            "\\usepackage{newtxtext",
+        ],
+        // latex: TeX Gyre Heros has Arial's advances (crate::fonts::latex_alt_prefix)
+        "liberation-sans" => &[
+            "Liberation Sans",
+            "liberation-sans",
+            "\\usepackage{tgheros}",
+        ],
         "liberation-mono" => &["Liberation Mono", "liberation-mono"],
         "gelasio" => &["Gelasio", "gelasio"],
         "caladea" => &["Caladea", "caladea"],
         "carlito" => &["Carlito", "carlito"],
-        "heros" => &["TeX Gyre Heros", "tex-gyre-heros"],
+        "heros" => &["TeX Gyre Heros", "tex-gyre-heros", "\\usepackage{tgheros}"],
         "eb-garamond" => &["EB Garamond", "eb-garamond"],
         _ => &[],
     }
 }
 
-fn declaration(path: &Path, text: &str, family: &str) -> bool {
-    let ext = path.extension().and_then(|s| s.to_str()).unwrap_or("");
-    if ext == "typ" {
-        // A template may bind font-family to font-name, so include both declaration lines.
-        let lines = text.lines().filter(|line| {
+/// The face-declaring lines of a typst file, comments removed. A template may bind font-family to font-name, so
+/// both declaration lines are included.
+fn typst_declaration(text: &str) -> String {
+    text.lines()
+        .filter(|line| {
             line.trim_start().starts_with("#let font-family")
                 || line.trim_start().starts_with("#let font-name")
                 || line.trim_start().starts_with("#let body-font")
@@ -62,14 +84,19 @@ fn declaration(path: &Path, text: &str, family: &str) -> bool {
                 || line.trim_start().starts_with("#let face ")
                 || line.trim_start().starts_with("#let serif ")
                 || line.contains("set text(font:")
-        });
-        let declaration = lines
-            .map(|line| line.split_once("//").map_or(line, |(code, _)| code))
-            .collect::<Vec<_>>()
-            .join("\n");
+        })
+        .map(|line| line.split_once("//").map_or(line, |(code, _)| code))
+        .collect::<Vec<_>>()
+        .join("\n")
+}
+
+fn declaration(path: &Path, text: &str, family: &str) -> bool {
+    let ext = path.extension().and_then(|s| s.to_str()).unwrap_or("");
+    if ext == "typ" {
+        let declaration = typst_declaration(text);
         if family == "times" {
-            return declaration.contains("Times New Roman")
-                && declaration.contains("Liberation Serif");
+            // the face is Times New Roman; the Liberation Serif fallback (docs/FONTS.md rule 3) is not this lint's
+            return declaration.contains("Times New Roman");
         }
         return family_markers(family)
             .iter()
@@ -104,22 +131,41 @@ fn collect_typst(dir: &Path, out: &mut Vec<PathBuf>) -> std::io::Result<()> {
     Ok(())
 }
 
+/// The typst files a template is made of: those `typst/main.typ` imports, and theirs in turn (a doc file may import
+/// a shared `/lib/typst/<court>-common.typ` that declares the face); every `.typ` under `typst/` when main imports
+/// none.
 pub(crate) fn template_files(doc_dir: &Path) -> std::io::Result<Vec<PathBuf>> {
     let typst = doc_dir.join("typst");
-    let main = typst.join("main.typ");
-    let mut files = Vec::new();
-    if main.is_file() {
-        let text = fs::read_to_string(&main)?;
+    let mut files: Vec<PathBuf> = Vec::new();
+    let mut queue = vec![typst.join("main.typ")];
+    while let Some(file) = queue.pop() {
+        if !file.is_file() {
+            continue;
+        }
+        let text = fs::read_to_string(&file)?;
+        let dir = file.parent().unwrap_or(&typst).to_path_buf();
         for line in text.lines() {
             if !line.trim_start().starts_with("#import") {
                 continue;
             }
-            for (_, rest) in line.match_indices('"') {
-                if let Some((name, _)) = rest.split_once('"') {
+            // the quoted strings of the line are its odd `"`-separated pieces
+            for name in line.split('"').skip(1).step_by(2) {
+                {
                     if name.ends_with(".typ") && !name.starts_with('@') {
-                        let path = typst.join(name);
-                        if path.is_file() {
-                            files.push(path);
+                        // `/lib/typst/x.typ` is relative to the project root (render.rs: --root <repo>)
+                        let path = match name.strip_prefix('/') {
+                            Some(rel) => doc_dir
+                                .ancestors()
+                                .map(|a| a.join(rel))
+                                .find(|p| p.is_file()),
+                            None => Some(dir.join(name)).filter(|p| p.is_file()),
+                        };
+                        if let Some(path) = path {
+                            // the shared document model (xdoc.typ) takes its face from the template
+                            if !files.contains(&path) && !path.ends_with("lib/typst/xdoc.typ") {
+                                files.push(path.clone());
+                                queue.push(path);
+                            }
                         }
                     }
                 }
@@ -148,6 +194,15 @@ fn audit(root: &Path) -> Res<Vec<(PathBuf, String)>> {
         let Some(doc) = crate::fonts::audit_doc(path) else {
             continue;
         };
+        // An exemplar settles a face only where a template can match it: a metric-exact face, or a ruling
+        // (`template_face`). An approximate or impossible exemplar leaves the face to the rules and docs/FONTS.md.
+        let ruled = record
+            .get("template_face")
+            .and_then(Value::as_str)
+            .is_some();
+        if !ruled && record.get("class").and_then(Value::as_str) != Some("metric-exact") {
+            continue;
+        }
         let face = crate::fonts::template_face(record);
         if !face.is_empty() {
             docs.entry(doc.to_string())
@@ -166,8 +221,18 @@ fn audit(root: &Path) -> Res<Vec<(PathBuf, String)>> {
             continue;
         }
         let doc_dir = root.join(&doc);
-        let mut files =
+        let typ =
             template_files(&doc_dir).map_err(|e| fail(2, format!("{}: {e}", doc_dir.display())))?;
+        // a file that declares no face (it imports the one that does, e.g. /lib/typst/<court>-common.typ) is not
+        // checked; a template none of whose files declares one is
+        let declaring: Vec<PathBuf> = typ
+            .iter()
+            .filter(|f| {
+                fs::read_to_string(f).is_ok_and(|t| !typst_declaration(&t).trim().is_empty())
+            })
+            .cloned()
+            .collect();
+        let mut files = if declaring.is_empty() { typ } else { declaring };
         let tex = doc_dir.join("latex/template.tex");
         if tex.is_file() {
             files.push(tex);
@@ -264,6 +329,16 @@ mod tests {
             "#let font-family = (\"Times New Roman\", \"Liberation Serif\")\nset text(font: font-family)",
             "times"
         ));
+        assert!(declaration(
+            p,
+            "#let font-family = \"Times New Roman\"\nset text(font: font-family)",
+            "times"
+        ));
+        assert!(!declaration(
+            p,
+            "#let font-family = \"Liberation Serif\" // not Times New Roman\nset text(font: font-family)",
+            "times"
+        ));
         assert!(!declaration(
             p,
             "#let font-family = \"EB Garamond\"\nset text(font: font-family)",
@@ -277,6 +352,15 @@ mod tests {
     }
 
     #[test]
+    fn a_typst_file_without_a_face_declares_nothing() {
+        assert!(typst_declaration("#import \"/lib/typst/x-common.typ\": *\n#let x = 1").is_empty());
+        assert!(!typst_declaration(
+            "#let font-family = (\"Times New Roman\", \"Liberation Serif\")"
+        )
+        .is_empty());
+    }
+
+    #[test]
     fn latex_lint_uses_vendored_family_path() {
         let p = Path::new("template.tex");
         assert!(declaration(
@@ -285,6 +369,9 @@ mod tests {
             "schola"
         ));
         assert!(!declaration(p, "\\setmainfont{Liberation Serif}", "schola"));
+        assert!(declaration(p, "\\usepackage{tgbonum}", "bonum"));
+        assert!(declaration(p, "\\usepackage{tgheros}", "heros"));
+        assert!(!declaration(p, "\\usepackage{tgheros}", "bonum"));
     }
 
     #[test]
