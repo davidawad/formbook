@@ -39,3 +39,19 @@ Only one filer's brief is on file, so tier 2 (professional convention) is judged
 | Date retrieved | 2026-10-17 |
 | SHA-256 | `2e07246e63a68b33f7d25740a51403ebe9932f74f222249baa60827e2682ac2e` |
 | Public filing | Yes, CourtListener RECAP; `pdftotext` confirms text on the 72-page PDF. |
+
+## Fourth filer (fb-9fyu replacement)
+
+| Field | Value |
+|---|---|
+| File | `FILED-EXAMPLE-answering-brief-4.pdf` (26 pages) |
+| Case / docket | *Theoda E. Mills v. City of St. Louis, et al.*, No. 26-1236, on appeal from E.D. Mo. |
+| Document | Brief of Appellees City of St. Louis, Sylvia Jackson-Bell, and Victoria Anwuri |
+| Filer | City of St. Louis, Sylvia Jackson-Bell and Victoria Anwuri, by Curtis D. Wilson and Christine Hodzic, Associate City Counselors (Michael Garvin, City Counselor) |
+| Date filed | 2026-05-14 (ECF header "Date Filed: 05/14/2026 Entry ID: 5639976") |
+| URL | https://storage.courtlistener.com/recap/gov.uscourts.ca8.113783/gov.uscourts.ca8.113783.00805519315.1.pdf |
+| Date retrieved | 2026-10-28 (PM RECAP staging branch `newbox/fb-9fyu-recap-files`) |
+| SHA-256 | `0bb4fb5f9bbf79ce4eb67ff1d709a12bba08181d182a4ab6fc017fbf38e756d7` |
+| Public filing | Yes, CourtListener RECAP; `pdftotext` yields the text of all 26 pages. Body text is Times New Roman (`TimesNewRomanPSMT`, not embedded); the cover uses Century Schoolbook (metric match: vendored TeX Gyre Schola). |
+
+Replacement for `FILED-EXAMPLE-answering-brief.pdf` (fb-9fyu: commercial face, Calisto MT) and `FILED-EXAMPLE-answering-brief-2.pdf` (fb-9fyu: commercial face, Garamond). The originals are kept.
