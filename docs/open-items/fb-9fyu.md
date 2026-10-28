@@ -70,6 +70,8 @@ audit and in the lint's use of it, and in templates only where the rules are sil
   reserves EB Garamond for a rule that names Garamond; CRC 8.74(b)(1) prefers Century Schoolbook.
 - BAP 1st Cir. answering brief's `docx/bap1.lua` still names Liberation Serif in its certificate (`FONT_NAME`).
 - Wisconsin Court of Appeals templates are Liberation Serif (rule 3 default), not the rule-6 Times New Roman.
+- Mississippi Supreme Court answering brief has the same single spacing tighter than solid (`leading-single = 0.25em`)
+  that DEF-FORM-004 (master 4b444d210) failed in the amicus brief; the amicus brief, touched here, now sets it solid.
 
 
 ## eighth-circuit (28)

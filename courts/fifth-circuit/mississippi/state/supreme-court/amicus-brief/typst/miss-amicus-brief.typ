@@ -15,9 +15,10 @@
 #let margin-bottom = 0.75in // MRAP 32(a): 3/4 in bottom (page number sits in this margin)
 #let margin-right = 0.5in // MRAP 32(a): 1/2 in right
 #let indent = 0.5in
-// Double spacing (MRAP 32(a)): line pitch = 1.1em ascent+descent of Liberation Serif plus leading. Single = leading 0.1em.
+// Line pitch = cap height (0.662 em, typst's default top edge) plus leading. Double (MRAP 32(a)): 1.86 em. Single: solid,
+// 1.0 em, the least any rule allows (DEF-FORM-004; fb-9fyu).
 #let leading-double = 1.2em
-#let leading-single = 0.25em
+#let leading-single = 0.34em
 
 // ---- Constants (court-wide, not case text) ----------------------------------------------------
 #let court-name = "IN THE SUPREME COURT OF MISSISSIPPI"
