@@ -43,3 +43,17 @@ Still **BLOCKED: no public filed exemplar**. New searches targeted the court's o
 | Search result for *Rusk v. Beutler*, BAP No. UT-25-10 | The accessible 2025 opening brief was filed in the later Tenth Circuit Court of Appeals case No. 25-4090, not in the BAP. It is a different court's filing and was not used as a BAP exemplar. |
 
 The court-authored sample and opinions are not filed opening briefs and were not substituted. No `FILED-EXAMPLE` file or transcription was created.
+
+## Re-check 2026-10-28
+
+Still **BLOCKED: no public filed exemplar**.
+
+| Source | Result |
+|---|---|
+| CourtListener v4 search API, anonymous | HTTP 403 `Authentication credentials were not provided.` No API token on this host. |
+| Web search: `"Bankruptcy Appellate Panel of the Tenth Circuit" "brief of appellee" OR "appellant's brief" OR "reply brief" filetype:pdf` | govinfo and bap10 opinions (e.g. WO-11-093, CO-18-085), the court-authored Pro Se Guide sample, the BAP local rules, a Supreme Court appendix (19-787) reprinting a BAP opinion. No filed brief. |
+| Web search: NCBRC brief bank (`ncbrc.org` uploads, "10th-BAP") | *Jubber* BAP opinion (2017), a Tenth Circuit opinion (*Williams*, 2022), briefs from other courts (7th Cir. *Johnson*, 9th Cir. *Oliver*). No Tenth Circuit BAP brief. |
+| Web search: UST / justice.gov BAP briefs | BAP opinions only (*Funderburgh*, *Miller*). No brief. |
+| Web search: BAP docket-prefix queries (`"BAP No. UT-"`, `CO-`, `KS-`, `NM-`, `WY-`, `EO-`) with brief titles | Unrelated brief-writing guides. No filing. |
+
+Still not searched: PACER (login) and a CourtListener API token. Both need a PM decision.

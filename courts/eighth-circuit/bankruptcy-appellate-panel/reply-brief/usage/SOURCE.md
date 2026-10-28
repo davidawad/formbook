@@ -84,3 +84,14 @@ Still not searched: PACER (login); a CourtListener API token (needed for full ba
 | 3 | CourtListener API availability check | Anonymous API access is denied on this host; no API token is configured. |
 
 The brief itself was found to have been filed, but no qualifying text PDF of that BAP filing was publicly accessible in this search. Keep the sample synthetic and blocked until a text PDF is available. If one is supplied, save it as `usage/FILED-EXAMPLE-reply-brief.pdf` and record the URL, case, docket, filer, filing date, and fetch date here.
+
+## Pass 6, 2026-10-28
+
+| # | Tool / query | Result |
+|---|---|---|
+| 1 | CourtListener v4 search API, anonymous | HTTP 403 `Authentication credentials were not provided.` No API token on this host. |
+| 2 | Web search: `"Bankruptcy Appellate Panel for the Eighth Circuit" "reply brief" appellant pdf ncbrc OR "brief bank"` | Eighth Circuit local rules, IOPs, FRBP 8014/8018 text. No reply. |
+| 3 | Web search: `"BAP No. 22-6009" OR "BAP No. 23-60" OR "BAP No. 24-60" "Eighth Circuit" "reply brief of appellant"` | Rules and a Supreme Court appendix (24-782, an Eighth Circuit civil case, not a BAP filing; checked with `pdftotext`). No reply. |
+| 4 | Web search: NCBRC uploads | Only the *Fisette* opening brief (already the opening-brief exemplar). No reply. |
+
+Still **BLOCKED: no qualifying text PDF**. Remaining routes are PACER or a CourtListener API token, and both need a PM decision.
