@@ -73,7 +73,7 @@ These courts have a `rules.md` written from primary sources, but we have not fou
 
 ## Looking for reviewers
 
-Every court above is machine-checked; none is marked `done`, because that takes a licensed attorney looking at the output and saying it is good enough to file. If you practice before any court in the index, email David Awad at me@davidaw.ad to become a reviewer: say who you are, where you are admitted, and which courts you file in.
+Every court above is machine-checked; none is marked `done`, because that takes a licensed attorney looking at the output and saying it is good enough to file. If you practice before any court in the index, [open a reviewer issue](https://github.com/davidawad/formbook/issues/new?template=reviewer.yml) (title `reviewer - <your name>`): say who you are, where you are admitted, and which courts you file in. Reviewers are added to the repo as collaborators with merge rights, so you can merge reviews and template fixes too; we need the help.
 
 Once you are a reviewer, you review the templates you know, one document type at a time (a court's opening brief, a district's motion brief), with your own agent:
 

@@ -3,7 +3,7 @@
 Two agent skills, one `SKILL.md` each:
 
 - `formbook/` (plus `reference/` notes it links to) teaches an agent to draft a court filing as markdown and render a court-compliant PDF from this repo's Typst templates, or to write a new template for a court or document type that is missing.
-- `formbook-review/` walks a reviewing attorney's agent through reviewing one or more templates: render the samples, check each page against the court's current rules, record the attorney's verdict in each template's `attorney-reviews/`, and open a pull request with it. Attorneys become reviewers by emailing me@davidaw.ad.
+- `formbook-review/` walks a reviewing attorney's agent through reviewing one or more templates: render the samples, check each page against the court's current rules, record the attorney's verdict in each template's `attorney-reviews/`, and open a pull request with it. Attorneys become reviewers by opening a [reviewer issue](https://github.com/davidawad/formbook/issues/new?template=reviewer.yml); reviewers get merge rights on the repo.
 
 ## Install
 

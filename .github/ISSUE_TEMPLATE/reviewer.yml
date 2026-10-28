@@ -1,0 +1,41 @@
+name: Become a reviewer
+description: Licensed attorneys who want to review formbook templates and get merge rights on the repo.
+title: "reviewer - <your name>"
+labels: ["reviewer"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Reviewers check that formbook's rendered filings meet a court's rules and are good enough to file, one template at a time, with `skills/formbook-review/SKILL.md`. Reviewers are added as collaborators with merge rights. A review covers form, not legal substance.
+  - type: input
+    id: name
+    attributes:
+      label: Name
+    validations:
+      required: true
+  - type: textarea
+    id: admissions
+    attributes:
+      label: Bar admissions
+      description: Jurisdictions and years admitted. A bar number is optional.
+    validations:
+      required: true
+  - type: textarea
+    id: courts
+    attributes:
+      label: Courts you file in
+      description: The courts (and document types, if you know) you would review. Aliases from the README index are fine.
+    validations:
+      required: true
+  - type: input
+    id: profile
+    attributes:
+      label: A public page that shows you practice
+      description: Firm bio, state bar listing, or similar. Optional.
+  - type: checkboxes
+    id: ack
+    attributes:
+      label: Acknowledgment
+      options:
+        - label: I am a licensed attorney in good standing in the jurisdictions above.
+          required: true

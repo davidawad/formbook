@@ -7,7 +7,7 @@ description: Help a formbook reviewer (a licensed attorney) review one or more o
 
 formbook's templates are machine-checked ("up for review") but none is human-verified until a licensed attorney has looked at the output and said it is usable. This skill walks you (the agent) and the attorney you work for through one or more templates (a template is one document type for one court, such as the First Circuit's opening brief): render its samples, check each page against the court's current rules, record the attorney's verdict, and open a pull request with that record. Reviews are merged as they come in.
 
-**Reviewers only.** Attorneys become reviewers by emailing David Awad at me@davidaw.ad. If the attorney you work for is not one yet, stop and tell them to do that first; nobody claims courts or templates in advance.
+**Reviewers only.** Attorneys become reviewers by opening a GitHub issue with the reviewer form (https://github.com/davidawad/formbook/issues/new?template=reviewer.yml; title `reviewer - <name>`, with where they are admitted and which courts they file in). Reviewers are added as collaborators with merge rights. If the attorney you work for is not one yet, give them that link, and offer to draft their answers to the form and stop until they are added; nobody claims courts or templates in advance.
 
 **Who signs.** The attorney does. You render, measure, compare and draft; the attorney looks at every page and decides every verdict. Never write a verdict the attorney did not give you, and never write that a page was looked at when it was not. The review is of form (layout, required parts, limits), not of legal substance, and it is not legal advice to anyone.
 
