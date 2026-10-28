@@ -1,5 +1,5 @@
-//! `fb lint docx [file.docx ...]`: DEF-DOCX-OPEN (docxopen.rs) over every committed `courts/**/usage/OUTPUT-*.docx`
-//! (or the files named). A .docx is a shipped deliverable; one that does not open is a broken download.
+//! `fb lint docx [file.docx ...]`: DEF-DOCX-OPEN over committed usage outputs, plus settings lint for
+//! committed `docx/reference.docx` files. Per-section footnote restarts make LibreOffice number notes incorrectly.
 //! Output: `LINT docx-open <file>: <problem>` per finding, then `RESULT: LINT DOCX PASS (<n> files)` or
 //! `RESULT: LINT DOCX FAIL (<k> findings in <m> files)`; exit 1 on findings.
 use crate::proc::TempDir;
@@ -58,16 +58,86 @@ pub fn findings(files: &[PathBuf]) -> Res<Vec<(PathBuf, String)>> {
     Ok(found)
 }
 
+fn references(dir: &Path) -> Vec<PathBuf> {
+    let mut found = Vec::new();
+    let mut stack = vec![dir.to_path_buf()];
+    while let Some(d) = stack.pop() {
+        for e in std::fs::read_dir(&d).into_iter().flatten().flatten() {
+            let p = e.path();
+            if p.is_dir() {
+                if e.file_name() == "docx" {
+                    let reference = p.join("reference.docx");
+                    if reference.is_file() {
+                        found.push(reference);
+                    }
+                } else if !e.file_name().to_string_lossy().starts_with('.') {
+                    stack.push(p);
+                }
+            }
+        }
+    }
+    found.sort();
+    found
+}
+
+fn restarts_each_section(settings: &str) -> bool {
+    settings.contains("<w:numRestart w:val=\"eachSect\"")
+        || settings.contains("<w:numRestart w:val='eachSect'")
+}
+
+fn reference_findings(files: &[PathBuf]) -> Res<Vec<(PathBuf, String)>> {
+    let mut found = Vec::new();
+    for f in files {
+        let mut each_section = false;
+        let mut unreadable = None;
+        for part in ["word/settings.xml", "word/document.xml"] {
+            let output = crate::proc::capture(
+                std::process::Command::new("unzip")
+                    .args(["-p"])
+                    .arg(f)
+                    .arg(part),
+            )?;
+            if !output.status.success() {
+                unreadable = Some(part);
+                continue;
+            }
+            each_section |= restarts_each_section(&String::from_utf8_lossy(&output.stdout));
+        }
+        if let Some(part) = unreadable {
+            found.push((f.clone(), format!("cannot read {part} from reference.docx")));
+        }
+        if each_section {
+            found.push((f.clone(), "reference.docx restarts footnote numbering each section (w:numRestart w:val=\"eachSect\"); remove w:numRestart".into()));
+        }
+    }
+    Ok(found)
+}
+
 pub fn main(args: &[String]) -> Res<ExitCode> {
     let root = repo_root()?;
-    let files = match args {
-        [] => outputs(&root.join("courts")),
-        named => named.iter().map(PathBuf::from).collect(),
+    let (files, refs) = match args {
+        [] => (
+            outputs(&root.join("courts")),
+            references(&root.join("courts")),
+        ),
+        named => {
+            let (refs, files): (Vec<_>, Vec<_>) = named
+                .iter()
+                .map(PathBuf::from)
+                .partition(|f| f.file_name().is_some_and(|n| n == "reference.docx"));
+            (files, refs)
+        }
     };
-    let found = findings(&files)?;
+    let mut found = findings(&files)?;
+    found.extend(reference_findings(&refs)?);
     for (f, p) in &found {
         let shown = f.strip_prefix(&root).unwrap_or(f);
-        println!("LINT docx-open {}: {p}", shown.display());
+        let kind = if f.file_name().is_some_and(|n| n == "reference.docx") {
+            "docx-reference"
+        } else {
+            "docx-open"
+        };
+        println!("LINT {kind} {}: {p}", shown.display());
     }
     let bad: std::collections::BTreeSet<_> = found.iter().map(|(f, _)| f).collect();
     match found.len() {
@@ -102,5 +172,24 @@ mod tests {
         assert!(!is_output(Path::new(
             "courts/x/usage/FILED-EXAMPLE-opening-brief.docx"
         )));
+    }
+
+    #[test]
+    fn catches_each_section_footnote_restart() {
+        assert!(restarts_each_section(
+            "<w:footnotePr><w:numRestart w:val=\"eachSect\"/></w:footnotePr>"
+        ));
+        assert!(restarts_each_section(
+            "<w:footnotePr><w:numRestart w:val='eachSect'/></w:footnotePr>"
+        ));
+        assert!(restarts_each_section(
+            "<w:sectPr><w:footnotePr><w:numRestart w:val=\"eachSect\"/></w:footnotePr></w:sectPr>"
+        ));
+        assert!(!restarts_each_section(
+            "<w:footnotePr><w:numRestart w:val=\"eachPage\"/></w:footnotePr>"
+        ));
+        assert!(!restarts_each_section(
+            "<w:footnotePr><w:footnote w:id=\"0\"/></w:footnotePr>"
+        ));
     }
 }
