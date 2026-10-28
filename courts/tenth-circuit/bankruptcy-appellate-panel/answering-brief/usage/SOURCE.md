@@ -62,3 +62,12 @@ Still **BLOCKED: no public filed exemplar**.
 | Web search: BAP docket-prefix queries (`"BAP No. UT-"`, `CO-`, `KS-`, `NM-`, `WY-`, `EO-`) with brief titles | Unrelated brief-writing guides. No filing. |
 
 Still not searched: PACER (login) and a CourtListener API token. Both need a PM decision.
+
+## Authenticated RECAP search 2026-10-28: permanently without an exemplar
+
+| Source | Result |
+|---|---|
+| CourtListener v4 search, authenticated, `type=rd` (RECAP documents), court `bap8` / `bap10`, `q=brief` (and the brief-title queries) | 0 documents. Control: court `ca10`, same query, 4004 documents. |
+| CourtListener v4 search, `type=r` (RECAP dockets), court `bap8` / `bap10` | 0 dockets. CourtListener lists `bap10` with no PACER court id, so RECAP holds no BAP filings; it has the panels' opinions only (`type=o`: bap10 554, bap8 1376). |
+
+The only remaining source is PACER, which charges per page and is out of scope (CoS ruling 2026-10-28). This folder is accepted as permanently without a `FILED-EXAMPLE`: tier 1 comes from the court's rules (rules.md); its INPUT is fictional. Re-open only if a public filing of this panel's brief becomes available.
