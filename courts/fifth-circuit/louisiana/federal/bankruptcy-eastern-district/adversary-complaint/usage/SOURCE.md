@@ -32,3 +32,18 @@ Other candidates found and not saved (the brief asks for one exemplar per doc ty
 - Public filing: CourtListener RECAP copy.
 
 This public, text-based complaint replaces the audited `FILED-EXAMPLE-adversary-complaint.pdf` (Garamond) for font and text-layer comparison. The Babin PDF is retained as historical source material.
+
+## Second replacement (fb-9fyu)
+
+- File: `FILED-EXAMPLE-adversary-complaint-3.pdf` (7 pages)
+- Case: *Kathleen M. Schroeder v. United States Department of Education, Nelnet Servicing, LLC, and Navient Solutions, LLC*, Adv. No. 23-01009, in *In re Kathleen M. Schroeder*, No. 23-10223 (Chapter 7)
+- Document: Doc. 1, Complaint to Determine Dischargeability of a Debt (11 U.S.C. § 523(a)(8))
+- Filer: Kathleen M. Schroeder, debtor/plaintiff, by Rachel T. Vogeltanz, The Law Office of Rachel Thyre Vogeltanz, LLC
+- Date filed: 2023-05-05 (CM/ECF header "Doc 1 Filed 05/05/23")
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.laeb.200935/gov.uscourts.laeb.200935.1.0.pdf
+- Date retrieved: 2026-10-28 (PM RECAP staging branch `newbox/fb-9fyu-recap-files`)
+- SHA-256: `c4913c9ced3537e28fcd5e1f92e50ce3269be47541257eeb9c33d3003feb6c36`
+- Text layer: yes; `pdftotext` yields the complaint. Body is embedded Times New Roman (`TimesNewRomanPSMT`).
+- Public filing: CourtListener RECAP copy.
+
+Replacement for `FILED-EXAMPLE-adversary-complaint.pdf` (fb-9fyu: commercial face, Garamond). The original is kept.
