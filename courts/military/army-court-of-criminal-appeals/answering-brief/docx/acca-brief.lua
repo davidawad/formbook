@@ -218,13 +218,7 @@ function Pandoc(doc)
   write_file("FORMBOOK_FINAL", '<w:sectPr><w:footerReference w:type="default" r:id="rIdAccaPage"/>'
     .. '<w:footerReference w:type="first" r:id="rIdAccaPanel"/>' .. SECT .. "</w:sectPr>")
 
-  -- No break inside a token of adjacent parentheses ("922(B)(2)"): typst boxes it (lib/typst/xengine.typ),
-  -- LibreOffice would break between ")" and "(" (Unicode line breaking allows it); a word joiner forbids it.
-  local function wj(s) return (s:gsub("%)%(", ")\u{2060}(")) end
-  doc.blocks = pandoc.Blocks(out):walk({
-    Str = function(el) el.text = wj(el.text); return el end,
-    RawBlock = function(el) el.text = wj(el.text); return el end,
-  })
+  doc.blocks = xe.blocks(out)
   doc.meta = pandoc.Meta({})   -- pandoc prints no title block: the caption is the filter's
   return doc
 end

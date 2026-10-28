@@ -438,13 +438,7 @@ function Pandoc(doc)
   end
   write_file("FORMBOOK_FINAL", sect_pr("rIdFtrPage", "decimal", 1))
 
-  -- No break inside a token of adjacent parentheses ("922(g)(7)"): typst boxes it (lib/typst/xengine.typ),
-  -- LibreOffice would break between ")" and "(" (Unicode line breaking allows it); a word joiner forbids it.
-  local function wj(s) return (s:gsub("%)%(", ")\u{2060}(")) end
-  doc.blocks = pandoc.Blocks(out):walk({
-    Str = function(el) el.text = wj(el.text); return el end,
-    RawBlock = function(el) el.text = wj(el.text); return el end,
-  })
+  doc.blocks = xe.blocks(out)
   doc.meta = pandoc.Meta({})
   return doc
 end

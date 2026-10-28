@@ -21,11 +21,7 @@ local xe = require("docx.xengine")
 local runs, inl = xe.runs, xe.inl
 local para, raw, ind, jc = xe.para, xe.raw, xe.ind, xe.jc
 local KEEP, LINES, BREAK = xe.KEEP, xe.LINES, xe.BREAK
--- Before the leader tab of a table row: three spaces the line cannot break at (typst listing-row: h(0.75em)). Not
--- xe.LEAD's three no-break spaces: LibreOffice lets a row end on those only 4.6 pt short of the right indent
--- (measured on this template's index rows), so it wrapped a last word typst kept. Four-per-em spaces (0.25 em, the
--- width of a space) bound by word joiners fit exactly as typst's space does.
-local LEAD = "\u{2060}\u{2005}\u{2060}\u{2005}\u{2060}\u{2005}\u{2060}\t"
+local LEAD = xe.LEAD
 local stringify = pandoc.utils.stringify
 
 -- The typst numbers, in twips (20 x pt).
@@ -496,11 +492,6 @@ end
 
 function Pandoc(doc)
   load_pages()
-  -- no break inside a token of adjacent parentheses ("502(c)(3)"; typst boxes it, LibreOffice would break before
-  -- the second parenthesis): a word joiner between them, in the body and in the metadata
-  doc = doc:walk({ Str = function(s)
-    if s.text:find(")(", 1, true) then return pandoc.Str((s.text:gsub("%)%(", ")\u{2060}("))) end
-  end })
   local meta = doc.meta
   for _, k in ipairs(C.fields) do need_meta(meta, k) end
   local authorities = meta.authorities or {}
@@ -602,5 +593,5 @@ function Pandoc(doc)
       runs("I certify that a copy of the foregoing was electronically filed with the Court and electronically served on ", {})
         .. inl(svc["served-on"], {}) .. runs(" on ", {}) .. inl(meta.date, {}) .. runs(".", {}), meta)))
   end
-  return pandoc.Pandoc(out, {})
+  return pandoc.Pandoc(xe.blocks(out), {})
 end

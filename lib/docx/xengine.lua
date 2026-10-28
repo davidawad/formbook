@@ -46,6 +46,15 @@ local function rpr(o)
   return "<w:rPr>" .. x .. "</w:rPr>"
 end
 
+local function bind_paren_tokens(text)
+  return text:gsub("%S+", function(token)
+    if not token:find("%)%(") then return token end
+    local chars = {}
+    for _, cp in utf8.codes(token) do chars[#chars + 1] = utf8.char(cp) end
+    return table.concat(chars, "\u{2060}")
+  end)
+end
+
 -- Text with tabs (\t) as Word runs. No line breaks are ever written: lines wrap where they wrap.
 local function runs(text, o)
   local x = rpr(o or {})
@@ -59,7 +68,10 @@ local function runs(text, o)
       local e = text:find("\t", pos, true) or (#text + 1)
       -- a hyphen before a digit does not end a line ("ER-178-82"; Unicode line breaking, as typst breaks): a word
       -- joiner after it (see NBH below)
-      local t = esc(text:sub(pos, e - 1)):gsub("%-(%d)", "-\u{2060}%1")
+      -- LibreOffice's Unicode line breaking allows a break between adjacent parentheses, while typst boxes tokens
+      -- such as "922(g)(7)". Keep the token together in every plain text run.
+      local source = text:sub(pos, e - 1)
+      local t = esc(bind_paren_tokens(source:gsub("%-(%d)", "-\u{2060}%1")))
       out[#out + 1] = "<w:r>" .. x .. '<w:t xml:space="preserve">' .. t .. "</w:t></w:r>"
       pos = e
     end
@@ -92,12 +104,36 @@ local function nobreak_hyphens(inlines)
   return out
 end
 
+-- Pandoc may represent a token boundary as two adjacent Str nodes (for example, a linked citation followed by
+-- parenthetical text). Bind that boundary too; per-run replacements cannot see across the nodes.
+local function bind_token_boundaries(inlines)
+  local previous
+  for _, el in ipairs(inlines) do
+    if el.t == "Str" then
+      if previous and previous:sub(-1) == ")" and el.text:sub(1, 1) == "(" then
+        el.text = "\u{2060}" .. el.text
+      end
+      previous = el.text
+    elseif el.t ~= "Span" and el.t ~= "Emph" and el.t ~= "Strong" then
+      previous = nil
+    end
+  end
+  return inlines
+end
+
+local function bind_token_strings(inlines)
+  for i, el in ipairs(inlines) do
+    if el.t == "Str" then inlines[i] = pandoc.Str(bind_paren_tokens(el.text)) end
+  end
+  return inlines
+end
+
 -- Pandoc inlines (or a metadata value) as Word runs; links keep their text.
 local function inl(x, o)
   o = o or {}
   if x == nil then return "" end
   if type(x) == "string" then return runs(x, o) end
-  x = bind_signs(unabbrev(x))
+  x = bind_token_boundaries(bind_signs(unabbrev(x)))
   local out = {}
   for _, el in ipairs(x) do
     local t = el.t
@@ -128,8 +164,23 @@ local function para(props, body)
   return "<w:p><w:pPr>" .. table.concat(props) .. "</w:pPr>" .. body .. "</w:p>"
 end
 
+local function bind_raw(xml)
+  -- Raw blocks are how many court filters write their generated headings and TOC rows; apply the same token rule
+  -- as runs() so those strings do not need a court-specific Str/RawBlock walk.
+  return (xml:gsub("%)%(", ")\u{2060}("))
+end
+
+-- Normalize text in a complete filter-generated document, including raw runs and inline nodes that Pandoc writes.
+-- This is useful for court filters that assemble their output from a mixture of native and OpenXML blocks.
+local function blocks(input)
+  return pandoc.Blocks(input):walk({
+    Inlines = function(l) return bind_token_boundaries(bind_token_strings(l)) end,
+    RawBlock = function(el) el.text = bind_raw(el.text); return el end,
+  })
+end
+
 local function raw(xml)
-  return pandoc.RawBlock("openxml", xml)
+  return pandoc.RawBlock("openxml", bind_raw(xml))
 end
 
 local function style(id)
@@ -179,7 +230,7 @@ end
 
 M.esc, M.merge, M.rpr, M.runs, M.inl = esc, merge, rpr, runs, inl
 M.unabbrev, M.bind_signs, M.nobreak_hyphens = unabbrev, bind_signs, nobreak_hyphens
-M.para, M.raw, M.style, M.spacing, M.ind, M.jc, M.leader_tab = para, raw, style, spacing, ind, jc, leader_tab
+M.para, M.raw, M.bind_raw, M.blocks, M.style, M.spacing, M.ind, M.jc, M.leader_tab = para, raw, bind_raw, blocks, style, spacing, ind, jc, leader_tab
 M.list_items = list_items
 M.KEEP = "<w:keepNext/><w:keepLines/>"
 M.LINES = "<w:keepLines/>"
@@ -188,11 +239,11 @@ M.BREAK = "<w:pageBreakBefore/>"
 M.BR = "<w:r><w:br/></w:r>"
 -- Before the leader tab of a table row: three no-break spaces, so the leader is never shorter than that and the
 -- last word takes them along when it wraps (typst: h(0.75em), latex: \xe@leader).
-M.LEAD = "\u{00A0}\u{00A0}\u{00A0}\t"
+M.LEAD = "\u{2060}\u{2005}\u{2060}\u{2005}\u{2060}\u{2005}\u{2060}\t"
 
 -- The break rules on inlines pandoc writes itself (the body text, footnotes, quotations).
 function M.inlines(l)
-  return nobreak_hyphens(bind_signs(unabbrev(l)))
+  return bind_token_boundaries(bind_token_strings(nobreak_hyphens(bind_signs(unabbrev(l)))))
 end
 
 return M
