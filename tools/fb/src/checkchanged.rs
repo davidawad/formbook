@@ -5,7 +5,13 @@
 //! When the branch touches tools/fb/, it also compiles the fb test suite (`cargo test --release --no-run`), so a
 //! test file that does not compile can not reach master (fb-595.81: 785ba8ade landed gate0_tests.rs uncompiled);
 //! no cargo means a failed gate, not a skipped one: a host that can not run cargo does not land tools/fb changes.
-//! Exit 0 only when every check passes (or nothing under courts/ or tools/fb/ changed).
+//! A diff that touches the shared document model (MODEL: lib/typst/xdoc*, lib/typst/xengine*, lib/pandoc, lib/latex,
+//! lib/docx, tools/fb/src/enginegen) also checks every doc folder on the model, a folder with `typst/layout.yaml` or
+//! an eval.yaml `params.cross_engine*` (fb-595.83): a folder that landed on the base after the branch forked was
+//! rendered on the previous model, and only a full recheck shows whether its committed outputs still pass.
+//! A change under tools/fb/src/enginegen does both. The RESULT line counts the folder/engine checks plus the fb test
+//! build when it ran, and says when the shared model changed.
+//! Exit 0 only when every check passes (or nothing under courts/, tools/fb/ or the model changed).
 
 use crate::{fail, Res};
 use std::collections::BTreeSet;
@@ -14,6 +20,57 @@ use std::process::{Command, ExitCode};
 
 const USAGE: &str = "usage: fb check-changed [--base <ref>]   (default base: origin/master)";
 const ENGINES: [&str; 3] = ["typst", "latex", "docx"];
+
+/// The path prefixes of the shared document model: a change under any of them can move every folder on the model.
+pub const MODEL: [&str; 6] = [
+    "lib/typst/xdoc",
+    "lib/typst/xengine",
+    "lib/pandoc/",
+    "lib/latex/",
+    "lib/docx/",
+    "tools/fb/src/enginegen/",
+];
+
+/// Does the diff `paths` touch the shared document model.
+pub fn touches_model(paths: &[String]) -> bool {
+    paths.iter().any(|p| MODEL.iter().any(|m| p.starts_with(m)))
+}
+
+/// Does eval.yaml text set a `params.cross_engine` or `params.cross_engine_<engine>` mode.
+pub fn has_cross_engine(eval_yaml: &str) -> bool {
+    serde_yaml::from_str::<serde_yaml::Value>(eval_yaml)
+        .ok()
+        .and_then(|v| v.get("params").and_then(|p| p.as_mapping()).cloned())
+        .is_some_and(|m| {
+            m.keys()
+                .filter_map(|k| k.as_str())
+                .any(|k| k == "cross_engine" || k.starts_with("cross_engine_"))
+        })
+}
+
+/// The doc folders on the model among the tracked `files` (repo-relative): the folder of each
+/// `<folder>/typst/layout.yaml`, and each `<folder>/eval.yaml` for which `cross_engine(path)` holds; only folders
+/// under courts/ for which `is_doc` holds.
+pub fn model_folders<C: Fn(&str) -> bool, D: Fn(&str) -> bool>(
+    files: &[String],
+    cross_engine: C,
+    is_doc: D,
+) -> BTreeSet<String> {
+    files
+        .iter()
+        .filter(|p| p.starts_with("courts/"))
+        .filter_map(|p| {
+            p.strip_suffix("/typst/layout.yaml")
+                .map(str::to_string)
+                .or_else(|| {
+                    p.strip_suffix("/eval.yaml")
+                        .filter(|_| cross_engine(p))
+                        .map(str::to_string)
+                })
+        })
+        .filter(|d| is_doc(d))
+        .collect()
+}
 
 /// The doc folders of `paths` (repo-relative), given `is_doc(dir)`: does `dir` hold a usage/ folder.
 pub fn doc_folders<F: Fn(&str) -> bool>(paths: &[String], is_doc: F) -> BTreeSet<String> {
@@ -70,10 +127,30 @@ fn fb_tests_compile(root: &Path) -> bool {
         .unwrap_or(false)
 }
 
-fn changed(root: &Path, base: &str) -> Res<Vec<String>> {
+/// The RESULT line: folder/engine checks plus the fb test build when it ran (`fb`), and a note when the diff
+/// touched the shared model (`model`), so every folder on it was checked.
+pub fn result_line(
+    jobs: usize,
+    failed: usize,
+    folders: usize,
+    fb: bool,
+    model: bool,
+    base: &str,
+) -> String {
+    let total = jobs + usize::from(fb);
+    format!(
+        "RESULT: CHECK-CHANGED {} of {total} checks passed ({jobs} folder/engine in {folders} folders{} vs {base}{})",
+        total - failed,
+        if fb { " + tools/fb test build" } else { "" },
+        if model { "; shared model changed: every folder on it" } else { "" },
+    )
+}
+
+/// The lines git prints for `args` in `root`.
+fn git_lines(root: &Path, args: &[&str]) -> Res<Vec<String>> {
     let out = Command::new("git")
         .current_dir(root)
-        .args(["diff", "--name-only", &format!("{base}...HEAD")])
+        .args(args)
         .output()
         .map_err(|e| fail(2, format!("fb check-changed: git: {e}")))?;
     out.status
@@ -88,7 +165,8 @@ fn changed(root: &Path, base: &str) -> Res<Vec<String>> {
             fail(
                 2,
                 format!(
-                    "fb check-changed: git diff {base}...HEAD failed: {}",
+                    "fb check-changed: git {} failed: {}",
+                    args.join(" "),
                     String::from_utf8_lossy(&out.stderr).trim()
                 ),
             )
@@ -102,8 +180,23 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         _ => return Err(fail(2, USAGE)),
     };
     let root = crate::repo_root()?;
-    let paths = changed(&root, &base)?;
-    let folders = doc_folders(&paths, |d| root.join(d).join("usage").is_dir());
+    let paths = git_lines(&root, &["diff", "--name-only", &format!("{base}...HEAD")])?;
+    let is_doc = |d: &str| root.join(d).join("usage").is_dir();
+    let mut folders = doc_folders(&paths, is_doc);
+    let model = touches_model(&paths);
+    if model {
+        let tracked = git_lines(&root, &["ls-files", "--", "courts"])?;
+        let on_model = model_folders(
+            &tracked,
+            |p| std::fs::read_to_string(root.join(p)).is_ok_and(|t| has_cross_engine(&t)),
+            is_doc,
+        );
+        eprintln!(
+            "fb check-changed: the diff touches the shared model; checking all {} folders on it",
+            on_model.len()
+        );
+        folders.extend(on_model);
+    }
     let todo = jobs(&folders, |d| root.join(d).is_dir());
     let exe = std::env::current_exe().map_err(|e| fail(2, format!("fb check-changed: {e}")))?;
     let fb_job = touches_fb(&paths);
@@ -123,16 +216,16 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         .map(|(folder, engine)| format!("{folder} --engine {engine}"))
         .chain(fb_failed.then(|| "tools/fb: cargo test --release --no-run".to_string()))
         .collect();
-    let total = todo.len() + usize::from(fb_job);
     println!(
-        "RESULT: CHECK-CHANGED {} of {} checks passed ({} folders{} vs {base})",
-        total - failed.len(),
-        total,
-        folders.len(),
-        match fb_job {
-            true => " + tools/fb test build",
-            false => "",
-        }
+        "{}",
+        result_line(
+            todo.len(),
+            failed.len(),
+            folders.len(),
+            fb_job,
+            model,
+            &base
+        )
     );
     failed.iter().for_each(|f| println!("FAILED: {f}"));
     Ok(match failed.is_empty() {
@@ -206,6 +299,88 @@ mod tests {
                 ("courts/a".to_string(), "docx"),
                 ("courts/b".to_string(), "typst")
             ]
+        );
+    }
+    #[test]
+    fn only_a_shared_model_path_counts_as_a_model_change() {
+        for p in [
+            "lib/typst/xdoc.typ",
+            "lib/typst/xengine.typ",
+            "lib/pandoc/xdoc.lua",
+            "lib/latex/xdoc.sty",
+            "lib/docx/xengine.lua",
+            "tools/fb/src/enginegen/gen.rs",
+        ] {
+            assert!(touches_model(&s(&["README.md", p])), "{p}");
+        }
+        assert!(!touches_model(&s(&[
+            "lib/typst/toa.typ",
+            "tools/fb/src/checkchanged.rs",
+            "courts/c/typst/layout.yaml",
+            "docs/EVAL-LOOP.md",
+        ])));
+    }
+
+    #[test]
+    fn eval_yaml_cross_engine_params_put_a_folder_on_the_model() {
+        assert!(has_cross_engine("params:\n  cross_engine: gate\n"));
+        assert!(has_cross_engine("params:\n  cross_engine_docx: report\n"));
+        assert!(!has_cross_engine("params:\n  max_pages: 30\n"));
+        assert!(!has_cross_engine("cross_engine: gate\n"));
+        assert!(!has_cross_engine(": not yaml: ["));
+    }
+
+    #[test]
+    fn a_model_change_checks_every_folder_on_the_model() {
+        // the bead's case: a folder that landed on the base after the fork is outside the branch's diff
+        let tracked = s(&[
+            "courts/a/brief/typst/layout.yaml",
+            "courts/a/brief/usage/INPUT-brief.md",
+            "courts/b/eval.yaml",
+            "courts/b/motion/eval.yaml",
+            "courts/c/eval.yaml",
+            "courts/d/typst/layout.yaml",
+            "lib/x/typst/layout.yaml",
+            "courts/e/typst/sub/typst/layout.yaml.bak",
+        ]);
+        let cross = ["courts/b/motion/eval.yaml", "courts/c/eval.yaml"];
+        let docs = ["courts/a/brief", "courts/b/motion", "courts/b", "courts/c"];
+        let got = model_folders(&tracked, |p| cross.contains(&p), |d| docs.contains(&d));
+        assert_eq!(
+            got,
+            ["courts/a/brief", "courts/b/motion", "courts/c"]
+                .iter()
+                .map(|x| x.to_string())
+                .collect()
+        );
+    }
+
+    #[test]
+    fn an_enginegen_change_builds_the_fb_tests_and_checks_every_model_folder() {
+        let paths = s(&["tools/fb/src/enginegen/gen.rs"]);
+        assert!(touches_fb(&paths));
+        assert!(touches_model(&paths));
+        assert_eq!(
+            result_line(4, 1, 2, true, true, "origin/master"),
+            "RESULT: CHECK-CHANGED 4 of 5 checks passed (4 folder/engine in 2 folders + tools/fb test build \
+             vs origin/master; shared model changed: every folder on it)"
+        );
+    }
+
+    #[test]
+    fn the_result_line_names_only_what_ran() {
+        assert_eq!(
+            result_line(3, 0, 1, false, false, "b"),
+            "RESULT: CHECK-CHANGED 3 of 3 checks passed (3 folder/engine in 1 folders vs b)"
+        );
+        assert_eq!(
+            result_line(0, 1, 0, true, false, "b"),
+            "RESULT: CHECK-CHANGED 0 of 1 checks passed (0 folder/engine in 0 folders + tools/fb test build vs b)"
+        );
+        assert_eq!(
+            result_line(2, 0, 1, false, true, "b"),
+            "RESULT: CHECK-CHANGED 2 of 2 checks passed (2 folder/engine in 1 folders vs b; \
+             shared model changed: every folder on it)"
         );
     }
 }
