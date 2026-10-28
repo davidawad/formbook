@@ -57,6 +57,13 @@ checks:
     method: body_size
     expect: "the most common word height is >= the height of the stated size in this font"
     fix: {anchor: "size"}
+  - id: DEF-FORM-004
+    gate: 1
+    kind: M
+    name: no line of text closer than solid to the line it overlaps, and no words printed over each other
+    method: text_overlap
+    expect: "0 pairs of words whose ems (one type size tall, 0.78 above the baseline) intersect by more than 0.5 pt (single spacing is the least any rule allows)"
+    fix: {anchor: "leading"}
   - id: DEF-FONT-001
     gate: 1
     kind: M

@@ -9,6 +9,7 @@ mod docxgate;
 mod gate0_tests;
 mod native;
 mod opts;
+pub mod overlap;
 mod prepare;
 mod rows;
 mod sh;

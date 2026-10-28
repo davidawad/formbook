@@ -59,6 +59,7 @@ fn main() -> ExitCode {
         "check" => check::main(rest),
         "check-changed" => checkchanged::main(rest),
         "toc-layout" => check::toclayout::main(rest),
+        "text-overlap" => check::overlap::main(rest),
         "cover-pages" => check::coverpages::main(rest),
         "eval" => eval::main(rest),
         "engines" => enginegen::main(rest),
@@ -91,7 +92,7 @@ fn main() -> ExitCode {
         "build" => filing::build(rest),
         "new-filing" => filing::new_filing(rest),
         "render-filing" => filing::render_filing(rest),
-        _ => Err(fail(2, "usage: fb check|check-changed|eval|selftest|check-selftest|bootstrap|showcase|render|render-latex|docx-reference|build|new|render-filing|overlay|fonts|manifest|tracker|worklist|claim|contribute|find|new-filing|readmes|measure|diff|calibrate|cross-engine|fetch|lint|match-stamp|diff-selftest|usage|toc-layout|cover-pages ...")),
+        _ => Err(fail(2, "usage: fb check|check-changed|eval|selftest|check-selftest|bootstrap|showcase|render|render-latex|docx-reference|build|new|render-filing|overlay|fonts|manifest|tracker|worklist|claim|contribute|find|new-filing|readmes|measure|diff|calibrate|cross-engine|fetch|lint|match-stamp|diff-selftest|usage|toc-layout|text-overlap|cover-pages ...")),
     };
     result.unwrap_or_else(|e| {
         eprintln!("{}", e.msg);

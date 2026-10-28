@@ -115,6 +115,17 @@ pub fn evaluate(c: &Ctx, s: &Sample, method: &str) -> Res<Option<Verdict>> {
             );
             result(pass, meas, detail)
         }
+        "text_overlap" => {
+            let found = super::overlap::find(&super::overlap::words_of(&s.pdf)?);
+            result(
+                found.is_empty(),
+                format!(
+                    "{} pairs of lines closer than solid or printed over each other",
+                    found.len()
+                ),
+                found.iter().take(8).cloned().collect::<Vec<_>>().join("\n"),
+            )
+        }
         "page_limit" => {
             let limit = super::sh::cfg(&c.env, &c.checks, ".params.page_limit")?;
             let pages: usize = s.npages.parse().unwrap_or(0);
