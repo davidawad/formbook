@@ -26,3 +26,16 @@ Filer count for tier 2: this is the only complaint saved for cacd. The CourtList
 ## Selected replacement
 
 The Greenberg complaint is flagged for Garamond. The saved Alarcon complaint is a same-court, same-document-type public RECAP filing with an extractable text layer (9,472 words) and is the available selected replacement. Its font list is largely unnamed CID fonts, so it does not resolve the exact-face issue; the sample remains based on the Alarcon filing.
+
+## Replacement exemplar (fb-9fyu, RECAP): `FILED-EXAMPLE-complaint-3.pdf`
+
+- File: `FILED-EXAMPLE-complaint-3.pdf` (6 pages)
+- Case: *Arch Specialty Insurance Co. v. B.R. Building Resources Co.*, No. 2:25-cv-00438-SPG-MAA (Doc. 1)
+- Document: Complaint
+- Filer: Plaintiff Arch Specialty Insurance Company, through Kimia Karami, Hinshaw & Culbertson LLP
+- Date filed: 2025-01-16
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.cacd.954495/gov.uscourts.cacd.954495.1.0.pdf
+- Date retrieved: 2026-10-28 (CourtListener RECAP search, staged by the PM)
+- Text layer: yes (`pdftotext` returns 1579 words); Times New Roman embedded for the body (`pdffonts`; `fb fonts audit` class metric-exact, body timesnewroman 0.955)
+- SHA-256: `f175b25d034fab48e55e12bd714f9ed366128aba039046fbc781ce2ca363f982`
+- Replacement for `FILED-EXAMPLE-complaint-2.pdf` (fb-9fyu: Garamond: commercial face, no redistributable metric-compatible face). The old exemplar is kept; no INPUT is transcribed from this one.

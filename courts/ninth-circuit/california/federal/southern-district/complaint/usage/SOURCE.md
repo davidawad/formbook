@@ -26,3 +26,16 @@ Second filer: not collected in this pass. The CourtListener results also listed 
 ## Selected replacement
 
 The Bosa filing is the scan flagged by the font audit. The saved Bachman complaint is a same-court, same-document-type public filing with a native text layer and embedded Times New Roman, making it the selected replacement. The sample is already based on Bachman.
+
+## Replacement exemplar (fb-9fyu, RECAP): `FILED-EXAMPLE-complaint-3.pdf`
+
+- File: `FILED-EXAMPLE-complaint-3.pdf` (6 pages)
+- Case: *In re Complaint and Petition of Brian Mackey*, No. 3:23-cv-00337-JAH-MSB (Doc. 1)
+- Document: Complaint and Petition for Exoneration from or Limitation of Liability (admiralty; the initial pleading)
+- Filer: Petitioner Brian Mackey, through Edwinth B. Barnes, Thomas Quinn, L.L.P.
+- Date filed: 2023-02-21
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.casd.752954/gov.uscourts.casd.752954.1.0_1.pdf
+- Date retrieved: 2026-10-28 (CourtListener RECAP search, staged by the PM)
+- Text layer: yes (`pdftotext` returns 1820 words); Times New Roman embedded for the body (`pdffonts`; `fb fonts audit` class metric-exact, body timesnewroman 0.958)
+- SHA-256: `779262ad5996de4648cab56cace52901d6e85100be5efb717ae00ea6a86287ab`
+- Replacement for `FILED-EXAMPLE-complaint-2.pdf` (fb-9fyu: scanned image, no text layer). The old exemplar is kept; no INPUT is transcribed from this one.

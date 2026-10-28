@@ -29,3 +29,16 @@ Second filer (tier-2 cross-check):
 ## Selected replacement
 
 The 2025 Smith exemplar is flagged by the font audit for `wrdembedsub39`. The saved 2015 Pigida memorandum is the selected replacement for that audit item: it is a public filing from the same court and motion-brief document type, has an extractable text layer, and uses Times New Roman. It is retained as its own filed example because the sample is transcribed from Smith; replacing Smith's PDF in place would invalidate that sample.
+
+## Replacement exemplar (fb-9fyu, RECAP): `FILED-EXAMPLE-motion-brief-3.pdf`
+
+- File: `FILED-EXAMPLE-motion-brief-3.pdf` (7 pages)
+- Case: *In re Car Toys, Inc.*, No. 25-12288-TWD, Chapter 11 (Doc. 101)
+- Document: Debtor's Supplemental Brief in Support of Motion for Order Authorizing Debtor to Pay WARN Act Class Action Settlement
+- Filer: Debtor Car Toys, Inc., through Steven M. Palmer and others, Cairncross & Hempelmann, P.S.
+- Date filed: 2025-08-29
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.wawb.698421/gov.uscourts.wawb.698421.101.0.pdf
+- Date retrieved: 2026-10-28 (CourtListener RECAP search, staged by the PM)
+- Text layer: yes (`pdftotext` returns 2773 words); Times New Roman embedded for the body (`pdffonts`; `fb fonts audit` class metric-exact, body timesnewroman 0.905)
+- SHA-256: `621513831eb155d8c80cc09d79395e61d822f940eb1414b7f141bce4e62d1ca1`
+- Replacement for `FILED-EXAMPLE-motion-brief.pdf` (fb-9fyu: unnamed font wrdembedsub matching no known face). The old exemplar is kept; no INPUT is transcribed from this one.
