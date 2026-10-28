@@ -584,7 +584,7 @@ One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself a
 | nynd | [complaint](courts/second-circuit/new-york/federal/northern-district/complaint) | yes | 1 | yes | 2 | up for review | **complete** |
 | nynd | [motion-brief](courts/second-circuit/new-york/federal/northern-district/motion-brief) | yes | 1 | yes | 3 | up for review | **complete** |
 | nysd | [complaint](courts/second-circuit/new-york/federal/southern-district/complaint) | yes | 1 | yes | 2 | up for review | **complete** |
-| nysd | [motion-brief](courts/second-circuit/new-york/federal/southern-district/motion-brief) | yes | 1 | yes | 2 | up for review | **complete** |
+| nysd | [motion-brief](courts/second-circuit/new-york/federal/southern-district/motion-brief) | yes | 1 | yes | 3 | up for review | **complete** |
 | nywd | [complaint](courts/second-circuit/new-york/federal/western-district/complaint) | yes | 1 | yes | 2 | up for review | **complete** |
 | nywd | [motion-brief](courts/second-circuit/new-york/federal/western-district/motion-brief) | yes | 1 | yes | 2 | up for review | **complete** |
 | vtb | [adversary-complaint](courts/second-circuit/vermont/federal/bankruptcy-district/adversary-complaint) | yes | 1 | yes | 3 | up for review | **complete** |
@@ -637,7 +637,7 @@ One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself a
 | paeb | [adversary-complaint](courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district/adversary-complaint) | yes | 2 | yes | 2 | up for review | **complete** |
 | paeb | [motion-brief](courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | pamb | [adversary-complaint](courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/adversary-complaint) | yes | 1 | yes | 1 | up for review | **complete** |
-| pamb | [motion-brief](courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/motion-brief) | yes | 1 | yes | 2 | up for review | **complete** |
+| pamb | [motion-brief](courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/motion-brief) | yes | 1 | yes | 3 | up for review | **complete** |
 | pawb | [adversary-complaint](courts/third-circuit/pennsylvania/federal/bankruptcy-western-district/adversary-complaint) | yes | 1 | yes | 1 | up for review | **complete** |
 | pawb | [motion-brief](courts/third-circuit/pennsylvania/federal/bankruptcy-western-district/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | paed | [complaint](courts/third-circuit/pennsylvania/federal/eastern-district/complaint) | yes | 1 | yes | 2 | up for review | **complete** |
@@ -871,11 +871,11 @@ One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself a
 | bap6 | [answering-brief](courts/sixth-circuit/bankruptcy-appellate-panel/answering-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | bap6 | [opening-brief](courts/sixth-circuit/bankruptcy-appellate-panel/opening-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | bap6 | [reply-brief](courts/sixth-circuit/bankruptcy-appellate-panel/reply-brief) | yes | 1 | yes | 1 | up for review | **complete** |
-| ca6 | [answering-brief](courts/sixth-circuit/court-of-appeals/answering-brief) | yes | 1 | yes | 2 | up for review | **complete** |
+| ca6 | [answering-brief](courts/sixth-circuit/court-of-appeals/answering-brief) | yes | 1 | yes | 3 | up for review | **complete** |
 | ca6 | [opening-brief](courts/sixth-circuit/court-of-appeals/opening-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | ca6 | [reply-brief](courts/sixth-circuit/court-of-appeals/reply-brief) | yes | 1 | yes | 2 | up for review | **complete** |
 | kyeb | [adversary-complaint](courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district/adversary-complaint) | yes | 1 | yes | 2 | up for review | **complete** |
-| kyeb | [motion-brief](courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district/motion-brief) | yes | 2 | yes | 2 | up for review | **complete** |
+| kyeb | [motion-brief](courts/sixth-circuit/kentucky/federal/bankruptcy-eastern-district/motion-brief) | yes | 2 | yes | 3 | up for review | **complete** |
 | kywb | [adversary-complaint](courts/sixth-circuit/kentucky/federal/bankruptcy-western-district/adversary-complaint) | yes | 1 | yes | 1 | up for review | **complete** |
 | kywb | [motion-brief](courts/sixth-circuit/kentucky/federal/bankruptcy-western-district/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | kyed | [complaint](courts/sixth-circuit/kentucky/federal/eastern-district/complaint) | yes | 1 | yes | 1 | up for review | **complete** |
@@ -896,7 +896,7 @@ One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself a
 | ohsb | [motion-brief](courts/sixth-circuit/ohio/federal/bankruptcy-southern-district/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | ohnd | [complaint](courts/sixth-circuit/ohio/federal/northern-district/complaint) | yes | 1 | yes | 2 | up for review | **complete** |
 | ohnd | [motion-brief](courts/sixth-circuit/ohio/federal/northern-district/motion-brief) | yes | 1 | yes | 2 | up for review | **complete** |
-| ohsd | [complaint](courts/sixth-circuit/ohio/federal/southern-district/complaint) | yes | 1 | yes | 1 | up for review | **complete** |
+| ohsd | [complaint](courts/sixth-circuit/ohio/federal/southern-district/complaint) | yes | 1 | yes | 2 | up for review | **complete** |
 | ohsd | [motion-brief](courts/sixth-circuit/ohio/federal/southern-district/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | tneb | [adversary-complaint](courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/adversary-complaint) | yes | 1 | yes | 1 | up for review | **complete** |
 | tneb | [motion-brief](courts/sixth-circuit/tennessee/federal/bankruptcy-eastern-district/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
@@ -992,7 +992,7 @@ One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself a
 | insd | [complaint](courts/seventh-circuit/indiana/federal/southern-district/complaint) | yes | 1 | yes | 2 | up for review | **complete** |
 | insd | [motion-brief](courts/seventh-circuit/indiana/federal/southern-district/motion-brief) | yes | 1 | yes | 2 | up for review | **complete** |
 | wieb | [adversary-complaint](courts/seventh-circuit/wisconsin/federal/bankruptcy-eastern-district/adversary-complaint) | yes | 1 | yes | 1 | up for review | **complete** |
-| wieb | [motion-brief](courts/seventh-circuit/wisconsin/federal/bankruptcy-eastern-district/motion-brief) | yes | 1 | yes | 2 | up for review | **complete** |
+| wieb | [motion-brief](courts/seventh-circuit/wisconsin/federal/bankruptcy-eastern-district/motion-brief) | yes | 1 | yes | 3 | up for review | **complete** |
 | wiwb | [adversary-complaint](courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district/adversary-complaint) | yes | 1 | yes | 1 | up for review | **complete** |
 | wiwb | [motion-brief](courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | wied | [complaint](courts/seventh-circuit/wisconsin/federal/eastern-district/complaint) | yes | 1 | yes | 2 | up for review | **complete** |
@@ -1187,7 +1187,7 @@ One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself a
 | canb | [adversary-complaint](courts/ninth-circuit/california/federal/bankruptcy-northern-district/adversary-complaint) | yes | 1 | yes | 2 | up for review | **complete** |
 | casb | [adversary-complaint](courts/ninth-circuit/california/federal/bankruptcy-southern-district/adversary-complaint) | yes | 1 | yes | 2 | up for review | **complete** |
 | casb | [motion-brief](courts/ninth-circuit/california/federal/bankruptcy-southern-district/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
-| cacd | [complaint](courts/ninth-circuit/california/federal/central-district/complaint) | yes | 1 | yes | 2 | up for review | **complete** |
+| cacd | [complaint](courts/ninth-circuit/california/federal/central-district/complaint) | yes | 1 | yes | 3 | up for review | **complete** |
 | cacd | [motion-brief](courts/ninth-circuit/california/federal/central-district/motion-brief) | yes | 1 | yes | 2 | up for review | **complete** |
 | caed | [complaint](courts/ninth-circuit/california/federal/eastern-district/complaint) | yes | 1 | yes | 2 | up for review | **complete** |
 | caed | [motion-brief](courts/ninth-circuit/california/federal/eastern-district/motion-brief) | yes | 1 | yes | 2 | up for review | **complete** |
@@ -1196,7 +1196,7 @@ One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself a
 | cand | [motion-brief](courts/ninth-circuit/california/federal/northern-district/motion-brief) | yes | 1 | yes | 2 | up for review | **complete** |
 | cand | [notice](courts/ninth-circuit/california/federal/northern-district/notice) | yes | 1 | yes | — | up for review | missing exemplar |
 | cand | [proposed-order](courts/ninth-circuit/california/federal/northern-district/proposed-order) | yes | 2 | yes | 3 | up for review | **complete** |
-| casd | [complaint](courts/ninth-circuit/california/federal/southern-district/complaint) | yes | 1 | yes | 2 | up for review | **complete** |
+| casd | [complaint](courts/ninth-circuit/california/federal/southern-district/complaint) | yes | 1 | yes | 3 | up for review | **complete** |
 | casd | [motion-brief](courts/ninth-circuit/california/federal/southern-district/motion-brief) | yes | 1 | yes | 2 | up for review | **complete** |
 | gub | [adversary-complaint](courts/ninth-circuit/guam/federal/bankruptcy-district/adversary-complaint) | yes | 1 | yes | 1 | up for review | **complete** |
 | gub | [motion-brief](courts/ninth-circuit/guam/federal/bankruptcy-district/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
@@ -1229,7 +1229,7 @@ One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself a
 | waeb | [adversary-complaint](courts/ninth-circuit/washington/federal/bankruptcy-eastern-district/adversary-complaint) | yes | 1 | yes | 2 | up for review | **complete** |
 | waeb | [motion-brief](courts/ninth-circuit/washington/federal/bankruptcy-eastern-district/motion-brief) | yes | 1 | yes | 2 | up for review | **complete** |
 | wawb | [adversary-complaint](courts/ninth-circuit/washington/federal/bankruptcy-western-district/adversary-complaint) | yes | 1 | yes | 2 | up for review | **complete** |
-| wawb | [motion-brief](courts/ninth-circuit/washington/federal/bankruptcy-western-district/motion-brief) | yes | 1 | yes | 2 | up for review | **complete** |
+| wawb | [motion-brief](courts/ninth-circuit/washington/federal/bankruptcy-western-district/motion-brief) | yes | 1 | yes | 3 | up for review | **complete** |
 | waed | [complaint](courts/ninth-circuit/washington/federal/eastern-district/complaint) | yes | 1 | yes | 2 | up for review | **complete** |
 | waed | [motion-brief](courts/ninth-circuit/washington/federal/eastern-district/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | wawd | [complaint](courts/ninth-circuit/washington/federal/western-district/complaint) | yes | 1 | yes | 2 | up for review | **complete** |
