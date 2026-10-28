@@ -793,7 +793,7 @@ One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself a
 | ca5 | [answering-brief](courts/fifth-circuit/court-of-appeals/answering-brief) | yes | 1 | yes | 2 | up for review | **complete** |
 | ca5 | [opening-brief](courts/fifth-circuit/court-of-appeals/opening-brief) | yes | 1 | yes | 2 | up for review | **complete** |
 | ca5 | [reply-brief](courts/fifth-circuit/court-of-appeals/reply-brief) | yes | 1 | yes | 2 | up for review | **complete** |
-| laeb | [adversary-complaint](courts/fifth-circuit/louisiana/federal/bankruptcy-eastern-district/adversary-complaint) | yes | 1 | yes | 2 | up for review | **complete** |
+| laeb | [adversary-complaint](courts/fifth-circuit/louisiana/federal/bankruptcy-eastern-district/adversary-complaint) | yes | 1 | yes | 3 | up for review | **complete** |
 | laeb | [motion-brief](courts/fifth-circuit/louisiana/federal/bankruptcy-eastern-district/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | lamb | [adversary-complaint](courts/fifth-circuit/louisiana/federal/bankruptcy-middle-district/adversary-complaint) | yes | 1 | yes | 2 | up for review | **complete** |
 | lamb | [motion-brief](courts/fifth-circuit/louisiana/federal/bankruptcy-middle-district/motion-brief) | yes | 1 | yes | 1 | up for review | **complete** |
@@ -1036,7 +1036,7 @@ One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself a
 | bap8 | [answering-brief](courts/eighth-circuit/bankruptcy-appellate-panel/answering-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | bap8 | [opening-brief](courts/eighth-circuit/bankruptcy-appellate-panel/opening-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | bap8 | [reply-brief](courts/eighth-circuit/bankruptcy-appellate-panel/reply-brief) | yes | 1 | yes | — | up for review | missing exemplar |
-| ca8 | [answering-brief](courts/eighth-circuit/court-of-appeals/answering-brief) | yes | 1 | yes | 3 | up for review | **complete** |
+| ca8 | [answering-brief](courts/eighth-circuit/court-of-appeals/answering-brief) | yes | 1 | yes | 4 | up for review | **complete** |
 | ca8 | [opening-brief](courts/eighth-circuit/court-of-appeals/opening-brief) | yes | 1 | yes | 3 | up for review | **complete** |
 | ca8 | [reply-brief](courts/eighth-circuit/court-of-appeals/reply-brief) | yes | 1 | yes | 2 | up for review | **complete** |
 | areb | [adversary-complaint](courts/eighth-circuit/arkansas/federal/bankruptcy-eastern-district/adversary-complaint) | yes | 1 | yes | 1 | up for review | **complete** |
@@ -1489,7 +1489,7 @@ One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself a
 | ca11 | [answering-brief](courts/eleventh-circuit/court-of-appeals/answering-brief) | yes | 1 | yes | 1 | up for review | **complete** |
 | ca11 | [opening-brief](courts/eleventh-circuit/court-of-appeals/opening-brief) | yes | 1 | yes | 2 | up for review | **complete** |
 | ca11 | [reply-brief](courts/eleventh-circuit/court-of-appeals/reply-brief) | yes | 1 | yes | 1 | up for review | **complete** |
-| almb | [adversary-complaint](courts/eleventh-circuit/alabama/federal/bankruptcy-middle-district/adversary-complaint) | yes | 1 | yes | 3 | up for review | **complete** |
+| almb | [adversary-complaint](courts/eleventh-circuit/alabama/federal/bankruptcy-middle-district/adversary-complaint) | yes | 1 | yes | 4 | up for review | **complete** |
 | almb | [motion-brief](courts/eleventh-circuit/alabama/federal/bankruptcy-middle-district/motion-brief) | yes | 2 | yes | 2 | up for review | **complete** |
 | alnb | [adversary-complaint](courts/eleventh-circuit/alabama/federal/bankruptcy-northern-district/adversary-complaint) | yes | 1 | yes | 2 | up for review | **complete** |
 | alnb | [motion-brief](courts/eleventh-circuit/alabama/federal/bankruptcy-northern-district/motion-brief) | yes | 1 | yes | 2 | up for review | **complete** |
