@@ -23,3 +23,16 @@ The Vongermeten filing is flagged as a scanned OCR PDF. The saved Ability Insura
 - Date retrieved: 2026-10-17
 - Text layer: yes (`pdftotext` returns 2,189 words); Times New Roman embedded for body text
 - SHA-256: `59e884ff003131ed9fecf7eacdf542db7f57888a4bfcfdbea1b09fbe8585eeff`
+
+## Replacement exemplar (fb-9fyu, RECAP): `FILED-EXAMPLE-motion-brief-3.pdf`
+
+- File: `FILED-EXAMPLE-motion-brief-3.pdf` (7 pages)
+- Case: *In re Wisconsin & Milwaukee Hotel, LLC*, No. 24-21743-gmh, Chapter 11 (Doc. 786)
+- Document: Lenders' Supplemental Brief in Support of Motion for Relief from the Automatic Stay
+- Filer: Computershare Trust Company, N.A. and Wisconsin & Milwaukee Hotel Funding LLC, through Frank W. DiCastri and Sara C. McNamara, Reinhart Boerner Van Deuren s.c.
+- Date filed: 2025-11-13
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.wieb.456155/gov.uscourts.wieb.456155.786.0.pdf
+- Date retrieved: 2026-10-28 (CourtListener RECAP search, staged by the PM)
+- Text layer: yes (`pdftotext` returns 2262 words); Times New Roman embedded for the body (`pdffonts`; `fb fonts audit` class metric-exact, body timesnewroman 0.975)
+- SHA-256: `8cb262f5dcb9933795bddbcf5d891b736b87dd9e34307e0ddc3ba653078548cf`
+- Replacement for `FILED-EXAMPLE-motion-brief.pdf` (fb-9fyu: scanned image with an OCR text layer). The old exemplar is kept; no INPUT is transcribed from this one.
