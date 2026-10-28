@@ -796,3 +796,23 @@ BLOCKED fb-l129.1 pass 3 minn/petition-for-rehearing: rechecked official Rule 14
 BLOCKED fb-l129.1 pass 3 wvactapp/petition-for-discretionary-review, petition-for-writ: rechecked official W. Va. Code § 51-11-10, Rule 16 and ICA official docket/order pages; review of ICA judgments lies in the Supreme Court of Appeals, which receives original writs; no qualifying ICA filing received
 BLOCKED fb-l129.1 pass 3 wvactapp/motion-brief: official current docket and order-list pages link case briefs but expose no motion PDFs; fresh search results returned orders/rules only, no filed motion with supporting memorandum
 BLOCKED fb-l129.1 pass 3 sd/amicus-brief: expanded the eCourts/public-search pass to appellate amicus filings; public case documents require purchase and are image-only; no standalone public text-layer amicus PDF found
+
+## fb-9fyu.3 — First Circuit replacement search (2026-10-28)
+
+Searched official First Circuit brief resources and indexed public web results by court and filing type. No qualifying public text-layer replacement was retrieved for these remaining exemplars:
+
+BLOCKED first-circuit/bankruptcy-appellate-panel/answering-brief: no accessible same-court, same-type public text-layer filing found; existing exemplar is Garamond.
+BLOCKED first-circuit/maine/state/supreme-judicial-court/petition-for-review: public material found was a scanned/OCR party filing or procedure material; no alternative text-layer petition found.
+BLOCKED first-circuit/maine/state/supreme-judicial-court (court-root copy of petition-for-review): same scanned/OCR filing is the root copy; no alternative text-layer petition found.
+BLOCKED first-circuit/massachusetts/state/supreme-judicial-court/petition-for-rehearing: no accessible public text-layer same-type filing found; indexed court material was rules and decisions, not a party filing.
+BLOCKED first-circuit/massachusetts/state/supreme-judicial-court/petition-for-writ: no accessible public text-layer same-type filing found; indexed court material was rules and decisions, not a party filing.
+BLOCKED first-circuit/massachusetts/state/supreme-judicial-court (court-root copies of petition-for-rehearing and petition-for-writ): no accessible public text-layer party filings found.
+BLOCKED first-circuit/new-hampshire/state/supreme-court/petition-for-rehearing: public material found was a scanned/OCR party filing or procedure material; no alternative text-layer petition found.
+BLOCKED first-circuit/new-hampshire/state/supreme-court (court-root copy of petition-for-rehearing): same scanned/OCR filing is the root copy; no alternative text-layer petition found.
+BLOCKED first-circuit/puerto-rico/federal/bankruptcy-district/adversary-complaint: no accessible same-court, same-type text-layer public complaint found.
+BLOCKED first-circuit/puerto-rico/federal/bankruptcy-district/motion-brief: no accessible same-court, same-type public text-layer filing found; existing exemplar is Garamond.
+BLOCKED first-circuit/puerto-rico/state/court-of-appeals/amicus-brief: public material found was a scanned/OCR party filing; no alternative text-layer amicus filing found.
+BLOCKED first-circuit/puerto-rico/state/court-of-appeals (court-root copy of amicus-brief): same scanned/OCR filing is the root copy; no alternative text-layer amicus filing found.
+BLOCKED first-circuit/puerto-rico/state/supreme-court/answering-brief: public material found was a scanned/OCR party filing; no alternative text-layer answering brief found.
+BLOCKED first-circuit/puerto-rico/state/supreme-court/brief-on-the-merits: public material found was a scanned/OCR party filing; no alternative text-layer merits brief found.
+BLOCKED first-circuit/puerto-rico/state/supreme-court (court-root copies of answering-brief, brief-on-the-merits, and motion-brief): the root copies are scanned/OCR; no alternative text-layer party filings found.
