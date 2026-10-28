@@ -816,3 +816,14 @@ BLOCKED first-circuit/puerto-rico/state/court-of-appeals (court-root copy of ami
 BLOCKED first-circuit/puerto-rico/state/supreme-court/answering-brief: public material found was a scanned/OCR party filing; no alternative text-layer answering brief found.
 BLOCKED first-circuit/puerto-rico/state/supreme-court/brief-on-the-merits: public material found was a scanned/OCR party filing; no alternative text-layer merits brief found.
 BLOCKED first-circuit/puerto-rico/state/supreme-court (court-root copies of answering-brief, brief-on-the-merits, and motion-brief): the root copies are scanned/OCR; no alternative text-layer party filings found.
+
+## fb-9fyu.3 — Second Circuit replacement search (2026-10-28)
+
+Searched public New York appellate resources and indexed public web results by court and filing type. No qualifying public text-layer replacement was retrieved for these remaining exemplars:
+
+BLOCKED second-circuit/new-york/federal/bankruptcy-northern-district/adversary-complaint: no accessible same-court, same-type public text-layer complaint found.
+BLOCKED second-circuit/new-york/federal/southern-district/motion-brief: no accessible same-court, same-type public text-layer motion found.
+BLOCKED second-circuit/new-york/federal/western-district/motion-brief: no accessible public text-layer motion with a vendored or Times-family face found; existing exemplar is Calisto MT.
+BLOCKED second-circuit/new-york/state/court-of-appeals/answering-brief: no accessible public text-layer answering brief with a vendored or Times-family face found; existing exemplars are Garamond.
+BLOCKED second-circuit/new-york/state/court-of-appeals/petition-for-discretionary-review: public material found was a scanned/OCR party filing; no alternative text-layer petition found.
+BLOCKED second-circuit/new-york/state/court-of-appeals (court-root copy of petition-for-discretionary-review): same scanned/OCR filing is the root copy; no alternative text-layer petition found.
