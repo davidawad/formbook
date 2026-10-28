@@ -35996,6 +35996,26 @@
         "OldEnglishTextMT"
       ]
     },
+    "courts/supreme-court-of-the-united-states/amicus-brief/usage/FILED-EXAMPLE-amicus-brief-4.pdf": {
+      "body": "centuryschoolbook",
+      "body_share": 0.999,
+      "class": "approximate",
+      "face": "TeX Gyre Schola",
+      "why": "Monotype Century Schoolbook; Schola has the Adobe NCS widths",
+      "fonts": [
+        "Arial-BoldMT",
+        "Calibri",
+        "Cambria",
+        "CenturySchoolbook",
+        "CenturySchoolbook-Bold",
+        "CenturySchoolbook-BoldItalic",
+        "CenturySchoolbook-Italic",
+        "NewCenturySchlbkLTStd-Bd",
+        "NewCenturySchlbkLTStd-Roman",
+        "OldEnglishTextMT",
+        "TimesNewRomanPSMT"
+      ]
+    },
     "courts/supreme-court-of-the-united-states/amicus-brief/usage/FILED-EXAMPLE-amicus-brief.pdf": {
       "body": "newcenturyschlbklt",
       "body_share": 0.999,
@@ -36097,6 +36117,28 @@
         "TimesNewRomanPS-ItalicMT"
       ]
     },
+    "courts/supreme-court-of-the-united-states/merits-brief/usage/FILED-EXAMPLE-merits-brief-4.pdf": {
+      "body": "newcenturyschlbk",
+      "body_share": 0.999,
+      "class": "metric-exact",
+      "face": "TeX Gyre Schola",
+      "why": "Adobe New Century Schoolbook metrics",
+      "fonts": [
+        "Arial",
+        "Arial,Bold",
+        "Calibri-Bold",
+        "Cambria",
+        "NewCenturySchlbk-Bold",
+        "NewCenturySchlbk-Bold2",
+        "NewCenturySchlbk-Italic",
+        "NewCenturySchlbk-Italic2",
+        "NewCenturySchlbk-Roman",
+        "NewCenturySchlbk-Roman2",
+        "OldEnglishTextMT",
+        "SymbolMT",
+        "TimesNewRoman"
+      ]
+    },
     "courts/supreme-court-of-the-united-states/merits-brief/usage/FILED-EXAMPLE-merits-brief.pdf": {
       "body": "newcenturyschlbkltstd",
       "body_share": 1.0,
@@ -36114,6 +36156,26 @@
         "OldEnglishTextMT",
         "SourceSansPro-Regular",
         "SymbolMT",
+        "TimesNewRomanPSMT"
+      ]
+    },
+    "courts/supreme-court-of-the-united-states/usage/FILED-EXAMPLE-amicus-brief-4.pdf": {
+      "body": "centuryschoolbook",
+      "body_share": 0.999,
+      "class": "approximate",
+      "face": "TeX Gyre Schola",
+      "why": "Monotype Century Schoolbook; Schola has the Adobe NCS widths",
+      "fonts": [
+        "Arial-BoldMT",
+        "Calibri",
+        "Cambria",
+        "CenturySchoolbook",
+        "CenturySchoolbook-Bold",
+        "CenturySchoolbook-BoldItalic",
+        "CenturySchoolbook-Italic",
+        "NewCenturySchlbkLTStd-Bd",
+        "NewCenturySchlbkLTStd-Roman",
+        "OldEnglishTextMT",
         "TimesNewRomanPSMT"
       ]
     },
@@ -36136,6 +36198,28 @@
         "TimesNewRomanPS-BoldMT",
         "TimesNewRomanPSMT",
         "WPTypographicSymbols"
+      ]
+    },
+    "courts/supreme-court-of-the-united-states/usage/FILED-EXAMPLE-merits-brief-4.pdf": {
+      "body": "newcenturyschlbk",
+      "body_share": 0.999,
+      "class": "metric-exact",
+      "face": "TeX Gyre Schola",
+      "why": "Adobe New Century Schoolbook metrics",
+      "fonts": [
+        "Arial",
+        "Arial,Bold",
+        "Calibri-Bold",
+        "Cambria",
+        "NewCenturySchlbk-Bold",
+        "NewCenturySchlbk-Bold2",
+        "NewCenturySchlbk-Italic",
+        "NewCenturySchlbk-Italic2",
+        "NewCenturySchlbk-Roman",
+        "NewCenturySchlbk-Roman2",
+        "OldEnglishTextMT",
+        "SymbolMT",
+        "TimesNewRoman"
       ]
     },
     "courts/tenth-circuit/colorado/federal/bankruptcy-district/adversary-complaint/usage/FILED-EXAMPLE-adversary-complaint-2.pdf": {

@@ -40,3 +40,16 @@
 ## Selected replacement
 
 The West Virginia filing is flagged for Century Expanded BT. The saved Chamber brief is the closest selected replacement: a same-court amicus brief with a text layer, filed by a different organization, in New Century Schoolbook. The Loper Bright NSSF brief is another text-layer option in Century Schoolbook. Both better reflect the Supreme Court's booklet typography than a Times New Roman replacement would. The existing West Virginia sample remains paired with its original source.
+
+## 4. `FILED-EXAMPLE-amicus-brief-4.pdf` (replacement search)
+
+- Court: Supreme Court of the United States
+- Case: *Bowe v. United States*, No. 24-5438 (merits stage)
+- Document: Brief of Court-Appointed Amicus Curiae in Support of Judgment Below on First Question Presented, 82 pages; text layer present, body in Century Schoolbook
+- Filer: Court-appointed amicus curiae Kasdin M. Mitchell (Kirkland & Ellis LLP)
+- Date filed: 2025-08-22 (Supreme Court docket entry)
+- Source URL: https://www.supremecourt.gov/DocketPDF/24/24-5438/370491/20250822124903073_20250822%20FINAL%20Amicus%20ISO%20QP1%20Brief%20w%20Addendum.pdf
+- Docket: https://www.supremecourt.gov/docket/docketfiles/html/public/24-5438.html
+- Date retrieved: 2026-10-28
+- SHA-256: `b5e9dece0b455a1a0bb61a857b3763e0d5414e0663226a057c0fd5cc408ce048`
+- Text-layer verification: `pdftotext` yields body text; pages 63–82 contain image-based addendum material, while the brief pages are text-based; `pdffonts` reports embedded CenturySchoolbook and NewCenturySchlbk faces.

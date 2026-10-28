@@ -5,7 +5,7 @@ Courts under `courts` (347).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Supreme Court of the United States](supreme-court-of-the-united-states) | `scotus` | up for review | 3/3 | 2/2 | 3/3 | 14 |
+| [Supreme Court of the United States](supreme-court-of-the-united-states) | `scotus` | up for review | 3/3 | 2/2 | 3/3 | 29 |
 | [Court of Appeals for the Federal Circuit](federal-circuit/court-of-appeals) | `cafc` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Court of Federal Claims](federal-circuit/court-of-federal-claims) | `uscfc` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Court of International Trade](federal-circuit/court-of-international-trade) | `cit` | up for review | 2/2 | — | 2/2 | 14 |

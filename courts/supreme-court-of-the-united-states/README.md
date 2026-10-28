@@ -4,12 +4,12 @@
 - Alias: `scotus`
 - CourtListener: [scotus](https://www.courtlistener.com/?court=scotus)
 - Level: supreme
-- Status: **up for review** (14%); manual status in `court.json`: `todo`
+- Status: **up for review** (29%); manual status in `court.json`: `todo`
 
 ## Checklist
 
 - [x] `rules.md` present
-- [ ] `usage/SOURCE.md` names at least 2 FILED-EXAMPLE PDFs (different filers)
+- [x] `usage/SOURCE.md` names at least 2 FILED-EXAMPLE PDFs (different filers)
 - [ ] `usage/` has at least 2 INPUT .md samples
 - [ ] typst engine passes (`usage/.check-typst.txt` valid)
 - [ ] latex engine passes (`usage/.check-latex.txt` valid)

@@ -127,7 +127,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Supreme Court of the United States](courts/supreme-court-of-the-united-states) | `scotus` | up for review | 3/3 | 2/2 | 3/3 | 14 |
+| [Supreme Court of the United States](courts/supreme-court-of-the-united-states) | `scotus` | up for review | 3/3 | 2/2 | 3/3 | 29 |
 
 ## Federal Circuit and feeder courts
 
@@ -851,7 +851,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 <!-- tracker:start -->
 | Group | Courts | Done | Up for review | In progress | Todo | % done | % up for review | Typst pass | LaTeX pass | DOCX pass | Avg checklist % |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Supreme Court of the United States | 1 | 0 | 1 | 0 | 0 | 0.0% | 100.0% | 1 | 1 | 1 | 14.0% |
+| Supreme Court of the United States | 1 | 0 | 1 | 0 | 0 | 0.0% | 100.0% | 1 | 1 | 1 | 29.0% |
 |  | 30 | 0 | 10 | 20 | 0 | 0.0% | 33.3% | 10 | 3 | 4 | 16.5% |
 | Federal Circuit and feeder courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 6 | 1 | 6 | 16.5% |
 | Military courts | 6 | 0 | 6 | 0 | 0 | 0.0% | 100.0% | 6 | 0 | 6 | 14.0% |

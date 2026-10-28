@@ -39,3 +39,16 @@ Only one exemplar is held for this doc type. A second filer's merits brief (a re
 The United States merits brief is flagged for Century Expanded BT. The saved Loper Bright petitioner merits brief is a same-court, same-document-type alternative with an extractable text layer and Century Schoolbook, consistent with the Court's booklet typography. Its filer differs from the United States, and the existing United States sample remains paired with its source.
 - Date retrieved: 2026-10-17
 - sha256: 893d935b37fa60ea71b07a518c8e3b5963746983056dc0a1275aff695bfa861b
+
+## 4. `FILED-EXAMPLE-merits-brief-4.pdf` (third filer, replacement search)
+
+- Court: Supreme Court of the United States
+- Case: *Bowe v. United States*, No. 24-5438 (on writ of certiorari to the Eleventh Circuit)
+- Document: Brief for Petitioner Michael Bowe, 74 pages, text-based PDF; body face New Century Schoolbook embedded
+- Filer: Petitioner Michael Bowe, through the Federal Public Defender for the Southern District of Florida (Andrew L. Adler, counsel of record)
+- Date filed: 2025-04-07 (Supreme Court docket entry)
+- Source URL: https://www.supremecourt.gov/DocketPDF/24/24-5438/354841/20250407132513522_Bowe%20Merits%20Brief%20FINAL.pdf
+- Docket: https://www.supremecourt.gov/docket/docketfiles/html/public/24-5438.html
+- Date retrieved: 2026-10-28
+- SHA-256: `56fc9ef1288cdadbc16a2750a6835c5d9f9195c455eb901410f15c43c4a2ac99`
+- Text-layer verification: `pdftotext` yields body text; `pdfimages -list` reports no page images; `pdffonts` reports embedded NewCenturySchlbk-Roman and related Century-family faces.
