@@ -81,8 +81,14 @@ local function section_break(footer_rid, numbering)
     .. 'w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/>' .. (numbering or "")
     .. '</w:sectPr></w:pPr></w:p>')
 end
-local FOOTER_EMPTY = "rId101"   -- footer2.xml, the cover
-local FOOTER_PAGE = "rId100"    -- footer1.xml, the centred PAGE field
+-- The footers (R. 9(c)(4)), in the Footer style of docx/reference.xml, written here for fb render (FORMBOOK_FOOTERS): a
+-- sectPr naming the reference document's own footer id can dangle, as pandoc may renumber it (fb-595.64, fb-595.70).
+local FOOTER_EMPTY = "rIdFiscrNone"   -- the cover
+local FOOTER_PAGE = "rIdFiscrPage"    -- the centred PAGE field
+local FOOTERS = FOOTER_PAGE .. "\t" .. '<w:p><w:pPr><w:pStyle w:val="Footer"/><w:jc w:val="center"/></w:pPr>'
+  .. '<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r>'
+  .. '<w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p>\n'
+  .. FOOTER_EMPTY .. "\t" .. '<w:p><w:pPr><w:pStyle w:val="Footer"/></w:pPr></w:p>\n'
 local ROMAN_FROM_II = '<w:pgNumType w:fmt="lowerRoman" w:start="2"/>'
 local ARABIC_FROM_1 = '<w:pgNumType w:fmt="decimal" w:start="1"/>'
 
@@ -275,7 +281,7 @@ end
 
 local NEEDLE_MAX = 60   -- a needle is a prefix of the text (letters and digits only)
 -- the document's last section (the certificates: arabic, continuing the body's numbers)
-local FINAL_SECT = '<w:sectPr><w:footerReference w:type="default" r:id="rId100"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/><w:pgNumType w:fmt="decimal"/></w:sectPr>'
+local FINAL_SECT = '<w:sectPr><w:footerReference w:type="default" r:id="' .. FOOTER_PAGE .. '"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/><w:pgNumType w:fmt="decimal"/></w:sectPr>'
 
 -- letters and digits only, lower case: fb render normalizes the PDF text the same way
 local function norm(s)
@@ -726,6 +732,7 @@ function Pandoc(doc)
   needles[#needles + 1] = "#section\tS:cover\tlower-roman\t"
   needles[#needles + 1] = "#section\t" .. body_first .. "\tdecimal\t"
   write_file("FORMBOOK_NEEDLES", table.concat(needles, "\n") .. "\n")
+  write_file("FORMBOOK_FOOTERS", FOOTERS)
   write_file("FORMBOOK_FINAL", FINAL_SECT)
   local pages = { labels = labels, occurrences = occurrences }
   -- assemble

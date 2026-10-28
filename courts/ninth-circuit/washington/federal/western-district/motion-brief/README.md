@@ -92,9 +92,9 @@ line and page where typst does (XENG-001..003 pass, 406/406 lines).
   item 3).
 
 **docx** (`docx/`; `usage/OUTPUT-motion-brief.docx` and `.docx.pdf`, the LibreOffice conversion): `docx/reference.xml`
-(the recipe styles in the typst face via `{font}`, the header `rIdWawdLines` with the 27 numbers in a text box and the
-three pleading rules as anchored lines) and `docx/motion-brief.lua` (cover, caption, contents, body, word certificate,
-signature block, certificate of service, the bottom notation from the frontmatter in `$FORMBOOK_FOOTERS`, the section
+(the recipe styles in the typst face via `{font}`) and `docx/motion-brief.lua` (cover, caption, contents, body, word
+certificate, signature block, certificate of service, the numbered paper in `$FORMBOOK_HEADERS`: the 27 numbers in a
+text box and the three pleading rules as anchored lines, the bottom notation from the frontmatter in `$FORMBOOK_FOOTERS`, the section
 in `$FORMBOOK_FINAL`). pandoc reads the sample as CommonMark (`pandoc-from="commonmark_x+smart"`), as cmarker does, so
 a Westlaw star page such as "*2" stays literal. No shell. Only the LibreOffice PDF was checked; Word was not available.
 

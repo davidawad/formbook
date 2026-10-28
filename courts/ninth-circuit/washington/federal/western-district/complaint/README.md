@@ -81,8 +81,8 @@ line and page where typst does (XENG-001..003 pass, 362/362 lines).
 - Bottom notation (LCR 10(e)(3)) fixed at its foot, 0.2 in above the page edge plus Word's 1 pt closing paragraph.
 
 **docx** (`docx/`; `usage/OUTPUT-complaint.docx` and `.docx.pdf`, the LibreOffice conversion): `docx/reference.xml`
-(the recipe styles in the typst face via `{font}`, the header `rIdWawdLines` with the 27 numbers in a text box and the
-three pleading rules as anchored lines) and `docx/complaint.lua` (cover, caption, numbered allegations, prayer,
-signature block, the bottom notation from the frontmatter in `$FORMBOOK_FOOTERS`, the section in `$FORMBOOK_FINAL`).
+(the recipe styles in the typst face via `{font}`) and `docx/complaint.lua` (cover, caption, numbered allegations, prayer,
+signature block, the numbered paper in `$FORMBOOK_HEADERS`: the 27 numbers in a text box and the three pleading rules
+as anchored lines, the bottom notation from the frontmatter in `$FORMBOOK_FOOTERS`, the section in `$FORMBOOK_FINAL`).
 pandoc reads the sample as CommonMark (`pandoc-from="commonmark_x+smart"`), as cmarker does. No shell. Only the
 LibreOffice PDF was checked; Word was not available.

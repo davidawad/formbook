@@ -29,6 +29,13 @@ local TAB = "<w:r><w:tab/></w:r>"
 -- The empty paragraph that ends a Word section: a 1 pt line, so it never pushes a line of the page on.
 local SECT_LINE = xe.spacing(0, 0, 20)
 local SECT_PG = '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="432" w:gutter="0"/>'
+-- The page-number footer (the cross-engine recipe's: a centered PAGE field), added by fb render from
+-- FORMBOOK_FOOTERS: a sectPr naming the reference document's own footer id can dangle, as pandoc may renumber it
+-- (fb-595.64, fb-595.70).
+local FOOTER_PAGE = "rIdCfcPage"
+local FOOTER_P = '<w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r>'
+  .. '<w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r>'
+  .. '<w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p>'
 
 local function need(meta, key)
   if meta[key] == nil then error("uscfc-motion-brief.lua: missing required metadata field `" .. key .. "`") end
@@ -257,7 +264,7 @@ end
 -- The paragraph that ends a section: the cover has no page number, the front matter is roman from i (the body's own
 -- section, arabic from 1, is the last: FORMBOOK_FINAL).
 local function section_break(fmt)
-  local footer = fmt == "none" and "" or '<w:footerReference w:type="default" r:id="rIdFooter1"/>'
+  local footer = fmt == "none" and "" or '<w:footerReference w:type="default" r:id="' .. FOOTER_PAGE .. '"/>'
   local numfmt = fmt == "none" and "decimal" or fmt
   local sect = "<w:sectPr>" .. footer .. SECT_PG .. '<w:pgNumType w:fmt="' .. numfmt .. '" w:start="1"/></w:sectPr>'
   return xe.para({ SECT_LINE, sect }, "")
@@ -463,8 +470,9 @@ local function write_needles(meta)
   flush("")
   need_at("S:cert", "B", "Certificate of Service", "I hereby certify")
   need_at("S:end", "B", "/s/ " .. plain(need(need(meta, "signature"), "signer")), "")
-  write_file("FORMBOOK_NEEDLES", table.concat(NEEDLES, "\n") .. "\n#section\t" .. (first or "S:cert") .. "\tdecimal\t\n")  -- the body's section (the last): arabic from 1, the reference's page-number footer
-  write_file("FORMBOOK_FINAL", '<w:sectPr><w:footerReference w:type="default" r:id="rIdFooter1"/>' .. SECT_PG
+  write_file("FORMBOOK_NEEDLES", table.concat(NEEDLES, "\n") .. "\n#section\t" .. (first or "S:cert") .. "\tdecimal\t\n")  -- the body's section (the last): arabic from 1, the page-number footer
+  write_file("FORMBOOK_FOOTERS", FOOTER_PAGE .. "\t" .. FOOTER_P .. "\n")
+  write_file("FORMBOOK_FINAL", '<w:sectPr><w:footerReference w:type="default" r:id="' .. FOOTER_PAGE .. '"/>' .. SECT_PG
     .. '<w:pgNumType w:fmt="decimal" w:start="1"/></w:sectPr>')
 end
 

@@ -7,8 +7,10 @@
 -- from reference.docx), headings as custom styles (JPML Heading 2..5: single spaced, hanging labels), footnotes
 -- as native footnotes. Everything else (caption, counsel blocks, signature block, tables of contents and
 -- authorities, certificate) is written here as OpenXML from the frontmatter, in the same styles' spacing.
--- Sections are set with sectPr paragraphs (the last one through fb render's FORMBOOK_FINAL); the footers are
--- reference.xml's rId100 (page number) and rId101 (empty).
+-- Sections are set with sectPr paragraphs (the last one through fb render's FORMBOOK_FINAL); the two footers, the
+-- page number (a PAGE field; the format comes from the section) and an empty one (the memorandum cover is
+-- unnumbered), are written here for fb render (FORMBOOK_FOOTERS): a sectPr naming the reference document's own
+-- footer id can dangle, as pandoc may renumber it (fb-595.64, fb-595.70).
 --
 -- Table of contents and table of authorities: static text (no TOC/TA field), so they show page numbers in any
 -- viewer. The page numbers: fb render (tools/fb/src/docxpass.rs) renders the document once, finds where each heading
@@ -23,12 +25,17 @@ local stringify = pandoc.utils.stringify
 local NEEDLES_OUT = os.getenv("FORMBOOK_NEEDLES")  -- written when set: "I:n<TAB>B<TAB>needle<TAB>needle"
 local PAGES_IN = os.getenv("FORMBOOK_PAGES")       -- the previous pass's pages: "I:n<TAB>page<TAB>label"
 -- the memorandum body's last section (arabic from 1, the page-number footer): pandoc writes its own final sectPr
-local FINAL_SECT = '<w:sectPr><w:footerReference w:type="default" r:id="rId100"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/><w:pgNumType w:fmt="decimal" w:start="1"/><w:cols w:space="720"/></w:sectPr>'
+local FINAL_SECT = '<w:sectPr><w:footerReference w:type="default" r:id="rIdJpmlPage"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/><w:pgNumType w:fmt="decimal" w:start="1"/><w:cols w:space="720"/></w:sectPr>'
 local MARKER = "<!-- memorandum -->"
 local PASSIM_AT = 7                            -- authority cited on this many pages or more: "passim"
 local TOC_LEVELS = 4                           -- typst: headings up to level 4 are in the table of contents
 local TAB = "<w:r><w:tab/></w:r>"
-local FOOTER_NUM, FOOTER_NONE = "rId100", "rId101"
+local FOOTER_NUM, FOOTER_NONE = "rIdJpmlPage", "rIdJpmlNone"
+local FOOTER_LINE = '<w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:ind w:firstLine="0"/>'
+local FOOTERS = FOOTER_NUM .. "\t" .. '<w:p><w:pPr>' .. FOOTER_LINE .. '<w:jc w:val="center"/></w:pPr>'
+  .. '<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r>'
+  .. '<w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p>\n'
+  .. FOOTER_NONE .. "\t" .. '<w:p><w:pPr>' .. FOOTER_LINE .. '</w:pPr></w:p>\n'
 
 -- ---------------------------------------------------------------------------
 -- OpenXML helpers
@@ -283,6 +290,9 @@ function Pandoc(doc)
     local g = assert(io.open(os.getenv("FORMBOOK_FINAL"), "w"))
     g:write(FINAL_SECT)
     g:close()
+    local h = assert(io.open(os.getenv("FORMBOOK_FOOTERS"), "w"))
+    h:write(FOOTERS)
+    h:close()
   end
 
   -- distinct printed pages of an authority, in order

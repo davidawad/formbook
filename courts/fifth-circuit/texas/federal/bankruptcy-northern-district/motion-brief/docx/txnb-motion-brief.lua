@@ -139,6 +139,11 @@ local function load_pages()
   f:close()
 end
 
+-- the page-number footer: the cross-engine recipe's, a centered PAGE field
+local FOOTER_P = '<w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:fldChar w:fldCharType="begin"/></w:r>'
+  .. '<w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r>'
+  .. '<w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p>'
+
 local function write_file(env, text)
   local path = os.getenv(env)
   if not path or path == "" then return end
@@ -323,8 +328,11 @@ function Pandoc(doc)
     for _, x in ipairs(needles) do nl[#nl + 1] = table.concat({ x.id, "B", x.needle, x.fallback }, "\t") end
     nl[#nl + 1] = "#section\tC:1\tdecimal\t"
     write_file("FORMBOOK_NEEDLES", table.concat(nl, "\n") .. "\n")
-    -- the last section: the reference's (the recipe's page-number footer, the page, the footer distance)
-    write_file("FORMBOOK_FINAL", '<w:sectPr><w:footerReference w:type="default" r:id="rIdFooter1"/>'
+    -- the last section: the reference's (the recipe's page-number footer, the page, the footer distance); the footer
+    -- is added by fb render from FORMBOOK_FOOTERS, as a sectPr naming the reference's own footer id can dangle when
+    -- pandoc renumbers it (fb-595.64, fb-595.70)
+    write_file("FORMBOOK_FOOTERS", "rIdTxnbPage\t" .. FOOTER_P .. "\n")
+    write_file("FORMBOOK_FINAL", '<w:sectPr><w:footerReference w:type="default" r:id="rIdTxnbPage"/>'
       .. '<w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" '
       .. 'w:header="720" w:footer="735" w:gutter="0"/></w:sectPr>')
     out[#out + 1] = p(xe.runs("TABLE OF CONTENTS", { b = true }), { jc = "center", brk = true })

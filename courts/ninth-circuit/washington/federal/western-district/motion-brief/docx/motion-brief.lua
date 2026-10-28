@@ -4,8 +4,8 @@
 -- the frontmatter's page_breaks open a page), the table of contents, the body, the word certificate (LCR 7(e)(6)), the
 -- signature block (LCR 10(e)(4)) and the certificate of service are built here, and the bottom notation (LCR
 -- 10(e)(3): the title and case number with the page number at left, the firm block, when the sample gives one, at
--- right) and the section (FORMBOOK_FOOTERS, FORMBOOK_FINAL). Font, spacing, the numbered paper (header rIdWawdLines)
--- are in docx/reference.xml (fb render builds the reference document from it). Content-agnostic: every case-specific
+-- right), the numbered paper (a header) and the section (FORMBOOK_FOOTERS, FORMBOOK_HEADERS, FORMBOOK_FINAL). Font
+-- and spacing are in docx/reference.xml (fb render builds the reference document from it). Content-agnostic: every case-specific
 -- word comes from the sample's frontmatter.
 --
 -- The cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): every paragraph in
@@ -281,7 +281,55 @@ local function notation(meta)
     .. xe.para({ xe.spacing(0, 0, 20) }, "")
 end
 
-local FINAL = '<w:sectPr><w:headerReference w:type="default" r:id="rIdWawdLines"/>'
+-- The numbered paper (LCR 10(e)(5)), the page header fb render adds (FORMBOOK_HEADERS; a sectPr naming the reference
+-- document's own header id can dangle, as pandoc may renumber it: fb-595.64, fb-595.70): the numbers 1 to 27 in one
+-- text box anchored to the page, 1 in wide, its top on the 1 in top margin, one exact 24 pt line each, right-aligned
+-- (typst line-numbers); the pleading rules, a double rule at 1.3 in and 1.34 in and a single rule at 7.6 in from the
+-- page's left edge, 0.75 pt, the page's full height (typst pleading-rules). EMU: 914400 an inch.
+local PAPER_ID = "rIdWawdPaper"
+local PAGE_H, LINES = 10058400, 27
+
+-- one shape anchored to the page, behind the text (z: its stacking order)
+local function anchored(n, z, name, x, y, cx, cy, shape)
+  return '<w:r><w:drawing xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" '
+    .. 'xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
+    .. 'xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape">'
+    .. '<wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" relativeHeight="' .. z
+    .. '" behindDoc="1" locked="1" layoutInCell="1" allowOverlap="1"><wp:simplePos x="0" y="0"/>'
+    .. '<wp:positionH relativeFrom="page"><wp:posOffset>' .. x .. '</wp:posOffset></wp:positionH>'
+    .. '<wp:positionV relativeFrom="page"><wp:posOffset>' .. y .. '</wp:posOffset></wp:positionV>'
+    .. '<wp:extent cx="' .. cx .. '" cy="' .. cy .. '"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:wrapNone/>'
+    .. '<wp:docPr id="' .. n .. '" name="' .. name .. '"/><wp:cNvGraphicFramePr/><a:graphic>'
+    .. '<a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"><wps:wsp>' .. shape
+    .. '</wps:wsp></a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>'
+end
+
+local function xfrm(cx, cy, geom)
+  return '<a:xfrm><a:off x="0" y="0"/><a:ext cx="' .. cx .. '" cy="' .. cy .. '"/></a:xfrm><a:prstGeom prst="' .. geom
+    .. '"><a:avLst/></a:prstGeom>'
+end
+
+local function rule(n, x)
+  return anchored(n, 251659264 + n, "Pleading rule " .. n, x, 0, 0, PAGE_H, '<wps:cNvCnPr/><wps:spPr>' .. xfrm(0, PAGE_H, "line")
+    .. '<a:ln w="9525"><a:solidFill><a:srgbClr val="000000"/></a:solidFill></a:ln></wps:spPr><wps:bodyPr/>')
+end
+
+local function paper()
+  local nums = {}
+  for i = 1, LINES do
+    nums[i] = '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="480" w:lineRule="exact"/><w:ind w:firstLine="0"/>'
+      .. '<w:jc w:val="right"/></w:pPr><w:r><w:t>' .. i .. '</w:t></w:r></w:p>'
+  end
+  local box = '<wps:cNvSpPr txBox="1"/><wps:spPr>' .. xfrm(914400, 8229600, "rect")
+    .. '<a:noFill/><a:ln><a:noFill/></a:ln></wps:spPr><wps:txbx><w:txbxContent>' .. table.concat(nums)
+    .. '</w:txbxContent></wps:txbx><wps:bodyPr rot="0" vert="horz" wrap="square" lIns="0" tIns="0" rIns="0" bIns="0" '
+    .. 'anchor="t" anchorCtr="0"><a:noAutofit/></wps:bodyPr>'
+  return '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/></w:pPr>'
+    .. anchored(1, 251659264, "Pleading line numbers", 0, 914400, 914400, 8229600, box)
+    .. rule(2, 1188720) .. rule(3, 1225296) .. rule(4, 6949440) .. '</w:p>'
+end
+
+local FINAL = '<w:sectPr><w:headerReference w:type="default" r:id="' .. PAPER_ID .. '"/>'
   .. '<w:footerReference w:type="default" r:id="rIdWawdNotation"/><w:pgSz w:w="12240" w:h="15840"/>'
   .. '<w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="2160" w:header="720" w:footer="288" w:gutter="0"/>'
   .. '<w:cols w:space="720"/></w:sectPr>'
@@ -483,6 +531,7 @@ local function finish(doc)
   end
 
   write_file("FORMBOOK_FOOTERS", "rIdWawdNotation\t" .. notation(read_meta()) .. "\n")
+  write_file("FORMBOOK_HEADERS", PAPER_ID .. "\t" .. paper() .. "\n")
   write_file("FORMBOOK_FINAL", FINAL)
   -- The frontmatter was consumed above; pandoc would otherwise write its title at the top of the document.
   return pandoc.Pandoc({ xe.raw(table.concat(x)) }, pandoc.Meta({}))

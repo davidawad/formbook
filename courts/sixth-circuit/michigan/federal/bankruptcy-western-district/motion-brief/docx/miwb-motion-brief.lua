@@ -7,8 +7,8 @@
 --   * the brief in support: a new section (its page numbers restart at 1), the same caption, the brief's title, the
 --     markdown body, the signing block.
 -- Nothing case-specific is written here: every string comes from the sample's YAML frontmatter, and the court's
--- name is the court's own title. Font, spacing, margins and the page-number footer are styles and section settings
--- in docx/reference.xml (fb render builds the reference document from it).
+-- name is the court's own title. Font, spacing and margins are styles and section settings in docx/reference.xml (fb
+-- render builds the reference document from it); the page-number footer and the sections are written here.
 --
 -- The cross-engine layout model (lib/docx/xengine.lua; docs/EVAL-LOOP.md, "Cross-engine gate"): every paragraph in
 -- exact line boxes of the typst pitch (twips = 20 x pt: 552 the body, 276 a single line), the spaces between blocks
@@ -160,13 +160,33 @@ local function signature(meta)
     p(xe.runs("Dated: " .. txt(need(meta, "date")))), table.concat(right))
 end
 
--- The end of the motion's section: the next section (the brief, docx/reference.xml's last sectPr) starts on a new page
--- and restarts its page numbers (typst pagebreak() and counter(page).update(1)). The paragraph that holds it is a
--- 1 pt line, so it never pushes the signature on.
-local SECTION_END = '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/><w:sectPr>'
-  .. '<w:footerReference w:type="default" r:id="rIdFooter1"/><w:pgSz w:w="12240" w:h="15840"/>'
+-- The footer of both sections: the page number at 11 pt in a single line (a PAGE field), 731 twips above the page foot
+-- so its baseline stands where typst sets it (footer-descent 30 %). fb render adds it (FORMBOOK_FOOTERS): a sectPr
+-- naming the reference document's own footer id can dangle, as pandoc may renumber it (fb-595.64, fb-595.70).
+local FOOTER_ID = "rIdMiwbPage"
+local FOOTER_P = '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="276" w:lineRule="exact"/><w:jc w:val="center"/></w:pPr>'
+  .. '<w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:fldChar w:fldCharType="begin"/></w:r>'
+  .. '<w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r>'
+  .. '<w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:fldChar w:fldCharType="separate"/></w:r>'
+  .. '<w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:t>1</w:t></w:r>'
+  .. '<w:r><w:rPr><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr><w:fldChar w:fldCharType="end"/></w:r></w:p>'
+local SECT_PG = '<w:footerReference w:type="default" r:id="' .. FOOTER_ID .. '"/><w:pgSz w:w="12240" w:h="15840"/>'
   .. '<w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="731" w:gutter="0"/>'
-  .. '</w:sectPr></w:pPr></w:p>'
+
+-- The end of the motion's section: the next section (the brief, the last: FORMBOOK_FINAL) starts on a new page and
+-- restarts its page numbers (typst pagebreak() and counter(page).update(1)). The paragraph that holds it is a 1 pt
+-- line, so it never pushes the signature on.
+local SECTION_END = '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/><w:sectPr>'
+  .. SECT_PG .. '</w:sectPr></w:pPr></w:p>'
+local FINAL = '<w:sectPr>' .. SECT_PG .. '<w:pgNumType w:start="1"/></w:sectPr>'
+
+local function write_file(env, text)
+  local path = os.getenv(env)
+  if not path or path == "" then return end
+  local fh = assert(io.open(path, "w"))
+  fh:write(text)
+  fh:close()
+end
 
 -- ---------------------------------------------------------------------------
 -- the body
@@ -252,6 +272,8 @@ local function finish(doc)
   body:insert(xe.raw(signature(meta) .. SECTION_END .. document_head(meta, need(meta, "brief_title"))))
   body:extend(pandoc.Blocks(brief_out):walk({ Inlines = xe.inlines }))
   body:insert(xe.raw(signature(meta)))
+  write_file("FORMBOOK_FOOTERS", FOOTER_ID .. "\t" .. FOOTER_P .. "\n")
+  write_file("FORMBOOK_FINAL", FINAL)
   -- The frontmatter was consumed above; pandoc would otherwise write its title and date at the top of the document.
   return pandoc.Pandoc(body, pandoc.Meta({}))
 end

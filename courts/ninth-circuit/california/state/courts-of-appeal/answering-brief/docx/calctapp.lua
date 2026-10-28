@@ -573,8 +573,13 @@ function Pandoc(doc)
   for _, n in ipairs(needles) do nl[#nl + 1] = table.concat({ n.id, n.kind, n.needle, n.fallback }, "\t") end
   nl[#nl + 1] = "#section\tS:cover\tdecimal\t"
   write_file("FORMBOOK_NEEDLES", table.concat(nl, "\n") .. "\n")
-  -- the one section: reference.xml's (the centered page-number footer, none on the cover page)
-  write_file("FORMBOOK_FINAL", '<w:sectPr><w:footerReference w:type="default" r:id="rIdCalctappFooter"/>'
+  -- the one section: the page and footnotes of reference.xml's, the centered page-number footer (none on the cover
+  -- page, titlePg), which fb render adds (FORMBOOK_FOOTERS): a sectPr naming the reference document's own footer id
+  -- can dangle, as pandoc may renumber it (fb-595.64, fb-595.70)
+  write_file("FORMBOOK_FOOTERS", "rIdCalctappPage\t" .. '<w:p><w:pPr><w:jc w:val="center"/></w:pPr>'
+    .. '<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r>'
+    .. '<w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r></w:p>\n')
+  write_file("FORMBOOK_FINAL", '<w:sectPr><w:footerReference w:type="default" r:id="rIdCalctappPage"/>'
     .. '<w:footnotePr><w:numRestart w:val="continuous"/></w:footnotePr><w:pgSz w:w="12240" w:h="15840"/>'
     .. '<w:pgMar w:top="1580" w:right="2160" w:bottom="1440" w:left="2160" w:header="720" w:footer="720" w:gutter="0"/>'
     .. "<w:titlePg/></w:sectPr>")
