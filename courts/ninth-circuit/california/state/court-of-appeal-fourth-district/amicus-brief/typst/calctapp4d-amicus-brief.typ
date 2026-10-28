@@ -11,7 +11,7 @@
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
 // ---------------------------------------------------------------------------
 
-#let font-family = "EB Garamond"          // Rule 8.74(b)(1): proportionally spaced serif. Vendored in /fonts.
+#let font-family = ("Times New Roman", "Liberation Serif")          // CRC 8.204(b)(2) allows any conventional font (Century Schoolbook only preferred, 8.74(b)(1)); the exemplar is Times New Roman, the house face (docs/FONTS.md rule 6; fb-9fyu)
 #let type-size = 13pt                      // Rule 8.204(b)(4), 8.74(b)(1): 13-point, footnotes included.
 #let body-leading = 0.65em                 // Rule 8.74(b)(2): lines 1.5 spaced. Measured on the render (README.md).
 #let single-leading = 0.12em               // headings, block quotations, footnotes, TOC and TOA: single spaced.

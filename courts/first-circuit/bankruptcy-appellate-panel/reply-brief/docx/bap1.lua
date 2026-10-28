@@ -15,7 +15,7 @@
 -- Word may paginate slightly differently from the LibreOffice PDF the page numbers come from (docs/DOCX.md).
 
 local KIND = "reply"   -- "opening" | "answering" | "reply"  (set per doc-type folder)
-local FONT_NAME, FONT_SIZE = "Liberation Serif", 14   -- typst: font-family (its first face), type-size
+local FONT_NAME, FONT_SIZE = "Times New Roman", 14   -- typst: font-family (its first face), type-size
 
 local KINDS = {
   opening = { title = "BRIEF FOR APPELLANT", limit = 13000, cite = "Fed. R. Bankr. P. 8015(a)(7)(A)",

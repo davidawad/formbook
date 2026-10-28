@@ -5,8 +5,9 @@
 #import "@preview/cmarker:0.1.10"
 
 // ---- MRAP 32(a): typography and margins ---------------------------------------------------------
-// No typeface is named by the rule; Liberation Serif (metric twin of Times New Roman) per docs/FONTS.md.
-#let face = "Liberation Serif"
+// No typeface is named by the rule (MISS-FORM-005); the exemplar is Times New Roman, so Times New Roman with its metric
+// twin Liberation Serif as fallback (docs/FONTS.md rules 3 and 6; fb-9fyu).
+#let face = ("Times New Roman", "Liberation Serif")
 #let body-size = 12pt // MRAP 32(a): body text at least 12-point (MISS-FORM-002)
 #let note-size = 11pt // MRAP 32(a): footnotes at least 11-point (MISS-FORM-002)
 #let margin-left = 1.5in // MRAP 32(a): 1 1/2 in left (MISS-FORM-003)

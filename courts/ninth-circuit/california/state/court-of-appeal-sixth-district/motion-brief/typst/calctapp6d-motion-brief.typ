@@ -5,7 +5,7 @@
 #import "/lib/typst/xdoc.typ": xdoc, split-frontmatter
 
 // CALCTAPP6D-FORM-002 (CRC 8.74(b)(1)): a proportionally spaced serif face. Vendored in /fonts.
-#let font-family = "EB Garamond"
+#let font-family = ("Times New Roman", "Liberation Serif") // CRC 8.204(b)(2) allows any conventional font (Century Schoolbook only preferred, 8.74(b)(1)); the exemplar is Times New Roman, the house face (docs/FONTS.md rule 6; fb-9fyu)
 
 // A motion sets no table of authorities: the California `authorities:` map (keys the body's `toa:` links name) is
 // not the model's list of groups, and is left out (lib/latex/xdoc.lua and lib/docx/xdoc.lua read no list from it).

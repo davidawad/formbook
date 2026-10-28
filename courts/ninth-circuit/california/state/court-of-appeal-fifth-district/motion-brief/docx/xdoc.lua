@@ -168,10 +168,4 @@ return require("docx.xdoc")({
       ["above"] = 18.2,
     },
   },
-  ["face_advances"] = {
-    ["digit"] = 0.48,
-    ["comma"] = 0.23,
-    ["space"] = 0.2,
-    ["hyphen"] = 0.274,
-  },
 })

@@ -1,2 +1,2 @@
 PASS
-7a70fd3ecdb370ff67de56ec6bf2c3be6432c48b46c49962d9dcfbbc8085ade2  usage/OUTPUT-motion-brief.latex.pdf
+6dee62d2a268ee970b3990a1b4e7aed6e10088a845cfc6137de2f3c79946126c  usage/OUTPUT-motion-brief.latex.pdf

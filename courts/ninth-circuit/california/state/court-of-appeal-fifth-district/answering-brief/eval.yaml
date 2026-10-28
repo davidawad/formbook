@@ -6,5 +6,7 @@ font:
 # on a line that carries a footnote mark (the mark's width, "Word's footnote area" in docs/open-items/fb-595.54.82.md),
 # so its lines and pages drift from typst's; the latex engine is not delivered (EB Garamond's boxed regular T opens a
 # paragraph on a line of its own, lib/latex/xdoc.sty \xd@glyph in vertical mode).
+# fb-9fyu (2026-10-28): the face is now Times New Roman (latex newtx), docs/FONTS.md rule 6; the EB Garamond notes above
+# describe the earlier face.
 params:
   cross_engine: report

@@ -6,7 +6,7 @@
 size: 13                  # CALCTAPP5D-FORM-003: not smaller than 13 point, footnotes included
 pitch:
   body: 25.35             # CALCTAPP5D-FORM-005: one-and-a-half spaced (1.5 x the single line)
-  single: 16.9            # headings, footnotes, quotations, cover, signature: single (1.3 x 13 pt, EB Garamond's line)
+  single: 16.9            # headings, footnotes, quotations, cover, signature: single (1.3 x 13 pt)
 margin: {top: 72, bottom: 72, left: 108, right: 108}   # CALCTAPP5D-FORM-006: 1-1/2 in left and right, 1 in top and bottom
 indent: 36
 page_number: {align: center, from: 2}   # CALCTAPP5D-FORM-007: the cover is page 1, its number suppressed

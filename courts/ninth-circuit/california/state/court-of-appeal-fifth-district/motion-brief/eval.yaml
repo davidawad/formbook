@@ -4,6 +4,8 @@
 # the committed latex/ is the earlier generation (plain ebgaramond, narrower than the vendored face); regenerated at
 # the model's EB Garamond, a paragraph that opens with the boxed regular T sets the T on a line of its own (p2 line
 # 10), and fb check's pdflatex calibration does not know `\usepackage[lining,tabular]{ebgaramond}` (DEF-FORM-003).
+# fb-9fyu (2026-10-28): the face is now Times New Roman (latex newtx), docs/FONTS.md rule 6; the EB Garamond notes above
+# describe the earlier face.
 params:
   cross_engine: gate
   cross_engine_latex: report
