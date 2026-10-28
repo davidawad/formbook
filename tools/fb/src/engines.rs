@@ -64,7 +64,21 @@ fn pandoc(court: &Path, args: &[String], meta: Option<&Path>) -> Res<()> {
     if let Some(m) = meta {
         cmd.env("FORMBOOK_META", m);
     }
-    let st = cmd
+    // Pandoc resolves image targets from its resource path. Include the sample's
+    // directory so outside samples staged by fb render resolve beside the markdown.
+    let resource_dir = args
+        .iter()
+        .map(Path::new)
+        .find(|p| p.extension().is_some_and(|ext| ext == "md"))
+        .map(|p| {
+            if p.is_absolute() {
+                p.to_path_buf()
+            } else {
+                court.join(p)
+            }
+        })
+        .and_then(|p| p.parent().map(Path::to_path_buf));
+    let cmd = cmd
         .current_dir(court)
         // a folder on the shared document model reads headings as typst does (docxref.rs MODEL_FROM)
         .args([
@@ -75,12 +89,55 @@ fn pandoc(court: &Path, args: &[String], meta: Option<&Path>) -> Res<()> {
                 "markdown+smart"
             },
         ])
-        .args(args)
+        .args(args);
+    if let Some(dir) = resource_dir {
+        cmd.arg(format!("--resource-path={}", dir.display()));
+    }
+    let st = cmd
         .status()
         .map_err(|e| fail(2, format!("fb render: cannot run pandoc: {e}")))?;
     st.success()
         .then_some(())
         .ok_or_else(|| fail(1, "fb render: pandoc failed"))
+}
+
+/// Copy local markdown image targets beside the generated LaTeX file, where pdflatex
+/// resolves them. Pandoc's resource path is only used while parsing markdown.
+fn copy_latex_images(court: &Path, sample: &str, work: &Path) -> Res<()> {
+    let sample = Path::new(sample);
+    let sample = if sample.is_absolute() {
+        sample.to_path_buf()
+    } else {
+        court.join(sample)
+    };
+    let source_dir = sample.parent().unwrap_or(court);
+    let markdown = std::fs::read_to_string(&sample)
+        .map_err(|e| fail(2, format!("fb render: {}: {e}", sample.display())))?;
+    for tail in markdown.split("![").skip(1) {
+        let Some((_, after_alt)) = tail.split_once("](") else {
+            continue;
+        };
+        let target = after_alt.split([')', ' ', '\t', '\n']).next().unwrap_or("");
+        if target.is_empty()
+            || target.starts_with('/')
+            || target.contains("://")
+            || target.starts_with('#')
+        {
+            continue;
+        }
+        let source = source_dir.join(target);
+        if !source.is_file() {
+            continue;
+        }
+        let dest = work.join(target);
+        if let Some(parent) = dest.parent() {
+            std::fs::create_dir_all(parent)
+                .map_err(|e| fail(2, format!("fb render: {}: {e}", parent.display())))?;
+        }
+        std::fs::copy(&source, &dest)
+            .map_err(|e| fail(2, format!("fb render: {}: {e}", dest.display())))?;
+    }
+    Ok(())
 }
 
 /// Render `sample` (relative to `court`) with the court's LaTeX template to `out`.
@@ -126,6 +183,7 @@ pub fn latex(root: &Path, court: &Path, sample: &str, out: &Path) -> Res<()> {
     args.extend([sample.to_string(), "-o".into(), tex.display().to_string()]);
     crate::docxpass::write_meta(&court.join(sample), work.path())?;
     pandoc(court, &args, Some(&work.path().join("meta.json")))?;
+    copy_latex_images(court, sample, work.path())?;
     let src = std::fs::read_to_string(&tex)
         .map_err(|e| fail(2, format!("fb render: {}: {e}", tex.display())))?;
     // shared packages (lib/latex/*.sty) go into the .tex itself: it must compile alone (sharedlib.rs)
@@ -251,6 +309,22 @@ fn stock_check(root: &Path, tex: &Path, src: &str, pdflatex: &Path) -> Res<()> {
     let dir = TempDir::new("stock-tex")?;
     std::fs::copy(tex, dir.path().join("doc.tex"))
         .map_err(|e| fail(2, format!("fb render: stock pdflatex check: {e}")))?;
+    // A markdown image is a normal LaTeX companion resource. Copy only media
+    // beside doc.tex so the interop check remains independent of the repository.
+    if let Some(work) = tex.parent() {
+        for entry in std::fs::read_dir(work).into_iter().flatten().flatten() {
+            let path = entry.path();
+            if path.is_file()
+                && path.extension().is_some_and(|ext| {
+                    ["png", "jpg", "jpeg", "pdf"]
+                        .iter()
+                        .any(|x| ext.eq_ignore_ascii_case(x))
+                })
+            {
+                let _ = std::fs::copy(&path, dir.path().join(entry.file_name()));
+            }
+        }
+    }
     let mut cmd = Command::new(pdflatex);
     cmd.args(PDFLATEX_ARGS).current_dir(dir.path());
     for v in LOCAL_PATH_VARS {
@@ -315,11 +389,19 @@ pub fn docx(court: &Path, sample: &str, out_pdf: &Path) -> Res<()> {
         }
         crate::docxdedupe::package(&temp_docx, work.path())?;
     } else if d.join("reference.docx").is_file() {
+        let sample_path = Path::new(sample);
+        let sample_path = if sample_path.is_absolute() {
+            sample_path.to_path_buf()
+        } else {
+            court.join(sample_path)
+        };
+        let resource_path = sample_path.parent().unwrap_or(court);
         let mut args = vec![
             "--to".to_string(),
             "docx".into(),
             format!("--from={}", crate::docxref::pandoc_from(&d)?),
             format!("--reference-doc={}", d.join("reference.docx").display()),
+            format!("--resource-path={}", resource_path.display()),
         ];
         args.extend(lua_filters(&d));
         crate::docxpass::render(court, &args[2..], sample, &temp_docx, work.path())?;

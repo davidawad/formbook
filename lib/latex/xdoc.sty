@@ -8,6 +8,7 @@
 %   \xd@apages{<k>}       authority k's pages, in order, without repeats, joined by ", " ("--" when none).
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{xdoc}[2026/10/22 shared document model: page bookkeeping]
+\RequirePackage{graphicx}
 
 \newcommand\xd@hmark[1]{\protected@write\@auxout{}{\string\xd@hat{#1}{\thepage}}}
 \newcommand\xd@hat[2]{\expandafter\gdef\csname xd@h@#1\endcsname{#2}}

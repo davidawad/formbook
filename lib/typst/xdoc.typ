@@ -25,6 +25,21 @@
 #import "@preview/cmarker:0.1.10"
 #import "xengine.typ": xengine, edges
 
+/// Resolve relative markdown images beside the sample, not beside cmarker's package.
+#let markdown-scope() = {
+  let sample = sys.inputs.at("sample", default: "")
+  let parts = sample.split("/")
+  let dir = parts.slice(0, calc.max(0, parts.len() - 1)).join("/")
+  (image: (source, ..args) => {
+    let source = str(source)
+    if source.starts-with("/") or source.match(regex("^[A-Za-z][A-Za-z0-9+.-]*:")) != none {
+      image(source, ..args)
+    } else {
+      image("/" + dir + "/" + source, ..args)
+    }
+  })
+}
+
 /// Split "---\nyaml\n---\nbody" into (meta, body).
 #let split-frontmatter(src) = {
   let m = src.match(regex("^---\r?\n([\\s\\S]*?)\r?\n---[ \t]*\r?\n"))
@@ -41,11 +56,11 @@
 #let md(s) = {
   // a value that reads as a thematic break ("______", a signature line) is its characters
   if str(s).match(regex("^\\s*(?:(?:_\\s*){3,}|(?:-\\s*){3,}|(?:\\*\\s*){3,})$")) != none {
-    return cmarker.render(str(s).replace(regex("[-_*]"), m => "\\" + m.text), raw-typst: false, smart-punctuation: true)
+    return cmarker.render(str(s).replace(regex("[-_*]"), m => "\\" + m.text), raw-typst: false, smart-punctuation: true, scope: markdown-scope())
   }
   let s = str(s).replace(regex("^(\\s*)([-*+>#])(\\s|$)"), m => m.captures.at(0) + "\\" + m.captures.at(1) + m.captures.at(2))
     .replace(regex("^(\\s*)(\\d+)([.)])(\\s|$)"), m => m.captures.at(0) + m.captures.at(1) + "\\" + m.captures.at(2) + m.captures.at(3))
-  cmarker.render(apostrophes(s), raw-typst: false, smart-punctuation: true)
+  cmarker.render(apostrophes(s), raw-typst: false, smart-punctuation: true, scope: markdown-scope())
 }
 #let pt(x) = if x == none { 0pt } else { x * 1pt }
 
@@ -780,7 +795,7 @@
     show enum: it => block(above: qgap, below: qgap, list-items(spec, it, 0))
     pad(left: pt(q.at("left", default: spec.indent)), right: pt(q.at("right", default: spec.indent)), it.body)
   })
-  let rendered = cmarker.render(apostrophes(src), raw-typst: false, smart-punctuation: true, h1-level: 1)
+  let rendered = cmarker.render(apostrophes(src), raw-typst: false, smart-punctuation: true, h1-level: 1, scope: markdown-scope())
   with-marks(meta, if spec.at("footnote", default: (:)).at("widows", default: false) { rendered } else { free-notes(rendered) })
 }
 

@@ -78,7 +78,7 @@ fn absolute(root: &Path, p: &str) -> PathBuf {
 /// Stage an outside sample under the repo root so Typst can read it without changing its root
 /// (templates use root-relative /lib imports). Only the markdown and its relative image targets
 /// are copied; paths in the markdown remain unchanged.
-fn staged_sample(root: &Path, sample: &Path) -> Res<Option<(PathBuf, PathBuf)>> {
+fn staged_sample(root: &Path, sample: &Path) -> Res<Option<(PathBuf, PathBuf, PathBuf)>> {
     let sample = if sample.is_absolute() {
         sample.to_path_buf()
     } else {
@@ -101,7 +101,7 @@ fn staged_sample(root: &Path, sample: &Path) -> Res<Option<(PathBuf, PathBuf)>> 
         .file_name()
         .ok_or_else(|| fail(2, "fb render: sample has no file name"))?;
     let dest = dir.join(name);
-    let mut typst_text = text.clone();
+    let mut pandoc_text = text.clone();
     // Markdown inline images: ![alt](relative/path). Ignore URLs, anchors and absolute paths.
     for tail in text.split("![").skip(1) {
         let Some((_, after_alt)) = tail.split_once("](") else {
@@ -135,22 +135,34 @@ fn staged_sample(root: &Path, sample: &Path) -> Res<Option<(PathBuf, PathBuf)>> 
         }
         std::fs::copy(&src, &to)
             .map_err(|e| fail(2, format!("fb render: {}: {e}", to.display())))?;
-        // cmarker evaluates relative image paths from its package directory, so walk from
-        // the vendored package back to the repo root and then into the ignored staging area.
-        typst_text = typst_text.replace(
-            &format!("]({target})"),
-            &format!("](../../../../../out/samples/{key}/{target})"),
-        );
+        if rel
+            .extension()
+            .is_some_and(|ext| ext.eq_ignore_ascii_case("svg"))
+        {
+            let png = to.with_extension("png");
+            let status = Command::new("magick")
+                .arg(&to)
+                .arg(&png)
+                .status()
+                .map_err(|e| fail(2, format!("fb render: cannot run magick: {e}")))?;
+            if !status.success() {
+                return Err(fail(
+                    1,
+                    format!("fb render: could not convert {} to PNG", to.display()),
+                ));
+            }
+            pandoc_text = pandoc_text.replace(
+                &format!("]({target})"),
+                &format!("]({})", rel.with_extension("png").display()),
+            );
+        }
     }
     std::fs::write(&dest, text.as_bytes())
         .map_err(|e| fail(2, format!("fb render: {}: {e}", dest.display())))?;
-    std::fs::write(dir.join("typst.md"), typst_text.as_bytes()).map_err(|e| {
-        fail(
-            2,
-            format!("fb render: {}: {e}", dir.join("typst.md").display()),
-        )
-    })?;
-    Ok(Some((dir, dest)))
+    let pandoc_dest = dir.join("pandoc.md");
+    std::fs::write(&pandoc_dest, pandoc_text.as_bytes())
+        .map_err(|e| fail(2, format!("fb render: {}: {e}", pandoc_dest.display())))?;
+    Ok(Some((dir, dest, pandoc_dest)))
 }
 
 /// Compile with typst; with `Warnings::Deny`, any typst warning on stderr is a failure.
@@ -240,11 +252,11 @@ pub fn render_one(
     let staged = staged_sample(root, &sample_arg)?;
     let sample_arg = staged
         .as_ref()
-        .map(|(d, p)| {
+        .map(|(_, p, pandoc)| {
             if engine == "typst" {
-                d.join("typst.md")
-            } else {
                 p.clone()
+            } else {
+                pandoc.clone()
             }
         })
         .unwrap_or(sample_arg);
@@ -309,6 +321,70 @@ pub fn latex_main(args: &[String]) -> Res<std::process::ExitCode> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn outside_sample_stages_relative_image_for_all_engines() {
+        let root = repo_root().unwrap();
+        let tmp = std::env::temp_dir().join(format!("fb-sample-assets-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&tmp);
+        std::fs::create_dir_all(&tmp).unwrap();
+        let sample = tmp.join("brief.md");
+        let image = tmp.join("mark.svg");
+        std::fs::write(&sample, "![mark](mark.svg)\n").unwrap();
+        std::fs::write(
+            &image,
+            "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1\" height=\"1\"/>",
+        )
+        .unwrap();
+        let staged = staged_sample(&root, &sample).unwrap().unwrap();
+        assert_eq!(
+            std::fs::read(staged.0.join("mark.svg")).unwrap(),
+            std::fs::read(image).unwrap()
+        );
+        assert_eq!(std::fs::read(staged.1).unwrap(), b"![mark](mark.svg)\n");
+        let _ = std::fs::remove_dir_all(&tmp);
+    }
+
+    #[test]
+    fn synthetic_outside_sample_renders_without_and_with_relative_svg_on_every_engine() {
+        let Ok(root) = repo_root() else { return };
+        let court =
+            root.join("courts/dc-circuit/district-of-columbia/state/court-of-appeals/amicus-brief");
+        let base = std::env::var_os("TMPDIR")
+            .map(PathBuf::from)
+            .unwrap_or_else(std::env::temp_dir);
+        let tmp = base.join(format!("fb-outside-render-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&tmp);
+        std::fs::create_dir_all(&tmp).unwrap();
+        let front = "---\ncase_number: Synthetic-1\ncaption:\n  - names: [Synthetic Petitioner]\n    designation: Appellant,\n  - names: [Synthetic Respondent]\n    designation: Appellee.\nbrief_title: Synthetic Test Brief\ncounsel: []\nfront_matter: []\nauthorities: []\nsignature:\n  signers: []\n---\n# Argument\n\nSynthetic test content.\n";
+        let image_sample = tmp.join("with-image.md");
+        let plain_sample = tmp.join("plain.md");
+        std::fs::write(&plain_sample, front).unwrap();
+        std::fs::write(&image_sample, format!("{front}\n![mark](mark.svg)\n")).unwrap();
+        std::fs::write(tmp.join("mark.svg"), "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\"><circle cx=\"10\" cy=\"10\" r=\"8\"/></svg>").unwrap();
+        let in_repo = court.join("usage/INPUT-amicus-brief.md");
+        assert!(staged_sample(&root, &in_repo).unwrap().is_none());
+        for engine in ["typst", "latex", "docx"] {
+            for sample in [&plain_sample, &image_sample] {
+                let suffix = if engine == "docx" { "docx.pdf" } else { "pdf" };
+                let out = tmp.join(format!(
+                    "{}-{engine}.{suffix}",
+                    sample.file_stem().unwrap().to_string_lossy()
+                ));
+                render_one(&root, engine, &court, sample, &out, Warnings::Allow).unwrap();
+                assert!(out.is_file(), "{engine} did not write {}", out.display());
+                if engine == "docx" && sample == &image_sample {
+                    let listing = Command::new("unzip")
+                        .args(["-l", out.with_extension("").as_os_str().to_str().unwrap()])
+                        .output()
+                        .unwrap();
+                    assert!(listing.status.success());
+                    assert!(String::from_utf8_lossy(&listing.stdout).contains("word/media/"));
+                }
+            }
+        }
+        let _ = std::fs::remove_dir_all(&tmp);
+    }
 
     fn v(a: &[&str]) -> Vec<String> {
         a.iter().map(|s| s.to_string()).collect()

@@ -440,7 +440,7 @@ pub fn main(args: &[String]) -> Res<std::process::ExitCode> {
 
 /// The reader of a folder on the shared document model (a generated `xdoc.lua`): pandoc's markdown as CommonMark reads
 /// a heading (typst's cmarker): one may follow a paragraph line without a blank line.
-pub const MODEL_FROM: &str = "markdown+smart-blank_before_header";
+pub const MODEL_FROM: &str = "markdown+smart-blank_before_header-implicit_figures";
 
 /// The reader of every pandoc pass for the court's docx folder `d` (`pandoc-from`, default `markdown+smart`, or
 /// MODEL_FROM for a folder on the shared document model).
