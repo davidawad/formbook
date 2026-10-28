@@ -5,7 +5,8 @@
 #
 # Not in this file on purpose: pleading-paper line numbers, 14 pt rules, cover contents, section order, certificates, TOC/TOA
 # contents (DEF-TOC-001 checks only the layout of a table that is there, and DEF-COVER-001 only how many pages come before
-# the first page number, neither of which needs court data).
+# the first page number, neither of which needs court data; DEF-COVER-002 compares page 1 with the same-id FILED-EXAMPLE,
+# so its data is the exemplar).
 # Those need court data; they belong in a court-level checks.yaml (see courts/ninth-circuit/court-of-appeals/).
 
 template: typst/main.typ
@@ -27,6 +28,7 @@ params:
   eps_pt: 3.0                        # horizontal tolerance: glyph advance boxes of text set exactly at the margin overhang it by 1-3 pt
   # page_limit: 30                   # unset on purpose: no rules.md states its limit in machine-readable form
   # cover_pages: 1                   # DEF-COVER-001: unnumbered pages before the first page number; set in eval.yaml for a longer declared cover
+  # cover_structure: gate            # DEF-COVER-002: `gate` or `report`; unset, folders in data/cover-structure-baseline.txt report, all others gate
 
 checks:
   - id: DEF-CONT-001
@@ -100,6 +102,19 @@ checks:
     name: the cover is exactly one page (the pages before the first page number), and the first page after it prints the expected number
     method: cover_pages
     expect: "params.cover_pages (1) unnumbered pages, then 1, i or C-1 (or the physical page number, the cover counted); a document numbered from page 1 prints 1 there"
+    fix: {anchor: "set page("}
+
+  # ------------------------------------------------------------------ Gate 2: cover structure (fb-595.78)
+  # Page 1 of each OUTPUT against page 1 of its same-id FILED-EXAMPLE: segment order, alignment, horizontal rules and
+  # a date line (tools/fb/src/check/coverstruct.rs; `fb cover-structure` runs it on any pair). A folder listed in
+  # data/cover-structure-baseline.txt (failing when the check came in) prints REPORTED until its cover is fixed and
+  # its line removed; params.cover_structure (`gate` or `report`) in eval.yaml overrides the list.
+  - id: DEF-COVER-002
+    gate: 2
+    kind: C
+    name: page 1 has the structure of page 1 of the same-id FILED-EXAMPLE (order, alignment, rules, date line)
+    method: cover_structure
+    expect: "no segment out of order or aligned otherwise, the same horizontal rules between the same segments, a date where the exemplar has a date line (passes with no same-id FILED-EXAMPLE)"
     fix: {anchor: "set page("}
 
 # Reported as SKIP by `fb check` (no rule data to test against). DEF-RENDER-001, render succeeds with no typst warnings,

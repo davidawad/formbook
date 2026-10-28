@@ -13,7 +13,7 @@
 mod align;
 mod breaks;
 pub mod calibrate;
-mod content;
+pub(crate) mod content;
 mod geom;
 pub mod xbaseline;
 pub mod xengine;

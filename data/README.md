@@ -8,3 +8,4 @@
 - `circuits.json` circuit-to-state/territory map (28 U.S.C. 41; Northern Mariana Islands via 48 U.S.C. 1821).
 - `index.json` GENERATED court tree index: alias to folder path. Do not edit. `tools/gen_tree.sh` normalizes this index and refreshes court folders while preserving manual fields in each `court.json`.
 - `priority.json` the order `just claim --next` claims courts in (a priority list, then every other court in index order), and the `reference` courts it never auto-claims.
+- `cover-structure-baseline.txt` the doc folders and engines whose page 1 differed in structure from the same-id FILED-EXAMPLE when DEF-COVER-002 came in (fb-595.78): they print the check as REPORTED until fixed. Lines are only ever deleted.

@@ -3,6 +3,7 @@
 mod bridge;
 mod calibtex;
 pub mod coverpages;
+pub mod coverstruct;
 mod declared;
 mod docxgate;
 #[cfg(test)]
@@ -464,6 +465,16 @@ fn run_checks(c: &Ctx, s: &Sample, gates: &str, t: &mut Tally) -> Res<()> {
         }
         if xengine::is_method(&r.method) && !xengine::gated(c)? {
             out(&xengine::reported_text(&r.id, &r.name, &meas, &detail));
+            continue;
+        }
+        if r.method == "cover_structure" && !coverstruct::gated(c)? {
+            out(&xengine::reported_why(
+                &r.id,
+                &r.name,
+                &meas,
+                &detail,
+                "listed in data/cover-structure-baseline.txt, or params.cover_structure is `report`",
+            ));
             continue;
         }
         let target = format!("{}/{}", c.doc, c.template);

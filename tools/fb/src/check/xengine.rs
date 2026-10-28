@@ -94,13 +94,24 @@ pub fn evaluate(c: &Ctx, s: &Sample, method: &str) -> Res<Option<Verdict>> {
 
 /// The REPORTED block of a folder that does not gate the check: the verdict, not counted as a failure.
 pub fn reported_text(id: &str, name: &str, meas: &str, detail: &str) -> String {
+    reported_why(
+        id,
+        name,
+        meas,
+        detail,
+        "params.cross_engine is not `gate` for this folder",
+    )
+}
+
+/// The REPORTED block with the reason the check is not gated (`why`).
+pub fn reported_why(id: &str, name: &str, meas: &str, detail: &str, why: &str) -> String {
     let det: String = detail
         .split('\n')
         .filter(|l| !l.is_empty())
         .map(|l| format!("          - {l}\n"))
         .collect();
     format!(
-        "  REPORTED {} {name}\n          measured: {meas}\n          (params.cross_engine is not `gate` for this folder: reported, not counted; docs/EVAL-LOOP.md)\n{det}",
+        "  REPORTED {} {name}\n          measured: {meas}\n          ({why}: reported, not counted; docs/EVAL-LOOP.md)\n{det}",
         super::rows::pad14(id)
     )
 }

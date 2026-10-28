@@ -126,6 +126,14 @@ pub fn evaluate(c: &Ctx, s: &Sample, method: &str) -> Res<Option<Verdict>> {
                 found.iter().take(8).cloned().collect::<Vec<_>>().join("\n"),
             )
         }
+        "cover_structure" => {
+            let doc = crate::layout::Doc::open(std::path::Path::new(&c.doc))?;
+            let (pass, meas, detail) = super::coverstruct::judge(
+                Some(doc.filed(&s.sid).as_path()),
+                std::path::Path::new(&s.pdf),
+            )?;
+            result(pass, meas, detail)
+        }
         "page_limit" => {
             let limit = super::sh::cfg(&c.env, &c.checks, ".params.page_limit")?;
             let pages: usize = s.npages.parse().unwrap_or(0);

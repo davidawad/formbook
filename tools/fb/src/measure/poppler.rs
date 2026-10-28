@@ -60,12 +60,20 @@ pub fn run(cmd: &str, args: &[&str]) -> Res<String> {
 }
 
 pub fn read(pdf: &Path) -> Res<Raw> {
+    read_upto(pdf, None)
+}
+
+/// `read`, limited to pages 1..=`last` when it is given.
+pub fn read_upto(pdf: &Path, last: Option<usize>) -> Res<Raw> {
     let p = pdf.to_str().ok_or_else(|| fail(2, "fb: non-UTF-8 path"))?;
-    let mut pages = parse_bbox(&run("pdftotext", &["-bbox-layout", p, "-"])?)?;
-    let runs = parse_html(&run(
-        "pdftohtml",
-        &["-xml", "-i", "-nodrm", "-zoom", "1", "-stdout", "-q", p],
-    )?)?;
+    let l = last.map(|n| n.to_string());
+    let range: Vec<&str> = l.as_deref().map_or(vec![], |l| vec!["-f", "1", "-l", l]);
+    let mut args = range.clone();
+    args.extend(["-bbox-layout", p, "-"]);
+    let mut pages = parse_bbox(&run("pdftotext", &args)?)?;
+    let mut args = range;
+    args.extend(["-xml", "-i", "-nodrm", "-zoom", "1", "-stdout", "-q", p]);
+    let runs = parse_html(&run("pdftohtml", &args)?)?;
     for (n, rs) in runs {
         if let Some(pg) = pages.get_mut(n.wrapping_sub(1)) {
             pg.runs = rs;

@@ -193,6 +193,20 @@ pub fn measure(pdf: &Path, regions: &[MaskRegion]) -> Res<Measured> {
     })
 }
 
+/// The first `n` pages of `pdf` measured (no cache), with its mask file regions: page-level checks that need
+/// only the cover (DEF-COVER-002) do not pay for a whole brief.
+pub fn measure_first(pdf: &Path, n: usize) -> Res<Measured> {
+    let regions = mask::regions_for(pdf)?;
+    let raw = poppler::read_upto(pdf, Some(n))?;
+    Ok(Measured {
+        schema: SCHEMA,
+        source: pdf.display().to_string(),
+        sha256: sha256_file(pdf)?,
+        fonts: raw.fonts,
+        pages: build::pages(raw.pages, &regions),
+    })
+}
+
 /// Measured form of `p`: a measured.json is read as is; a PDF is measured, through the cache in
 /// `$root/out/measure/<sha256>-<schema>-<masks and fb build>.json`.
 pub fn load(p: &Path) -> Res<Measured> {
