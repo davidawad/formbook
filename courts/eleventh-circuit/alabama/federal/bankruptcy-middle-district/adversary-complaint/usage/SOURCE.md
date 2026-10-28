@@ -36,3 +36,19 @@ This text-layer Times New Roman filing replaces the scanned `FILED-EXAMPLE-adver
 - CourtListener web search page (`/?q=...&court=almb&type=r`): returned results once (adversary and Alabama dockets) and then empty responses.
 - Web search for `gov.uscourts.almb`, "adversary complaint", "motion for relief from stay", "motion to dismiss", "objection to claim" with `almb`: no RECAP complaint or motion PDFs. Results were the court's hearing calendars (almb.uscourts.gov), govinfo opinions, and Leagle summaries.
 - The court's own site (`almb.uscourts.gov`) hosts calendars, the attorney adversary guide, and local rules, but no filed complaints.
+
+## Second replacement for the audited scanned exemplars (fb-9fyu)
+
+- File: `FILED-EXAMPLE-adversary-complaint-4.pdf` (42 pages)
+- Court: United States Bankruptcy Court, Middle District of Alabama
+- Case: *Jackson Hospital & Clinic, Inc. v. Blue Cross and Blue Shield of Alabama*, Adv. No. 25-03025, in *In re Jackson Hospital & Clinic, Inc., et al.*, Case No. 25-30256, Chapter 11 (jointly administered)
+- Document: Doc. 1, Plaintiff's Original Complaint
+- Filer: Jackson Hospital & Clinic, Inc., debtor, by Chase J. Potter, Joshua L. Shepherd and Anna Olin Richardson (pro hac vice), Iacuone McAllister Potter PLLC
+- Date filed: 2025-12-18 (CM/ECF header "Doc 1 Filed 12/18/25")
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.almb.269993/gov.uscourts.almb.269993.1.0.pdf
+- Date retrieved: 2026-10-28 (PM RECAP staging branch `newbox/fb-9fyu-recap-files`)
+- SHA-256: `04ea914f810cc36671b6b5f8ca30569ab93f4d5012aa5d781a12bd71e8e1ee50`
+- Text layer: yes (`pdftotext` extracts all 42 pages); body is embedded Times New Roman. `pdffonts` also lists an Aptos subset, used only for blank space glyphs (`pdftohtml -xml`: 13 space-only runs).
+- Public filing: CourtListener RECAP copy.
+
+Replacement for `FILED-EXAMPLE-adversary-complaint-3.pdf` and `FILED-EXAMPLE-adversary-complaint.pdf` (fb-9fyu: scanned, OCR text layer). The originals are kept.
