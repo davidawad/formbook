@@ -41,3 +41,16 @@ The Mullen PDF is flagged for Liberation Sans in the font audit and is an OCR/te
 | Date retrieved | 2026-10-17 |
 | Text and fonts | Native text layer (`pdftotext` extracts 1,966 words); embedded Times New Roman regular and italic; Liberation Sans and standard fonts also appear in cover/signature material. |
 | SHA-256 | `36e0ef70eda367e94ff449bd3cbd57a1cbf0e64872e27f91547a6f6f748b67ca` |
+
+## Replacement exemplar (fb-9fyu, RECAP): `FILED-EXAMPLE-motion-brief-3.pdf`
+
+- File: `FILED-EXAMPLE-motion-brief-3.pdf` (6 pages)
+- Case: *In re Mulkerin*, No. 1:24-bk-03264-HWV, Chapter 7 (Doc. 481)
+- Document: Trustee's Brief in Support of Application to Pay Special Counsel's Fee
+- Filer: Chapter 7 trustee, through Steven M. Carr, Ream, Carr, Markey, Woloshin & Hunter, LLP
+- Date filed: 2025-06-27
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.pamb.282280/gov.uscourts.pamb.282280.481.0.pdf
+- Date retrieved: 2026-10-28 (CourtListener RECAP search, staged by the PM)
+- Text layer: yes (`pdftotext` returns 1370 words); Times New Roman embedded for the body (`pdffonts`; `fb fonts audit` class metric-exact, body timesnewroman 0.931)
+- SHA-256: `7c7c3dafe82a0b14ea85a8a26cdaff9ae313d223fa588b9f3d103b266003efb4`
+- Replacement for `FILED-EXAMPLE-motion-brief.pdf` (fb-9fyu: scanned image with an OCR text layer). The old exemplar is kept; no INPUT is transcribed from this one.
