@@ -13,9 +13,11 @@
 //! - a date line: when the exemplar's page 1 has a short line carrying a date, the render's page 1 has a date.
 //!
 //! Fonts, sizes, leading and exact positions are not compared (tier 3; `fb diff` and the overlay show those).
-//! The check passes, saying why, when the sample has no FILED-EXAMPLE, the exemplar's page 1 has no text layer,
-//! or too few of its lines are on our page 1 to be the same page. `fb cover-structure <exemplar.pdf>
-//! <render.pdf>...` runs the same test on any pair.
+//! The exemplar page compared is whichever of its first three our page 1 transcribes best (a filing may lead with a
+//! notice); when none shares enough lines, that is a finding (our cover leaves most of it out, or the INPUT
+//! transcribes another filing). The check passes, saying why, when the sample has no FILED-EXAMPLE or the exemplar
+//! has no text layer.
+//! `fb cover-structure <exemplar.pdf> <render.pdf>...` runs the same test on any pair.
 use crate::measure::{self, Line, Page, Rect, Word};
 use crate::{fail, Res};
 use std::collections::BTreeMap;
@@ -42,8 +44,10 @@ const RULE_MIN_PT: f64 = 72.0;
 const FOOTNOTE_RULE: f64 = 0.45;
 /// Fewer text lines than this on the exemplar's page 1: a scan, nothing to compare.
 const MIN_LINES: usize = 3;
-/// Fewer of the exemplar's segments than this share paired: our page 1 is not the same page.
+/// Fewer of the exemplar's segments than this share paired: our page 1 is not the same page (a finding).
 const MIN_PAIRED: f64 = 0.4;
+/// The exemplar pages searched for the one our page 1 transcribes (a filing may lead with a notice or docket sheet).
+const EXEMPLAR_PAGES: usize = 3;
 /// A date line has at most this many words (a date inside a paragraph is content, not a date line).
 const DATE_WORDS: usize = 8;
 /// Order is judged only on pairs this sure (dice), alignment on pairs SURE_ALIGN sure: a paragraph broken
@@ -464,12 +468,13 @@ pub fn compare(ex: &Cover, us: &Cover) -> (bool, String, Vec<String>) {
     let paired = map.iter().filter(|m| m.is_some()).count();
     if (paired as f64) < MIN_PAIRED * ex.segs.len() as f64 {
         return (
-            true,
-            format!(
-                "only {paired}/{} exemplar lines are on our page 1: not the same page, nothing to compare",
+            false,
+            format!("{paired}/{} exemplar lines paired", ex.segs.len()),
+            vec![format!(
+                "page: only {paired} of the exemplar's {} cover lines are on our page 1: our cover leaves most of them \
+                 out, or the INPUT transcribes another filing (or the exemplar's text layer is unreadable)",
                 ex.segs.len()
-            ),
-            vec![],
+            )],
         );
     }
     let mut findings = Vec::new();
@@ -672,9 +677,32 @@ pub fn gated(c: &super::Ctx) -> Res<bool> {
     Ok(gated_by(&param, &parse_baseline(&text), doc, &c.engine))
 }
 
-/// Page 1 of `pdf`, measured with its mask file regions.
-pub fn first_page(pdf: &std::path::Path) -> Res<Option<Cover>> {
-    Ok(measure::measure_first(pdf, 1)?.pages.first().map(Cover::of))
+/// The first `n` pages of `pdf`, measured with its mask file regions.
+pub fn first_pages(pdf: &std::path::Path, n: usize) -> Res<Vec<Cover>> {
+    Ok(measure::measure_first(pdf, n)?
+        .pages
+        .iter()
+        .map(Cover::of)
+        .collect())
+}
+
+/// Of the exemplar's first pages, the one our page 1 transcribes: the most of its lines paired (a filing may lead
+/// with a notice or a docket sheet). Its number (1-based) and cover; None when no page has a text layer.
+pub fn exemplar_cover(pages: Vec<Cover>, us: &Cover) -> Option<(usize, Cover)> {
+    pages
+        .into_iter()
+        .enumerate()
+        .filter(|(_, c)| c.segs.len() >= MIN_LINES)
+        .map(|(k, c)| {
+            let share =
+                pair(&c, us).iter().filter(|m| m.is_some()).count() as f64 / c.segs.len() as f64;
+            (k + 1, c, share)
+        })
+        .fold(None, |best: Option<(usize, Cover, f64)>, x| match best {
+            Some(b) if b.2 >= x.2 => Some(b),
+            _ => Some(x),
+        })
+        .map(|(k, c, _)| (k, c))
 }
 
 /// A difference from the exemplar accepted as one filer's style (tier 3), from `params.cover_structure_accepted` in
@@ -728,21 +756,23 @@ pub fn judge(
             String::new(),
         ));
     };
-    let e = match first_page(ex) {
-        Ok(Some(e)) => e,
-        // poppler cannot read the exemplar's text (a damaged or image-only filing)
-        Ok(None) | Err(_) => {
-            return Ok((
-                true,
-                "exemplar page 1 cannot be read: nothing to compare".into(),
-                String::new(),
-            ))
-        }
-    };
-    let Some(u) = first_page(render)? else {
+    let Some(u) = first_pages(render, 1)?.into_iter().next() else {
         return Ok((false, "the render has no page 1".into(), String::new()));
     };
+    // poppler cannot read a damaged exemplar's text: nothing to compare, as with a scan
+    let pages = first_pages(ex, EXEMPLAR_PAGES).unwrap_or_default();
+    let Some((k, e)) = exemplar_cover(pages, &u) else {
+        return Ok((
+            true,
+            format!("the exemplar's first {EXEMPLAR_PAGES} pages have no text layer: nothing to compare"),
+            String::new(),
+        ));
+    };
     let (_, meas, found) = compare(&e, &u);
+    let meas = match k {
+        1 => meas,
+        k => format!("exemplar page {k} (the cover): {meas}"),
+    };
     let (ok, detail) = verdict(&found, accept);
     let taken = found.len() - found.iter().filter(|f| why(f, accept).is_none()).count();
     let meas = match taken {

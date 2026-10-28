@@ -231,7 +231,7 @@ fn caption_columns_are_segments_of_their_own() {
 }
 
 #[test]
-fn nothing_to_compare_passes_and_says_why() {
+fn nothing_to_compare_passes_and_another_page_fails() {
     let scan = page(vec![line("RECEIVED", 72.0, 72.0)], vec![]);
     let (ok, meas, _) = compare(&Cover::of(&scan), &Cover::of(&cover(72.0, vec![], false)));
     assert!(ok && meas.contains("no text layer"), "{meas}");
@@ -247,8 +247,20 @@ fn nothing_to_compare_passes_and_says_why() {
             .collect(),
         vec![],
     );
-    let (ok, meas, _) = compare(&Cover::of(&other), &Cover::of(&cover(72.0, vec![], false)));
-    assert!(ok && meas.contains("not the same page"), "{meas}");
+    let ours = Cover::of(&cover(72.0, vec![], false));
+    let (ok, _, found) = compare(&Cover::of(&other), &ours);
+    assert!(!ok);
+    assert!(
+        found[0].starts_with("page: only 0 of the exemplar's 10 cover lines are on our page 1"),
+        "{found:?}"
+    );
+    // a filing that leads with a notice: its second page is the cover compared
+    let (k, e) = exemplar_cover(
+        vec![Cover::of(&other), Cover::of(&cover(72.0, vec![], false))],
+        &ours,
+    )
+    .unwrap();
+    assert_eq!((k, compare(&e, &ours).0), (2, true));
     let (ok, meas, _) = judge(None, std::path::Path::new("/nonexistent.pdf"), &[]).unwrap();
     assert!(ok && meas.contains("no same-id FILED-EXAMPLE"), "{meas}");
 }
