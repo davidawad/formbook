@@ -75,6 +75,84 @@ fn absolute(root: &Path, p: &str) -> PathBuf {
     }
 }
 
+/// Stage an outside sample under the repo root so Typst can read it without changing its root
+/// (templates use root-relative /lib imports). Only the markdown and its relative image targets
+/// are copied; paths in the markdown remain unchanged.
+fn staged_sample(root: &Path, sample: &Path) -> Res<Option<(PathBuf, PathBuf)>> {
+    let sample = if sample.is_absolute() {
+        sample.to_path_buf()
+    } else {
+        root.join(sample)
+    };
+    if sample.starts_with(root) {
+        return Ok(None);
+    }
+    let text = std::fs::read_to_string(&sample)
+        .map_err(|e| fail(2, format!("fb render: {}: {e}", sample.display())))?;
+    use sha2::{Digest, Sha256};
+    let mut hash = Sha256::new();
+    hash.update(sample.to_string_lossy().as_bytes());
+    hash.update(&text);
+    let key = format!("{:x}", hash.finalize());
+    let dir = root.join("out/samples").join(&key);
+    std::fs::create_dir_all(&dir)
+        .map_err(|e| fail(2, format!("fb render: {}: {e}", dir.display())))?;
+    let name = sample
+        .file_name()
+        .ok_or_else(|| fail(2, "fb render: sample has no file name"))?;
+    let dest = dir.join(name);
+    let mut typst_text = text.clone();
+    // Markdown inline images: ![alt](relative/path). Ignore URLs, anchors and absolute paths.
+    for tail in text.split("![").skip(1) {
+        let Some((_, after_alt)) = tail.split_once("](") else {
+            continue;
+        };
+        let target = after_alt.split([')', ' ', '\t', '\n']).next().unwrap_or("");
+        if target.is_empty()
+            || target.contains("://")
+            || target.starts_with('/')
+            || target.starts_with('#')
+        {
+            continue;
+        }
+        let src = sample.parent().unwrap_or(Path::new(".")).join(target);
+        if !src.is_file() {
+            continue;
+        }
+        let rel = Path::new(target);
+        if rel.components().any(|c| {
+            matches!(
+                c,
+                std::path::Component::ParentDir | std::path::Component::RootDir
+            )
+        }) {
+            continue;
+        }
+        let to = dir.join(rel);
+        if let Some(parent) = to.parent() {
+            std::fs::create_dir_all(parent)
+                .map_err(|e| fail(2, format!("fb render: {}: {e}", parent.display())))?;
+        }
+        std::fs::copy(&src, &to)
+            .map_err(|e| fail(2, format!("fb render: {}: {e}", to.display())))?;
+        // cmarker evaluates relative image paths from its package directory, so walk from
+        // the vendored package back to the repo root and then into the ignored staging area.
+        typst_text = typst_text.replace(
+            &format!("]({target})"),
+            &format!("](../../../../../out/samples/{key}/{target})"),
+        );
+    }
+    std::fs::write(&dest, text.as_bytes())
+        .map_err(|e| fail(2, format!("fb render: {}: {e}", dest.display())))?;
+    std::fs::write(dir.join("typst.md"), typst_text.as_bytes()).map_err(|e| {
+        fail(
+            2,
+            format!("fb render: {}: {e}", dir.join("typst.md").display()),
+        )
+    })?;
+    Ok(Some((dir, dest)))
+}
+
 /// Compile with typst; with `Warnings::Deny`, any typst warning on stderr is a failure.
 fn typst(root: &Path, court: &Path, sample_rel: &Path, out: &Path, warnings: Warnings) -> Res<()> {
     crate::pin::check_typst(root)?;
@@ -159,6 +237,17 @@ pub fn render_one(
     } else {
         court.join(sample)
     };
+    let staged = staged_sample(root, &sample_arg)?;
+    let sample_arg = staged
+        .as_ref()
+        .map(|(d, p)| {
+            if engine == "typst" {
+                d.join("typst.md")
+            } else {
+                p.clone()
+            }
+        })
+        .unwrap_or(sample_arg);
     let sample_rel = sample_arg.strip_prefix(court).unwrap_or(&sample_arg);
     match engine {
         "latex" => crate::engines::latex(root, court, &sample_rel.to_string_lossy(), out),
@@ -176,6 +265,14 @@ pub fn main(args: &[String]) -> Res<std::process::ExitCode> {
     let sample = Path::new(&o.pos[1]);
     let out = match o.pos.get(2) {
         Some(p) => absolute(&root, p),
+        None if sample.is_absolute() && !sample.starts_with(&root) => {
+            let stem = sample.file_stem().unwrap_or_default().to_string_lossy();
+            if o.engine == "docx" {
+                sample.with_file_name(format!("{stem}.docx.pdf"))
+            } else {
+                sample.with_file_name(format!("{stem}.{}.pdf", o.engine))
+            }
+        }
         None => default_out(&court, sample, &o.engine)?,
     };
     render_one(&root, &o.engine, &court, sample, &out, o.warnings)?;
@@ -196,6 +293,12 @@ pub fn latex_main(args: &[String]) -> Res<std::process::ExitCode> {
     let sample = Path::new(&o.pos[1]);
     let out = match o.pos.get(2) {
         Some(p) => absolute(&root, p),
+        None if sample.is_absolute() && !sample.starts_with(&root) => {
+            sample.with_file_name(format!(
+                "{}.latex.pdf",
+                sample.file_stem().unwrap_or_default().to_string_lossy()
+            ))
+        }
         None => default_out(&court, sample, "latex")?,
     };
     render_one(&root, "latex", &court, sample, &out, Warnings::Allow)?;
