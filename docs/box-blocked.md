@@ -827,3 +827,21 @@ BLOCKED second-circuit/new-york/federal/western-district/motion-brief: no access
 BLOCKED second-circuit/new-york/state/court-of-appeals/answering-brief: no accessible public text-layer answering brief with a vendored or Times-family face found; existing exemplars are Garamond.
 BLOCKED second-circuit/new-york/state/court-of-appeals/petition-for-discretionary-review: public material found was a scanned/OCR party filing; no alternative text-layer petition found.
 BLOCKED second-circuit/new-york/state/court-of-appeals (court-root copy of petition-for-discretionary-review): same scanned/OCR filing is the root copy; no alternative text-layer petition found.
+
+## fb-9fyu.3 — Third Circuit replacement search (2026-10-28)
+
+Searched indexed public web results, PACourts public resources, and official court materials. PACFile's appellate-brief archive requires a registered participant account. No qualifying public text-layer replacement was retrieved for these remaining exemplars:
+
+BLOCKED third-circuit/court-of-appeals/answering-brief: no accessible public text-layer answering brief with a vendored or Times-family face found; existing flagged exemplar is Garamond.
+BLOCKED third-circuit/new-jersey/federal/district/complaint: no publicly retrievable text-layer complaint with a recoverable face found; existing PDF's font name is stripped and its signature does not match measured face signatures.
+BLOCKED third-circuit/pennsylvania/federal/bankruptcy-middle-district/motion-brief: no accessible same-court, same-type text-layer public motion found; available indexed material did not expose a qualifying party filing.
+BLOCKED third-circuit/pennsylvania/state/commonwealth-court/answering-brief: no accessible alternative public text-layer answering brief found; PACFile appellate-brief search requires a registered participant account.
+BLOCKED third-circuit/pennsylvania/state/commonwealth-court (court-root copy of answering-brief): no accessible alternative public text-layer answering brief found; PACFile appellate-brief search requires a registered participant account.
+BLOCKED third-circuit/pennsylvania/state/court-of-judicial-discipline/motion-brief: no accessible alternative public text-layer motion found; public indexed material returned decisions and procedure resources.
+BLOCKED third-circuit/pennsylvania/state/court-of-judicial-discipline (court-root copy of motion-brief): no accessible alternative public text-layer motion found; public indexed material returned decisions and procedure resources.
+BLOCKED third-circuit/pennsylvania/state/superior-court/motion-brief: no accessible alternative public text-layer motion found; public indexed material returned decisions and procedure resources.
+BLOCKED third-circuit/pennsylvania/state/superior-court/opening-brief: no accessible alternative public text-layer opening brief found; public indexed material returned decisions and procedure resources.
+BLOCKED third-circuit/pennsylvania/state/superior-court (court-root copies of motion-brief and opening-brief): no accessible alternative public text-layer party filings found.
+BLOCKED third-circuit/pennsylvania/state/supreme-court/amicus-brief: no accessible alternative public text-layer amicus brief found; public indexed material returned decisions and procedure resources.
+BLOCKED third-circuit/pennsylvania/state/supreme-court/petition-for-discretionary-review: no accessible alternative public text-layer petition found; public indexed material returned decisions and procedure resources.
+BLOCKED third-circuit/pennsylvania/state/supreme-court (court-root copies of amicus-brief and petition-for-discretionary-review): no accessible alternative public text-layer party filings found.
