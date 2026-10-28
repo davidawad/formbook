@@ -313,7 +313,7 @@
     top-edge: "ascender", bottom-edge: "descender",
   )
   set par(
-    leading: body-leading, spacing: 0pt,
+    leading: body-leading, spacing: body-leading,   // a paragraph break keeps the body pitch (spacing 0 set its first line into the line above)
     first-line-indent: (amount: para-indent, all: true), justify: false,
   )
   // The numbering function is what steps the heading counter; the labels are drawn by the show rule below.
