@@ -23,3 +23,16 @@ The complaint is a pseudonymous civil action by a sexual-assault survivor. The s
 ## Second filer
 
 Not yet found. A second S.D. Ohio complaint from a different filer was not located in this pass (the RECAP entries for *Xiao v. General Electric*, 1:26-cv-01033, and other October 2026 complaints show no available document). EVAL-LOOP's tier-2 rule (2 or 3 filers) is therefore not met and is recorded in `../README.md`.
+
+## Replacement exemplar (fb-9fyu, RECAP): `FILED-EXAMPLE-complaint-2.pdf`
+
+- File: `FILED-EXAMPLE-complaint-2.pdf` (21 pages)
+- Case: *United States v. Assorted Property Seized on October 4, 2019*, No. 2:26-cv-00147-SDM-CMV (Doc. 1)
+- Document: Verified Complaint for Forfeiture In Rem
+- Filer: Plaintiff United States, through AUSA William B. King II, United States Attorney's Office for the Southern District of Ohio
+- Date filed: 2026-02-10
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.ohsd.309490/gov.uscourts.ohsd.309490.1.0.pdf
+- Date retrieved: 2026-10-28 (CourtListener RECAP search, staged by the PM)
+- Text layer: yes (`pdftotext` returns 6752 words); Times New Roman embedded for the body (`pdffonts`; `fb fonts audit` class metric-exact, body timesnewroman 0.966)
+- SHA-256: `9359a4aef0b94c633be355577ae8e41d5ff19aa2ea9f97e5b4c922125f23fbfa`
+- Replacement for `FILED-EXAMPLE-complaint.pdf` (fb-9fyu: Garamond: commercial face, no redistributable metric-compatible face). The old exemplar is kept; no INPUT is transcribed from this one.

@@ -32,3 +32,16 @@ Not saved in this box. A second Sixth Circuit answering brief from a different f
 ## Selected replacement
 
 The Bruneau PDF is a scanned filing with OCR. The saved *JB-K Cabinet* answering brief is a same-court, same-document-type public filing with an extractable text layer and is the selected replacement. It uses Century Schoolbook rather than Times New Roman, but remains the best available typed brief from a different filer in this folder. Keep the Bruneau sample paired with its source unless the sample is rebuilt around the replacement.
+
+## Replacement exemplar (fb-9fyu, RECAP): `FILED-EXAMPLE-answering-brief-3.pdf`
+
+- File: `FILED-EXAMPLE-answering-brief-3.pdf` (42 pages)
+- Case: *Lawrence v. NVR, Inc.*, No. 26-3309 (Doc. 17)
+- Document: Brief of Appellee NVR, Inc.
+- Filer: Defendant-Appellee NVR, Inc., through David D. Yeagley and Ryan W. Gillespie (UB Greensfelder LLP) and Matthew T. Nelson (Warner Norcross + Judd LLP)
+- Date filed: 2026-07-29
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.ca6.158377/gov.uscourts.ca6.158377.17.0.pdf
+- Date retrieved: 2026-10-28 (CourtListener RECAP search, staged by the PM)
+- Text layer: yes (`pdftotext` returns 8273 words); Times New Roman embedded for the body (`pdffonts`; `fb fonts audit` class metric-exact, body timesnewroman 0.961)
+- SHA-256: `816164f288f516307bc82b421aa98484d26ab7a7e577e5869c13e4bd31df21e5`
+- Replacement for `FILED-EXAMPLE-answering-brief.pdf` (fb-9fyu: scanned image with an OCR text layer). The old exemplar is kept; no INPUT is transcribed from this one.

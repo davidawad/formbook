@@ -49,3 +49,16 @@ Not tried: PACER (requires an account and fees; not used by this box), and the c
 ## Selected replacement
 
 The Wells Fargo PDF is flagged for Calisto MT. The saved Williams motion-brief is the selected replacement: same bankruptcy court and document type, public filing with a text layer, and Times New Roman body text. The Williams sample remains paired with that source and must be rebuilt before replacing the Wells Fargo PDF.
+
+## Replacement exemplar (fb-9fyu, RECAP): `FILED-EXAMPLE-motion-brief-4.pdf`
+
+- File: `FILED-EXAMPLE-motion-brief-4.pdf` (38 pages)
+- Case: *Bluegrass Natural Resources, LLC v. Blackjewel Liquidation Trust*, Adv. No. 25-07001-dll, in *In re Inmet Mining, LLC*, No. 23-70113 (Doc. 60-1)
+- Document: Memorandum of Law in Support of Plaintiff/Counterclaim Defendant's Motion for Summary Judgment (attachment 1 to Doc. 60)
+- Filer: Plaintiff/counterclaim defendant Bluegrass Natural Resources, LLC, through Nicholas S. Johnson, Bailey & Glasser, LLP
+- Date filed: 2026-02-06
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.kyeb.334170/gov.uscourts.kyeb.334170.60.1.pdf
+- Date retrieved: 2026-10-28 (CourtListener RECAP search, staged by the PM)
+- Text layer: yes (`pdftotext` returns 13412 words); Times New Roman embedded for the body (`pdffonts`; `fb fonts audit` class metric-exact, body timesnewroman 0.946)
+- SHA-256: `5f3344c56ce0abed895f214974852e870d4da42c28c74de6ba7788fdd7a6d4eb`
+- Replacement for `FILED-EXAMPLE-motion-brief-3.pdf` (fb-9fyu: scanned image with an OCR text layer). The old exemplar is kept; no INPUT is transcribed from this one.
