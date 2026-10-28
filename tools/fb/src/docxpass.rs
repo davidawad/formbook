@@ -13,6 +13,7 @@
 //!     wrote to `$FORMBOOK_FINAL` (pandoc would copy the reference document's); a filter may add footers of its
 //!     own (text from the sample, such as a paper's title) in `$FORMBOOK_FOOTERS`, one per line:
 //!     `ID <TAB> paragraphs` (the footer's `w:p` elements; the PAGE field is the filter's to write);
+//!     a header the same way in `$FORMBOOK_HEADERS` (pleading paper drawn in the header, W.D. Wash.);
 //!   * a reproducible archive (docxzip.rs);
 //!   * the LibreOffice PDF, and the page of every needle in it.
 //!
@@ -74,6 +75,7 @@ fn pandoc(
             .env("FORMBOOK_NEEDLES", work.join("needles.tsv"))
             .env("FORMBOOK_FINAL", work.join("final.xml"))
             .env("FORMBOOK_FOOTERS", work.join("footers.tsv"))
+            .env("FORMBOOK_HEADERS", work.join("headers.tsv"))
             .env("FORMBOOK_META", work.join("meta.json"))
             .env("FORMBOOK_STATE", work.join("state.tsv"))
             .env("FORMBOOK_PAGES", pages)
@@ -94,16 +96,17 @@ pub(crate) fn replace_final_sect(doc: &str, last: &str) -> Option<String> {
     Some(format!("{}{}{}", &doc[..start], last, &doc[end..]))
 }
 
-/// The footers a filter wrote to `$FORMBOOK_FOOTERS`: one per line, `ID <TAB> paragraphs` (the `w:p` elements of
-/// the footer), as `(id, file, paragraphs)`; the file names follow the line order.
-fn filter_footers(text: &str) -> Vec<(String, String, String)> {
+/// The footers a filter wrote to `$FORMBOOK_FOOTERS` (`prefix` "ftr"), or the headers it wrote to `$FORMBOOK_HEADERS`
+/// ("hdr"): one per line, `ID <TAB> paragraphs` (the `w:p` elements of the part), as `(id, file, paragraphs)`; the
+/// file names follow the line order.
+fn filter_parts(text: &str, prefix: &str) -> Vec<(String, String, String)> {
     text.lines()
         .filter_map(|l| l.split_once('\t'))
         .enumerate()
         .map(|(n, (id, paras))| {
             (
                 id.to_string(),
-                format!("ftr-own{}.xml", n + 1),
+                format!("{prefix}-own{}.xml", n + 1),
                 paras.to_string(),
             )
         })
@@ -134,19 +137,31 @@ fn finish(docx: &Path, work: &Path) -> Res<()> {
     ];
     let own = work.join("footers.tsv");
     if own.is_file() {
-        footers.extend(filter_footers(&read(&own)?));
+        footers.extend(filter_parts(&read(&own)?, "ftr"));
+    }
+    let mut parts: Vec<_> = footers
+        .into_iter()
+        .map(|f| (("ftr", "footer"), f))
+        .collect();
+    let own = work.join("headers.tsv");
+    if own.is_file() {
+        parts.extend(
+            filter_parts(&read(&own)?, "hdr")
+                .into_iter()
+                .map(|h| (("hdr", "header"), h)),
+        );
     }
     let mut rels = String::new();
     let mut types = String::new();
-    for (id, file, paras) in &footers {
+    for ((tag, kind), (id, file, paras)) in &parts {
         write(
             &x.join("word").join(file),
             &format!(
-                r#"<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:ftr {FOOTER_NS}>{paras}</w:ftr>"#
+                r#"<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:{tag} {FOOTER_NS}>{paras}</w:{tag}>"#
             ),
         )?;
-        rels.push_str(&format!(r#"<Relationship Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer" Id="{id}" Target="{file}"/>"#));
-        types.push_str(&format!(r#"<Override PartName="/word/{file}" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/>"#));
+        rels.push_str(&format!(r#"<Relationship Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/{kind}" Id="{id}" Target="{file}"/>"#));
+        types.push_str(&format!(r#"<Override PartName="/word/{file}" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.{kind}+xml"/>"#));
     }
     let rp = x.join("word/_rels/document.xml.rels");
     write(
@@ -292,7 +307,8 @@ mod tests {
 
     #[test]
     fn reads_the_filter_footers() {
-        let got = filter_footers("rIdA\t<w:p/>\nbad line\nrIdB\t<w:p><w:r/></w:p>\n");
+        let got = filter_parts("rIdA\t<w:p/>\nbad line\nrIdB\t<w:p><w:r/></w:p>\n", "ftr");
+        assert_eq!(filter_parts("rIdH\t<w:p/>\n", "hdr")[0].1, "hdr-own1.xml");
         assert_eq!(
             got,
             [

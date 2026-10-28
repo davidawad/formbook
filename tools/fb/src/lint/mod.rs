@@ -4,7 +4,8 @@
 //! checks the usage/ layout under courts/ (see paths.rs); `fb lint rules` checks the format of every
 //! courts/**/rules.md (see rules.rs); `fb lint pipefail`
 //! rejects a pipe into an early-exiting grep in shell under tools/ (see pipefail.rs); `fb lint docx` checks that
-//! every committed usage/OUTPUT-*.docx opens (DEF-DOCX-OPEN, see docx.rs).
+//! every committed usage/OUTPUT-*.docx opens (DEF-DOCX-OPEN, see docx.rs) and that no docx filter names a
+//! relationship id pandoc may renumber (docxrid.rs, also run on a doc dir's docx/ by `fb lint <doc-dir>`).
 //!   (a) ngram      a template file shares a run of 5+ words with a FILED-EXAMPLE's text, and the run
 //!                  is not rule text (rules.md of the doc dir or an enclosing court folder);
 //!   (b) break/vspace  forced line breaks or literal vertical space outside the parameter block
@@ -15,6 +16,7 @@
 //! `RESULT: LINT FAIL (<n> findings)`; exit 1 on findings.
 mod docx;
 mod docxfonts;
+mod docxrid;
 pub(crate) mod fonts;
 mod input;
 pub(crate) mod metadata;
@@ -175,6 +177,9 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
             Some("tex") => found.extend(tex::check(&name, &text)),
             _ => {}
         }
+    }
+    if engine == "all" && dir.join("docx").is_dir() {
+        found.extend(docxrid::check(&dir.join("docx"), &dir)?);
     }
     let doc = crate::layout::Doc::open(&dir)?;
     for id in doc.ids(crate::layout::INPUT) {

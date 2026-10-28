@@ -1,5 +1,8 @@
-//! `fb lint docx [file.docx ...]`: DEF-DOCX-OPEN over committed usage outputs, plus settings lint for
-//! committed `docx/reference.docx` files. Per-section footnote restarts make LibreOffice number notes incorrectly.
+//! `fb lint docx [file.docx ...]`: DEF-DOCX-OPEN (docxopen.rs) over every committed `courts/**/usage/OUTPUT-*.docx`
+//! (or the files named). A .docx is a shipped deliverable; one that does not open is a broken download. Committed
+//! `docx/reference.docx` files are also linted: a per-section footnote restart makes LibreOffice number notes
+//! incorrectly. With no files it also runs `docx-rid` (docxrid.rs) over every docx folder: no filter names a
+//! relationship id pandoc may renumber (`LINT docx-rid <file>:<line>: ..`).
 //! Output: `LINT docx-open <file>: <problem>` per finding, then `RESULT: LINT DOCX PASS (<n> files)` or
 //! `RESULT: LINT DOCX FAIL (<k> findings in <m> files)`; exit 1 on findings.
 use crate::proc::TempDir;
@@ -115,17 +118,18 @@ fn reference_findings(files: &[PathBuf]) -> Res<Vec<(PathBuf, String)>> {
 
 pub fn main(args: &[String]) -> Res<ExitCode> {
     let root = repo_root()?;
-    let (files, refs) = match args {
+    let (files, refs, rids) = match args {
         [] => (
             outputs(&root.join("courts")),
             references(&root.join("courts")),
+            super::docxrid::check_repo(&root)?,
         ),
         named => {
             let (refs, files): (Vec<_>, Vec<_>) = named
                 .iter()
                 .map(PathBuf::from)
                 .partition(|f| f.file_name().is_some_and(|n| n == "reference.docx"));
-            (files, refs)
+            (files, refs, vec![])
         }
     };
     let mut found = findings(&files)?;
@@ -138,6 +142,14 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
             "docx-open"
         };
         println!("LINT {kind} {}: {p}", shown.display());
+    }
+    rids.iter().for_each(|f| println!("{f}"));
+    if !rids.is_empty() {
+        println!(
+            "RESULT: LINT DOCX FAIL ({} filters or references name a relationship id pandoc may renumber)",
+            rids.len()
+        );
+        return Ok(ExitCode::from(1));
     }
     let bad: std::collections::BTreeSet<_> = found.iter().map(|(f, _)| f).collect();
     match found.len() {
