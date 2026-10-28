@@ -53,3 +53,16 @@ Form notes (tier 2): page 1 is a caption-only cover (court name, parties at left
 ## Selected replacement
 
 The Minerva filing is flagged as an OCR paper-capture. The saved Garg memorandum is a same-court, same-document-type public filing with a native text layer, Times New Roman body text, and distinct counsel. It is the selected replacement for Minerva; the sample is already based on Garg.
+
+## Replacement exemplar (fb-9fyu, RECAP): `FILED-EXAMPLE-motion-brief-3.pdf`
+
+- File: `FILED-EXAMPLE-motion-brief-3.pdf` (63 pages)
+- Case: *United States v. Spagnuolo*, No. 1:26-cr-00278-AT (Doc. 41; a criminal docket, so the Local Criminal Rules also apply)
+- Document: Memorandum of Law in Support of Defendant's Motion to Dismiss the Indictment
+- Filer: Defendant, through Shawn G. Crowley and others, Hecker Fink LLP
+- Date filed: 2026-08-26
+- URL: https://storage.courtlistener.com/recap/gov.uscourts.nysd.667058/gov.uscourts.nysd.667058.41.0_1.pdf
+- Date retrieved: 2026-10-28 (CourtListener RECAP search, staged by the PM)
+- Text layer: yes (`pdftotext` returns 19905 words); Times New Roman embedded for the body (`pdffonts`; `fb fonts audit` class metric-exact, body timesnewroman 0.97)
+- SHA-256: `35ff94c1e665100562b3cde5daf91c1257cc61c781118bb530feacbfbe6e83de`
+- Replacement for `FILED-EXAMPLE-motion-brief.pdf` (fb-9fyu: scanned image with an OCR text layer). The old exemplar is kept; no INPUT is transcribed from this one.
