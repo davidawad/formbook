@@ -2,3 +2,14 @@
 # where the typst render does (fb-595.54.2, on the shared layout model lib/*/xengine*), so a difference fails.
 params:
   cross_engine: gate
+  # DEF-COVER-002 against FILED-EXAMPLE-reply-brief.pdf (Whitney Law Group): differences that are this filer's style
+  # (tier 3) or that the rules decide. fb-595.78.
+  cover_structure_accepted:
+    - finding: 'order: "No. 24-1414" is above "UNITED STATES COURT OF APPEALS"'
+      reason: "FRAP 32(a)(2)(A): the number of the case centered at the top (opening-brief and answering-brief-2 set it there too)"
+    - finding: 'rules: above "UNITED STATES COURT OF APPEALS"'
+      reason: "the rule follows the case number at the top (FRAP 32(a)(2)(A))"
+    - finding: 'rules: between "FOR THE FIRST CIRCUIT" and "ELIZABETH F. WARNER,"'
+      reason: "one rule below the court's name, as reply-brief-2 and answering-brief-2; Whitney rules the case number off on both sides"
+    - finding: 'rules: between "OF APPELLANT ELIZABETH F. WARNER" and "Mark M. Whitney'
+      reason: "a rule below the brief's title, as reply-brief-2, answering-brief and opening-brief-2"

@@ -166,8 +166,7 @@
 
 % ---- Cover (FRAP 32(a)(2)) [cover-body] ----
 % Rules in vertical mode with no interline glue: they cost their own height, as in typst.
-\newcommand{\caonedoublerule}{\par\nointerlineskip\hbox to\linewidth{\rule{\linewidth}{1.6pt}}\nointerlineskip
-  \vspace{2.5pt}\nointerlineskip\hbox to\linewidth{\rule{\linewidth}{0.5pt}}\nointerlineskip}
+\newcommand{\caonefullrule}{\par\nointerlineskip\hbox to\linewidth{\rule{\linewidth}{1pt}}\nointerlineskip}% [full-rule]
 \newcommand{\caoneshortrule}{\par\nointerlineskip\hbox to\linewidth{\hss\rule{2in}{0.7pt}\hss}\nointerlineskip}
 
 % ---- Certificates [checkbox, check-row] ----

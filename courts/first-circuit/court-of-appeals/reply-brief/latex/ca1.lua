@@ -264,20 +264,20 @@ local function sort_key(a)
   return (s:lower():gsub("[^a-z0-9 ]", ""))
 end
 
--- The cover (FRAP 32(a)(2)(A)-(F)) [cover-body]: single-spaced, centered; the designations and counsel start at the
+-- The cover (FRAP 32(a)(2)(A)-(F)) [cover-body]: single-spaced, centered; counsel starts at the
 -- middle of the page. The gaps stretch to fill the page and shrink when the page is full.
 local function cover(meta)
   local o = {}
   local function p(s) o[#o + 1] = s end
   p("\\thispagestyle{empty}\\begingroup\\singlespacing\\centering\\parindent=0pt")
   p("\\cagap{}\\textbf{No. " .. tex(meta.case_number) .. "}\\par\\cagap{}")
-  p("\\caonedoublerule\\cagap{}")
+  p("\\caonefullrule\\cagap{}")
   p("\\textbf{\\MakeUppercase{United States Court of Appeals for the First Circuit}}\\par\\cagap{}")
   p("\\caoneshortrule\\cagap{}")
   local sides = meta.caption
   for i, side in ipairs(sides) do
     for _, name in ipairs(side.names) do p(tex(name) .. "\\par\\addvspace{4.9bp}") end
-    p("{\\raggedright\\leftskip=0.5\\linewidth " .. tex(side.designation) .. "\\par}")
+    p(tex(side.designation) .. "\\par") -- centered under the names [cover-body]
     if i < #sides then p("\\cahalfgap{}v.\\par\\cahalfgap{}") end
   end
   p("\\cagap{}\\caoneshortrule\\cagap{}")
@@ -305,7 +305,7 @@ local function cover(meta)
     end
   end
   p("}")
-  p("\\cagap{}\\caonedoublerule\\par\\endgroup")
+  p("\\par\\endgroup")
   return table.concat(o, "\n")
 end
 

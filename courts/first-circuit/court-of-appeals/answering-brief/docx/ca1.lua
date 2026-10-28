@@ -21,7 +21,7 @@ local TAB = 720        -- half an inch (para-indent, label width), in twips
 local TAB_R = 9360     -- the right tab of the tables: at the margin (the text width, 6.5 in)
 local PNUM_TOC = 720   -- the column the contents' page numbers keep to themselves (typst toc-page-col, 36 pt)
 local PNUM_TOA = 1120  -- the column of the authorities' page lists (typst toa-page-col, 56 pt)
-local HALF_W = 4680    -- the middle of the text: designations, counsel and signature blocks start here
+local HALF_W = 4680    -- the middle of the text: counsel and signature blocks start here
 local SINGLE = 400     -- single-spaced material (headings, cover, tables, certificates, notes): typst pitch-single, 20 pt
 local DOUBLE = 628     -- body text (reference.docx Body Text): typst pitch-double, 31.4 pt (FRAP 32(a)(4))
 local HEAD_SZ = 32     -- section headings: 16 pt (half points; typst heading-size)
@@ -81,10 +81,10 @@ local function dot_tabs()
   return xe.leader_tab(TAB_R)
 end
 
--- A horizontal rule [double-rule, short-rule]: an empty paragraph with a bottom border; `left_right` narrows it.
+-- A horizontal rule [full-rule, short-rule]: an empty paragraph with a bottom border; `left_right` narrows it.
 local function rule(kind, before, left_right)
-  local b = kind == "double"
-      and '<w:pBdr><w:bottom w:val="thickThinSmallGap" w:sz="12" w:space="1" w:color="000000"/></w:pBdr>'
+  local b = kind == "full"
+      and '<w:pBdr><w:bottom w:val="single" w:sz="8" w:space="1" w:color="000000"/></w:pBdr>'
       or '<w:pBdr><w:bottom w:val="single" w:sz="6" w:space="1" w:color="000000"/></w:pBdr>'
   return para({ b, spacing(before, 0, 120), ind(left_right or 0, nil, nil, left_right or 0) }, "")
 end
@@ -361,14 +361,14 @@ local function cover(meta)
   local out = {}
   local function add(x) out[#out + 1] = x end
   add(para({ KEEP, spacing(math.floor(gap * 0.6), 0), jc("center") }, runs("No. ", { b = true }) .. inl(meta.case_number, { b = true })))
-  add(rule("double", gap))
+  add(rule("full", gap))
   add(para({ spacing(gap, 0), jc("center") }, runs(("United States Court of Appeals for the First Circuit"):upper(), { b = true })))
   add(rule("short", gap, 3240))
   for i, side in ipairs(sides) do
     for k, n in ipairs(side.names) do
       add(para({ spacing((i == 1 and k == 1) and gap or 98, 0), jc("center") }, inl(n, {})))
     end
-    add(para({ spacing(98, 0), ind(HALF_W) }, inl(side.designation, {})))
+    add(para({ spacing(98, 0), jc("center") }, inl(side.designation, {}))) -- centered under the names [cover-body]
     if i < #sides then
       add(para({ spacing(math.floor(gap * 0.3), math.floor(gap * 0.3)), jc("center") }, runs("v.", {})))
     end
@@ -398,7 +398,6 @@ local function cover(meta)
     if gi == #counsel then ls[#ls + 1] = need_meta(meta, "phone") end
     for _, l in ipairs(ls) do cl(inl(l, { i = true }), 140) end -- typst: half an em in
   end
-  add(rule("double", gap))
   local blocks = {}
   for _, x in ipairs(out) do blocks[#blocks + 1] = raw(x) end
   return blocks

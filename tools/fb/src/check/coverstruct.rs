@@ -50,6 +50,8 @@ const DATE_WORDS: usize = 8;
 /// differently pairs its lines loosely.
 const SURE_ORDER: f64 = 0.6;
 const SURE_ALIGN: f64 = 0.5;
+/// Segments within this many line heights of each other, starting at one x, make a left-aligned block.
+const BLOCK_LINES: f64 = 4.0;
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Align {
@@ -85,6 +87,9 @@ pub struct Seg {
     pub baseline: f64,
     /// The only segment of its line.
     pub alone: bool,
+    /// One of three or more segments a few lines apart that start at the same x and end at different ones: a
+    /// left-aligned block (an indented counsel block), whose short lines are not centered however they fall.
+    pub flush: bool,
     pub words: Vec<String>,
 }
 
@@ -153,6 +158,7 @@ fn segments(l: &Line) -> Vec<Seg> {
                 bottom: l.bottom,
                 baseline: l.baseline,
                 alone: false,
+                flush: false,
             }
         })
         .filter(|s| !s.words.is_empty() && !numeral(&s.text))
@@ -163,7 +169,23 @@ fn segments(l: &Line) -> Vec<Seg> {
 
 impl Cover {
     pub fn of(page: &Page) -> Cover {
-        let segs: Vec<Seg> = page.lines.iter().flat_map(segments).collect();
+        let mut segs: Vec<Seg> = page.lines.iter().flat_map(segments).collect();
+        let flush: Vec<bool> = segs
+            .iter()
+            .map(|s| {
+                let near: Vec<&Seg> = segs
+                    .iter()
+                    .filter(|o| {
+                        (o.top - s.top).abs() <= BLOCK_LINES * s.height()
+                            && (o.left - s.left).abs() <= 1.5
+                    })
+                    .collect();
+                near.len() >= 3 && near.iter().any(|o| (o.right - s.right).abs() > EDGE_PT)
+            })
+            .collect();
+        for (s, f) in segs.iter_mut().zip(flush) {
+            s.flush = f;
+        }
         let frame = segs
             .iter()
             .fold(None, |f: Option<(f64, f64)>, s| {
@@ -240,9 +262,10 @@ impl Cover {
             Align::Left
         } else if (fr - s.right).abs() <= EDGE_PT {
             Align::Right
-        } else if [(fl + fr) / 2.0, self.width / 2.0]
-            .iter()
-            .any(|m| (c - m).abs() <= CENTER * fw)
+        } else if !s.flush
+            && [(fl + fr) / 2.0, self.width / 2.0]
+                .iter()
+                .any(|m| (c - m).abs() <= CENTER * fw)
         {
             Align::Center
         } else {
@@ -340,10 +363,16 @@ fn common(a: &[String], b: &[String]) -> usize {
 }
 
 /// For every exemplar segment, the render segment that shares most of its words (None when none does); ties go
-/// to the one at the nearest relative height.
+/// to the one at the nearest relative height. A render segment's words are claimed once: when several exemplar
+/// segments pick the same one, the best match takes its words first and a segment left without enough of them is
+/// unpaired (an exemplar repeating a party's name in its counsel block does not pair twice with the one caption line).
 pub fn pair(ex: &Cover, us: &Cover) -> Vec<Option<usize>> {
     let rel = |c: &Cover, s: &Seg| s.mid() / c.height.max(1.0);
-    ex.segs
+    let enough = |n: usize, a: &Seg, b: &Seg| {
+        n > 0 && n as f64 >= 0.6 * a.words.len().min(b.words.len()) as f64
+    };
+    let best: Vec<Option<(usize, f64, f64)>> = ex
+        .segs
         .iter()
         .map(|e| {
             let ye = rel(ex, e);
@@ -351,16 +380,33 @@ pub fn pair(ex: &Cover, us: &Cover) -> Vec<Option<usize>> {
                 .iter()
                 .enumerate()
                 .filter_map(|(j, u)| {
-                    let n = common(&e.words, &u.words);
-                    let small = e.words.len().min(u.words.len());
                     let dice = dice(e, u);
-                    (n > 0 && n as f64 >= 0.6 * small as f64 && dice >= 0.3)
+                    (enough(common(&e.words, &u.words), e, u) && dice >= 0.3)
                         .then(|| (j, (dice * 20.0).round(), (ye - rel(us, u)).abs()))
                 })
                 .max_by(|a, b| a.1.total_cmp(&b.1).then(b.2.total_cmp(&a.2)))
-                .map(|(j, ..)| j)
         })
-        .collect()
+        .collect();
+    let mut order: Vec<usize> = (0..ex.segs.len()).filter(|&i| best[i].is_some()).collect();
+    order.sort_by(|&a, &b| {
+        let (a, b) = (best[a].unwrap(), best[b].unwrap());
+        b.1.total_cmp(&a.1).then(a.2.total_cmp(&b.2))
+    });
+    let mut left: Vec<Vec<String>> = us.segs.iter().map(|u| u.words.clone()).collect();
+    let mut map = vec![None; ex.segs.len()];
+    for i in order {
+        let j = best[i].unwrap().0;
+        let e = &ex.segs[i];
+        if enough(common(&e.words, &left[j]), e, &us.segs[j]) {
+            for w in &e.words {
+                if let Some(k) = left[j].iter().position(|x| x == w) {
+                    left[j].swap_remove(k);
+                }
+            }
+            map[i] = Some(j);
+        }
+    }
+    map
 }
 
 fn quote(text: &str) -> String {

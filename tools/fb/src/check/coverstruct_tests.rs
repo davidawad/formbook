@@ -354,3 +354,31 @@ fn a_rule_painted_twice_is_one_rule() {
         (true, vec![])
     );
 }
+
+#[test]
+fn a_name_repeated_in_the_exemplar_pairs_once() {
+    // the exemplar names the party again under counsel; ours does not: no order finding for the second one
+    let mut ex = cover(72.0, vec![], false);
+    ex.lines.push(line("ATTORNEY FOR APPELLANT", 306.0, 420.0));
+    ex.lines
+        .push(line("Lisa Tresslar, Appellant", 306.0, 434.0));
+    let map = pair(&Cover::of(&ex), &Cover::of(&cover(72.0, vec![], false)));
+    assert_eq!(map.iter().filter(|m| **m == Some(3)).count(), 1);
+    assert_eq!(map.last(), Some(&None));
+    assert_eq!(run(&ex, &cover(72.0, vec![], false)), (true, vec![]));
+}
+
+#[test]
+fn a_short_line_of_a_left_aligned_block_is_not_centered() {
+    // a counsel block from the middle of the page: its short line falls on the page's centre line
+    let block = |c: f64| {
+        let mut p = cover(c, vec![], false);
+        p.lines.push(line("Boston", c, 372.0));
+        p
+    };
+    let c = Cover::of(&block(276.0));
+    let short = c.segs.iter().find(|s| s.text == "Boston").unwrap();
+    assert!(short.flush);
+    assert_eq!(c.align(short), Align::Indent(276.0 - 72.0));
+    assert_eq!(run(&block(276.0), &block(270.0)), (true, vec![]));
+}

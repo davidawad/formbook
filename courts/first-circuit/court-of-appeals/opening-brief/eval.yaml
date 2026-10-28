@@ -2,3 +2,11 @@
 # where the typst render does (fb-595.54.2, on the shared layout model lib/*/xengine*), so a difference fails.
 params:
   cross_engine: gate
+  # DEF-COVER-002 against FILED-EXAMPLE-opening-brief.pdf (Jellison & Nathanson): differences that are this filer's style
+  # (tier 3), because FILED-EXAMPLE-opening-brief-2.pdf (Drummond Woodsum) and the answering and reply exemplars set
+  # them as the template does. fb-595.78.
+  cover_structure_accepted:
+    - finding: 'rules: '
+      reason: "Nathanson's cover has no rules at all; opening-brief-2 and the four answering and reply exemplars rule off the cover's parts"
+    - finding: 'date line:'
+      reason: "only two of the six 1st Cir. covers carry a date (opening-brief-2, the reply exemplars and answering-brief-2 do not)"

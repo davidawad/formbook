@@ -12,17 +12,12 @@ brief_title: "Reply Brief of Appellant Elizabeth F. Warner"
 counsel:
   - names:
       - "Mark M. Whitney (1st Cir. No. 46659)"
-    lines:
-      - "Whitney Law Group, LLC"
-      - "11 State Street"
-      - "Marblehead, MA 01945"
-      - "mwhitney@whitneylawgroup.com"
-  - names:
       - "Kyle E. Cullen (1st Cir. No. 1212465)"
     lines:
       - "Whitney Law Group, LLC"
       - "11 State Street"
       - "Marblehead, MA 01945"
+      - "mwhitney@whitneylawgroup.com"
       - "kcullen@whitneylawgroup.com"
 phone: "(781) 631-4400"
 signature:

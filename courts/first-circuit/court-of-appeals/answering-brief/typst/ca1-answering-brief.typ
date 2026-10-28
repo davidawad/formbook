@@ -171,7 +171,7 @@
 
 #let heading-tab = 0.5in
 
-/// Set from the middle of the text column, left-aligned: the designations, counsel and signature blocks.
+/// Set from the middle of the text column, left-aligned: the counsel and signature blocks.
 #let right-half(body) = block(width: 100%, inset: (left: 50%), align(left, body))
 
 /// A single-spaced paragraph whose continuation lines are indented by `indent`.
@@ -310,11 +310,9 @@
 // Cover (FRAP 32(a)(2)(A)-(F))
 // ---------------------------------------------------------------------------
 
-#let double-rule = {
-  line(length: 100%, stroke: 1.6pt)
-  v(2.5pt)
-  line(length: 100%, stroke: 0.5pt)
-}
+// One full-width rule below the docket number: the filed covers in usage/ use single rules, none a double one, and
+// none ends with a rule below counsel (DEF-COVER-002).
+#let full-rule = line(length: 100%, stroke: 1pt)
 #let short-rule = align(center, line(length: 2in, stroke: 0.7pt))
 
 #let cover-body(meta, gap) = {
@@ -323,7 +321,7 @@
   v(gap * 0.6)
   strong[No. #need(meta, "case_number")]              // (A) the number of the case, centered at the top
   v(gap)
-  double-rule
+  full-rule
   v(gap)
   strong(upper(court-name))                            // (B) the name of the court
   v(gap)
@@ -332,7 +330,7 @@
   let sides = need(meta, "caption")                     // (C) the title of the case
   for (i, side) in sides.enumerate() {
     for name in side.names { inl(name); parbreak() }
-    right-half(inl(side.designation))
+    inl(side.designation); parbreak()                  // centered under the names, as all six filed covers set it
     if i < sides.len() - 1 { v(gap * 0.3); [v.]; v(gap * 0.3) }
   }
   v(gap)
@@ -363,8 +361,6 @@
       })
     }
   })
-  v(gap)
-  double-rule
 }
 
 /// The cover is one page. The spacing between its parts is the only thing that gives:

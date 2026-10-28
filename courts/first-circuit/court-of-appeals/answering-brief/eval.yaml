@@ -2,3 +2,14 @@
 # where the typst render does (fb-595.54.2, on the shared layout model lib/*/xengine*), so a difference fails.
 params:
   cross_engine: gate
+  # DEF-COVER-002 against FILED-EXAMPLE-answering-brief.pdf (Morgan, Brown & Joy): differences that are this filer's style
+  # (tier 3) or that the rules decide. fb-595.78.
+  cover_structure_accepted:
+    - finding: 'order: "NO. 23-1668" is above "UNITED STATES COURT OF APPEALS"'
+      reason: "FRAP 32(a)(2)(A): the number of the case centered at the top (answering-brief-2 sets it there too)"
+    - finding: 'rules: above "UNITED STATES COURT OF APPEALS"'
+      reason: "the rule follows the case number at the top (FRAP 32(a)(2)(A)), as answering-brief-2 rules it off"
+    - finding: 'rules: between "FOR THE FIRST CIRCUIT" and "KIMBERLY A. GRIFFIN"'
+      reason: "one rule below the court's name, as answering-brief-2 and opening-brief-2; Morgan Brown rules the case number off on both sides"
+    - finding: 'date line:'
+      reason: "only two of the six 1st Cir. covers carry a date (answering-brief-2 and the reply exemplars do not)"
