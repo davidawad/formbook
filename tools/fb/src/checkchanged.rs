@@ -2,7 +2,10 @@
 //! branch touches, so a landing gate (the declared quality command) refuses a court change whose committed
 //! outputs fail. A doc folder is the nearest ancestor (under courts/) of a changed path that holds `usage/`;
 //! its engines are whichever of typst/, latex/ and docx/ it has. Folders the branch deleted are skipped.
-//! Exit 0 only when every check passes (or nothing under courts/ changed).
+//! When the branch touches tools/fb/, it also compiles the fb test suite (`cargo test --release --no-run`), so a
+//! test file that does not compile can not reach master (fb-595.81: 785ba8ade landed gate0_tests.rs uncompiled);
+//! no cargo means a failed gate, not a skipped one: a host that can not run cargo does not land tools/fb changes.
+//! Exit 0 only when every check passes (or nothing under courts/ or tools/fb/ changed).
 
 use crate::{fail, Res};
 use std::collections::BTreeSet;
@@ -45,6 +48,28 @@ pub fn jobs<F: Fn(&str) -> bool>(
         .collect()
 }
 
+/// Does the branch touch the fb crate (its sources, tests, manifest or lockfile)?
+pub fn touches_fb(paths: &[String]) -> bool {
+    paths.iter().any(|p| p.starts_with("tools/fb/"))
+}
+
+/// Compile every fb test target without running it; false when cargo is missing or the build fails.
+fn fb_tests_compile(root: &Path) -> bool {
+    eprintln!("fb check-changed: cargo test --release --no-run (tools/fb)");
+    Command::new("cargo")
+        .current_dir(root)
+        .args(["test", "--release", "--no-run"])
+        .args(["--manifest-path", "tools/fb/Cargo.toml"])
+        .status()
+        .map_err(|e| {
+            eprintln!(
+                "fb check-changed: cargo: {e} (land tools/fb changes from a host that runs cargo)"
+            )
+        })
+        .map(|s| s.success())
+        .unwrap_or(false)
+}
+
 fn changed(root: &Path, base: &str) -> Res<Vec<String>> {
     let out = Command::new("git")
         .current_dir(root)
@@ -81,6 +106,8 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
     let folders = doc_folders(&paths, |d| root.join(d).join("usage").is_dir());
     let todo = jobs(&folders, |d| root.join(d).is_dir());
     let exe = std::env::current_exe().map_err(|e| fail(2, format!("fb check-changed: {e}")))?;
+    let fb_job = touches_fb(&paths);
+    let fb_failed = fb_job && !fb_tests_compile(&root);
     let failed: Vec<String> = todo
         .iter()
         .filter(|(folder, engine)| {
@@ -94,12 +121,18 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
                 .unwrap_or(false)
         })
         .map(|(folder, engine)| format!("{folder} --engine {engine}"))
+        .chain(fb_failed.then(|| "tools/fb: cargo test --release --no-run".to_string()))
         .collect();
+    let total = todo.len() + usize::from(fb_job);
     println!(
-        "RESULT: CHECK-CHANGED {} of {} folder/engine checks passed ({} folders vs {base})",
-        todo.len() - failed.len(),
-        todo.len(),
-        folders.len()
+        "RESULT: CHECK-CHANGED {} of {} checks passed ({} folders{} vs {base})",
+        total - failed.len(),
+        total,
+        folders.len(),
+        match fb_job {
+            true => " + tools/fb test build",
+            false => "",
+        }
     );
     failed.iter().for_each(|f| println!("FAILED: {f}"));
     Ok(match failed.is_empty() {
@@ -143,6 +176,20 @@ mod tests {
         assert!(
             doc_folders(&s(&["docs/EVAL-LOOP.md", "courts/z/README.md"]), |_| false).is_empty()
         );
+    }
+
+    #[test]
+    fn a_tools_fb_change_and_only_that_compiles_the_fb_tests() {
+        assert!(touches_fb(&s(&[
+            "docs/x.md",
+            "tools/fb/src/check/gate0_tests.rs"
+        ])));
+        assert!(touches_fb(&s(&["tools/fb/Cargo.lock"])));
+        assert!(!touches_fb(&s(&[
+            "courts/c/rules.md",
+            "tools/check.sh",
+            "tools/fbx/a"
+        ])));
     }
 
     #[test]

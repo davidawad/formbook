@@ -47,7 +47,7 @@ Scope: one court folder per claim. Do not edit another court's folder or shared 
    - the remaining tier-2 findings, by page (`OPEN` or `ACCEPTED` rows of the Gate 2 review);
    - the docx `BLOCKED` items: each failing check ID and why (a docx may be delivered BLOCKED or partial; silently missing is not acceptable, and the same holds for latex).
    Never merge your own PR. Do not delete the claim branch.
-6. For tool or infrastructure beads (not court work): branch `fb-595.N-<slug>`, PR with the bead id, leave the bead `in_progress` and record the PR with `br comments add <id> "<PR URL>"`. David closes beads.
+6. For tool or infrastructure beads (not court work): branch `fb-595.N-<slug>`, PR with the bead id, leave the bead `in_progress` and record the PR with `br comments add <id> "<PR URL>"`. David closes beads. A change under `tools/fb/` needs `cargo test --manifest-path tools/fb/Cargo.toml` run green on your host before you push; `fb check-changed` (the landing gate) and `.gitlab-ci.yml` compile the tests and fail without cargo. If your host cannot run cargo, do not push `tools/fb` changes: end with `BLOCKED:` and ask your lead to run the tests (fb-595.81).
 
 If you are blocked on a decision only David can make (scope, license, which exemplar, conflicting rules), stop, record the question (a bead comment for tool work, the PR description for court work), and end with a single line `BLOCKED: <question>`. Do not guess, and do not report success you have not verified with the commands above.
 

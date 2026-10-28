@@ -1,0 +1,50 @@
+# tools/fb test gate (fb-595.81): a tools/fb change whose tests do not compile or fail must not move master.
+# Runs on merge requests and on pushes to master that touch tools/fb. The same compile check is part of the landing
+# gate (`fb check-changed`, which runs `cargo test --release --no-run` when a branch touches tools/fb/).
+# NEEDS A MAINTAINER: to make this block merges, enable Settings > Merge requests > "Pipelines must succeed",
+# and protect master so only merge requests move it.
+# Linux runners only: the fb-595.71 macOS-only failures do not arise here; skip such a test with
+# #[cfg_attr(target_os = "macos", ignore)], never by leaving it out of this job.
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+default:
+  image: rust:1-bookworm
+
+variables:
+  CARGO_HOME: $CI_PROJECT_DIR/.cargo-home
+  CARGO_TARGET_DIR: $CI_PROJECT_DIR/tools/fb/target
+
+.fb-changes: &fb-changes
+  changes:
+    - tools/fb/**/*
+    - .gitlab-ci.yml
+
+cache:
+  key: fb-cargo
+  paths:
+    - .cargo-home/registry
+    - tools/fb/target
+
+# every test target compiles: needs only cargo, so it fails fast and does not depend on the toolchain download
+fb-test-build:
+  stage: test
+  rules:
+    - *fb-changes
+  script:
+    - cargo test --release --no-run --locked --manifest-path tools/fb/Cargo.toml
+
+# the whole suite: the render tests need the pinned toolchain (tools/bootstrap.sh) and soffice for the docx engine
+fb-test:
+  stage: test
+  needs: [fb-test-build]
+  rules:
+    - *fb-changes
+  script:
+    - apt-get update -qq && apt-get install -y -qq --no-install-recommends libreoffice-writer >/dev/null
+    - sh tools/bootstrap.sh
+    - export PATH="$HOME/.local/share/formbook/env/bin:$HOME/.local/share/formbook/texlive/bin/x86_64-linux:$PATH"
+    - export TMPDIR="$(mktemp -d)"
+    - cargo test --release --locked --manifest-path tools/fb/Cargo.toml
