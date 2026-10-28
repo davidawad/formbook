@@ -2,3 +2,8 @@
 # where the typst render does (fb-595.54.2, on the shared layout model lib/*/xengine*), so a difference fails.
 params:
   cross_engine: gate
+  # DEF-COVER-002 against FILED-EXAMPLE-reply-brief.pdf (Baker & Hostetler): a difference that is this filer's style
+  # (tier 3), because FILED-EXAMPLE-reply-brief-2.pdf (United States Attorney) sets it as the template does. fb-595.78.
+  cover_structure_accepted:
+    - finding: 'rules: between "No. 26-2469" and "Americans For Prosperity'
+      reason: "a rule below the docket number and a short rule below the court's name, as reply-brief-2 (and answering-brief-2, opening-brief-2); Baker sets the two together above one rule"

@@ -131,6 +131,7 @@ pub fn evaluate(c: &Ctx, s: &Sample, method: &str) -> Res<Option<Verdict>> {
             let (pass, meas, detail) = super::coverstruct::judge(
                 Some(doc.filed(&s.sid).as_path()),
                 std::path::Path::new(&s.pdf),
+                &super::coverstruct::accepted(c)?,
             )?;
             result(pass, meas, detail)
         }

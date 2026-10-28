@@ -2,3 +2,17 @@
 # where the typst render does (fb-595.54.2, on the shared layout model lib/*/xengine*), so a difference fails.
 params:
   cross_engine: gate
+  # DEF-COVER-002 against FILED-EXAMPLE-opening-brief.pdf (The Gold Law Firm): differences that are this filer's style
+  # (tier 3), because FILED-EXAMPLE-opening-brief-2.pdf (Federal Public Defender) and the answering and reply exemplars
+  # set them as the template does. fb-595.78.
+  cover_structure_accepted:
+    - finding: 'alignment: "Brian C. Farrell, Esquire"'
+      reason: "counsel in the right half, as opening-brief-2 and four of the six ca3 exemplars; Gold sets it at the left margin"
+    - finding: 'alignment: "Counsel for Appellant'
+      reason: "the counsel-for line belongs to the counsel block in the right half (see above)"
+    - finding: 'rules: between "No. 26-1367" and "UNITED STATES COURT OF APPEALS"'
+      reason: "a rule between the docket number and the court's name, as opening-brief-2, answering-brief-2 and reply-brief-2"
+    - finding: 'rules: between "Craig A. Dally" and "On Appeal'
+      reason: "one rule after the parties, as opening-brief-2 and five of the six ca3 exemplars; Gold draws a short and a full rule"
+    - finding: 'date line:'
+      reason: "only Gold dates its cover; opening-brief-2 and the answering and reply exemplars do not (the date is in the signature)"

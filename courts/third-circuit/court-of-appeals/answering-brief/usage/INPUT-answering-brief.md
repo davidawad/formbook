@@ -18,7 +18,8 @@ disclosure: |
   Anywhere Real Estate Inc. is a publicly traded corporation.
 counsel:
   - names: ["Daniel M. Eliades"]
-    lines: ["K&L GATES LLP", "One Newark Center, 10th Floor", "Newark, NJ 07102", "Counsel for Appellee Coldwell Banker Real Estate LLC"]
+    lines: ["K&L GATES LLP", "One Newark Center, 10th Floor", "Newark, NJ 07102"]
+counsel_for: "Counsel for Appellee Coldwell Banker Real Estate LLC"
 phone: "(973) 848-4000 (telephone)"
 signature:
   signer: "Daniel M. Eliades"

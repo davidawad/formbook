@@ -197,7 +197,7 @@ impl Cover {
                     y1: w.y1,
                 })
         });
-        let rules = page
+        let all = page
             .rules
             .iter()
             .copied()
@@ -209,7 +209,17 @@ impl Cover {
                 !masked.iter().any(|m| m.contains_pt(cx, cy))
             })
             .filter(|r| !underline(r))
-            .collect();
+            .collect::<Vec<Rect>>();
+        // one rule drawn twice (LibreOffice paints a paragraph border as two identical rectangles) is one rule
+        let mut rules: Vec<Rect> = Vec::new();
+        for r in all {
+            let same = |q: &Rect| {
+                (q.y0 - r.y0).abs() < 0.5 && (q.x0 - r.x0).abs() < 0.5 && (q.x1 - r.x1).abs() < 0.5
+            };
+            if !rules.iter().any(same) {
+                rules.push(r);
+            }
+        }
         Cover {
             segs,
             frame,
@@ -447,7 +457,37 @@ pub fn compare(ex: &Cover, us: &Cover) -> (bool, String, Vec<String>) {
         moved.push(worst);
         inv.retain(|&(a, b)| a != worst && b != worst);
     }
-    // alignment, on every paired segment that kept its place and is alone on its line on one side at least
+    // alignment, on every paired segment that kept its place and is alone on its line on one side at least; a run of
+    // consecutive exemplar segments that differ the same way (a counsel block) is one finding
+    struct Run<'a> {
+        first: usize,
+        n: usize,
+        kinds: (String, String),
+        names: (String, String),
+        ours: &'a Seg,
+    }
+    let kind = |a: Align| match a {
+        Align::Indent(_) => "indented".to_string(),
+        a => a.name(),
+    };
+    let flush = |r: Option<Run>, findings: &mut Vec<String>| {
+        if let Some(r) = r {
+            let (lines, verb) = match r.n {
+                1 => (String::new(), "is"),
+                n => (format!(" and the {} lines after it", n - 1), "are"),
+            };
+            findings.push(format!(
+                "alignment: {}{lines} {verb} {} in the exemplar, {} in ours (x {:.1}-{:.1})",
+                quote(&ex.segs[r.first].text),
+                r.names.0,
+                r.names.1,
+                r.ours.left,
+                r.ours.right
+            ));
+        }
+    };
+    let mut run: Option<Run> = None;
+    let mut prev: Option<usize> = None;
     for i in (0..ex.segs.len()).filter(|i| sure(ex, us, &map, *i, SURE_ALIGN) && !moved.contains(i))
     {
         let (e, u) = (&ex.segs[i], &us.segs[map[i].unwrap()]);
@@ -455,26 +495,34 @@ pub fn compare(ex: &Cover, us: &Cover) -> (bool, String, Vec<String>) {
             continue;
         }
         let (ae, au) = (ex.align(e), us.align(u));
-        if !same_place(
-            ae,
-            ex.fw(),
-            au,
-            us.fw(),
-            (e.left - ex.frame.0, u.left - us.frame.0),
-        ) {
-            findings.push(format!(
-                "alignment: {} is {} in the exemplar, {} in ours (x {:.1}-{:.1})",
-                quote(&e.text),
-                ae.name(),
-                au.name(),
-                u.left,
-                u.right
-            ));
+        let lefts = (e.left - ex.frame.0, u.left - us.frame.0);
+        let next = prev == Some(i.wrapping_sub(1));
+        prev = Some(i);
+        if same_place(ae, ex.fw(), au, us.fw(), lefts) {
+            flush(run.take(), &mut findings);
+            continue;
+        }
+        let kinds = (kind(ae), kind(au));
+        match run.as_mut() {
+            Some(r) if next && r.kinds == kinds => r.n += 1,
+            _ => {
+                flush(run.take(), &mut findings);
+                run = Some(Run {
+                    first: i,
+                    n: 1,
+                    kinds,
+                    names: (ae.name(), au.name()),
+                    ours: u,
+                });
+            }
         }
     }
+    flush(run.take(), &mut findings);
     // rules, by the gap between anchors (paired segments of two words or more that kept their place)
     let anchors: Vec<usize> = (0..ex.segs.len())
-        .filter(|i| map[*i].is_some() && ex.segs[*i].words.len() >= 2 && !moved.contains(i))
+        .filter(|i| {
+            sure(ex, us, &map, *i, SURE_ORDER) && ex.segs[*i].words.len() >= 2 && !moved.contains(i)
+        })
         .collect();
     let gaps = |c: &Cover, ys: &[f64]| {
         let mut m: BTreeMap<usize, usize> = BTreeMap::new();
@@ -583,10 +631,49 @@ pub fn first_page(pdf: &std::path::Path) -> Res<Option<Cover>> {
     Ok(measure::measure_first(pdf, 1)?.pages.first().map(Cover::of))
 }
 
-/// The check of one sample: `exemplar` None (or missing) when the sample has no FILED-EXAMPLE.
+/// A difference from the exemplar accepted as one filer's style (tier 3), from `params.cover_structure_accepted` in
+/// eval.yaml: every finding that starts with `finding` is printed as ACCEPTED with `reason` and not counted.
+#[derive(Debug, Clone, PartialEq, serde::Deserialize)]
+pub struct Accepted {
+    pub finding: String,
+    pub reason: String,
+}
+
+/// The accepted list of the merged checks file (`[]` when there is none).
+pub fn accepted(c: &super::Ctx) -> Res<Vec<Accepted>> {
+    let json = super::sh::cfg(
+        &c.env,
+        &c.checks,
+        "(.params.cover_structure_accepted // []) | @json",
+    )?;
+    let list: Vec<Accepted> = serde_json::from_str(json.trim()).map_err(|e| {
+        fail(
+            2,
+            format!(
+                "params.cover_structure_accepted: a list of {{finding, reason}} is expected: {e}"
+            ),
+        )
+    })?;
+    match list
+        .iter()
+        .find(|a| a.finding.trim().is_empty() || a.reason.trim().is_empty())
+    {
+        Some(a) => Err(fail(
+            2,
+            format!(
+                "params.cover_structure_accepted: an entry needs a finding and a reason: {a:?}"
+            ),
+        )),
+        None => Ok(list),
+    }
+}
+
+/// The check of one sample: `exemplar` None (or missing) when the sample has no FILED-EXAMPLE. Findings in
+/// `accept` are listed as ACCEPTED and do not fail it.
 pub fn judge(
     exemplar: Option<&std::path::Path>,
     render: &std::path::Path,
+    accept: &[Accepted],
 ) -> Res<(bool, String, String)> {
     let Some(ex) = exemplar.filter(|p| p.is_file()) else {
         return Ok((
@@ -609,12 +696,37 @@ pub fn judge(
     let Some(u) = first_page(render)? else {
         return Ok((false, "the render has no page 1".into(), String::new()));
     };
-    let (ok, meas, found) = compare(&e, &u);
-    let mut detail: Vec<String> = found.iter().take(LIST).cloned().collect();
-    if found.len() > LIST {
-        detail.push(format!("... and {} more", found.len() - LIST));
+    let (_, meas, found) = compare(&e, &u);
+    let (ok, detail) = verdict(&found, accept);
+    let taken = found.len() - found.iter().filter(|f| why(f, accept).is_none()).count();
+    let meas = match taken {
+        0 => meas,
+        n => format!("{meas} ({n} accepted)"),
+    };
+    Ok((ok, meas, detail))
+}
+
+fn why<'a>(finding: &str, accept: &'a [Accepted]) -> Option<&'a str> {
+    accept
+        .iter()
+        .find(|a| finding.starts_with(a.finding.as_str()))
+        .map(|a| a.reason.as_str())
+}
+
+/// (pass, detail): failing findings first (at most LIST), then the accepted ones with their reasons.
+pub fn verdict(found: &[String], accept: &[Accepted]) -> (bool, String) {
+    let (open, taken): (Vec<&String>, Vec<&String>) =
+        found.iter().partition(|f| why(f, accept).is_none());
+    let mut detail: Vec<String> = open.iter().take(LIST).map(|f| f.to_string()).collect();
+    if open.len() > LIST {
+        detail.push(format!("... and {} more", open.len() - LIST));
     }
-    Ok((ok, meas, detail.join("\n")))
+    detail.extend(
+        taken
+            .iter()
+            .map(|f| format!("ACCEPTED {f} ({})", why(f, accept).unwrap_or_default())),
+    );
+    (open.is_empty(), detail.join("\n"))
 }
 
 /// `fb cover-structure <exemplar.pdf> <render.pdf>...`: each render against the exemplar, OK or FAIL, then the
@@ -639,7 +751,8 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
                 return Err(fail(2, format!("fb cover-structure: no such PDF: {p}")));
             }
         }
-        let (ok, meas, detail) = judge(Some(std::path::Path::new(ex)), std::path::Path::new(r))?;
+        let (ok, meas, detail) =
+            judge(Some(std::path::Path::new(ex)), std::path::Path::new(r), &[])?;
         println!("{}\t{r}\t{meas}", if ok { "OK" } else { "FAIL" });
         for d in detail.lines() {
             println!("\t{d}");

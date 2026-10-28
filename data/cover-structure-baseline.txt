@@ -229,9 +229,6 @@ courts/eighth-circuit/missouri/state/supreme-court/answering-brief typst
 courts/eighth-circuit/missouri/state/supreme-court/brief-on-the-merits docx
 courts/eighth-circuit/missouri/state/supreme-court/brief-on-the-merits latex
 courts/eighth-circuit/missouri/state/supreme-court/brief-on-the-merits typst
-courts/eighth-circuit/missouri/state/supreme-court/petition-for-writ docx
-courts/eighth-circuit/missouri/state/supreme-court/petition-for-writ latex
-courts/eighth-circuit/missouri/state/supreme-court/petition-for-writ typst
 courts/eighth-circuit/missouri/state/supreme-court/reply-brief docx
 courts/eighth-circuit/missouri/state/supreme-court/reply-brief latex
 courts/eighth-circuit/missouri/state/supreme-court/reply-brief typst
@@ -303,11 +300,9 @@ courts/eighth-circuit/south-dakota/federal/district/motion-brief docx
 courts/eighth-circuit/south-dakota/state/supreme-court/answering-brief docx
 courts/eighth-circuit/south-dakota/state/supreme-court/answering-brief latex
 courts/eighth-circuit/south-dakota/state/supreme-court/answering-brief typst
-courts/eighth-circuit/south-dakota/state/supreme-court/brief-on-the-merits docx
 courts/eighth-circuit/south-dakota/state/supreme-court/motion-brief docx
 courts/eighth-circuit/south-dakota/state/supreme-court/motion-brief latex
 courts/eighth-circuit/south-dakota/state/supreme-court/motion-brief typst
-courts/eighth-circuit/south-dakota/state/supreme-court/reply-brief docx
 courts/eleventh-circuit/alabama/federal/bankruptcy-middle-district/adversary-complaint docx
 courts/eleventh-circuit/alabama/federal/bankruptcy-middle-district/adversary-complaint typst
 courts/eleventh-circuit/alabama/federal/bankruptcy-middle-district/motion-brief docx
@@ -355,7 +350,6 @@ courts/eleventh-circuit/court-of-appeals/opening-brief typst
 courts/eleventh-circuit/court-of-appeals/reply-brief docx
 courts/eleventh-circuit/court-of-appeals/reply-brief latex
 courts/eleventh-circuit/court-of-appeals/reply-brief typst
-courts/eleventh-circuit/florida/federal/bankruptcy-middle-district/adversary-complaint docx
 courts/eleventh-circuit/florida/federal/bankruptcy-northern-district/motion-brief docx
 courts/eleventh-circuit/florida/federal/bankruptcy-northern-district/motion-brief typst
 courts/eleventh-circuit/florida/federal/bankruptcy-southern-district/adversary-complaint docx
@@ -487,14 +481,12 @@ courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/adversary-com
 courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/adversary-complaint typst
 courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/motion-brief docx
 courts/eleventh-circuit/georgia/federal/bankruptcy-middle-district/motion-brief typst
-courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/adversary-complaint docx
 courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/motion-brief docx
 courts/eleventh-circuit/georgia/federal/bankruptcy-northern-district/motion-brief typst
 courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district/adversary-complaint docx
 courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district/adversary-complaint typst
 courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district/motion-brief docx
 courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district/motion-brief typst
-courts/eleventh-circuit/georgia/federal/middle-district/complaint docx
 courts/eleventh-circuit/georgia/federal/middle-district/motion-brief docx
 courts/eleventh-circuit/georgia/federal/middle-district/motion-brief typst
 courts/eleventh-circuit/georgia/federal/northern-district/complaint docx
@@ -817,7 +809,6 @@ courts/first-circuit/massachusetts/state/supreme-judicial-court/motion-brief doc
 courts/first-circuit/massachusetts/state/supreme-judicial-court/motion-brief latex
 courts/first-circuit/massachusetts/state/supreme-judicial-court/motion-brief typst
 courts/first-circuit/massachusetts/state/supreme-judicial-court/petition-for-discretionary-review typst
-courts/first-circuit/massachusetts/state/supreme-judicial-court/petition-for-rehearing docx
 courts/first-circuit/massachusetts/state/supreme-judicial-court/petition-for-review docx
 courts/first-circuit/massachusetts/state/supreme-judicial-court/petition-for-review latex
 courts/first-circuit/massachusetts/state/supreme-judicial-court/petition-for-review typst
@@ -1506,7 +1497,6 @@ courts/ninth-circuit/oregon/federal/district/motion-brief docx
 courts/ninth-circuit/oregon/federal/district/motion-brief typst
 courts/ninth-circuit/oregon/state/court-of-appeals/motion-brief typst
 courts/ninth-circuit/oregon/state/supreme-court/amicus-brief typst
-courts/ninth-circuit/oregon/state/supreme-court/answering-brief typst
 courts/ninth-circuit/oregon/state/supreme-court/brief-on-the-merits typst
 courts/ninth-circuit/oregon/state/supreme-court/motion-brief typst
 courts/ninth-circuit/oregon/state/supreme-court/petition-for-discretionary-review typst
@@ -2260,15 +2250,6 @@ courts/tenth-circuit/wyoming/state/supreme-court/brief-on-the-merits typst
 courts/tenth-circuit/wyoming/state/supreme-court/reply-brief docx
 courts/tenth-circuit/wyoming/state/supreme-court/reply-brief latex
 courts/tenth-circuit/wyoming/state/supreme-court/reply-brief typst
-courts/third-circuit/court-of-appeals/answering-brief docx
-courts/third-circuit/court-of-appeals/answering-brief latex
-courts/third-circuit/court-of-appeals/answering-brief typst
-courts/third-circuit/court-of-appeals/opening-brief docx
-courts/third-circuit/court-of-appeals/opening-brief latex
-courts/third-circuit/court-of-appeals/opening-brief typst
-courts/third-circuit/court-of-appeals/reply-brief docx
-courts/third-circuit/court-of-appeals/reply-brief latex
-courts/third-circuit/court-of-appeals/reply-brief typst
 courts/third-circuit/delaware/federal/bankruptcy-district/adversary-complaint docx
 courts/third-circuit/delaware/federal/bankruptcy-district/adversary-complaint typst
 courts/third-circuit/delaware/federal/bankruptcy-district/motion-brief docx
@@ -2307,7 +2288,6 @@ courts/third-circuit/new-jersey/state/supreme-court/petition-for-writ latex
 courts/third-circuit/new-jersey/state/supreme-court/petition-for-writ typst
 courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district/motion-brief docx
 courts/third-circuit/pennsylvania/federal/bankruptcy-eastern-district/motion-brief typst
-courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/adversary-complaint docx
 courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/adversary-complaint typst
 courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/motion-brief docx
 courts/third-circuit/pennsylvania/federal/bankruptcy-middle-district/motion-brief typst

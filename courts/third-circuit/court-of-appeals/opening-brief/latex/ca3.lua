@@ -342,7 +342,7 @@ local GAP = "\\briefgap{14}"
 local GAP3 = "\\briefgap{4.2}"
 
 -- One counsel group: names, then the lines half an em in (italic in the answering and reply briefs); the last group
--- carries the phone (and, in the opening brief, the party counsel act for).
+-- carries the phone and then (opening and answering briefs) the party counsel act for.
 local function counsel_lines(m, g, last)
   local out = {}
   local function line(x, italic) out[#out + 1] = "\\hspace*{0.5em}" .. (italic and ("\\emph{" .. x .. "}") or x) end
@@ -351,7 +351,7 @@ local function counsel_lines(m, g, last)
   for _, l in ipairs(g.lines or {}) do line(tex(l), italic) end
   if last then
     line(tex(need(m, "phone")), italic)
-    if TYPE == "opening" and m.counsel_for then line(tex(m.counsel_for), true) end
+    if TYPE ~= "reply" and m.counsel_for then line(tex(m.counsel_for), true) end
   end
   return table.concat(out, "\\newline ")
 end
@@ -361,7 +361,7 @@ local function cover(m)
   local function add(s) out[#out + 1] = s end
   add("\\thispagestyle{empty}\\begingroup\\briefsingle\\centering\\parskip=4.9bp\\relax")
   add("{\\bfseries No.\\ " .. tex(need(m, "case_number")) .. "\\par}")
-  add(GAP .. "\\briefdouble" .. GAP)
+  add(GAP .. "\\brieffull" .. GAP)
   if TYPE == "opening" then
     add("{\\bfseries IN THE UNITED STATES COURT OF APPEALS FOR THE~THIRD~CIRCUIT\\par}")
   else
@@ -371,7 +371,7 @@ local function cover(m)
   local sides = need(m, "caption")
   for i, side in ipairs(sides) do
     for _, name in ipairs(side.names) do add(tex(name) .. "\\par") end
-    add("{\\leftskip=3.25in\\rightskip=0pt plus 1fil\\relax\\noindent " .. tex(side.designation) .. "\\par}")
+    add(tex(side.designation) .. "\\par") -- centered under the names (typst)
     if i < #sides then add(GAP3 .. "v.\\par" .. GAP3) end
   end
   add(GAP .. "\\briefrulesmall" .. GAP)
@@ -413,7 +413,6 @@ local function cover(m)
     end
     add("{\\leftskip=3.25in\\rightskip=0pt plus 1fil\\relax\\parskip=7bp\\relax " .. table.concat(blocks, "\n") .. "}")
   end
-  add(GAP .. "\\briefdouble")
   add("\\par\\endgroup")
   return table.concat(out, "\n")
 end

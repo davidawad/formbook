@@ -86,10 +86,11 @@ local function dot_tabs()
   return xe.leader_tab(TAB_R)
 end
 
--- A rule on the cover: an empty paragraph with a bottom border, `left_right` in from both margins (the 2 in rules).
+-- A rule on the cover: an empty paragraph with a bottom border, `left_right` in from both margins (the 2 in rules);
+-- "full" is the single 1 pt full-width rule (typst full-rule).
 local function rule(kind, before, left_right)
-  local b = kind == "double"
-      and '<w:pBdr><w:bottom w:val="thickThinSmallGap" w:sz="12" w:space="1" w:color="000000"/></w:pBdr>'
+  local b = kind == "full"
+      and '<w:pBdr><w:bottom w:val="single" w:sz="8" w:space="1" w:color="000000"/></w:pBdr>'
       or '<w:pBdr><w:bottom w:val="single" w:sz="6" w:space="1" w:color="000000"/></w:pBdr>'
   return para({ KEEP, b, spacing(before, 0, 120), ind(left_right or 0, nil, nil, left_right or 0) }, "")
 end
@@ -405,7 +406,7 @@ end
 -- ---------------------------------------------------------------------------
 
 -- One counsel group: names, then the lines half an em in (italic in the answering and reply briefs); the last group
--- carries the phone (and, in the opening brief, the party counsel act for).
+-- carries the phone and then (opening and answering briefs) the party counsel act for.
 local function lines_of(meta, g, last)
   local italic = TYPE ~= "opening"
   local ls = {}
@@ -413,7 +414,7 @@ local function lines_of(meta, g, last)
   for _, l in ipairs(g.lines or {}) do ls[#ls + 1] = { x = inl(l, { i = italic }), first = 140 } end
   if last then
     ls[#ls + 1] = { x = inl(need_meta(meta, "phone"), { i = italic }), first = 140 }
-    if TYPE == "opening" and meta.counsel_for then ls[#ls + 1] = { x = inl(meta.counsel_for, { i = true }), first = 140 } end
+    if TYPE ~= "reply" and meta.counsel_for then ls[#ls + 1] = { x = inl(meta.counsel_for, { i = true }), first = 140 } end
   end
   return ls
 end
@@ -457,7 +458,7 @@ build_cover = function(meta, gap)
     add(para({ KEEP, spacing(before or 0, 0), ind(0, nil, 0), jc("center") }, x))
   end
   center(runs("No. ", { b = true }) .. inl(need_meta(meta, "case_number"), { b = true }), 0)
-  add(rule("double", gap))
+  add(rule("full", gap))
   if TYPE == "opening" then
     center(runs("IN THE UNITED STATES COURT OF APPEALS FOR THE\u{00A0}THIRD\u{00A0}CIRCUIT", { b = true }), gap)
   else
@@ -466,7 +467,7 @@ build_cover = function(meta, gap)
   add(rule("short", gap, 3240))
   for i, side in ipairs(sides) do
     for k, n in ipairs(side.names) do center(inl(n, {}), (k == 1 and i == 1) and gap or 0) end
-    add(para({ KEEP, spacing(0, 0), ind(HALF_W, nil, 0) }, inl(side.designation, {})))
+    center(inl(side.designation, {})) -- centered under the names (typst)
     if i < #sides then
       add(para({ KEEP, spacing(small, small), ind(0, nil, 0), jc("center") }, runs("v.", {})))
     end
@@ -535,7 +536,6 @@ build_cover = function(meta, gap)
       end
     end
   end
-  add(rule("double", gap))
   local blocks = {}
   local h = extra
   for _, x in ipairs(out) do

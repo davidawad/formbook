@@ -2,3 +2,11 @@
 # where the typst render does (fb-595.54.2, on the shared layout model lib/*/xengine*), so a difference fails.
 params:
   cross_engine: gate
+  # DEF-COVER-002 against FILED-EXAMPLE-answering-brief.pdf (K&L Gates): differences that are this filer's style (tier 3),
+  # because FILED-EXAMPLE-answering-brief-2.pdf (United States Attorney) and the opening and reply exemplars set them as
+  # the template does. fb-595.78.
+  cover_structure_accepted:
+    - finding: 'alignment: "Plaintiff/Appellant,"'
+      reason: "party designations centered under the names, as answering-brief-2 and five of the six ca3 exemplars; K&L sets them flush right"
+    - finding: 'rules: between "United States Court of Appeals for the Third Cir'
+      reason: "a rule between the docket number and the court's name, as answering-brief-2, opening-brief-2 and reply-brief-2"

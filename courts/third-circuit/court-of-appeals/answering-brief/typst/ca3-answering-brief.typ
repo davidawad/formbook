@@ -295,11 +295,9 @@
 // Cover (FRAP 32(a)(2))
 // ---------------------------------------------------------------------------
 
-#let double-rule = {
-  line(length: 100%, stroke: 1.6pt)
-  v(2.5pt)
-  line(length: 100%, stroke: 0.5pt)
-}
+// One full-width rule below the docket number and below counsel: every filed cover in usage/ uses single rules
+// (none a double one), DEF-COVER-002.
+#let full-rule = line(length: 100%, stroke: 1pt)
 #let short-rule = align(center, line(length: 2in, stroke: 0.7pt))
 
 #let cover-body(meta, gap) = {
@@ -309,7 +307,7 @@
   v(gap * 0.6)
   strong[No. #need(meta, "case_number")]
   v(gap)
-  double-rule
+  full-rule
   v(gap)
   strong[IN THE UNITED STATES COURT OF APPEALS\ FOR THE THIRD CIRCUIT]
   v(gap)
@@ -318,7 +316,8 @@
   let sides = need(meta, "caption")
   for (i, side) in sides.enumerate() {
     for name in side.names { inl(name); parbreak() }
-    align(left, pad(left: half-width, inl(side.designation)))
+    // centered under the names, as five of the six filed covers set it (DEF-COVER-002)
+    inl(side.designation); parbreak()
     if i < sides.len() - 1 { v(gap * 0.3); [v.]; v(gap * 0.3) }
   }
   v(gap)
@@ -346,11 +345,12 @@
         let lines = g.at("lines", default: ())
         if gi == groups.len() - 1 { lines = lines + (need(meta, "phone"),) }
         for l in lines { h(0.5em); emph(inl(l)); linebreak() }
+        // the party counsel act for, last (after the telephone), as the filed covers that name it set it
+        if gi == groups.len() - 1 and "counsel_for" in meta { h(0.5em); emph(inl(meta.counsel_for)); linebreak() }
       })
     }
   }))
-  v(gap)
-  double-rule
+  // no rule below counsel: five of the six filed covers end without one (DEF-COVER-002)
 }
 
 /// The cover is one page. The spacing between its parts is the only thing that gives:

@@ -121,15 +121,16 @@ fn the_same_cover_passes() {
 }
 
 #[test]
-fn counsel_moved_to_the_middle_fails_per_line() {
+fn counsel_moved_to_the_middle_fails_as_one_block() {
     let (ok, found) = run(
         &cover(72.0, vec![rule(215.0)], true),
         &cover(306.0, vec![rule(215.0)], true),
     );
     assert!(!ok);
-    assert_eq!(found.len(), 3, "{found:?}");
-    assert!(found[0]
-        .starts_with("alignment: \"Brian C. Farrell, Esquire\" is left in the exemplar, indented"));
+    assert_eq!(
+        found,
+        vec!["alignment: \"Brian C. Farrell, Esquire\" and the 2 lines after it are left in the exemplar, indented 234 pt in ours (x 306.0-447.0)"]
+    );
 }
 
 #[test]
@@ -248,7 +249,7 @@ fn nothing_to_compare_passes_and_says_why() {
     );
     let (ok, meas, _) = compare(&Cover::of(&other), &Cover::of(&cover(72.0, vec![], false)));
     assert!(ok && meas.contains("not the same page"), "{meas}");
-    let (ok, meas, _) = judge(None, std::path::Path::new("/nonexistent.pdf")).unwrap();
+    let (ok, meas, _) = judge(None, std::path::Path::new("/nonexistent.pdf"), &[]).unwrap();
     assert!(ok && meas.contains("no same-id FILED-EXAMPLE"), "{meas}");
 }
 
@@ -311,4 +312,45 @@ fn the_committed_baseline_is_well_formed() {
             "{BASELINE}: {doc} is not a doc folder (no usage/)"
         );
     }
+}
+
+#[test]
+fn an_accepted_finding_is_listed_with_its_reason_and_does_not_fail() {
+    let found = vec![
+        "alignment: \"Brian C. Farrell, Esquire\" is left in the exemplar, indented 209 pt in ours"
+            .to_string(),
+        "date line: the exemplar's page 1 has \"Date: July 27, 2026\", ours has no date"
+            .to_string(),
+    ];
+    let accept = vec![Accepted {
+        finding: "date line:".into(),
+        reason: "one filer dates the cover; the other exemplar does not".into(),
+    }];
+    let (ok, detail) = verdict(&found, &accept);
+    assert!(!ok);
+    assert_eq!(
+        detail.lines().collect::<Vec<_>>(),
+        vec![
+            found[0].as_str(),
+            "ACCEPTED date line: the exemplar's page 1 has \"Date: July 27, 2026\", ours has no date (one filer dates the cover; the other exemplar does not)",
+        ]
+    );
+    let all = vec![
+        accept[0].clone(),
+        Accepted {
+            finding: "alignment: \"Brian C. Farrell".into(),
+            reason: "counsel placement differs between filers".into(),
+        },
+    ];
+    assert!(verdict(&found, &all).0);
+}
+
+#[test]
+fn a_rule_painted_twice_is_one_rule() {
+    let us = cover(72.0, vec![rule(215.0), rule(215.0)], false);
+    assert_eq!(Cover::of(&us).rules.len(), 1);
+    assert_eq!(
+        run(&cover(72.0, vec![rule(215.0)], false), &us),
+        (true, vec![])
+    );
 }

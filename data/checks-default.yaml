@@ -29,6 +29,7 @@ params:
   # page_limit: 30                   # unset on purpose: no rules.md states its limit in machine-readable form
   # cover_pages: 1                   # DEF-COVER-001: unnumbered pages before the first page number; set in eval.yaml for a longer declared cover
   # cover_structure: gate            # DEF-COVER-002: `gate` or `report`; unset, folders in data/cover-structure-baseline.txt report, all others gate
+  # cover_structure_accepted: []     # DEF-COVER-002: [{finding: <start of a finding>, reason: <the exemplars that set it as the template does>}], tier-3 differences printed ACCEPTED
 
 checks:
   - id: DEF-CONT-001
