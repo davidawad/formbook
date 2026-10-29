@@ -1,10 +1,4 @@
 PASS
-<<<<<<< HEAD
 edf2fe690f31d62d5029ec28edc0e6163fc007ab1ce7e88585946632cf5e33f5  usage/OUTPUT-answering-brief.docx
 be6857392aea7a958d6ea0c4678c508fa2e95a2b7c7765268601c290275a94bb  usage/OUTPUT-answering-brief.docx.pdf
 62fba3f007d410c44e7d8fbfd8d64368b06fa1f5d2ff2923a0aa1dcf7e7cf28c  usage/OUTPUT-answering-brief.typst.pdf
-=======
-d7685000ccf376dabc1516b2d654148b6d86ca8eecd28e7eea91fc9ca7a58cab  usage/OUTPUT-answering-brief.docx
-77f42d5e7b27fe785e68ec5f8f0731c40d7133e3269e66a92af3817bad7d5b78  usage/OUTPUT-answering-brief.docx.pdf
-693b8db2c4fdef8319fc40c4b2fb014b6bec1c7d8db94fd39aef9844a059c1e9  usage/OUTPUT-answering-brief.typst.pdf
->>>>>>> c0ff56e94 (fix(docx): finalize shared spacing guards (fb-595.54.8))
