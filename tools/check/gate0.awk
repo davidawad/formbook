@@ -21,7 +21,8 @@
 # Prepare a markdown block: returns its normal form T and fills TI[i] (italic flag per character),
 # WS/WT (where each markdown word starts, for naming the first lost word), the link list lk/lkoff and the
 # footnote-reference list refkey/refpos. A footnote reference becomes the footnote's number, because that
-# is what the PDF prints at that spot.
+# is what the PDF prints at that spot. LEAD is the dots that end the stream before the block (see prepb()): a dot
+# leader is cut to four counting them, as the PDF stream is cut across its runs.
 function prep(raw,    i, n, c, ital, t, nc, k, key, wl) {
   T = ""; ital = 0; nlinks = 0; nrefs = 0; delete TI; delete WS; delete WT; nw = 0
   n = length(raw); wl = 0
@@ -39,14 +40,22 @@ function prep(raw,    i, n, c, ital, t, nc, k, key, wl) {
       continue
     }
     if (c ~ /[ \t]/) { wl = 0; continue }
-    if (c == "." && T ~ /\.\.\.\.$/) continue   # a dot leader's length is layout, not content (leader())
     nc = norm1(c)
     if (wl == 0) WS[++nw] = length(T) + 1
     wl++; WT[nw] = WT[nw] c
-    for (k = 1; k <= length(nc); k++) { T = T substr(nc, k, 1); TI[length(T)] = ital }
+    for (k = 1; k <= length(nc); k++) {
+      if (substr(nc, k, 1) == "." && (LEAD T) ~ /\.\.\.\.$/) continue   # a dot leader's length is layout, not content (leader())
+      T = T substr(nc, k, 1); TI[length(T)] = ital
+    }
   }
   return T
 }
+
+# Prepare block b of the body. The PDF stream has no whitespace and no block boundaries, so the dots that end one block
+# and open the next (an elision line after a quoted sentence ending in an ellipsis) run together there and leader()
+# cuts them to four as one run: each block is prepared after the dots that end the stream before it (lead[b]), and
+# a block that is nothing but dots continuing them prepares to nothing.
+function prepb(b) { LEAD = (b in lead) ? lead[b] : ""; return prep(braw[b]) }
 
 function runat(p,    lo, hi, mid) {            # index of the run holding offset p of the original stream S
   lo = 1; hi = nruns
@@ -77,7 +86,7 @@ function longest_prefix(t, from,    lo, hi, mid) {
 
 # Everything that follows from block b being found at offset pos of S2.
 function settle(b, pos,    t, endp, r, r1, r2, k, bad, badw, w2, nr, nl, kind, lab, lp, labok, txt, refp, rp) {
-  t = prep(braw[b]); endp = pos + length(t) - 1
+  t = prepb(b); endp = pos + length(t) - 1
   r1 = runat(M2[pos]); r2 = runat(M2[endp])
   kind = (bk[b] == "H" && blv[b] ~ /c/) ? "Hc" : bk[b]
   for (r = r1; r <= r2; r++) if (!(r in kindof)) kindof[r] = kind
@@ -104,7 +113,7 @@ function settle(b, pos,    t, endp, r, r1, r2, k, bad, badw, w2, nr, nl, kind, l
 }
 
 function report_missing(b, from,    t, lo, pq) {
-  t = prep(braw[b]); missing++
+  t = prepb(b); missing++
   lo = longest_prefix(t, from); pq = index(substr(S2, from), substr(t, 1, lo > 0 ? lo : 1))
   printf "FAIL %s block %d is missing or altered in the PDF. Markdown: \"%.70s\". The text matches for %d of %d characters, then the markdown has \"%s\" where the PDF has \"%.30s\"\n",
     bk[b], b, braw[b], lo, length(t), substr(t, lo + 1, 25), substr(S2, from + pq - 1 + lo, 30) >> rep
@@ -156,7 +165,7 @@ function tl_head_ok(h) { return length(h) >= 12 }                       # a head
 function table_row(b,    full, cells, n, i, j, k, w, q, L, tt, total, wd, wl, W, ord, bad, idx, minpos, maxend, ht, hq, lim, r, r1, r2, badn, first) {
   full = braw[b]; n = split(full, cells, "\001"); total = 0
   for (i = 1; i <= n; i++) {
-    tt = prep(cells[i]); ct[i] = tt; tl[i] = length(tt); total += tl[i]
+    LEAD = ""; tt = prep(cells[i]); ct[i] = tt; tl[i] = length(tt); total += tl[i]
     cti[i] = ""; for (k = 1; k <= tl[i]; k++) cti[i] = cti[i] (TI[k] ? "1" : "0")
   }
   W = total * 3 + 300; wd = substr(S2, cursor, W); wl = length(wd)
@@ -187,7 +196,7 @@ function table_row(b,    full, cells, n, i, j, k, w, q, L, tt, total, wd, wl, W,
   if (minpos == 0) minpos = cursor
   lim = minpos - 1
   for (k = npend; k >= 1; k--) {                                         # headings sit just before the row
-    ht = prep(braw[pend[k]]); hq = last_in(ht, cursor, lim)
+    ht = prepb(pend[k]); hq = last_in(ht, cursor, lim)
     if (hq == 0) { report_missing(pend[k], cursor); continue }
     settle(pend[k], hq); lim = hq - 1
   }
@@ -243,11 +252,16 @@ END {
   printf "" > rep; printf "" > tag; printf "" > hd; printf "" > lkf
 
   # ---- footnotes: numbers follow the order of references in the body ----
-  for (b = 1; b <= nb; b++) if (bk[b] != "F") prep(braw[b])
+  # (and lead[b], the dots that end the stream before body block b: prepb())
+  tail = ""
+  for (b = 1; b <= nb; b++) if (bk[b] != "F") {
+    lead[b] = tail; t = prepb(b); t = LEAD t
+    tail = match(t, /\.+$/) ? substr(t, RSTART + (RLENGTH > 4 ? RLENGTH - 4 : 0)) : ""
+  }
   nfn = 0; fnmiss = 0
   for (b = 1; b <= nb; b++) if (bk[b] == "F") {
     key = blv[b]; nfn++
-    ftxt = prep(braw[b])
+    LEAD = ""; ftxt = prep(braw[b])
     if (!(key in fnnum) && blab[b] == "fm" && key ~ /^[0-9]+$/) fnnum[key] = key + 0   # frontmatter note: its key is the printed number
     if (!(key in fnnum)) { print "NOTE footnote [^" key "] is defined but never referenced" >> rep; continue }
     want = fnnum[key] ftxt
@@ -280,16 +294,17 @@ END {
     if (bk[b] == "H") { pend[++npend] = b; continue }
     if (bk[b] != "R") intable = 0
     if (bk[b] == "R") {                                                   # table row: contiguous in the PDF, or interleaved with its neighbours
-      full = braw[b]; gsub(/\001/, " ", braw[b]); t = prep(braw[b])
+      full = braw[b]; gsub(/\001/, " ", braw[b]); t = prepb(b)
       if (!intable) { thead = t; intable = 1 }                            # the first row of a table is its header; the PDF repeats it after a page break
       if (index(substr(S2, cursor), t) == 0) { braw[b] = full; table_row(b); continue }
     }
-    t = prep(braw[b])
+    t = prepb(b)
+    if (t == "") continue                                               # nothing but dots, run into the last block's (prepb())
     q = index(substr(S2, cursor), t)
     if (q == 0) {
       report_missing(b, cursor)
       for (k = 1; k <= npend; k++) {                                     # place the headings that preceded it
-        ht = prep(braw[pend[k]]); q2 = index(substr(S2, cursor), ht)
+        ht = prepb(pend[k]); q2 = index(substr(S2, cursor), ht)
         if (q2 == 0) { report_missing(pend[k], cursor); continue }
         settle(pend[k], cursor + q2 - 1); cursor = cursor + q2 - 1 + length(ht)
       }
@@ -299,7 +314,7 @@ END {
     pos = cursor + q - 1
     lim = pos - 1
     for (k = npend; k >= 1; k--) {                                       # headings sit just before this block
-      ht = prep(braw[pend[k]]); hq = last_in(ht, cursor, lim)
+      ht = prepb(pend[k]); hq = last_in(ht, cursor, lim)
       if (hq == 0) { report_missing(pend[k], cursor); continue }
       settle(pend[k], hq); lim = hq - 1
     }
@@ -308,7 +323,7 @@ END {
     cursor = pos + length(t)
   }
   for (k = 1; k <= npend; k++) {                                         # headings with nothing after them
-    ht = prep(braw[pend[k]]); q = index(substr(S2, cursor), ht)
+    ht = prepb(pend[k]); q = index(substr(S2, cursor), ht)
     if (q == 0) { report_missing(pend[k], cursor); continue }
     settle(pend[k], cursor + q - 1); cursor = cursor + q - 1 + length(ht)
   }

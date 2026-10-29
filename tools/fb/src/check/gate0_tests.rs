@@ -105,6 +105,29 @@ fn a_dot_leader_matches_whatever_its_length() {
 }
 
 #[test]
+fn ellipses_in_a_row_are_not_a_leader() {
+    // fb-595.91: quoted passages with elided parts, an elision line its own block after a sentence ending in an
+    // ellipsis: the dots of the two blocks meet in the whitespace-free PDF stream as seven or more and are cut to
+    // four as if a leader, so the elision block was looked for further on and every block after it failed.
+    let md = "> She contends the order fails. ....\n\n> ...\n\n> She argues the commission erred.\n";
+    let typst = [
+        "She contends the order fails. \u{2026}.",
+        "\u{2026}",
+        "She argues the commission erred.",
+    ];
+    assert_eq!(g0_missing(md, &typst), "0");
+    let md = "> The court ruled with covers. . . . .\n\n> . . . .\n\n> In short, no right exists.\n";
+    let spaced = [
+        "The court ruled with covers. . . .",
+        "....",
+        "In short, no right exists.",
+    ];
+    assert_eq!(g0_missing(md, &spaced), "0");
+    // the text after the elision still counts
+    assert_eq!(g0_missing(md, &spaced[..2]), "1");
+}
+
+#[test]
 fn footnote_continued_on_the_next_page_is_reassembled() {
     let md = "Body one.[^1] More body.\n\nBody two.\n\n[^1]: The note begins here and then it continues onto the next page.\n";
     // the note's first part is at the foot of page 1, its rest at the foot of page 2
