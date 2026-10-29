@@ -686,8 +686,10 @@
 
 /// The text of a keyed authority's row: a case-like group's (`italic`) name in italics before the citation, another
 /// group's name, a comma and the citation, or the citation alone.
+/// (`separator`, fb-595.96: the text between the name and the citation; a space after an italic name, a comma and a
+/// space after a roman one, by default)
 #let keyed-text(g, e) = if not is-set(e.at("name", default: none)) { e.cite } else if g.at("italic", default: false) {
-  "*" + e.name + "* " + e.cite } else { e.name + ", " + e.cite }
+  "*" + e.name + "*" + g.at("separator", default: " ") + e.cite } else { e.name + g.at("separator", default: ", ") + e.cite }
 
 /// Content with every occurrence of an authority's `find` text marked (<xd-toa>, the entry's number) at the end of the
 /// word it ends in: the pages of the table of authorities. Not before the word (typst sets a mark that opens a line at

@@ -3516,3 +3516,26 @@ fn a_footer_anchored_at_its_foot_wraps_and_grows_upward_in_every_engine() {
         .1;
     assert!(tpl.contains("\\vbox to0pt{\\vss\\setbox0\\hbox to\\textwidth{\\hfil\\thepage\\hfil}\\ht0=11.04bp\\dp0=2.76bp\\box0}"), "{tpl}");
 }
+
+#[test]
+fn a_keyed_authority_s_separator_between_name_and_citation() {
+    // (fb-595.96) federal tables set a comma after the italic case name; the default stays a space after an italic name
+    // and a comma after a roman one, the same text in typst and in the pandoc half of the model
+    let ty = typst_expr(
+        "import \"/lib/typst/xdoc.typ\": keyed-text; let e = (name: \"Doe v. Roe\", cite: \"1 U.S. 1\"); \
+         (keyed-text((italic: true), e), keyed-text((italic: true, separator: \", \"), e), keyed-text((:), e))",
+    );
+    assert_eq!(
+        ty,
+        r#"["*Doe v. Roe* 1 U.S. 1","*Doe v. Roe*, 1 U.S. 1","Doe v. Roe, 1 U.S. 1"]"#
+    );
+    let lu = lua(
+        "local xd = require(\"pandoc.xdoc\"); local e = { name = \"Doe v. Roe\", cite = \"1 U.S. 1\" }\n\
+         print(xd.keyed_text({ italic = true }, e)); print(xd.keyed_text({ italic = true, separator = \", \" }, e)); \
+         print(xd.keyed_text({}, e))",
+    );
+    assert_eq!(
+        lu,
+        "*Doe v. Roe* 1 U.S. 1\n*Doe v. Roe*, 1 U.S. 1\nDoe v. Roe, 1 U.S. 1"
+    );
+}

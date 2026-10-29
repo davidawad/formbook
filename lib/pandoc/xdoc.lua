@@ -985,8 +985,10 @@ end
 -- The markdown of a keyed authority's row (lib/typst/xdoc.typ keyed-text).
 function M.keyed_text(g, e)
   if not M.is_set(e.name) then return tostring(e.cite) end
-  if g.italic then return "*" .. e.name .. "* " .. tostring(e.cite) end
-  return e.name .. ", " .. tostring(e.cite)
+  -- (`separator`, fb-595.96: the text between the name and the citation; a space after an italic name, a comma
+  -- and a space after a roman one, by default: a federal table's italic case name takes a comma)
+  if g.italic then return "*" .. e.name .. "*" .. (g.separator or " ") .. tostring(e.cite) end
+  return e.name .. (g.separator or ", ") .. tostring(e.cite)
 end
 
 function M.authority_entries(meta)
