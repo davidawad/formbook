@@ -1,0 +1,78 @@
+# D.P.R. Local Civil Rules (reviewed in courts/first-circuit/puerto-rico/federal/district/rules.md), L.Civ.R. 7:
+# 12-point proportional type, double spacing and the memorandum's length/contents conventions. D.P.R. L.Civ.R. 5
+# governs the caption, service and signature. Source list and verification dates are in the district rules.md.
+base: /lib/layouts/frcp-motion-brief.yaml
+front: ~
+size: 12
+pitch: {body: 24, single: 13.8}
+margin: {top: 72, bottom: 72, left: 72, right: 72}
+page_number: {align: center, from: 1, front: lower-roman}
+# FRCP 10(a), D.P.R. L.Civ.R. 5(a): court name, parties and case identifier on the caption.
+constants:
+  court: "UNITED STATES DISTRICT COURT"
+  district: "FOR THE DISTRICT OF PUERTO RICO"
+cover:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 245
+        blocks:
+          - box:
+              - each: caption
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", left: 100.8, above: 13.8}
+                between:
+                  - {text: "v.", align: center, above: 13.8, below: 13.8}
+            stroke: {right: 0.75, bottom: 0.75}
+            inset: {right: 12, bottom: 12}
+      - blocks:
+          - {text: "Civil No. {case_number}"}
+          - {text: "{judge}", above: 13.8}
+          - {text: "{brief_title}", bold: true, upper: true, above: 13.8}
+    gutter: 18
+    above: 21.6
+  - columns:
+      each: counsel
+      split: 1
+      gap: 18
+      blocks: [{text: "{.}"}]
+    above: 24
+# D.P.R. L.Civ.R. 7(e) (as quoted in the district rules.md) calls for contents for long memoranda; the table of
+# authorities follows the convention in two filed exemplars (usage/SOURCE.md).
+contents: {title: "Table of Contents", depth: 4, col: 36, hang: 18, step: 21, above: 7}
+authorities:
+  title: "Table of Authorities"
+  col: 72
+  hang: 25.2
+  above: 8.4
+  group: {bold: true, above: 13.8, below: 7}
+  kinds:
+    - {kind: case, title: "Cases"}
+    - {kind: statute, title: "Statutes"}
+    - {kind: rule, title: "Rules"}
+    - {kind: regulation, title: "Regulations"}
+    - {kind: other, title: "Other Authorities"}
+heading:
+  - {align: center, bold: true, upper: true, above: 13.8, below: 13.8}
+  - {bold: true, number: "I.", hang: 36, above: 13.8, below: 13.8}
+  - {bold: true, number: "A.", hang: 36, above: 13.8, below: 13.8}
+  - {bold: true, number: "1.", hang: 36, above: 13.8, below: 13.8}
+  - {bold: true, number: "a.", hang: 36, above: 13.8, below: 13.8}
+closing:
+  - group:
+      - {text: "Dated: {date}", optional: true}
+      - {text: "Respectfully submitted,"}
+      - each: signature.groups
+        blocks:
+          - {text: "s/ {signer}", underline: true, above: 5.6}
+          - each: lines
+            blocks: [{text: "{.}"}]
+    above: 21.6
+after_tail:
+  - {text: "CERTIFICATE OF SERVICE", heading: 1}
+  - {text: "I hereby certify that this document was served through CM/ECF on all counsel of record."}
+  - {text: "{certificate.place}, {certificate.date}"}
+  - {text: "s/ {certificate.signer}", underline: true, above: 5.6}
+  - each: certificate.lines
+    blocks: [{text: "{.}"}]
