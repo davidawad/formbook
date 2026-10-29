@@ -21,7 +21,7 @@ Courts under `courts/tenth-circuit` (31).
 | [United States District Court, Oklahoma Northern](oklahoma/federal/northern-district) | `oknd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court, Oklahoma Western](oklahoma/federal/western-district) | `okwd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Utah](utah/federal/bankruptcy-district) | `utb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. Utah](utah/federal/district) | `utd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. Utah](utah/federal/district) | `utd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Wyoming](wyoming/federal/bankruptcy-district) | `wyb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Wyoming](wyoming/federal/district) | `wyd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Colorado Court of Appeals](colorado/state/court-of-appeals) | `coloctapp` | up for review | 5/5 | — | — | 29 |

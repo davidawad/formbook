@@ -7,10 +7,10 @@ Folder: `courts/tenth-circuit/utah/federal/district/motion-brief/`. Self-contain
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (22 pages, text layer; `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (abridged transcription of the exemplar, see Known gaps) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf` and `usage/OUTPUT-motion-brief.docx` (+ `.docx.pdf`), 11 pages each, typst 0.15.0 and LibreOffice, vendored Times New Roman only, no warnings (`tools/render.sh`) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, `.latex.pdf`, `.docx` and `.docx.pdf`, 11 pages each, on the generic FRCP brief (fb-595.92); vendored Times New Roman only, no warnings |
 | typeface | face required: **none** (DUCivR 10-1(3) names no typeface). Font: **Times New Roman** 12 pt on both engines, footnotes included (docs/FONTS.md; the docx names the typst face through `{font}`). |
-| overlay | ok: `usage/OVERLAY-miller-motion-to-dismiss.pdf` and `usage/OVERLAY-miller-motion-to-dismiss.txt` (`tools/overlay.sh`, exemplar passed as the third argument: see Render and overlay) |
-| pages reviewed | 11 of 11 typst and 11 of 11 docx (rendered at 50 dpi and viewed after the last template change, fb-595.68.33) |
+| overlay | `just overlay <dir>` writes `.overlay/<doc path>/OVERLAY-motion-brief.pdf` (gitignored, not committed) |
+| pages reviewed | 11 of 11 on each engine (2026-10-29, the FRCP-base render: `reviews/2026-10-29.md`) |
 
 File names. The brief names outputs `<id>.pdf` and `<id>-overlay.pdf`. `tools/render.sh`, `tools/overlay.sh` and the court-folder convention (`CLAUDE.md`) name them `INPUT-<id>.md` → `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf`/`.txt`. The tools were used as they are; `<id>` is `miller-motion-to-dismiss`.
 
@@ -38,11 +38,11 @@ Not produced by this template: a proposed order (DUCivR 7-1, separate filing), a
 ## Layout
 
 - Shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): every line a box of its pitch, first-fit ragged-right breaking, no kerning, ligatures or hyphenation. The docx render breaks every line and page where typst does (XENG-001..003 gated in `eval.yaml`).
-- Page 1: counsel block single-spaced at the upper left with the party represented in italics; a blank double line; the court title centred bold capitals; a blank double line; the caption: the party column (3.75 in; names, designation 1.25 in in, "v.", blank single lines between) closed by a rule on its right and below; at the right the case number, the title in bold capitals and the judge. Then, a blank double line below, the motion (DUCivR 7-1(a)(1)(A)) on the 24 pt pitch, its bullets half an inch in with the text an inch in.
-- New page: TABLE OF CONTENTS (title, a blank double line, "Page" at the right; a blank single line above each row; level 2 label at the margin and level 3 half an inch in, each label in a half-inch box; the text wraps before a 0.5 in page column; a dot leader to the page).
+- Page 1: counsel block single-spaced at the upper left with the party represented in italics; a blank double line; the court title centred bold capitals; a blank double line; the caption: the party column (3.75 in; names, designation 1.25 in in, "v." between the sides, a blank line on each side), ruled at its right and foot, and right of the rule the title in bold capitals, the case number and the judge, a blank line apart; a blank double line; the motion (DUCivR 7-1(a)(1)(A)), which may run onto page 2.
+- New page: TABLE OF CONTENTS (the title centred, a blank double line; a blank single line above each row; level 1 rows at the margin, "I." half an inch in and "A." an inch in, each label in a half-inch box; the text wraps before a half-inch page column; a dot leader).
 - New page: TABLE OF AUTHORITIES, from the `toa:` links of the body: Cases, Statutes, Rules, Other Authorities (a blank single line above each group, 6 pt above each entry; a 1 in page column; 7 or more pages print "passim"). A row keeps its last word before the leader only with 4 pt to spare (`lead-slack`: LibreOffice wraps a word that leaves less).
 - New page: the memorandum from `# MEMORANDUM OF LAW`. Headings on the body pitch, bold, kept with their text: level 1 centred capitals; level 2 "I." at the margin, level 3 "A." half an inch in, the label in a half-inch box and the later lines under the text (labels restart under each level 1 heading). Numbered lists as the bullets. Footnotes 12 pt single-spaced, 6 pt between notes.
-- Signature: a blank double line, "DATED:" and the date at the left; the firm, "/s/", the signer and the lines from 3.25 in. The last section (CONCLUSION) is kept with the signature block.
+- Signature: a blank double line, "DATED:" and the date at the left; the firm, "/s/", the signer and the lines from 3.25 in. The last paragraph is kept with the signature block.
 - Pages numbered 1, 2, 3 ... from the caption page, centred, the 13.8 pt line box ending 0.5 in above the page edge.
 
 ## Markdown contract (for samples)
@@ -67,7 +67,7 @@ The exemplar PDF is not in the checkout (only `usage/SOURCE.md` is). On 2026-10-
 
 Overlay map: ours pp. 1–3 ↔ filed pp. 1–3 (80–90%); ours p. 4 (TOA) ↔ filed p. 4 (32%: the exemplar's TOA page is a different layout); ours pp. 5–12 ↔ filed pp. 7, 8, 10, 12, 13, 17, 19, 21. The later pairs are coarse because the sample skips parts of the memorandum (see Known gaps), so a later page pairs with the exemplar page that shares most of its words, not the page at the same position. The overlay is a diagnostic, not a score.
 
-## Visual review (Gate 2 record, fb-595.68.33: all 11 pages of each engine rendered at 50 dpi and looked at)
+## Visual review (before the FRCP base, fb-595.68.33; the current record is `reviews/2026-10-29.md`)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -94,15 +94,29 @@ The docx pages break every line and page as typst does (`fb diff --engines`: 253
 5. **TOA completeness.** The TOA is generated from the links in the sample. The exemplar's printed TOA omits *Leverington*, which its text cites; the sample's TOA includes it, because the links make it complete. Authorities cited only in the omitted parts (for example *Dennis v. Sparks*, *Hoai*, *Whipple*) are not in the sample's TOA.
 6. **Judge.** The caption shows "Judge Daphne A. Oberg", as the exemplar does; no magistrate judge line (the exemplar has none).
 7. **Exemplar wording.** The sample keeps the exemplar's wording, including its "barred by the by Younger abstention". One punctuation change: the *Bailey* cite is set as 846 P.2d 1278, 1280 (the filed text has no comma between the page numbers).
-8. **Tier-2 comparison.** One exemplar only. Alternates (Adams v. Tooele County School District, Fox v. University of Utah, Xlear v. FTC) are in `usage/SOURCE.md`. Not run as a second-filer comparison.
+8. **Tier-2 comparison.** Three exemplars from different filers (`usage/SOURCE.md`); the caption order and the contents' indents follow the first two (fb-595.92).
 9. **Certificates.** No certificate of service (FRCP 5(d)(1)(B)); no certificate of compliance (not needed under the page limit).
-10. **Signature placement.** The last section (the conclusion) is kept with the signature block on both engines.
-11. **Checks.** `sh tools/check.sh <folder> --engine typst` (9 passed, 0 failed) and `--engine docx` (13 passed, 0 failed, XENG-001..003 gated).
+10. **Signature placement.** The last paragraph is kept with the signature block (the base's `keep_with_closing`), in every engine.
+11. **Checks.** `sh tools/check.sh <folder> --engine typst`, `latex` and `docx` exit 0 (fb-595.92), XENG-001..003 gated; DEF-COVER-002 reported (`eval.yaml`).
 
 ## Engines
 
-**typst** (`typst/`): the reference. **docx** (`docx/`): `docx/reference.xml` (`base="xengine"`, `{font}`, Body Text 480 twips, single 276, Footnote Text 12 pt in 276-twip lines with 120 after, Body Text Noted (no widow control, for a paragraph with a footnote) and Body Text Keep) and the filter `docx/utd-motion-brief.lua`, which writes every paragraph with its typst pitch and spacing (cover, caption table, motion, tables, headings with their labels, lists, signature table), the letter section with the 1 1/2 in top margin and the page-number footer. The tables carry real page numbers: the filter writes needles (the first counsel line, the table titles, each heading, each citation) and `fb render` renders again with the pages LibreOffice gave them until they settle. `fb render` builds the reference document; there is no shell builder and no committed `reference.docx` (fb-595.68.33; the earlier docx listed the tables without page numbers). Results: typst 9 and docx 13 checks passed, 0 failed; XENG-001..003 PASS (11 = 11 pages, 253/253 lines). No latex engine in this folder.
+The folder is on the generic federal district brief (`lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and the shared
+document model (docs/EVAL-LOOP.md, "Generated engines"): `typst/layout.yaml` names the base and overlays D. Utah's
+local rules, each with its rule; `typst/utd-motion-brief.typ` names the face and stops the render without the
+memorandum's heading. `fb engines gen` writes `latex/` (`template.tex`, `xdoc.lua`) and `docx/` (`reference.xml`,
+`xdoc.lua`) from the merged layout; `eval.yaml` sets `params.cross_engine: gate`, so latex and docx must break every
+line and page where typst does (XENG-001..003). The docx is checked with LibreOffice only (Word is not available here).
 
-## FRCP base port assessment (fb-595.17.20, 2026-10-29)
+## FRCP base (fb-595.92): moved
 
-Skipped: not moved onto the generic federal district brief (`lib/layouts/frcp-motion-brief.yaml`). DUCivR 10-1(6)(A)-(B) puts the counsel block and the caption on the first page, and DUCivR 7-1(a)(1)(A) makes the motion an initial separate section; this folder sets that section under the caption on page 1 and its tables of contents and authorities after it, before the memorandum (the exemplar's order). The shared model (`lib/typst/xdoc.typ`) sets the tables before `front` (the caption page), and its `body_before_tables` and `before_tables` each end their own page, so a body section cannot share the caption's page ahead of the tables. Missing base feature: the tables after a body part set on the caption's page (`front` plus `body_before_tables` on one page, the contents after them). The rest is expressible as an overlay: the 1 1/2 in top margin (DUCivR 10-1(1)), the exact 24 pt double pitch (10-1(4)), the counsel block above the caption, the caption's ruled party column with title and judge at the right (10-1(6)), the keyed table of authorities. Dropping the tables (DUCivR 7-1(a)(6)(C) requires a table of contents only over the limit) would discard what the sample renders. This folder does not use numbered pleading paper.
+DUCivR 7-1(a)(1)(A)'s motion, an initial separate section under the caption on page 1 with the tables after it, is the
+base's `body_before_tables: {until: "MEMORANDUM", place: cover}` (fb-595.92): the body up to its "MEMORANDUM OF LAW"
+heading set on the cover's page after the counsel block, the court's name and the caption, the tables of contents and
+authorities on the next pages, then the memorandum, every page numbered consecutively, as the template set it before
+the move. Changes: the caption's right column now runs title, case number, judge (both filers' order); the party
+column's rules are a box ruled at its right inside one ruled at its foot (typst draws a two-side stroke as one
+polygon); the contents indent "I." half an inch and "A." an inch (both filers); the contents' "Page" label is gone (the
+model has none; neither filer prints one); the last paragraph, not the whole conclusion, is kept with the signature.
+Open (tier 2): the bullets of the motion's list stand at the margin, the text half an inch in; the first filer sets the
+bullet half an inch in (the model has no list offset).

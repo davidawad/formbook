@@ -1120,8 +1120,19 @@
   // the contents on the cover's page (contents.break: false): no break after the cover
   let on-cover = spec.at("contents", default: (:)).at("break", default: true) == false
   if on-cover and front != none { panic("xdoc: contents.break: false needs a cover numbered with the body (no page_number.front)") }
+  // `body_before_tables: {.., place: cover}` (fb-595.92, DUCivR 7-1(a)(1)(A): the motion under the caption): the
+  // body sections before the tables set on the cover's page, after its blocks, the tables on the next
+  let (pre, main) = split-head(spec, meta, main)
+  let pre-cover = pre != "" and spec.at("body_before_tables", default: (:)).at("place", default: none) == "cover"
+  if pre-cover and (front != none or "cover" not in spec or "before_tables" in spec) {
+    panic("xdoc: body_before_tables.place: cover needs a cover numbered with the body (no page_number.front) and no before_tables")
+  }
   if "cover" in spec {
     blocks(spec, spec.cover, meta, first: true, page: true)
+    if pre-cover {
+      [#metadata(none)<xd-heads>]
+      body-of(spec, meta, pre)
+    }
     if not on-cover { pagebreak() }
   }
   // the tables numbered apart (page_number.front), from 1 (from the cover when it is counted)
@@ -1131,8 +1142,7 @@
   }
   // the pages before the tables (numbered with them): the layout's `before_tables`, then the body sections set before
   // them (`body_before_tables`); the contents list their headings
-  let (pre, main) = split-head(spec, meta, main)
-  [#metadata(none)<xd-heads>]
+  if not pre-cover [#metadata(none)<xd-heads>]
   if "before_tables" in spec {
     blocks(spec, spec.before_tables, meta, first: true, page: true)
     pagebreak()
@@ -1140,7 +1150,7 @@
   // `body_before_tables: {.., place: between}`: the sections between the contents and the authorities, after the
   // layout's `between_tables`
   let between = spec.at("body_before_tables", default: (:)).at("place", default: none) == "between"
-  if pre != "" and not between {
+  if pre != "" and not between and not pre-cover {
     body-of(spec, meta, pre)
     pagebreak()
   }

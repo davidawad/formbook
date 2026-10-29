@@ -935,6 +935,11 @@ return function(spec)
           needle("start", "B", first_text(xd.tree(spec, spec.cover or spec.front or {}, meta, true, true)) or "", "")
           if not front then sections[1] = "#section\tstart\tdecimal\t" end
         end
+        -- the body sections before the tables on the cover's page (body_before_tables.place: cover, fb-595.92)
+        local oncover = #pre > 0 and spec.body_before_tables.place == "cover"
+        if oncover and (front or not spec.cover or spec.before_tables) then
+          error("xdoc: body_before_tables.place: cover needs a cover numbered with the body (no page_number.front) and no before_tables", 0)
+        end
         if spec.cover then
           local nodes = xd.tree(spec, spec.cover, meta, true, true)
           plan(nodes, false)
@@ -947,6 +952,7 @@ return function(spec)
             end
           end
           for _, x in ipairs(xs) do out:insert(raw_block(x)) end
+          if oncover then out:extend(body(pre, s, "Body Text")) end
           -- the cover a section of its own (no page number) when the pages after it are numbered apart
           -- (the contents on the cover's page, contents.break: false: no break)
           -- (page_number.cover: the cover counted in the tables' numbering, printed when `numbered`)
@@ -988,7 +994,7 @@ return function(spec)
             for _, x in ipairs(emit_list(bnodes, s, false)) do out:insert(raw_block(x)) end
             out:insert(raw_block(brk(s)))
           end
-          if #pre > 0 and not late then
+          if #pre > 0 and not late and not oncover then
             out:extend(body(pre, s, "Body Text"))
             out:insert(raw_block(brk(s)))
           end

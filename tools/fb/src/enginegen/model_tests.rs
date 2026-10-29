@@ -2876,3 +2876,39 @@ fn a_cover_a_field_switches() {
         assert_eq!(doc.contains("rIdXdNone"), toc, "{name}");
     }
 }
+
+#[test]
+fn the_body_before_the_tables_on_the_cover_s_page() {
+    // fb-595.92: body_before_tables.place: cover (DUCivR 7-1(a)(1)(A)): the motion under the caption on page 1, the
+    // contents on page 2, the memorandum after them
+    let l = layout(
+        "cover:\n  - {text: \"{court}\", align: center}\nbody_before_tables: {until: MEMORANDUM, place: cover}\ncontents: {title: Contents, depth: 1, col: 36}\nheading:\n  - {bold: true}\n",
+    );
+    let Some(f) = fx(
+        "pre-on-cover",
+        &l,
+        "---\ncourt: COURT OF TESTS\n---\nThe motion.\n\n# MEMORANDUM\n\nThe memorandum.\n",
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
+        return;
+    };
+    let pages = f.typst_pages().unwrap();
+    assert_eq!(pages.len(), 3, "{pages:?}");
+    assert!(pages[0].contains("COURT OF TESTS") && pages[0].contains("The motion."), "{pages:?}");
+    assert!(pages[1].contains("Contents") && pages[1].contains("MEMORANDUM") && !pages[1].contains("The motion."));
+    assert!(pages[2].contains("The memorandum."));
+    // LaTeX: the motion between the cover and its \clearpage, the contents after it
+    let tex = f.latex().unwrap();
+    let (court, motion, contents) = (
+        tex.find("COURT OF TESTS").unwrap(),
+        tex.find("The motion.").unwrap(),
+        tex.find("Contents").unwrap(),
+    );
+    assert!(court < motion && motion < contents, "{tex}");
+    assert!(!tex[court..motion].contains("\\clearpage") && tex[motion..contents].contains("\\clearpage"), "{tex}");
+    // Word: the motion before the first page break, the contents after it
+    let doc = f.docx().unwrap();
+    let brk = doc.find("pageBreakBefore").unwrap();
+    assert!(doc.find("motion.").unwrap() < brk, "{doc}");
+    assert!(doc.find(">Contents<").unwrap() > brk);
+}

@@ -1,0 +1,87 @@
+# U.S. District Court for the District of Utah (utd): a motion and its supporting memorandum in one document (DUCivR
+# 7-1(a)(1)), on the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D. Utah's local rules
+# overlaid here. The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged
+# layout by `fb engines gen`). Rules: D. Utah Civil Rules (DUCivR) 7-1 and 10-1 (../README.md quotes them, with their
+# source). The base already meets DUCivR 10-1(1)'s letter paper and one-inch side and bottom margins, 10-1(3)'s 12-point
+# type (footnotes included), 10-1(4)'s double spacing (24 pt) and 10-1(5)'s consecutive page numbers.
+base: /lib/layouts/frcp-motion-brief.yaml
+# DUCivR 10-1(1): a top margin of at least 1 1/2 inches.
+margin: {top: 108, bottom: 72, left: 72, right: 72}
+# DUCivR 10-1(5): every page numbered consecutively from the caption page, centred, the number's line box ending half
+# an inch above the page edge (its top 22.2 pt below the text).
+page_number: {align: center, descent: 22.2}
+# DUCivR 10-1(3), (4): footnotes at 12 pt, single-spaced, 6 pt after each, the rule 7.8 pt under the text.
+footnote: {size: 12, gap: 6, clearance: 7.8}
+# DUCivR 10-1(4): block quotations single-spaced, half an inch in on each side, a single line around them.
+quote: {left: 36, right: 36, above: 13.8, below: 13.8}
+# Headings bold on the body pitch, no space of their own, kept with what follows: a section centred in capitals; the
+# argument headings numbered by the template, "I." at the margin, "A." and "1." half an inch further in each, the
+# label in a half-inch box with the title's later lines hung under it.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body, above: 0, below: 0}
+  - {bold: true, number: "I.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, number: "A.", label_box: 36, left: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, number: "1.", label_box: 36, left: 72, pitch: body, above: 0, below: 0}
+# Page 1, DUCivR 10-1(6): counsel at the upper left, single-spaced, the party represented in italics (10-1(6)(A)); a
+# double line below, the court's name centred in bold capitals; a double line below, the caption (10-1(6)(B)): the
+# parties in a 3.75 in column ruled at its right and foot (a box ruled at its right in one ruled at its foot; "v." between them, a blank line on each side; a party's
+# designation 1.25 in in, a blank line above it), and 0.15 in right of the rule the title of the document in bold
+# capitals, the case number and the judge, a blank line apart (both filers' order).
+cover:
+  - {text: "{counsel}"}
+  - {text: "{counsel_role}", italic: true, optional: true}
+  - {text: "{court}", align: center, bold: true, upper: true, above: 24}
+  - columns:
+      - width: 270
+        blocks:
+          - box:
+              - box:
+                  - each: caption
+                    blocks:
+                      - {text: "{names}"}
+                      - {text: "{designation}", left: 90, above: 13.8}
+                    between:
+                      - {text: "v.", above: 13.8, below: 13.8}
+                stroke: {right: 0.75}
+                inset: {right: 10.8, bottom: 13.8}
+            stroke: {bottom: 0.75}
+      - blocks:
+          - {text: "{brief_title}", bold: true, upper: true, left: 10.8}
+          - {text: "Case No. {case_number}", left: 10.8, above: 13.8}
+          - {text: "Judge {judge}", left: 10.8, above: 13.8, optional: true}
+          - {text: "Magistrate Judge {magistrate}", left: 10.8, optional: true}
+    gutter: 0
+    above: 24
+    below: 24
+front: []
+# DUCivR 7-1(a)(1)(A): the motion, an initial separate section stating the relief and its grounds, under the caption on
+# page 1 (the body up to its "MEMORANDUM OF LAW" heading); then the tables of contents and authorities (the exemplar's
+# order: DUCivR 7-1(a)(6)(C) asks for them over the limit, the filers set them always), then the memorandum (7-1(a)(1)(B)).
+body_before_tables: {until: "MEMORANDUM", place: cover}
+contents: {title: "TABLE OF CONTENTS", style: {pitch: body, below: 24}, depth: 3, col: 36, hang: 36, step: 36, above: 13.8}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  style: {pitch: body, below: 24}
+  page_heading: "Page(s)"
+  passim: 7
+  kinds:
+    - {kind: case, title: "Cases"}
+    - {kind: statute, title: "Statutes"}
+    - {kind: rule, title: "Rules"}
+    - {kind: other, title: "Other Authorities"}
+  col: 72
+  hang: 36
+  above: 6
+  group: {bold: true, above: 13.8}
+# DUCivR 10-1(8): "DATED:" and the date at the left; from 3.25 in the firm, a blank line, the "/s/" signature, the
+# signer and the signer's lines, single-spaced; a double line below the text, kept with the last paragraph.
+closing:
+  - group:
+      - columns:
+          - {width: 234, blocks: [{text: "DATED: {date}"}]}
+          - blocks:
+              - {text: "{signature.firm}", optional: true}
+              - {text: "/s/ {signature.signer}", above: 13.8}
+              - {text: "{signature.signer}"}
+              - {text: "{signature.lines}", optional: true}
+    above: 24

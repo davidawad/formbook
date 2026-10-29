@@ -720,13 +720,19 @@ return function(spec)
         -- justified text: the body's spaces stretch from here (each block of the layout sets RAGGED in its group)
         if spec.justify then out:insert(raw("\\xd@justtrue\\selectfont")) end
         -- a cover numbered apart is unnumbered on every page it runs to (typst: no page label before the tables)
+        -- the body sections before the tables on the cover's page (body_before_tables.place: cover, fb-595.92)
+        local oncover = #pre > 0 and spec.body_before_tables.place == "cover"
+        if oncover and (front or not spec.cover or spec.before_tables) then
+          error("xdoc: body_before_tables.place: cover needs a cover numbered with the body (no page_number.front) and no before_tables", 0)
+        end
         if spec.cover then
           -- a coloured cover (cover_fill): its pages' colour, the pages after it uncoloured
           local fill = spec.cover_fill and spec.cover_fill:gsub("^#", ""):upper()
           out:insert(raw((fill and ("\\pagecolor[HTML]{" .. fill .. "}") or "") .. (hidden and "\\pagestyle{empty}" or "")
-            .. emit(xd.tree(spec, spec.cover, meta, true, true), false)
-            .. ((spec.contents and spec.contents["break"] == false) and "" or "\\clearpage") .. (fill and "\\nopagecolor" or "")
-            .. (hidden and "\\pagestyle{plain}" or "")))
+            .. emit(xd.tree(spec, spec.cover, meta, true, true), false)))
+          if oncover then out:extend((body(pre, 0, nil, spec.paragraph_gap))) end
+          out:insert(raw(((spec.contents and spec.contents["break"] == false) and "" or "\\clearpage")
+            .. (fill and "\\nopagecolor" or "") .. (hidden and "\\pagestyle{plain}" or "")))
         end
         -- without tables (or pages before them) the body follows the cover at once, numbered from 1 (typst: the tables'
         -- numbering unused)
@@ -734,7 +740,7 @@ return function(spec)
         if front and not cmode then out:insert(raw("\\pagenumbering{" .. (tables and TEX_FMT[front] or "arabic") .. "}")) end
         -- the pages before the tables, numbered with them: the layout's before_tables, the body sections set before them
         if spec.before_tables then out:insert(raw(emit(bnodes, false) .. "\\clearpage")) end
-        if #pre > 0 and not late then
+        if #pre > 0 and not late and not oncover then
           out:extend((body(pre, 0, nil, spec.paragraph_gap)))
           out:insert(raw("\\clearpage"))
         end

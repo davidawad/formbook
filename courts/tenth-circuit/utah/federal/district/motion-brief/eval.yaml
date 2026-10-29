@@ -1,4 +1,9 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (fb-595.68.33, on the shared layout model lib/*/xengine*), so a difference fails.
+# typst render does (fb-595.68.33; generated from the merged layout since fb-595.92), so a difference fails.
 params:
   cross_engine: gate
+  # DEF-COVER-002 reported, not gated, on every engine (typst and docx are listed in data/cover-structure-baseline.txt;
+  # latex, new with fb-595.92, alike): the exemplar rules its caption as a full table (a rule over and under the court
+  # title and under the caption's rows); the template rules the party column at its right and foot, as the second
+  # filer does not rule it at all. Tier 3, reviews/2026-10-29.md.
+  cover_structure: report
