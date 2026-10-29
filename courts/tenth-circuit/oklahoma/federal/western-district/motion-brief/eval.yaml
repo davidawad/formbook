@@ -2,7 +2,7 @@
 # the default list, so `checks:` below repeats the default checks and adds OKWD-FONT-003 and OKWD-FORM-002.
 # OKWD-FONT-003, LCvR7.1(d): print style, footnotes included, not less than 13 point (every word, not only the body).
 # OKWD-FORM-002, LCvR5.2(a): double-spaced, read as a baseline pitch of at least 2 x 13 pt between body-paragraph
-# lines (the template sets 29.9 pt, two single lines of Times New Roman at 13 pt: typst/ pitch-body).
+# lines (the layout sets 29.9 pt, two single lines of Times New Roman at 13 pt: typst/layout.yaml pitch.body).
 font:
   size_pt: 13
 
@@ -86,14 +86,16 @@ checks:
     name: every word is at least 13 point, footnotes included (LCvR7.1(d))
     method: font_size
     expect: "every word at least the height of 13 pt in this font"
-    fix: {anchor: "type-size"}
+    fix: {anchor: "size: 13"}
   - id: OKWD-FORM-002
     gate: 1
     kind: M
     name: body paragraphs are double-spaced (baseline pitch >= 2 x 13 pt; LCvR5.2(a))
     method: double_space
+    engines: [typst, docx]
+    engines_reason: "pdfTeX sets the pilcrow from the TS1 Termes font, whose taller glyph box the line reader (lines.tsv, grouped by word top) takes for a line of its own 3.56 pt above its neighbours; the latex render sets the body at the same 29.9 pt pitch as typst (generated from the one layout, XENG-003)"
     expect: "every consecutive pair of body-paragraph lines >= 26 pt apart"
-    fix: {anchor: "pitch-body"}
+    fix: {anchor: "pitch:"}
 
   # Gate 4 CROSS-ENGINE (the default checks, repeated: this list replaces the default one).
   - id: XENG-001

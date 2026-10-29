@@ -111,3 +111,31 @@ DOCX engine (`docx/`: `reference.xml`, `oknd-motion-brief.lua`; no shell, no bin
 - **Matches the typst form, line for line:** the filter reads the sample chunk by chunk as typst does and writes every paragraph with the typst pitch and spaces (exact 552 twips body, 276 single and footnote lines); Times New Roman 12 pt, footnotes 12 pt; the 12 pt page number in a 276-twip footer line 0.5 in above the page edge; the caption as a two-column table; heading labels I., A., 1., a. in a 0.5 in tab; block quotations paragraph by paragraph; a paragraph that carries a footnote left to pandoc in "Body Text Note" (Body Text without widow control) so that pandoc writes the note; the certificate of service from a page break. XENG-001..003 PASS: 303/303 lines and 13 = 13 pages.
 - **Differs from typst:** heading labels are typed text (they do not renumber when a heading is added by hand). The caption is a Word table.
 - **BLOCKED:** `toc_toa: true` (indexed TOC and TOA, LCvR7-1(d)) stops the filter with an error rather than omit them; the typst template builds them. The committed sample (13 pages) does not use it. Authority links (`toa:KEY`) are written as their text.
+
+## On the FRCP base (fb-595.17.20, 2026-10-29)
+
+`typst/layout.yaml` names the generic federal district brief (`base: /lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and overlays only what N.D. Okla. sets itself, each rule cited there; `typst/oknd-motion-brief.typ` names the face and hands the merged layout to the shared document model (`lib/typst/xdoc.typ`). `latex/` and `docx/` are generated from the merged layout by `fb engines gen` (do not edit them; `fb engines gen --check` fails on a stale one). The per-folder typst code and the docx filter `oknd-motion-brief.lua` are gone. The Layout, Render and check, Visual review and Engines sections above describe the earlier template where they differ from this list.
+
+- Unchanged: Times New Roman 12 pt, footnotes too; 27.6 pt double pitch, 13.8 pt single lines (LGnR2-4(a)); headings numbered I., A., 1., a. by the template in half-inch label boxes at each level's indent; block quotations half an inch in on both sides; footnotes 6 pt apart; the signature column 3.3 in in with "Dated:" at the margin; the certificate of service on its own page; the 25-page `page_limit`. The frontmatter field names are kept (`caption`, `title`, `date`, `signature.signer`/`lines`, `certificate.text`/`service`/`signer`, `toc_toa`, `authorities`).
+- Caption: as the exemplar sets it, no longer ruled: each side's names, its designation a single line below 1.8 in in, "v." at the margin (was centered), "Case No.:" (the exemplar's colon; `case_label` overrides it) at the right, centered on the parties' height. DEF-COVER-002 now passes on typst, latex and docx, so the folder's two lines leave `data/cover-structure-baseline.txt`.
+- The footnote rule is the model's (30 % of the measure; was 2 in).
+- Tables (LCvR7-1(d)): `toc_toa: true` sets a table of contents and a listed `authorities` mapping a table of authorities (the body's `[text](toa:KEY)` links; groups Cases, Federal Statutes, Federal Rules, Federal Regulations, Other Authorities; *passim* at 7 pages) on all three engines now (the docx was BLOCKED on `toc_toa`). They come before the caption page, in the one sequence of page numbers (the model sets the tables before `front`; the earlier typst set them after the caption page). Tried on typst with a temporary sample (`toc_toa: true`, one `toa:` link to a case): contents on page 1, authorities on page 2, the caption page 3; the temporary input was deleted. A level-1 row of the contents is printed as the sample writes the heading (the heading itself is set in capitals). Tier 2, OPEN: tables before the caption page.
+
+Gate 2 review after the move (every page of the three renders, as text layout `pdftotext -layout` and word boxes `-bbox`; this pod's image viewer could not open a PNG, so no page was looked at as a picture; the latex and docx renders break every line where typst does, XENG-003):
+
+| Page | What is on it | Finding | Status |
+|---|---|---|---|
+| 1 | Court name, caption, title, the opening paragraph, SUMMARY OF ARGUMENT | none | PASS |
+| 2-3 | SUMMARY (end), FACTUAL BACKGROUND | none | PASS |
+| 4 | "October 06, 2023.¹" alone at the top with footnote 1 at the foot, STANDARD FOR DISMISSAL | the line with the mark moves on with its note (a widow), as before | OPEN |
+| 5 | STANDARD (end), ARGUMENT AND AUTHORITY, I., footnote 2 | none | PASS |
+| 6-7 | The Rule 4(j) and 51 O.S. § 163(E) quotations | single-spaced, half an inch in on both sides | PASS |
+| 8-11 | II., III., IV. | none | PASS |
+| 12 | CONCLUSION; "Dated:" beside "Respectfully submitted,"; the signer's block ("OKLAHOMA ATTORNEY GENERAL'S OFFICE" wraps in the 3.2 in column, as before) | none | PASS |
+| 13 | CERTIFICATE OF SERVICE on its own page, the person served, the signer | none | PASS |
+
+- typst: `RESULT: 12 checks passed, 0 failed`.
+- latex: `RESULT: 15 checks passed, 0 failed`; XENG-001..003 PASS (13 pages, 303/303 typst lines break after the same word).
+- docx: `RESULT: 16 checks passed, 0 failed`; XENG-001..003 PASS (13 pages, 303/303).
+- `tools/check-selftest.sh` reads a court folder's `court.json`; this doc-type folder has none, so it does not run here.
+- BLOCKED: none.

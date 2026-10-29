@@ -2176,8 +2176,6 @@ courts/tenth-circuit/oklahoma/federal/eastern-district/complaint typst
 courts/tenth-circuit/oklahoma/federal/eastern-district/motion-brief typst
 courts/tenth-circuit/oklahoma/federal/northern-district/complaint docx
 courts/tenth-circuit/oklahoma/federal/northern-district/complaint typst
-courts/tenth-circuit/oklahoma/federal/northern-district/motion-brief docx
-courts/tenth-circuit/oklahoma/federal/northern-district/motion-brief typst
 courts/tenth-circuit/oklahoma/federal/western-district/motion-brief docx
 courts/tenth-circuit/oklahoma/federal/western-district/motion-brief typst
 courts/tenth-circuit/oklahoma/state/court-of-civil-appeals/answering-brief typst

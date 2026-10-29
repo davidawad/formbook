@@ -10,8 +10,8 @@ Courts under `courts/tenth-circuit/oklahoma/federal` (7).
 | [United States Bankruptcy Court, W.D. Oklahoma](bankruptcy-western-district) | `okwb` | up for review | 1/1 | — | 1/1 | 14 |
 | [United States District Court for the District of Oklahoma](district) | `okd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court, Oklahoma Eastern](eastern-district) | `oked` | up for review | 2/2 | 1/1 | 2/2 | 14 |
-| [United States District Court, Oklahoma Northern](northern-district) | `oknd` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court, Oklahoma Western](western-district) | `okwd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court, Oklahoma Northern](northern-district) | `oknd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [United States District Court, Oklahoma Western](western-district) | `okwd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 
 [Formbook index](../../../../README.md)
 <!-- fb:generated:end -->

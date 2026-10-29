@@ -46,10 +46,10 @@ https://okwd.uscourts.gov/local-rules (current edition `LocalRules2026.pdf`, eff
 
 ## Markdown contract (for samples)
 
-- YAML frontmatter, then the body. The body is blank-line-separated chunks: a `#` heading (level 1), `##` (level 2), `###` (level 3), a list (`1.` or `-` items, lettered by the template), or a paragraph (indented, not numbered).
-- Frontmatter fields: `case_number`, `caption.parties` (list of `{names, designation}`; names are plain text, not markdown), `brief_title`, `jury_demand`, `date` (optional), `signature` (`firm` list, `sign`, `lines`), `certificate` (`title`, `text`, `recipients`, `sign`, `lines`; the template renders the certificate after the signature, so it is not in the body).
+- YAML frontmatter, then the body. The body is blank-line-separated chunks: a `#` heading (level 1, unnumbered), `##` (level 2, numbered I., II. by the template), `###` (level 3, lettered A., B. by the template; do not type the labels), a markdown list, or a paragraph (indented, not numbered).
+- Frontmatter fields: `case_number`, `caption.parties` (list of `{names, designation}`; `names` a list of lines), `brief_title` (must contain "brief", LCvR7.1(k)), `jury_demand`, `date` (optional), `signature` (`firm` list of lines, a `""` entry a blank line, optional; `sign`; `lines`), `certificate` (optional: `title`, `text`, `recipients` lines, `sign`, `lines`; set after the signature, so it is not in the body).
 - Body paragraphs that the filing numbers are written `1\.`, `2\.` and so on (escaped so markdown does not read them as a list).
-- Not supported: tables, footnotes, raw typst, forced line breaks in the body.
+- Not supported: raw typst, forced line breaks in the body. Footnotes and pipe tables are set by the shared model (none in the sample).
 
 ## Known gaps and open choices
 
@@ -70,3 +70,31 @@ Typst is the primary engine. The docx engine (`docx/`): `reference.xml` holds th
 
 - Cross-engine (fb-595.68.33): typst and docx share the layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`). `sh tools/check.sh <this folder> --engine docx`: XENG-001..003 PASS (10 = 10 pages, 199/199 lines break after the same word); `params.cross_engine: gate` in `eval.yaml`. typst 12 and docx 16 checks passed, 0 failed (with OKWD-FONT-003, every word at least 13 pt, OKWD-FORM-002, double spacing, and the 25-page limit from `eval.yaml`).
 - The `.docx` converts in LibreOffice without error (the check's conversion); not opened in Word.
+
+## On the FRCP base (fb-595.17.20, 2026-10-29)
+
+`typst/layout.yaml` names the generic federal district brief (`base: /lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and overlays only what W.D. Okla. sets itself, each rule cited there; `typst/okwd-motion-brief.typ` names the face, asserts LCvR7.1(k) (the title says "brief") and hands the merged layout to the shared document model (`lib/typst/xdoc.typ`). `latex/` and `docx/` are generated from the merged layout by `fb engines gen` (do not edit them; `fb engines gen --check` fails on a stale one). The per-folder typst code and the docx filter `okwd-motion-brief.lua` are gone. The Layout, Engines and gap 8 above describe the earlier template where they differ from this list.
+
+- Unchanged numbers: Times New Roman 13 pt (LCvR7.1(d)), 29.9 pt double pitch and 14.95 pt single lines (LCvR5.2(a)), the caption's 3.4 in party column, ")" column and case number with JURY TRIAL DEMANDED, the signature column 3.4 in in, the 25-page `page_limit`.
+- Headings: the argument headings are numbered I., II. and the sub-headings lettered A., B. by the template (each label in a half-inch box), so the sample no longer types its labels.
+- Signature: "Respectfully submitted,", a blank line, the supervising counsel's lines (a `""` line between groups), a blank line, the `/s/` line and the signer's lines; kept whole and with the body's last paragraph (`keep_with_closing`). The sample's trailing `""` lines in `firm` and `recipients` are dropped (the layout sets the blank line).
+- Certificate of mailing: kept whole after the signature; the persons served now half an inch in (the exemplar's), no longer in the signature column.
+- `eval.yaml`: OKWD-FORM-002 (double spacing) runs on typst and docx; on latex it is SKIP with its reason: pdfTeX sets the pilcrow (the sample's "¶¶") from the TS1 Termes font, whose taller glyph box the line reader takes for a line of its own 3.56 pt above its neighbours. The latex render is set at the same 29.9 pt pitch from the same layout (XENG-003 below). The `fix.anchor`s point into `typst/layout.yaml`.
+- Not produced, as before: the table of contents and of authorities of LCvR7.1(e) for a brief over 15 pages (gap 1; the model can set them, `contents`/`authorities`, a later change).
+
+Gate 2 review after the move (every page of the three renders, as text layout `pdftotext -layout` and word boxes `-bbox`; this pod's image viewer could not open a PNG, so no page was looked at as a picture; the latex and docx renders break every line where typst does, XENG-003):
+
+| Page | What is on it | Finding | Status |
+|---|---|---|---|
+| 1 | Court name, caption with ")" column, case number and JURY TRIAL DEMANDED, the title, the opening paragraph, STATEMENT OF THE CASE, paragraphs 1 to 3 | none | PASS |
+| 2-3 | Paragraphs 4 to 8, ARGUMENT AND AUTHORITY, I., II., III. and III.A | labels in their half-inch boxes, sub-headings bold italic half an inch in | PASS |
+| 4-7 | III.B, III.C | none | PASS |
+| 8 | The end of III.C; the foot of the page empty | the conclusion is kept with the signature (gap 10) | ACCEPTED |
+| 9 | CONCLUSION, the signature block | none | PASS |
+| 10 | CERTIFICATE OF MAILING, the persons served, the signer | none | PASS |
+
+- typst: `RESULT: 12 checks passed, 0 failed`.
+- latex: `RESULT: 14 checks passed, 0 failed` (OKWD-FORM-002 SKIP, above); XENG-001..003 PASS (10 pages, 199/199 typst lines break after the same word).
+- docx: `RESULT: 16 checks passed, 0 failed`; XENG-001..003 PASS (10 pages, 199/199).
+- `tools/check-selftest.sh` reads a court folder's `court.json`; this doc-type folder has none, so it does not run here.
+- BLOCKED: none.

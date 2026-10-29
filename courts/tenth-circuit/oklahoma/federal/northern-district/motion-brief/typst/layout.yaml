@@ -1,0 +1,96 @@
+# U.S. District Court for the Northern District of Oklahoma (oknd): a motion and its brief in support in one document
+# (LCvR7-1(b)), on the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with N.D. Okla.'s local rules
+# overlaid here. The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged
+# layout by `fb engines gen`, fb-595.17.20). Rules: N.D. Okla. Local Rules (2026-07-31),
+# https://www.oknd.uscourts.gov/sites/default/files/2026-07-31%20Local%20Rules.pdf (../README.md quotes them). The base
+# already meets LGnR2-4(a)'s 12-point floor (footnotes included), 8 1/2 x 11 paper and one-inch margins. The 25-page
+# limit of LCvR7-1(d) is checked on the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, two lines.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT FOR THE"
+  district: "NORTHERN DISTRICT OF OKLAHOMA"
+# LGnR2-4(a): double-spaced, and "The use of 'Exactly 24 pt' spacing is not permitted": the face's own double spacing,
+# twice Times New Roman's 13.8 pt single line, as a word processor's "Double" sets it at 12 pt.
+pitch: {body: 27.6}
+# LGnR2-4(a): footnotes at 12 point too, single-spaced, 6 pt between notes, the rule a single line below the text.
+footnote: {size: 12, gap: 6, clearance: 13.8}
+# Block quotations single-spaced, half an inch in on both sides, a blank single line above and below.
+quote: {above: 13.8, below: 13.8}
+# Headings single-spaced, bold, a blank single line above and below, kept with the text: a section centered in capitals,
+# unnumbered; the deeper levels numbered by the template, I., A., 1., a., each label in a half-inch box at its level's
+# indent (0, 0.5, 1, 1.5 in) and the lines after the first hanging after it.
+heading:
+  - {align: center, bold: true, upper: true, above: 13.8, below: 13.8}
+  - {bold: true, number: "I.", label_box: 36, above: 13.8, below: 13.8}
+  - {bold: true, number: "A.", label_box: 36, left: 36, above: 13.8, below: 13.8}
+  - {bold: true, number: "1.", label_box: 36, left: 72, above: 13.8, below: 13.8}
+  - {bold: true, number: "a.", label_box: 36, left: 108, above: 13.8, below: 13.8}
+# LCvR7-1(d): a brief over fifteen pages carries an indexed table of contents and an indexed table of the authorities
+# cited: when the frontmatter sets `toc_toa` (the contents) and lists `authorities` (the table of authorities, from the
+# body's `[text](toa:key)` links), each on its own page before the brief, in the one sequence of page numbers.
+contents: {title: "TABLE OF CONTENTS", depth: 4, col: 36, step: 36, above: 0, when: toc_toa}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  page_heading: "Page(s)"
+  passim: 7
+  kinds:
+    - {kind: case, title: "Cases"}
+    - {kind: statute, title: "Federal Statutes"}
+    - {kind: rule, title: "Federal Rules"}
+    - {kind: regulation, title: "Federal Regulations"}
+    - {kind: other, title: "Other Authorities"}
+  col: 56
+  hang: 25.2
+  above: 6
+  group: {bold: true, above: 13.8, below: 0}
+# FRCP 10(a) and LCvR7-1(b) (the title says the motion and brief are one document): the court's name; a blank double
+# line; the parties in the left half (each side's names, its designation 1.8 in in a single line below them, "v." at
+# the margin a single line from each), unruled; "Case No.:" at the right, centered on the parties' height;
+# then the paper's title, bold and centered (the exemplar, usage/SOURCE.md).
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 234
+        blocks:
+          - each: caption
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 129.6, above: 13.8}
+            between:
+              - {text: "v.", above: 13.8, below: 13.8}
+      - valign: center
+        blocks:
+          - {text: "{case_label|Case No.:} {case_number}", left: 14.4}
+    above: 27.6
+  - {text: "{title}", align: center, bold: true, above: 27.6, below: 13.8}
+# FRCP 11(a) and LGnR2-6: single-spaced, kept whole and with the body's last paragraph: "Dated:" at the margin when the
+# frontmatter dates the paper, "Respectfully submitted," beside it in the signature column 3.3 in in, a blank double
+# line, the "/s/" signature and the signer's lines (bar numbers, office, address, telephone, e-mail, whom they
+# represent).
+closing:
+  - group:
+      - columns:
+          - {width: 237.6, blocks: [{text: "Dated: {date}", optional: true}]}
+          - blocks:
+              - {text: "Respectfully submitted,"}
+              - {text: "/s/ {signature.signer}", above: 27.6}
+              - {text: "{signature.lines}"}
+    above: 27.6
+# Fed. R. Civ. P. 5(d)(1)(B): a paper served outside the court's electronic-filing system carries a certificate of
+# service: on a page of its own, its title centered in bold capitals, the certificate double-spaced, the persons served
+# half an inch in, then the "/s/" signature and the signer in the signature column.
+after_tail:
+  - when: certificate
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 13.8}
+      - {markdown: "{certificate.text}", pitch: body, indent: 36}
+      - group:
+          - {text: "{certificate.service}", left: 36}
+        above: 13.8
+      - columns:
+          - {width: 237.6, blocks: []}
+          - blocks: [{text: "/s/ {certificate.signer}"}, {text: "{certificate.signer}"}]
+        above: 27.6

@@ -2,7 +2,6 @@
 title: "Memorandum in Support of Defendant Tucker Alger's Motion to Dismiss"
 case_number: "1:26-cv-00263-SWS"
 caption:
-  separator: "v."
   parties:
     - names: ["LUIS ELIZONDO,"]
       designation: "Plaintiff,"

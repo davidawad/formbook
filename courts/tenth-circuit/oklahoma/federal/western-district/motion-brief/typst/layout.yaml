@@ -1,0 +1,77 @@
+# U.S. District Court for the Western District of Oklahoma (okwd): a motion to dismiss and brief in support in one
+# document (LCvR7.1(k)), on the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with W.D. Okla.'s
+# local rules overlaid here. The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated
+# from the merged layout by `fb engines gen`, fb-595.17.20). Rules: W.D. Okla. Local Civil Rules (effective April
+# 2026), https://okwd.uscourts.gov/sites/okwd/files/LocalRules2026.pdf (../README.md quotes them). The base already
+# meets LCvR5.2(a) (8 1/2 by 11 paper) and LCvR7.1(d) (margins of at least one inch on every side). The 25-page limit
+# of LCvR7.1(e) is checked on the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, two lines.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE WESTERN DISTRICT OF OKLAHOMA"
+# LCvR7.1(d): print style not less than 13-point, footnotes included.
+size: 13
+# LCvR5.2(a): double-spaced: two single lines of the face at 13 pt (29.9 pt, the exemplar's pitch); single lines 1.15 x
+# 13 pt for the caption, title, headings (LCvR7.1(e): headings may be single-spaced), signature and certificate lists.
+pitch: {body: 29.9, single: 14.95}
+footnote: {size: 13}
+quote: {above: 14.95, below: 14.95}
+# Headings single-spaced, bold, a blank single line above, kept with the text: a section centered in capitals; an
+# argument heading numbered I., II. by the template, its label in a half-inch box at the margin and its lines hanging
+# after it; a sub-heading lettered A., B. the same half an inch in, bold italic (the exemplar's).
+heading:
+  - {align: center, bold: true, upper: true, above: 14.95, below: 0}
+  - {bold: true, number: "I.", label_box: 36, above: 14.95, below: 0}
+  - {bold: true, italic: true, number: "A.", label_box: 36, left: 36, above: 14.95, below: 0}
+# FRCP 10(a) and LCvR7.1(b) (the title identifies on whose behalf it is presented): the court's name; the parties at the
+# left (each party's names, its designation half an inch in, "v." between them), a column of ")" as tall as theirs, the
+# case number at the right and, when the filer demands a jury, JURY TRIAL DEMANDED a line below it; then the paper's
+# title centered in bold capitals, a blank single line between the parts (the exemplar, usage/SOURCE.md).
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 244.8
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 36}
+            between:
+              - {text: "v."}
+      - {width: 21.6, repeat: ")", align: center}
+      - blocks:
+          - {text: "{case_number}", left: 21.6}
+          - when: jury_demand
+            blocks: [{text: "JURY TRIAL DEMANDED", bold: true, left: 21.6, above: 14.95}]
+    above: 14.95
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 14.95, below: 14.95}
+# FRCP 11(a) and LCvR5.4 (the attorney's name, address, telephone and e-mail on the paper): the date (when given) at the
+# margin beside "Respectfully submitted,", then in the right half, a blank line apart, the supervising counsel's lines,
+# the "/s/" signature and the signer's lines; single-spaced, kept whole and with the body's last paragraph.
+closing:
+  - group:
+      - columns:
+          - {width: 244.8, blocks: [{text: "Dated: {date}", optional: true}]}
+          - blocks: [{text: "Respectfully submitted,"}]
+      - columns:
+          - {width: 244.8, blocks: []}
+          - blocks:
+              - {text: "{signature.firm}", optional: true, above: 14.95}
+              - {text: "{signature.sign}", above: 14.95}
+              - {text: "{signature.lines}"}
+    above: 14.95
+# Fed. R. Civ. P. 5(b)(2)(C) and LCvR5.1: a party not served through ECF is served otherwise, with a certificate (a
+# certificate of mailing here): its title centered in bold capitals, the statement double-spaced, a blank line, the
+# persons served half an inch in, a blank line, the signer in the right half; kept whole.
+after_tail:
+  - when: certificate
+    blocks:
+      - group:
+          - {text: "{certificate.title|Certificate of Service}", align: center, bold: true, upper: true}
+          - {markdown: "{certificate.text}", pitch: body, indent: 36}
+          - {text: "{certificate.recipients}", left: 36, above: 14.95}
+          - {text: "{certificate.sign}", left: 244.8, above: 14.95}
+          - {text: "{certificate.lines}", left: 244.8, optional: true}
+        above: 14.95

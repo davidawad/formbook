@@ -3,7 +3,7 @@
 - Court: `wyd`, United States District Court for the District of Wyoming (`courts/tenth-circuit/wyoming/federal/district/`)
 - Doc type: `motion-brief`. A memorandum in support of a dispositive motion (Fed. R. Civ. P. 12(b)(6), 12(b)(7) and 19), filed with the motion itself as a separate document.
 - Exemplar: `usage/FILED-EXAMPLE-motion-brief-2.pdf` (*Elizondo v. Alger*, No. 1:26-cv-00263-SWS, Document 8, filed 2026-10-05, 12 pages; provenance in `usage/SOURCE.md`). One filer (defendant's counsel). The motion (Document 7) is not in the exemplar, so the sample is the memorandum only.
-- Samples: `usage/INPUT-motion-brief-2.md` (transcription of the whole memorandum from the introduction through the conclusion, with the signature block and certificate of service in the frontmatter, typographic apostrophes as filed) and `usage/INPUT-motion-brief.md` (the same memorandum with straight apostrophes, an explicit caption `separator` and the persons served only in the service list).
+- Samples: `usage/INPUT-motion-brief-2.md` (transcription of the whole memorandum from the introduction through the conclusion, with the signature block and certificate of service in the frontmatter, typographic apostrophes as filed) and `usage/INPUT-motion-brief.md` (the same memorandum with straight apostrophes and the persons served only in the service list).
 - Status: typst and docx on the shared cross-engine layout model (fb-595.68.33): Times New Roman 12 pt on both engines, the docx breaks every line and page where the typst render does (XENG-001..003 PASS on both samples, `params.cross_engine: gate` in `eval.yaml`); `sh tools/check.sh <this folder>` typst 18 and `--engine docx` 26 checks passed, 0 failed. Every page of both renders of both samples viewed (9 + 9 per sample). `court.json` untouched.
 
 ## Files
@@ -88,3 +88,30 @@ Tier-2 findings (OPEN or ACCEPTED):
 - **typst** (primary, `typst/`): the reference for the form and for the other engine's breaks.
 - **docx** (`docx/`): `docx/reference.xml` and `docx/wyd.lua` (no shell, no committed `reference.docx`; `docs/DOCX.md`, "The docx template without shell"). `sh tools/check.sh <this folder> --engine docx`: 26 checks passed, 0 failed, XENG-001..003 PASS on both samples (gated). The relief items are typed numbers with a tab, not Word list numbering; the attorney block and caption are borderless fixed-width tables.
 - **latex**: none for this doc type.
+
+## On the FRCP base (fb-595.17.20, 2026-10-29)
+
+`typst/layout.yaml` names the generic federal district brief (`base: /lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and overlays only what D. Wyo. sets itself, each rule cited there; `typst/wyd-motion-brief.typ` names the face and hands the merged layout to the shared document model (`lib/typst/xdoc.typ`). `latex/` (new: this folder had no latex engine) and `docx/` are generated from the merged layout by `fb engines gen` (do not edit them; `fb engines gen --check` fails on a stale one). The per-folder typst code and the docx filter `wyd.lua` are gone. The Files, Layout, Page review and Engines sections above describe the earlier template where they differ from this list.
+
+- Unchanged: Times New Roman 12 pt; exact 24 pt double pitch for the title, headings, paragraphs, list and certificate statement, 13.8 pt single lines for the attorney block, court name, caption, signature and service list (LR 10.1(a)); the attorney block one column per firm group 0.3 in apart (LR 10.1(b)); the caption's ")" column and designations an inch in; the title in bold capitals; the signature column 2.5 in in with two blank single lines between its groups; the certificate kept whole after it. The frontmatter field names are kept; sample 1 drops `caption.separator` ("v." is the layout's).
+- LR 7.1(b)(2)(B)'s 25 pages: `eval.yaml` `params.page_limit: 25` (DEF-LEN-001, every engine) instead of a typst assertion.
+- "Case No." is centered on the parties' height (on the sample's line of "v.", where the earlier template put it by row).
+- Headings: the filer types the numbers, as before; the lines after the first hang under the text (a section at the margin, 0.5 in; a sub-heading half an inch in, 0.4 in more), but the label is followed by a space, not set in a box (the model boxes only a label it numbers itself, and numbering would print a number before CONCLUSION). Tier 2, OPEN: CONCLUSION is now bold at the margin with the other level-1 headings; the exemplar centers it.
+- The relief list: the number at the margin in a half-inch box, the text hanging after it (the model's list; was half an inch in, the text at 0.85 in). Tier 2, OPEN.
+- Tier 2, OPEN (model): the body's last block is the relief list, which `keep_with_closing` does not keep (it keeps a final paragraph only), so the signature block opens page 9 with the certificate, and relief item 5 stays on page 8 (the earlier template moved item 5 with the signature).
+
+Gate 2 review after the move (both samples, every page of the three renders, as text layout `pdftotext -layout` and word boxes `-bbox`; this pod's image viewer could not open a PNG, so no page was looked at as a picture; the latex and docx renders break every line where typst does, XENG-003). The two samples break the same pages:
+
+| Page | What is on it | Finding | Status |
+|---|---|---|---|
+| 1 | Attorney block, court name, caption, title (two lines), I. INTRODUCTION | none | PASS |
+| 2-3 | II., III., IV., heading A (two lines, hung) | none | PASS |
+| 4-7 | Arguments A to D, headings B to D | none | PASS |
+| 8 | Heading E, CONCLUSION (at the margin), relief items 1 to 5 | CONCLUSION not centered; the list's numbers at the margin | OPEN |
+| 9 | DATED line, signature block, CERTIFICATE OF SERVICE, the persons served, the signer | the signature opens the page without body text | OPEN |
+
+- typst: `RESULT: 22 checks passed, 0 failed` (both samples).
+- latex: `RESULT: 28 checks passed, 0 failed`; XENG-001..003 PASS (9 pages each; 228/228 and 230/230 typst lines break after the same word).
+- docx: `RESULT: 30 checks passed, 0 failed`; XENG-001..003 PASS (9 pages each; 228/228 and 230/230).
+- `tools/check-selftest.sh` reads a court folder's `court.json`; this doc-type folder has none, so it does not run here.
+- BLOCKED: none.

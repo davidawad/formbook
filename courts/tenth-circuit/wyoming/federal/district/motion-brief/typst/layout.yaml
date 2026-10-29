@@ -1,0 +1,65 @@
+# U.S. District Court for the District of Wyoming (wyd): a memorandum in support of a dispositive motion, on the generic
+# FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D. Wyo.'s local rules overlaid here. The shared
+# document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines
+# gen`, fb-595.17.20). Rules: D. Wyo. Local Civil Rules LR 7.1 and 10.1 (../README.md quotes them, with the date
+# verified). The base already meets LR 10.1(a): typed, double spaced (24 pt, two 12-point lines), 8 1/2 x 11 paper,
+# one-inch margins on all sides, type not less than 12 point. The 25-page limit of LR 7.1(b)(2)(B) is checked on the
+# render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, two lines.
+constants:
+  court: "UNITED STATES DISTRICT COURT"
+  district: "FOR THE DISTRICT OF WYOMING"
+# LR 10.1(a): double spaced throughout the brief, its title and headings too, with no extra space between paragraphs
+# (as filed); single spacing for the attorney block, court name, caption, signature block and the persons served.
+# Headings bold, a 12 pt space above, kept with the text; the filer types the numbers (I., A.), the lines after the
+# first hung under the text: a section at the margin, a sub-heading half an inch in.
+heading:
+  - {bold: true, hang: 36, pitch: body, above: 12, below: 0}
+  - {bold: true, left: 36, hang: 28.8, pitch: body, above: 12, below: 0}
+# LR 10.1(b) and FRCP 10(a): the attorney information block at the top (one column per firm group, 0.3 in apart); the
+# court's name; the caption (the parties at the left, each party's names, its designation an inch in, "v." a single
+# line from each, a column of ")" as tall as theirs, the case number at the right); then the paper's title on the body
+# pitch, centered in bold capitals (the exemplars, usage/SOURCE.md).
+front:
+  - columns: {each: attorney, blocks: [{text: "{.}"}]}
+    gutter: 21.6
+  - {text: "{xd.court}", align: center, bold: true, above: 18}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 223.2
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 72}
+            between:
+              - {text: "v.", above: 13.8, below: 13.8}
+      - {width: 25.2, repeat: ")"}
+      - valign: center
+        blocks:
+          - {text: "{case_label|Case No.} {case_number}"}
+    above: 18
+  - {text: "{title}", align: center, bold: true, upper: true, pitch: body, above: 18, below: 12}
+# FRCP 11(a): the date line at the margin; "Respectfully submitted," 2.5 in in a double line below; two blank single lines,
+# the "/s/" signature and the signer's lines; two blank single lines, whom the signer represents. Single spaced, kept
+# whole and with the body's last paragraph.
+closing:
+  - group:
+      - {text: "{dated}", optional: true}
+      - {text: "Respectfully submitted,", left: 180, above: 24}
+      - {text: "/s/ {signature.signer}", left: 180, above: 27.6}
+      - {text: "{signature.lines}", left: 180}
+      - {text: "{signature.role}", left: 180, above: 27.6, optional: true}
+    above: 24
+# Fed. R. Civ. P. 5(b), 5(d)(1)(B): the certificate of service after the signature: its title centered in bold, the
+# statement double spaced, the persons served single spaced half an inch in, the signer 2.5 in in; kept whole.
+after_tail:
+  - when: certificate
+    blocks:
+      - group:
+          - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, pitch: body}
+          - {markdown: "{certificate.text}", pitch: body, indent: 36, above: 12}
+          - {text: "{certificate.served}", left: 36, above: 12, optional: true}
+          - {text: "/s/ {certificate.signer}", left: 180, above: 24}
+        above: 24

@@ -297,12 +297,12 @@ Courts under `courts` (347).
 | [United States Bankruptcy Court, W.D. Oklahoma](tenth-circuit/oklahoma/federal/bankruptcy-western-district) | `okwb` | up for review | 1/1 | — | 1/1 | 14 |
 | [United States District Court for the District of Oklahoma](tenth-circuit/oklahoma/federal/district) | `okd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court, Oklahoma Eastern](tenth-circuit/oklahoma/federal/eastern-district) | `oked` | up for review | 2/2 | 1/1 | 2/2 | 14 |
-| [United States District Court, Oklahoma Northern](tenth-circuit/oklahoma/federal/northern-district) | `oknd` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court, Oklahoma Western](tenth-circuit/oklahoma/federal/western-district) | `okwd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court, Oklahoma Northern](tenth-circuit/oklahoma/federal/northern-district) | `oknd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [United States District Court, Oklahoma Western](tenth-circuit/oklahoma/federal/western-district) | `okwd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Utah](tenth-circuit/utah/federal/bankruptcy-district) | `utb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Utah](tenth-circuit/utah/federal/district) | `utd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Wyoming](tenth-circuit/wyoming/federal/bankruptcy-district) | `wyb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. Wyoming](tenth-circuit/wyoming/federal/district) | `wyd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. Wyoming](tenth-circuit/wyoming/federal/district) | `wyd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Colorado Court of Appeals](tenth-circuit/colorado/state/court-of-appeals) | `coloctapp` | up for review | 5/5 | — | — | 29 |
 | [Colorado Supreme Court](tenth-circuit/colorado/state/supreme-court) | `colo` | up for review | 8/8 | — | — | 29 |
 | [Court of Appeals of Kansas](tenth-circuit/kansas/state/court-of-appeals) | `kanctapp` | up for review | 5/5 | 5/5 | 0/5 | 29 |

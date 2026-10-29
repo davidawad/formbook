@@ -22,7 +22,6 @@ signature:
     - ""
     - "SHERRI KATZ"
     - "Litigation Division Head"
-    - ""
   sign: "/s/ Katie Goff"
   lines:
     - "Katie Goff, OBA No. 32402"
@@ -40,7 +39,6 @@ certificate:
     - "605 SE 21st Street"
     - "Oklahoma City, OK 73129"
     - "Pro Se Plaintiff"
-    - ""
   sign: "/s/ Katie Goff"
   lines:
     - "Assistant Municipal Counselor"
@@ -68,21 +66,21 @@ COMES NOW, Defendant City of Oklahoma City (City), by and through Katie Goff, As
 
 # ARGUMENT AND AUTHORITY
 
-## I. A MUNICIPALITY CANNOT BE LIABLE FOR INTENTIONAL TORTS.
+## A MUNICIPALITY CANNOT BE LIABLE FOR INTENTIONAL TORTS.
 
 Concurrent with the filing of this Motion, Defendant OCWUT has also filed a Motion to Dismiss. In that Motion to Dismiss, OCWUT sets forth the same proposition and provides supporting argument therein. In addition to the fraud and misrepresentation alleged against OCWUT, Plaintiff also seemingly alleges assault and battery, false imprisonment and intentional infliction of emotional distress against City. The City hereby adopts as its own and incorporates into its own Motion to Dismiss Defendant OCWUT’s proposition and arguments regarding intentional torts. Accordingly, the allegations of fraud, misrepresentation, assault, battery, false imprisonment, and intentional infliction of emotional distress against this Defendant must be dismissed.
 
-## II. AN ALLEGATION OF INVERSE CONDEMNATION BASED ON ALLEGED TORTIOUS ACTS IS IMPROPER AND MUST BE DIMISSED.
+## AN ALLEGATION OF INVERSE CONDEMNATION BASED ON ALLEGED TORTIOUS ACTS IS IMPROPER AND MUST BE DIMISSED.
 
 In its Motion to Dismiss, OCWUT sets forth the same proposition and provides supporting argument therein. The City hereby adopts as its own and incorporates into its own Motion to Dismiss Defendant OCWUT’s proposition and arguments regarding Inverse condemnation. Accordingly, Plaintiff’s inverse condemnation claim against City must be dismissed as relief cannot be granted therein.
 
-## III. THE COMPLAINT, AS A WHOLE, DOES NOT MEET THE FEDERAL PLEADING STANDARDS.
+## THE COMPLAINT, AS A WHOLE, DOES NOT MEET THE FEDERAL PLEADING STANDARDS.
 
-### A. Breach of Contract, Open Records Violations, and the Intentional Torts.
+### Breach of Contract, Open Records Violations, and the Intentional Torts.
 
 Concurrent with the filing of this Motion, Defendant OCWUT has also filed a Motion to Dismiss. In that Motion to Dismiss, OCWUT sets forth the same proposition and provides supporting argument therein. The City hereby adopts as its own and incorporates into its own Motion to Dismiss Defendant OCWUT’s proposition and arguments regarding the pleading issues as to the complaint as a whole, and specifically to the allegations of breach of contract, Open Records Act violations and the intentional torts. The City offers the following related to additional causes of action against it.
 
-### B. Civil Rights Allegations
+### Civil Rights Allegations
 
 In this newest iteration of the Complaint, Plaintiff added what appear to be four civil rights causes of action against the City. Each one fails to meet the federal pleading standards articulated in OCWUT’s motion. Further, following Bell Atlantic Corp. v. Twombly, 550 U.S. 544, 127 S. Ct. 1955, 167 L. Ed. 2d 929 (2007), the Tenth Circuit affirmed that a Complaint must contain sufficient factual allegations to put a defendant on fair notice of what he or she is alleged to have done that constitutes a claim under substantive law. See Ton Services, Inc. v. Qwest Corp., 493 F.3d 1225, 1236 (10th Cir. 2007) (noting that Twombly “articulated a new ‘plausibility’ standard under which a Complaint must include ‘enough facts to state a claim to relief that is plausible on its face.’”); Ridge at Red Hawk, L.L.C. v. Schneider, 493 F.3d 1174, 1177 (10th Cir. 2007) (noting Twombly’s observation that the previous standard of evaluating motions to dismiss in federal court “has earned its retirement”). In actions brought under 42 U.S.C. § 1983, such as the present one, liability for damages for a constitutional tort under 42 U.S.C. § 1983 is personal, so each defendant’s conduct must be independently assessed. Wilson v. Northcutt, 441 F.3d 586, 591 (8th Cir. 2006).
 
@@ -96,7 +94,7 @@ An official policy that would allow a claim of municipal liability to proceed is
 
 None of the individual causes of action found in Counts IX, X, XI, or XII (Doc. 11, ¶¶159-167) include any specific statement about what the alleged Policy is, rather they all make conclusory unadorned statements and then point to the same paragraph in XII (First Amendment Retaliation) at Doc. 1-1, ¶ 168. That paragraph does not meet the pleading standard for a §1983 cause of action, rather Plaintiff just uses the buzz words of “customs practices, and deliberate indifference” and then states that an incident he alleges occurred on June 6 proves these elements. It is still not clear at all what the City, as a Defendant, allegedly did via policy, practice or custom, to violate Plaintiff’s constitutional rights. Simply saying that a policy does exist, (or doesn’t for that matter) does not establish a causal connection between police action and some illusory speculative alleged harm. These are simply unadorned, bald allegations not permitted by federal pleadings standards as articulated thoroughly in OCWUT’s Motion to Dismiss. Ashcroft v. Iqbal, 556 U.S. 662, 129 S. Ct. 1937, 1949, 173 L. Ed. 2d 868 (2009). Bell Atlantic Corp. v. Twombly, 550 U.S. 544, 555, 127 S. Ct. 1955, 167 L. Ed. 2d 929 (2007). Fed. R. Civ. P. 8. Further, neither ¶168 or the individual counts articulate what exactly the City did versus what each individual John Doe officer (four of whom are named among the 22 defendants) did. Rather, it lumps them all together and the City cannot ascertain “exactly who is alleged to have done what to whom.” Robbins v. DHS, 519 F. 3d 1242, 1250 (10th Cir. 2008). As such, Plaintiff has failed to state a claim against City on the civil rights causes of action and Plaintiff’s claims against Defendant City should be dismissed pursuant to Fed. R. Civ. P. 12(b)(6) and also the entire action should be dismissed as a whole.
 
-### C. Negligence and Nuisance Allegations
+### Negligence and Nuisance Allegations
 
 Because negligence and nuisance were not specifically addressed under the pleading standard proposition in OCWUT’s brief, the City will do so here, still incorporating the authorities and arguments made by OCWUT.
 
