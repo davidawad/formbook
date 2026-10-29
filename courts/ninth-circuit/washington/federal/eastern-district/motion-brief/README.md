@@ -8,10 +8,10 @@ Folder: `courts/ninth-circuit/washington/federal/eastern-district/motion-brief/`
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (25 pp., ECF No. 4; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (an excerpt, 15 rendered pages; see below) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf` and `usage/OUTPUT-motion-brief.docx` / `.docx.pdf`, 15 pages each, no warnings; the docx breaks every line and page as typst (XENG-001..003 gated, `eval.yaml`) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, `.latex.pdf` and `.docx.pdf`, 15 pages each (typst 0.15.0, pdfLaTeX with TeX Gyre Cursor, LibreOffice), no warnings; the latex and docx break every line and page as typst (XENG-001..003 gated, `eval.yaml`; 2026-10-29, on the shared document model, fb-595.96) |
 | overlay | `just overlay <this folder>` (written to the gitignored `.overlay/`) |
 | typeface | face required: none named by LCivR 10(d) (serif or traditional Roman, proportionately spaced at 14 pt or more, or monospaced). The template sets Liberation Mono at 14 pt (8.6 characters an inch), the metric twin of the exemplar's Courier New (`data/exemplar-fonts.json`, docs/FONTS.md); the docx names the same face (`{font}` in `docx/reference.xml`). See gap 8. |
-| pages reviewed | 15 of 15 on each engine (`reviews/docx-review.md`) |
+| pages reviewed | 15 of 15 on each engine rendered to PNG at 60 dpi (45 images, `.overlay/`); read by their text layout and line geometry (2026-10-29: the image viewer of the agent pod could not open them; see Review) |
 
 File names follow the tools (`INPUT-`, `OUTPUT-`, `OVERLAY-`, which `tools/overlay.sh` reads and writes), not the
 `<id>.pdf` / `<id>-overlay.pdf` names in the brief.
@@ -26,51 +26,43 @@ Primary sources, verified 2026-10-14:
 | LCivR 7(i)(1) | Motion caption shows the hearing date, and time and place (or phone number), or the motion is noted without oral argument. | `hearing` frontmatter: `date`, `type`; caption shows "Hearing date" and "Without Oral Argument". Time and place are not shown because the exemplar is "without oral argument" (LCivR 7(i)(3)(A)). |
 | LCivR 7(i)(2)(B) | Hearing date for a dispositive motion at least 50 days after filing. | Not checked by the template; the sample's 8/31/2026 date is the exemplar's, transcribed. Author responsibility. |
 | LCivR 7(f)(1), (4) | Dispositive motions (including dismissal) at most 20 pages; the caption, signatures and certificates are not counted. | Not enforced by the template. The sample is an excerpt; the filed exemplar is 25 pp. with caption and TOC. |
-| LCivR 10(a)(1)(A) to (E) | Counsel block above line 5; court title on or below line 5; caption on the left; case number and title of the paper on the right; footer with the title (or an abbreviated title) and the page number. | `counsel` frontmatter; `court-title`; `caption`; `footer-block` with `footer_title`. |
+| LCivR 10(a)(1)(A) to (E) | Counsel block above line 5; court title on or below line 5; caption on the left; case number and title of the paper on the right; footer with the title (or an abbreviated title) and the page number. | layout.yaml `cover`: `counsel` in a box at least four numbered lines high, the court title single-spaced after it, the caption columns; `page_number` with `footer_title`. |
 | LCivR 10(a)(2) | Sequential pagination through the whole filing, page numbers in the footer. | Continuous arabic numbering (the exemplar's TOC uses roman numerals; the rule asks for sequential numbering only). |
-| LCivR 10(d) | 8½ × 11; line numbers in the left margin; serif or traditional Roman type; "a proportionately spaced typeface of 14 points or more"; text and footnotes double spaced; quotations, headings, captions, signature blocks and certifications may be single spaced. | `type-size = 14pt`, Liberation Mono (gap 8), numbers 1 to 20, `pitch = 32pt` (double spacing), single spacing for counsel, caption, headings, signature and certificate. |
+| LCivR 10(d) | 8½ × 11; line numbers in the left margin; serif or traditional Roman type; "a proportionately spaced typeface of 14 points or more"; text and footnotes double spaced; quotations, headings, captions, signature blocks and certifications may be single spaced. | layout.yaml `size: 14`, Liberation Mono (gap 8), `pleading.lines: 20`, `pitch: {body: 32, single: 16}` (double spacing; single for counsel, caption and signature). |
 | Fed. R. Civ. P. 12(b) | Defenses by motion, including 12(b)(6) failure to state a claim. | Body text; the sample cites Rule 12(b)(6) in the introduction. Text from https://www.law.cornell.edu/rules/frcp/rule_12, fetched 2026-10-14. |
 
 Local rules source: E.D. Wash. Local Civil Rules, November 2025 version (per the file name), https://www.waed.uscourts.gov/sites/cst/waed/files/local-rules/LocalCivilRules---November-2025.pdf (linked from https://www.waed.uscourts.gov/rules-policies/local-rules), fetched 2026-10-14.
 
 ## Layout
 
-- The cross-engine layout model (`lib/typst/xengine.typ`): every line a box of its pitch, 32 pt a numbered line, 16 pt a single line; 20 numbered lines from the 72 pt top margin.
-- Caption page: counsel (lines 1 to 6 here, single spaced, padded to whole numbered lines, at least 4), the court title single spaced on lines 7 and 8 (on or below line 5), the caption row (whole numbered lines, here 9 to 20) with the hearing notation at the right.
-- Table of contents: generated by the template from the body's level 1 and 2 headings (label in a 0.6 in box, a dot leader to the page the heading starts on), so its page numbers are the render's own; on its own page after the caption, one numbered line a row. The certificate of service is not listed.
-- Body: paragraphs on the numbered lines with a 0.5 in first-line indent, headings bold and left aligned, a long heading wrapping onto the next numbered line.
-- Signature block after the conclusion ("DATED this 6th day of July, 2026", "By s/" the signer), then the certificate of service on its own page.
+The folder is on the generic federal district brief (`lib/layouts/frcp-motion-brief.yaml`) with E.D. Wash.'s rules overlaid in `typst/layout.yaml`, set by the shared document model (`lib/typst/xdoc.typ`; `latex/` and `docx/` generated by `fb engines gen`, fb-595.96).
+
+- Pleading paper (layout.yaml `pleading`): the numbers 1 to 20, right-aligned 0.45 in left of the text, one per 32 pt numbered line from the 72 pt top margin; a double rule at 0.9 in and 0.94 in from the page's left edge and a single rule 0.1 in right of the text. `eval.yaml` params.pleading_lines: 20 drops the numbers from the text the checks read.
+- Caption page (`cover`, its own page when the sample has a table of contents, `cover_when: toc`): counsel single-spaced in a box at least four numbered lines high (lines 1 to 6 here), the court title single-spaced (on or below line 5), the caption (parties at the left, designations 1.2 in in, "v." between them, ruled at the right and foot; the case number, the bold title, the hearing date and "Without Oral Argument" at the right).
+- Table of contents (when `toc`): the headings to the third level with their pages, the pages numbered as one through the filing (LCivR 10(a)(2)).
+- Body: paragraphs on the numbered lines with a 0.5 in first-line indent; headings numbered by the layout (gap 11).
+- Signature block after the conclusion ("DATED this 6th day of July, 2026", "By s/" the signer), kept with the last paragraph; the certificate of service (the frontmatter's `certificate_of_service`) on its own page, not listed in the contents.
+- Footer: "BATTELLE'S MOTION TO DISMISS - n" at the left, 52 pt above the page's foot.
 
 ## Markdown contract (for samples)
 
-- YAML frontmatter, then the body. Body chunks are separated by blank lines: `#` (level 1, bold caps), `##` (level 2, bold), `###` (bold italic); a list (`1.` items, lettered A., B. by the template); or a paragraph (not numbered).
-- The body section `# CERTIFICATE OF SERVICE` is split off by the template and rendered after the signature block on its own page.
-- Frontmatter fields: `case_number`, `caption.parties` (`{names, designation}`; "v." is inserted between parties, so do not add it), `brief_title`, `footer_title` (abbreviated, see below), `counsel`, `hearing` (`date`, `type`, optional `judge`), `division`, `jury_demand`, `toc` (true to generate the table of contents), `date`, `signature` (`firm`, `signer`, `lines`).
-- Not supported: tables, footnotes, raw typst. The table of authorities is not generated (gap 2).
+- YAML frontmatter, then the body: `#` (a section, numbered I.), `##` (A.), `###` (1.); paragraphs. Do not type the labels.
+- Frontmatter fields: `case_number`, `caption.parties` (`{names, designation}`; "v." between parties), `brief_title`, `footer_title` (abbreviated, in capitals as filed), `counsel`, `division`, `hearing` (`date`, `type`, `judge`), `toc` (true: the caption page and a table of contents of their own), `date`, `signature` (`firm`, `signer`, `lines`), `certificate_of_service` (markdown: its paragraphs).
+- Not supported: tables. The table of authorities is not generated (gap 2).
 
-## Overlay
+## Review of the rendered pages (Gate 2, 2026-10-29)
 
-Recorded on an earlier render (11 pages, EB Garamond, before the cross-engine port; `just overlay` writes a fresh one to `.overlay/`): our render in red, the filed exemplar in blue, overlap in black. Pages are paired by shared words (`tools/overlay.sh`); the page map is in `OVERLAY-hartsock-motion-to-dismiss.txt`:
+After the move onto the shared model (fb-595.96): every page of the three renders (15 typst, 15 latex, 15 docx: 45 pages) rasterized at 60 dpi with pdftoppm into `.overlay/`. The agent's image viewer could not open the PNGs in its pod, so each page was read by its text layout (`pdftotext -layout`) and its line geometry (`fb measure`); a look at the images themselves is left to the reviewer (PR). The three engines break every line and page alike (XENG-001..003 PASS). `reviews/docx-review.md` is the review of the old typst and docx templates.
 
-| our page | filed page | word overlap |
-|---|---|---|
-| 1 | 1 | 85.3% |
-| 2 | 2 | 30.9% (our TOC against the filed TOC) |
-| 3 | 5 | 86.0% |
-| 4 | 6 | 81.0% |
-| 5 | 7 | 77.2% |
-| 6 | 9 | 47.3% |
-| 7 | 10 | 81.0% |
-| 8 | 11 | 76.1% |
-| 9 | 12 | 73.7% |
-| 10 | 24 | 54.2% |
-| 11 | 25 | 66.6% |
+| Page | What it is | Finding (all three engines) | Status |
+|---|---|---|---|
+| 1 | Caption page: counsel (lines 1 to 5), court title (lines 6 and 7), the caption (to line 19) | Structure as LCivR 10(a)(1) asks; the exemplar's wider columns and ruled footer differ (eval.yaml `cover_structure: report`). | ACCEPTED (tier 3) |
+| 2 | Table of contents: I. to V., A. and B. under IV. | OK. | OK |
+| 3-14 | Introduction, factual and procedural background, argument A. and B., the note on the untranscribed sections, conclusion, signature | OK. | OK |
+| 15 | Certificate of service | OK. | OK |
+| all | Footer "BATTELLE'S MOTION TO DISMISS - n" | OK. | OK |
 
-The overlay is a diagnostic, not a score. The sample pairs with the filed pages it came from; our pages 10 and 11 pair with the filed signature and certificate (pp. 24 and 25), and our page 2 (TOC) pairs poorly because the filed TOC has dot leaders and roman page numbers.
-
-## Review of the rendered pages
-
-Every page of the typst and docx renders, side by side at 60 dpi, after the last template change: `reviews/docx-review.md`.
+Reviewed pages: 15 of 15 on each engine (45).
 
 ## Known gaps and open choices
 
@@ -82,33 +74,15 @@ Every page of the typst and docx renders, side by side at 60 dpi, after the last
 6. **Hearing.** The caption shows the date and "Without Oral Argument" (the exemplar's form). LCivR 7(i)(1) also asks for a time and place where argument is set; none is shown because none is set.
 7. **Page limit and timing.** LCivR 7(f)(1) (20 pages for a dispositive motion) and LCivR 7(i)(2)(B) (50 days) are not checked by the template. Author responsibility.
 8. **Typeface (open).** The template sets the exemplar's audited face, Liberation Mono for Courier New (`data/exemplar-fonts.json`; `fb lint fonts` holds the template to it). LCivR 10(d) allows a monospaced face, but `../rules.md` WAED-FORM-002 states only the proportional one; the complaint sets Times New Roman. Whether the motion should follow the house standard (Times New Roman) instead is a decision for the maintainer (the exemplar audit would change with it).
-9. **Caption length.** The caption row is not split across pages; this sample's long party list fills the first page to line 20.
+9. **Caption length.** The caption's columns are not split across pages; this sample's long party list fills the first page to line 19.
+
+10. **Bottom margin 79.95 pt.** The 20 numbered lines of 32 pt fill the 640 pt between the top margin and an 80 pt bottom margin exactly; Word starts the page after a page break (the contents page, the certificate) with a paragraph of one twip (lib/docx/xdoc.lua brk), so its last numbered line moved to the next page. The bottom margin is a twip less (79.95 pt) in every engine; the footer stays where it was.
+11. **Headings.** Numbered by the layout (I., A., 1.; the sample no longer types the labels): a section centred in bold capitals ("I. INTRODUCTION", as filed), a sub-section bold at the margin with its label in a 0.6 in box. In the contents a section's label stands before its title (a centred heading has no label box), a sub-section's in its box.
 
 ## Engines
 
-`sh tools/check.sh <this folder> --engine typst|docx` runs every gate on each engine (no latex template). The docx is
-held to the typst render by Gate 4 (`params.cross_engine: gate` in `eval.yaml`): the same pages, page ends and line
-breaks.
+All three engines are generated from one layout (docs/EVAL-LOOP.md, "Generated engines"; fb-595.96): `typst/layout.yaml` over `lib/layouts/frcp-motion-brief.yaml`; `typst/waed-motion-brief.typ` names the face (Liberation Mono) and hands the layout to `lib/typst/xdoc.typ`; `fb engines gen` writes `latex/template.tex` (TeX Gyre Cursor, Courier's 0.6 em advances), `latex/xdoc.lua`, `docx/reference.xml` and `docx/xdoc.lua` (`docx/motion-brief.lua` and `docx/lib/pleading.lua` are gone; the complaint keeps its own copy; the LaTeX engine is new). `eval.yaml` gates the cross-engine check (`params.cross_engine: gate`).
 
-### docx (`docx/`)
+`sh tools/check.sh <dir>`: typst 9 passed, 0 failed; `--engine latex`: 12 passed, 0 failed; `--engine docx`: 13 passed, 0 failed; XENG-001..003 PASS on both. Not verified in Word (LibreOffice only).
 
-Declarative inputs only (docs/DOCX.md, "The docx template without shell"): `docx/reference.xml` (the cross-engine
-style recipe in the typst face, `{font}`, at 14 pt, with 32 pt and 16 pt exact lines, plus "List Letter"),
-`docx/motion-brief.lua` (the cover, the table of contents, the headings, the memorandum, the signature block and the
-certificate as WordprocessingML) and `docx/lib/pleading.lua` (the pleading paper, shared with the complaint folder:
-the footer with the 20 line numbers in a frame and the title with the page number, `$FORMBOOK_FOOTERS`; the section
-with the margins and the pleading rules as page borders, `$FORMBOOK_FINAL`; the counsel block, court title and
-caption row sized to whole numbered lines from the face's advance widths). The contents' page numbers come from
-needles (`$FORMBOOK_NEEDLES`: each heading with the words after it), found by `fb render` in the LibreOffice PDF
-until they settle (were `docx/render.sh` and `toc-pagemap.awk`). The contents are plain rows (a right indent, a dot
-leader tab), not a TOC field.
-
-What differs (not a rule; tier 2 or 3):
-
-- The pleading rules are page borders that run from the text area, not from the page edge (the typst rules run the full page height).
-- The leader in the contents starts three spaces after the title and runs to the page number (Word's tab leader); typst's dots stop short of the page column.
-- Word may paginate differently from LibreOffice; the gate and the contents' page numbers are the LibreOffice PDF's.
-
-## FRCP base port assessment (fb-595.17.13)
-
-Skipped: pleading paper. LCivR 10(d) asks for line numbers; the template sets 20 numbered lines of 32 pt down the left margin with the double and single pleading rules. The FRCP base (`lib/layouts/frcp-motion-brief.yaml`) has no pleading paper yet (fb-595.84 brings it), so the folder stays on its own templates. (LCivR 10(a)(1)(E)'s footer, the paper's title or an abbreviated one with the page number, would also need the running footer the base lacks; see the District of Oregon's motion-brief README.)
+[Parent: washington/federal/eastern-district](../README.md)

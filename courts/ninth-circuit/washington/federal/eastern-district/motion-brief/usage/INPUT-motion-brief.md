@@ -15,7 +15,7 @@ caption:
     - names: ["BATTELLE MEMORIAL INSTITUTE, a foreign non-profit corporation and operator of Pacific Northwest National Laboratory, CASEY PITTMAN, in her official capacity, JESSICA DELUCCHI and JOHN DOE DELUCCHI, in her official capacity and as a marital community, STEVE EKLUND, in his official capacity, and MITCHELL TUFFORD and JANE DOE TUFFORD, in his official capacity and as a marital community,"]
       designation: "Defendants."
 brief_title: "DEFENDANT BATTELLE MEMORIAL INSTITUTE’S MOTION TO DISMISS"
-footer_title: "Battelle’s Motion to Dismiss"
+footer_title: "BATTELLE’S MOTION TO DISMISS"
 hearing:
   date: "8/31/2026"
   type: "Without Oral Argument"
@@ -34,6 +34,12 @@ counsel:
 division: "AT RICHLAND"
 jury_demand: false
 toc: true
+certificate_of_service: |
+  I hereby certify that on this day I caused a true and correct copy of the foregoing to be served, as indicated, upon the following participants: Carrie M. Coppinger, Coppinger Law P.S., 103 W. Main Street, Suite 202, Everson, WA 98247 (cc@coppingerlawps.com; service@coppingerlawps.com), attorney for Plaintiff, via CM/ECF, email, and U.S. Mail.
+
+  DATED this 6th day of July, 2026.
+
+  s/Dominique Barrientes, Legal Assistant, dominiqueb@summitlaw.com
 date: "this 6th day of July, 2026"
 signature:
   firm:
@@ -42,7 +48,7 @@ signature:
   lines: ["Rebecca R. Singleton, WSBA #57719", "Eva Oliver, WSBA #57019", "sethb@summitlaw.com", "rebeccas@summitlaw.com", "evao@summitlaw.com", "Attorneys for Defendant Battelle Memorial Institute, dba Pacific Northwest National Laboratory"]
 ---
 
-# I. INTRODUCTION
+# INTRODUCTION
 
 Plaintiff Alaric Hartsock (“Plaintiff”) brings this action against his former employer, Battelle Memorial Institute (“BMI”), and four of its employees arising out of the termination of his employment in November 2024. Plaintiff asserts seven different causes of action, all but one are legally deficient on their face and cannot survive scrutiny under Federal Rule of Civil Procedure 12(b)(6).
 
@@ -54,7 +60,7 @@ Finally, Plaintiff’s NIED fails because it is duplicative of his discriminatio
 
 For these reasons, and as set forth more fully below, BMI respectfully requests that the Court dismiss each of Plaintiff’s claims with the exception of Plaintiff’s first cause of action for disparate treatment disability discrimination.
 
-# II. FACTUAL BACKGROUND
+# FACTUAL BACKGROUND
 
 Plaintiff worked for BMI from around March 2021 until November 2024. Complaint, ¶¶3.1, 3.32. He was initially hired as an intern (Tech Student 4). *Id.*, ¶3.1. In early 2024, prior to applying to work as a Post-Bachelors Research Assistant (“PBRA”), Plaintiff disclosed a mental health condition to his Team Lead, Ben Laroque. *Id.*, ¶3.4. Laroque encouraged Plaintiff to apply for the position and advised that his mental health condition would not make him ineligible for security clearance. *Id.*, ¶3.5. In mid-March 2024, Plaintiff was hired as a PBRA. *Id.*, ¶3.6.
 
@@ -74,19 +80,19 @@ On June 24, 2024, Plaintiff was placed into a new half-time position on the Meet
 
 [The facts from July 2024 to November 2024 are not transcribed in this sample.]
 
-# III. PROCEDURAL BACKGROUND
+# PROCEDURAL BACKGROUND
 
 On June 4, 2026, Plaintiff filed the instant Complaint in Benton County Superior Court. *See* Dkt. 1, pp. 8-22. The Complaint alleges seven causes of action: disability discrimination, retaliation, wrongful discharge in violation of public policy, negligent hiring, negligent retention, negligent supervision, and NIED. *Id.* The Complaint also purports to allege a claim for “respondeat superior,” but as discussed below, such is not an independent claim but a theory of liability and one which is inapplicable here.
 
 On June 10, 2026, Plaintiff served the Complaint and Summons on Defendant BMI. Dkt. 2 (Berntsen Decl.), ¶2. Defendant BMI timely removed this matter to this Court pursuant to 28 U.S.C. § 1332(a). Dkt. 1. Upon information and belief, the individually named defendants have not been served.
 
-# IV. AUTHORITY & ARGUMENT
+# AUTHORITY & ARGUMENT
 
-## A. Legal Standard
+## Legal Standard
 
 To survive a motion to dismiss under Federal Rule of Civil Procedure 12(b)(6), the complaint “must contain sufficient factual matter, accepted as true, to ‘state a claim to relief that is plausible on its face.’” *Ashcroft v. Iqbal*, 556 U.S. 662, 678 (2009) (quoting *Bell Atl. Corp. v. Twombly*, 550 U.S. 544, 570 (2007)). “A claim has facial plausibility when the plaintiff pleads factual content that allows the court to draw the reasonable inference that the defendant is liable for the misconduct alleged.” *Id.* The court is not required to accept as true legal conclusions, conclusory statements, unreasonable inferences, or “formulaic recitation[s] of the elements of a cause of action.” *Chavez v. United States*, 683 F.3d 1102, 1108 (9th Cir. 2012).
 
-## B. Plaintiff Fails to State an Actionable Retaliation Claim.
+## Plaintiff Fails to State an Actionable Retaliation Claim.
 
 Plaintiff’s second cause of action alleges that Defendants retaliated against him for reporting discriminatory behavior and for requesting reasonable accommodations. Compl., ¶¶5.1-5.4. Nonetheless, Plaintiff does not identify the legal basis—statutory, common law, or otherwise—for his retaliation claim. Plaintiff asserts this claim under the employment anti-retaliation provision of the Washington Law Against Discrimination (“WLAD”), RCW 49.60.210.
 
@@ -102,14 +108,7 @@ Moreover, causation cannot be inferred from the timing of events. BMI terminated
 
 [Sections IV.C to IV.E (the wrongful discharge, negligent hiring, supervision and retention, and NIED arguments) are not transcribed in this sample.]
 
-# V. CONCLUSION
+# CONCLUSION
 
 For the reasons set forth herein, BMI respectfully requests that the Court grant BMI’s Motion to Dismiss.
 
-# CERTIFICATE OF SERVICE
-
-I hereby certify that on this day I caused a true and correct copy of the foregoing to be served, as indicated, upon the following participants: Carrie M. Coppinger, Coppinger Law P.S., 103 W. Main Street, Suite 202, Everson, WA 98247 (cc@coppingerlawps.com; service@coppingerlawps.com), attorney for Plaintiff, via CM/ECF, email, and U.S. Mail.
-
-DATED this 6th day of July, 2026.
-
-s/Dominique Barrientes, Legal Assistant, dominiqueb@summitlaw.com
