@@ -2314,6 +2314,36 @@ fn a_listed_authority_on_passim_pages_or_more_is_passim() {
 }
 
 #[test]
+fn a_page_list_wider_than_the_line_wraps_and_leaves_the_citation_its_line() {
+    // typst: the page column never takes the citation's own width (fb-595.87: "G.L. c. 239, § 8A" on 22 pages was
+    // set a word a line, its last word printed into the pages, DEF-FORM-004)
+    let l = layout("authorities:\n  title: Authorities\n  col: 56\n");
+    let pages = (1..=70)
+        .map(|n| n.to_string())
+        .collect::<Vec<_>>()
+        .join(", ");
+    let Some(f) = fx(
+        "wide-page-list",
+        &l,
+        &format!("---\nauthorities:\n  - heading: Statutes\n    entries:\n      - {{cite: \"G.L. c. 239, § 8A\", pages: \"{pages}\"}}\n---\n# Argument\n\nThe body.\n"),
+        &["typst", "pdftotext"],
+    ) else {
+        return;
+    };
+    let pages = f.typst_pages().unwrap();
+    let toa: Vec<&str> = pages[0].lines().map(str::trim).collect();
+    assert!(
+        toa.iter()
+            .any(|t| t.starts_with("G.L. c. 239, § 8A") && t.contains(" 1, 2, 3, ")),
+        "{toa:?}"
+    );
+    assert!(
+        toa.iter().any(|t| t.trim_end().ends_with("69, 70")),
+        "{toa:?}"
+    );
+}
+
+#[test]
 fn the_model_s_inline_rules_in_latex_and_word() {
     let l = layout("");
     let Some(f) = fx(

@@ -813,7 +813,7 @@
       box(width: 1fr, repeat[.])
       h(LEADER-MIN)
     }),
-    align(right + bottom, page),
+    align(right + bottom, { set par(justify: false); page }),
   ))
   if target == none { row } else { link(target, row) }
 }
@@ -853,9 +853,17 @@
   }
 }
 
+/// A row of the authorities, `row(col)`, its page column `col` (layout.yaml `authorities.col`) or the page list's own
+/// width when wider, but never so wide that the citation `cite` loses its own width (up to half the line) and a leader
+/// of three ems: a longer list wraps in that column, so the citation does not run into the pages (DEF-FORM-004).
+#let page-fit(a, cite, list, row) = layout(size => {
+  let room = size.width - calc.min(measure(cite).width, size.width / 2) - 3em.to-absolute() - LEADER-MIN.to-absolute()
+  row(calc.max(calc.min(measure(list).width, room), pt(a.at("col", default: 56))))
+})
+
 /// The table of authorities (layout.yaml `authorities`, the frontmatter's `authorities`): each group's heading in
 /// the `group` style, then a row per entry, its pages (the distinct pages of its marks, or the entry's own `pages`,
-/// or "--") in a column of `col` or the list's own width when wider.
+/// or "--") in a column of `col` or the list's own width when wider (page-fit).
 #let authorities-pages(spec, a, meta) = {
   table-title(spec, a)
   set text(..edges(pitch-of(spec, a.at("pitch", default: none))))
@@ -878,8 +886,9 @@
         for e in members {
           let pages = hits.filter(m => m.value == e.k).map(m => page-label(m.location())).dedup()
           let list = if pages.len() >= a.at("passim", default: 1000000) { emph[passim] } else { pages.join(", ") }
-          table-row(none, md(keyed-text(g, e)), list, calc.max(pt(a.at("col", default: 56)), measure(list).width),
-            pt(a.at("hang", default: 0)), pt(a.at("above", default: 0)))
+          let cite = md(keyed-text(g, e))
+          page-fit(a, cite, list, col => table-row(none, cite, list, col, pt(a.at("hang", default: 0)),
+            pt(a.at("above", default: 0))))
         }
       }
     }
@@ -897,8 +906,8 @@
         // `passim` pages or more: "passim", in italics (as the keyed list)
         let list = if "find" not in e { str(e.at("pages", default: "--")) } else if pages.len() == 0 { "--" } else if (
           pages.len() >= a.at("passim", default: 1000000)) { emph[passim] } else { pages.join(", ") }
-        table-row(none, md(e.cite), list, calc.max(pt(a.at("col", default: 56)), measure(list).width),
-          pt(a.at("hang", default: 0)), pt(a.at("above", default: 0)))
+        page-fit(a, md(e.cite), list, col => table-row(none, md(e.cite), list, col, pt(a.at("hang", default: 0)),
+          pt(a.at("above", default: 0))))
       }
     }
   }
