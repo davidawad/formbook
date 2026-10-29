@@ -6,7 +6,7 @@
 # background, the first part of the argument (its Rule 12(b)(1) standard and its limitations argument), a PORTION of the
 # service argument, the individual-liability conclusion, the conclusion, the signature blocks and the certificate of
 # service. The table of contents and index of authorities are NOT transcribed: the template builds them from the
-# headings and from the `authorities` list in this frontmatter, with page numbers computed by typst. Footnotes are
+# headings and from the `authorities` list in this frontmatter (each entry's `find`, the text that cites it), with the pages found by the template. Footnotes are
 # not transcribed (the filing's footnotes 1 to 7 are summarized in the text). Italics of case names are not
 # transcribed (the text layer carries no italic markup). See ../README.md for the meaning of every field.
 case_number: "4:26-cv-00713-P-BJ"
@@ -16,50 +16,51 @@ caption:
       designation: "Plaintiff,"
     - names: ["WORKERS UNITED SOUTHWEST REGIONAL JOINT BOARD, et al.,"]
       designation: "Defendants."
-court_division: "FORT WORTH DIVISION"
+division: "Fort Worth"
 brief_title: "DEFENDANTS’ BRIEF IN SUPPORT OF RENEWED MOTION TO DISMISS"
 motion_grounds: "Rules 12(b)(1), 12(b)(4), 12(b)(5) and 12(b)(6) of the Federal Rules of Civil Procedure"
 date: "September 21, 2026"
 authorities:
-  - category: "Cases"
+  - heading: "Cases"
     entries:
       - cite: "Adams v. AlliedSignal Gen. Aviation Avionics, 74 F.3d 882 (8th Cir. 1996)"
-        key: "Adams"
+        find: "Adams"
       - cite: "Ayanbadejo v. Chertoff, 462 F. Supp. 2d 736 (S.D. Tex. 2006), rev’d in part, 517 F.3d 273 (5th Cir. 2008)"
-        key: "Ayanbadejo"
+        find: "Ayanbadejo"
       - cite: "Chauffeurs, Teamsters & Helpers, Local No. 391 v. Terry, 494 U.S. 558 (1990)"
-        key: "Terry"
+        find: "Terry"
       - cite: "DelCostello v. Teamsters, 462 U.S. 151 (1983)"
-        key: "DelCostello"
+        find: "DelCostello"
       - cite: "Escamilla v. United Food & Commercial Workers Int’l Union AFL-CIO CLC Local No. 514T, 209 F. Supp. 2d 653 (N.D. Tex. 2002)"
-        key: "Escamilla"
+        find: "Escamilla"
       - cite: "Krim v. pcOrder.com, Inc., 402 F.3d 489 (5th Cir. 2005)"
-        key: "Krim"
+        find: "Krim"
       - cite: "Martin’s Herend Imports, Inc. v. Diamond & Gem Trading United States of Am. Co., 195 F.3d 765 (5th Cir. 1999)"
-        key: "Herend"
+        find: "Herend"
       - cite: "Ramming v. United States, 281 F.3d 158 (5th Cir. 2001)"
-        key: "Ramming"
+        find: "Ramming"
       - cite: "Stripling v. Jordan Prod. Co., LLC, 234 F.3d 863 (5th Cir. 2000)"
-        key: "Stripling"
+        find: "Stripling"
       - cite: "White v. Anchor Motor Freight, Inc., 899 F.2d 555 (6th Cir. 1990)"
-        key: "Anchor Motor"
-  - category: "Statutes"
+        find: "Anchor Motor"
+  - heading: "Statutes"
     entries:
       - cite: "Labor Management Relations Act of 1947, 29 U.S.C. § 141"
-        key: "LMRA"
+        find: "LMRA"
       - cite: "Title VII of the Civil Rights Act of 1964, 42 U.S.C. § 2000e, et seq."
-        key: "Title VII"
-  - category: "Rules"
+        find: "Title VII"
+  - heading: "Rules"
     entries:
       - cite: "Fed. R. Civ. P. 4(e)"
-        key: "4(e)"
+        find: "4(e)"
       - cite: "Fed. R. Civ. P. 4(h)"
-        key: "4(h)"
+        find: "4(h)"
       - cite: "Fed. R. Civ. P. 12(b)(1)"
-        key: "12(b)(1)"
+        find: "12(b)(1)"
       - cite: "Fed. R. Civ. P. 12(b)(6)"
-        key: "12(b)(6)"
+        find: "12(b)(6)"
 signature:
+  signers:
   - firm:
       - "DEATS DURST & OWEN PLLC"
     signer: "Manuel Quinto-Pozos"

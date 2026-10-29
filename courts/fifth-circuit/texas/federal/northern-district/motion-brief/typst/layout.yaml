@@ -1,0 +1,76 @@
+# U.S. District Court for the Northern District of Texas (txnd): a brief in support of a motion, on the generic FRCP
+# brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with N.D. Tex.'s local rules overlaid here. The shared
+# document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by
+# `fb engines gen`).
+# Rules: N.D. Tex. Local Civil Rules LR 7.1, 7.2, 10.1 (../README.md quotes them, with the date verified). The base
+# already meets LR 7.2's 12-point or larger type, double spacing (quotations and headings excepted) and one-inch
+# margins, and LR 10.1's 8 1/2 x 11 paper. The 25-page limit of LR 7.2(c) (excluding the tables) is checked on the
+# render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, second line.
+constants:
+  district: "FOR THE NORTHERN DISTRICT OF TEXAS"
+# LR 10.1: pages numbered. The cover counted, unprinted; the tables from ii; the brief from 1 (the exemplar's numbering).
+page_number: {align: center, front: lower-roman, cover: counted}
+# LR 7.2: quotations single spaced (the base), set off from the text by a single line.
+quote: {above: 12, below: 12}
+# LR 7.2: headings single spaced (the base), bold, kept with what follows: a section centered; an argument heading and
+# a sub-heading at the margin, the lines after the first hung half an inch. A one-line heading takes two lines of the
+# double-spaced text (24 + 13.8 + 10.2 pt). The sample types each heading's number.
+heading:
+  - {align: center, bold: true, above: 24, below: 10.2}
+  - {bold: true, hang: 36, above: 24, below: 10.2}
+  - {bold: true, hang: 36, above: 24, below: 10.2}
+# FRCP 10(a), LR 10.1: the cover: the court's name with the division; the parties at the left (each designation
+# indented, "v." a line from each), a column of section marks beside them (the Texas convention: the second
+# exemplar draws it, as both E.D. Tex. exemplars do; the first closes the parties with a rule instead), the civil
+# action number at the right; then the title of the paper, bold and centered.
+cover:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{division} DIVISION", align: center, bold: true, upper: true, optional: true}
+  - columns:
+      - width: 216
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 36, above: 13.8}
+            between:
+              - {text: "v.", above: 13.8, below: 13.8}
+      - {width: 36, repeat: "§", align: center}
+      - valign: center
+        blocks:
+          - {text: "{case_label|CIVIL ACTION NO.} {case_number}"}
+    above: 18
+  - {text: "{brief_title}", align: center, bold: true, above: 42}
+front: []
+# LR 7.2(d): a brief longer than 10 pages has a table of contents and an alphabetical table of authorities, each
+# with the pages (when the sample lists its authorities); the contents a step in per level, the index's groups bold.
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 18, step: 18, above: 0, when: authorities}
+authorities:
+  title: "INDEX OF AUTHORITIES"
+  col: 72
+  hang: 36
+  above: 0
+  passim: 6
+  group: {bold: true, above: 12, below: 0}
+# LR 10.1(d) and FRCP 11(a): "Respectfully submitted," and each signer's signature, name, bar number, firm, address,
+# telephone and e-mail and whom they represent, single spaced in the right half of the page, the signers a little
+# apart, kept whole and with the last paragraph; the certificate of service (the sample's last section) after it.
+closing:
+  - columns:
+      - {width: 216, blocks: []}
+      - blocks:
+          - {text: "Respectfully submitted,"}
+          - each: signature.signers
+            gap: 6
+            blocks:
+              - {text: "/s/ {signer}", above: 6}
+              - {text: "{signer}"}
+              - {text: "{bar}", optional: true}
+              - {text: "{firm}", optional: true}
+              - {text: "{address}", optional: true}
+              - {text: "{lines}", optional: true}
+    above: 24
+tail: {at: "CERTIFICATE OF SERVICE", pitch: body, indent: 36, above: 24}

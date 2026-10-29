@@ -1,21 +1,13 @@
 ---
-court:
-  - "UNITED STATES DISTRICT COURT"
-  - "FOR THE WESTERN DISTRICT OF TEXAS"
-  - "AUSTIN DIVISION"
+division: "Austin"
 caption:
-  - ["LEAGUE OF LATIN AMERICAN"]
-  - ["CITIZENS, et al.,"]
-  - ["          Plaintiffs,"]
-  - ["", ""]
-  - ["v.", "CIVIL ACTION NO."]
-  - ["", "1:26-CV-00729-ADA-SH"]
-  - ["", ""]
-  - ["JANE NELSON, in her official capacity"]
-  - ["as the Texas Secretary of State, et al.,"]
-  - ["          Defendants."]
-title: "DEFENDANT PAUL ADAMS’S RULE 12 MOTION TO DISMISS, AND BRIEF IN SUPPORT"
-toc_title: "TABLE OF CONTENTS"
+  parties:
+    - names: ["LEAGUE OF LATIN AMERICAN", "CITIZENS, et al.,"]
+      designation: "Plaintiffs,"
+    - names: ["JANE NELSON, in her official capacity", "as the Texas Secretary of State, et al.,"]
+      designation: "Defendants."
+case_number: "1:26-CV-00729-ADA-SH"
+brief_title: "DEFENDANT PAUL ADAMS’S RULE 12 MOTION TO DISMISS, AND BRIEF IN SUPPORT"
 signature:
   firm:
     - "JOHN CREUZOT"

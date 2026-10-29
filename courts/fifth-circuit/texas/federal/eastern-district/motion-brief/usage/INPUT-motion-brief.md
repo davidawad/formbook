@@ -1,17 +1,16 @@
 ---
 # TRANSCRIPTION (EXCERPT) of Dkt. 53, Health Care Service Corp. v. Neuromonitoring Associates, LLC, No. 5:26-cv-00022 (E.D. Tex., Texarkana Div.), filed 2026-06-18. Transcribed from usage/FILED-EXAMPLE-motion-brief.pdf. Body: brief pages 1 to 10 (PDF pages 11 to 20) of 46. Signature: page 46. Certificate of service: page 47. Omitted: tables of contents and authorities, the argument from page 11 on, the Pickett local-counsel block, the Dated line, the CM/ECF /s/ line in the certificate, and the exhibit declaration.
 excerpt: true
-court:
-  - UNITED STATES DISTRICT COURT
-  - FOR THE EASTERN DISTRICT OF TEXAS
-  - TEXARKANA DIVISION
+division: "Texarkana"
 caption:
+  parties:
   - names: ["Health Care Service Corporation, a Mutual Legal Reserve Company,"]
     designation: "Plaintiff,"
   - names: ["Neuromonitoring Associates, LLC, Physician Oversight, LLC, and Monitoring Associates, LLC,"]
     designation: "Defendants."
-case_number: "Case No.: 5:26-cv-00022-RWS-JBB"
-jury_demand: "ORAL ARGUMENT REQUESTED"
+case_label: "Case No.:"
+case_number: "5:26-cv-00022-RWS-JBB"
+legend: "ORAL ARGUMENT REQUESTED"
 brief_title: "DEFENDANTS' MOTION TO DISMISS THE AMENDED COMPLAINT AND REQUEST FOR JUDICIAL NOTICE"
 signature:
   firm: ["McDermott Will & Schulte LLP"]
@@ -22,7 +21,7 @@ signature:
     - "Boston, MA 02116"
     - "(617) 535-4000 (telephone)"
     - "mknowles@mcdermottlaw.com"
-  role: "Attorneys for Defendants Neuromonitoring Associates, LLC, Physician Oversight, LLC, and Monitoring Associates, LLC"
+  counsel_for: "Attorneys for Defendants Neuromonitoring Associates, LLC, Physician Oversight, LLC, and Monitoring Associates, LLC"
 service:
   date: "June 18, 2026"
   method: "through the Court's CM/ECF system, which sends notice of the filing by e-mail to all counsel of record"

@@ -1,7 +1,6 @@
-// Entry point. Compile with the doc-type folder as --root; tools/render.sh does it:
-//   typst compile --root <doctype-dir> --font-path <repo>/fonts --ignore-system-fonts \
-//     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/NAME.md \
-//     typst/main.typ out.pdf
+// Entry point. tools/render.sh compiles it with the doc-type folder as --root:
+//   sh tools/render.sh courts/fifth-circuit/texas/federal/eastern-district/motion-brief usage/INPUT-<id>.md
+// Vendored fonts only (--ignore-system-fonts); any typst warning fails the render.
 #import "txed-motion-brief.typ": txed-motion-brief, split-frontmatter
 
 #let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))

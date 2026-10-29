@@ -1,0 +1,71 @@
+# U.S. District Court for the Western District of Texas (txwd): a motion with its brief in support, on the generic
+# FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with W.D. Tex.'s local rules overlaid here. The shared
+# document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by
+# `fb engines gen`).
+# Rules: W.D. Tex. Local Rules CV-7 and CV-10 (../README.md quotes them, with the date verified). The base already
+# meets CV-10(a)'s 12-point or larger type (footnotes too), double spacing, 8 1/2 x 11 paper and one-inch margins.
+# The 20-page limit of CV-7(c)(2) is checked on the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, second line.
+constants:
+  district: "FOR THE WESTERN DISTRICT OF TEXAS"
+# Pages numbered: the cover counted, unprinted; the contents from ii; the motion from 1 (the exemplar's numbering).
+page_number: {align: center, front: lower-roman, cover: counted}
+# CV-10(a): quotations of more than two lines may be single spaced; indented half an inch from each side, a single
+# line above and below.
+quote: {above: 13.8, below: 13.8}
+# Headings at the body pitch, bold, kept with what follows, no space of their own (the double pitch sets them off):
+# a section centered in capitals, an argument heading and a sub-heading at the margin. The sample types each number.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body}
+  - {bold: true, pitch: body}
+  - {bold: true, pitch: body}
+# CV-10(a), FRCP 10(a): the cover: the court's name with the division; the style of the case (the parties at the
+# left, each designation indented, "v." a line from each), a column of section marks beside them (the W.D. Tex.
+# convention, the exemplar's), the civil action number at the right; then the descriptive name of the paper, bold and
+# centered at the body pitch.
+cover:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{division} DIVISION", align: center, bold: true, upper: true, optional: true}
+  - columns:
+      - width: 266.4
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 36}
+            between:
+              - {text: "v.", above: 13.8, below: 13.8}
+      - {width: 21.6, repeat: "§", align: center}
+      - valign: center
+        blocks:
+          - {text: "{case_label|CIVIL ACTION NO.}", left: 14.4}
+          - {text: "{case_number}", left: 14.4}
+    above: 27.6
+  - {text: "{brief_title}", align: center, bold: true, pitch: body, above: 27.6}
+front: []
+# The contents, on their own page after the cover: the headings of three levels with their pages, a step in per level.
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 18, step: 18, above: 0}
+# CV-10(b): the signature block, in the right 3.2 inches: "Respectfully submitted,", the firm lines, the signature
+# and the signer's address, e-mail, state bar card number, telephone and fax, as the sample gives them (an empty line
+# keeps its height), a single line between the groups; kept whole and with the last paragraph. Then the certificate
+# of service, when the sample gives one: its heading centered and bold, its statement at the body pitch, the signer's
+# lines at the right; kept whole.
+closing:
+  - columns:
+      - {width: 237.6, blocks: []}
+      - blocks:
+          - {text: "Respectfully submitted,"}
+          - {text: "{signature.firm}", optional: true, above: 13.8}
+          - {text: "/s/ {signature.signer}", above: 13.8}
+          - {text: "{signature.lines}", optional: true}
+    above: 13.8
+  - when: certificate
+    blocks:
+      - group:
+          - {text: "{certificate.heading|CERTIFICATE OF SERVICE}", align: center, bold: true, below: 13.8}
+          - {text: "{certificate.text}", pitch: body, indent: 36, below: 13.8}
+          - {text: "/s/ {certificate.signer}", align: right}
+          - {text: "{certificate.lines}", optional: true, align: right}
+        above: 27.6

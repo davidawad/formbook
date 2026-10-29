@@ -1,15 +1,15 @@
 ---
 # TRANSCRIPTION of the filed exemplar (usage/FILED-EXAMPLE-motion-brief-3.pdf, Dkt. 33). Text as filed; the MDL header block is reduced to the member-case number (see README.md).
-court:
-  - IN THE UNITED STATES DISTRICT COURT
-  - FOR THE EASTERN DISTRICT OF TEXAS
-  - SHERMAN DIVISION
+division: "Sherman"
 caption:
+  parties:
   - names: ["ABC IP, LLC,", "RARE BREED TRIGGERS, INC., and", "RBTM LLC"]
     designation: "Plaintiffs,"
   - names: ["STARK80 LLC d/b/a STARK80 and", "JEREMIAH WILLIAMSON"]
     designation: "Defendants."
-case_number: "MDL No. 3176; Civil Action No. 4:26-cv-01018-ALM"
+case_lines: ["MDL No. 3176"]
+case_label: "Civil Action No."
+case_number: "4:26-cv-01018-ALM"
 brief_title: "DEFENDANT JEREMIAH WILLIAMSON'S MOTION TO DISMISS UNDER FEDERAL RULE OF CIVIL PROCEDURE 12(b)(6) AND, IN THE ALTERNATIVE, MOTION FOR A MORE DEFINITE STATEMENT UNDER RULE 12(e)"
 signature:
   firm: ["THE LANGLEY LAW FIRM, P.C."]
@@ -21,7 +21,7 @@ signature:
     - "(512) 477-3830 (telephone)"
     - "(866) 735-9129 (facsimile)"
     - "dlangley@iptechlaw.com"
-  role: "ATTORNEYS FOR DEFENDANT JEREMIAH WILLIAMSON"
+  counsel_for: "ATTORNEYS FOR DEFENDANT JEREMIAH WILLIAMSON"
 service:
   date: "September 15, 2026"
   method: "filed electronically with the Clerk of Court using the CM/ECF system, which will send notification of such filing to all counsel of record who have consented to electronic service"

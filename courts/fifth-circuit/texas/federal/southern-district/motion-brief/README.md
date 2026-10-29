@@ -8,9 +8,9 @@ Folder: `courts/fifth-circuit/texas/federal/southern-district/motion-brief/` (th
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (portions of the 22-page filing; see the sample's header) |
 | typeface | face required by the retrieved rules: none named (LR10.2, Judge Hanks Procs. 7.A, Galveston f.). Substitute: none; **Times New Roman** (`docs/FONTS.md` rule 6, the house standard; EB Garamond before fb-595.68). Embedded: Times New Roman only (`pdffonts`). |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages (also 10 on the 2026-10-14 EB Garamond render, before fb-595.68), typst 0.15.0, `tools/render.sh`, vendored fonts and the pinned Times New Roman only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, `.latex.pdf`, `.docx` and `.docx.pdf`, 10 pages each (cover, contents i, body 1 to 8), vendored Times New Roman only, no warnings, on the shared document model: the generic FRCP brief `lib/layouts/frcp-motion-brief.yaml` with the local rules overlaid in `typst/layout.yaml` (fb-595.17.7) |
 | overlay | ok (re-run 2026-10-14): `usage/OVERLAY-dangelas-motion-brief.pdf` and `usage/OVERLAY-dangelas-motion-brief.txt` |
-| pages reviewed | 10 of 10 (re-rendered at 60 dpi and every page viewed on 2026-10-14; the layout is unchanged from the earlier review, which is listed below) |
+| pages reviewed | 10 of 10 on typst, latex and docx, read as laid-out text after the move onto the FRCP base, 2026-10-29 (see "Gate 2 review on the FRCP base"; the older reviews below were made on earlier renders) |
 | BLOCKED | none for the template. The table of authorities is not produced (see Known gaps 3). |
 
 ## Governing rules
@@ -71,10 +71,23 @@ Word-overlap per page (see `usage/OVERLAY-dangelas-motion-brief.txt`; measured o
 - Page 9: signature block at the right (Dated line at the left); CERTIFICATE OF WORD COUNT, CERTIFICATE OF CONFERENCE and the start of CERTIFICATE OF SERVICE, each under its heading with the `/s/` line. Pass (after the certificate headings were changed to level-1 headings; the first render overlapped the text under each heading).
 - Page 10: the service certificate's last lines and the `/s/` line; a widow (Known gap 7). Pass with the gap noted.
 
+## Gate 2 review on the FRCP base (2026-10-29, every page of the typst, latex and docx renders read)
+
+Pages read as laid-out text (`pdftotext -layout`) on all three engines; XENG-001..003 show the latex and docx pages break every line where typst does.
+
+- Page 1 (the cover, unnumbered): court's name with the division, the caption with the column of section marks, the civil action number and the judge, the title at the body pitch. PASS.
+- Page i: the table of contents, two levels and the three certificates, argument headings a step in. PASS. The pages now run as the exemplar's: cover unnumbered, contents i, the motion from 1 (the old template numbered from the cover).
+- Pages 1 to 6: body at 13 points on a 26-point pitch, centered section headings in capitals, argument headings at the margin. PASS. OPEN (tier 2): the statement of the issues is a numbered list, its lines hung under the text (the exemplar indents the number and wraps to the margin).
+- Page 7: conclusion and prayer, the date at the margin, the signature block 3.25 inches in, the certificate of word count. Page 8: the certificates of conference and service, each signed in the signature column. PASS.
+- The box caption style (`caption.style: box`) of the old template is not carried over: no sample used it. The table of authorities is still not produced (the sample lists no authorities; the base would build one from an `authorities` list).
+- Frontmatter now: `division` (the name, not "HOUSTON DIVISION"), `caption.parties` (no `style`), `signature.{lead, by, lines, date}` (was `signer_lines` and a top-level `date`).
+
 ## Engines
 
-**docx** (`docx/`; `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf`, the LibreOffice conversion that was checked). Files: `reference.xml` (`base="xengine"`: `fb render --engine docx` builds the reference document from it, the shared cross-engine recipe in the typst template's face, Times New Roman 13 pt, exact 26 pt line pitch, Letter, 1-inch margins); `txsd.lua` (court title, section caption, title, the table of contents, lettered and numbered items, signature block and certificates, all read from the sample; `NUMBERED = false` here); fb render renders in passes: the filter writes needles, fb render reads the page of each heading from the LibreOffice PDF and renders again with the contents' page numbers. `sh tools/render.sh --engine docx` is a wrapper of `fb render --engine docx`. (Before fb-595.68, `docx/build-reference.sh` built a committed `reference.docx` in EB Garamond and a two-pass `docx/render.sh` wrote the TOC's PAGEREF results; both are retired into fb render.)
+On the shared document model (docs/EVAL-LOOP.md, "Generated engines"; fb-595.17.7): `typst/layout.yaml` names the generic FRCP brief (`base: /lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and overlays only what this court sets itself, each with its rule; `latex/` and `docx/` are generated from the merged layout by `fb engines gen`, and the per-folder docx filter (`docx/txsd.lua`) is removed. No page limit is checked: LR10.2 sets none (the 25 pages of Judge Hanks's procedures and the 30 of the Galveston rules bind only their own cases). The sections above that name the old template's parameters (`pitch-double`, `caption-left` and the like) predate the move; the layout is now `typst/layout.yaml`.
 
-- Matches the typst form: only Times New Roman is embedded (`pdffonts`); 13 pt; 1-inch margins on Letter; double spacing (26 pt pitch); section caption with the § column and one row per line at typst's pitch; the title; a table of contents whose page numbers come from fb render's needles (on the earlier EB Garamond render a TOC field, its numbers equal to the typst TOC's: 3, 3, 4, 4, 5, 6, 7, 7, 7, 8, 9, 9, 9); signature block at 3.25 inch; certificates under level-1 headings; page number centered at the foot. 10 pages, as typst.
-- Differs (not blocking; observed on the earlier EB Garamond render, before fb-595.68): (1) LibreOffice places the extra leading of an exact line above the glyphs; typst places it below. Text sits about 11 to 13 pt lower on each page; line pitch and margins are the same. Word was not run. (2) The title keeps the typographic apostrophe (pandoc's smart punctuation) where typst prints a straight one. (3) Some lines break at a different word from typst, so a few page ends move by a line. (4) Word can paginate differently; the TOC numbers are from the LibreOffice layout and can be refreshed in Word with Update Field.
-- BLOCKED: none. The table of authorities is not produced by this template (Known gap 3), as in typst. `tools/check.sh` cannot run on this folder (it needs `court.json` and `checks.yaml`).
+| Engine | Status |
+|---|---|
+| typst | reference; `sh tools/check.sh <dir>` exits 0 |
+| latex | generated; `--engine latex` exits 0, XENG-001..003 pass (every page and line breaks where typst breaks it) |
+| docx | generated; `--engine docx` exits 0, XENG-001..003 pass; `.docx.pdf` by LibreOffice. BLOCKED: none |

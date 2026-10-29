@@ -1,0 +1,73 @@
+# U.S. District Court for the Eastern District of Texas (txed): a motion to dismiss with its memorandum, on the
+# generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with E.D. Tex.'s local rules overlaid here. The
+# shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by
+# `fb engines gen`).
+# Rules: E.D. Tex. Local Rules, CV-5, CV-7, CV-10 (text read 2026-10-15; ../README.md quotes them). The base already
+# meets CV-10(a)(4)'s 8 1/2 x 11 paper and CV-10(a)(5)'s 12-point type (footnotes and page number too) and the
+# one-inch margins. The 30-page limit of CV-7(a)(1) is checked on the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, second line.
+constants:
+  district: "FOR THE EASTERN DISTRICT OF TEXAS"
+# CV-10(a)(5): double spaced, at Word's double pitch for 12-point type (27.6 pt, the exemplars' pitch).
+pitch: {body: 27.6}
+# Block quotations single spaced, indented half an inch from each side, a single line above and below.
+quote: {above: 13.8, below: 13.8}
+# Headings at the body pitch, bold, kept with what follows: a section centered in capitals, numbered I., II., ...; an
+# argument heading at the margin, A., B., ... within its section, its later lines hung under its title; a sub-heading
+# bold italic, unnumbered (the exemplars of two filers, usage/SOURCE.md).
+heading:
+  - {align: center, bold: true, upper: true, pitch: body, number: "I."}
+  - {bold: true, pitch: body, number: "A.", label_box: 18}
+  - {bold: true, italic: true, pitch: body}
+# CV-10(a)(1), (2) and FRCP 10(a): the court's name with the division, the style of the case (the parties at the
+# left, each designation indented, "v." a line from each), the number at the right (after any lines the sample puts
+# over it, an MDL number), a bold legend under it (an
+# oral-argument request or jury demand) when the sample gives one, a column of section marks between them (the
+# Texas convention: both exemplars, of two filers, draw it); then the title, which states the filer and the
+# character of the paper (CV-10(a)(2)), bold capitals, centered, a double line below the caption.
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{division} DIVISION", align: center, bold: true, upper: true, optional: true}
+  - columns:
+      - width: 234
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 108, above: 13.8}
+            between:
+              - {text: "v.", above: 13.8, below: 13.8}
+      - {width: 36, repeat: "§", align: center}
+      - valign: center
+        blocks:
+          - {text: "{case_lines}", optional: true}
+          - {text: "{case_label|Civil Action No.} {case_number}"}
+          - {text: "{legend}", bold: true, optional: true, above: 13.8}
+    above: 27.6
+  - {text: "{brief_title}", align: center, bold: true, above: 27.6}
+# CV-10(a)(3): signed by the lead attorney or with his or her permission; the signature block single spaced in the
+# right half of the page, a double line below the text, kept whole and with the last paragraph. CV-5(c): the
+# certificate of service states the date and the method of service, when the sample gives `service`, signed in the
+# signature column as both exemplars sign it (no certificate of conference: CV-7(i) exempts a motion to dismiss).
+closing:
+  - group:
+      - columns:
+          - {width: 216, blocks: []}
+          - blocks:
+              - {text: "Respectfully submitted,"}
+              - {text: "{signature.firm}", optional: true, above: 13.8}
+              - {text: "/s/ {signature.signer}", above: 13.8}
+              - {text: "{signature.signer}"}
+              - {text: "{signature.lines}", optional: true}
+              - {text: "{signature.counsel_for}", optional: true, above: 13.8}
+    above: 27.6
+  - when: service
+    blocks:
+      - group:
+          - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, pitch: body}
+          - {text: "I hereby certify that on {service.date}, the foregoing document was served on all counsel of record {service.method}.", pitch: body, indent: 36}
+          - {text: "/s/ {signature.signer}", left: 216, above: 13.8}
+          - {text: "{signature.signer}", left: 216}
+        above: 27.6

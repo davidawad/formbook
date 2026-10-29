@@ -1,4 +1,13 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (fb-595.68.15, on the shared layout model lib/*/xengine*), so a difference fails.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.17), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
   cross_engine: gate
+  # DEF-LEN-001: CV-7(a)(1), a case dispositive motion is at most 30 pages, excluding attachments.
+  page_limit: 30
+  # DEF-COVER-002: the exemplar of sample 1 (Dkt. 53, usage/SOURCE.md) opens with a cover page that lists every
+  # counsel group under the caption (its brief starts on PDF page 11, after the tables); the excerpt INPUT transcribes
+  # the caption, the title and the brief from its page 1, so 15 of the cover's 44 lines pair and the rest are the
+  # counsel listing, one filer's style (the second filer, FILED-EXAMPLE-motion-brief-3.pdf, starts the motion under
+  # the caption). Reported, not counted, on every engine.
+  cover_structure: report

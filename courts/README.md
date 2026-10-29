@@ -124,10 +124,10 @@ Courts under `courts` (347).
 | [United States Bankruptcy Court, N.D. Texas](fifth-circuit/texas/federal/bankruptcy-northern-district) | `txnb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. Texas](fifth-circuit/texas/federal/bankruptcy-southern-district) | `txsb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Texas](fifth-circuit/texas/federal/bankruptcy-western-district) | `txwb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, E.D. Texas](fifth-circuit/texas/federal/eastern-district) | `txed` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, N.D. Texas](fifth-circuit/texas/federal/northern-district) | `txnd` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, S.D. Texas](fifth-circuit/texas/federal/southern-district) | `txsd` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, W.D. Texas](fifth-circuit/texas/federal/western-district) | `txwd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. Texas](fifth-circuit/texas/federal/eastern-district) | `txed` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, N.D. Texas](fifth-circuit/texas/federal/northern-district) | `txnd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, S.D. Texas](fifth-circuit/texas/federal/southern-district) | `txsd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, W.D. Texas](fifth-circuit/texas/federal/western-district) | `txwd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Louisiana Court of Appeal](fifth-circuit/louisiana/state/court-of-appeal) | `lactapp` | up for review | 6/6 | 6/6 | 6/6 | 29 |
 | [Supreme Court of Louisiana](fifth-circuit/louisiana/state/supreme-court) | `la` | up for review | 9/9 | 8/8 | 8/8 | 29 |
 | [Court of Appeals of Mississippi](fifth-circuit/mississippi/state/court-of-appeals) | `missctapp` | up for review | 5/5 | 5/5 | 1/5 | 29 |

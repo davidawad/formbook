@@ -1,4 +1,13 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (fb-595.68.15, on the shared layout model lib/*/xengine*), so a difference fails.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.17), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
   cross_engine: gate
+  # DEF-LEN-001: LR 7.2(c), a brief is at most 25 pages, excluding the tables (here every page is counted, the
+  # conservative reading).
+  page_limit: 25
+  # DEF-COVER-002: the exemplar of the sample (Dkt. 35, usage/SOURCE.md) closes its party column with a rule under the
+  # parties and sets no column of section marks; the second filer (FILED-EXAMPLE-motion-brief-2.pdf) sets the section
+  # marks and no rule, as both E.D. Tex. exemplars do. The template follows the Texas section-mark caption, so the
+  # exemplar's one rule is the difference. Reported, not counted, on every engine.
+  cover_structure: report

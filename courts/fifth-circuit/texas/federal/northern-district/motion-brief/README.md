@@ -8,9 +8,9 @@ Folder: `courts/fifth-circuit/texas/federal/northern-district/motion-brief/`.
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (Defendants' brief in support of a renewed Rule 12(b)(1), (4), (5), (6) motion, with table of contents and index of authorities); second filer `usage/FILED-EXAMPLE-motion-brief-2.pdf` (Plaintiff's combined motion and brief). See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-motion-brief.md` (a portion of the 32-page filing: caption, introduction, issues, background, argument A (1 to 3), B (1 to 3), C, conclusion, certificate of service, signature blocks; the argument after section C is omitted) |
 | typeface | face required: none (LR 7.2 sets the size, 12 pt or larger; LR 10.1 names no face) -> template face: Times New Roman (pinned install; `docs/FONTS.md` rule 6, the house standard; EB Garamond before fb-595.68) -> fit: n/a, no court-named face to match. The filed exemplars use Times New Roman; see Known gaps 4. |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages (cover, table of contents, index of authorities, body pages 1 to 8), typst 0.15.0, pinned Times New Roman only (`pdffonts`: Regular and Bold embedded), no warnings (the 2026-10-14 render, before fb-595.68, was EBGaramond-Regular and EBGaramond-Bold) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, `.latex.pdf`, `.docx` and `.docx.pdf`, 11 pages each (cover, contents ii, index iii, body 1 to 8), vendored Times New Roman only, no warnings, on the shared document model: the generic FRCP brief `lib/layouts/frcp-motion-brief.yaml` with the local rules overlaid in `typst/layout.yaml` (fb-595.17.7) |
 | overlay | ok: `usage/OVERLAY-coney-motion-brief.pdf` and `usage/OVERLAY-coney-motion-brief.txt` (page map; regenerated 2026-10-14 against the Coney exemplar fetched from the URL in `usage/SOURCE.md`; the exemplar PDF is not committed) |
-| pages reviewed | 11 of 11 (every page rendered at 60 dpi and viewed on 2026-10-14 after the re-render; the EB Garamond render, before fb-595.68) |
+| pages reviewed | 11 of 11 on typst, latex and docx, read as laid-out text after the move onto the FRCP base, 2026-10-29 (see "Gate 2 review on the FRCP base"; the older reviews below were made on earlier renders) |
 | file names | the tools write `OUTPUT-<id>.pdf` and `OVERLAY-<id>.pdf` (the names `tools/render.sh` and `tools/overlay.sh` use); see the complaint README |
 
 ## Governing rules
@@ -71,36 +71,23 @@ Each page was rendered at 60 dpi and viewed after the last template change.
 
 Earlier review rounds found and fixed the same defects the complaint had (see the complaint README): the caption and signature lines overlapped (single-spaced stacks needed a gap); the caption's case number wrapped (column widened).
 
+## Gate 2 review on the FRCP base (2026-10-29, every page of the typst, latex and docx renders read)
+
+Pages read as laid-out text (`pdftotext -layout`) on all three engines; XENG-001..003 show the latex and docx pages break every line where typst does.
+
+- Page 1 (the cover, counted, unprinted): court's name with the division, the caption with the column of section marks, the civil action number, the title. PASS. DEF-COVER-002 is reported, not counted (`eval.yaml`): the exemplar closes the parties with a rule and sets no section marks; the second filer sets the marks.
+- Page ii: the table of contents, three levels, a step in per level. Page iii: the index of authorities, its pages found by the template from each entry's `find` (LR 7.2(d)). PASS.
+- Pages 1 to 7: body, centered section headings, argument headings hung half an inch, the block quotation (pages 6 and 7). PASS. OPEN (tier 2): the issues' bullets stand at the margin (the base's list), not half an inch in as the old template set them.
+- Page 8: conclusion, the two signer groups in the right half (LR 10.1(d)), the certificate of service (the sample's last section, set after the closing). PASS. OPEN (tier 2): the certificate's "/s/" line is a body paragraph (indented half an inch), not in the signature column.
+- Shared-code finding (not this folder's): with the headings on 12 pt spaces, a "Rule 12(b)(1)." that ended both a paragraph and body page 4 was indexed on page 5 by typst and on page 4 by LaTeX and Word (XENG-003 failed on the index row). The headings now take two lines of the double-spaced text, which moves that line; the typst mark at a page's last paragraph end (lib/typst/xdoc.typ `with-marks`) needs a fix of its own.
+- Frontmatter now: `division` (was `court_division`), `authorities: [{heading, entries: [{cite, find}]}]` (was `category` and `key`), `signature.signers` (was a list under `signature`).
+
 ## Engines
 
-| Engine | Folder | Output in `usage/` | State |
-|---|---|---|---|
-| typst (primary) | `typst/` | `OUTPUT-motion-brief.typst.pdf` | the reference (see the review above) |
-| docx | `docx/` | `OUTPUT-motion-brief.docx`, `OUTPUT-motion-brief.docx.pdf` | `.docx` and `.docx.pdf` (11 pages, as the typst render) built by `fb render --engine docx`; the BLOCKED items below were recorded before fb-595.68 |
+On the shared document model (docs/EVAL-LOOP.md, "Generated engines"; fb-595.17.7): `typst/layout.yaml` names the generic FRCP brief (`base: /lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and overlays only what this court sets itself, each with its rule; `latex/` and `docx/` are generated from the merged layout by `fb engines gen`, and the per-folder docx filter (`docx/txnd-motion-brief.lua`) is removed. The 25-page limit of LR 7.2(c) is `eval.yaml` params.page_limit (DEF-LEN-001, every engine). The sections above that name the old template's parameters (`pitch-double`, `caption-left` and the like) predate the move; the layout is now `typst/layout.yaml`.
 
-The docx is built by `fb render --engine docx`: the reference document from `docx/reference.xml` (`base="xengine"`, the shared cross-engine recipe in the typst template's face), then pandoc with `docx/txnd-motion-brief.lua`, in passes: the filter writes needles, fb render finds their pages in the LibreOffice PDF and renders again with them (the contents' and the index's page numbers), and writes the sections (`FORMBOOK_FINAL`). (Before fb-595.68, `docx/render.sh` ran pandoc and wrote the footer's relationship id into the section breaks, and `sh docx/make-reference.sh` made a committed `reference.docx` from `docx/styles.xml`.) Command: `sh tools/render.sh --engine docx <court>/motion-brief usage/INPUT-motion-brief.md`.
-
-Sections: the cover has no page number; the table of contents and the index of authorities are numbered in lower roman from `ii` (as in typst, where the cover is page `i`); the body starts at `1`.
-
-What follows the typst template, by construction (no docx page had been seen when this was written, so none of this is a visual claim):
-
-- Times New Roman 12 pt; body double-spaced at an exact 24 pt pitch; 0.5 in first-line indent; letter paper with 1 in margins.
-- Cover: court title on three lines, caption with section marks, title of the brief centered and bold.
-- Headings: level 1 centered bold; level 2 bold with a hanging indent; level 3 bold with a hanging indent. Block quotations single-spaced, indented 0.5 in on both sides. Issues as bullets.
-- Signature blocks at the right half: `Respectfully submitted,` then one block per signer (`/s/`, name, bar number, firm, address, telephone, email, role).
-- Table of contents: listing rows over the headings, levels 1 to 3, with their page numbers from fb render's needles (a TOC field before fb-595.68).
-- Index of authorities: the frontmatter's list, grouped (Cases, Statutes, Rules), each entry with the pages on which its key appears (found by fb render as typst finds them), `passim` beyond five pages.
-
-What differs or is not checked:
-
-- The caption wraps a long party name onto two lines; the section mark then sits on the first line only. This is the same in the typst output (checked on page 1 of the typst render), so it is a shared defect of the caption, not a docx one. Not changed here (`typst/` is not in this change).
-- No docx page has been rendered or reviewed; Gate 2 for docx is open.
-
-docx BLOCKED items, as recorded before fb-595.68 (`check.sh --engine docx` runs its gates on the `.docx.pdf`; `usage/OUTPUT-motion-brief.docx.pdf` is now committed, and fb render now writes the contents' and the index's page numbers):
-
-- `docx.pdf` (LibreOffice render, Gates 0 to 3): BLOCKED. LibreOffice 25.2 could not run on the build box (see the complaint README for the cause). No `.docx.pdf` exists.
-- Gate 2 for docx (every page rendered and reviewed): BLOCKED on the same cause. No docx page was rendered or reviewed (the docx page count is not known).
-- Table of contents page numbers: BLOCKED. The TOC is a field; its cached result lists the headings without numbers. Word and LibreOffice write the numbers only when the field is updated (F9 in Word); the page numbers cannot be computed here without a renderer.
-- Index of authorities page references: BLOCKED. The index lists the authorities without pages; a TOA field would need the same update, and LibreOffice does not honor TA/TOA fields (`docs/DOCX.md`).
-- Opens in Word and LibreOffice without a repair prompt: not checked (no Word here, LibreOffice does not run).
-- Fonts: Times New Roman (EB Garamond when this was recorded) must be installed on the machine that opens the file, or Word substitutes a face silently (`docs/DOCX.md`).
+| Engine | Status |
+|---|---|
+| typst | reference; `sh tools/check.sh <dir>` exits 0 |
+| latex | generated; `--engine latex` exits 0, XENG-001..003 pass (every page and line breaks where typst breaks it) |
+| docx | generated; `--engine docx` exits 0, XENG-001..003 pass; `.docx.pdf` by LibreOffice. BLOCKED: none |
