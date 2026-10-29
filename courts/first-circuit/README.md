@@ -10,7 +10,7 @@ Courts under `courts/first-circuit` (20).
 | [United States Bankruptcy Court, D. Maine](maine/federal/bankruptcy-district) | `meb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Maine](maine/federal/district) | `med` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Massachusetts](massachusetts/federal/bankruptcy-district) | `mab` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. Massachusetts](massachusetts/federal/district) | `mad` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. Massachusetts](massachusetts/federal/district) | `mad` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. New Hampshire](new-hampshire/federal/bankruptcy-district) | `nhb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. New Hampshire](new-hampshire/federal/district) | `nhd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Puerto Rico](puerto-rico/federal/bankruptcy-district) | `prb` | up for review | 2/2 | — | 2/2 | 14 |

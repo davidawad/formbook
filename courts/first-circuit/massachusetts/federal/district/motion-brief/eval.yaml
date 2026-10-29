@@ -1,4 +1,9 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (fb-595.68.16, on the shared layout model lib/*/xengine*), so a difference fails.
+# Gate 4 CROSS-ENGINE; D. Mass. L.R. 7.1(b)(4): a memorandum supporting a motion does not exceed 20 pages.
 params:
   cross_engine: gate
+  # docx REPORTED (fb-595.89): usage/INPUT-motion-brief.md footnote 2 (13 lines, anchored on typst p2 line 17, "2027.
+  # A copy of the CBA ... Exhibit A.") does not fit below its line. typst and LaTeX move the line to p3 with the note,
+  # which is never split; LibreOffice keeps the line on p2 and moves the whole note (Footnote Text keepLines) to p3, so
+  # every page end from p3 on differs (XENG-002, XENG-003 from p2 line 18). Word has no "keep a note with its line".
+  cross_engine_docx: report
+  page_limit: 20
