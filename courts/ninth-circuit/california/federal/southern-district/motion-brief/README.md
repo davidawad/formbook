@@ -96,7 +96,3 @@ What differs from the typst template:
 - Footnote Text is single spaced (a convention, not verified); no footnotes in the sample.
 
 `sh tools/check.sh courts/ninth-circuit/california/federal/southern-district/motion-brief --engine docx`: RESULT 8 checks passed, 0 failed. Every page of the 9-page `.docx.pdf` was viewed. Word fidelity (repair prompt, line-number placement, border offsets) is not checked in Word.
-
-## FRCP base port assessment (fb-595.17.12)
-
-Skipped: pleading paper. S.D. Cal. Civil L.R. 5.1 asks for papers line-numbered in the left margin, at most 28 lines a page; the template sets the numbered lines 1 to 28 and the pleading rules (`lib/typst/pleading-paper.typ`, the footer below line 28). The FRCP base (`lib/layouts/frcp-motion-brief.yaml`) has no pleading paper yet (fb-595.84 brings it), so the folder stays on its own templates.
