@@ -390,10 +390,10 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, N.D. Texas](courts/fifth-circuit/texas/federal/bankruptcy-northern-district) | `txnb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. Texas](courts/fifth-circuit/texas/federal/bankruptcy-southern-district) | `txsb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Texas](courts/fifth-circuit/texas/federal/bankruptcy-western-district) | `txwb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, E.D. Texas](courts/fifth-circuit/texas/federal/eastern-district) | `txed` | up for review | 2/2 | 1/1 | 2/2 | 14 |
-| [District Court, N.D. Texas](courts/fifth-circuit/texas/federal/northern-district) | `txnd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
-| [District Court, S.D. Texas](courts/fifth-circuit/texas/federal/southern-district) | `txsd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
-| [District Court, W.D. Texas](courts/fifth-circuit/texas/federal/western-district) | `txwd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, E.D. Texas](courts/fifth-circuit/texas/federal/eastern-district) | `txed` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, N.D. Texas](courts/fifth-circuit/texas/federal/northern-district) | `txnd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, S.D. Texas](courts/fifth-circuit/texas/federal/southern-district) | `txsd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, W.D. Texas](courts/fifth-circuit/texas/federal/western-district) | `txwd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Court of Civil Appeals of Texas](courts/fifth-circuit/texas/state/court-of-civil-appeals) | `texapp` | up for review | 5/5 | 2/2 | 5/5 | 29 |
 | [Court of Criminal Appeals of Texas](courts/fifth-circuit/texas/state/court-of-criminal-appeals) | `texcrimapp` | up for review | 5/5 | 2/2 | 3/4 | 29 |
 | [Texas Supreme Court](courts/fifth-circuit/texas/state/supreme-court) | `tex` | up for review | 2/2 | 2/2 | 2/2 | 29 |
@@ -860,7 +860,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Second Circuit | 19 | 0 | 19 | 0 | 0 | 0.0% | 100.0% | 19 | 13 | 15 | 18.7% |
 | Third Circuit | 18 | 0 | 18 | 0 | 0 | 0.0% | 100.0% | 18 | 10 | 18 | 18.1% |
 | Fourth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 15 | 21 | 19.1% |
-| Fifth Circuit | 26 | 0 | 26 | 0 | 0 | 0.0% | 100.0% | 26 | 17 | 23 | 18.0% |
+| Fifth Circuit | 26 | 0 | 26 | 0 | 0 | 0.0% | 100.0% | 26 | 13 | 23 | 18.0% |
 | Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 12 | 23 | 18.6% |
 | Seventh Circuit | 21 | 0 | 21 | 0 | 0 | 0.0% | 100.0% | 21 | 9 | 15 | 18.2% |
 | Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 38 | 27 | 26 | 20.3% |
