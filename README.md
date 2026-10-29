@@ -466,9 +466,9 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [United States Bankruptcy Court, C.D. Illinois](courts/seventh-circuit/illinois/federal/bankruptcy-central-district) | `ilcb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Illinois](courts/seventh-circuit/illinois/federal/bankruptcy-northern-district) | `ilnb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. Illinois](courts/seventh-circuit/illinois/federal/bankruptcy-southern-district) | `ilsb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, C.D. Illinois](courts/seventh-circuit/illinois/federal/central-district) | `ilcd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, C.D. Illinois](courts/seventh-circuit/illinois/federal/central-district) | `ilcd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [District Court, N.D. Illinois](courts/seventh-circuit/illinois/federal/northern-district) | `ilnd` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, S.D. Illinois](courts/seventh-circuit/illinois/federal/southern-district) | `ilsd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, S.D. Illinois](courts/seventh-circuit/illinois/federal/southern-district) | `ilsd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Appellate Court of Illinois](courts/seventh-circuit/illinois/state/appellate-court) | `illappct` | up for review | 6/6 | 6/6 | 1/6 | 29 |
 | [Illinois Supreme Court](courts/seventh-circuit/illinois/state/supreme-court) | `ill` | up for review | 8/8 | — | — | 29 |
 
@@ -478,8 +478,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, N.D. Indiana](courts/seventh-circuit/indiana/federal/bankruptcy-northern-district) | `innb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. Indiana](courts/seventh-circuit/indiana/federal/bankruptcy-southern-district) | `insb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, N.D. Indiana](courts/seventh-circuit/indiana/federal/northern-district) | `innd` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, S.D. Indiana](courts/seventh-circuit/indiana/federal/southern-district) | `insd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, N.D. Indiana](courts/seventh-circuit/indiana/federal/northern-district) | `innd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, S.D. Indiana](courts/seventh-circuit/indiana/federal/southern-district) | `insd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Indiana Court of Appeals](courts/seventh-circuit/indiana/state/court-of-appeals) | `indctapp` | up for review | 3/3 | — | — | 29 |
 | [Indiana Supreme Court](courts/seventh-circuit/indiana/state/supreme-court) | `ind` | up for review | 1/1 | — | — | 29 |
 
@@ -862,14 +862,14 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Fourth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 15 | 21 | 19.1% |
 | Fifth Circuit | 26 | 0 | 26 | 0 | 0 | 0.0% | 100.0% | 26 | 13 | 23 | 18.0% |
 | Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 12 | 23 | 18.6% |
-| Seventh Circuit | 21 | 0 | 21 | 0 | 0 | 0.0% | 100.0% | 21 | 4 | 15 | 18.2% |
+| Seventh Circuit | 21 | 0 | 21 | 0 | 0 | 0.0% | 100.0% | 21 | 8 | 15 | 18.2% |
 | Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 38 | 27 | 26 | 20.3% |
 | Ninth Circuit | 61 | 0 | 59 | 2 | 0 | 0.0% | 96.7% | 58 | 19 | 44 | 21.0% |
 | Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 31 | 15 | 23 | 19.3% |
 | Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 13 | 23 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 4 | 3 | 3 | 17.7% |
 | Fifth Circuit | 1 | 0 | 1 | 0 | 0 | 0.0% | 100.0% | 1 | 0 | 0 | 14.0% |
-| **Total** | 377 | 0 | 354 | 23 | 0 | 0.0% | 93.8% | 353 | 157 | 269 | 19.0% |
+| **Total** | 377 | 0 | 354 | 23 | 0 | 0.0% | 93.8% | 353 | 161 | 269 | 19.0% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
