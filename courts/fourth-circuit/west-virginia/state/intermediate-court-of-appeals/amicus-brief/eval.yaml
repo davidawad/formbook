@@ -8,8 +8,5 @@
 params:
   page_limit: 25
   cross_engine: gate
-  # docx: INPUT-amicus-brief p8: Word's footnote area is smaller than typst's (17.1 pt from the last body line to the
-  # first note, typst more than 19.4), so Word keeps the line that anchors footnote 15 and the note on p8, typst and
-  # LaTeX move them to p9; the page ends of p9-p13 follow. A shared-model difference (Word's footnote area),
-  # docs/open-items/fb-595.54.66.md (XENG-002, XENG-003).
-  cross_engine_docx: report
+  # Word breaks every line and page as typst does (XENG-001..003 pass since fb-595.54.11.2): gated (fb-595.54.83).
+  cross_engine_docx: gate

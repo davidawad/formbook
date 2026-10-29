@@ -10,8 +10,5 @@ params:
   # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
   # the typst render does, so a difference fails.
   cross_engine: gate
-  # The docx is reported, not gated: footnote 1 (four lines) does not fit under its anchor on page 13; typst and LaTeX
-  # carry two of its lines there and two on page 14 (a note's last two lines kept together), LibreOffice three and one,
-  # as it does not apply widow control inside a footnote (Footnote Text has it; Word itself would keep the two). Every
-  # other line of the 40 pages breaks as in typst (957/958); recorded on bead fb-595.54.15.
-  cross_engine_docx: report
+  # Word breaks every line and page as typst does (XENG-001..003 pass since fb-595.54.11.2): gated (fb-595.54.83).
+  cross_engine_docx: gate

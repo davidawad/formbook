@@ -3,9 +3,5 @@
 # the typst render does, so a difference fails.
 params:
   cross_engine: gate
-  # Word gets a zero-width space after a slash inside a word before a letter (lib/docx/xdoc.lua `breaks`, for
-  # "CM/ECF"); the e-signature "s/Charles N. Nauen" (as filed) is such a word, and LibreOffice's PDF text then reads
-  # "s/" and "Charles" as two words: INPUT-motion-brief, page 7 line 10 (XENG-003 182/183; pages, page ends and every
-  # line break equal). Typst and LaTeX keep one word. Reported, not gated, until the shared model treats a word-initial
-  # "s/" as it treats "/s/" (docs/open-items/fb-595.54.43.md).
-  cross_engine_docx: report
+  # Word breaks every line and page as typst does (XENG-001..003 pass since fb-595.54.11.2): gated (fb-595.54.83).
+  cross_engine_docx: gate

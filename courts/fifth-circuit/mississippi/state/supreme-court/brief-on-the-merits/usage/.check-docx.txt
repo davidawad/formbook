@@ -1,3 +1,4 @@
 PASS
 26c734dce0ddb281e7cb1925403ac66930e6b7b95a0abbacbb2c81b0a4c0c3c8  usage/OUTPUT-brief-on-the-merits.docx
 3c61c95e92a9fd1834ee1c60d50b24a3786782e9f47deade2e4bf350d828509d  usage/OUTPUT-brief-on-the-merits.docx.pdf
+bfae988a94919e2f538f83d89d94b733ed268b9d26206297f2b303c904182e8f  usage/OUTPUT-brief-on-the-merits.typst.pdf

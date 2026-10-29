@@ -7,8 +7,8 @@ params:
   cross_engine: gate
   # LaTeX loses the footnotes whose marks follow the token after a pilcrow ("Bodde Aff. ¶ 11).[^5]"): the shared model
   # holds that token unbroken (lib/pandoc/xdoc.lua hold_sign_tokens), mark and all, in a box LaTeX drops the note from
-  # (INPUT-brief-on-the-merits, page 13, footnotes 5 and 6); the pages after it shift. Word sets one body line more
-  # above a long note than typst (page 20, footnote 12; the open "Word's footnote area" request of
-  # docs/open-items/fb-595.54.82.md). Both reported, not gated (docs/open-items/fb-595.54.49.md).
+  # (INPUT-brief-on-the-merits, page 13, footnotes 5 and 6); the pages after it shift. Reported, not gated
+  # (docs/open-items/fb-595.54.49.md). Word breaks every line and page as typst does (XENG-001..003 pass since
+  # fb-595.54.11.2): gated (fb-595.54.83).
   cross_engine_latex: report
-  cross_engine_docx: report
+  cross_engine_docx: gate

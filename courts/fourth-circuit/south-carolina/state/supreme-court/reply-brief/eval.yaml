@@ -7,8 +7,7 @@ params:
   cross_engine: gate
   # LaTeX sets the box bar of "SMITH│ROBINSON" (counsel and signature) as newtx's glyph centred in a box of Liberation
   # Serif's advance, so the PDF text splits the word in three (the cross-engine diff joins that split for LibreOffice
-  # only): pages 2 and 17. LibreOffice splits footnote 1 over pages 15 and 16 where typst moves its line on with it
-  # (the open note-placement request of docs/open-items/fb-595.54.82.md). Both reported, not gated
-  # (docs/open-items/fb-595.54.49.md).
+  # only): pages 2 and 17. Reported, not gated (docs/open-items/fb-595.54.49.md). Word breaks every line and page as
+  # typst does (XENG-001..003 pass since fb-595.54.11.2): gated (fb-595.54.83).
   cross_engine_latex: report
-  cross_engine_docx: report
+  cross_engine_docx: gate

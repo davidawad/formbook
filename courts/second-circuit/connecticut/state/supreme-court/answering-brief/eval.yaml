@@ -1,10 +1,8 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
-# the typst render does, so a difference fails. LaTeX is gated (1083/1083 lines). Word is reported, not gated: its
-# pages and line breaks match typst's (pages and page ends equal, 1082/1083 lines), but the table of authorities
-# lists Ostrowski v. Avery on page 32 where typst and LaTeX list 31 (p5 line 14): the citation starts on the last line
-# of page 31 and ends on page 32, and the shared docx page lookup (tools/fb/src/docxpages.rs) counts a keyed
-# authority where its link text ends, typst and LaTeX after the link's first word. A shared-model item.
+# the typst render does, so a difference fails. LaTeX is gated (1083/1083 lines). Word is gated: its pages and line
+# breaks match typst's, and since fb-595.54.11.2 its table of authorities gives a keyed authority that crosses a page
+# end the page of its first word, as typst and LaTeX do (fb-595.54.83).
 params:
   cross_engine: gate
-  cross_engine_docx: report
+  cross_engine_docx: gate

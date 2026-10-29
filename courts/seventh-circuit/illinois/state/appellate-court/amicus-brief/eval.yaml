@@ -3,8 +3,5 @@
 # the typst render does, so a difference fails.
 params:
   cross_engine: gate
-  # LibreOffice sets two body lines above the one-note footnote area of page 10 where typst and LaTeX set one
-  # ("demographic in our country ..." ends p10 in Word, starts p11 in typst; XENG-002, XENG-003 on p11, p12). Word's
-  # footnote area is not yet in the shared model (docs/open-items/fb-595.54.82.md); reported, not gated
-  # (docs/open-items/fb-595.54.56.md).
-  cross_engine_docx: report
+  # Word breaks every line and page as typst does (XENG-001..003 pass since fb-595.54.11.2): gated (fb-595.54.83).
+  cross_engine_docx: gate

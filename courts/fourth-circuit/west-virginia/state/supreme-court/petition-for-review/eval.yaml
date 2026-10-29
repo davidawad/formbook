@@ -7,7 +7,5 @@
 params:
   page_limit: 40
   cross_engine: gate
-  # Word's footnote area holds note 46 and its anchor line on page 12, where typst and LaTeX move them to page 13;
-  # 7 of 40 page ends differ, the page count is equal; a footnote clearance of 7.5 does not move it
-  # (docs/open-items/fb-595.54.21.md, B7). Reported, not gated.
-  cross_engine_docx: report
+  # Word breaks every line and page as typst does (XENG-001..003 pass since fb-595.54.11.2): gated (fb-595.54.83).
+  cross_engine_docx: gate

@@ -1,8 +1,6 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
 # typst template's layout (typst/layout.yaml; `fb engines gen`, fb-595.54.12) and break every line and page where
-# the typst render does, so a difference fails. The docx engine is reported, not gated (docs/open-items/fb-595.54.57.md):
-# LibreOffice keeps the line that cites a note that does not fit and moves the note (p15, note 8; "LibreOffice's note
-# placement" in docs/open-items/fb-595.54.82.md), and fits a body line more above two notes (p9).
+# the typst render does, so a difference fails. Word passes XENG-001..003 since fb-595.54.11.2: gated (fb-595.54.83).
 params:
   cross_engine: gate
-  cross_engine_docx: report
+  cross_engine_docx: gate
