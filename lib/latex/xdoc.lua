@@ -708,7 +708,10 @@ return function(spec)
         -- page_number.cover: the cover counted in the tables' numbering (counted: unprinted; numbered: printed)
         local cmode = front and spec.page_number.cover
         local hidden = front and cmode ~= "numbered"
-        if (spec.page_number and spec.page_number.from or 1) > 1 or hidden then first:insert(raw("\\thispagestyle{empty}")) end
+        -- (an unnumbered cover's page; none without a cover: the tables then open the document, numbered, fb-595.96)
+        if (spec.page_number and spec.page_number.from or 1) > 1 or (hidden and spec.cover) then
+          first:insert(raw("\\thispagestyle{empty}"))
+        end
         if cmode then first:insert(raw("\\pagenumbering{" .. TEX_FMT[front] .. "}")) end
         -- a running footer (page_number.text with frontmatter fields, lines at "<br>"): \xd@foot, the lines the
         -- generated template's footer stacks, each a line box of the footer's pitch (page_number.pitch, the single pitch

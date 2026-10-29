@@ -275,7 +275,40 @@ fn pages_of(docx: &Path, n: usize, work: &Path) -> Res<String> {
     } else {
         Default::default()
     };
-    crate::docxpages::lookup_all(&needles, &pages, &lines, &dests).map_err(|e| fail(1, e))
+    lookup_or_raw(&needles, &pages, &lines, &dests, || {
+        let o = capture(Command::new("pdftotext").arg("-raw").arg(&pdf).arg("-"))?;
+        if !o.status.success() {
+            return Err(fail(1, "fb render: pdftotext -raw failed"));
+        }
+        Ok(crate::docxpages::page_texts(&String::from_utf8_lossy(
+            &o.stdout,
+        )))
+    })
+}
+
+/// The needles' pages from the text in pdftotext's reading order, or, when a needle is not found there, from the text
+/// in the PDF's content order (`raw`, `pdftotext -raw`: LibreOffice writes it in the document's order), used only
+/// when it finds every needle (fb-595.96). The reading order can set a line's text after the paragraphs below it: a
+/// heading's title at the tab after its label, in a column no other line starts at (the C.D. Cal. memorandum's
+/// "A." headings half an inch in, on 24 pt lines), so its needle is in neither order of the words there. A lookup that
+/// succeeds in the reading order is the one it always was.
+pub(crate) fn lookup_or_raw(
+    needles: &str,
+    pages: &[String],
+    lines: &[crate::docxpages::PageLines],
+    dests: &std::collections::HashMap<String, (usize, f64)>,
+    raw: impl FnOnce() -> Res<Vec<String>>,
+) -> Res<String> {
+    match crate::docxpages::lookup_all(needles, pages, lines, dests) {
+        Ok(found) => Ok(found),
+        Err(e) => {
+            let raw = raw()?;
+            if raw.len() != pages.len() {
+                return Err(fail(1, e));
+            }
+            crate::docxpages::lookup_all(needles, &raw, lines, dests).map_err(|_| fail(1, e))
+        }
+    }
 }
 
 /// Build `sample` into `out` (a .docx): one pass for a filter without needles, otherwise passes until the pages
@@ -317,6 +350,29 @@ pub fn render(court: &Path, args: &[String], sample: &str, out: &Path, work: &Pa
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn a_needle_missing_in_the_reading_order_is_looked_up_in_the_content_order() {
+        // (fb-595.96) a heading's title read after the paragraph below it: not in the reading order, found in the raw one
+        let needles =
+            "h1\tB\taplaintiffsallegedlysnapshotdefendantis\taplaintiffsallegedlysnapshot\n";
+        let flow = vec![
+            "intro".to_string(),
+            "adefendantisplaintiffsallegedlysnapshot".to_string(),
+        ];
+        let raw = vec![
+            "intro".to_string(),
+            "aplaintiffsallegedlysnapshotdefendantis".to_string(),
+        ];
+        let none = std::collections::HashMap::new();
+        let got = lookup_or_raw(needles, &flow, &[], &none, || Ok(raw.clone())).unwrap();
+        assert_eq!(got, "h1\t2\t-\n");
+        // found in the reading order: the raw text is not read at all
+        let got = lookup_or_raw(needles, &raw, &[], &none, || panic!("read the raw text")).unwrap();
+        assert_eq!(got, "h1\t2\t-\n");
+        // in neither: the reading order's error
+        assert!(lookup_or_raw(needles, &flow, &[], &none, || Ok(flow.clone())).is_err());
+    }
 
     #[test]
     fn replaces_only_the_last_sectpr() {
