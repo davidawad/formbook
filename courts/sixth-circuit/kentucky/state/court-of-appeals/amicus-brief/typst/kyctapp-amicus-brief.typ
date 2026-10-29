@@ -20,7 +20,7 @@
 #let font-family = ("Times New Roman", "Liberation Serif")   // RAP 31 (A) (2): readable serif; Liberation Serif is the metric twin (docs/FONTS.md).
 #let type-size = 12pt                                       // RAP 31 (A) (1) (c)-(d): text and footnotes no smaller than 12 point.
 #let body-leading = 1.2em                                   // RAP 31 (A) (1) (b): double spaced (pitch about 2.35 em, about 28 pt).
-#let single-leading = 0.2em                                 // Captions, cover blocks, headings, block quotations, footnotes and authorities: single spaced.
+#let single-leading = 0.46em                                // Captions, cover blocks, headings, block quotations, footnotes and authorities: single spaced (0.46 em on the cap-height line: a 1.15 em, 13.8 pt pitch).
 #let para-indent = 0.5in
 #let sig-indent = 3.0in                                     // signature blocks start right of centre (exemplars do the same).
 
@@ -109,7 +109,7 @@
   for n in names [ #inl(n) \ ]
 }
 
-#let cover(meta) = {
+#let cover-body(meta, s) = {
   set par(leading: single-leading, first-line-indent: 0pt, spacing: 0pt)
   align(center)[
     #text(weight: "bold")[COMMONWEALTH OF KENTUCKY] \
@@ -117,7 +117,7 @@
     #v(0.1in)
     CASE NO. #need(meta, "case_number")
   ]
-  v(0.3in)
+  v(0.3in * s)
   let sides = need(meta, "caption")
   grid(
     columns: (2.5in, 2.5in, 1.0in),
@@ -134,17 +134,17 @@
     [],
     [#align(right, text(weight: "bold")[#sides.at(1).designation])],
   )
-  v(0.35in)
+  v(0.35in * s)
   line(length: 100%, stroke: 0.75pt)
-  v(0.12in)
+  v(0.12in * s)
   align(center)[
     #set par(leading: single-leading, first-line-indent: 0pt, spacing: 0pt)
     #text(weight: "bold")[#inl(need(meta, "brief_title"))] \
     #text(weight: "bold")[#inl(need(meta, "brief_party"))]
   ]
-  v(0.12in)
+  v(0.12in * s)
   line(length: 100%, stroke: 0.75pt)
-  v(0.3in)
+  v(0.3in * s)
   pad(left: sig-indent, {
     set par(leading: single-leading, first-line-indent: 0pt, spacing: 0pt)
     [Respectfully submitted,]
@@ -162,7 +162,7 @@
     }
   })
   if "service" in meta {
-    v(0.25in)
+    v(0.25in * s)
     let svc = meta.service
     set par(leading: single-leading, first-line-indent: 0pt, spacing: 0.5em)
     align(center, text(weight: "bold")[CERTIFICATE OF SERVICE])
@@ -182,6 +182,15 @@
     ]
   }
 }
+
+/// The cover is one page. Its fixed vertical spaces are the only thing that gives: the largest scale of them at
+/// which the whole cover fits is used (RAP 31 (C) (1) (b) puts the certificate of service on the cover).
+#let cover(meta) = layout(size => {
+  let fits(s) = measure(block(width: size.width, cover-body(meta, s))).height <= size.height
+  let s = (1.0, 0.8, 0.6, 0.4, 0.2, 0.0).find(fits)
+  if s == none { panic("kyctapp-amicus-brief: the cover does not fit on one page; shorten the counsel or service lines") }
+  cover-body(meta, s)
+})
 
 // ---------------------------------------------------------------------------
 // Template

@@ -230,6 +230,7 @@
     text(weight: "bold", style: "italic", h.body),
   )
   show heading: set par(leading: leading-single, spacing: leading-single, first-line-indent: 0pt)
+  show heading: set text(size: body-size) // headings in the body type size (as filed), not typst's larger default
   show footnote: f => text(font: font-family, f)
   show footnote.entry: n => {
     set text(font: font-family, size: note-size)
