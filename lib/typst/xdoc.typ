@@ -929,6 +929,12 @@
 /// each row; the leader runs from three spaces after the text to the page (lib/typst/xengine.typ listing-row).
 #let contents-pages(spec, c) = {
   table-title(spec, c)
+  // (`page_heading`, fb-595.96: the label over the page column, "Page": at the right, bold, at the contents' pitch,
+  // kept with the rows; `page_style` over that style; lib/pandoc/xdoc.lua contents_page_heading alike)
+  if "page_heading" in c {
+    let st = (align: "right", bold: true, pitch: c.at("pitch", default: none), keep: true) + c.at("page_style", default: (:))
+    line-block(spec, st, inl(st, c.page_heading), pt(st.at("above", default: 0)), pt(st.at("below", default: 0)))
+  }
   set text(..edges(pitch-of(spec, c.at("pitch", default: none))))
   context {
     let hs = query(selector(heading).after(<xd-heads>)).filter(h => h.level <= c.at("depth", default: 3))

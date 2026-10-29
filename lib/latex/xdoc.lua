@@ -521,7 +521,11 @@ return function(spec)
   end
 
   local function contents(c, heads)
-    local out = { table_title(c), lines(c) }
+    local out = { table_title(c) }
+    -- (the label over the page column, contents.page_heading)
+    local ph = xd.contents_page_heading(c)
+    if ph then out[#out + 1] = par(ph) end
+    out[#out + 1] = lines(c)
     for _, h in ipairs(heads) do
       if h.level <= (c.depth or 3) then
         -- the heading's text without its authority marks (typst marks the body, not the contents)

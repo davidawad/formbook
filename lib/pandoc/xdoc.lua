@@ -1001,6 +1001,18 @@ function M.keyed(spec, meta)
   return out, by
 end
 
+-- The label over the contents' page column (layout.yaml contents.page_heading, fb-595.96: "Page", as the pleading
+-- courts' filers set it): a paragraph after the title, at the right, bold, at the contents' pitch, kept with the rows
+-- (`page_style` over that style; its `above` and `below`), or nil (lib/typst/xdoc.typ contents-pages alike).
+function M.contents_page_heading(c)
+  if not c.page_heading then return nil end
+  local st = { align = "right", bold = true, pitch = c.pitch, keep = true }
+  for k, v in pairs(c.page_style or {}) do st[k] = v end
+  local text = M.inlines(c.page_heading)
+  if st.upper then text = M.upper(text) end
+  return { t = "par", text = text, st = st, lead = 0, above = tonumber(st.above) or 0, below = tonumber(st.below) or 0 }
+end
+
 -- The markdown of a keyed authority's row (lib/typst/xdoc.typ keyed-text).
 function M.keyed_text(g, e)
   if not M.is_set(e.name) then return tostring(e.cite) end

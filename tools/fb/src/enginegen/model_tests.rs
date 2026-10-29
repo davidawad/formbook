@@ -3581,3 +3581,48 @@ fn a_footer_line_with_its_parts_at_both_margins_in_every_engine() {
     assert_eq!(super::gen::is_running("Page {page}"), false);
     assert!(super::gen::is_running("{page}<tab>x"));
 }
+
+#[test]
+fn a_page_label_over_the_contents_column_in_every_engine() {
+    // (fb-595.96) contents.page_heading: "Page" at the right under the contents' title, bold, kept with the rows
+    let l = layout("page_number: {align: center, front: lower-roman}\ncover:\n  - {text: \"COVER\"}\ncontents: {title: \"Table of Contents\", page_heading: \"Page\", col: 36}\nheading:\n  - {bold: true}\n");
+    let Some(f) = fx(
+        "contents-page",
+        &l,
+        "---\nx: 1\n---\n# Introduction\n\nBody.\n",
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
+        return;
+    };
+    let pages = f.typst_pages().unwrap();
+    let toc: Vec<&str> = pages[1]
+        .lines()
+        .map(str::trim)
+        .filter(|l| !l.is_empty())
+        .collect();
+    assert!(
+        toc[0].contains("Table of Contents")
+            && toc[1] == "Page"
+            && toc[2].starts_with("Introduction"),
+        "{toc:?}"
+    );
+    let m = crate::measure::measure(&f.dir.join("out.pdf"), &[]).unwrap();
+    let page = m.pages[1]
+        .lines
+        .iter()
+        .find(|ln| ln.text == "Page")
+        .unwrap();
+    assert!((page.right - 540.0).abs() < 0.5 && page.bold, "{page:?}");
+    let tex = f.latex().unwrap();
+    let (t, p, r) = (
+        tex.find("Table of Contents").unwrap(),
+        tex.find("bfseries Page").unwrap(),
+        tex.find("Introduction").unwrap(),
+    );
+    assert!(t < p && p < r, "{tex}");
+    let doc = f.docx().unwrap();
+    assert!(
+        doc.find(">Page<").unwrap() < doc.find(">Introduction<").unwrap(),
+        "{doc}"
+    );
+}

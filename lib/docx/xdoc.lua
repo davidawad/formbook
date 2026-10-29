@@ -681,7 +681,8 @@ return function(spec)
   end
 
   local function contents(c, heads, s)
-    local out = emit_list({ table_title(c) }, s, false)
+    -- (the label over the page column, contents.page_heading)
+    local out = emit_list({ table_title(c), xd.contents_page_heading(c) }, s, false)
     local pitch = xd.pitch(spec, c.pitch)
     for _, h in ipairs(heads) do
       if h.level <= (c.depth or 3) then
