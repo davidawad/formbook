@@ -31,18 +31,18 @@ Courts under `courts/eighth-circuit` (38).
 | [Arkansas Supreme Court](arkansas/state/supreme-court) | `ark` | up for review | 9/9 | 8/8 | 8/8 | 29 |
 | [Court of Appeals of Iowa](iowa/state/court-of-appeals) | `iowactapp` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Supreme Court of Iowa](iowa/state/supreme-court) | `iowa` | up for review | 8/8 | 7/7 | 7/7 | 29 |
-| [Court of Appeals of Minnesota](minnesota/state/court-of-appeals) | `minnctapp` | up for review | 7/7 | 3/3 | 3/3 | 29 |
-| [Supreme Court of Minnesota](minnesota/state/supreme-court) | `minn` | up for review | 8/8 | 2/2 | 2/2 | 29 |
-| [Missouri Court of Appeals](missouri/state/court-of-appeals) | `moctapp` | up for review | 5/5 | 1/1 | 1/1 | 29 |
-| [Missouri Court of Appeals, Eastern District](missouri/state/court-of-appeals-eastern-district) | `moctapped` | up for review | 4/4 | 4/4 | 4/4 | 29 |
-| [Missouri Court of Appeals, Southern District](missouri/state/court-of-appeals-southern-district) | `moctappsd` | up for review | 3/3 | 3/3 | 3/3 | 29 |
-| [Missouri Court of Appeals, Western District](missouri/state/court-of-appeals-western-district) | `moctappwd` | up for review | 5/5 | 5/5 | 5/5 | 29 |
-| [Supreme Court of Missouri](missouri/state/supreme-court) | `mo` | up for review | 6/6 | 6/6 | 6/6 | 29 |
-| [Nebraska Court of Appeals](nebraska/state/court-of-appeals) | `nebctapp` | up for review | 4/4 | 4/4 | 4/4 | 29 |
-| [Nebraska Supreme Court](nebraska/state/supreme-court) | `neb` | up for review | 5/5 | 4/4 | 3/3 | 29 |
-| [North Dakota Court of Appeals](north-dakota/state/court-of-appeals) | `ndctapp` | up for review | 3/3 | 3/3 | 2/2 | 29 |
-| [North Dakota Supreme Court](north-dakota/state/supreme-court) | `nd` | up for review | 7/7 | 6/6 | 6/6 | 29 |
-| [Supreme Court of South Dakota](south-dakota/state/supreme-court) | `sd` | up for review | 4/4 | 4/4 | 4/4 | 29 |
+| [Court of Appeals of Minnesota](minnesota/state/court-of-appeals) | `minnctapp` | up for review | 7/7 | 3/3 | 0/3 | 29 |
+| [Supreme Court of Minnesota](minnesota/state/supreme-court) | `minn` | up for review | 8/8 | 2/2 | 0/2 | 29 |
+| [Missouri Court of Appeals](missouri/state/court-of-appeals) | `moctapp` | up for review | 5/5 | 1/1 | 0/1 | 29 |
+| [Missouri Court of Appeals, Eastern District](missouri/state/court-of-appeals-eastern-district) | `moctapped` | up for review | 4/4 | 4/4 | 0/4 | 29 |
+| [Missouri Court of Appeals, Southern District](missouri/state/court-of-appeals-southern-district) | `moctappsd` | up for review | 3/3 | 3/3 | 1/3 | 29 |
+| [Missouri Court of Appeals, Western District](missouri/state/court-of-appeals-western-district) | `moctappwd` | up for review | 5/5 | 5/5 | 0/5 | 29 |
+| [Supreme Court of Missouri](missouri/state/supreme-court) | `mo` | up for review | 6/6 | 6/6 | 1/6 | 29 |
+| [Nebraska Court of Appeals](nebraska/state/court-of-appeals) | `nebctapp` | up for review | 4/4 | 4/4 | 0/4 | 29 |
+| [Nebraska Supreme Court](nebraska/state/supreme-court) | `neb` | up for review | 5/5 | 4/4 | 1/3 | 29 |
+| [North Dakota Court of Appeals](north-dakota/state/court-of-appeals) | `ndctapp` | up for review | 3/3 | 3/3 | 0/2 | 29 |
+| [North Dakota Supreme Court](north-dakota/state/supreme-court) | `nd` | up for review | 7/7 | 6/6 | 0/6 | 29 |
+| [Supreme Court of South Dakota](south-dakota/state/supreme-court) | `sd` | up for review | 4/4 | 4/4 | 2/4 | 29 |
 
 [Formbook index](../../README.md)
 <!-- fb:generated:end -->

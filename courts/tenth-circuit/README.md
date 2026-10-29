@@ -26,15 +26,15 @@ Courts under `courts/tenth-circuit` (31).
 | [District Court, D. Wyoming](wyoming/federal/district) | `wyd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Colorado Court of Appeals](colorado/state/court-of-appeals) | `coloctapp` | up for review | 5/5 | — | — | 29 |
 | [Colorado Supreme Court](colorado/state/supreme-court) | `colo` | up for review | 8/8 | — | — | 29 |
-| [Court of Appeals of Kansas](kansas/state/court-of-appeals) | `kanctapp` | up for review | 5/5 | 5/5 | 5/5 | 29 |
-| [Supreme Court of Kansas](kansas/state/supreme-court) | `kan` | up for review | 9/9 | 9/9 | 9/9 | 29 |
+| [Court of Appeals of Kansas](kansas/state/court-of-appeals) | `kanctapp` | up for review | 5/5 | 5/5 | 0/5 | 29 |
+| [Supreme Court of Kansas](kansas/state/supreme-court) | `kan` | up for review | 9/9 | 9/9 | 1/9 | 29 |
 | [New Mexico Court of Appeals](new-mexico/state/court-of-appeals) | `nmctapp` | up for review | 6/6 | 6/6 | 6/6 | 29 |
 | [New Mexico Supreme Court](new-mexico/state/supreme-court) | `nm` | up for review | 8/8 | 1/1 | 1/1 | 29 |
 | [Court of Civil Appeals of Oklahoma](oklahoma/state/court-of-civil-appeals) | `oklacivapp` | up for review | 1/1 | — | — | 14 |
-| [Court of Criminal Appeals of Oklahoma](oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | up for review | 5/5 | 5/5 | 5/5 | 29 |
-| [Supreme Court of Oklahoma](oklahoma/state/supreme-court) | `okla` | up for review | 6/6 | 6/6 | 6/6 | 29 |
+| [Court of Criminal Appeals of Oklahoma](oklahoma/state/court-of-criminal-appeals) | `oklacrimapp` | up for review | 5/5 | 5/5 | 0/5 | 29 |
+| [Supreme Court of Oklahoma](oklahoma/state/supreme-court) | `okla` | up for review | 6/6 | 6/6 | 0/6 | 29 |
 | [Court of Appeals of Utah](utah/state/court-of-appeals) | `utahctapp` | up for review | 4/4 | 4/4 | 4/4 | 29 |
-| [Utah Supreme Court](utah/state/supreme-court) | `utah` | up for review | 7/7 | 7/7 | 7/7 | 29 |
+| [Utah Supreme Court](utah/state/supreme-court) | `utah` | up for review | 7/7 | 7/7 | 2/7 | 29 |
 | [Wyoming Supreme Court](wyoming/state/supreme-court) | `wyo` | up for review | 3/3 | 2/2 | 2/2 | 29 |
 
 [Formbook index](../../README.md)

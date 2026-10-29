@@ -18,12 +18,12 @@ Courts under `courts/first-circuit` (20).
 | [United States Bankruptcy Court, D. Rhode Island](rhode-island/federal/bankruptcy-district) | `rib` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Rhode Island](rhode-island/federal/district) | `rid` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Supreme Judicial Court of Maine](maine/state/supreme-judicial-court) | `me` | up for review | 8/8 | 8/8 | 8/8 | 29 |
-| [Massachusetts Appeals Court](massachusetts/state/appeals-court) | `massappct` | up for review | 5/5 | 3/3 | 5/5 | 29 |
+| [Massachusetts Appeals Court](massachusetts/state/appeals-court) | `massappct` | up for review | 5/5 | 3/3 | 1/5 | 29 |
 | [Massachusetts District Court, Appellate Division](massachusetts/state/district-court-appellate-division) | `massdistctapp` | in progress | — | — | — | 14 |
 | [Massachusetts Supreme Judicial Court](massachusetts/state/supreme-judicial-court) | `mass` | up for review | 9/9 | 5/5 | 5/5 | 29 |
-| [Supreme Court of New Hampshire](new-hampshire/state/supreme-court) | `nh` | up for review | 9/9 | 8/8 | 6/6 | 29 |
-| [Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico](puerto-rico/state/court-of-appeals) | `prapp` | up for review | 1/1 | 1/1 | 1/1 | 29 |
-| [Supreme Court of Puerto Rico](puerto-rico/state/supreme-court) | `prsupreme` | up for review | 4/4 | 4/4 | 4/4 | 29 |
+| [Supreme Court of New Hampshire](new-hampshire/state/supreme-court) | `nh` | up for review | 9/9 | 8/8 | 0/6 | 29 |
+| [Tribunal De Apelaciones De Puerto Rico/Court of Appeals of Puerto Rico](puerto-rico/state/court-of-appeals) | `prapp` | up for review | 1/1 | 1/1 | 0/1 | 29 |
+| [Supreme Court of Puerto Rico](puerto-rico/state/supreme-court) | `prsupreme` | up for review | 4/4 | 4/4 | 2/4 | 29 |
 | [Supreme Court of Rhode Island](rhode-island/state/supreme-court) | `ri` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 
 [Formbook index](../../README.md)

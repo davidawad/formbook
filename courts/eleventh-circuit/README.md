@@ -26,7 +26,7 @@ Courts under `courts/eleventh-circuit` (32).
 | [United States District Court for the Southern District of Georgia](georgia/federal/southern-district) | `gasd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Alabama Court of Civil Appeals](alabama/state/court-of-civil-appeals) | `alacivapp` | up for review | 3/3 | — | — | 29 |
 | [Alabama Court of Criminal Appeals](alabama/state/court-of-criminal-appeals) | `alacrimapp` | up for review | 3/3 | — | — | 29 |
-| [Supreme Court of Alabama](alabama/state/supreme-court) | `ala` | up for review | 7/7 | 5/5 | 6/6 | 29 |
+| [Supreme Court of Alabama](alabama/state/supreme-court) | `ala` | up for review | 7/7 | 5/5 | 3/6 | 29 |
 | [Florida District Courts of Appeal](florida/state/district-courts-of-appeal) | `fladistctapp` | up for review | 8/8 | — | — | 29 |
 | [Florida Fifth District Court of Appeal](florida/state/fifth-district-court-of-appeal) | `fladistctapp5` | up for review | 8/8 | 8/8 | 8/8 | 29 |
 | [Florida First District Court of Appeal](florida/state/first-district-court-of-appeal) | `fladistctapp1` | up for review | 8/8 | — | — | 29 |
@@ -35,8 +35,8 @@ Courts under `courts/eleventh-circuit` (32).
 | [Florida Sixth District Court of Appeal](florida/state/sixth-district-court-of-appeal) | `fladistctapp6` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [Florida Supreme Court](florida/state/supreme-court) | `fla` | up for review | 9/9 | — | — | 29 |
 | [Florida Third District Court of Appeal](florida/state/third-district-court-of-appeal) | `fladistctapp3` | up for review | 8/8 | 1/1 | 1/1 | 29 |
-| [Georgia Court of Appeals](georgia/state/court-of-appeals) | `gactapp` | up for review | 6/6 | 6/6 | 6/6 | 29 |
-| [Georgia Supreme Court](georgia/state/supreme-court) | `ga` | up for review | 8/8 | 6/6 | 8/8 | 29 |
+| [Georgia Court of Appeals](georgia/state/court-of-appeals) | `gactapp` | up for review | 6/6 | 6/6 | 4/6 | 29 |
+| [Georgia Supreme Court](georgia/state/supreme-court) | `ga` | up for review | 8/8 | 6/6 | 4/8 | 29 |
 
 [Formbook index](../../README.md)
 <!-- fb:generated:end -->

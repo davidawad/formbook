@@ -14,7 +14,7 @@ Courts under `courts/fifth-circuit/texas` (12).
 | [District Court, S.D. Texas](federal/southern-district) | `txsd` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, W.D. Texas](federal/western-district) | `txwd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Court of Civil Appeals of Texas](state/court-of-civil-appeals) | `texapp` | up for review | 5/5 | 2/2 | 5/5 | 29 |
-| [Court of Criminal Appeals of Texas](state/court-of-criminal-appeals) | `texcrimapp` | up for review | 5/5 | 2/2 | 4/4 | 29 |
+| [Court of Criminal Appeals of Texas](state/court-of-criminal-appeals) | `texcrimapp` | up for review | 5/5 | 2/2 | 3/4 | 29 |
 | [Texas Supreme Court](state/supreme-court) | `tex` | up for review | 2/2 | 2/2 | 2/2 | 29 |
 | [District Courts of Travis County, Texas (Austin)](state/district-court-travis) | `txdistrict-travis` | up for review | 6/6 | — | — | 14 |
 

@@ -5,8 +5,8 @@ Courts under `courts/eleventh-circuit/georgia/state` (2).
 
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
-| [Georgia Court of Appeals](court-of-appeals) | `gactapp` | up for review | 6/6 | 6/6 | 6/6 | 29 |
-| [Georgia Supreme Court](supreme-court) | `ga` | up for review | 8/8 | 6/6 | 8/8 | 29 |
+| [Georgia Court of Appeals](court-of-appeals) | `gactapp` | up for review | 6/6 | 6/6 | 4/6 | 29 |
+| [Georgia Supreme Court](supreme-court) | `ga` | up for review | 8/8 | 6/6 | 4/8 | 29 |
 
 [Formbook index](../../../../README.md)
 <!-- fb:generated:end -->
