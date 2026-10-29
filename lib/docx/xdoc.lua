@@ -1085,10 +1085,11 @@ return function(spec)
         if paged then
           -- the numbering starts at the first line of the document (page 1)
           -- (its first paragraph's text, inside columns too: a cover may open with a caption's columns)
-          -- (none without a text to find: a layout whose cover is a paper before it, lead, fb-595.96, and whose tables are
-          -- numbered apart, which start at the `front` needle)
-          local st = first_text(xd.tree(spec, spec.cover or spec.front or {}, meta, true, true))
-          if st or not front then needle("start", "B", st or "", "") end
+          -- (none for tables numbered apart without a cover: the cover is a paper before them, lead, fb-595.96; they
+          -- start at the `front` needle, and the front's first text comes after them)
+          if spec.cover or not front then
+            needle("start", "B", first_text(xd.tree(spec, spec.cover or spec.front or {}, meta, true, true)) or "", "")
+          end
           if not front then sections[1] = "#section\tstart\tdecimal\t" end
         end
         -- the body sections before the tables on the cover's page (body_before_tables.place: cover, fb-595.92)
