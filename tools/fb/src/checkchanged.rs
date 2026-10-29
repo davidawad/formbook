@@ -9,8 +9,12 @@
 //! lib/docx, tools/fb/src/enginegen) also checks every doc folder on the model, a folder with `typst/layout.yaml` or
 //! an eval.yaml `params.cross_engine*` (fb-595.83): a folder that landed on the base after the branch forked was
 //! rendered on the previous model, and only a full recheck shows whether its committed outputs still pass.
-//! A change under tools/fb/src/enginegen does both. The RESULT line counts the folder/engine checks plus the fb test
-//! build when it ran, and says when the shared model changed.
+//! A change under tools/fb/src/enginegen does both. A diff that touches the check code (CHECKS: tools/fb/src/check,
+//! tools/check, data/checks-default.yaml and the check baselines, and this gate) checks every doc folder, each folder
+//! under courts/ with `usage/`, on all its engines (fb-595.94): fb-595.79 made DEF-FORM-004 a default and its gate
+//! checked only the model folders, so 79 off-model folders stayed red unseen until fb-595.91 swept them.
+//! The RESULT line counts the folder/engine checks plus the fb test build when it ran, and says when the check code
+//! or the shared model changed.
 //! The folder/engine checks run in parallel (fb-595.86: a model diff's serial run passed the 4500 s land-gate
 //! deadline) on `FB_JOBS` workers, default the host's available parallelism, one folder (its engines in turn) per
 //! job, since a folder's engines share one out/check scratch; each check's output is buffered and
@@ -34,6 +38,36 @@ pub const MODEL: [&str; 6] = [
     "lib/docx/",
     "tools/fb/src/enginegen/",
 ];
+
+/// The path prefixes of the check code: what decides the checks, their defaults and their per-folder params, so a
+/// change under any of them can turn any doc folder red (a new or tightened default check, fb-595.94).
+pub const CHECKS: [&str; 7] = [
+    "tools/fb/src/check/",
+    "tools/check/",
+    "tools/check.sh",
+    "data/checks-default.yaml",
+    "data/cover-structure-baseline.txt",
+    "data/cross-engine-baseline.json",
+    "tools/fb/src/checkchanged.rs",
+];
+
+/// Does the diff `paths` touch the check code.
+pub fn touches_checks(paths: &[String]) -> bool {
+    paths
+        .iter()
+        .any(|p| CHECKS.iter().any(|c| p.starts_with(c)))
+}
+
+/// Every doc folder among the tracked `files` (repo-relative): the parent of each `usage/` under courts/, only
+/// folders for which `is_doc` holds.
+pub fn all_folders<D: Fn(&str) -> bool>(files: &[String], is_doc: D) -> BTreeSet<String> {
+    files
+        .iter()
+        .filter(|p| p.starts_with("courts/"))
+        .filter_map(|p| p.rfind("/usage/").map(|i| p[..i].to_string()))
+        .filter(|d| is_doc(d))
+        .collect()
+}
 
 /// Does the diff `paths` touch the shared document model.
 pub fn touches_model(paths: &[String]) -> bool {
@@ -216,12 +250,14 @@ where
 }
 
 /// The RESULT line: folder/engine checks plus the fb test build when it ran (`fb`), and a note when the diff
-/// touched the shared model (`model`), so every folder on it was checked.
+/// touched the check code (`checks`), so every doc folder was checked, or else the shared model (`model`), so every
+/// folder on it was.
 pub fn result_line(
     jobs: usize,
     failed: usize,
     folders: usize,
     fb: bool,
+    checks: bool,
     model: bool,
     base: &str,
 ) -> String {
@@ -230,7 +266,11 @@ pub fn result_line(
         "RESULT: CHECK-CHANGED {} of {total} checks passed ({jobs} folder/engine in {folders} folders{} vs {base}{})",
         total - failed,
         if fb { " + tools/fb test build" } else { "" },
-        if model { "; shared model changed: every folder on it" } else { "" },
+        match (checks, model) {
+            (true, _) => "; check code changed: every doc folder",
+            (false, true) => "; shared model changed: every folder on it",
+            (false, false) => "",
+        },
     )
 }
 
@@ -302,6 +342,16 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
             on_model.len()
         );
         folders.extend(on_model);
+    }
+    let checks = touches_checks(&paths);
+    if checks {
+        let tracked = git_lines(&root, &["ls-files", "--", "courts"])?;
+        let every = all_folders(&tracked, is_doc);
+        eprintln!(
+            "fb check-changed: the diff touches the check code; checking all {} doc folders",
+            every.len()
+        );
+        folders.extend(every);
     }
     let todo = jobs(&folders, |d| root.join(d).is_dir());
     let exe = std::env::current_exe().map_err(|e| fail(2, format!("fb check-changed: {e}")))?;
@@ -375,6 +425,7 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
             failed.len(),
             folders.len(),
             fb_job,
+            checks,
             model,
             &base
         )
@@ -616,7 +667,7 @@ mod tests {
         assert!(touches_fb(&paths));
         assert!(touches_model(&paths));
         assert_eq!(
-            result_line(4, 1, 2, true, true, "origin/master"),
+            result_line(4, 1, 2, true, false, true, "origin/master"),
             "RESULT: CHECK-CHANGED 4 of 5 checks passed (4 folder/engine in 2 folders + tools/fb test build \
              vs origin/master; shared model changed: every folder on it)"
         );
@@ -625,17 +676,75 @@ mod tests {
     #[test]
     fn the_result_line_names_only_what_ran() {
         assert_eq!(
-            result_line(3, 0, 1, false, false, "b"),
+            result_line(3, 0, 1, false, false, false, "b"),
             "RESULT: CHECK-CHANGED 3 of 3 checks passed (3 folder/engine in 1 folders vs b)"
         );
         assert_eq!(
-            result_line(0, 1, 0, true, false, "b"),
+            result_line(0, 1, 0, true, false, false, "b"),
             "RESULT: CHECK-CHANGED 0 of 1 checks passed (0 folder/engine in 0 folders + tools/fb test build vs b)"
         );
         assert_eq!(
-            result_line(2, 0, 1, false, true, "b"),
+            result_line(2, 0, 1, false, false, true, "b"),
             "RESULT: CHECK-CHANGED 2 of 2 checks passed (2 folder/engine in 1 folders vs b; \
              shared model changed: every folder on it)"
         );
+        assert_eq!(
+            result_line(9, 0, 4, true, true, true, "b"),
+            "RESULT: CHECK-CHANGED 10 of 10 checks passed (9 folder/engine in 4 folders + tools/fb test build vs b; \
+             check code changed: every doc folder)"
+        );
+    }
+
+    #[test]
+    fn only_a_check_code_path_counts_as_a_check_change() {
+        for p in [
+            "tools/fb/src/check/native.rs",
+            "tools/fb/src/check/overlap.rs",
+            "tools/check/lib.sh",
+            "tools/check.sh",
+            "data/checks-default.yaml",
+            "data/cover-structure-baseline.txt",
+            "data/cross-engine-baseline.json",
+            "tools/fb/src/checkchanged.rs",
+        ] {
+            assert!(touches_checks(&s(&["README.md", p])), "{p}");
+        }
+        assert!(!touches_checks(&s(&[
+            "tools/fb/src/enginegen/gen.rs",
+            "lib/typst/xdoc.typ",
+            "courts/c/checks.yaml",
+            "data/priority.json",
+            "tools/check-selftest.sh",
+            "docs/EVAL-LOOP.md",
+        ])));
+    }
+
+    #[test]
+    fn a_check_code_change_checks_every_doc_folder() {
+        // the bead's case: DEF-FORM-004 became a default; the off-model folders (no layout.yaml, no cross_engine)
+        // must be checked too, each on every engine it has
+        let tracked = s(&[
+            "courts/a/brief/typst/layout.yaml",
+            "courts/a/brief/usage/INPUT-brief.md",
+            "courts/a/brief/usage/OUTPUT-brief.typst.pdf",
+            "courts/b/usage/FILED-EXAMPLE-amicus-brief.pdf",
+            "courts/b/motion/usage/INPUT-motion.md",
+            "courts/c/rules.md",
+            "courts/d/usage/SOURCE.md",
+            "lib/x/usage/INPUT-x.md",
+        ]);
+        let docs = ["courts/a/brief", "courts/b", "courts/b/motion"];
+        let got = all_folders(&tracked, |d| docs.contains(&d));
+        let want: BTreeSet<String> = docs.iter().map(|x| x.to_string()).collect();
+        assert_eq!(got, want);
+        let has = [
+            "courts/a/brief/typst",
+            "courts/b/latex",
+            "courts/b/docx",
+            "courts/b/motion/typst",
+        ];
+        let todo = jobs(&got, |d| has.contains(&d));
+        assert_eq!(todo.len(), 4);
+        assert_eq!(by_folder(&todo).len(), 3);
     }
 }
