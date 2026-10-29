@@ -1,0 +1,59 @@
+# U.S. District Court for the Western District of Wisconsin (wiwd): a brief in support of a motion to dismiss, on the
+# generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with W.D. Wis.'s practice overlaid here. The
+# shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb
+# engines gen`). Rules: FRCP 7(b)(1), 10(a), 11(a), 12(b); W.D. Wis. LR 5.1 (electronic filing) and the court's
+# Briefing Guidelines (https://www.wiwd.uscourts.gov/local-rules-and-procedures, read 2026-10-14; ../README.md quotes
+# them). The court's posted rules set no font, spacing or margin (rules.md WIWD-LEN-001), so the base's federal floor
+# stands: letter paper, one-inch margins, 12-point type, double-spaced text, pages numbered at the foot.
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE WESTERN DISTRICT OF WISCONSIN"
+# Headings at the body pitch with no space of their own, as the exemplar sets them: a section centered in bold
+# capitals; an argument heading in bold at the margin, its "I." as typed; a sub-heading in bold italic at the margin.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body, above: 0, below: 0}
+  - {bold: true, pitch: body, above: 0, below: 0}
+  - {bold: true, italic: true, pitch: body, above: 0, below: 0}
+# FRCP 10(a): the court's name in bold and a rule across the page; the parties (each party's names, its designation an
+# inch and a half in a single line below, "v." at the margin a single line from each) with the case number beside them,
+# centered on their height; a rule, the paper's title centered in bold, a rule, as the exemplar; the text a double
+# line below.
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {rule: 0.75, above: 6.9}
+  - columns:
+      - width: 252
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 108, above: 13.8}
+            between:
+              - {text: "v.", above: 13.8, below: 13.8}
+      - valign: center
+        blocks:
+          - {text: "Case No. {case_number}", left: 21.6}
+    gutter: 14.4
+    above: 13.8
+  - {rule: 0.75, above: 13.8}
+  - {text: "{brief_title}", align: center, bold: true, above: 13.8}
+  - {rule: 0.75, above: 6.9, below: 24}
+# FRCP 11(a): two and three quarter inches in, the preamble, a double line below it the "/s/" signature, then the
+# signer's name and lines (bar number, the party represented, address, telephone, e-mail), single spaced; kept whole
+# with the last paragraph.
+closing:
+  - group:
+      - columns:
+          - {width: 198, blocks: []}
+          - blocks:
+              - each: signature.preamble
+                blocks: [{text: "{.}"}]
+              - {text: "/s/ {signature.signer}", above: 24}
+              - {text: "{signature.signer}"}
+              - each: signature.lines
+                blocks: [{text: "{.}"}]
+        gutter: 0
+    above: 24

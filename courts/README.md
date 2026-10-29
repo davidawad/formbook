@@ -177,8 +177,8 @@ Courts under `courts` (347).
 | [District Court, S.D. Indiana](seventh-circuit/indiana/federal/southern-district) | `insd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. Wisconsin](seventh-circuit/wisconsin/federal/bankruptcy-eastern-district) | `wieb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Wisconsin](seventh-circuit/wisconsin/federal/bankruptcy-western-district) | `wiwb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, E.D. Wisconsin](seventh-circuit/wisconsin/federal/eastern-district) | `wied` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, W.D. Wisconsin](seventh-circuit/wisconsin/federal/western-district) | `wiwd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. Wisconsin](seventh-circuit/wisconsin/federal/eastern-district) | `wied` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, W.D. Wisconsin](seventh-circuit/wisconsin/federal/western-district) | `wiwd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Appellate Court of Illinois](seventh-circuit/illinois/state/appellate-court) | `illappct` | up for review | 6/6 | 6/6 | 1/6 | 29 |
 | [Illinois Supreme Court](seventh-circuit/illinois/state/supreme-court) | `ill` | up for review | 8/8 | — | — | 29 |
 | [Indiana Court of Appeals](seventh-circuit/indiana/state/court-of-appeals) | `indctapp` | up for review | 3/3 | — | — | 29 |

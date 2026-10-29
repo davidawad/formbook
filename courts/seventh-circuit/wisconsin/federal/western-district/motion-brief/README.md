@@ -31,20 +31,20 @@ Not produced by this template: the proposed order (separate filing), any declara
 
 ## Layout
 
-- Court title centered in bold caps (`IN THE UNITED STATES DISTRICT COURT` / `FOR THE WESTERN DISTRICT OF WISCONSIN`), then the caption with parties on the left and `Case No.` on the right.
-- Title of the brief centered in bold below the caption.
-- Body double-spaced (exact 24 pt line boxes at 12 pt on the shared cross-engine model `lib/typst/xengine.typ`; single lines 13.8 pt), first-line indent 0.5 in, paragraphs unnumbered (a brief, not a numbered pleading).
-- Headings at 12 pt on the body pitch, no space of their own: level 1 centered bold caps (`CONCLUSION`); level 2 bold at the left margin (argument headings `I.`, `II.`); level 3 bold italic at the left margin (sub-argument).
-- Lists: lettered items (`a.`, `b.`, ...), the letter at 0.5 in, the lines hanging at 0.9 in.
-- Signature block in the right half of the page, left-aligned within it: "Respectfully submitted this [date]", then `/s/` signature, the signer's name and the lines for bar number, role, address, telephone, fax, email.
-- Page number (11 pt) centered in the footer, its line box 0.5 in above the page edge.
+Since fb-595.17.16 the folder is on the generic federal district brief: `typst/layout.yaml` is `base: /lib/layouts/frcp-motion-brief.yaml` plus this court's overlay (each choice cited there), `typst/wiwd-motion-brief.typ` names the face, and `lib/typst/xdoc.typ` sets the layout; `latex/` and `docx/` are generated from the merged layout by `fb engines gen`.
+
+- Court title centered in bold caps (`{xd.court}` / `{xd.district}`, layout constants), a rule across the page; the caption with the parties on the left (each party's names, its designation 1.5 in in, `v.` at the margin, a single line between) and `Case No.` beside them, centered on their height; a rule, the title of the brief centered in bold, a rule, as the exemplar (its three underscore rows).
+- Body double-spaced (24 pt line boxes at 12 pt; single lines 13.8 pt), first-line indent 0.5 in, paragraphs unnumbered (a brief, not a numbered pleading).
+- Headings at 12 pt on the body pitch, no space of their own: level 1 centered bold caps (`CONCLUSION`); level 2 bold at the left margin (argument headings, `I.`, `II.` as typed); level 3 bold italic at the left margin (sub-argument).
+- Lists: the model's numbered list, the number in a half-inch box at the margin, the lines hanging after it (the exemplar's `a.)` lettering is that filer's style, tier 3).
+- Signature block 2.75 in from the margin, kept with the last paragraph: the preamble ("Respectfully submitted this [date]"), a double line, `/s/` signature, the signer's name and the lines for bar number, role, address, telephone, fax, email.
+- Page number (12 pt, the base's) centered at the foot.
 
 ## Markdown contract (for samples)
 
-- YAML frontmatter, then the body. Body chunks are separated by a blank line: a `#` heading (level 1, centered caps, used for CONCLUSION only in this sample), a `##` heading (argument heading, bold, left), a `###` heading (sub-argument, bold italic, left), a list (`1.` items, lettered `a.` by the template), or a paragraph (indented, unnumbered).
-- Frontmatter fields: `case_number`, `caption.parties` (`{names, designation}`; "v." inserted between parties), `brief_title`, `date`, `signature` (`preamble` lines, `signer`, `lines`).
-- Not supported: tables, footnotes, raw typst, certificates (none in this sample).
-
+- YAML frontmatter, then the body: a `#` heading (level 1, centered caps), a `##` heading (argument heading, bold, left), a `###` heading (sub-argument, bold italic, left), a list (`1.` items), or a paragraph (indented, unnumbered).
+- Frontmatter fields: `case_number`, `caption.parties` (`{names, designation}`; "v." inserted between parties), `brief_title`, `date` (not printed), `signature` (`preamble` lines, `signer`, `lines`).
+- Not supported: raw typst, certificates (none in this sample).
 ## Overlay: what it shows
 
 `OVERLAY-drone-motion-to-dismiss.txt` pairs each sample page with the filed page that shares the most words:
@@ -63,34 +63,29 @@ The overlay is a diagnostic, not a score. The sample is the whole brief, so the 
 
 ## Known gaps and open choices
 
-1. **W.D. Wis. form rules not located (open question for David).** Font size, margins, spacing and signature placement are conventions matched to the exemplar, not rule citations. The W.D. Wis. page limit for briefs is not checked, and the template has no page counter. A future pass needs the civil local rules (LR 7, LR 10 or their equivalent) or confirmation from the clerk.
+1. **W.D. Wis. form rules not located (open question for David).** Font size, margins, spacing and signature placement are conventions matched to the exemplar, not rule citations. The W.D. Wis. page limit for briefs is not checked (`eval.yaml` has no `page_limit`). A future pass needs the civil local rules (LR 7, LR 10 or their equivalent) or confirmation from the clerk.
 2. **Font and length.** The filed exemplar uses Century Schoolbook, but no rule names a face, so the template is set in Times New Roman 12 pt, the house standard, in both engines (fb-595.68.28; was TeX Gyre Schola in typst and EB Garamond in the docx). The sample is 7 pages where the filed brief (Century Schoolbook, wider) is 10; the content is the whole brief.
 3. **Only one exemplar.** EVAL-LOOP's tier-2 rule asks for 2 or 3 filers. The search (CourtListener RECAP, `court=wiwd`, brief-in-support-of-motion-to-dismiss entries) found 2700 Winter LLC v. Paine (7 pages, Times New Roman, counsel for the City of Superior; text layer present) and Inspired Pursuits LLC v. Paragon Component Systems (8 pages; no text layer). The 2700 Winter brief would be the second filer if collected. Tier 2 is not judged against two filers.
-4. **Caption.** The party column is closed by a right rule and a bottom rule. The exemplar uses a `*` column; this is a convention choice.
+4. **Caption.** Since fb-595.17.16 the caption follows the exemplar: rules across the page under the court name and around the title, no box; the exemplar's `*` column is not copied (tier 3).
 5. **No table of contents or table of authorities.** The brief is under 10 pages and the exemplar has neither. A longer brief would need them; the template does not produce them.
 6. **Italics.** Case names are roman in the transcription (the text layer of the exemplar carries no italic markup). The template italicizes `*...*` markdown, so future samples can carry italics.
 7. **Paragraph numbering.** Briefs are not numbered; the sample's paragraphs are unnumbered and the exemplar's are too.
-8. **Gate scripts.** Since fb-595.68.28: `sh tools/check.sh <this folder>` and `--engine docx` both exit 0 (typst 9, docx 13 checks passed, 0 failed).
+8. **Gate scripts.** Since fb-595.17.16: `sh tools/check.sh <this folder>` exits 0 on typst (11 passed), latex (14) and docx (15), 0 failed; XENG-001..003 PASS on latex and docx (191/191 lines, 7 = 7 pages); DEF-COVER-002 PASS on all three (3 rules vs 3), so the folder left `data/cover-structure-baseline.txt`.
 
-## Review of the rendered pages (`OUTPUT-motion-brief.typst.pdf` and `.docx.pdf`, 7 pages each)
+## Review of the rendered pages (`OUTPUT-motion-brief.typst.pdf`, `.latex.pdf`, `.docx.pdf`, 7 pages each)
 
-Each page rendered at 50 dpi and viewed on both engines after the cross-engine port (fb-595.68.28); the docx breaks every line and page as typst does (XENG-001..003).
+Re-rendered on the FRCP base (fb-595.17.16) and reviewed page by page as text layout and word boxes (`pdftotext -layout`, the cover-structure measurer); the latex and docx renders break every line and page as typst does (XENG-001..003), so one review covers the three.
 
-- Page 1: court title, caption with the rules and `Case No. 26 CV 539` at right, title centered bold (two lines), opening paragraphs. Pass.
-- Page 2: continuation of the opening; the "I." argument heading (four lines, bold, left) kept with its first paragraph. Pass.
-- Page 3: Part I continued; the sub-argument heading (bold italic) kept with its first paragraph. Pass.
-- Page 4: Part I, the counts. Pass.
-- Page 5: Part I ends. Pass.
-- Page 6: the "II." argument heading at the top of the page; the lettered elements a. to d., hanging at 0.9 in. Pass.
-- Page 7: CONCLUSION centered; final paragraphs; the signature block in the right half, left-aligned within it. Pass.
-
+| Page | Content | Finding |
+|---|---|---|
+| 1 | Court title, rule, caption (Case No. centered beside the parties), rule, two-line bold title, rule, opening paragraphs. | Pass. DEF-COVER-002 0 differences. |
+| 2 | Opening continued; the four-line "I." argument heading kept with its first paragraph. | Pass. |
+| 3 | Part I continued; the bold italic sub-heading kept with its first paragraph. | Pass. |
+| 4 | Part I, the counts. | Pass. |
+| 5 | Part I ends. | Pass. |
+| 6 | "II." argument heading; the four elements, numbered 1. to 4., the third hanging after its number. | ACCEPTED: numbered, not lettered `a.)` as the filer (tier 3). |
+| 7 | CONCLUSION centered; final paragraphs; the signature block 2.75 in from the margin. | Pass. |
 
 ## Engines
 
-**typst** is the primary engine (sections above). **latex**: not built here. **docx**: built and checked.
-
-Files: `docx/reference.xml` (the Word styles: `base="xengine"` in the typst face `{font}`, Times New Roman, 12 pt, 480-twip body and 276-twip single line boxes, headings on the body pitch, the 11 pt page-number footer 0.5 in above the page edge; `fb render` builds the reference document from it) and `docx/wiwd-motion-brief.lua`, which reads the sample's body chunk by chunk, as the typst template does, and writes every paragraph as WordprocessingML on `lib/docx/xengine.lua`: the court title, the caption table (the party column ruled at right and foot), the title, the body paragraphs, headings, lettered lists and the signature block (indented 2.75 in, 3.5 in wide). No script: `fb render` runs pandoc with the filter and packs the archive (fb-595.68.28; were `build-reference.sh` and a committed `reference.docx` naming EB Garamond). No case text is in either file.
-
-- Cross-engine (fb-595.68.28): `sh tools/check.sh <this folder> --engine docx`: XENG-001..003 PASS (193/193 typst lines break after the same word, 7 = 7 pages); `params.cross_engine: gate` in `eval.yaml`. typst 9 and docx 13 checks passed, 0 failed.
-- Lettered items are typed `a.` followed by a tab, not Word list numbering. The `.docx` converts in LibreOffice without error; not opened in Word.
-- TOC and TOA: not produced; the typst template does not produce them and the brief is under 10 pages.
+**typst** is the primary engine (`typst/main.typ`, `typst/wiwd-motion-brief.typ`, `typst/layout.yaml`). **latex** (`latex/template.tex`, `latex/xdoc.lua`) and **docx** (`docx/reference.xml`, `docx/xdoc.lua`) are generated by `fb engines gen` from the merged layout (`fb engines gen --check` fails on a stale one) and set by the shared code (`lib/pandoc/xdoc.lua`, `lib/latex/xdoc.lua`, `lib/docx/xdoc.lua`). The old docx filter `docx/wiwd-motion-brief.lua` is removed. The `.docx` converts in LibreOffice without error; not opened in Word. TOC and TOA: not produced (the brief is under 10 pages).

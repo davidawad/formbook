@@ -1,0 +1,73 @@
+# U.S. District Court for the Eastern District of Wisconsin (wied): a brief in support of a motion, on the generic FRCP
+# brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with E.D. Wis.'s local rules overlaid here. The shared document
+# model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`).
+# Rules: Local Rules of the E.D. Wis., "Local Rules 2010-0201, Amended 2026-0729",
+# https://www.wied.uscourts.gov/sites/wied/files/documents/Local%20Rules%202010-0201-Amended%202026-0729.pdf, read
+# 2026-10-14 (../README.md quotes them). The base already meets General L.R. 5(a)(5) (8 1/2 x 11 paper, margins of at
+# least one inch, double-spaced text, single-spaced headings and quotations allowed, page numbers) and 5(a)(6) (12-point
+# type). Civil L.R. 7(f)'s 30-page limit is eval.yaml page_limit.
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name.
+constants:
+  court: "UNITED STATES DISTRICT COURT"
+  district: "FOR THE EASTERN DISTRICT OF WISCONSIN"
+# General L.R. 5(a)(5): quotations of more than two lines indented and single spaced, half an inch in on each side.
+quote: {left: 36, right: 36, above: 12, below: 12}
+# Headings bold (General L.R. 5(a)(7): bold for emphasis), the two exemplars' convention: a section centered in
+# capitals at the body pitch; an argument heading single spaced (General L.R. 5(a)(5)), its "I." numbered by the
+# template in an inch-wide box, the title's later lines hung under it; a sub-heading bold italic half an inch in,
+# "a." then the title.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body, above: 12, below: 0}
+  - {bold: true, number: "I.", label_box: 72, above: 12, below: 6}
+  - {bold: true, italic: true, number: "a.", left: 36, above: 6, below: 6}
+# FRCP 10(a): the court's name; the parties (each party's names, its designation half an inch in a single line below,
+# "v." at the margin a single line from each, no box: the convention of both exemplars) with the case number beside
+# them, centered on their height; the paper's title centered in bold capitals. A rule across the page under the court's
+# name and above and below the title, as the same-id exemplar (the second filer's has none; either is professional).
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {rule: 0.75, above: 12}
+  - columns:
+      - width: 234
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 36, above: 13.8}
+            between:
+              - {text: "v.", above: 13.8, below: 13.8}
+      - valign: center
+        blocks:
+          - {text: "Case No. {case_number|____________}", left: 7.2}
+    gutter: 21.6
+    above: 12
+  - {rule: 0.75, above: 24}
+  - {text: "{document_title}", align: center, bold: true, upper: true, above: 12}
+  - {rule: 0.75, above: 12, below: 24}
+# General L.R. 5(c), FRCP 11(a): "Dated this ..." at the paragraph indent; three inches in the firm, the party
+# represented, each signer's "s/" signature, name and bar number, the address, telephone and each signer's e-mail, a
+# single line between the groups; kept whole with the last paragraph.
+closing:
+  - group:
+      - {text: "Dated this {date}.", indent: 36}
+      - columns:
+          - {width: 216, blocks: []}
+          - blocks:
+              - {text: "{signature.firm}"}
+              - {text: "{signature.role}"}
+              - each: signature.signers
+                blocks:
+                  - {text: "s/ {name}", above: 13.8}
+                  - {text: "{name}"}
+                  - {text: "{bar}"}
+              - group:
+                  - each: signature.address
+                    blocks: [{text: "{.}"}]
+                above: 13.8
+              - {text: "Telephone: {signature.telephone}"}
+              - each: signature.signers
+                blocks: [{text: "E-mail: {email}"}]
+        above: 24
+    above: 24

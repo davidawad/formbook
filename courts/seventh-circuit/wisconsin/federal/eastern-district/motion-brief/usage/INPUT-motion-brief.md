@@ -33,9 +33,9 @@ Plaintiffs challenge Defendants’ policies allowing officers to conduct warrant
 
 # ARGUMENT
 
-## I. STANDARD OF REVIEW
+## STANDARD OF REVIEW
 
-### a. Motion To Dismiss Under Fed. R. Civ. P. 12(b)(6).
+### Motion To Dismiss Under Fed. R. Civ. P. 12(b)(6).
 
 To analyze the sufficiency of Plaintiffs’ complaint under Fed. R. Civ. P. 12(b)(6), the pleading should be construed in the light most favorable to Plaintiffs, with all well pled facts of the complaint accepted as true and all reasonable inferences drawn in Plaintiffs’ favor. *Tamayo v. Blagojevich*, 526 F.3d 1074, 1081 (7th Cir. 2008).
 
@@ -43,11 +43,11 @@ However, the Defendants’ Motion should be granted if the Court finds that the 
 
 If the allegations of a complaint give rise to an “‘obvious alternative [legitimate] explanation’” for the conduct which is allegedly wrongful, the claim fails to meet the plausibility requirement and must be dismissed. *Iqbal*, 556 U.S. at 678 (quoting *Twombly*, 550 U.S. at 557). While a court should accept “the well-pleaded facts in the complaint as true” when analyzing a motion to dismiss, “legal conclusions and conclusory allegations merely reciting the elements of the claim are not entitled to this presumption of truth.” *McCauley v. City of Chicago*, 671 F.3d 611, 616 (7th Cir. 2011). “The required level of factual specificity rises with the complexity of the claim . . . .” *Id.* at 616–17.
 
-### b. Motion To Dismiss Under Fed. R. Civ. P. 12(b)(1).
+### Motion To Dismiss Under Fed. R. Civ. P. 12(b)(1).
 
 A party may also move to dismiss an action for lack of a justiciable controversy under Federal Rule of Civil Procedure 12(b)(1). See *Retired Chicago Police Ass’n v. City of Chicago*, 76 F.3d 856, 862 (7th Cir. 1996). At the pleading stage, courts review justiciability based on the well-pled allegations in the complaint under the Fed. R. 12(b)(6) standard. See *Prairie Rivers Network v. Dynegy Midwest Generation, LLC*, 2 F.4th 1002, 1007-08 (7th Cir. 2021). The plaintiff carries the burden of establishing standing. *Id.*
 
-## II. PLAINTIFFS DO NOT HAVE A DIRECT CAUSE OF ACTION UNDER THE FOURTH AMENDMENT
+## PLAINTIFFS DO NOT HAVE A DIRECT CAUSE OF ACTION UNDER THE FOURTH AMENDMENT
 
 Plaintiffs allege two causes of action. First, Plaintiffs allege a “violation of the Fourth Amendment of the United States Constitution.” (Dkt. 1-1, ¶¶ 78-91). Second, Plaintiffs allege a “violation of the Civil Rights Act of 1871 42 U.S.C. § 1983” predicated on an alleged “violation of the Fourth Amendment.” (Id., ¶¶ 92-95). Plaintiffs’ first cause of action fails as a matter of law because there is no direct cause of action under the Fourth Amendment; Plaintiffs’ redress, if any exists, is through 42 U.S.C. § 1983.
 
@@ -55,7 +55,7 @@ There is simply “no need to imply a direct cause of action under the Fourteent
 
 Section 1983 provides Plaintiffs with their exclusive remedy against the Defendants and this Court must dismiss Plaintiffs’ Fourth Amendment claim outright because the availability of the statutory remedy under § 1983 precludes direct claims against Defendants. See *Allen*, 828 F. Supp. at 563 (dismissing direct claims under First Amendment and refusing to construe such claims as § 1983 claims when plaintiffs disavowed reliance on § 1983); see also *Smith*, 36 F.4th at 673-76 (dismissing direct action under Thirteenth Amendment after plaintiffs disavowed reliance on § 1983 because § 1983 claims were time-barred). Plaintiffs’ first cause of action fails as a matter of law.
 
-## III. PLAINTIFFS’ FOURTH AMENDMENT § 1983 CLAIM FAILS AS A MATTER OF LAW
+## PLAINTIFFS’ FOURTH AMENDMENT § 1983 CLAIM FAILS AS A MATTER OF LAW
 
 Plaintiffs’ second cause of action is a § 1983 claim predicated on Defendants’ alleged violation of the Fourth Amendment. See (Dkt. 1-1, ¶¶ 92-5). Specifically, Plaintiffs allege that “Defendants’ search of the Flock Location Database is a search that requires a warrant, or applicable warrant exception, under the Fourth Amendment” and “[w]hen Defendants query the Flock Location Database without probable cause and without a warrant (or a valid warrant exception), Defendants violate the Fourth Amendment.” (Dkt. 1-1, ¶¶ 77, 89). In addition, Plaintiffs allege that “Defendants’ practices and policies authorize their officers and employees to access the Flock Location Database without a warrant and without any valid warrant exception . . . [and] deprive Plaintiffs of the right to be free from unreasonable searches, in violation of the Fourth Amendment and 42 U.S.C. § 1983.” (Id., ¶ 95). However, pleading something is a Fourth Amendment violation does not make it so. As will be explained below, contrary to Plaintiffs’ allegations, querying the “Flock Location Database” is not a “search” for purposes of the Fourth Amendment and therefore Plaintiffs’ claim fails as a matter of law.
 
@@ -71,11 +71,11 @@ The conclusion is bolstered by the Supreme Court’s decision in *Carpenter v. U
 
 Quite simply, the use of technology to capture license plate data as alleged in this case and an inquiry into the “Flock Location Database” is not a “search” for purposes of the Fourth Amendment. For this reason, Plaintiffs have failed to state a claim upon which relief can be granted, and their complaint should be dismissed as a matter of law.
 
-## IV. PLAINTIFFS LACK STANDING
+## PLAINTIFFS LACK STANDING
 
 Even if this Court finds that Plaintiffs have stated a claim for relief, Plaintiffs’ complaint must be dismissed because they lack standing. This is so for three reasons. First, Donavan Haidinger, the only individual plaintiff in this case, has failed to allege an injury in fact. Second, neither NoCams Muskego nor Citizens Defending Liberty have alleged facts conferring them associational standing. Third, and finally, none of the Plaintiffs have alleged facts entitling them to taxpayer standing.
 
-### a. Haidinger has not alleged an injury in fact.
+### Haidinger has not alleged an injury in fact.
 
 Plaintiff Donavan Haidinger, the only individual plaintiff in this lawsuit, does not have standing because he failed to allege an injury in fact.
 
@@ -89,7 +89,7 @@ The Northern District of Illinois recently found that prospective plaintiffs on 
 
 The same is true here. Because Haidinger has failed to allege that he was the subject of a warrantless “Flock Location Database search” by any of the Defendants, he lacks standing to challenge that conduct. For this additional reason, Haidinger’s claims fail as a matter of law.
 
-### b. NoCams Muskego and Citizens Defending Liberty lack associational standing.
+### NoCams Muskego and Citizens Defending Liberty lack associational standing.
 
 The other two Plaintiffs in this case are organizations, not individuals. As explained below, Plaintiffs NoCams Muskego and Citizens Defending Liberty have not alleged facts that allow them to have standing on behalf of their members. For this reason, NoCams Muskego and Citizens Defending Liberty’s claims must be dismissed as well.
 
@@ -101,7 +101,7 @@ Importantly, and fatal to Plaintiffs’ claims, “the Court has required plaint
 
 Because Plaintiffs have not alleged any facts showing that any one of their members have standing, neither NoCams Muskego nor Citizens Defending Liberty may assert standing on behalf of their members. For this additional reasons, Plaintiffs’ claims fail and the complaint should be dismissed.
 
-### c. Plaintiffs lack taxpayer standing.
+### Plaintiffs lack taxpayer standing.
 
 Finally, Plaintiffs allege that, “[a]s taxpayers, Plaintiffs may challenge Defendants’ illegal Flock practices.” (Dkt. 1-1, ¶ 90). In addition, Plaintiffs allege that “[a]ll Defendants receive taxes from Plaintiffs either through direct taxation, fees, licenses, or shared revenue payments” and that “Plaintiffs and their members or supporters are also Wisconsin taxpayers whose taxes support Defendants’ operations, including Defendants’ purchase, use, and operation of Flock cameras and the unconstitutional searches of the Flock Location Database.” None of these allegations confer standing on Plaintiffs as state or local taxpayers. (Id., ¶¶ 18-19).
 

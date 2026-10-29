@@ -1794,12 +1794,8 @@ courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district/motion-brie
 courts/seventh-circuit/wisconsin/federal/bankruptcy-western-district/motion-brief typst
 courts/seventh-circuit/wisconsin/federal/eastern-district/complaint docx
 courts/seventh-circuit/wisconsin/federal/eastern-district/complaint typst
-courts/seventh-circuit/wisconsin/federal/eastern-district/motion-brief docx
-courts/seventh-circuit/wisconsin/federal/eastern-district/motion-brief typst
 courts/seventh-circuit/wisconsin/federal/western-district/complaint docx
 courts/seventh-circuit/wisconsin/federal/western-district/complaint typst
-courts/seventh-circuit/wisconsin/federal/western-district/motion-brief docx
-courts/seventh-circuit/wisconsin/federal/western-district/motion-brief typst
 courts/seventh-circuit/wisconsin/state/court-of-appeals/amicus-brief docx
 courts/seventh-circuit/wisconsin/state/court-of-appeals/amicus-brief latex
 courts/seventh-circuit/wisconsin/state/court-of-appeals/amicus-brief typst
