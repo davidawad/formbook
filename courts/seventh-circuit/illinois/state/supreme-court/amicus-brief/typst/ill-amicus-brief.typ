@@ -86,7 +86,7 @@
     cells.push([)])
     cells.push(inl(row.at("right", default: "")))
   }
-  grid(columns: (3.0in, 0.25in, 2.75in), align: left, row-gutter: 0.2em, ..cells)
+  grid(columns: (3.0in, 0.25in, 2.75in), align: left, row-gutter: single-leading, ..cells)
 }
 
 #let front-matter(meta) = {
