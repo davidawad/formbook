@@ -16,7 +16,8 @@
 #let font-family = ("Times New Roman", "Liberation Serif")   // HRAP 32(b): Times New Roman 12 pt is deemed to comply; Liberation Serif is its metric twin (docs/FONTS.md).
 #let type-size = 12pt                      // HRAP 32(b): 12 point, footnotes and quotations included.
 #let body-leading = 1.15em                 // HRAP 32(b): double spaced. 1.15em of extra leading gives a 27.6 pt pitch at 12 pt.
-#let single-leading = 0em                  // headings, block quotations, footnotes, TOC and TOA: single spaced (13.8 pt pitch).
+#let single-leading = 0.25em               // headings, block quotations, footnotes, TOC and TOA: single spaced. The ascender-to-descender line is 0.9 em; 0.25 em more gives the 1.15 em (13.8 pt) single line.
+#let cover-leading = 0.1em                 // the flyleaf, which must fit on one page, is set solid: 0.9 em line plus 0.1 em, a 12 pt pitch.
 #let page-margin = 1in                     // HRAP 32(a): not less than 1 inch on all sides.
 #let flyleaf-band = 3in                    // HRAP 32(a): the flyleaf keeps a 3-inch-by-3-inch top-right corner clear.
 #let para-indent = 0.5in
@@ -234,8 +235,10 @@
 // the first page, has a 3-inch top margin, and is not printed with a page number.
 // ---------------------------------------------------------------------------
 
-#let cover-body(meta, gap) = {
-  set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.35em, justify: false)
+#let cover-body(meta, gap, tight: false) = {
+  // tight: the last resort before giving up, every fixed space between paragraphs shrinks to the line leading.
+  let sp(x) = if tight { cover-leading } else { x }
+  set par(first-line-indent: 0pt, leading: cover-leading, spacing: sp(0.35em), justify: false)
   // HRAP 32(a): the top right 3-inch-by-3-inch corner of the flyleaf is left clear; the case number and
   // the court sit in the top left band, and the cause, judges, title and counsel run full width below it.
   grid(columns: (3.5in, 1fr), rows: (flyleaf-band,),
@@ -248,7 +251,7 @@
   )
   // The cause: each side's names, then its designation, with "v." between the sides.
   align(left, {
-    set par(first-line-indent: 0pt, leading: single-leading, spacing: 0.3em)
+    set par(first-line-indent: 0pt, leading: cover-leading, spacing: sp(0.3em))
     let sides = need(meta, "caption")
     for (i, side) in sides.enumerate() {
       for name in side.names { inl(name); parbreak() }
@@ -268,24 +271,26 @@
   v(gap * 1.6)
   // Counsel: each counsel group in its own column, then the party line.
   align(left, {
-    set par(hanging-indent: 0pt, spacing: 0.2em)
+    set par(hanging-indent: 0pt, spacing: sp(0.2em))
     let groups = need(meta, "counsel")
     grid(columns: groups.map(_ => 1fr), column-gutter: 0.3in, ..groups.map(g => block(breakable: false, {
       for n in g.names { n; linebreak() }
       for l in g.at("lines", default: ()) { l; linebreak() }
     })))
-    v(0.5em)
+    v(sp(0.5em))
     emph(inl(need(meta, "counsel_for")))
   })
 }
 
-/// The flyleaf is one page. The spacing between its parts is the only
-/// thing that gives: the largest spacing at which the whole flyleaf fits is used (the type size never shrinks).
+/// The flyleaf is one page. The spacing between its parts is the only thing that gives: the largest spacing at
+/// which the whole flyleaf fits is used, and at no spacing the fixed space between paragraphs shrinks to the line
+/// leading too (the type size and the solid line pitch never shrink).
 #let cover(meta) = page(numbering: none, footer: none, margin: page-margin, layout(size => {
-  let fits(g) = measure(block(width: size.width, cover-body(meta, g * 1em))).height <= size.height
+  let fits(g, tight: false) = measure(block(width: size.width, cover-body(meta, g * 1em, tight: tight))).height <= size.height
   let g = (1.2, 1.0, 0.8, 0.6, 0.45, 0.3, 0.2, 0.1, 0.0).find(fits)
-  if g == none { panic("hawapp-reply-brief: the flyleaf does not fit on one page; shorten the counsel or party lines") }
-  cover-body(meta, g * 1em)
+  if g != none { cover-body(meta, g * 1em) } else if fits(0, tight: true) { cover-body(meta, 0em, tight: true) } else {
+    panic("hawapp-reply-brief: the flyleaf does not fit on one page; shorten the counsel or party lines")
+  }
 }))
 
 // ---------------------------------------------------------------------------
@@ -337,7 +342,7 @@
     top-edge: "ascender", bottom-edge: "descender",
   )
   set par(
-    leading: body-leading, spacing: 0pt,
+    leading: body-leading, spacing: body-leading,
     first-line-indent: (amount: para-indent, all: true), justify: false,
   )
   set heading(numbering: none)
