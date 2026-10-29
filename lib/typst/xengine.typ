@@ -17,6 +17,9 @@
 //     of their own (`list-indent: none` keeps typst's lists).
 //   - a note never starts on a page before its mark: a paragraph a block only wraps is laid out bare once a note
 //     of it did (unwrap-note-par, below; fb-595.54.11.1).
+//   - a note split over a page end keeps typst's widow and orphan cost, as LaTeX keeps \clubpenalty/\widowpenalty
+//     10000 inside notes and Word's Footnote Text keeps its lines together: a zero cost (LibreOffice's any-line
+//     split) moved 32 renders and broke the line match in about 25 gated folders (fb-595.54.11.3).
 //   - with `footnote-widows: false`, no footnote widows: a paragraph whose last line carries a footnote that does not
 //     fit with it carries its second-to-last line over too, as LaTeX and Word do (widow-start, below; fb-595.54.9).
 //     Opt-in: by default typst may set such a widow, and the LaTeX and Word filters turn widow control off for a

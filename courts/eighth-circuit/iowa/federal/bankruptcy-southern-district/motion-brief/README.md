@@ -120,6 +120,6 @@ docx BLOCKED (the 2026-10-15 run):
 
 The DOCX engine uses `docx/reference.xml` and Lua filters with the shared cross-engine layout model. The Word face is resolved from this folder's typst template. The folder has no docx shell builder/render script or binary `reference.docx`; its entry is absent from `.shell-safety-baseline.json`. The current `sh tools/check.sh` runs for typst and docx both report zero failed checks. `DEF-COVER-001` and `DEF-TOC-001` pass; the sample has no contents or authorities table. No LaTeX engine is present in this folder.
 
-XENG-001 and XENG-002 pass. XENG-003 is REPORTED, not gated: 289/290 lines match; the first difference is p. 8 line 25, where footnote 2 splits 4+2 lines across typst pages 7–8 and 5+1 in LibreOffice. The renderer limitation and reason this folder remains `params.cross_engine: report` are recorded above in this README and in `eval.yaml`.
+XENG-001, XENG-002 and XENG-003 pass and are gated (`params.cross_engine: gate`, fb-595.54.11.3): 290/290 lines match. Footnote 2 splits 4+2 lines across pages 7–8 in both engines since Footnote Text in `docx/reference.xml` keeps 84 twips before a page's first note (typst's 12 pt clearance and 6 pt gap, less LibreOffice's own 1.15 x 12 pt line; the fb-595.54.11.2 rule); before that LibreOffice split it 5+1.
 
 Older DOCX notes in this README describe the pre-adoption shell-built engine and are superseded by this status.

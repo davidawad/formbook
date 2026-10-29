@@ -321,9 +321,9 @@ Folders: `oklahoma/federal/eastern-district/{complaint,motion-brief}`, `oklahoma
 | `eighth-circuit/iowa/federal/bankruptcy-northern-district/motion-brief` | docx | PASS |
 | `eighth-circuit/iowa/federal/bankruptcy-southern-district/adversary-complaint` | docx | PASS |
 | `eighth-circuit/iowa/federal/northern-district/complaint` | docx | PASS |
-| `eighth-circuit/iowa/federal/bankruptcy-southern-district/motion-brief` | docx | REPORTED: XENG-003, p. 8 line 25 |
+| `eighth-circuit/iowa/federal/bankruptcy-southern-district/motion-brief` | docx | PASS |
 
-The reported motion-brief difference is footnote 2: typst keeps the final two note lines together (four lines on p. 7, two on p. 8), while LibreOffice ignores widow control in a note (five lines on p. 7, one on p. 8). Letting typst split the note freely leaves the note on p. 7 below its moved anchor paragraph, which is worse; no available setting makes the renderers agree. Its `eval.yaml` therefore keeps `params.cross_engine: report`, and its README records the exact exception. Do not count this folder as gated.
+The motion-brief's footnote 2 (six lines at the foot of p. 7) once split 4+2 in typst and 5+1 in LibreOffice. Its typst split is fixed by the page space (no fifth note line fits on p. 7; a zero widow cost inside notes changes nothing there). LibreOffice matches it once Footnote Text keeps typst's clearance + gap above a page's first note (fb-595.54.11.2: 84 twips in the folder's hand-kept `reference.xml`). 290/290 lines match, and the folder is gated (fb-595.54.11.3).
 
 **Fifth Circuit Louisiana district adoption (fb-595.68.13, verified 2026-10-22).** These 12 folders have typst and DOCX templates and no LaTeX templates. Every DOCX uses declarative `reference.xml` and Lua filters, with its body face inherited through `{font}` from typst; no DOCX builder or render shell scripts or binary `reference.docx` remain, and the assigned-folder entries in `.shell-safety-baseline.json` are zero. The typst and DOCX checks were rerun for every folder: all tier-1 checks passed with zero failures, including `DEF-COVER-001` and `DEF-TOC-001`; 11 folders pass XENG-001..003 on every input and set `params.cross_engine: gate`.
 
@@ -334,7 +334,7 @@ The reported motion-brief difference is footnote 2: typst keeps the final two no
 | `fifth-circuit/louisiana/federal/bankruptcy-middle-district/adversary-complaint` | docx | PASS |
 | `fifth-circuit/louisiana/federal/bankruptcy-middle-district/motion-brief` | docx | PASS |
 | `fifth-circuit/louisiana/federal/bankruptcy-western-district/adversary-complaint` | docx | PASS |
-| `fifth-circuit/louisiana/federal/bankruptcy-western-district/motion-brief` | docx | REPORTED: XENG-003, p. 4 lines 26–27 |
+| `fifth-circuit/louisiana/federal/bankruptcy-western-district/motion-brief` | docx | PASS |
 | `fifth-circuit/louisiana/federal/eastern-district/complaint` | docx | PASS |
 | `fifth-circuit/louisiana/federal/eastern-district/motion-brief` | docx | PASS |
 | `fifth-circuit/louisiana/federal/middle-district/complaint` | docx | PASS |
@@ -342,7 +342,7 @@ The reported motion-brief difference is footnote 2: typst keeps the final two no
 | `fifth-circuit/louisiana/federal/western-district/complaint` | docx | PASS |
 | `fifth-circuit/louisiana/federal/western-district/motion-brief` | docx | PASS |
 
-The western-district motion-brief exception is footnote 7: typst places the note at the foot of p. 4 while LibreOffice keeps it with its mark on p. 5. XENG-001 and XENG-002 pass; XENG-003 matches 179/181 lines, with the two differences at p. 4 lines 26–27. The `eval.yaml` records why the engines cannot agree and leaves this folder at `report`; do not count it as gated. The remaining exception is tracked separately by fb-595.54.11.
+The western-district motion-brief's footnote 7 was once set by typst at the foot of p. 4, while LibreOffice kept it with its mark on p. 5. Since fb-595.54.11.1 (unwrap-note-par in `lib/typst/xengine.typ`), typst sets it on p. 5 too. 181/181 lines match, and the folder is gated (fb-595.54.11.3).
 
 **Tolerance, from measurement.** On break words: none. On positions, measured on ca9 once every break agreed (both samples, 880 lines per engine pair, `fb diff --engines` diagnostics): the width of a line both engines break alike differs by at most 0.10 pt (latex) and 0.37 pt (docx); outside the cover every line's left edge and baseline is within 0.5 pt of typst's (cover: the gaps between its parts differ, up to 34 pt; its lines break alike). The documented tolerance is therefore **glyph-advance drift below 0.5 pt per line, and no other**: a template whose identical lines drift more, or whose breaks differ at all, has a layout difference to fix. The 0.5 pt is reported (`width`, `left edge`, `baseline` diagnostics of `fb diff --engines`), not gated: the gate is the breaks.
 

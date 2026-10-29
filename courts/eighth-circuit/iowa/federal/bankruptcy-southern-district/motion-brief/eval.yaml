@@ -1,8 +1,7 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render is on the shared layout model
-# (lib/*/xengine*, fb-595.68.7) and is reported, not gated: all 12 pages and every page start and end match typst, and
-# 289 of 290 lines, but footnote 2 (six lines, at the foot of p7) splits differently: typst keeps two lines of a note
-# together at a page end (4 on p7, 2 on p8), LibreOffice ignores widow control in a note (5 and 1). Letting typst
-# split it anywhere (`costs: (widow: 0%)` on the note) moves the anchoring paragraph's last two lines to p8 below
-# the part of the note left on p7, a worse page than either; no setting of either engine makes them agree.
+# (lib/*/xengine*, fb-595.68.7) and is gated: all 12 pages, every page start and end and all 290 lines match typst.
+# Footnote 2 (six lines, at the foot of p7) splits 4+2 in both engines since Footnote Text keeps typst's clearance +
+# gap above a page's first note (12 + 6 pt, less LibreOffice's own 1.15 x 12 pt line: 84 twips before; the rule of
+# fb-595.54.11.2, set by hand in this folder's reference.xml); before that LibreOffice set it 5+1 (fb-595.54.11.3).
 params:
-  cross_engine: report
+  cross_engine: gate

@@ -1,9 +1,7 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render is on the shared layout model
-# (lib/*/xengine*, fb-595.68.13) and is reported, not gated: all 7 pages and every page start and end match typst, and
-# every body line (179 of 181 lines alike), but footnote 7 does not: its mark is on the first line of p5 in both
-# engines ("... the Loan Agreement[7] led to"), and LibreOffice sets the note on p5 with it, while typst sets the note
-# at the foot of p4. That line fits on p4 without its note but not with it; typst then moves the line and leaves
-# the note behind. A float that takes the space the note would use (the ianb carry rule turned round) did not settle
-# (typst: "document did not converge"), and no setting of either engine makes them agree.
+# (lib/*/xengine*, fb-595.68.13) and is gated: all 7 pages, every page start and end and all 181 lines match typst.
+# Footnote 7, whose mark is on the first line of p5, is set on p5 with it in both engines since typst lays a
+# paragraph that anchors a note out bare once the note started on a page before its mark (lib/typst/xengine.typ,
+# unwrap-note-par; fb-595.54.11.1); before that typst left the note at the foot of p4 (fb-595.54.11.3).
 params:
-  cross_engine: report
+  cross_engine: gate
