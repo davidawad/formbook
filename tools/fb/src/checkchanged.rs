@@ -12,7 +12,8 @@
 //! A change under tools/fb/src/enginegen does both. The RESULT line counts the folder/engine checks plus the fb test
 //! build when it ran, and says when the shared model changed.
 //! The folder/engine checks run in parallel (fb-595.86: a model diff's serial run passed the 4500 s land-gate
-//! deadline) on `FB_JOBS` workers, default the host's available parallelism; each check's output is buffered and
+//! deadline) on `FB_JOBS` workers, default the host's available parallelism, one folder (its engines in turn) per
+//! job, since a folder's engines share one out/check scratch; each check's output is buffered and
 //! printed in job order, so the log reads as a serial run's.
 //! Exit 0 only when every check passes (or nothing under courts/, tools/fb/ or the model changed).
 
@@ -128,6 +129,12 @@ fn fb_tests_compile(root: &Path) -> bool {
         })
         .map(|s| s.success())
         .unwrap_or(false)
+}
+
+/// The jobs split into runs of one folder each, in job order: the unit a worker takes, since a folder's engines
+/// share fb check's out/check/<alias>/<doc>/ scratch (run concurrently, they overwrite each other's runs.tsv).
+pub fn by_folder<'a>(jobs: &'a [(String, &'static str)]) -> Vec<&'a [(String, &'static str)]> {
+    jobs.chunk_by(|a, b| a.0 == b.0).collect()
 }
 
 /// The worker count for `jobs` checks: `FB_JOBS` when it is a positive integer, else the host's available
@@ -255,43 +262,60 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
     let exe = std::env::current_exe().map_err(|e| fail(2, format!("fb check-changed: {e}")))?;
     let fb_job = touches_fb(&paths);
     let fb_failed = fb_job && !fb_tests_compile(&root);
-    let n = workers(std::env::var("FB_JOBS").ok().as_deref(), todo.len());
+    // a folder's engines share fb check's out/check/<alias>/<doc>/ scratch, so they run one after another on one
+    // worker; folders run in parallel (each child's own scratch, and a LibreOffice -env:UserInstallation profile
+    // under it, is a TempDir named by pid, so concurrent children never share one)
+    let groups = by_folder(&todo);
+    let n = workers(std::env::var("FB_JOBS").ok().as_deref(), groups.len());
     eprintln!(
-        "fb check-changed: {} folder/engine checks on {n} workers",
-        todo.len()
+        "fb check-changed: {} folder/engine checks in {} folders on {n} workers",
+        todo.len(),
+        groups.len()
     );
-    // each child is its own process: fb check's scratch (and a LibreOffice -env:UserInstallation profile under
-    // it) is a TempDir named by pid, so concurrent children never share one
-    let passed = run_ordered(
-        &todo,
+    let passed: Vec<bool> = run_ordered(
+        &groups,
         n,
-        |(folder, engine)| {
-            let t = std::time::Instant::now();
-            let out = Command::new(&exe)
-                .current_dir(&root)
-                .env("FB_ROOT", &root)
-                .args(["check", folder, "--engine", engine, "--no-render"])
-                .output();
-            (out, t.elapsed())
+        |group| {
+            group
+                .iter()
+                .map(|(folder, engine)| {
+                    let t = std::time::Instant::now();
+                    let out = Command::new(&exe)
+                        .current_dir(&root)
+                        .env("FB_ROOT", &root)
+                        .args(["check", folder, "--engine", engine, "--no-render"])
+                        .output();
+                    (out, t.elapsed())
+                })
+                .collect::<Vec<_>>()
         },
-        |(folder, engine), (out, took)| {
-            eprintln!(
-                "fb check-changed: {folder} --engine {engine} ({:.1} s)",
-                took.as_secs_f64()
-            );
-            match out {
-                Ok(o) => {
-                    print!("{}", String::from_utf8_lossy(&o.stdout));
-                    eprint!("{}", String::from_utf8_lossy(&o.stderr));
-                    o.status.success()
-                }
-                Err(e) => {
-                    eprintln!("fb check-changed: {}: {e}", exe.display());
-                    false
-                }
-            }
+        |group, outs| {
+            group
+                .iter()
+                .zip(outs)
+                .map(|((folder, engine), (out, took))| {
+                    eprintln!(
+                        "fb check-changed: {folder} --engine {engine} ({:.1} s)",
+                        took.as_secs_f64()
+                    );
+                    match out {
+                        Ok(o) => {
+                            print!("{}", String::from_utf8_lossy(&o.stdout));
+                            eprint!("{}", String::from_utf8_lossy(&o.stderr));
+                            o.status.success()
+                        }
+                        Err(e) => {
+                            eprintln!("fb check-changed: {}: {e}", exe.display());
+                            false
+                        }
+                    }
+                })
+                .collect::<Vec<_>>()
         },
-    );
+    )
+    .into_iter()
+    .flatten()
+    .collect();
     let failed: Vec<String> = todo
         .iter()
         .zip(&passed)
@@ -465,6 +489,38 @@ mod tests {
             assert_eq!(ran, items, "workers {n}");
         }
         assert!(run_ordered(&[] as &[u8], 4, |_| (), |_, _| ()).is_empty());
+    }
+
+    #[test]
+    fn a_folders_engines_are_one_unit_of_work_and_every_job_stays() {
+        let folders: BTreeSet<String> = ["courts/a/x", "courts/a/x/y", "courts/b"]
+            .iter()
+            .map(|x| x.to_string())
+            .collect();
+        let has = [
+            "courts/a/x/typst",
+            "courts/a/x/docx",
+            "courts/a/x/y/latex",
+            "courts/b/typst",
+        ];
+        let todo = jobs(&folders, |d| has.contains(&d));
+        let groups = by_folder(&todo);
+        let names: Vec<Vec<String>> = groups
+            .iter()
+            .map(|g| g.iter().map(|(f, e)| format!("{f} {e}")).collect())
+            .collect();
+        assert_eq!(
+            names,
+            vec![
+                vec![
+                    "courts/a/x typst".to_string(),
+                    "courts/a/x docx".to_string()
+                ],
+                vec!["courts/a/x/y latex".to_string()],
+                vec!["courts/b typst".to_string()],
+            ]
+        );
+        assert_eq!(groups.concat(), todo);
     }
 
     #[test]
