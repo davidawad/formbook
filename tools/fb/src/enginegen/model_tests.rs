@@ -2772,6 +2772,113 @@ fn a_note_never_starts_on_a_page_before_its_mark() {
     );
 }
 
+/// The `<entry>` values (a note's mark and entry pages) of a typst file `main` laid out under
+/// tools/fb/target/model-tests/<name>, and the number of `hold` markers (the rule's own) it set; None without typst.
+fn notes_of(name: &str, main: &str, hold: &str) -> Option<(Vec<serde_json::Value>, usize)> {
+    if !have(&["typst"]) {
+        return None;
+    }
+    let root = root();
+    let dir = root.join("tools/fb/target/model-tests").join(name);
+    let _ = std::fs::remove_dir_all(&dir);
+    std::fs::create_dir_all(&dir).unwrap();
+    std::fs::write(dir.join("main.typ"), main).unwrap();
+    let query = |sel: &str| {
+        let o = Command::new("typst")
+            .args(["query", "--root"])
+            .arg(&root)
+            .arg("--font-path")
+            .arg(root.join("fonts"))
+            .arg("--ignore-system-fonts")
+            .arg(dir.join("main.typ"))
+            .args([sel, "--field", "value"])
+            .output()
+            .unwrap();
+        assert!(o.status.success(), "{}", String::from_utf8_lossy(&o.stderr));
+        serde_json::from_slice::<Vec<serde_json::Value>>(&o.stdout).unwrap()
+    };
+    Some((query("<entry>"), query(hold).len()))
+}
+
+/// The note entries of `main` all start on or after their marks' pages, and the fixture made the rule act.
+fn assert_no_note_before_its_mark(name: &str, main: &str, hold: &str) {
+    let Some((entries, held)) = notes_of(name, main, hold) else {
+        return;
+    };
+    assert!(!entries.is_empty());
+    for e in &entries {
+        assert!(
+            e["entry"].as_i64() >= e["mark"].as_i64(),
+            "a note starts on a page before its mark: {e}"
+        );
+    }
+    assert!(held > 0, "no trial set a note before its mark: {entries:?}");
+}
+
+/// A bare paragraph's note does not stay behind when typst's widow and orphan cost moves its mark's line on: with 14
+/// pt type on 31.4 pt lines and 20 pt notes, a mark on the second-to-last line whose note starts at the foot of the
+/// page took the last line's need along and left the note on the page before (9 of these 10 trials; ca10
+/// reply-brief). The paragraph is then laid out without that cost (lib/typst/xengine.typ loosen-note-par,
+/// fb-595.54.11.4): the mark's line stays with its note.
+#[test]
+fn a_bare_paragraph_s_note_never_starts_on_a_page_before_its_mark() {
+    let main = r#"#import "/lib/typst/xengine.typ": xengine, edges
+#set page(paper: "us-letter", margin: 1in)
+#set text(font: "Liberation Serif", size: 14pt)
+#set par(first-line-indent: (amount: 0.5in, all: true))
+#show: xengine.with(pitch: 31.4pt, list-indent: none)
+#set footnote.entry(gap: 7pt, clearance: 12.6pt, indent: 0pt)
+#show footnote.entry: it => {
+  set text(..edges(20pt))
+  set par(first-line-indent: 0pt)
+  context [#metadata((mark: it.note.location().page(), entry: here().page()))<entry>]
+  it
+}
+#let s = [The court considered the record and the arguments of the parties with care before it reached its decision on the merits of the appeal. ]
+#for k in range(160, 200, step: 4) {
+  pagebreak(weak: true)
+  [#("word " * k) #s #s #s #s #s #s #s #s #s #s]
+  parbreak()
+  [#s #s #s Zanchor.#footnote[#s #s #s #s] #s]
+  parbreak()
+  lorem(200)
+}
+"#;
+    assert_no_note_before_its_mark("note-before-mark-bare", main, "<xe-loose>");
+}
+
+/// A list item of the shared model (lib/typst/xdoc.typ list-items: a block around a `pad` that indents its paragraph
+/// on the left) is laid out bare like a block-wrapped paragraph once its note started on a page before its mark (4
+/// of these 12 trials; Md. Ct. App. petition-for-writ note 147), with every line indented by the pad
+/// (fb-595.54.11.4).
+#[test]
+fn a_list_item_s_note_never_starts_on_a_page_before_its_mark() {
+    let main = r#"#import "/lib/typst/xengine.typ": xengine, edges
+#set page(paper: "us-letter", margin: 1in)
+#set text(font: "Liberation Serif", size: 12pt)
+#set par(first-line-indent: (amount: 0.5in, all: true))
+#show: xengine.with(pitch: 24pt, list-indent: none)
+#set footnote.entry(gap: 6pt, clearance: 8pt, indent: 0pt)
+#show footnote.entry: it => {
+  set text(..edges(14pt))
+  set par(first-line-indent: 0pt)
+  context [#metadata((mark: it.note.location().page(), entry: here().page()))<entry>]
+  it
+}
+#let abc = "aaa bbb ccc ddd eee fff ggg hhh iii jjj kkk lll mmm nnn ooo ppp qqq rrr sss ttt uuu vvv www xxx yyy zzz"
+#let (to-t, from-u) = (abc.slice(0, abc.position(" uuu")), abc.slice(abc.position(" uuu")))
+#for n in range(546, 558) {
+  pagebreak(weak: true)
+  v(n * 1pt)
+  block(above: 0pt, below: 0pt, pad(left: 36pt, par(first-line-indent: 0pt, hanging-indent: 36pt,
+    [#box(width: 36pt)[•]A#abc.slice(1) #to-t#footnote[Note C.]#from-u #abc #abc #abc])))
+  parbreak()
+  lorem(40)
+}
+"#;
+    assert_no_note_before_its_mark("note-before-mark-pad", main, "<xe-bare>");
+}
+
 /// Word's Footnote Text keeps above a page's first note what typst does (clearance + gap) less the Normal line
 /// LibreOffice reserves there itself (1.15 x the size), from the layout's own values; none where that line is larger.
 #[test]

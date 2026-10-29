@@ -15,8 +15,11 @@
 //     number (the LaTeX and Word filters bind them with a no-break space);
 //   - lists: the number or bullet in a box of `list-indent` at the margin, the text hanging after it, with no space
 //     of their own (`list-indent: none` keeps typst's lists).
-//   - a note never starts on a page before its mark: a paragraph a block only wraps is laid out bare once a note
-//     of it did (unwrap-note-par, below; fb-595.54.11.1).
+//   - a note never starts on a page before its mark: a paragraph a block only wraps (or a left `pad` in it) is laid
+//     out bare once a note of it did (unwrap-note-par, below; fb-595.54.11.1), and a bare paragraph then without its
+//     widow and orphan cost, so its mark's line stays with the note (loosen-note-par; fb-595.54.11.4). When no line
+//     of a note fits on its mark's page, the line moves on with it, as LaTeX does; LibreOffice does that only on a
+//     page with no note yet (docs/open-items/fb-595.54.11.4.md).
 //   - a note split over a page end keeps typst's widow and orphan cost, as LaTeX keeps \clubpenalty/\widowpenalty
 //     10000 inside notes and Word's Footnote Text keeps its lines together: a zero cost (LibreOffice's any-line
 //     split) moved 32 renders and broke the line match in about 25 gated folders (fb-595.54.11.3).
@@ -53,6 +56,15 @@
   false
 }
 
+// Whether a note marked between `me` and the marker after it (`end`: its label, with the value `me`) starts on a page
+// before its mark.
+#let note-before-mark(me, end) = {
+  let stop = query(end).filter(m => m.value == me)
+  let notes = if stop.len() == 0 { () } else { query(selector(footnote).after(me).before(stop.first().location())) }
+  let marks = notes.map(n => n.location())
+  query(footnote.entry).any(e => e.note.location() in marks and e.location().page() < e.note.location().page())
+}
+
 // A note never starts on a page before its mark (fb-595.54.11.1). A footnote in a paragraph a template wraps in a
 // breakable block cannot take its line on with it: when the line and its note do not both fit, typst may keep the
 // note where the line was first laid and move the line on alone (lawb motion-brief: note 7 on page 4, its mark on
@@ -62,8 +74,19 @@
 // block is (only with `all: true`), once one of its notes started on a page before its mark: on the next layout
 // pass, and from then on (<xe-bare> holds it, so the layout converges). A block whose notes all start on their marks'
 // pages is laid out as before (a note too long for the rest of its mark's page then follows on the next page).
+// The paragraph may sit in a `pad` that only indents it on the left (lib/typst/xdoc.typ's list items): the bare
+// paragraph then indents every line by that much more (Md. Ct. App. petition-for-writ note 147, fb-595.54.11.4).
 #let unwrap-note-par(it) = {
   let b = it.body
+  let left = 0pt
+  if type(b) == content and b.func() == pad {
+    let pf = b.fields()
+    let body = pf.remove("body")
+    let l = pf.remove("left", default: 0pt)
+    if type(l) == relative and l.ratio == 0% { l = l.length }
+    if pf.values().any(v => v != 0pt) or type(l) != length { return it }
+    (b, left) = (body, l)
+  }
   if type(b) != content or b.func() != par or not has-note(b.body) or it.has("label") { return it }
   let f = it.fields()
   if not (f.breakable and f.height == auto and f.width in (auto, 100%) and f.fill == none and not f.clip
@@ -72,21 +95,42 @@
     let me = here()
     let s = par.spacing.to-absolute()
     let bare = if f.above.to-absolute() != s or f.below.to-absolute() != s { false }
-      else if query(<xe-bare>).any(m => m.value == me) { true } else {
-      let end = query(<xe-np-end>).filter(m => m.value == me)
-      let notes = if end.len() == 0 { () } else { query(selector(footnote).after(me).before(end.first().location())) }
-      let marks = notes.map(n => n.location())
-      query(footnote.entry).any(e => e.note.location() in marks and e.location().page() < e.note.location().page())
-    }
+      else if query(<xe-bare>).any(m => m.value == me) { true } else { note-before-mark(me, <xe-np-end>) }
     if bare {
       let pf = b.fields()
       let body = pf.remove("body")
       let fi = pf.at("first-line-indent", default: par.first-line-indent)
       if type(fi) != dictionary { fi = (amount: fi, all: false) }
+      let hi = pf.remove("hanging-indent", default: par.hanging-indent)
       [#metadata(me)<xe-bare>]
-      par(..pf, first-line-indent: (amount: if fi.at("all", default: false) { fi.amount } else { 0pt }, all: true), body)
+      par(..pf, first-line-indent: (amount: left + if fi.at("all", default: false) { fi.amount } else { 0pt },
+        all: true), hanging-indent: left + hi, body)
     } else { it }
     [#metadata(me)<xe-np-end>]
+  }
+}
+
+// Nor does a note of a bare paragraph (fb-595.54.11.4). typst keeps a paragraph's first and last two lines together
+// (its widow and orphan cost) after it has placed the note of the line it lays: when the next line does not fit
+// below that one, both move on and the note stays behind (a mark on the second-to-last line, its note started at
+// the foot of the page before: 14 pt type on 31.4 pt lines with 20 pt notes, ca10 reply-brief). Such a paragraph is
+// laid out without that cost once one of its notes started on a page before its mark, so its mark's line stays with
+// the note and the line after it moves on alone, as Word sets a paragraph that anchors a note (Body Text Note: no
+// widow control) and LaTeX where its filter turns widow control off for it. <xe-loose> holds it. The notes keep the
+// cost (fb-595.54.11.3): a note's entry takes the styles of its mark, not of the paragraph's show rule. A paragraph
+// whose notes all start on their marks' pages is laid out as before. (By the time a paragraph is shown its footnotes
+// are, so only a paragraph that holds an element's tag is looked at.)
+#let loosen-note-par(it) = {
+  let b = it.body
+  if not (type(b) == content and b.has("children") and b.children.any(c => repr(c.func()) == "tag")) { return it }
+  context {
+    let me = here()
+    if query(<xe-loose>).any(m => m.value == me) or note-before-mark(me, <xe-lp-end>) {
+      [#metadata(me)<xe-loose>]
+      set text(costs: (widow: 0%, orphan: 0%))
+      it
+    } else { it }
+    [#metadata(me)<xe-lp-end>]
   }
 }
 
@@ -244,6 +288,8 @@
   set super(size: 0.58em)
   // A paragraph that anchors a footnote laid out bare, not in a block that only wraps it (unwrap-note-par, above).
   show block: unwrap-note-par
+  // Nor in a bare paragraph whose last (first) two lines typst keeps together (loosen-note-par, above).
+  show par: loosen-note-par
   // Never break inside a token of adjacent parentheses, nor between a section sign / pilcrow and its number.
   // Unbreakable boxes, so the extracted text stays exactly the author's characters.
   show regex("\\S*\\)\\(\\S*"): it => box(it)
