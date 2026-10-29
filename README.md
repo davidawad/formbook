@@ -626,7 +626,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Guam](courts/ninth-circuit/guam/federal/bankruptcy-district) | `gub` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. Guam](courts/ninth-circuit/guam/federal/district) | `gud` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. Guam](courts/ninth-circuit/guam/federal/district) | `gud` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Supreme Court of Guam](courts/ninth-circuit/guam/state/supreme-court) | `guam` | up for review | 2/2 | 2/2 | 2/2 | 29 |
 
 ### Hawaii
@@ -643,7 +643,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Idaho](courts/ninth-circuit/idaho/federal/bankruptcy-district) | `idb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the District of Idaho](courts/ninth-circuit/idaho/federal/district) | `idd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the District of Idaho](courts/ninth-circuit/idaho/federal/district) | `idd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Idaho Court of Appeals](courts/ninth-circuit/idaho/state/court-of-appeals) | `idahoctapp` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 | [Idaho Supreme Court](courts/ninth-circuit/idaho/state/supreme-court) | `idaho` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 
@@ -652,7 +652,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Montana](courts/ninth-circuit/montana/federal/bankruptcy-district) | `mtb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. Montana](courts/ninth-circuit/montana/federal/district) | `mtd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. Montana](courts/ninth-circuit/montana/federal/district) | `mtd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Montana Supreme Court](courts/ninth-circuit/montana/state/supreme-court) | `mont` | up for review | 9/9 | 9/9 | 9/9 | 29 |
 
 ### Nevada
@@ -864,12 +864,12 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 16 | 23 | 18.6% |
 | Seventh Circuit | 21 | 0 | 21 | 0 | 0 | 0.0% | 100.0% | 21 | 9 | 15 | 18.2% |
 | Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 38 | 27 | 26 | 20.3% |
-| Ninth Circuit | 61 | 0 | 59 | 2 | 0 | 0.0% | 96.7% | 58 | 19 | 44 | 21.0% |
+| Ninth Circuit | 61 | 0 | 59 | 2 | 0 | 0.0% | 96.7% | 58 | 22 | 44 | 21.0% |
 | Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 31 | 15 | 23 | 19.3% |
 | Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 17 | 23 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 4 | 3 | 3 | 17.7% |
 | Fifth Circuit | 1 | 0 | 1 | 0 | 0 | 0.0% | 100.0% | 1 | 0 | 0 | 14.0% |
-| **Total** | 377 | 0 | 354 | 23 | 0 | 0.0% | 93.8% | 353 | 183 | 269 | 19.0% |
+| **Total** | 377 | 0 | 354 | 23 | 0 | 0.0% | 93.8% | 353 | 186 | 269 | 19.0% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
