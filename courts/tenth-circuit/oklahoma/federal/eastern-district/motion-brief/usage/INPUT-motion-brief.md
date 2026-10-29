@@ -1,50 +1,42 @@
 ---
-court:
-  - UNITED STATES DISTRICT COURT
-  - FOR THE EASTERN DISTRICT OF OKLAHOMA
+# Sample 1 of 1: transcribed from the filed exemplar (usage/FILED-EXAMPLE-motion-brief.pdf, Doc. 17, 17 pages). The
+# fact paragraphs are numbered in the text, as the filing numbers them; the argument numbers ("I.", "A.") are the
+# template's. See ../README.md for the meaning of every field.
 case_number: "6:25-cv-94-JFH"
 judge: "Hon. John F. Heil, III"
 caption:
-  plaintiffs:
-    - names:
-        - "OKLAHOMA STATE DEPARTMENT OF"
-        - "EDUCATION, and"
-        - "RYAN WALTERS, in his official capacity"
-        - "as Superintendent of Public Instruction,"
-        - "and in his individual capacity,"
+  parties:
+    - names: |-
+        OKLAHOMA STATE DEPARTMENT OF
+        EDUCATION, and
+        RYAN WALTERS, in his official capacity
+        as Superintendent of Public Instruction,
+        and in his individual capacity,
       designation: "Plaintiffs,"
-  defendants:
-    - names:
-        - "FREEDOM FROM RELIGION"
-        - "FOUNDATION,"
+    - names: |-
+        FREEDOM FROM RELIGION
+        FOUNDATION,
       designation: "Defendant."
 brief_title: "DEFENDANT'S MOTION TO DISMISS AND BRIEF IN SUPPORT"
-date: "May 9, 2025"
 signature:
-  signer: "Adam H. Hines"
-  lines:
-    - "Adam H. Hines"
-    - "Oklahoma Bar Number: 35640"
-    - "Megan Lambert"
-    - "Oklahoma Bar Number: 33216"
-    - "AMERICAN CIVIL LIBERTIES UNION"
-    - "FOUNDATION OF OKLAHOMA"
-    - "P.O. Box 13327"
-    - "Oklahoma City, OK 73113"
-    - "Tel.: 405-524-8511"
-    - "ahines@acluok.org"
-    - "mlambert@acluok.org"
-attorneys_for: "Counsel for Defendant"
-certificate:
-  signer: "Adam H. Hines"
-  lines:
-    - "AMERICAN CIVIL LIBERTIES UNION"
-    - "FOUNDATION OF OKLAHOMA"
-    - "P.O. Box 13327"
-    - "Oklahoma City, OK 73113"
-    - "Tel.: 405-524-8511"
-    - "ahines@acluok.org"
-  attorneys_for: "Counsel for Defendant"
+  date_line: "Date: May 9, 2025"
+  firm: "Respectfully submitted,"
+  blocks:
+    - ["/s/ Adam H. Hines", "Adam H. Hines", "Oklahoma Bar Number: 35640", "Megan Lambert", "Oklahoma Bar Number: 33216", "AMERICAN CIVIL LIBERTIES UNION", "FOUNDATION OF OKLAHOMA", "P.O. Box 13327", "Oklahoma City, OK 73113", "Tel.: 405-524-8511", "ahines@acluok.org", "mlambert@acluok.org"]
+  counsel_for: "*Counsel for Defendant*"
+service:
+  signed: |-
+    Respectfully submitted,
+
+    /s/ Adam H. Hines
+    Adam H. Hines
+    AMERICAN CIVIL LIBERTIES UNION
+    FOUNDATION OF OKLAHOMA
+    P.O. Box 13327
+    Oklahoma City, OK 73113
+    Tel.: 405-524-8511
+    ahines@acluok.org
+  counsel_for: "*Counsel for Defendant*"
 ---
 
 The Freedom From Religion Foundation ("Defendant" or "FFRF") respectfully requests that the Court dismiss the Complaint brought by the Oklahoma State Department of Education ("OSDE"), and Ryan Walters, in his official capacity as Superintendent of Public Instruction, and in his individual capacity (together, "Plaintiffs"),[^1] for: (1) lack of standing under Article III of the United States Constitution; (2) failure to demonstrate subject matter jurisdiction under 28 U.S.C. 1331; (3) filing a frivolous lawsuit targeting First Amendment protected expression pursuant to the Oklahoma Citizens Participation Act ("OCPA"); and (4) failure to state a claim upon which relief can be granted as required by Fed. R. Civ. P. 8 and 12(b)(6). While dismissal is proper for all these reasons, any one is a sufficient basis on its own.
@@ -61,13 +53,13 @@ Adding insult to injury, Plaintiffs appear to have sued Defendant specifically b
 
 # FACTUAL BACKGROUND
 
-<!--numbered--> On March 31, 2025, Plaintiffs filed a complaint, *see* Doc. 2, alleging the following relevant facts:
+1\. On March 31, 2025, Plaintiffs filed a complaint, *see* Doc. 2, alleging the following relevant facts:
 
-<!--numbered--> On approximately December 17, 2024, Rick Beene, Achille Public Schools ("APS") Superintendent, received a letter from FFRF regarding "[u]nconstitutional school-sponsored prayer and bible readings." *See* Doc. 2, Ex. B. The letter summarized a report from a concerned parent about APS having "implemented a policy allowing teachers to read Bible verses at the beginning of their classes" and "a custom and practice of beginning each school day with a 'mandatory student-led prayer' over the schools' intercom." *Id.* The letter ended with a statement that "the District must cease permitting instructors to teach students Bible verses, and it must end its schools' practice of beginning each day with school-sponsored student-led prayers." *Id.* The letter made no threat of litigation, instead stating that FFRF "hope[s] to work with the District to address this issue" and asking APS to "respond in writing with the steps the District is taking to address this matter" so FFRF could update the parent who complained of the conduct. *Id.*
+2\. On approximately December 17, 2024, Rick Beene, Achille Public Schools ("APS") Superintendent, received a letter from FFRF regarding "[u]nconstitutional school-sponsored prayer and bible readings." *See* Doc. 2, Ex. B. The letter summarized a report from a concerned parent about APS having "implemented a policy allowing teachers to read Bible verses at the beginning of their classes" and "a custom and practice of beginning each school day with a 'mandatory student-led prayer' over the schools' intercom." *Id.* The letter ended with a statement that "the District must cease permitting instructors to teach students Bible verses, and it must end its schools' practice of beginning each day with school-sponsored student-led prayers." *Id.* The letter made no threat of litigation, instead stating that FFRF "hope[s] to work with the District to address this issue" and asking APS to "respond in writing with the steps the District is taking to address this matter" so FFRF could update the parent who complained of the conduct. *Id.*
 
-<!--numbered--> The Complaint also references a letter FFRF sent to Putnam City Schools in 2018. Doc. 2 at ¶¶ 35–36. This letter followed a complaint to FFRF from a concerned resident about a designated chaplain for the Putnam City high school football team who was reportedly proselytizing to the players and leading them in prayer. *See* Doc. 2, Ex. C. The letter expressed FFRF's position that the chaplain's conduct was a "serious and flagrant violation of the First Amendment" and ended with an "ask" to "commence an immediate investigation into this complaint" and "take appropriate action to end its chaplaincy program." *Id.*
+3\. The Complaint also references a letter FFRF sent to Putnam City Schools in 2018. Doc. 2 at ¶¶ 35–36. This letter followed a complaint to FFRF from a concerned resident about a designated chaplain for the Putnam City high school football team who was reportedly proselytizing to the players and leading them in prayer. *See* Doc. 2, Ex. C. The letter expressed FFRF's position that the chaplain's conduct was a "serious and flagrant violation of the First Amendment" and ended with an "ask" to "commence an immediate investigation into this complaint" and "take appropriate action to end its chaplaincy program." *Id.*
 
-<!--numbered--> The Complaint mentions three other FFRF actions in passing. *See* Doc. 2 at ¶ 8. In 2012, FFRF sent a letter to the Oklahoma Water Resources Board asking the Board to discontinue its practice of opening each meeting with a sectarian prayer. *Id.* In 2018, FFRF wrote the Claremore Police and Fire Departments regarding reports of city employees fundraising for the Salvation Army. *Id.* In 1996, FFRF published a letter written by the late Joann Bell, Former Executive Director of the ACLU of Oklahoma, about her experience of the Oklahoma City Bombing and its aftermath. *Id.*
+4\. The Complaint mentions three other FFRF actions in passing. *See* Doc. 2 at ¶ 8. In 2012, FFRF sent a letter to the Oklahoma Water Resources Board asking the Board to discontinue its practice of opening each meeting with a sectarian prayer. *Id.* In 2018, FFRF wrote the Claremore Police and Fire Departments regarding reports of city employees fundraising for the Salvation Army. *Id.* In 1996, FFRF published a letter written by the late Joann Bell, Former Executive Director of the ACLU of Oklahoma, about her experience of the Oklahoma City Bombing and its aftermath. *Id.*
 
 # ARGUMENT
 

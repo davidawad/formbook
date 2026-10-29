@@ -1,44 +1,36 @@
 ---
 case_number: "1:26-cv-02065-MDB"
 caption:
-  - names: ["MAXFIELD ALTON SUSSMAN,"]
-    designation: "Plaintiff,"
-  - names:
-      - "DEPUTY JOSHUA T. MILLER, in his individual capacity;"
-      - "SERGEANT URIAH CAIN SPEIGHT, in his individual capacity; and"
-      - "DEPUTY JEREMY MILLER, in his individual capacity,"
-    designation: "Defendants."
-title: "MOTION TO DISMISS"
+  parties:
+    - names: "MAXFIELD ALTON SUSSMAN,"
+      designation: "Plaintiff,"
+    - names: |-
+        DEPUTY JOSHUA T. MILLER, in his individual capacity;
+        SERGEANT URIAH CAIN SPEIGHT, in his individual capacity; and
+        DEPUTY JEREMY MILLER, in his individual capacity,
+      designation: "Defendants."
+brief_title: "MOTION TO DISMISS"
 lead_in: "Defendants, DEPUTY JOSHUA MILLER, SERGEANT URIAH SPEIGHT, and DEPUTY JEREMY MILLER, through their attorneys, SGR, LLC, and pursuant to Fed.R.Civ.P. 12(b)(6), hereby submit their Motion to Dismiss Plaintiffs’ Complaint, and state as follows:"
+conferral_heading: "CERTIFICATE OF COMPLIANCE"
 conferral: "Pursuant to the Court’s civil practice standards, the undersigned conferred with Plaintiff regarding the relief requested in this Motion. Plaintiff opposes the Motion."
 signature:
-  intro: ["Respectfully submitted this 16th day of September, 2026."]
-  signers:
-    - name: "Jonathan N. Eddy"
-      lines:
-        - "SGR, LLC"
-        - "3900 East Mexico Avenue, Suite 700"
-        - "Denver, CO 80210"
-        - "Telephone: (303) 320-0509"
-        - "Email: jeddy@sgrllc.com"
-    - name: "James T. Kadolph"
-      lines:
-        - "SGR, LLC"
-        - "3900 East Mexico Avenue, Suite 700"
-        - "Denver, CO 80210"
-        - "Telephone: (303) 320-0509"
-        - "Email: jkadolph@sgrllc.com"
-  role: "Attorneys for Defendants"
+  date_line: "Respectfully submitted this 16th day of September, 2026."
+  blocks:
+    - ["s/ Jonathan N. Eddy", "Jonathan N. Eddy", "SGR, LLC", "3900 East Mexico Avenue, Suite 700", "Denver, CO 80210", "Telephone: (303) 320-0509", "Email: jeddy@sgrllc.com"]
+    - ["s/ James T. Kadolph", "James T. Kadolph", "SGR, LLC", "3900 East Mexico Avenue, Suite 700", "Denver, CO 80210", "Telephone: (303) 320-0509", "Email: jkadolph@sgrllc.com"]
+  counsel_for: "Attorneys for Defendants"
 service:
   text: "I HEREBY CERTIFY that on this 16th day of September, 2026, I electronically filed a true and correct copy of the above and foregoing MOTION TO DISMISS with the Clerk of Court using the CM/ECF system which will send notification of such filing to the following email addresses. A copy was emailed to the following pro se party:"
-  party_lines:
-    - "Maxfield Alton Sussman"
-    - "Email: maxs1983184@gmail.com"
-    - "Plaintiff Pro Se"
-  signer_lines:
-    - "/s/ Mariel Juniper"
-    - "Legal Secretary"
+  served:
+    - |-
+      Maxfield Alton Sussman
+      Email: maxs1983184@gmail.com
+      Plaintiff Pro Se
+  signed: |-
+    /s/ Mariel Juniper
+    Legal Secretary
 ---
+
 
 # INTRODUCTION
 

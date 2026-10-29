@@ -1,0 +1,63 @@
+# U.S. District Court for the Western District of Oklahoma (the folder's alias okd; see usage/SOURCE.md): a motion to
+# dismiss and brief in support in one document (LCvR7.1(k)), on the generic FRCP brief
+# (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with W.D. Okla.'s local rules overlaid here. The shared document
+# model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`). Rules:
+# W.D. Okla. Local Civil Rules (effective April 2026), https://okwd.uscourts.gov/sites/okwd/files/LocalRules2026.pdf
+# (../README.md quotes them). The base already meets LCvR5.2(a) (letter paper) and LCvR7.1(d) (margins of at least
+# one inch on every side). The brief without tables is held to 15 pages (LCvR7.1(e): a longer brief needs a table of
+# contents and of authorities, which this template does not make; ../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, second line.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE WESTERN DISTRICT OF OKLAHOMA"
+# LCvR7.1(d): 13-point type or larger, footnotes included.
+size: 13
+# LCvR5.2(a): double-spaced; 27.5 pt, the exemplar's measured double pitch (../README.md); single lines 1.15 x 13 pt.
+pitch: {body: 27.5, single: 14.95}
+footnote: {size: 13, clearance: 7.5}
+quote: {below: 27.5}
+# Sections centered in bold capitals; an argument heading bold at the margin; a point bold italic half an inch in (the
+# filer types the numbers, as the exemplar's are typed); a single line above and below each.
+heading:
+  - {align: center, bold: true, upper: true, above: 14.95, below: 14.95}
+  - {bold: true, above: 14.95, below: 14.95}
+  - {bold: true, italic: true, left: 36, above: 14.95, below: 14.95}
+# FRCP 10(a) and LCvR7.1(b) (the title identifies on whose behalf it is presented): the court's name; the parties at the
+# left (each party's names, its designation an inch in, "v." between them), a column of ")" as tall as theirs, the
+# case number at the right and, when the filer demands a jury, JURY TRIAL DEMANDED a line below it; then the paper's
+# title centered in bold capitals, underlined (the exemplar, usage/SOURCE.md).
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 230.4
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 72}
+            between:
+              - {text: "v.", left: 36}
+      - {width: 21.6, repeat: ")"}
+      - valign: center
+        blocks:
+          - {text: "{case_label|Case No.} {case_number}"}
+          - when: jury_demand
+            blocks: [{text: "JURY TRIAL DEMANDED", above: 14.95}]
+    above: 27.5
+  - {text: "{brief_title}", align: center, bold: true, upper: true, underline: true, left: 36, right: 36, above: 27.5, below: 14.95}
+# Fed. R. Civ. P. 5(d)(1)(B) and LCvR5.1: a party not served through ECF is served otherwise, with a certificate: on a
+# page of its own, its title (a certificate of mailing, of service), the certificate, the persons served half an inch
+# in, the signer at the right.
+after_tail:
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "{service.title|CERTIFICATE OF SERVICE}", align: center, bold: true, underline: true, below: 14.95}
+      - {markdown: "{service.text}", pitch: body, indent: 36}
+      - {text: "{service.served}", left: 36, above: 14.95}
+      - columns:
+          - {width: 208.8, blocks: []}
+          - blocks: [{text: "{service.signed}"}]
+        above: 27.5

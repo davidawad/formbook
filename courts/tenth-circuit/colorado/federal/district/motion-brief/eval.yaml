@@ -1,4 +1,11 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (fb-595.68.32, on the shared layout model lib/*/xengine*), so a difference fails.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.17.19), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
   cross_engine: gate
+  # DEF-COVER-002, tier 3: the exemplar's filer (SGR, LLC; usage/SOURCE.md, the only filer here) sets a section's
+  # number a tab before its centered title; LCivR sets no heading form, and the template centers number and title
+  # together as one line.
+  cover_structure_accepted:
+    - finding: 'alignment: "I." is indented'
+      reason: "one filer's heading style (tier 3): LCivR 10.1 names no heading form; number and title are centered together"

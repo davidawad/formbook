@@ -1,4 +1,8 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (fb-595.68.33, on the shared layout model lib/*/xengine*), so a difference fails.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.17.19), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
   cross_engine: gate
+  # DEF-LEN-001: LCvR 7.1(c), a brief over 15 pages needs an indexed table of contents and table of authorities,
+  # which this template does not make (25 pages is the rule's outer bound).
+  page_limit: 15

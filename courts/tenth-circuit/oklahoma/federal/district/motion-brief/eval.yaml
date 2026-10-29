@@ -1,0 +1,11 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.17.19), so they
+# break every line and page where the typst render does, and a difference fails.
+params:
+  cross_engine: gate
+  # DEF-LEN-001: LCvR7.1(e), a brief over 15 pages needs an indexed table of contents and table of authorities, which
+  # this template does not make (the 25-page limit is the rule's outer bound).
+  page_limit: 15
+# DEF-FONT: LCvR7.1(d), 13-point type or larger, footnotes included.
+font:
+  size_pt: 13

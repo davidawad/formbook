@@ -1,0 +1,68 @@
+# U.S. District Court for the District of New Mexico (nmd): a motion with its supporting brief, on the generic FRCP
+# brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D.N.M.'s local rules overlaid here. The shared document
+# model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`). Rules:
+# D.N.M.LR-Civ. (amended effective October 1, 2020),
+# https://www.nmd.uscourts.gov/sites/nmd/files/local_rules/Local%20Rules%20of%20Civil%20Procedure%20Adopted%20October%201%2C%202020_0.pdf
+# (../README.md quotes them). The base already meets LR-Civ. 10.1: letter paper, one-inch left, right and bottom
+# margins, 12-point type, text double spaced except footnotes and quotations. The 27-page limit of LR-Civ. 7.5 is
+# checked on the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, second line.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE DISTRICT OF NEW MEXICO"
+# LR-Civ. 10.1: a top margin of at least 1 1/2 inches.
+margin: {top: 108}
+# Sections centered in bold capitals (INTRODUCTION, ARGUMENT, CONCLUSION); an argument "I." and a point "a." in bold,
+# numbered by the template, each label in a half-inch box with the title's later lines hung under it (the exemplar's
+# form, usage/SOURCE.md); 12 pt above and below each.
+heading:
+  - {align: center, bold: true, upper: true, above: 12, below: 12}
+  - {bold: true, number: "I.", label_box: 36, above: 12, below: 12}
+  - {bold: true, number: "a.", label_box: 36, above: 12, below: 12}
+# Word sets a footnote's rule 7.5 pt under the text with the 7 pt gap (the space LibreOffice keeps above its separator).
+footnote: {clearance: 7.5}
+# FRCP 10(a) and LR-Civ. 10.1 (the first page has the case file number with the assigned judges' initials): the
+# court's name; the parties at the left (each party's names, its designation an inch in, "v." between them), a column
+# of ")" as tall as theirs, the case number at the right centered on their height; then the paper's title centered
+# in bold, in the filer's own capitalization (LR-Civ. 10.2: the title identifies its substance and the paper it
+# answers), underlined.
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 230.4
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 72}
+            between:
+              - {text: "v.", left: 72}
+      - {width: 21.6, repeat: ")"}
+      - valign: center
+        blocks:
+          - {text: "{case_label|Case No.} {case_number}"}
+    above: 24
+  - {text: "{brief_title}", align: center, bold: true, underline: true, left: 36, right: 36, above: 24, below: 12}
+# LR-Civ. 7.1(b): a motion, response or reply includes a certificate of service on each party: the heading, the
+# certificate, those served two to a row 12 pt apart, the signers at the right (the typst template stops the render
+# without one).
+after_tail:
+  - when: service
+    blocks:
+      - group:
+          - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, underline: true, below: 12}
+          - {markdown: "{service.text}", pitch: body, indent: 36}
+          - columns:
+              each: service.served
+              per_row: 2
+              row_gap: 12
+              blocks: [{text: "{.}"}]
+            gutter: 18
+            above: 12
+          - columns:
+              - {width: 208.8, blocks: []}
+              - blocks: [{text: "{service.signed}"}]
+            above: 24
+        above: 24

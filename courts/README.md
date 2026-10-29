@@ -287,16 +287,16 @@ Courts under `courts` (347).
 | [United States Bankruptcy Appellate Panel of The Tenth Circuit](tenth-circuit/bankruptcy-appellate-panel) | `bap10` | up for review | 3/3 | — | 3/3 | 14 |
 | [Court of Appeals for the Tenth Circuit](tenth-circuit/court-of-appeals) | `ca10` | up for review | 3/3 | 1/1 | 3/3 | 14 |
 | [United States Bankruptcy Court, D. Colorado](tenth-circuit/colorado/federal/bankruptcy-district) | `cob` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the District of Colorado](tenth-circuit/colorado/federal/district) | `cod` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the District of Colorado](tenth-circuit/colorado/federal/district) | `cod` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Kansas](tenth-circuit/kansas/federal/bankruptcy-district) | `ksb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. Kansas](tenth-circuit/kansas/federal/district) | `ksd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. Kansas](tenth-circuit/kansas/federal/district) | `ksd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. New Mexico](tenth-circuit/new-mexico/federal/bankruptcy-district) | `nmb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. New Mexico](tenth-circuit/new-mexico/federal/district) | `nmd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. New Mexico](tenth-circuit/new-mexico/federal/district) | `nmd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. Oklahoma](tenth-circuit/oklahoma/federal/bankruptcy-eastern-district) | `okeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Oklahoma](tenth-circuit/oklahoma/federal/bankruptcy-northern-district) | `oknb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Oklahoma](tenth-circuit/oklahoma/federal/bankruptcy-western-district) | `okwb` | up for review | 1/1 | — | 1/1 | 14 |
-| [United States District Court for the District of Oklahoma](tenth-circuit/oklahoma/federal/district) | `okd` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court, Oklahoma Eastern](tenth-circuit/oklahoma/federal/eastern-district) | `oked` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the District of Oklahoma](tenth-circuit/oklahoma/federal/district) | `okd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [United States District Court, Oklahoma Eastern](tenth-circuit/oklahoma/federal/eastern-district) | `oked` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court, Oklahoma Northern](tenth-circuit/oklahoma/federal/northern-district) | `oknd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court, Oklahoma Western](tenth-circuit/oklahoma/federal/western-district) | `okwd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Utah](tenth-circuit/utah/federal/bankruptcy-district) | `utb` | up for review | 2/2 | — | 2/2 | 14 |

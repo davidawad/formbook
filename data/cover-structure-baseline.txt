@@ -2131,8 +2131,6 @@ courts/tenth-circuit/colorado/federal/bankruptcy-district/motion-brief docx
 courts/tenth-circuit/colorado/federal/bankruptcy-district/motion-brief typst
 courts/tenth-circuit/colorado/federal/district/complaint docx
 courts/tenth-circuit/colorado/federal/district/complaint typst
-courts/tenth-circuit/colorado/federal/district/motion-brief docx
-courts/tenth-circuit/colorado/federal/district/motion-brief typst
 courts/tenth-circuit/colorado/state/court-of-appeals/amicus-brief typst
 courts/tenth-circuit/colorado/state/court-of-appeals/answering-brief typst
 courts/tenth-circuit/colorado/state/court-of-appeals/motion-brief typst
@@ -2159,8 +2157,6 @@ courts/tenth-circuit/kansas/federal/bankruptcy-district/motion-brief docx
 courts/tenth-circuit/kansas/federal/bankruptcy-district/motion-brief typst
 courts/tenth-circuit/kansas/federal/district/complaint docx
 courts/tenth-circuit/kansas/federal/district/complaint typst
-courts/tenth-circuit/kansas/federal/district/motion-brief docx
-courts/tenth-circuit/kansas/federal/district/motion-brief typst
 courts/tenth-circuit/kansas/state/court-of-appeals/amicus-brief docx
 courts/tenth-circuit/kansas/state/court-of-appeals/amicus-brief latex
 courts/tenth-circuit/kansas/state/court-of-appeals/amicus-brief typst
@@ -2208,8 +2204,6 @@ courts/tenth-circuit/new-mexico/federal/bankruptcy-district/motion-brief docx
 courts/tenth-circuit/new-mexico/federal/bankruptcy-district/motion-brief typst
 courts/tenth-circuit/new-mexico/federal/district/complaint docx
 courts/tenth-circuit/new-mexico/federal/district/complaint typst
-courts/tenth-circuit/new-mexico/federal/district/motion-brief docx
-courts/tenth-circuit/new-mexico/federal/district/motion-brief typst
 courts/tenth-circuit/new-mexico/state/court-of-appeals/amicus-brief docx
 courts/tenth-circuit/new-mexico/state/court-of-appeals/amicus-brief latex
 courts/tenth-circuit/new-mexico/state/court-of-appeals/amicus-brief typst

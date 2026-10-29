@@ -1,0 +1,66 @@
+# U.S. District Court for the District of Colorado (cod): a motion to dismiss with its memorandum in one document, on
+# the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D. Colo.'s local rules overlaid here. The
+# shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by
+# `fb engines gen`). Rules: D.C.COLO.LCivR (effective December 1, 2025),
+# https://www.cod.uscourts.gov/Portals/0/Documents/LocalRules/2025_Final_Local_Rules.pdf (../README.md quotes them).
+# The base already meets LCivR 10.1: letter paper (10.1(b)), one-inch side and bottom margins (10.1(c)), 12-point
+# type, footnotes included (10.1(d)), double spacing (10.1(e)), consecutively numbered pages.
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, second line.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE DISTRICT OF COLORADO"
+# LCivR 10.1(c): a top margin of 1 1/2 inches.
+margin: {top: 108}
+# Block quotations an inch in on each side, as the exemplar sets them (usage/SOURCE.md).
+quote: {left: 72, right: 72, above: 13.8, below: 13.8}
+# The sections numbered by the template, as D. Colo. motions number them (the exemplar): a section "I." centered in
+# bold capitals; an argument "A." at the margin and a point "1." half an inch in, each label in a half-inch box with
+# the title's later lines hung under it.
+heading:
+  - {align: center, bold: true, upper: true, number: "I.", above: 13.8, below: 13.8}
+  - {bold: true, number: "A.", label_box: 36, above: 13.8, below: 13.8}
+  - {bold: true, number: "1.", label_box: 36, left: 36, above: 13.8, below: 13.8}
+# FRCP 10(a) in the D. Colo. form (the court's own forms and the exemplar): the court's name, "Civil Action No." a
+# double line below it, then the parties (each party's names, its designation half an inch in a line below, "v." a
+# line from each), then the paper's title centered in bold between two rules across the page (the D. Colo. form:
+# the court's own forms and orders rule off the caption so, as the exemplar does). Then the motion's opening paragraph
+# (its rule, LCivR 7.1(d)) and, when the filer gives one, the certificate of conferral (LCivR 7.1(a); not required
+# for a Rule 12 motion, 7.1(b)(2), but a judge's practice standards may ask for it).
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{case_label|Civil Action No.} {case_number}", above: 24}
+  - each: caption.parties
+    blocks:
+      - {text: "{names}"}
+      - {text: "{designation}", left: 36, above: 13.8}
+    between:
+      - {text: "v.", above: 13.8, below: 13.8}
+    above: 24
+  - {rule: 0.75, above: 13.8}
+  - {text: "{brief_title}", align: center, bold: true, above: 13.8, below: 13.8}
+  - {rule: 0.75, below: 24}
+  - {markdown: "{lead_in}", pitch: body, indent: 36, optional: true}
+  - when: conferral
+    blocks:
+      - {text: "{conferral_heading|CERTIFICATE OF CONFERRAL}", align: center, bold: true, above: 13.8, below: 13.8}
+      - {markdown: "{conferral}", pitch: body, indent: 36}
+# LCivR 5.1(d): the notice of electronic filing serves a CM/ECF user; a party served otherwise (a pro se party) needs a
+# certificate of service: the heading, the certificate, the party served half an inch in, the signer at the right.
+after_tail:
+  - when: service
+    blocks:
+      - group:
+          - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 13.8}
+          - {markdown: "{service.text}", pitch: body, indent: 36}
+          - each: service.served
+            blocks: [{text: "{.}", left: 36}]
+            above: 13.8
+          - columns:
+              - {width: 208.8, blocks: []}
+              - blocks: [{text: "{service.signed}"}]
+            above: 24
+        above: 24
+# Word sets a footnote's rule 7.5 pt under the text with the 7 pt gap (the space LibreOffice keeps above its separator).
+footnote: {clearance: 7.5}

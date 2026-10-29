@@ -1,0 +1,77 @@
+# U.S. District Court for the District of Kansas (ksd): a memorandum in support of a motion, on the generic FRCP brief
+# (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D. Kan.'s local rules overlaid here. The shared document model
+# sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`). Rules:
+# D. Kan. Rules of Practice (as amended 4/1/26),
+# https://www.ksd.uscourts.gov/sites/ksd/files/MASTER%20COPY%20updated%204%2027%2026.pdf (../README.md quotes them).
+# The base already meets D. Kan. R. 5.1(a): letter paper, 12-point type (footnotes too, above the rule's 10-point
+# floor). The 15-page limit of D. Kan. R. 7.1(d)(3) is checked on the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, second line.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE DISTRICT OF KANSAS"
+# D. Kan. R. 5.1(a): double-spaced; 27.6 pt, twice the 13.8 pt single line, the pitch of the exemplar's text.
+pitch: {body: 27.6}
+# Block quotations single-spaced, half an inch in on each side, a double line after them.
+quote: {below: 27.6}
+# D. Kan. R. 7.1(a)(3) and (1): a statement of the facts and the specific relief sought; the conclusion (the relief)
+# must be there, in every engine (the facts heading's wording varies: the typst template asserts it).
+checks: {sections: ["CONCLUSION"]}
+# The points lettered by the template, as in the D. Kan. template this replaces: a section centered in bold capitals,
+# unnumbered; an argument "A." in bold at the margin, a point "1." half an inch in, a sub-point "a." in italics an inch
+# in, each label in a half-inch box with the title's later lines hung under it.
+heading:
+  - {align: center, bold: true, upper: true, above: 13.8, below: 13.8}
+  - {bold: true, number: "A.", label_box: 36, above: 13.8, below: 13.8}
+  - {bold: true, number: "1.", label_box: 36, left: 36, above: 13.8, below: 13.8}
+  - {italic: true, number: "a.", label_box: 36, left: 72, above: 13.8, below: 13.8}
+# FRCP 10(a) in the D. Kan. form (the exemplar, usage/SOURCE.md): the court's name; the parties at the left (each
+# party's names, its designation an inch in, "v." between them), a column of ")" as tall as theirs, the case number
+# at the right centered on their height, a rule under the parties and their ")"; then the paper's title centered in
+# bold capitals, underlined.
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 230.4
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 72, above: 13.8}
+            between:
+              - {text: "v.", above: 13.8, below: 13.8}
+      - {width: 21.6, repeat: ")"}
+      - valign: center
+        blocks:
+          - {text: "{case_label|Case No.} {case_number}"}
+    above: 24
+  - columns:
+      - {width: 252, blocks: [{rule: 0.75}]}
+      - {blocks: []}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, underline: true, left: 36, right: 36, above: 24, below: 13.8}
+# D. Kan. R. 5.1(f) (Fed. R. Civ. P. 5(d)(1)(B): none for a paper served by CM/ECF alone): a certificate of service
+# names each person served and their address, the capacity in which served, the manner and the date of service (the
+# date in the certificate's text): the heading, the certificate, each person served half an inch in, the signer at
+# the right.
+after_tail:
+  - when: service
+    blocks:
+      - group:
+          - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 13.8}
+          - {markdown: "{service.text}", pitch: body, indent: 36}
+          - each: service.recipients
+            blocks:
+              - {text: "{name}", left: 36}
+              - {text: "{address}", left: 36}
+              - {text: "Capacity: {capacity}", left: 36}
+              - {text: "Manner of service: {manner}", left: 36}
+            gap: 13.8
+            above: 13.8
+          - columns:
+              - {width: 208.8, blocks: []}
+              - blocks:
+                  - {text: "{service.signer}"}
+                  - {text: "{service.signer_name}"}
+            above: 27.6
+        above: 27.6

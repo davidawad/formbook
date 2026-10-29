@@ -5,50 +5,37 @@
 # sub-headings, the conclusion, the signature block and the certificate of mailing. The section numbers and the statement
 # paragraph numbers are typed in the text, as in the filing. Italics of case names are not transcribed (the text layer
 # carries no italic markup). See ../README.md for the meaning of every field.
-court:
-  - "IN THE UNITED STATES DISTRICT COURT"
-  - "FOR THE WESTERN DISTRICT OF OKLAHOMA"
 case_number: "CIV-2026-2422-R"
 caption:
   parties:
-    - names: ["ANTHONY TRUPIA, an individual,"]
+    - names: "ANTHONY TRUPIA, an individual,"
       designation: "Plaintiff,"
-    - names:
-        - "CITY OF OKLAHOMA CITY,"
-        - "A municipal corporation, et al."
+    - names: |-
+        CITY OF OKLAHOMA CITY,
+        A municipal corporation, et al.
       designation: "Defendants."
 brief_title: "DEFENDANT CITY OF OKLAHOMA CITY’S MOTION TO DISMISS AND BRIEF IN SUPPORT"
 jury_demand: true
 signature:
-  closing:
-    - "Respectfully submitted,"
-  groups:
-    - lines:
-        - "KENNETH JORDAN"
-        - "Municipal Counselor"
-        - "SHERRI KATZ"
-        - "Litigation Division Head"
-    - lines:
-        - "/s/ Katie Goff"
-        - "Katie Goff, OBA No. 32402"
-        - "Assistant Municipal Counselor"
-        - "200 North Walker, Suite 400"
-        - "Oklahoma City, Oklahoma 73102"
-        - "(405) 297-2451"
-        - "katie.goff@okc.gov"
-        - "Attorney for Defendant City"
-certificate:
+  date_line: "Respectfully submitted,"
+  firm: |-
+    KENNETH JORDAN
+    Municipal Counselor
+    SHERRI KATZ
+    Litigation Division Head
+  blocks:
+    - ["/s/ Katie Goff", "Katie Goff, OBA No. 32402", "Assistant Municipal Counselor", "200 North Walker, Suite 400", "Oklahoma City, Oklahoma 73102", "(405) 297-2451", "katie.goff@okc.gov", "Attorney for Defendant City"]
+service:
   title: "CERTIFICATE OF MAILING"
   text: "I hereby certify that on the 16th day of September, 2026, I filed the foregoing Motion to Dismiss of Oklahoma City with the Clerk of the Court and served the attached document by US Postal Service on the following who are not registered participants of the Electronic Case Filing. Otherwise, registered participants will receive automatic notice via ECF."
-  served:
-    - "Anthony Trupia"
-    - "605 SE 21st Street"
-    - "Oklahoma City, OK 73129"
-    - "Pro Se Plaintiff"
-  groups:
-    - lines:
-        - "/s/ Katie Goff"
-        - "Assistant Municipal Counselor"
+  served: |-
+    Anthony Trupia
+    605 SE 21st Street
+    Oklahoma City, OK 73129
+    Pro Se Plaintiff
+  signed: |-
+    /s/ Katie Goff
+    Assistant Municipal Counselor
 ---
 
 COMES NOW, Defendant City of Oklahoma City (City), by and through Katie Goff, Assistant Municipal Counselor, who moves this Court to dismiss Plaintiff’s Second Amended Complaint against Defendant City pursuant to Rule 12 (B)(6) and Federal Rules of Civil Procedure Rule 8 as set forth in the following brief.

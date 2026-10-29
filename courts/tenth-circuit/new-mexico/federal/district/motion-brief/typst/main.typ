@@ -1,5 +1,5 @@
-// Entry point. tools/render.sh compiles it with this folder as --root:
-//   typst compile --root <doc-type-dir> --font-path <repo>/fonts --ignore-system-fonts \
+// Entry point. tools/render.sh compiles it with the repo root as --root:
+//   typst compile --root <repo> --font-path <repo>/fonts --ignore-system-fonts \
 //     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/NAME.md \
 //     typst/main.typ out.pdf
 #import "nmd-motion-brief.typ": nmd-motion-brief, split-frontmatter

@@ -7,28 +7,21 @@
 case_number: "2:26-cv-02480-KHV-RES"
 caption:
   parties:
-    - names: ["SAMUEL LOUIS BLATNICK,"]
+    - names: "SAMUEL LOUIS BLATNICK,"
       designation: "Plaintiff,"
-    - names: ["LAIRD NOLLER AUTOMOTIVE, INC.,", "and MCCARTHY AUTO GROUP OF LAWRENCE, INC. d/b/a MCCARTHY HYUNDAI OF LAWRENCE,"]
+    - names: |-
+        LAIRD NOLLER AUTOMOTIVE, INC.,
+        and MCCARTHY AUTO GROUP OF LAWRENCE, INC. d/b/a MCCARTHY HYUNDAI OF LAWRENCE,
       designation: "Defendants."
-title: "Memorandum in Support of Defendant Laird Noller Automotive, Inc.’s Motion to Partially Dismiss Claims"
-jury_demand: false
+brief_title: "Memorandum in Support of Defendant Laird Noller Automotive, Inc.’s Motion to Partially Dismiss Claims"
 signature:
-  intro: ["Respectfully submitted,", "MORRIS LAING LAW FIRM"]
-  signer: "/s/ Ryan M. Peck"
-  lines:
-    - "Ryan M. Peck, #21223"
-    - "Cristina Silva, #29791"
-    - "300 N. Mead, Suite 200"
-    - "Wichita, Kansas 67202"
-    - "Direct: (316) 383-6453"
-    - "Main: (316) 262-2671"
-    - "Fax: (316) 262-6226"
-    - "rpeck@morrislaing.com"
-    - "csilva@morrislaing.com"
-    - ""
-    - "*Attorneys for Defendant*"
-    - "*Laird Noller Automotive, Inc.*"
+  date_line: "Respectfully submitted,"
+  firm: "MORRIS LAING LAW FIRM"
+  blocks:
+    - ["/s/ Ryan M. Peck", "Ryan M. Peck, #21223", "Cristina Silva, #29791", "300 N. Mead, Suite 200", "Wichita, Kansas 67202", "Direct: (316) 383-6453", "Main: (316) 262-2671", "Fax: (316) 262-6226", "rpeck@morrislaing.com", "csilva@morrislaing.com"]
+  counsel_for: |-
+    *Attorneys for Defendant*
+    *Laird Noller Automotive, Inc.*
 service:
   date: "August 14, 2026"
   text: "I, the undersigned, do hereby certify that on this 14th day of August, 2026, I electronically filed the foregoing with the clerk of the court by using the CM/ECF system which will send a notice of electronic filing to all counsel who have registered for receipt of documents filed in this matter. A copy also was sent via email to the following:"

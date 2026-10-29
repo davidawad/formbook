@@ -1,65 +1,59 @@
 ---
-# Sample transcribed from the filed exemplar (usage/FILED-EXAMPLE-motion-brief.pdf) for visual
-# comparison only: the whole 13-page motion, with its argument, conclusion, signature block and certificate of service.
-# Omitted: footnote 1 on filed page 2 (the template does not render footnotes; see ../README.md). The ECF header
-# (Case/Document/Filed/Page stamp) is not part of the document and is not transcribed. Italics of case names are not
-# transcribed (the text layer carries no italic markup), so case names are roman. See ../README.md for the meaning of
-# every field.
+# Sample transcribed from the filed exemplar (usage/FILED-EXAMPLE-motion-brief.pdf) for visual comparison: the whole
+# 13-page motion, with its argument, conclusion, signature block and certificate of service, and its footnote 1. The
+# ECF header (Case/Document/Filed/Page stamp) and the filer's running footer ("MOTION TO DISMISS PAGE x OF 13") are
+# not transcribed. The argument numbers ("I.", "a.") are the template's, as the filing numbers them. Italics of case
+# names are not transcribed (the text layer carries no italic markup), so case names are roman. See ../README.md for
+# the meaning of every field.
 case_number: "1:26-cv-03220 JMR/GJF"
-court:
-  - "IN THE UNITED STATES DISTRICT COURT"
-  - "FOR THE DISTRICT OF NEW MEXICO"
 caption:
   parties:
-    - names: ["WESLEY TURNER and", "MALACHI ALDERETE,"]
+    - names: |-
+        WESLEY TURNER and
+        MALACHI ALDERETE,
       designation: "Plaintiffs,"
-    - names: ["CITY OF RIO RANCHO and", "COUNTY OF SANDOVAL,"]
+    - names: |-
+        CITY OF RIO RANCHO and
+        COUNTY OF SANDOVAL,
       designation: "Defendants."
 brief_title: "DEFENDANT CITY OF RIO RANCHO’S MOTION TO DISMISS PLAINTIFFS’ AMENDED CIVIL COMPLAINT [Doc. 1-1]"
-footer_title: "Motion to Dismiss"
 signature:
-  firm:
-    - "MYNATT SPRINGER P.C."
+  date_line: "Respectfully submitted,"
+  firm: "MYNATT SPRINGER P.C."
   blocks:
-    - - "ALAN J. DAHL"
-      - "New Mexico Bar No. 148072"
-      - "SHELTON J. COTTON"
-      - "New Mexico Bar No. 161402"
-      - "P.O. Box 2699"
-      - "Las Cruces, NM 88004-2699"
-      - "(575) 524-8812"
-      - "ajd@mynattspringer.com"
-      - "sjc@mynattspringer.com"
-  attorneys_for: "Attorneys for Defendant City of Rio Rancho"
-certificate:
+    - ["ALAN J. DAHL", "New Mexico Bar No. 148072", "SHELTON J. COTTON", "New Mexico Bar No. 161402", "P.O. Box 2699", "Las Cruces, NM 88004-2699", "(575) 524-8812", "ajd@mynattspringer.com", "sjc@mynattspringer.com"]
+  counsel_for: "*Attorneys for Defendant City of Rio Rancho*"
+service:
   text: "I hereby certify that on this 6th day of October 2026, a true and correct copy of the foregoing was served on the following via the CMECF File and Serve System, electronic mail and U.S. Mail:"
   served:
-    - - "Wesley Turner"
-      - "Malachi Alderete"
-      - "4990 Foxmoore Drive NE"
-      - "Rio Rancho, NM 87144"
-      - "Pro se Plaintiffs"
-    - - "Brandon Huss"
-      - "bhuss@nmcounties.org"
-      - "David Roman"
-      - "droman@nmcounties.org"
-      - "Bree Barnett"
-      - "bbarnett@nmcounties.org"
-      - "Adolfo Mendez"
-      - "amendez@nmcounties.org"
-      - "Attorneys for Defendant County of Sandoval"
-  signed:
-    - "ALAN J. DAHL"
-    - "SHELTON J. COTTON"
+    - |-
+      Wesley Turner
+      Malachi Alderete
+      4990 Foxmoore Drive NE
+      Rio Rancho, NM 87144
+      *Pro se Plaintiffs*
+    - |-
+      Brandon Huss
+      bhuss@nmcounties.org
+      David Roman
+      droman@nmcounties.org
+      Bree Barnett
+      bbarnett@nmcounties.org
+      Adolfo Mendez
+      amendez@nmcounties.org
+      *Attorneys for Defendant County of Sandoval*
+  signed: |-
+    ALAN J. DAHL
+    SHELTON J. COTTON
 ---
-
-# INTRODUCTION AND PROCEDURAL HISTORY
 
 Defendant City of Rio Rancho (the “City”), by and through counsel of record MYNATT SPRINGER P.C. (Alan J. Dahl and Shelton J. Cotton), moves this Court pursuant to Federal Rules of Civil Procedure 12(b)(1), 12(b)(6), and 42(b), and 28 U.S.C. § 1654, for dismissal and other relief regarding Plaintiffs’ Amended Civil Complaint (the “Amended Complaint”) [Doc 1-1] in lieu of answering the Amended Complaint. Per D.N.M.LR-Civ. 7.1(a), the City requested Plaintiffs’ concurrence regarding this Motion and Plaintiffs opposed.
 
+# INTRODUCTION AND PROCEDURAL HISTORY
+
 Plaintiffs, proceeding pro se, filed suit in New Mexico state court on August 12, 2026. Their two-page Original Complaint [Doc. 1-2] generally alleged an unlawful arrest and seizure arising from an August 8, 2026 incident, harassment arising from a separate welfare check in May 2026, and an alleged assault arising from an encounter with a Sandoval County deputy. The Original Complaint did not identify any particular statutory cause of action.
 
-On September 10, 2026, Plaintiffs filed a 37-page Amended Complaint that appears to bring claims under 42 U.S.C. § 1983, the New Mexico Civil Rights Act (the “NMCRA”), and the New Mexico Tort Claims Act (the “NMTCA”) [See Doc. 1-1 at 2, 9-12]. The Amended Complaint also invokes several state and federal constitutional provisions, criminal statutes, and case law. [See id. at 2-3, 5-6, 7-8, 10, 12, 14]. The City removed this action on September 29, 2026, based on the federal claims pled in the Amended Complaint.
+On September 10, 2026, Plaintiffs filed a 37-page Amended Complaint that appears to bring claims under 42 U.S.C. § 1983, the New Mexico Civil Rights Act (the “NMCRA”), and the New Mexico Tort Claims Act (the “NMTCA”) [See Doc. 1-1 at 2, 9-12][^1]. The Amended Complaint also invokes several state and federal constitutional provisions, criminal statutes, and case law. [See id. at 2-3, 5-6, 7-8, 10, 12, 14]. The City removed this action on September 29, 2026, based on the federal claims pled in the Amended Complaint.
 
 # FACTUAL BACKGROUND
 
@@ -83,7 +77,7 @@ For these reasons, discussed further below, the City respectfully requests dismi
 
 # LEGAL STANDARDS
 
-### a. Rule 12(b)(6) and Rule 8
+### Rule 12(b)(6) and Rule 8
 
 To avoid dismissal under Rule 12(b)(6), a complaint must contain “a short and plain statement of the claim showing that the pleader is entitled to relief.” FED. R. CIV. P. 8(a)(2); 12(b)(6). This requires sufficient factual allegations that, when taken as true, “state a claim to relief that is plausible on its face.” Kansas Penn Gaming, LLC v. Collins, 656 F.3d 1210, 1214 (10th Cir. 2011) (citing Bell Atl. Corp. v. Twombly, 550 U.S. 544, 570 (2007)). "A claim has facial plausibility when the plaintiff pleads factual content that allows the court to draw the reasonable inference that the defendant is liable for the misconduct alleged." Ashcroft v. Iqbal, 556 U.S. 662, 678 (2009) (citing Twombly, 550 U.S. at 556). Mere legal conclusions will not satisfy this standard. See id. (citing Twombly, 550 U.S. at 555).
 
@@ -91,25 +85,25 @@ Similarly, speculative complaints that do not state a plausible claim for relief
 
 This plausibility standard ensures fair notice to Defendants of the claims against them and the grounds upon which the claims rest. See Robbins v. Okla. ex rel. Dep’t of Human Servs, 519 F.3d 1242, 1248 (10th Cir. 2008) (citing Twombly, 550 U.S. at 555 n. 3). Whether fair notice has been given depends on the context of the case. See id. at 1248-1250. As the Tenth Circuit explained, a straightforward negligence claim may require relatively few factual allegations, while a § 1983 claim involving multiple government actors presents a different problem. See id. at 1249-1250. For the latter situation, the complaint must “make clear exactly who is alleged to have done what to whom, to provide each individual with fair notice as to the basis of the claims against him or her.” Id. at 1250 (citing Twombly 550 U.S. at 565 n.10) (emphasis in original). Accordingly, allegations directed collectively to “defendants”, without distinguishing the conduct attributable to each defendant, fail to provide the adequate notice required by Rule 8. See id.
 
-### b. Rule 12(b)(1)
+### Rule 12(b)(1)
 
 Rule 12(b)(1) permits dismissal for lack of subject-matter jurisdiction. See FED. R. CIV. P. 12(b)(1). In Gallegos, the United States District Court for the District of New Mexico held that the NMTCA’s notice requirement is jurisdictional and therefore must be considered under Rule 12(b)(1). See Gallegos v. Bernalillo County Board of County Commissioners, 278 F. Supp. 3d 1245, 1273-74 (D.N.M. 2017). A Rule 12(b)(1) challenge may take either a facial or factual form. See id. at 1258–59. A facial attack challenges the sufficiency of the complaint’s jurisdictional allegations, which the Court accepts as true. See id. A factual attack challenges the jurisdictional facts themselves and permits the Court to consider evidence outside the pleadings without converting the motion into one for summary judgment. See id.
 
 Under the NMTCA, no action against a local public body for which immunity has been waived may be maintained, and “no court shall have jurisdiction” to consider such an action, unless the statutory notice was provided or “the governmental entity had actual notice of the occurrence.” NMSA 1978, § 41-4-16(B). As Gallegos set forth, “[b]ecause the notice requirement is jurisdictional, the Court must determine whether it has jurisdiction under rule 12(b)(1).” 278 F. Supp. 3d at 1273.
 
-### c. 28 U.S.C. § 1654
+### 28 U.S.C. § 1654
 
 Under 28 U.S.C. § 1654, parties in federal court “may plead and conduct their own cases personally or by counsel.” 28 U.S.C. § 1654. The right of self-representation, however, is personal and does not authorize a non-attorney litigant to represent another party. In Meeker, the Tenth Circuit held that although a pro se plaintiff had the right to appear on his own behalf, he did not have the right to represent other plaintiffs. See Meeker v. Kercher, 782 F.2d 153, 154 (10th Cir. 1986). Accordingly, the Tenth Circuit did not address the appeal of the plaintiffs impermissibly represented by the pro se plaintiff. See id.
 
-### d. Rule 42(b)
+### Rule 42(b)
 
 Federal Rule of Civil Procedure 42(b) provides that, “[f]or convenience, to avoid prejudice, or to expedite and economize,” a court may order a separate trial of one or more separate issues or claims. FED. R. CIV. P. 42(b). In ordering separate trials, the Court must preserve any federal right to a jury trial. See id. In determining whether bifurcation is appropriate, courts consider whether separate trials would further convenience and economy, whether the issues are sufficiently separable, and whether bifurcation would avoid unfair prejudice. See Angelo v. Armstrong World Indus., Inc., 11 F.3d 957, 964–65 (10th Cir. 1993).
 
 # ARGUMENT
 
-## I. The Amended Complaint conflates multiple theories of liability involving several separate incidents, two Plaintiffs, and two Defendants without clearly identifying the legal basis for each claim and therefore should be dismissed for failing to provide adequate fair notice.
+## The Amended Complaint conflates multiple theories of liability involving several separate incidents, two Plaintiffs, and two Defendants without clearly identifying the legal basis for each claim and therefore should be dismissed for failing to provide adequate fair notice.
 
-### a. Plaintiffs fail to clearly identify who allegedly did what to whom or the legal basis for each claim.
+### Plaintiffs fail to clearly identify who allegedly did what to whom or the legal basis for each claim.
 
 As demonstrated above, the problem with the Amended Complaint is not simply that Plaintiffs have imperfectly labeled otherwise discernible causes of action. Plaintiffs intermingle separate incidents, individuals, and state and federal authorities without consistently connecting those authorities to their particular claims. [See Doc 1-1 at 4-14].
 
@@ -119,7 +113,7 @@ This issue was addressed in Robbins, which held that plaintiffs asserting civil 
 
 Accordingly, the Amended Complaint should be dismissed under Rule 12(b)(6) for failure to provide fair notice of the claims asserted against the City. To the extent the Court allows amendment, Plaintiffs should, at minimum, be required to separately identify each cause of action, the Plaintiff asserting it, the Defendant against whom it is asserted, the incident giving rise to the claim, the individual state actors involved, and the legal basis for the claim.
 
-### b. Plaintiffs fail to state a § 1983 claim against the City.
+### Plaintiffs fail to state a § 1983 claim against the City.
 
 To state a § 1983 claim against a municipality, Plaintiffs must plausibly allege (1) an underlying constitutional violation; (2) the existence of a municipal policy or custom; and (3) a direct causal link between the policy or custom and the alleged injury. See Monell v. Dep’t of Soc. Servs., 436 U.S. 658, 691, 694 (1978); see also Jenkins v. Wood, 81 F.3d 988, 993-94 (10th Cir. 1996). A municipality cannot be held liable under § 1983 solely because one of its employees allegedly committed a constitutional violation. See Monell, 436 U.S. at 691.
 
@@ -127,7 +121,7 @@ Even assuming arguendo that Plaintiffs sufficiently alleged an underlying consti
 
 Because Plaintiffs fail to plausibly allege a municipal policy or custom that caused an alleged constitutional deprivation, their § 1983 claim against the City must be dismissed.
 
-### c. Plaintiffs fail to identify a cognizable basis for civil recovery under the criminal statutes cited in the Amended Complaint.
+### Plaintiffs fail to identify a cognizable basis for civil recovery under the criminal statutes cited in the Amended Complaint.
 
 Plaintiffs invoke the NMTCA and generally allege “[t]ort law duty, breach of duty, and proximate cause” and that “[b]oth defendants had a duty to perform (laws herein and integrity), and acted in criminal negligence.” [See Doc 1-1 at 9]. Plaintiffs then cite numerous state and federal criminal statutes without explaining whether those statutes are asserted as independent causes of action or in support of another civil theory of liability. [See id. at 10-14].
 
@@ -135,13 +129,13 @@ To the extent Plaintiffs seek civil recovery under those criminal statutes, they
 
 Plaintiffs also fail to identify a civil basis of recovery arising under the criminal statutes. Accordingly, to the extent Plaintiffs seek to recover directly under criminal statutes that provide no private right of action, those claims should be dismissed. To the extent Plaintiffs instead seek recovery under some other state law theory, they must provide fair notice of the corresponding state cause of action.
 
-## II. Plaintiffs failed to timely serve the City with notice of any putative tort claims arising from the May 18 incident, thereby warranting dismissal of those claims under the NMTCA.
+## Plaintiffs failed to timely serve the City with notice of any putative tort claims arising from the May 18 incident, thereby warranting dismissal of those claims under the NMTCA.
 
 The NMTCA requires an individual claiming damages against a municipality to provide the mayor, within ninety days of the occurrence giving rise to the claim, written notice stating, “the time, place and circumstances of the loss or injury.” NMSA 1978, § 41-4-16(A). The Act further provides that no action against a local public body for which immunity has been waived may be maintained and no court shall have jurisdiction over any suit against a municipality unless the required notice was given or “the governmental entity had actual notice of the occurrence.” Id. § 41-4-16(B).
 
 Here, Plaintiffs invoke the NMTCA but failed to provide the City with the notice required by § 41-4-16 concerning any putative tort claims arising from the May 18 incident. The ninety-day period for providing written notice concerning the May 18 incident expired on August 17, 2026. Accordingly, to the degree that Plaintiffs assert NMTCA claims against the City arising from the May 18 incident, those claims must be dismissed under Rule 12(b)(1). See Gallegos, 278 F. Supp. 3d at 1273-76.
 
-## III. Neither pro se Plaintiff may prosecute claims belonging to the other.
+## Neither pro se Plaintiff may prosecute claims belonging to the other.
 
 Should this Court allow Plaintiffs’ claims to proceed, Turner may prosecute his own claims, and Alderete may prosecute his own claims. Neither Plaintiff, however, may proceed pro se on behalf of the other. See 28 U.S.C. § 1654; see also Meeker, 782 F.2d at 154.
 
@@ -149,7 +143,7 @@ The City raises this distinction because the Amended Complaint often shifts betw
 
 To the extent either Plaintiff attempts to prosecute or advocate claims belonging to the other, § 1654 does not allow him to do so. Plaintiffs must bring their claims separately.
 
-## IV. Alternatively, claims arising from separate incidents should be bifurcated.
+## Alternatively, claims arising from separate incidents should be bifurcated.
 
 If the Court permits claims arising from the separate incidents to proceed, those claims must be bifurcated pursuant to Rule 42(b). As explained above, Plaintiffs’ claims present several distinctions. Trying those claims together would unnecessarily blur the factual and legal issues presented by each incident and confuse the jury. By contrast, separate trials would allow the parties and the Court to address each incident on its own facts and applicable legal theories while reducing the potential for confusion and prejudice. Since the incidents are factually distinct, the issues are sufficiently separable, and separate trials would promote convenience and judicial economy while avoiding prejudice, bifurcation is appropriate under Rule 42(b). See Angelo, 11 F.3d at 964–65.
 
@@ -160,3 +154,5 @@ For the foregoing reasons, the City respectfully requests that the Court dismiss
 The City further requests that, should any claims survive dismissal, the Court require each Plaintiff to prosecute only his own claims, personally or through licensed counsel.
 
 Alternatively, if the Court permits any claims from separate incidents to proceed, the City requests that those claims be bifurcated to avoid prejudice and confusion and promote judicial efficiency.
+
+[^1]: Because the Amended Complaint does not consistently number its paragraphs or counts, the City cites to the page numbers of the Amended Complaint for ease of reference. See generally Am. Compl. at 4–14.
