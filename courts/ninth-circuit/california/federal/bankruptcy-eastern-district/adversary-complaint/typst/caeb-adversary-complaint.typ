@@ -38,6 +38,8 @@
 // below the one and above the other (Word's exact line spacing; the docx engine sets the same twips).
 #let pitch = 24pt                       // LBR 9004-2(a)(2), (b)(1): numbered lines, double spaced
 #let pitch-single = 12pt                // counsel, caption, quotations and signature are single spaced (LBR 9004-2(b)(1)): two lines to a numbered line
+#let single-size = 12pt                 // their type (LBR 9004-2(a)(4): 12 to 14 point), solid on the 12 pt pitch; 13 pt type
+                                        // would set them closer than solid (DEF-FORM-004)
 #let half-gap = 12pt                    // a blank half line in the caption and the signature block
 #let drop = 9.6pt                       // a block of single lines starts this far below a numbered line's top, so its first line
                                         // (and every second) stands on a line number's baseline (0.8 x 24 pt = 9.6 + 0.8 x 12 pt)
@@ -61,9 +63,9 @@
 /// A metadata value as a list (a YAML list or one string).
 #let as-list(v) = if type(v) == array { v } else { (v,) }
 
-/// One single-spaced line block (a paragraph of its own), with explicit space above it.
-#let line-block(above: 0pt, body) = block(width: 100%, above: above, below: 0pt, {
-  set text(..edges(pitch-single))
+/// One single-spaced line block (a paragraph of its own), with explicit space above it, in `size` type.
+#let line-block(above: 0pt, size: single-size, body) = block(width: 100%, above: above, below: 0pt, {
+  set text(size: size, ..edges(pitch-single))
   set par(first-line-indent: 0pt)
   body
 })
@@ -102,13 +104,13 @@
   top + left,
   dx: left-margin,
   dy: top-margin + lines-per-page * pitch + 8pt,
-  block(width: text-width, line-block(align(center, context counter(page).display()))),
+  block(width: text-width, line-block(size: type-size, align(center, context counter(page).display()))),
 )
 
 /// Upper left corner of the first page: the total number of pages (LBR 9004-2(c)(4)).
 #let page-total() = context if counter(page).get().first() == 1 {
   place(top + left, dx: left-margin, dy: total-top,
-    block(width: counsel-width, line-block[Page total: #counter(page).final().first()]))
+    block(width: counsel-width, line-block(size: type-size)[Page total: #counter(page).final().first()]))
 }
 
 // ---------------------------------------------------------------------------
@@ -231,7 +233,7 @@
       } else if t.starts-with(">") {
         // A quotation is single spaced (LBR 9004-2(b)(1)) and indented on both sides.
         block(width: 100%, above: drop, below: 0pt, inset: (left: para-indent, right: para-indent), {
-          set text(..edges(pitch-single))
+          set text(size: single-size, ..edges(pitch-single))
           par(first-line-indent: 0pt, md(t.split(regex("\\r?\\n")).map(l => l.trim(">", at: start).trim()).join("\n")))
         })
       } else {

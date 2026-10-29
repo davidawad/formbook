@@ -16,6 +16,7 @@ local xe = require("docx.xengine")
 
 local BODY, SINGLE = 480, 240            -- typst pitch, pitch-single
 local HALF = 240                         -- typst half-gap 12 pt
+local SMALL = { sz = 24 }                -- typst single-size 12 pt: the type of every single line (counsel, caption, signature, quotations)
 local DROP = 192                         -- typst drop 9.6 pt: single lines on the line numbers' baselines
 local INDENT = 720                       -- typst para-indent and item-indent, 0.5 in
 local NUMBER_TAB = 1440                  -- typst para-indent + number-box: the text of an allegation or list item
@@ -96,7 +97,7 @@ local function cover(meta, out)
   -- by whole numbered lines, half a line kept below the last (typst counsel-block)
   local counsel = list(meta.counsel)
   for j, l in ipairs(counsel) do
-    out[#out + 1] = p(xe.inl(l), { before = j == 1 and DROP or 0, right = COUNSEL_RIGHT })
+    out[#out + 1] = p(xe.inl(l, SMALL), { before = j == 1 and DROP or 0, right = COUNSEL_RIGHT })
   end
   local rows = math.max(COUNSEL_LINES, grid_rows(#counsel, 1))
   for i, l in ipairs(list(meta.court)) do
@@ -107,21 +108,21 @@ local function cover(meta, out)
   -- first paragraph of each cell carries it. The right column spans both rows (the debtors, the party box).
   local top = BODY + DROP
   local debtors = {}
-  for j, l in ipairs(list(meta.caption.debtors)) do debtors[#debtors + 1] = p(xe.inl(l), { before = j == 1 and top or 0 }) end
+  for j, l in ipairs(list(meta.caption.debtors)) do debtors[#debtors + 1] = p(xe.inl(l, SMALL), { before = j == 1 and top or 0 }) end
   local parties = {}
   for k, party in ipairs(meta.caption.parties) do
-    if k > 1 then parties[#parties + 1] = p(xe.runs("v.")) end
-    for _, n in ipairs(list(party.names)) do parties[#parties + 1] = p(xe.inl(n)) end
-    parties[#parties + 1] = p(xe.inl(party.designation))
+    if k > 1 then parties[#parties + 1] = p(xe.runs("v.", SMALL)) end
+    for _, n in ipairs(list(party.names)) do parties[#parties + 1] = p(xe.inl(n, SMALL)) end
+    parties[#parties + 1] = p(xe.inl(party.designation, SMALL))
   end
   local function r(body, before) return p(body, { before = before or 0, left = RIGHT_INSET }) end
   local right = {}
-  for j, l in ipairs(list(meta.caption["case-lines"])) do right[#right + 1] = r(xe.inl(l), j == 1 and top or 0) end
-  for j, l in ipairs(list(meta.caption["chapter-lines"])) do right[#right + 1] = r(xe.inl(l), j == 1 and HALF or 0) end
-  right[#right + 1] = r(xe.runs("Adv. Proc. No.: " .. text(meta.caption.adversary)), HALF)
-  if meta.caption.dcn then right[#right + 1] = r(xe.runs("DCN: " .. text(meta.caption.dcn)), HALF) end
-  right[#right + 1] = r(xe.inl(upper(meta.brief_title), { b = true }), HALF)
-  if meta.jury_demand then right[#right + 1] = r(xe.runs("DEMAND FOR JURY TRIAL", { b = true }), HALF) end
+  for j, l in ipairs(list(meta.caption["case-lines"])) do right[#right + 1] = r(xe.inl(l, SMALL), j == 1 and top or 0) end
+  for j, l in ipairs(list(meta.caption["chapter-lines"])) do right[#right + 1] = r(xe.inl(l, SMALL), j == 1 and HALF or 0) end
+  right[#right + 1] = r(xe.runs("Adv. Proc. No.: " .. text(meta.caption.adversary), SMALL), HALF)
+  if meta.caption.dcn then right[#right + 1] = r(xe.runs("DCN: " .. text(meta.caption.dcn), SMALL), HALF) end
+  right[#right + 1] = r(xe.inl(upper(meta.brief_title), { b = true, sz = SMALL.sz }), HALF)
+  if meta.jury_demand then right[#right + 1] = r(xe.runs("DEMAND FOR JURY TRIAL", { b = true, sz = SMALL.sz }), HALF) end
   local mar = '<w:tcMar><w:right w:w="' .. CAP_INSET .. '" w:type="dxa"/></w:tcMar>'
   out[#out + 1] = tbl({ CAP_LEFT, CAP_GUTTER, TEXTW - CAP_LEFT - CAP_GUTTER }, {
     { cells = {
@@ -152,13 +153,13 @@ local function signatures(meta, out)
   for _, sig in ipairs(list(meta.signature)) do
     local firm, lines = list(sig.firm), list(sig.lines)
     local rows = grid_rows(1 + #firm + 2 + #lines, 2)
-    left[#left + 1] = p(xe.runs("Dated: " .. text(meta.date)), { before = since + BODY + DROP })
+    left[#left + 1] = p(xe.runs("Dated: " .. text(meta.date), SMALL), { before = since + BODY + DROP })
     since = rows * BODY - DROP - SINGLE
-    right[#right + 1] = p(xe.runs("Respectfully submitted,"), { before = pad + BODY + DROP })
-    for j, l in ipairs(firm) do right[#right + 1] = p(xe.inl(l), { before = j == 1 and HALF or 0 }) end
-    right[#right + 1] = p(xe.runs("By: /s/ " .. text(sig.signer)), { before = HALF })
-    right[#right + 1] = p(xe.runs(text(sig.signer)))
-    for _, l in ipairs(lines) do right[#right + 1] = p(xe.inl(l)) end
+    right[#right + 1] = p(xe.runs("Respectfully submitted,", SMALL), { before = pad + BODY + DROP })
+    for j, l in ipairs(firm) do right[#right + 1] = p(xe.inl(l, SMALL), { before = j == 1 and HALF or 0 }) end
+    right[#right + 1] = p(xe.runs("By: /s/ " .. text(sig.signer), SMALL), { before = HALF })
+    right[#right + 1] = p(xe.runs(text(sig.signer), SMALL))
+    for _, l in ipairs(lines) do right[#right + 1] = p(xe.inl(l, SMALL)) end
     pad = rows * BODY - DROP - (3 + #firm + #lines) * SINGLE - 2 * HALF
   end
   pad_last(right, pad)
@@ -209,7 +210,7 @@ local function body(blocks, out, first)
     elseif b.t == "BlockQuote" then
       -- LBR 9004-2(b)(1): single spaced, indented on both sides
       for k, q in ipairs(b.content) do
-        out[#out + 1] = p(xe.inl(q.content), o({ before = k == 1 and DROP or 0, left = INDENT, right = INDENT,
+        out[#out + 1] = p(xe.inl(q.content, SMALL), o({ before = k == 1 and DROP or 0, left = INDENT, right = INDENT,
           keep = last }))
       end
     elseif b.t == "OrderedList" or b.t == "BulletList" then
