@@ -10,3 +10,7 @@ params:
   # page 5; LaTeX moves that line on with its note, and 18 of 24 page ends differ after it. The model does not yet
   # keep a note on its mark's page in typst (docs/open-items/fb-595.54.21.md, B5); reported, not gated.
   cross_engine_latex: report
+  # docx the same since Footnote Text keeps typst's clearance + gap above the first note (fb-595.54.11.2): LibreOffice
+  # then moves the quotation's last line on to p6 with note 3 (typst p5 ends "emotional injury.3", docx p5 "In its
+  # order,"; 18 of 24 page ends differ after it), the anchor-line rule of fb-595.54.11.4; reported, not gated.
+  cross_engine_docx: report

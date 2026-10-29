@@ -1,3 +1,3 @@
 PASS
-fe6eed7d17d74eaa90a8c60d1b7b374fb33f8d3a9e07d8969eb05538797d4410  usage/OUTPUT-answering-brief.docx
-2a3a505bf40d5964660c10e381e06975d1c19be6499948dc1070b3542e5b0368  usage/OUTPUT-answering-brief.docx.pdf
+59614c3966b8cb46a7519ae62ed259e832064269f751f85f3b5eec4f8b1734a6  usage/OUTPUT-answering-brief.docx
+e0344f78a9287c19a4367d19bc6416716f6df37cc017e9fdb8f5dff2537ccf8b  usage/OUTPUT-answering-brief.docx.pdf
