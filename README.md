@@ -538,8 +538,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, E.D. Missouri](courts/eighth-circuit/missouri/federal/bankruptcy-eastern-district) | `moeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Missouri](courts/eighth-circuit/missouri/federal/bankruptcy-western-district) | `mowb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, E.D. Missouri](courts/eighth-circuit/missouri/federal/eastern-district) | `moed` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, W.D. Missouri](courts/eighth-circuit/missouri/federal/western-district) | `mowd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. Missouri](courts/eighth-circuit/missouri/federal/eastern-district) | `moed` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, W.D. Missouri](courts/eighth-circuit/missouri/federal/western-district) | `mowd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Missouri Court of Appeals](courts/eighth-circuit/missouri/state/court-of-appeals) | `moctapp` | up for review | 5/5 | 1/1 | 0/1 | 29 |
 | [Missouri Court of Appeals, Eastern District](courts/eighth-circuit/missouri/state/court-of-appeals-eastern-district) | `moctapped` | up for review | 4/4 | 4/4 | 0/4 | 29 |
 | [Missouri Court of Appeals, Southern District](courts/eighth-circuit/missouri/state/court-of-appeals-southern-district) | `moctappsd` | up for review | 3/3 | 3/3 | 1/3 | 29 |
@@ -551,7 +551,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Nebraska](courts/eighth-circuit/nebraska/federal/bankruptcy-district) | `nebraskab` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court, Nebraska](courts/eighth-circuit/nebraska/federal/district) | `ned` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court, Nebraska](courts/eighth-circuit/nebraska/federal/district) | `ned` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Nebraska Court of Appeals](courts/eighth-circuit/nebraska/state/court-of-appeals) | `nebctapp` | up for review | 4/4 | 4/4 | 0/4 | 29 |
 | [Nebraska Supreme Court](courts/eighth-circuit/nebraska/state/supreme-court) | `neb` | up for review | 5/5 | 4/4 | 1/3 | 29 |
 
@@ -560,7 +560,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. North Dakota](courts/eighth-circuit/north-dakota/federal/bankruptcy-district) | `ndb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. North Dakota](courts/eighth-circuit/north-dakota/federal/district) | `ndd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. North Dakota](courts/eighth-circuit/north-dakota/federal/district) | `ndd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [North Dakota Court of Appeals](courts/eighth-circuit/north-dakota/state/court-of-appeals) | `ndctapp` | up for review | 3/3 | 3/3 | 0/2 | 29 |
 | [North Dakota Supreme Court](courts/eighth-circuit/north-dakota/state/supreme-court) | `nd` | up for review | 7/7 | 6/6 | 0/6 | 29 |
 
@@ -569,7 +569,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. South Dakota](courts/eighth-circuit/south-dakota/federal/bankruptcy-district) | `sdb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. South Dakota](courts/eighth-circuit/south-dakota/federal/district) | `sdd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. South Dakota](courts/eighth-circuit/south-dakota/federal/district) | `sdd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Supreme Court of South Dakota](courts/eighth-circuit/south-dakota/state/supreme-court) | `sd` | up for review | 4/4 | 4/4 | 2/4 | 29 |
 
 ## Ninth Circuit
@@ -863,13 +863,13 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Fifth Circuit | 26 | 0 | 26 | 0 | 0 | 0.0% | 100.0% | 26 | 13 | 23 | 18.0% |
 | Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 12 | 23 | 18.6% |
 | Seventh Circuit | 21 | 0 | 21 | 0 | 0 | 0.0% | 100.0% | 21 | 4 | 15 | 18.2% |
-| Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 38 | 22 | 26 | 20.3% |
+| Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 38 | 27 | 26 | 20.3% |
 | Ninth Circuit | 61 | 0 | 59 | 2 | 0 | 0.0% | 96.7% | 58 | 19 | 44 | 21.0% |
 | Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 31 | 15 | 23 | 19.3% |
 | Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 13 | 23 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 4 | 3 | 3 | 17.7% |
 | Fifth Circuit | 1 | 0 | 1 | 0 | 0 | 0.0% | 100.0% | 1 | 0 | 0 | 14.0% |
-| **Total** | 377 | 0 | 354 | 23 | 0 | 0.0% | 93.8% | 353 | 152 | 269 | 19.0% |
+| **Total** | 377 | 0 | 354 | 23 | 0 | 0.0% | 93.8% | 353 | 157 | 269 | 19.0% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
