@@ -1,0 +1,99 @@
+# U.S. District Court for the Northern District of California (cand): a notice of motion and motion with its
+# memorandum of points and authorities in one document (Civil L.R. 7-2, 7-4), on the generic FRCP brief
+# (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with N.D. Cal.'s local rules overlaid here, on pleading paper
+# (fb-595.96). The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged
+# layout by `fb engines gen`). Rules: N.D. Cal. Civil Local Rules (effective October 2, 2026), Civil L.R. 3-4, 7-2, 7-4
+# (../README.md quotes them). The base already sets 12-point type (Civil L.R. 3-4(c)(2)(B), footnotes included).
+base: /lib/layouts/frcp-motion-brief.yaml
+# Civil L.R. 3-4(c)(2) (CAND-FORM-003): double-spaced text, no more than 28 lines a page; counsel, the caption,
+# headings, tables, footnotes and the signature single-spaced, two lines to a numbered line.
+pitch: {body: 24, single: 12}
+# Civil L.R. 3-4(c)(1) (CAND-FORM-001): letter paper with numbered lines: 28 lines of 24 pt fill 672 of the 792 pt
+# page, so the top and bottom margins are 60 pt (the rules set no minimum margin); a 1.5 in left margin holds the
+# numbers and the rules.
+margin: {top: 60, bottom: 60, left: 108, right: 72}
+# pleading paper: the numbers 1 to 28 right-aligned on 1 in, one a numbered line from the top margin; a double rule at
+# the text's left (1.3 in and 1.34 in from the page's left edge) and a single one 0.1 in right of the text
+pleading: {lines: 28, rules: [93.6, 96.5, 547.2]}
+# Civil L.R. 3-4(c)(3) (CAND-FORM-005): a footer on each page with the paper's title and the case number: the page
+# number, the sample's `footer_title` (a title of two lines wraps) and "No." with the case number, centered, 10 pt in
+# 11.5 pt lines, the last 8 pt above the page's foot (anchored there and growing upward). The cover unnumbered, the
+# tables from i, the memorandum from 1.
+page_number: {align: center, front: lower-roman, size: 10, pitch: 11.5, foot: 8, text: "{page}<br>{footer_title}<br>No. {case_number}"}
+footnote: {size: 12, pitch: single, gap: 7, clearance: 12.6}
+# Civil L.R. 3-4(a) (CAND-FIRST-001, -002), 7-2(b)(1) and 7-4(a)(1) (CAND-FIRST-003): the first page: counsel's name,
+# address, telephone, e-mail and bar number at the upper left and the party represented (in italics), in a box at least
+# six numbered lines high, so the court title (bold capitals, centered, from the sample's `court`) starts on the
+# eighth line at the earliest; the caption: the parties at the left, each party's designation 1.8 in in, "v." centered
+# between them, ruled at their right and foot; at the right the case number, the paper's title in bold capitals and the
+# noticed hearing (date, time, place, judge).
+cover:
+  - box:
+      - {text: "{counsel}"}
+      - {text: "{counsel_role}", italic: true}
+    min_height: 144
+  - {text: "{court}", align: center, bold: true, upper: true, above: 24}
+  - columns:
+      - blocks:
+          - box:
+              - each: caption
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", left: 129.6}
+                between:
+                  - {text: "v.", align: center, above: 12, below: 12}
+            stroke: {right: 0.75, bottom: 0.75}
+            inset: {right: 14.4, bottom: 12}
+      - blocks:
+          - {text: "Case No. {case_number}", left: 14.4, above: 3.6}
+          - {text: "{brief_title}", bold: true, upper: true, left: 14.4, above: 12}
+          - {text: "Date: {hearing.date}", left: 14.4, above: 12, optional: true}
+          - {text: "Time: {hearing.time}", left: 14.4, optional: true}
+          - {text: "Place: {hearing.place}", left: 14.4, optional: true}
+          - {text: "{hearing.judge}", left: 14.4, optional: true}
+    above: 24
+front: []
+# Civil L.R. 7-4(a)(2) (CAND-CONT-003): a table of contents and a table of authorities. The contents: a row per heading
+# to the fourth level, a numbered heading's label in its box, each level half an inch further in, the page in a 36 pt
+# column, 6 pt between rows; the authorities from the sample's keyed `authorities` (`toa:` links), grouped (cases in
+# italics, a comma before the citation), the pages in an inch, "passim" for seven or more, "Page(s)" over the first group.
+contents: {title: "Table of Contents", depth: 4, col: 36, step: 36, above: 6}
+authorities:
+  title: "Table of Authorities"
+  col: 72
+  hang: 25.2
+  above: 6
+  passim: 7
+  page_heading: "Page(s)"
+  group: {bold: true, above: 12}
+  kinds:
+    - {kind: case, title: "Cases", italic: true, separator: ", "}
+    - {kind: statute, title: "Federal Statutes"}
+    - {kind: rule, title: "Federal Rules"}
+    - {kind: regulation, title: "Federal Regulations"}
+    - {kind: other, title: "Other Authorities"}
+# Civil L.R. 7-2(b), 7-4(a) (CAND-CONT-001): the notice, relief sought, issues and memorandum as level-1 headings,
+# centered in bold capitals; the memorandum's sections numbered I., A., 1., a. by the layout, bold, the label in a
+# half-inch box and the title hanging after it, each level half an inch further in; single-spaced, 12 pt above and
+# below, kept with what follows.
+heading:
+  - {align: center, bold: true, upper: true, above: 12, below: 12}
+  - {bold: true, number: "I.", label_box: 36, above: 12, below: 12}
+  - {bold: true, left: 36, number: "A.", label_box: 36, above: 12, below: 12}
+  - {bold: true, left: 72, number: "1.", label_box: 36, above: 12, below: 12}
+  - {bold: true, left: 108, number: "a.", label_box: 36, above: 12, below: 12}
+# FRCP 11(a): the date at the margin; at the right (3.2 in) "Respectfully submitted,", the preamble a numbered line
+# below, the signer's "/s/" in italics a numbered line below that, the signer and the signer's lines; kept with the
+# body's last paragraph (the base's keep_with_closing).
+closing:
+  - columns:
+      - blocks:
+          - {text: "Dated: {date}"}
+      - width: 230.4
+        blocks:
+          - {text: "Respectfully submitted,"}
+          - {text: "{signature.preamble}", above: 24, optional: true}
+          - {text: "/s/ {signature.signer}", italic: true, above: 24}
+          - {text: "{signature.signer}"}
+          - {text: "{signature.lines}", optional: true}
+    above: 24

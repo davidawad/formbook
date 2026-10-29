@@ -25,7 +25,7 @@ caption:
       - "UNITED STATES DEPARTMENT OF THE INTERIOR; RYAN ZINKE, in his official capacity as Secretary of the Interior; MICHAEL S. BLACK, in his official capacity as Acting Assistant Secretary-Indian Affairs of the United States Department of the Interior; and DOES 1 to 100,"
     designation: "Defendants."
 brief_title: "Motion to Dismiss or Transfer for Improper Venue or, in the Alternative, Motion to Dismiss for Failure to State a Claim"
-footer_title: "Motion to Dismiss or Transfer for Improper Venue or, in the Alternative, Motion to Dismiss for Failure to State a Claim"
+footer_title: "MOTION TO DISMISS OR TRANSFER FOR IMPROPER VENUE OR, IN THE ALTERNATIVE, MOTION TO DISMISS FOR FAILURE TO STATE A CLAIM"
 hearing:
   date: "Thursday, May 25, 2017"
   time: "9:30 a.m."
