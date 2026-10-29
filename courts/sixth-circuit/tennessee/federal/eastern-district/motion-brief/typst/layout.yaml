@@ -1,0 +1,82 @@
+# U.S. District Court for the Eastern District of Tennessee (tned): a memorandum of law supporting a motion, on the
+# generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with E.D. Tenn.'s local rules overlaid here. The
+# shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb
+# engines gen`). Rules: E.D. Tenn. Local Rules, revised April 8, 2026, https://www.tned.uscourts.gov/local-rules
+# (verified 2026-10-14; ../../rules.md TNED-FORM-001, TNED-SIG-001; ../README.md). The base already meets LR 5.1:
+# 8 1/2 x 11 paper, margins of at least one inch on all four sides, type no smaller than 12 points (footnotes too), the
+# text double-spaced, the pages numbered consecutively at the bottom. The 25-page limit of LR 7.1(b) is checked on the
+# render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, as the exemplar sets it (the division follows, from the sample).
+constants:
+  court: "UNITED STATES DISTRICT COURT"
+  district: "EASTERN DISTRICT OF TENNESSEE"
+# LR 5.1: footnotes single-spaced; 7 pt between notes and from the text to the rule (the room LibreOffice keeps above
+# a note).
+footnote: {clearance: 7}
+# LR 5.1: quotations indented and single-spaced: half an inch in on each side, 12 pt from the text.
+quote: {left: 36, right: 36, above: 12, below: 12}
+# LR 5.1: headings single-spaced, bold, 12 pt above and below. The author types each heading's number ("I.", "A.",
+# "1."): a section centered in capitals (both exemplars); deeper levels with their later lines hung half an inch,
+# a point at the margin, a sub-point half an inch in, the next an inch in and italic.
+heading:
+  - {align: center, bold: true, upper: true, above: 12, below: 12}
+  - {bold: true, hang: 36, above: 12, below: 12}
+  - {bold: true, left: 36, hang: 36, above: 12, below: 12}
+  - {bold: true, italic: true, left: 72, hang: 36, above: 12, below: 12}
+# FRCP 10(a), 7(b)(2): the court's name and the division (the sample's, in capitals), a double line below them the
+# caption as the first exemplar sets it: the parties at the left (each party's names in capitals, a blank line, its
+# designation half an inch in; "v." at the margin, a blank line from each), the file number at the right, centered
+# on their height. Then the paper's title centered in bold capitals between two rules across the page (the first
+# exemplar's; the second filer rules under its caption only: tier 2, ../README.md).
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{division}", align: center, bold: true, upper: true, optional: true}
+  - columns:
+      - width: 234
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}", upper: true}
+              - {text: "{designation}", left: 36, above: 13.8}
+            between:
+              - {text: "v.", above: 13.8, below: 13.8}
+      - valign: center
+        blocks:
+          - {text: "{case_label|No.} {case_number}"}
+    gutter: 18
+    above: 24
+  - {rule: 0.75, above: 13.8}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 13.8}
+  - {rule: 0.75, above: 13.8, below: 13.8}
+# FRCP 11(a), LR 5.1 (the filing attorney's name, address, telephone number and BPR number): three and a quarter
+# inches in, "Respectfully submitted,", the firm, the e-signature, each attorney's name with the BPR number and the
+# address lines, whom they represent in italics, a blank line between the groups; kept whole and with the last
+# paragraph. FRCP 5(b), 5(d)(1)(B): the certificate of service, when the sample gives one, on a page of its own: the
+# title in bold underlined capitals (both exemplars), the text double-spaced, the persons served an inch in, the
+# e-signature three and a quarter inches in.
+closing:
+  - group:
+      - {text: "Respectfully submitted,", left: 234}
+      - {text: "{signature.firm}", left: 234, optional: true, above: 13.8}
+      - {text: "By: /s/ {signature.by}", left: 234, above: 13.8}
+      - each: signature.attorneys
+        blocks:
+          - {text: "{name}, {bpr}", left: 234, above: 13.8}
+          - {text: "{lines}", left: 234}
+      - {text: "{signature.role}", left: 234, italic: true, optional: true, above: 13.8}
+    above: 24
+  - when: certificate
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, underline: true, below: 12, keep: true}
+      - {markdown: "{certificate.text}", pitch: body, indent: 36}
+      - group:
+          - each: certificate.recipients
+            blocks:
+              - {text: "{.}", left: 72}
+            gap: 13.8
+          - {text: "By: /s/ {certificate.by}", left: 234, above: 13.8}
+          - {text: "{certificate.by}", left: 234}
+        above: 12

@@ -1,0 +1,93 @@
+# U.S. District Court for the Middle District of Tennessee (tnmd): a memorandum of law in support of a motion, on the
+# generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with M.D. Tenn.'s local rules overlaid here. The
+# shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb
+# engines gen`). Rules: M.D. Tenn. Local Rules of Court (2025 amendments, effective 2025-05-15),
+# https://www.tnmd.uscourts.gov/sites/tnmd/files/2025.05.15%20TNMD%20Local%20Rules%20of%20Court%20-%202025%20amendments%20_0.pdf
+# (read 2026-10-14; ../README.md TNMD-FORM-001..005, TNMD-MEMO-001..010). The base already meets LR 7.03(a): 8 1/2 x 11
+# paper, one-inch margins, at least 12-point type (footnotes too), every page numbered at the bottom. The 25-page
+# limit of LR 7.01(a)(2) is checked on the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# LR 7.03(a) (TNMD-FORM-003): all but headings, footnotes and quotations double spaced: Word's double line at 12 pt
+# (2 x 13.8 pt), the exemplar's pitch.
+pitch: {body: 27.6}
+# FRCP 10(a): the court's name, as the exemplar sets it (the division follows, from the sample).
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE MIDDLE DISTRICT OF TENNESSEE"
+# LR 7.03(a): footnotes single-spaced; 7 pt apart and from the text to the rule (the room LibreOffice keeps above a
+# note).
+footnote: {clearance: 7}
+# LR 7.03(a): headings single-spaced, bold, a blank single line above and half of one below, kept with what follows.
+# The author types each heading's number ("I.", "A."): a section centered; a point at the margin, its later lines
+# hung half an inch; a sub-point half an inch in, in bold italics (the exemplar's). The exemplar underlines a point;
+# not here: Word's PDF splits an underlined ")(" ("12(b)(6)") into two words, which XENG-003 fails (lib/docx; tier 2,
+# ../README.md).
+heading:
+  - {align: center, bold: true, above: 13.8, below: 6.9}
+  - {bold: true, hang: 36, above: 13.8, below: 6.9}
+  - {bold: true, italic: true, left: 36, hang: 36, above: 13.8, below: 6.9}
+# FRCP 10(a), 7(b)(2), LR 7.03(a) and (c) in the Tennessee form of the exemplar: the court's name and the division
+# centered, a double line below them the caption: the plaintiff's names, a blank line, the designation half an inch
+# in, in italics; "v." at the margin a blank line from each; the defendant's the same; a ")" beside every line. At the
+# right, opposite "v.", the file number, then a blank line apart: "JURY DEMAND" opposite the style (LR 7.03(c), when
+# the complaint demanded one), and the District Judge and the Magistrate Judge below the case number (LR 7.03(a)).
+# Then the paper's title centered in bold between two rules across the page (the exemplar's), a blank line from each.
+front:
+  - {text: "{xd.court}", align: center}
+  - {text: "{xd.district}", align: center}
+  - {text: "{division}", align: center, optional: true}
+  - group:
+      - columns:
+          - width: 237.6
+            blocks:
+              - {text: "{caption.parties.0.names}"}
+              - {text: "{caption.parties.0.designation}", italic: true, left: 36, above: 13.8}
+          - {width: 21.6, repeat: ")"}
+          - {blocks: []}
+      - columns:
+          - width: 237.6
+            blocks:
+              - {text: ""}
+              - {text: "v."}
+              - {text: ""}
+              - {text: "{caption.parties.1.names}"}
+              - {text: "{caption.parties.1.designation}", italic: true, left: 36, above: 13.8}
+          - {width: 21.6, repeat: ")"}
+          - blocks:
+              - {text: ""}
+              - {text: "{case_label|Case No.} {case_number}"}
+              - when: jury_demand
+                blocks:
+                  - {text: "JURY DEMAND", above: 13.8}
+              - each: judges
+                blocks:
+                  - {text: "{.}"}
+                gap: 13.8
+                above: 13.8
+    above: 27.6
+  - {rule: 0.75, above: 13.8}
+  - {text: "{brief_title}", align: center, bold: true, above: 13.8}
+  - {rule: 0.75, above: 13.8, below: 13.8}
+# FRCP 11(a), LR 7.03(a) (the names typed beneath the signature lines): from the middle of the page "Respectfully
+# submitted," the e-signature a blank line below, the counsel's lines half a line below it; kept whole and with the
+# last paragraph. LR 5.01 (TNMD-MEMO-006): the certificate of service, when the sample gives one (its CERTIFICATE OF
+# SERVICE section), on a page of its own, double-spaced; the persons served half an inch in, each whole and a blank
+# line apart, then the e-signature.
+closing:
+  - group:
+      - {text: "Respectfully submitted,", left: 234}
+      - {text: "{signature.signer}", left: 234, above: 13.8}
+      - {text: "{signature.lines}", left: 234, above: 6.9}
+    above: 13.8
+tail: {at: "CERTIFICATE OF SERVICE", break: true, pitch: body, indent: 36}
+after_tail:
+  - each: certificate.service
+    blocks:
+      - group:
+          - {text: "{.}", left: 36}
+    gap: 13.8
+    above: 13.8
+  - group:
+      - {text: "{certificate.signer}", left: 234}
+      - {text: "{certificate.lines}", left: 234, above: 6.9}
+    above: 13.8

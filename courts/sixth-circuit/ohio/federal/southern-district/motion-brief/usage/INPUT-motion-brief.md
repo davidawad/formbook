@@ -1,9 +1,9 @@
 ---
 # Sample 1 of 1. Transcribed in full from the filed exemplar (usage/FILED-EXAMPLE-motion-brief.pdf).
 # The motion (page 1), the memorandum in support (pages 2 to 7) and the certificate of service (page 8). Italics of
-# case names are not transcribed (the text layer carries no italic markup). Footnotes: none. The filed page 1 carries
-# the motion's own signature block (motion_signature), and the memorandum starts on a new page (new_page_before), as
-# in the filing. See ../README.md for every field.
+# case names are not transcribed (the text layer carries no italic markup). Footnotes: none. The motion (`motion`) is set
+# on page 1 with its own signature block, and the memorandum starts on a new page, as in the filing. See ../README.md
+# for every field.
 case_number: "1:26-cv-00448"
 judge: "JUDGE JEFFERY P. HOPKINS"
 division: "WESTERN DIVISION AT CINCINNATI"
@@ -14,9 +14,6 @@ caption:
     - names: ["CITY OF WILMINGTON, OHIO, et al."]
       designation: "Defendants."
 brief_title: "DEFENDANTS CITY OF WILMINGTON, OHIO CITY COUNCIL, CITY OF WILMINGTON, OHIO PLANNING COMMISSION, AUSTIN POWELL, AND SHIRLEY ORWICK’S MOTION TO DISMISS PLAINTIFFS’ FIRST AMENDED COMPLAINT"
-numbered: false
-motion_signature: true
-new_page_before: "MEMORANDUM IN SUPPORT"
 date: "May 12, 2026"
 signature:
   lines:
@@ -35,9 +32,8 @@ certificate:
   lines:
     - "/s/ Dawn M. Frick"
     - "Dawn M. Frick (0069068)"
+motion: "Now come Defendants City of Wilmington, Ohio City Council, City of Wilmington, Ohio Planning Commission, Austin Powell, and Shirley Orwick, by and through counsel, and hereby move this Honorable Court for an Order dismissing the First Amended Complaint of Plaintiffs for failure to state a claim pursuant to Fed. R. Civ. P. 12(b)(6). The reasons in support of this Motion are set forth more fully in the accompanying Memorandum in Support."
 ---
-
-Now come Defendants City of Wilmington, Ohio City Council, City of Wilmington, Ohio Planning Commission, Austin Powell, and Shirley Orwick, by and through counsel, and hereby move this Honorable Court for an Order dismissing the First Amended Complaint of Plaintiffs for failure to state a claim pursuant to Fed. R. Civ. P. 12(b)(6). The reasons in support of this Motion are set forth more fully in the accompanying Memorandum in Support.
 
 # MEMORANDUM IN SUPPORT
 

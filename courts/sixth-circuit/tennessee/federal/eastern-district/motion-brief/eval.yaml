@@ -1,4 +1,8 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (on the shared layout model lib/*/xengine*), so a difference fails. (fb-595.68.31)
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.17.18), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
   cross_engine: gate
+  # DEF-LEN-001: E.D. Tenn. LR 7.1(b), a brief is at most 25 pages unless the Court orders otherwise (counted here with
+  # the certificate of service, the conservative reading).
+  page_limit: 25

@@ -1954,8 +1954,6 @@ courts/sixth-circuit/ohio/federal/northern-district/complaint docx
 courts/sixth-circuit/ohio/federal/northern-district/complaint typst
 courts/sixth-circuit/ohio/federal/southern-district/complaint docx
 courts/sixth-circuit/ohio/federal/southern-district/complaint typst
-courts/sixth-circuit/ohio/federal/southern-district/motion-brief docx
-courts/sixth-circuit/ohio/federal/southern-district/motion-brief typst
 courts/sixth-circuit/ohio/state/court-of-appeals/amicus-brief docx
 courts/sixth-circuit/ohio/state/court-of-appeals/amicus-brief latex
 courts/sixth-circuit/ohio/state/court-of-appeals/amicus-brief typst
@@ -2010,16 +2008,11 @@ courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/motion-brief 
 courts/sixth-circuit/tennessee/federal/bankruptcy-western-district/motion-brief typst
 courts/sixth-circuit/tennessee/federal/eastern-district/complaint docx
 courts/sixth-circuit/tennessee/federal/eastern-district/complaint typst
-courts/sixth-circuit/tennessee/federal/eastern-district/motion-brief docx
-courts/sixth-circuit/tennessee/federal/eastern-district/motion-brief typst
 courts/sixth-circuit/tennessee/federal/middle-district/complaint docx
 courts/sixth-circuit/tennessee/federal/middle-district/complaint typst
 courts/sixth-circuit/tennessee/federal/middle-district/motion-brief docx
-courts/sixth-circuit/tennessee/federal/middle-district/motion-brief typst
 courts/sixth-circuit/tennessee/federal/western-district/complaint docx
 courts/sixth-circuit/tennessee/federal/western-district/complaint typst
-courts/sixth-circuit/tennessee/federal/western-district/motion-brief docx
-courts/sixth-circuit/tennessee/federal/western-district/motion-brief typst
 courts/sixth-circuit/tennessee/state/court-of-appeals/amicus-brief docx
 courts/sixth-circuit/tennessee/state/court-of-appeals/amicus-brief latex
 courts/sixth-circuit/tennessee/state/court-of-appeals/amicus-brief typst

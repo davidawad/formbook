@@ -18,13 +18,13 @@ Courts under `courts/sixth-circuit` (29).
 | [United States Bankruptcy Court, N.D. Ohio](ohio/federal/bankruptcy-northern-district) | `ohnb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. Ohio](ohio/federal/bankruptcy-southern-district) | `ohsb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, N.D. Ohio](ohio/federal/northern-district) | `ohnd` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, S.D. Ohio](ohio/federal/southern-district) | `ohsd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, S.D. Ohio](ohio/federal/southern-district) | `ohsd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. Tennessee](tennessee/federal/bankruptcy-eastern-district) | `tneb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, M.D. Tennessee](tennessee/federal/bankruptcy-middle-district) | `tnmb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Tennessee](tennessee/federal/bankruptcy-western-district) | `tnwb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, E.D. Tennessee](tennessee/federal/eastern-district) | `tned` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, M.D. Tennessee](tennessee/federal/middle-district) | `tnmd` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, W.D. Tennessee](tennessee/federal/western-district) | `tnwd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. Tennessee](tennessee/federal/eastern-district) | `tned` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, M.D. Tennessee](tennessee/federal/middle-district) | `tnmd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, W.D. Tennessee](tennessee/federal/western-district) | `tnwd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Court of Appeals of Kentucky](kentucky/state/court-of-appeals) | `kyctapp` | up for review | 6/6 | 3/3 | 0/3 | 29 |
 | [Kentucky Supreme Court](kentucky/state/supreme-court) | `ky` | up for review | 8/8 | — | — | 29 |
 | [Michigan Court of Appeals](michigan/state/court-of-appeals) | `michctapp` | up for review | 6/6 | 6/6 | 0/6 | 29 |

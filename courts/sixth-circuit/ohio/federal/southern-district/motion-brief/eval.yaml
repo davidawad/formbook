@@ -1,4 +1,13 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (fb-595.68.30, on the shared layout model lib/*/xengine*), so a difference fails.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.17.18), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
   cross_engine: gate
+  # DEF-COVER-002, tier 3: three marks of the exemplar's one filer (usage/SOURCE.md) on page 1 that no rule asks for.
+  cover_structure_accepted:
+    - finding: 'alignment: "cherman@sdtlawyers.com"'
+      reason: "the filer's Word tab sets the e-mail addresses after the first under its first address; the template sets every signature line at the signature column (tier 3)"
+    - finding: 'rules: between "CITY OF WILMINGTON, OHIO, et al." and "DEFENDANTS CITY OF WILMINGTON, OHIO CITY COUNCIL...": the exemplar has 2 horizontal rules, ours 1'
+      reason: "the filer rules the caption's foot twice (a cell border and a paragraph border); the template draws one rule under the caption (tier 3)"
+    - finding: 'rules: between "/s/ Dawn M. Frick" and "Dawn M. Frick (0069068)"'
+      reason: "the filer draws a signature line under the e-signature; FRCP 11(a) asks for a signature, not a line (tier 3)"

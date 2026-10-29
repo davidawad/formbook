@@ -1,0 +1,84 @@
+# U.S. District Court for the Western District of Tennessee (tnwd): a memorandum in support of a motion, on the generic
+# FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with W.D. Tenn.'s local rules overlaid here. The shared
+# document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines
+# gen`). Rules: W.D. Tenn. Local Rules, revised 11.17.2025, https://www.tnwd.uscourts.gov/local-rules (read
+# 2026-10-14; ../README.md quotes them). The base already meets LR 7.1(a) (8 1/2 x 11 paper, one-inch margins on all
+# sides) and LR 7.1(b) (no smaller than 12 point, footnotes included). The 20-page limit of LR 7.2(e) and LR 12.1(a)
+# is checked on the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# LR 7.1(b): double-spaced, Word's double line at 12 pt (2 x 13.8 pt), the exemplar's pitch.
+pitch: {body: 27.6}
+# FRCP 10(a): the court's name, as the exemplar sets it (the division follows, from the sample).
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE WESTERN DISTRICT OF TENNESSEE"
+# LR 7.1(b): footnotes may be single-spaced; 7 pt apart, 12.6 pt from the text to the rule (the room LibreOffice
+# keeps above a note).
+footnote: {clearance: 12.6}
+# LR 7.1(b): quotations may be single-spaced: half an inch in on each side, half a single line from the text.
+quote: {left: 36, right: 36, above: 6.9, below: 6.9}
+# LR 7.1(b): headings may be single-spaced; bold, a blank single line above and half of one below, kept with what
+# follows. A section centered as the sample types it; a point heading (the author types its "I." or "A.") at the
+# margin, its later lines hung half an inch.
+heading:
+  - {align: center, bold: true, above: 13.8, below: 6.9}
+  - {bold: true, hang: 36, above: 13.8, below: 6.9}
+  - {bold: true, hang: 36, above: 13.8, below: 6.9}
+# FRCP 10(a), 7(b)(2) in the Tennessee form of the exemplar: the court's name and the division centered, a double line
+# below them the caption: each party's names, a blank line, its designation half an inch in; "v." at the margin a
+# blank line from each, the file number opposite it; a ")" beside every line. Then the paper's title centered in bold
+# between two rules across the page, a blank line from each.
+front:
+  - {text: "{xd.court}", align: center}
+  - {text: "{xd.district}", align: center}
+  - {text: "{division}", align: center, optional: true}
+  - group:
+      - each: caption.parties
+        blocks:
+          - columns:
+              - width: 237.6
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", left: 36, above: 13.8}
+              - {width: 28.8, repeat: ")"}
+              - {blocks: []}
+        between:
+          - columns:
+              - width: 237.6
+                blocks:
+                  - {text: ""}
+                  - {text: "v."}
+                  - {text: ""}
+              - {width: 28.8, repeat: ")"}
+              - blocks:
+                  - {text: ""}
+                  - {text: "{case_label|No.} {case_number}", left: 7.2}
+    above: 27.6
+  - {rule: 0.75, above: 13.8}
+  - {text: "{brief_title}", align: center, bold: true, above: 13.8}
+  - {rule: 0.75, above: 13.8, below: 13.8}
+# FRCP 11(a), LR 7.1(a), LR 11.1(b) (the electronic signature: "s/" and the filing user's name, the attorney bar number,
+# the firm, street address, telephone and e-mail): from the middle of the page, "Respectfully submitted," the "s/"
+# line a blank line below, the bar number, firm and address lines; the date at the margin above, when the sample gives
+# one; kept whole and with the last paragraph. FRCP 5(b): the certificate of service, when the sample gives one, on a
+# page of its own (the exemplar's), kept whole: the title, the declaration double-spaced, the persons served half an
+# inch in, the date, the firm and the "s/" line.
+closing:
+  - group:
+      - {text: "Dated: {date}", optional: true, below: 13.8}
+      - {text: "Respectfully submitted,", left: 234}
+      - {text: "s/ {signature.signer}", left: 234, above: 13.8}
+      - {text: "Attorney Bar No. {signature.bar_number}", left: 234}
+      - {text: "{signature.firm}", left: 234, optional: true}
+      - {text: "{signature.lines}", left: 234}
+    above: 27.6
+  - when: certificate
+    blocks:
+      - {break: true}
+      - group:
+          - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 13.8}
+          - {markdown: "The undersigned hereby certifies that a true and correct copy of the foregoing {certificate.document} was {certificate.method} upon:", pitch: body, indent: 36}
+          - {text: "{certificate.served_on}", left: 36, above: 13.8}
+          - {text: "DATE: {certificate.date}", optional: true, above: 13.8}
+          - {text: "{signature.firm}", left: 234, optional: true, above: 13.8}
+          - {text: "s/ {signature.signer}", left: 234, above: 13.8}

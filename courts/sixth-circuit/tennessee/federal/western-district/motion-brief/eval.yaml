@@ -1,4 +1,9 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (on the shared layout model lib/*/xengine*), so a difference fails. (fb-595.68.31)
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.17.18), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
   cross_engine: gate
+  # DEF-LEN-001: W.D. Tenn. LR 7.2(e) and LR 12.1(a), a memorandum in support of a motion is at most 20 pages unless
+  # the court orders otherwise (counted here with the caption, signature and certificate, which LR 7.1(d) excludes: the
+  # conservative reading).
+  page_limit: 20

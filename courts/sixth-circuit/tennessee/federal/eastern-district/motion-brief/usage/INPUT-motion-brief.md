@@ -7,7 +7,7 @@ caption:
       designation: "Defendant."
 case_number: "1:26-cv-00065-TRM-MJD"
 division: "At Chattanooga"
-title: "Defendant Sweet Emmaline Cheesecakes Franchise, LLC’s Memorandum of Law in Support of Motion to Dismiss"
+brief_title: "Defendant Sweet Emmaline Cheesecakes Franchise, LLC’s Memorandum of Law in Support of Motion to Dismiss"
 signature:
   firm: ["MILLER & MARTIN PLLC"]
   by: "Bradford G. Harvey"
@@ -19,7 +19,7 @@ signature:
       bpr: "BPR No. 40215"
       lines: ["Suite 1200, Volunteer Building", "832 Georgia Avenue", "Chattanooga, TN 37402", "andrew.whitten@millermartin.com"]
   role: "Attorneys for Defendant Sweet Emmaline Cheesecakes Franchise, LLC"
-certificate_of_service:
+certificate:
   text: "I hereby certify that on June 8, 2026, a copy of the foregoing pleading was filed electronically. Notice of this filing will be sent by operation of the Court’s electronic filing system to all parties indicated on the electronic filing receipt. All other parties will be served by regular U.S. mail. Parties may access this filing through the Court’s electronic filing system."
   recipients:
     - ["Anthony I. Paronich", "Paronich Law, P.C.", "350 Lincoln Street, Suite 2400", "Hingham, MA 02043", "anthony@paronichlaw.com"]

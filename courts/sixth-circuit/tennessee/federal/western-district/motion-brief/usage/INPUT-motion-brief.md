@@ -5,14 +5,15 @@
 # markup, so italic case names are the transcriber's reading of the citations). The ECF header is not transcribed.
 # See ../README.md, "Markdown contract", for the meaning of every field.
 case_number: "1:26-cv-02199-STA-jay"
-court_division: "WESTERN DIVISION"
+division: "WESTERN DIVISION"
 caption:
-  - names: ["ERIC D. GONZALEZ.,"]
-    designation: "Plaintiff,"
-  - names:
-      - "HOLLOW ROCK-BRUCETON, SPECIAL SCHOOL DISTRICT, DR. MYLES HEBRARD, in his official capacity as SUPERINTENDENT, HOLLOW ROCK-BRUCETON, SPECIAL SCHOOL DISTRICT, CHRISTOPHER FINLEY, in his official capacity as PRINCIPAL, CENTRAL ELEMENTARY SCHOOL CARROLL COUNTY CIVIC CENTER, CARROLL COUNTY, TENNESSEE,"
-    designation: "Defendants."
-title: "MEMORANDUM IN SUPPORT OF DEFENDANTS CARROLL COUNTY, TENNESSEE AND CARROLL COUNTY CIVIC CENTER’S MOTION TO DISMISS"
+  parties:
+    - names: ["ERIC D. GONZALEZ.,"]
+      designation: "Plaintiff,"
+    - names:
+        - "HOLLOW ROCK-BRUCETON, SPECIAL SCHOOL DISTRICT, DR. MYLES HEBRARD, in his official capacity as SUPERINTENDENT, HOLLOW ROCK-BRUCETON, SPECIAL SCHOOL DISTRICT, CHRISTOPHER FINLEY, in his official capacity as PRINCIPAL, CENTRAL ELEMENTARY SCHOOL CARROLL COUNTY CIVIC CENTER, CARROLL COUNTY, TENNESSEE,"
+      designation: "Defendants."
+brief_title: "MEMORANDUM IN SUPPORT OF DEFENDANTS CARROLL COUNTY, TENNESSEE AND CARROLL COUNTY CIVIC CENTER’S MOTION TO DISMISS"
 signature:
   signer: "Nathan D. Tilly"
   bar_number: "031318"
