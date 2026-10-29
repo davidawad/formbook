@@ -998,8 +998,13 @@ fn a_footnote_in_a_heading_is_kept_in_every_engine() {
         .find("\"Xd Note Host\"")
         .unwrap_or_else(|| panic!("no Xd Note Host in {doc}"));
     let rest = &doc[host..];
-    let note = rest.find(", Note").unwrap_or_else(|| panic!("no Note in {rest}"));
-    assert!(rest[..note].contains("<w:pPr>") && rest[..note].contains(">ALLEGED<"), "{rest}");
+    let note = rest
+        .find(", Note")
+        .unwrap_or_else(|| panic!("no Note in {rest}"));
+    assert!(
+        rest[..note].contains("<w:pPr>") && rest[..note].contains(">ALLEGED<"),
+        "{rest}"
+    );
     assert!(rest[note..].contains("\"Accepted\""), "{rest}");
     assert!(!doc.contains("xd-note"), "a mark left in {doc}");
 }
