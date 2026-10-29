@@ -30,7 +30,9 @@
 %                                 lines (call \xe@lines inside them again);
 %   \xe@row{<above>}{<hang>}{<text>}{<page>}   one row of a table of contents or authorities: the text wraps before
 %                                 a column of width \xe@col kept for the page, a dot leader (\xe@leader, at least
-%                                 three spaces, tied to the text) runs to the page on the last line; not split.
+%                                 three spaces, tied to the text) runs to the page on the last line; not split;
+%   \xe@portionsinit, \xeportions{true|false}   Word's text portions: each \emph and \textbf end floored to a twip,
+%                                 as LibreOffice measures its runs (below; fb-595.54.10).
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{xengine}[2026/10/21 cross-engine layout model]
 
@@ -97,3 +99,42 @@
   \noindent\hangindent=#2\relax\hangafter=1\relax
   \rightskip=\dimexpr\xe@col\relax plus 1fil\relax\parfillskip=-\dimexpr\xe@col\relax\relax
   #3\xe@leader\hbox to \xe@col{\hss#4}\par\endgroup}
+
+% Word's text portions (fb-595.54.10; lib/typst/xengine.typ, docx-portions, where the measurement is): LibreOffice
+% sets a run of like formatting it lays out whole in whole twips, rounded down, so the text after the run starts at
+% its end floored to a twip, and a line fits iff those floored widths and the unrounded width of its last run sum to
+% no more than the measure. Under \xeportions{true} each \emph and \textbf does the same at both its ends: it saves
+% its position there (\pdfsavepos, written to the .aux), and on the next pass a box of a negative kern moves what
+% follows left by what the position lay past a whole twip (the line starts on one: the margins and indents are whole
+% twips). A box adds no break point, and the kern is a box's, so a break after it keeps it. The shifts of a line are
+% recomputed together from the positions and shifts of the last pass (the boundaries of a line: those on the same
+% page at the same baseline), so they settle a pass after the line breaks do; fb render runs pdflatex until the .aux
+% settles. \xeportions{false} turns it off again (the template scopes it to the text its typst template scopes it to).
+\newif\ifxe@portions
+\newcommand\xeportions[1]{\csname xe@portions#1\endcsname}
+\newcount\xe@twn
+\def\xe@twip{3289.088}% one twip, 1/20 bp, in sp
+\gdef\xe@twline{}\gdef\xe@twold{0}\gdef\xe@twnew{0}
+% \xe@twpos{<n>}{<page>}{<x>}{<y>}{<shift>}: boundary n as the last pass shipped it (positions and shift in sp),
+% read from the .aux in order; it sets \xe@tw@<n>, the shift of boundary n on this pass.
+\def\xe@twpos#1#2#3#4#5{%
+  \def\xe@tmp{#2:#4}%
+  \ifx\xe@tmp\xe@twline\else\global\let\xe@twline\xe@tmp\gdef\xe@twold{0}\gdef\xe@twnew{0}\fi
+  \edef\xe@tmp{\fpeval{#3+\xe@twold-\xe@twnew}}%
+  \edef\xe@tmp{\fpeval{max(0, round(\xe@tmp-floor(\xe@tmp/\xe@twip+0.001)*\xe@twip))}}%
+  \expandafter\xdef\csname xe@tw@#1\endcsname{\xe@tmp}%
+  \xdef\xe@twold{\fpeval{\xe@twold+#5}}\xdef\xe@twnew{\fpeval{\xe@twnew+\xe@tmp}}}
+\AtEndDocument{\gdef\xe@twpos#1#2#3#4#5{}}
+\def\xe@tw{\ifxe@portions\ifhmode
+  \global\advance\xe@twn\@ne
+  \edef\xe@s{\ifcsname xe@tw@\the\xe@twn\endcsname\csname xe@tw@\the\xe@twn\endcsname\else 0\fi}%
+  \pdfsavepos
+  \edef\xe@tmp{\write\@auxout{\string\xe@twpos{\the\xe@twn}{\noexpand\the\noexpand\ReadonlyShipoutCounter}%
+    {\noexpand\the\pdflastxpos}{\noexpand\the\pdflastypos}{\xe@s}}}\xe@tmp
+  \hbox{\kern-\xe@s sp}%
+\fi\fi}
+% \xe@portionsinit, in the preamble of a template that uses \xeportions: \emph and \textbf as the document begins
+% with them, their boundaries inside the argument (so the italic correction still sees the token after it).
+\newcommand\xe@portionsinit{\AtBeginDocument{%
+  \NewCommandCopy\xe@emph\emph\DeclareRobustCommand\emph[1]{\xe@emph{\xe@tw##1\xe@tw}}%
+  \NewCommandCopy\xe@textbf\textbf\DeclareRobustCommand\textbf[1]{\xe@textbf{\xe@tw##1\xe@tw}}}}

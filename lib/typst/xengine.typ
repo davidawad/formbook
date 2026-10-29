@@ -26,6 +26,8 @@
 //     paragraph that anchors a footnote instead (the federal-circuit folders, fb-595.54.6); the rule's layout can
 //     fail to settle in a long document whose notes move between passes, so a template enables it only where it
 //     renders without warnings.
+//   - with `show: docx-portions` over a stretch of text, an emph or strong span's ends floored to a twip, as
+//     LibreOffice measures its runs (portion-piece, below; fb-595.54.10).
 // The template keeps its own numbers: type size, pitches (`edges`), spacings, indents, page column widths.
 
 /// The line box of a pitch: the baseline at 0.8 of it (Word's exact line spacing; LaTeX \pdfeachlineheight).
@@ -143,6 +145,93 @@
   let widow = (s.page + 1 == m.page and ep.page == m.page and line-top < top + 0.5 * pitch
     and ep.y <= line-top + pitch + 0.5pt)
   if widow or query(<xe-float>).any(f => f.value.par == s) [#metadata(s)<xe-widow>]
+}
+
+// Word's text portions (fb-595.54.10). LibreOffice lays a line out in portions, one per run of like formatting (an
+// italic or bold span, the text either side of it), and gives a portion it sets whole a width in whole twips,
+// rounded down; inside a portion, and in the portion a line breaks in, it adds the glyphs' advances unrounded. So the
+// portion after a span starts where the span ends, floored to a twip (the line starts on a whole twip: the margins and
+// indents are whole twips), and a line fits iff the floored widths of its whole portions and the unrounded width of
+// its last one sum to no more than the measure. Measured on the ca8 reply brief's docx PDF: each of the 418 portion
+// starts in it lies at the floor of the portion's unrounded advance; the rounded advance matches 280, the unrounded
+// one 224, a sum of glyphs or words rounded or floored 301, 191 and 258. Under `show: docx-portions` each emph or
+// strong span does the same here: the text after its start, and from its end on, moves left by what that position
+// lies past a whole twip. The shift goes inside the span's first (last) two characters, as tracking, which adds no
+// break opportunity and keeps the PDF text as written. Each piece records its shift; a piece recomputes the shifts of
+// its line from the positions and shifts the last pass laid out (both of the same pass), so the layout settles a pass
+// after its line breaks do. A template scopes it to text that is not laid out more than once (not a cover fitted by
+// measure, nor contents rows): there the pieces would not settle in typst's five passes. Not modelled: a span of one
+// character, and the portions Word starts elsewhere (a footnote mark, a no-break or zero-width space the filters
+// write).
+#let twip = 0.05pt
+#let past-twip(x) = calc.max(0pt, x - calc.floor(x / twip + 1e-6) * twip)
+
+// Two characters of a span, `s`, the shift of its boundaries inside them: `start` (the span starts at `s`), `rest`
+// (the span ends after `rest`, which starts with `s`; none if it does not).
+#let portion-piece(s, start, rest) = context {
+  let me = here()
+  let p = me.position()
+  let offs = if start { (0pt,) } else { () }
+  if rest != none { offs.push(measure(rest).width) }
+  // the pieces before this one on its line, as the last pass placed them, and their shifts then
+  let raws = ()
+  let old = 0pt
+  for m in query(selector(<xe-tw>).before(me, inclusive: false)) {
+    let q = m.location().position()
+    if q.page == p.page and calc.abs((q.y - p.y) / 1pt) < 0.01 {
+      raws.push((x: q.x + old, offs: m.value.offs))
+      old += m.value.shift
+    }
+  }
+  raws.push((x: p.x + old, offs: offs))
+  let acc = 0pt
+  let shift = 0pt
+  // the first pass knows no positions (every one is the page origin): it shifts nothing
+  if p.x == 0pt and p.y == 0pt { raws = () }
+  for r in raws {
+    let pos = r.x - acc
+    shift = 0pt
+    for o in r.offs { shift += past-twip(pos + o - shift) }
+    acc += shift
+  }
+  [#metadata((shift: shift, offs: offs))<xe-tw>]
+  text(tracking: text.tracking - shift, s)
+}
+
+// A span's body with its boundaries' pieces: the first characters of its first text (`start`), the last of its last
+// (`end`). A body that is not text or a sequence of it is left as it is.
+#let portion-split(body, start, end) = {
+  if type(body) != content or not (start or end) { return body }
+  if body.func() == text {
+    let cs = body.text.clusters()
+    let n = cs.len()
+    if n < 2 { return body }
+    let cat(a, b) = cs.slice(a, b).sum(default: "")
+    if start and end and n < 4 { return portion-piece(cat(0, 2), true, body.text) + cat(2, n) }
+    let head = if start { portion-piece(cat(0, 2), true, none) } else { cat(0, 2) }
+    if not end { return head + cat(2, n) }
+    let tail = portion-piece(cat(n - 2, n), false, cat(n - 2, n))
+    return if start { head + cat(2, n - 2) + tail } else { cat(0, n - 2) + tail }
+  }
+  if body.has("children") {
+    let cs = body.children
+    if cs.len() == 0 { return body }
+    if cs.len() == 1 { return portion-split(cs.first(), start, end) }
+    return (portion-split(cs.first(), start, false), ..cs.slice(1, -1), portion-split(cs.last(), false, end)).join()
+  }
+  body
+}
+
+/// Word's text portions for `body` (show: docx-portions): each emph or strong span's boundaries floored to a twip
+/// (portion-piece, above).
+#let docx-portions(body) = {
+  show emph: it => if it.at("label", default: none) == <xe-portion> { it } else {
+    [#emph(portion-split(it.body, true, true))<xe-portion>]
+  }
+  show strong: it => if it.at("label", default: none) == <xe-portion> { it } else {
+    [#strong(delta: it.delta, portion-split(it.body, true, true))<xe-portion>]
+  }
+  body
 }
 
 #let xengine(pitch: none, list-indent: 0.5in, footnote-widows: true, body) = {

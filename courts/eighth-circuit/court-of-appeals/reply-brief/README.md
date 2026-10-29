@@ -52,7 +52,7 @@ Body: `# Heading` is a section (centered); `##` A.; `###` 1.; `####` a.; `#####`
 
 `usage/OVERLAY-delgado-midland.pdf` puts our render (red) over the filed brief (blue), page by page. Pages are paired by word overlap (`-overlay.txt`), not by index. The pairing scores run 40% to 100% (page 1: 100%, page 2: 90%, page 17: 40%). The differences are layout, not content:
 
-- The filed brief uses Gelasio (Georgia metrics); ours uses the house-standard Times New Roman. The cross-engine template outputs match typst's line and page breaks except for the documented DOCX whole-twip variance below.
+- The filed brief uses Gelasio (Georgia metrics); ours uses the house-standard Times New Roman. The docx output matches typst's line and page breaks; the latex output matches its pages and all but three lines (below).
 - Pages 1-2 (cover, contents) overlay closely. Our TOA runs 3 pages (ii-iv) against the filed 2; the page numbers in the TOA and TOC therefore differ from the filed ones.
 - The body is one page ahead or behind in places; that is the same text on a different page.
 
@@ -75,7 +75,7 @@ All 18 pages of `usage/OUTPUT-reply-brief.typst.pdf` were rasterized at 60 dpi (
 - Times New Roman is used on typst, LaTeX (`newtxtext`/`newtxmath`) and docx; the certificate states "Times New Roman, 14-point." All pages of all three engines were reviewed after the final render; see [the page-by-page review](reviews/2026-10-22.md).
 - Fixed (tier 2): the signature under both certificates was set in markup with `\` breaks, so each line picked up a leading space and the three lines stepped to the right. It is now one `cert-sig` block, flush left from mid-page like the signature block, with the role line from `signature.role` (default "Counsel for Appellant") instead of fixed text.
 - Checked, no defect: cover on one page; TOC (i) and TOA (ii-iv) page numbers match the body; footnotes 1-3 on their pages at 14 pt; no heading stranded; page 15 ends short because the conclusion is kept with the signature block (as before).
-- All applicable tier-1 checks pass. DOCX XENG-003 is reported under the documented one-twip LibreOffice limitation (397/400 line endings); no tier-2 findings remain.
+- All applicable tier-1 checks pass. LaTeX XENG-003 is reported (397/400 line endings, p9 lines 14-16: newtx metrics against the docx's whole-twip runs); no tier-2 findings remain.
 
 ## Known gaps
 
@@ -94,7 +94,8 @@ All three engines are on the shared cross-engine layout model (`lib/*/xengine*`;
 `params.cross_engine: gate`, `params.cross_engine_docx: report` (`eval.yaml`). 18 pages on every engine.
 
 - latex: XENG-001..003 PASS, 400 of 400 lines.
-- docx: XENG-001 and XENG-002 PASS (every page and page end); XENG-003 REPORTED, 397 of 400 lines: on p9 line 14 typst overflows the measure by 0.07 pt with "collateral", and LibreOffice, which decides a line in whole twips (its PDF sets that line 0.08 pt narrower than typst's), keeps the word, so p9 lines 14 to 16 break one word later. A 1-twip right indent on Body Text fixes p9 and breaks p16 line 2 instead (typst fills it to within 0.01 pt, and LibreOffice then measures it as too wide although its PDF sets it 0.2 pt narrower): no template setting reproduces a sub-twip decision, so the docx is reported, not gated.
+- docx: XENG-001..003 PASS and gated (400 of 400 lines). LibreOffice sets each italic or bold run of a line in whole twips, rounded down (measured on this docx: every one of the 418 run starts in the body of its PDF lies at the floor of the run’s unrounded advance), so on p9 line 14 it fits "collateral" where typst overflowed the measure by 0.07 pt. The body is set under the shared model’s Word text portions (`show: docx-portions`, lib/typst/xengine.typ; `\xeportions{true}`, lib/latex/xengine.sty; fb-595.54.10), which floor the ends of every italic or bold span to a twip in typst and LaTeX too.
+- latex: XENG-001 and XENG-002 PASS; XENG-003 REPORTED, 397 of 400 lines: LaTeX floors its spans on its own positions, and newtx is not Times New Roman to the hundredth of a point, so on p9 line 14 its floors take 0.04 pt where typst’s take 0.07 pt and the line ends 0.04 pt past its measure; a measure wide enough for it fits "factual" on p14 line 3, which typst does not (eval.yaml).
 
 - **typst** (primary, `typst/`): the reference. For the cross-engine model: footnote marks are scaled digits (`super(typographic: false)`, never a face's superior figures), widows and orphans cost 10000 %, and a paragraph whose last line carries a footnote too long to fit with it carries its second-to-last line over too (`lib/typst/xengine.typ`, the footnote widow guard: p12/p13 of this INPUT, where typst had left "§ 548.101(a)(5) (emphasis added).²" alone at the top of p13 while LaTeX and Word carry two lines); a URL breaks only after `?`, `=`, `&`, a hyphen or a slash (not after its scheme's `//`), the counsel block and signatures start at a fixed share of the text width (`right-half`).
 - **latex** (`latex/template.tex`, `latex/ca8.lua`): stock pdflatex, newtxtext/newtxmath; every block built as typst builds it, sizes and spaces in bp; the ellipsis over 1 em, Times New Roman's glyph; no italic correction. The text width is 0.05 bp wider than typst's: newtx sets a line up to about 0.04 bp wider than Times New Roman (p9 line 11, which typst fills to within 0.02 bp, took one word less).

@@ -347,11 +347,13 @@ function Pandoc(doc)
   if svc then toc[#toc + 1] = tocline(1, 0, '', 'Certificate of Service', 'cs') end
   front:insert(raw(table.concat(toc, '\n')))
   front:insert(raw('\\clearpage\n' .. table.concat(toa(meta, hits), '\n')))
-  front:insert(raw('\\clearpage\\pagenumbering{arabic}\\normalsize'))
+  -- the body under Word's text portions (lib/latex/xengine.sty \xeportions; the typst template's docx-portions scope)
+  front:insert(raw('\\clearpage\\pagenumbering{arabic}\\normalsize\\xeportions{true}'))
 
   -- [certificate-of-compliance], [certificate-of-service]: single-spaced paragraphs 14 bp apart, then the signature
   local back = pandoc.Blocks({})
-  back:insert(raw('\\clearpage\\cahead{1}{0}{}{Certificate of Compliance}{cc}{99}\\begingroup\\singlespacing' ..
+  back:insert(raw('\\clearpage\\xeportions{false}' ..
+    '\\cahead{1}{0}{}{Certificate of Compliance}{cc}{99}\\begingroup\\singlespacing' ..
     '\\caformpar{I certify that this brief complies with the type-volume limitation of Fed.~R.~App.~P. 32(a)(7)(B) ' ..
     'because it contains ' .. group_digits(words) .. ' words, excluding the parts of the brief exempted by ' ..
     'Fed.~R.~App.~P. 32(f). The brief complies with the typeface requirements of Fed.~R.~App.~P. 32(a)(5) and the ' ..

@@ -42,6 +42,8 @@
 % No italic correction after \emph or \textit (typst and Word add none: a line with an italic word would be wider).
 \def\check@icl{}\def\check@icr{}
 \xe@lists{0.5in}
+% Word's text portions (xengine.sty \xeportions, which ca8.lua turns on for the body; fb-595.54.10).
+\xe@portionsinit
 % The page number in the 14 bp type, single-spaced.
 \def\ps@plain{\let\@mkboth\@gobbletwo\let\@oddhead\@empty\let\@evenhead\@empty
   \def\@oddfoot{\reset@font\singlespacing\hfil\thepage\hfil}\let\@evenfoot\@oddfoot}

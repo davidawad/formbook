@@ -1,9 +1,13 @@
 # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx renders break every line and page
 # where the typst render does (fb-595.54.9, on the shared layout model lib/*/xengine*), so a difference fails.
-# The docx is reported, not gated: every page and page end match typst, and 397 of 400 lines, but on p9 line 14 typst
-# overflows the measure by 0.07 pt with "collateral" and LibreOffice, which measures a line in whole twips (its PDF
-# sets the line 0.08 pt narrower), keeps the word; a right indent of 1 twip that fixes p9 breaks p16 line 2, which
-# typst fills to within 0.01 pt. No template setting reproduces a sub-twip decision; see README.md.
+# The body is set under the model's Word text portions (fb-595.54.10: LibreOffice floors each italic or bold run of a
+# line to a whole twip; typst docx-portions, latex \xeportions): typst and Word now break every line alike (p9 line 14,
+# where "collateral" fits only once the runs before it are floored, was the docx's one difference).
+# The latex is reported, not gated: it applies the same floors to its own positions, and newtx, the stock Times it
+# sets, is a few hundredths of a point wider or narrower than Times New Roman, which moves a run's end across a twip:
+# on p9 line 14 its floors take 0.04 pt where typst's take 0.07 pt, and the line (typst's 539.996 pt of a 540 pt
+# measure) ends at 540.09 pt, past its 540.05; widening its measure to take it (0.1 bp) takes "factual" onto p14
+# line 3 instead (540.048 pt, which typst does not fit). No measure takes both: 397 of 400 lines, every page alike.
 params:
   cross_engine: gate
-  cross_engine_docx: report
+  cross_engine_latex: report

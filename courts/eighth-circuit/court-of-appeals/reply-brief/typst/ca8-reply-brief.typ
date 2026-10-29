@@ -6,7 +6,7 @@
 // YAML frontmatter of the same file (markdown contract: ../README.md).
 
 #import "@preview/cmarker:0.1.10"
-#import "/lib/typst/xengine.typ": xengine, edges, listing-row
+#import "/lib/typst/xengine.typ": xengine, edges, listing-row, docx-portions
 
 // ---------------------------------------------------------------------------
 // Parameters (the only numbers in this file; each traces to a rule or a style choice)
@@ -466,6 +466,9 @@
   set page(numbering: "1")
   counter(page).update(1)
   {
+    // LibreOffice floors each italic or bold run of a line to a whole twip (lib/typst/xengine.typ, docx-portions;
+    // fb-595.54.10): the body text, not the cover, which is fitted by measuring it, nor the tables
+    show: docx-portions
     set heading(numbering: "1")
     // The signature block never stands alone: the brief's last paragraph is kept with it.
     // Footnote definitions are collected at the end of the markdown; they are handed to both
