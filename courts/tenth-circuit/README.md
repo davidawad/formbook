@@ -15,7 +15,7 @@ Courts under `courts/tenth-circuit` (31).
 | [District Court, D. New Mexico](new-mexico/federal/district) | `nmd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. Oklahoma](oklahoma/federal/bankruptcy-eastern-district) | `okeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Oklahoma](oklahoma/federal/bankruptcy-northern-district) | `oknb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States Bankruptcy Court, W.D. Oklahoma](oklahoma/federal/bankruptcy-western-district) | `okwb` | up for review | 1/1 | — | 1/1 | 14 |
+| [United States Bankruptcy Court, W.D. Oklahoma](oklahoma/federal/bankruptcy-western-district) | `okwb` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court for the District of Oklahoma](oklahoma/federal/district) | `okd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court, Oklahoma Eastern](oklahoma/federal/eastern-district) | `oked` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court, Oklahoma Northern](oklahoma/federal/northern-district) | `oknd` | up for review | 2/2 | 1/1 | 2/2 | 14 |

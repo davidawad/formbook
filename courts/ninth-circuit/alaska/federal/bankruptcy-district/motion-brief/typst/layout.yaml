@@ -1,0 +1,107 @@
+# U.S. Bankruptcy Court for the District of Alaska (akb): a motion or a memorandum in support of one (Fed. R. Bankr. P.
+# 9013, 9014; AK LBR 9013-1(a)(1): "a clear and concise written statement of the relief requested and reasons in
+# support thereof, including relevant facts and citations to authorities"), on the generic FRCP brief
+# (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with the District of Alaska Local Bankruptcy Rules overlaid here. The
+# shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb
+# engines gen`). Rules: Local Bankruptcy Rules, District of Alaska (12/2024),
+# https://www.akb.uscourts.gov/sites/akb/files/2024%20-%20Local%20Bankruptcy%20Rules.pdf (fetched 2026-10-29;
+# ../rules.md AKB-FORM-001..004, AKB-COVER-001..002, AKB-CERT-001; ../README.md quotes them). The base already meets
+# LBR 9004-1(a)(1), (2), (5), (7): letter paper, margins of at least one inch, each page numbered at the bottom, 12-point
+# type (footnotes too). No local rule limits a motion's length.
+base: /lib/layouts/frcp-motion-brief.yaml
+# LBR 9004-1(a)(4) (AKB-FORM-002): double-spaced; 27.6 pt, twice the 13.8 pt single line of 12 pt Times New Roman, the
+# pitch of the exemplars of three filers (usage/SOURCE.md).
+pitch: {body: 27.6}
+# LBR 9004-1(a)(4): "quotations exceeding fifty (50) words are to be single-spaced and indented": half an inch in on
+# each side, a single line before and a double line after.
+quote: {left: 36, right: 36, above: 13.8, below: 27.6}
+# Headings bold on the body pitch, kept with the text after them: a section centered as the filer types it
+# ("Background Facts", "Argument", as all three exemplars set them), an argument heading at the margin with its later
+# lines hung half an inch, a sub-heading half an inch in.
+heading:
+  - {align: center, bold: true, pitch: body}
+  - {bold: true, hang: 36, pitch: body}
+  - {bold: true, italic: true, left: 36, pitch: body}
+# FRBP 9004(b)(1): the court's name, bold and centered, as two of the three exemplars set it.
+constants:
+  court: "IN THE UNITED STATES BANKRUPTCY COURT"
+  district: "FOR THE DISTRICT OF ALASKA"
+# LBR 9004-1(c)(2) (AKB-COVER-001): at the top of the first page, before the caption, "to the left of center" and "at
+# least one inch (1") below the top edge" (the margin), the attorney's name, address, telephone number and e-mail
+# address, then the party represented. LBR 9004-1(c)(1), FRBP 9004(b) (AKB-COVER-002): the caption in the form of
+# Official Form 416B (in a case) or 416D (in an adversary proceeding): "In re", the debtor's names, its designation; in
+# an adversary proceeding the parties too (each party's names, its designation, "v." between them); a column of ")"
+# as tall as the party column, a rule under both (as two of the three exemplars); at the right
+# the case number, the chapter and any adversary number, centered on its height. Then the paper's title (FRBP
+# 9004(b)(4)), bold and centered, a double line below.
+front:
+  - columns:
+      - width: 288
+        blocks:
+          - {text: "{counsel}"}
+      - {blocks: []}
+  - {text: "{xd.court}", align: center, bold: true, above: 27.6}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 252
+        blocks:
+          - {text: "In re"}
+          - {text: "{caption.debtor}", above: 13.8}
+          - {text: "{caption.designation|Debtor.}", left: 108, above: 13.8}
+          - when: caption.parties
+            blocks:
+              - group:
+                  - each: caption.parties
+                    blocks:
+                      - {text: "{names}"}
+                      - {text: "{designation}", left: 108, above: 13.8}
+                    between:
+                      - {text: "v.", left: 36, above: 13.8, below: 13.8}
+                above: 27.6
+      - {width: 14.4, repeat: ")"}
+      - valign: center
+        blocks:
+          - {text: "{caption.numbers}", left: 21.6}
+    above: 27.6
+  - columns:
+      - width: 266.4
+        blocks:
+          - {rule: 0.75}
+      - {blocks: []}
+    above: 2
+  - {text: "{brief_title}", align: center, bold: true, left: 36, right: 36, above: 27.6, below: 13.8}
+# FRCP 11(a), FRBP 9011(a), LBR 9004-1(a)(9) (AKB-CERT-001: "names are to be typed or printed beneath signatures"): the
+# date line at the body pitch after the last paragraph; in a column at the right the firm, whom it represents, the
+# "By: /s/" signature and each signer's typed name and bar number beneath it, as all three exemplars set it; kept whole
+# and with the last paragraph.
+closing:
+  - group:
+      - {text: "{signature.date_line}", pitch: body, indent: 36}
+      - columns:
+          - {width: 252, blocks: []}
+          - blocks:
+              - {text: "{signature.firm}", optional: true}
+              - {text: "{signature.counsel_for}", optional: true}
+              - {text: "By: /s/ {signature.signer}", above: 13.8}
+              - {text: "{signature.lines}"}
+        above: 13.8
+    above: 13.8
+# FRBP 9014(b), 7005 (FRCP 5(b), (d)(1)(B)): the certificate of service, when the sample gives one, as all three
+# exemplars close: its title, the certificate single-spaced, those served (and how) a line below, the signer's "/s/"
+# signature and typed name (LBR 9004-1(a)(9)); kept on one page.
+after_tail:
+  - when: certificate
+    blocks:
+      - group:
+          - {text: "CERTIFICATE OF SERVICE", align: center, bold: true}
+          - {markdown: "{certificate.text}", above: 13.8, gap: 13.8}
+          - group:
+              - {text: "{certificate.served}"}
+            above: 13.8
+          - columns:
+              - {width: 252, blocks: []}
+              - blocks:
+                  - {text: "/s/ {certificate.signer}"}
+                  - {text: "{certificate.lines}", optional: true}
+            above: 13.8
+        above: 27.6

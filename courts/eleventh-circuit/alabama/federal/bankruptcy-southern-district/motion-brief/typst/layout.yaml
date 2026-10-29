@@ -1,0 +1,121 @@
+# U.S. Bankruptcy Court for the Southern District of Alabama (alsb): a motion, or a brief in support of one (Fed. R.
+# Bankr. P. 9013: a motion "must state its grounds with particularity and set forth the relief or order requested";
+# 9014; 7007, FRCP 7(b)), on the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with the court's
+# rules overlaid here. The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the
+# merged layout by `fb engines gen`). Rules: Local Bankruptcy Rules, S.D. Ala., effective July 1, 2026,
+# https://www.alsb.uscourts.gov/sites/alsb/files/ALSB%20Local%20Rules%207-1-2026.pdf (a scan without a text layer,
+# read by OCR on 2026-10-29; ../rules.md ALSB-*; ../README.md quotes them). They have no rule on the form of papers
+# (type, margins, spacing, length); FRBP 9004(a) asks only that a paper be "clearly legible". The base's letter page,
+# one-inch margins, 12-point type, double spacing and numbered pages are the floor of the federal local rules and the
+# form of all three exemplars (usage/SOURCE.md).
+base: /lib/layouts/frcp-motion-brief.yaml
+# Double-spaced; 27.6 pt, twice the 13.8 pt single line of 12 pt Times New Roman, the pitch of all three exemplars.
+pitch: {body: 27.6}
+# A quotation single-spaced, half an inch in on each side, a single line before and a double line after, as the
+# exemplars set the long ones.
+quote: {left: 36, right: 36, above: 13.8, below: 27.6}
+# Headings bold on the body pitch, kept with the text after them: a section centered in capitals ("BACKGROUND",
+# "RELIEF REQUESTED", as FILED-EXAMPLE-motion-brief.pdf), an argument heading at the margin with its later lines hung
+# half an inch after the number the filer types ("I. Facts", as FILED-EXAMPLE-motion-brief-2.pdf), a sub-heading half
+# an inch in.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body}
+  - {bold: true, hang: 36, pitch: body}
+  - {bold: true, left: 36, hang: 36, pitch: body}
+# FRBP 9004(b)(1): the court's name, centered, as two of the three exemplars print it (plain), and the division when
+# the filer names one (FILED-EXAMPLE-motion-brief-2.pdf: "SOUTHERN DIVISION").
+constants:
+  court: "IN THE UNITED STATES BANKRUPTCY COURT"
+  district: "FOR THE SOUTHERN DISTRICT OF ALABAMA"
+# FRBP 9004(b) (ALSB-CONT-001): the caption with the court's name, the title of the case, the case number and, in an
+# adversary proceeding, its number, and the paper's designation; Official Forms 416B and 416D. As the three exemplars
+# set it: "In re:", the debtor's names and its designation half an inch in at the left, a column of ")" as tall as
+# them, the chapter and case number at the right centered on their height; in an adversary proceeding a second row
+# below it, the plaintiffs and defendants ("v." between them) beside the adversary number. Then the paper's title
+# (FRBP 9004(b)(4)), bold and centered, a double line below.
+front:
+  - {text: "{xd.court}", align: center}
+  - {text: "{xd.district}", align: center}
+  - {text: "{division}", align: center, optional: true}
+  - columns:
+      - width: 252
+        blocks:
+          - {text: "{caption.in_re|In re:}"}
+          - {text: "{caption.debtor}", above: 13.8}
+          - {text: "{caption.designation|Debtor.}", left: 36, above: 13.8}
+      - {width: 14.4, repeat: ")"}
+      - valign: center
+        blocks:
+          - {text: "{caption.numbers}", left: 36}
+    above: 27.6
+  - when: caption.parties
+    blocks:
+      - columns:
+          - width: 252
+            blocks:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", left: 36, above: 13.8}
+                between:
+                  - {text: "v.", above: 13.8, below: 13.8}
+          - {width: 14.4, repeat: ")"}
+          - valign: center
+            blocks:
+              - {text: "{caption.adversary_numbers}", left: 36}
+        above: 13.8
+  - {text: "{brief_title}", align: center, bold: true, left: 36, right: 36, above: 27.6, below: 13.8}
+# LBR 9007-1(b)(2): a paper filed on negative notice carries "a negative notice legend prominently displayed on the face
+# of the first page of the paper ... in a form substantially as follows" (the rule's text, with the number of days,
+# LBR 9007-1(b)(3), and the movant's attorney to be served, from the frontmatter); ruled round, under the title.
+  - when: negative_notice
+    blocks:
+      - box:
+          - {text: "NOTICE OF OPPORTUNITY TO OBJECT AND FOR HEARING", align: center, bold: true}
+          - {text: "Pursuant to Local Rule, the court will consider this motion, objection, or other matter without further notice or hearing unless a party in interest files a written objection within {negative_notice.days} days from the date of service of this paper. If you object to the relief requested in this paper, you must file your written objection stating the specific ground or grounds on which your objection is based with the clerk of the court and serve a copy on the movant’s attorney, {negative_notice.serve_on}.", indent: 36, above: 13.8}
+          - {text: "If you file and serve a written objection stating the specific ground or grounds on which your objection is based within the time permitted, the court will schedule a hearing and you will be notified. If you do not file a proper written objection within the time permitted, the court will consider that you do not oppose the granting of the relief requested in the paper, will proceed to consider the paper without further notice or hearing, and may grant the relief requested.", indent: 36, above: 13.8}
+        stroke: 0.75
+        inset: 7.2
+    above: 13.8
+    below: 13.8
+# FRCP 11(a), FRBP 9011(a) (ALSB-CERT-001: the signer's address, e-mail address and telephone number): the date line
+# after the last paragraph (one line each, half an inch in); in a column at the right the "/s/" signature, the signer's
+# typed name and lines, as all three exemplars set it; an "OF COUNSEL" block at the margin below when the filer gives
+# one (FILED-EXAMPLE-motion-brief-2.pdf); kept whole and with the last paragraph.
+closing:
+  - group:
+      - {text: "{signature.date_line}", indent: 36, optional: true}
+      - columns:
+          - {width: 216, blocks: []}
+          - blocks:
+              - {text: "{signature.intro}", optional: true}
+              - {text: "/s/ {signature.signer}"}
+              - {text: "{signature.lines}"}
+        above: 13.8
+      - when: signature.of_counsel
+        blocks:
+          - group:
+              - {text: "{signature.of_counsel}"}
+            above: 13.8
+    above: 13.8
+# FRBP 7005, 9014(b) (FRCP 5(b), (d)(1)(B)): the certificate of service, when the sample gives one, as two of the three
+# exemplars close: its title, the certificate double-spaced, those served single-spaced, the signer's "/s/" signature
+# at the right; kept on one page.
+after_tail:
+  - when: certificate
+    blocks:
+      - group:
+          - {text: "CERTIFICATE OF SERVICE", align: center, bold: true}
+          - {markdown: "{certificate.text}", pitch: body, indent: 36, above: 13.8}
+          - when: certificate.served
+            blocks:
+              - group:
+                  - {text: "{certificate.served}"}
+                above: 13.8
+          - columns:
+              - {width: 216, blocks: []}
+              - blocks:
+                  - {text: "/s/ {certificate.signer}"}
+                  - {text: "{certificate.lines}", optional: true}
+            above: 13.8
+        above: 27.6

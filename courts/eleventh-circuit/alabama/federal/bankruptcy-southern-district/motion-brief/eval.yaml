@@ -1,0 +1,6 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.93), so they
+# break every line and page where the typst render does, and a difference fails. No rule sets a page limit
+# (DEF-LEN-001 skips).
+params:
+  cross_engine: gate

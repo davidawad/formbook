@@ -8,7 +8,7 @@ Courts under `courts/eleventh-circuit` (32).
 | [United States Court of Appeals for the Eleventh Circuit](court-of-appeals) | `ca11` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court for the Middle District of Alabama](alabama/federal/bankruptcy-middle-district) | `almb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Alabama](alabama/federal/bankruptcy-northern-district) | `alnb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States Bankruptcy Court, S.D. Alabama](alabama/federal/bankruptcy-southern-district) | `alsb` | up for review | 1/1 | — | 1/1 | 14 |
+| [United States Bankruptcy Court, S.D. Alabama](alabama/federal/bankruptcy-southern-district) | `alsb` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court for the Middle District of Alabama](alabama/federal/middle-district) | `almd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court for the Northern District of Alabama](alabama/federal/northern-district) | `alnd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court for the Southern District of Alabama](alabama/federal/southern-district) | `alsd` | up for review | 2/2 | 1/1 | 2/2 | 14 |

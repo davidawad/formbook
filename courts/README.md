@@ -225,7 +225,7 @@ Courts under `courts` (347).
 | [Supreme Court of South Dakota](eighth-circuit/south-dakota/state/supreme-court) | `sd` | up for review | 4/4 | 4/4 | 2/4 | 29 |
 | [United States Bankruptcy Appellate Panel of The Ninth Circuit](ninth-circuit/bankruptcy-appellate-panel) | `bap9` | up for review | 3/3 | — | 3/3 | 14 |
 | [Court of Appeals for the Ninth Circuit](ninth-circuit/court-of-appeals) | `ca9` | up for review | 4/4 | 3/3 | 4/4 | 100 |
-| [United States Bankruptcy Court, D. Alaska](ninth-circuit/alaska/federal/bankruptcy-district) | `akb` | up for review | 1/1 | — | 1/1 | 14 |
+| [United States Bankruptcy Court, D. Alaska](ninth-circuit/alaska/federal/bankruptcy-district) | `akb` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court for the District of Alaska](ninth-circuit/alaska/federal/district) | `akd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Arizona](ninth-circuit/arizona/federal/bankruptcy-district) | `arb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the District of Arizona](ninth-circuit/arizona/federal/district) | `azd` | up for review | 2/2 | — | 2/2 | 14 |
@@ -294,7 +294,7 @@ Courts under `courts` (347).
 | [District Court, D. New Mexico](tenth-circuit/new-mexico/federal/district) | `nmd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. Oklahoma](tenth-circuit/oklahoma/federal/bankruptcy-eastern-district) | `okeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Oklahoma](tenth-circuit/oklahoma/federal/bankruptcy-northern-district) | `oknb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States Bankruptcy Court, W.D. Oklahoma](tenth-circuit/oklahoma/federal/bankruptcy-western-district) | `okwb` | up for review | 1/1 | — | 1/1 | 14 |
+| [United States Bankruptcy Court, W.D. Oklahoma](tenth-circuit/oklahoma/federal/bankruptcy-western-district) | `okwb` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court for the District of Oklahoma](tenth-circuit/oklahoma/federal/district) | `okd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court, Oklahoma Eastern](tenth-circuit/oklahoma/federal/eastern-district) | `oked` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court, Oklahoma Northern](tenth-circuit/oklahoma/federal/northern-district) | `oknd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
@@ -318,7 +318,7 @@ Courts under `courts` (347).
 | [United States Court of Appeals for the Eleventh Circuit](eleventh-circuit/court-of-appeals) | `ca11` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court for the Middle District of Alabama](eleventh-circuit/alabama/federal/bankruptcy-middle-district) | `almb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Alabama](eleventh-circuit/alabama/federal/bankruptcy-northern-district) | `alnb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States Bankruptcy Court, S.D. Alabama](eleventh-circuit/alabama/federal/bankruptcy-southern-district) | `alsb` | up for review | 1/1 | — | 1/1 | 14 |
+| [United States Bankruptcy Court, S.D. Alabama](eleventh-circuit/alabama/federal/bankruptcy-southern-district) | `alsb` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court for the Middle District of Alabama](eleventh-circuit/alabama/federal/middle-district) | `almd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court for the Northern District of Alabama](eleventh-circuit/alabama/federal/northern-district) | `alnd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court for the Southern District of Alabama](eleventh-circuit/alabama/federal/southern-district) | `alsd` | up for review | 2/2 | 1/1 | 2/2 | 14 |

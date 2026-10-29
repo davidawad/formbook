@@ -1,0 +1,17 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.93), so they
+# break every line and page where the typst render does, and a difference fails.
+params:
+  cross_engine: gate
+  # DEF-LEN-001: LR 9013-1(C), "No brief longer than twenty (20) typewritten pages may be submitted without prior
+  # permission of the Court" (the count here is every page, the notice and the certificate of service included, the
+  # conservative reading).
+  page_limit: 20
+  # DEF-COVER-002 against FILED-EXAMPLE-motion-brief.pdf (Lindauer & Vaughn): a difference that is this filer's style
+  # (tier 3), because FILED-EXAMPLE-motion-brief-2.pdf (Garvin, Agee, Carlton & Mashburn) and
+  # FILED-EXAMPLE-motion-brief-3.pdf (United States Attorney) set it as the template does.
+  cover_structure_accepted:
+    - finding: 'order: "THE UNITED STATES BANKRUPTCY COURT FOR THE WESTE'
+      reason: "the court's name broken after 'FOR THE' ('IN THE UNITED STATES BANKRUPTCY COURT FOR THE' / 'WESTERN DISTRICT OF OKLAHOMA'), as motion-brief-2 and motion-brief-3; Lindauer breaks it after 'COURT'"
+    - finding: 'order: "FOR THE WESTERN DISTRICT OF OKLAHOMA"'
+      reason: "the same line break of the court's name (see above)"

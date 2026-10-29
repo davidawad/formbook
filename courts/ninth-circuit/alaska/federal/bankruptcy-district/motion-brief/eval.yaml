@@ -1,0 +1,23 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.93), so they
+# break every line and page where the typst render does, and a difference fails. The local rules set no page limit
+# for a motion (DEF-LEN-001 skips).
+params:
+  cross_engine: gate
+  # DEF-COVER-002 against FILED-EXAMPLE-motion-brief.pdf (Birch Horton Bittner & Cherot): differences that are this
+  # filer's style (tier 3), because FILED-EXAMPLE-motion-brief-2.pdf (David H. Bundy, P.C.) and
+  # FILED-EXAMPLE-motion-brief-3.pdf (Erik LeRoy, P.C.) set them as the template does. Birch Horton prints its
+  # letterhead down the left edge of every page and sets the whole text column 84 pt to the right of it.
+  cover_structure_accepted:
+    - finding: 'order: "MEMO IN SUPPORT OF MOTION TO COMPEL PAYMENT"'
+      reason: "Birch Horton's running footer (short title, case number, 'PAGE 1 OF 8') pairs with our title; the template numbers the page alone (LBR 9004-1(a)(5)), its title wraps where its width does"
+    - finding: 'order: "MEMORANDUM IN SUPPORT OF MOTION"'
+      reason: "the same footer pairing (see above)"
+    - finding: 'alignment: "Kathryn A. Black, ABA #8006008"'
+      reason: "counsel at the left margin, as motion-brief-2 (Bundy) and motion-brief-3 (LeRoy); Birch Horton's text column starts 84 pt in, beside its letterhead"
+    - finding: 'alignment: "IN THE UNITED STATES BANKRUPTCY COURT"'
+      reason: "the court's name centered on the page, as motion-brief-2 and motion-brief-3; Birch Horton centers it on its shifted column"
+    - finding: 'alignment: "In re"'
+      reason: "the caption at the left margin, as motion-brief-2 and motion-brief-3 (the letterhead shift, see above)"
+    - finding: 'alignment: "TO COMPEL PAYMENT OF REAL PROPERTY TAXES"'
+      reason: "the title centered on the page, as motion-brief-2 and motion-brief-3 (the letterhead shift, see above)"

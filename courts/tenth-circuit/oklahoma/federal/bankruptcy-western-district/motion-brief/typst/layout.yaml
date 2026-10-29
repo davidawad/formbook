@@ -1,0 +1,138 @@
+# U.S. Bankruptcy Court for the Western District of Oklahoma (okwb): a motion and its brief in support (LR 9013-1(C):
+# a motion "must specify the point or points upon which it is based and must be accompanied by a concise brief"; "a
+# brief may be combined with the request for relief ... provided the title of the Document clearly so indicates"), on
+# the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with the court's Local Bankruptcy Rules
+# overlaid here. The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the
+# merged layout by `fb engines gen`). Rules: Local Rules of the U.S. Bankruptcy Court for the Western District of
+# Oklahoma, effective January 15, 2026, https://www.okwb.uscourts.gov/sites/okwb/files/Local_Rules.pdf (fetched
+# 2026-10-29; ../rules.md OKWB-*; ../README.md quotes them). The base already meets LR 9004-1(A) (OKWB-FORM-001,
+# OKWB-FONT-001): 8 1/2 x 11 inches, margins of no less than one inch, 12-point printing including footnotes, black
+# on white. The 20-page limit of LR 9013-1(C) is checked on the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# LR 9004-1(A): "Documents shall be double spaced (unless the Document is only one (1) page)"; 27.6 pt, twice the
+# 13.8 pt single line of 12 pt Times New Roman, as the exemplars set it.
+pitch: {body: 27.6}
+# A block quotation single-spaced, half an inch in on each side, a single line before and a double line after (the
+# Sewell exemplar, FILED-EXAMPLE-motion-brief-3.pdf, quotes Rule 4007(c) so).
+quote: {left: 36, right: 36, above: 13.8, below: 27.6}
+# Headings bold on the body pitch, kept with the text after them: a section centered in capitals, its number typed by
+# the filer ("I. JURISDICTION AND VENUE", "BRIEF IN SUPPORT", as all three exemplars), a point at the margin with its
+# later lines hung half an inch ("1. The Probable Success ...", FILED-EXAMPLE-motion-brief-2.pdf), a sub-point half an
+# inch in.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body}
+  - {bold: true, hang: 36, pitch: body}
+  - {bold: true, left: 36, hang: 36, pitch: body}
+# FRBP 9004(b)(1): the court's name, bold and centered, in the two lines of two of the three exemplars.
+constants:
+  court: "IN THE UNITED STATES BANKRUPTCY COURT FOR THE"
+  district: "WESTERN DISTRICT OF OKLAHOMA"
+# Counsel's block at the top left when the filer gives one (FILED-EXAMPLE-motion-brief.pdf; no rule asks for it). FRBP
+# 9004(b), LR 1005-1 (OKWB-CONT-001): the caption "should comply with the appropriate Official Form(s)" (416B, 416D);
+# "every case and adversary proceeding number must be followed by the letters which designate the Judge", "the Chapter
+# ... shown below the case number" (the filer types both in `caption.numbers`): "In re:", the debtor's names and its
+# designation at the left, a column of ")" as tall as them, the numbers at the right centered on their height; in an
+# adversary proceeding a second row, the parties ("v." between them) beside the adversary number. Then the title (LR
+# 9004-1(C): it "must clearly identify each and every request for relief"; LR 9013-1(G): "And Notice of Opportunity for
+# Hearing" in it), bold and centered.
+front:
+  - when: counsel
+    blocks:
+      - columns:
+          - width: 288
+            blocks:
+              - {text: "{counsel}"}
+          - {blocks: []}
+        below: 13.8
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{division}", align: center, bold: true, optional: true}
+  - columns:
+      - width: 252
+        blocks:
+          - {text: "In re:"}
+          - {text: "{caption.debtor}", above: 13.8}
+          - {text: "{caption.designation|Debtor.}", left: 108, above: 13.8}
+      - {width: 14.4, repeat: ")"}
+      - valign: center
+        blocks:
+          - {text: "{caption.numbers}", left: 36}
+    above: 27.6
+  - when: caption.parties
+    blocks:
+      - columns:
+          - width: 252
+            blocks:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", left: 108, above: 13.8}
+                between:
+                  - {text: "v.", above: 13.8, below: 13.8}
+          - {width: 14.4, repeat: ")"}
+          - valign: center
+            blocks:
+              - {text: "{caption.adversary_numbers}", left: 36}
+        above: 13.8
+  - {text: "{brief_title}", align: center, bold: true, left: 36, right: 36, above: 27.6, below: 13.8}
+# LR 9013-1(G) (OKWB-CONT-004): "immediately below the title" every motion not excepted by LR 9013-1(H) "shall contain
+# the following statement": its heading, then the rule's statement single-spaced, half an inch in on each side, with
+# the response time the filer computes (`notice.days`; the court's address is the rule's); or, where an order sets
+# another deadline, the filer's own statement (`notice.text`, FILED-EXAMPLE-motion-brief.pdf). A notice of an
+# expedited hearing set by the court follows it when given (LR 9013-1(F): notice of a hearing "may be combined in one
+# Document with the request for relief").
+  - when: notice
+    blocks:
+      - {text: "NOTICE OF OPPORTUNITY FOR HEARING", align: center, bold: true, above: 13.8}
+      - when: notice.text
+        blocks:
+          - {markdown: "{notice.text}", left: 36, right: 36, above: 13.8, gap: 13.8}
+      - unless: notice.text
+        blocks:
+          - {text: "Your rights may be affected. You should read this Document carefully and consult your attorney about your rights and the effect of this Document. If you do not want the Court to grant the requested relief, or you wish to have your views considered, you must file a written response to the requested relief with the Clerk of the United States Bankruptcy Court for the Western District of Oklahoma, 215 Dean A. McGee Avenue, Oklahoma City, OK 73102 no later than {notice.days} days from the date of filing of this request for relief. You should also serve a file-stamped copy of the response to the undersigned {notice.serve|and others who are required to be served} and file a certificate or affidavit of service with the court.", left: 36, right: 36, above: 13.8}
+    below: 13.8
+  - when: hearing
+    blocks:
+      - {text: "NOTICE OF HEARING", align: center, bold: true, above: 13.8}
+      - {markdown: "{hearing}", left: 36, right: 36, above: 13.8}
+    below: 13.8
+# FRCP 11(a), FRBP 9011(a), LR 9004-1(D) (OKWB-CERT-001): "the electronic filer's full name, state bar number (if
+# applicable), address, email address, telephone number, facsimile number (if applicable), and name of party or
+# parties represented shall be shown on the Document beneath the signature line": the date line after the last
+# paragraph; in a column at the right the "/s/" signature with those lines beneath it (the filer gives them, as the
+# CM/ECF profile has them), as all three exemplars set it; kept whole and with the last paragraph.
+closing:
+  - group:
+      - {text: "{signature.date_line}", indent: 36, optional: true}
+      - columns:
+          - {width: 216, blocks: []}
+          - blocks:
+              - {text: "{signature.intro}", optional: true}
+              - {text: "/s/ {signature.signer}", above: 13.8}
+              - {text: "{signature.lines}"}
+        above: 13.8
+    above: 13.8
+# LR 9007-1(D): "a certificate or affidavit of service ... must accompany all requests for relief", with "the names
+# and addresses of all persons and entities served other than through the ECF System", "the date service was made",
+# "the manner in which service was made" and "the personal or electronic signature of the person making the
+# certificate ..., his or her typed name, address, telephone number, and if an attorney, state bar number": on a page
+# of its own when the sample gives one (all three exemplars), its title, the certificate double-spaced, those served
+# single-spaced, the signer's "/s/" signature and lines at the right.
+after_tail:
+  - when: certificate
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true}
+      - {markdown: "{certificate.text}", pitch: body, indent: 36, above: 13.8}
+      - when: certificate.served
+        blocks:
+          - group:
+              - {text: "{certificate.served}"}
+            above: 13.8
+      - group:
+          - columns:
+              - {width: 216, blocks: []}
+              - blocks:
+                  - {text: "/s/ {certificate.signer}"}
+                  - {text: "{certificate.lines}", optional: true}
+        above: 13.8

@@ -2,7 +2,7 @@
 
 Verified against the primary sources cited in this file on 2026-10-17.
 
-Alias `akb`. Court-wide rules for the adversary-complaint folder. Primary local source: [District of Alaska Local Bankruptcy Rules (December 2024)](https://www.akb.uscourts.gov/sites/akb/files/2024%20-%20Local%20Bankruptcy%20Rules.pdf), verified 2026-10-17 against the court-hosted PDF and its text extraction. The Federal Rules were checked against the official U.S. Courts current-rules pages on 2026-10-17. Re-check the court's local-rules page and linked primary texts before each release and at least every six months; check earlier when an amendment or new effective date is announced.
+Alias `akb`. Court-wide rules for the adversary-complaint and motion-brief folders. Primary local source: [District of Alaska Local Bankruptcy Rules (December 2024)](https://www.akb.uscourts.gov/sites/akb/files/2024%20-%20Local%20Bankruptcy%20Rules.pdf), verified 2026-10-17 against the court-hosted PDF and its text extraction. The Federal Rules were checked against the official U.S. Courts current-rules pages on 2026-10-17. Re-check the court's local-rules page and linked primary texts before each release and at least every six months; check earlier when an amendment or new effective date is announced.
 
 ## Sources
 
@@ -39,3 +39,16 @@ Kinds: **M** mandated by a rule, **C** convention where rules leave the choice o
 | AKB-CERT-002 | File a completed summons for each defendant and pay any required filing fee; conventional filing also requires Form 1040. These are separate items, not part of the complaint. | AKB-LBR 7003-1(a)-(b) | M |
 
 No typeface is specified for adversary complaints. Form 416D supplies a model caption; the rule requires substantial conformity, not exact reproduction. The adversary summons and any conventional-filing cover sheet are separate filings.
+
+## Motion brief
+
+Scope: a motion, or a memorandum in support of one (`motion-brief`). AKB-LBR re-read on 2026-10-29 from the same court-hosted PDF (12/2024 edition, Rules 9004-1 and 9013-1); the form rules AKB-FORM-001..004, AKB-COVER-001..002 and AKB-CERT-001 above apply to it unchanged.
+
+| ID | Requirement | Source | Kind |
+|---|---|---|---|
+| AKB-MOT-001 | A motion governed by FRBP 9014 includes, or is filed with, a clear and concise written statement of the relief requested and the reasons for it, including the relevant facts and citations to authorities; legible copies of the documentary evidence, a proposed order (unless ex parte) and any supporting affidavits or declarations are filed with it. | AKB-LBR 9013-1(a); FRBP 9013 | M |
+| AKB-MOT-002 | An ex parte motion is served on the parties affected (or says why not), states the authority to grant it without notice and hearing, states whether the movant conferred and whether the motion is opposed, and is accompanied by a lodged proposed order. | AKB-LBR 9013-1(f)(1) | A |
+| AKB-MOT-003 | An opposition is due within 21 days of service of the notice of the motion; a reply within 7 days of service of the opposition (14 days for motions under FRCP 12(b), 12(c) and 56). No local rule limits the length of a motion, an opposition or a reply. | AKB-LBR 9013-1(b)-(c) | A |
+| AKB-MOT-004 | A motion is served on the parties entitled to it, and service is shown by a certificate of service; a CM/ECF filer's employee may sign it with "/s/" and a typed name. | FRBP 7005, 9014(b); AKB-LBR 9011-1(a)(3) | M |
+
+The 12/2024 rules deleted former LBR 9013-1(e) and say that motions "must be accompanied by a notice unless filed on an ex parte basis" (the rules' summary of changes); the notice is a separate paper, not part of this template. The electronic signature is "/s/" followed by the typed name (AKB-LBR 9011-1(a)(1)[B]), as the template prints it.
