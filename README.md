@@ -507,8 +507,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, E.D. Arkansas](courts/eighth-circuit/arkansas/federal/bankruptcy-eastern-district) | `areb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Arkansas](courts/eighth-circuit/arkansas/federal/bankruptcy-western-district) | `arwb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Eastern District of Arkansas](courts/eighth-circuit/arkansas/federal/eastern-district) | `ared` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Western District of Arkansas](courts/eighth-circuit/arkansas/federal/western-district) | `arwd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the Eastern District of Arkansas](courts/eighth-circuit/arkansas/federal/eastern-district) | `ared` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [United States District Court for the Western District of Arkansas](courts/eighth-circuit/arkansas/federal/western-district) | `arwd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Arkansas Court of Appeals](courts/eighth-circuit/arkansas/state/court-of-appeals) | `arkctapp` | up for review | 6/6 | 4/4 | 4/4 | 29 |
 | [Arkansas Supreme Court](courts/eighth-circuit/arkansas/state/supreme-court) | `ark` | up for review | 9/9 | 8/8 | 8/8 | 29 |
 
@@ -518,8 +518,8 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, N.D. Iowa](courts/eighth-circuit/iowa/federal/bankruptcy-northern-district) | `ianb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. Iowa](courts/eighth-circuit/iowa/federal/bankruptcy-southern-district) | `iasb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, N.D. Iowa](courts/eighth-circuit/iowa/federal/northern-district) | `iand` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, S.D. Iowa](courts/eighth-circuit/iowa/federal/southern-district) | `iasd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, N.D. Iowa](courts/eighth-circuit/iowa/federal/northern-district) | `iand` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, S.D. Iowa](courts/eighth-circuit/iowa/federal/southern-district) | `iasd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Court of Appeals of Iowa](courts/eighth-circuit/iowa/state/court-of-appeals) | `iowactapp` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Supreme Court of Iowa](courts/eighth-circuit/iowa/state/supreme-court) | `iowa` | up for review | 8/8 | 7/7 | 7/7 | 29 |
 
@@ -528,7 +528,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/bankruptcy-district) | `mnb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/district) | `mnd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. Minnesota](courts/eighth-circuit/minnesota/federal/district) | `mnd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Court of Appeals of Minnesota](courts/eighth-circuit/minnesota/state/court-of-appeals) | `minnctapp` | up for review | 7/7 | 3/3 | 3/3 | 29 |
 | [Supreme Court of Minnesota](courts/eighth-circuit/minnesota/state/supreme-court) | `minn` | up for review | 8/8 | 2/2 | 2/2 | 29 |
 
@@ -863,13 +863,13 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Fifth Circuit | 26 | 0 | 26 | 0 | 0 | 0.0% | 100.0% | 26 | 13 | 26 | 18.0% |
 | Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 12 | 28 | 18.6% |
 | Seventh Circuit | 21 | 0 | 21 | 0 | 0 | 0.0% | 100.0% | 21 | 4 | 18 | 18.2% |
-| Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 38 | 17 | 38 | 20.3% |
+| Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 38 | 22 | 38 | 20.3% |
 | Ninth Circuit | 61 | 0 | 59 | 2 | 0 | 0.0% | 96.7% | 58 | 19 | 53 | 21.0% |
 | Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 31 | 15 | 28 | 19.3% |
 | Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 13 | 26 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 4 | 3 | 4 | 17.7% |
 | Fifth Circuit | 1 | 0 | 1 | 0 | 0 | 0.0% | 100.0% | 1 | 0 | 0 | 14.0% |
-| **Total** | 377 | 0 | 354 | 23 | 0 | 0.0% | 93.8% | 353 | 142 | 327 | 19.0% |
+| **Total** | 377 | 0 | 354 | 23 | 0 | 0.0% | 93.8% | 353 | 147 | 327 | 19.0% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
