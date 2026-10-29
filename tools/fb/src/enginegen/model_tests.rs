@@ -2804,3 +2804,75 @@ fn the_first_note_s_space_is_typst_s_clearance_and_gap() {
     // a clearance that leaves less than LibreOffice's line: 0, not less
     assert_eq!(before("footnote: {clearance: 4}\n"), 0);
 }
+
+#[test]
+fn a_running_footer_prints_frontmatter_fields_in_every_engine() {
+    // fb-595.92: page_number.text naming fields and holding <br> lines (D. Alaska L.Civ.R. 7.5(a)(1)(C))
+    let l = layout(
+        "page_number: {align: center, text: \"{page}<br>{footer_title}<br>{case_name}, Case No. {case_number}\"}\n",
+    );
+    let Some(f) = fx(
+        "running-footer",
+        &l,
+        "---\nfooter_title: Short Title\ncase_name: \"*Doe* v. Roe\"\ncase_number: \"1:26-cv-1\"\n---\nThe body.\n",
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
+        return;
+    };
+    // typst: three lines under the text, the number first
+    let pages = f.typst_pages().unwrap();
+    let tail: Vec<&str> = pages[0].lines().map(str::trim).filter(|s| !s.is_empty()).collect();
+    assert_eq!(
+        tail[tail.len() - 3..],
+        ["1", "Short Title", "Doe v. Roe, Case No. 1:26-cv-1"],
+        "{pages:?}"
+    );
+    // LaTeX: \xd@foot, a line box per line, the case name in italics
+    let tex = f.latex().unwrap();
+    let def = tex.split("\\csname xd@foot\\endcsname{").nth(1).expect("no \\xd@foot");
+    assert_eq!(def.matches("\\setbox0\\hbox to\\textwidth").count(), 3, "{def}");
+    assert!(def.contains("\\thepage{}") && def.contains("Short Title") && def.contains("{\\xd@em Doe}"));
+    assert!(def.contains("Case No. 1:26-cv\\mbox{-}1"), "{def}");
+    // Word: the document writes its footer, a paragraph per line, the PAGE field in the first, the distance three
+    // lines above the one-line footer's bottom
+    f.docx().unwrap();
+    let footers = f.written("footers.tsv").unwrap();
+    let page = footers.lines().find(|l| l.starts_with("rIdXdPage\t")).unwrap();
+    assert_eq!(page.matches("<w:p>").count() + page.matches("<w:p ").count(), 3, "{page}");
+    assert!(page.contains(" PAGE ") && page.contains(">Title<") && page.contains("<w:i/>"), "{page}");
+    let fin = f.written("final.xml").unwrap();
+    assert!(fin.contains(r#"w:footer="180""#), "{fin}");
+}
+
+#[test]
+fn a_cover_a_field_switches() {
+    // fb-595.92: cover_when (N.D. Ohio L.R. 7.1(f)): the caption page and the tables only when the field is set
+    let l = layout(
+        "page_number: {align: center, front: lower-roman}\ncover_when: toc\ncover:\n  - {text: \"{court}\", align: center}\ncontents: {title: Contents, depth: 1, col: 36, when: toc}\nheading:\n  - {bold: true}\n",
+    );
+    for (name, toc) in [("cover-off", false), ("cover-on", true)] {
+        let sample = format!("---\ncourt: COURT OF TESTS\ntoc: {toc}\n---\n# Argument\n\nBody.\n");
+        let Some(f) = fx(name, &l, &sample, &["typst", "pandoc", "pdftotext"]) else {
+            return;
+        };
+        let pages = f.typst_pages().unwrap();
+        if toc {
+            // the cover alone and unnumbered, the contents i, the body from 1
+            assert_eq!(pages.len(), 3, "{pages:?}");
+            assert!(pages[0].contains("COURT OF TESTS") && !pages[0].contains("Body."));
+            assert!(pages[1].contains("Contents") && pages[1].trim_end().ends_with('i'));
+            assert!(pages[2].contains("Body.") && pages[2].trim_end().ends_with('1'));
+        } else {
+            // the cover's blocks above the body on page 1, numbered 1
+            assert_eq!(pages.len(), 1, "{pages:?}");
+            assert!(pages[0].contains("COURT OF TESTS") && pages[0].contains("Body."));
+            assert!(pages[0].trim_end().ends_with('1'));
+        }
+        let tex = f.latex().unwrap();
+        assert_eq!(tex.contains("\\pagenumbering{roman}"), toc, "{name}: {tex}");
+        assert!(tex.find("COURT OF TESTS") < tex.find("Body."));
+        let doc = f.docx().unwrap();
+        assert_eq!(doc.contains(">Contents<"), toc, "{name}");
+        assert_eq!(doc.contains("rIdXdNone"), toc, "{name}");
+    }
+}

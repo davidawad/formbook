@@ -1097,6 +1097,16 @@
     let _ = s.remove("contents")
     s
   } else { spec }
+  // a cover a frontmatter field switches (layout.yaml cover_when, fb-595.92; lib/pandoc/xdoc.lua switch_contents):
+  // unless the field is set, the cover's blocks open page 1 above `front`, and the pages are numbered as one
+  let (spec, pn) = if "cover_when" in spec and not is-set(lookup(meta, spec.cover_when)) {
+    let s = spec
+    s.front = s.remove("cover", default: ()) + s.at("front", default: ())
+    let p = pn
+    if p != none { let _ = p.remove("front", default: none); let _ = p.remove("cover", default: none) }
+    s.page_number = p
+    (s, p)
+  } else { (spec, pn) }
   let front = if pn == none { none } else { pn.at("front", default: none) }
   // `page_number.cover`: the cover counted in the tables' numbering (counted: unprinted, the tables from ii; numbered:
   // printed too); otherwise unnumbered and the tables from i

@@ -17,7 +17,7 @@ Courts under `courts/sixth-circuit` (29).
 | [District Court, W.D. Michigan](michigan/federal/western-district) | `miwd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Ohio](ohio/federal/bankruptcy-northern-district) | `ohnb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. Ohio](ohio/federal/bankruptcy-southern-district) | `ohsb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, N.D. Ohio](ohio/federal/northern-district) | `ohnd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, N.D. Ohio](ohio/federal/northern-district) | `ohnd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [District Court, S.D. Ohio](ohio/federal/southern-district) | `ohsd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. Tennessee](tennessee/federal/bankruptcy-eastern-district) | `tneb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, M.D. Tennessee](tennessee/federal/bankruptcy-middle-district) | `tnmb` | up for review | 2/2 | — | 2/2 | 14 |

@@ -7,11 +7,11 @@ Folder: `courts/sixth-circuit/ohio/federal/northern-district/motion-brief/` (one
 |---|---|
 | exemplar | yes: 2 filers. `usage/FILED-EXAMPLE-motion-brief.pdf` (15 pp, U.S. Government, transcribed) and `usage/FILED-EXAMPLE-motion-brief-2.pdf` (29 pp, an individual defendant, with a table of contents and table of authorities; not transcribed). See `usage/SOURCE.md`. |
 | sample md | `usage/INPUT-motion-brief.md`: the whole 15-page memorandum (caption, every section, three footnotes, signature). |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 15 pages, `tools/render.sh`, vendored Times New Roman only, no typst warnings; `usage/OUTPUT-motion-brief.docx` and `.docx.pdf`, 15 pages, breaking every line and page where typst does. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, `.latex.pdf`, `.docx` and `.docx.pdf`, 15 pages each, on the generic FRCP brief (fb-595.92); vendored Times New Roman only, no warnings |
 | overlay | `just overlay <dir>` writes `.overlay/<doc path>/OVERLAY-motion-brief.pdf` and `.txt` (gitignored, not committed). |
-| pages reviewed | 14 of 14 (every page of the current PDF rendered at 60 dpi and viewed after the last template change). |
+| pages reviewed | 15 of 15 on each engine (2026-10-29, the FRCP-base render: `reviews/2026-10-29.md`) |
 | content check | every word of the sample body and of its three footnotes appears in the PDF (compared as word counts, because footnotes sit at the foot of the page and dashes split at line ends; the body's word order was not compared). |
-| `tools/check.sh` | typst: `RESULT: 9 checks passed, 0 failed`; docx: `RESULT: 13 checks passed, 0 failed`, XENG-001..003 PASS (358/358 lines, 15/15 pages), gated by `eval.yaml` (`params.cross_engine: gate`). |
+| `tools/check.sh` | exits 0 on typst, latex and docx (fb-595.92); XENG-001..003 PASS on latex and docx |
 
 ## Governing rules
 
@@ -47,7 +47,7 @@ Notes on the sources:
 - The table of authorities is built from links in the body with the target `toa:KEY`, with the full citation as the link text. Each `toa:` link marks the page where its authority starts. A key missing from `authorities:` in the frontmatter stops the build. Authorities are grouped (cases, constitutional provisions, statutes, regulations, rules, other) and sorted; an authority on 7 or more pages prints "passim".
 - The sample is 14 pages, so it does not need contents, and the committed sample does not use the table of authorities. The TOC and TOA paths were exercised with a scratch variant (contents on, three `toa:` links, the issues and summary headings), which rendered as 17 pages with a TOC on page 2 and a TOA on page 3; the scratch file was deleted. The two L.R. 7.1(f) build failures were also exercised with scratch variants: an `expedited` track (10 pages) on this 14-page memorandum failed with "L.R. 7.1(f) allows 10 for this track", and a 17-page memorandum without contents failed with "requires a table of contents and a table of authorities above 15 pages".
 
-## Review of the rendered pages (current PDF)
+## Review of the rendered pages (before the FRCP base; the current record is `reviews/2026-10-29.md`)
 
 Typst and docx renders of `usage/INPUT-motion-brief.md` (fb-595.68.30), every page rendered at 60 dpi and viewed side by side; compared with the Hammill exemplar (pages 1 to 3 as images, the rest by its text layer). The two engines break every line and page alike (XENG-001..003 PASS), so each row holds for both.
 
@@ -78,13 +78,13 @@ The overlay is a diagnostic (tier 3), not a score: `just overlay <dir>` writes i
 ## Known gaps and open choices
 
 1. **Typeface.** L.R. 10.1 names no face and allows any clearly legible typeface. The template sets Times New Roman, as both exemplars (it was EB Garamond before fb-595.68.30).
-2. **Track.** The L.R. 7.1(f) limit depends on the track assigned to the case, which the exemplar does not show. The sample uses `standard` (a 20-page limit). A filing in an expedited case has a 10-page limit, and the build fails over it.
-3. **Page limit counting.** The rule does not say whether the table of contents, the table of authorities or the caption page count toward the limit. The template counts every page from the caption page through the signature block (contents included). That is the stricter reading, so a memorandum that passes is safe under either. David to confirm.
+2. **Track.** The L.R. 7.1(f) limit depends on the track assigned to the case, which the exemplar does not show. The sample uses `standard` (a 20-page limit, `eval.yaml` `params.page_limit: 20`). A track the rule does not name stops the render (typst).
+3. **Page limit counting.** The render no longer stops over the limit (see FRCP base below); `check.sh` DEF-LEN-001 counts every page of the render against `params.page_limit`, the stricter reading (the rule does not say whether the tables or the caption page count).
 4. **Modified limits.** A limit set by a judge's order is recorded in frontmatter `page_limit_order`, and the certification states it. The template does not verify the order. The Kinzie exemplar runs 29 pages, over the 20-page limit for a standard track, so it was presumably filed with leave; the order is not in the file.
 5. **Pagination.** Page 13 ends with space because the conclusion and signature stay together. A signature alone on a page is worse for a clerk. The conclusion heading moves with the paragraph (it is sticky).
 5. **Pagination.** Page 14 ends with space because the conclusion and signature stay together. A signature alone on a page is worse for a clerk. The conclusion heading moves with the paragraph (it is sticky).
 7. **No certificate of service.** Service is through ECF on filing (both exemplars rely on it and print no certificate). Not produced; add one in the sample if a filing needs it.
-8. **Last paragraph.** The last paragraph of the body cannot carry a footnote (the template renders it apart from the rest, so that its footnote could not be matched). The assertion says so when a sample breaks the rule.
+8. **Last paragraph.** Kept whole with the signature (the base's `keep_with_closing`), unless it calls a footnote.
 9. **Headings.** The numerals are typed in the sample as filed. The template's TOC shows them as typed.
 10. **Table of authorities.** Implemented to the rule's requirements but not exercised by the committed sample (14 pages). The scratch variant is the only evidence it renders; a real memorandum over 15 pages should be rendered and checked on its own.
 10. **Table of authorities.** Implemented to the rule's requirements but not exercised by the committed sample (15 pages, not over the 15-page threshold). The scratch variant is the only evidence it renders; a real memorandum over 15 pages should be rendered and checked on its own.
@@ -100,14 +100,25 @@ The overlay is a diagnostic (tier 3), not a score: `just overlay <dir>` writes i
 
 ## Engines
 
-Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"), and `eval.yaml` gates it (`params.cross_engine: gate`): the docx render must break every line and page where the typst render does.
+The folder is on the generic federal district brief (`lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and the shared
+document model (docs/EVAL-LOOP.md, "Generated engines"): `typst/layout.yaml` names the base and overlays N.D. Ohio's
+local rules, each with its rule; `typst/ohnd-motion-brief.typ` names the face and stops the render on a track L.R.
+7.1(f) does not name. `fb engines gen` writes `latex/` (`template.tex`, `xdoc.lua`) and `docx/` (`reference.xml`,
+`xdoc.lua`) from the merged layout; `eval.yaml` sets `params.cross_engine: gate`, so latex and docx must break every
+line and page where typst does (XENG-001..003). The docx is checked with LibreOffice only (Word is not available here).
+`contents: true` now builds in every engine (the docx's earlier BLOCKED item is gone): exercised with a scratch copy of
+the sample (`contents: true`, deleted after): the caption page alone and unnumbered, the contents at i, the text from
+1, 16 pages in each engine, the same lines on every page (the Word leaders run to the number, as elsewhere).
 
-**docx** (`docx/`): `docx/reference.xml` (`base="xengine"`: Times New Roman 12 pt, the typst face as `{font}`; Body Text in exact 27.6 pt lines, single lines, headings and footnotes 13.8 pt, 7 pt after each footnote; "Body Text Note" for a paragraph that carries a footnote) and the filter `docx/ohnd-motion-brief.lua`, which `fb render` runs: it writes the court title (the 1 1/2 in first-page top margin as its space before), the caption as a borderless table (one row per line of the party column; the ")" count of a wrapped name computed from Times New Roman's advances, as typst measures it), the title, the headings, paragraphs and quotations with the typst spaces, the signature block kept with the last paragraph, the certification, and the footer (a centered page number) and last section via `$FORMBOOK_FOOTERS` and `$FORMBOOK_FINAL`; pandoc writes the paragraphs that carry footnotes, and the notes. The old `build-reference.sh`, `render.sh` and `reference.docx` (EB Garamond) are gone.
+## FRCP base (fb-595.92): moved
 
-- Result: 15 pages, every typst line breaking after the same word (358/358), every page starting and ending on the same word; tier 1 (DEF-FONT-002, DEF-COVER-001, DEF-TOC-001 and the rest) green on both engines.
-- BLOCKED: `contents: true` (table of contents and table of authorities, L.R. 7.1(f) above 15 pages): not built by the docx engine. The filter stops with an error rather than omit them. TOC/TOA fields need an update step and LibreOffice does not honor TA/TOA the way Word does (docs/DOCX.md).
-- BLOCKED: the L.R. 7.1(f) page-limit assertion (the typst `length-checks`) is not made in the docx: it needs the laid-out page count of the LibreOffice PDF. The sample's docx is 15 pages, the same as typst (XENG-001), within the standard track's 20.
+L.R. 7.1(f) and 10.1 together are the base's cover a frontmatter field switches (`cover_when: contents`, fb-595.92):
+without `contents: true` the caption opens page 1 and the text follows it (the transcribed exemplar); with it the
+caption takes a page of its own, the tables follow in lower-case roman and the text starts at 1 (the second filer's
+long memorandum). The certification of track and page limit is one `when: track, is: <track>` block per track in the
+closing. The render's text is the old template's, line for line and page for page.
 
-## FRCP base (fb-595.17.17): not moved
-
-This folder stays on its own template. The generic federal district brief (`lib/layouts/frcp-motion-brief.yaml` on the shared document model) cannot set L.R. 7.1(f) and 10.1 together without a shared change: a memorandum of 15 pages or fewer opens with the caption on its first page and the text under it (the transcribed exemplar), while one over 15 pages carries a table of contents and a table of authorities, which the filed long memorandum (the second filer) sets after a caption page of its own, the tables numbered in roman and the text from 1. The model always breaks the page after its `cover` (`lib/typst/xdoc.typ`, the `pagebreak()` after the cover's blocks) and numbers the tables apart only by `page_number.front`, so the caption cannot move from the first text page to a page of its own when the frontmatter switches the tables on (`contents: true`). Missing base feature: a cover (and its numbering) switched by a frontmatter field, as `contents.when` switches the contents. The L.R. 7.1(f) certification of track and page limit would be expressible (one `when: track, is: <track>` block per track).
+Lost in the move, until the base can condition on the rendered page count (fb-595.92's D. Haw. feature): the old typst
+template stopped the render when the memorandum ran past its track's limit, and when one over 15 pages lacked the
+contents, a statement of the issues or a summary of the argument. Now `eval.yaml` `params.page_limit: 20` (the
+sample's standard track; DEF-LEN-001) checks the sample's render, and the author keeps the 15-page conditions.

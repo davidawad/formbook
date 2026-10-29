@@ -1,0 +1,106 @@
+# U.S. District Court for the Northern District of Ohio (ohnd): a memorandum in support of a motion (L.R. 7.1(c)), on
+# the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with N.D. Ohio's local rules overlaid here.
+# The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb
+# engines gen`). Rules: N.D. Ohio L.R. 7.1 (https://www.ohnd.uscourts.gov/sites/ohnd/files/Rule_7_1%20redline.pdf)
+# and 10.1 (https://www.ohnd.uscourts.gov/sites/ohnd/files/CivilRules_Rule101.pdf, last revised 8/10/18); ../README.md
+# quotes them. The base already meets L.R. 10.1's letter paper, one-inch margins and consecutive page numbers.
+base: /lib/layouts/frcp-motion-brief.yaml
+# L.R. 10.1: double-spaced except quoted material: 27.6 pt lines, twice the 13.8 pt single line at 12 pt (the base's
+# type size; no N.D. Ohio size rule).
+pitch: {body: 27.6, single: 13.8}
+# L.R. 10.1: every page numbered, at the foot, centred, the number's line box ending half an inch above the page
+# edge (its top 22.2 pt below the text). A long memorandum (`contents: true`, below): the caption page unnumbered,
+# the tables in lower-case roman, the text from 1 (the second filer's long memorandum).
+page_number: {align: center, front: lower-roman, descent: 22.2}
+# A double-spaced quotation is exempt: single-spaced, half an inch in on each side, a single line around it.
+quote: {left: 36, right: 36, above: 13.8, below: 13.8}
+# Headings single-spaced and bold at the type size, a single line above, kept with what follows: a section at the
+# margin, a point half an inch in, a sub-point an inch in, the lines of each hanging half an inch (the sample types the
+# numerals, as filed).
+heading:
+  - {bold: true, hang: 36, above: 13.8, below: 0}
+  - {bold: true, left: 36, hang: 36, above: 13.8, below: 0}
+  - {bold: true, left: 72, hang: 36, above: 13.8, below: 0}
+constants:
+  court: "UNITED STATES DISTRICT COURT"
+  district: "NORTHERN DISTRICT OF OHIO"
+  # L.R. 7.1(f): the certification's words before the track
+  certifies: "Pursuant to Local Rule 7.1(f), the undersigned certifies that this memorandum relates to a dispositive motion, that this case is assigned to the"
+# L.R. 7.1(f), 10.1: the caption page. The court's name and the division centred, a 1 1/2 inch top margin on the first
+# page (the text's inch and 36 pt); FRCP 10(a): the caption, the parties in a 3.3 in column ("v." between them with a
+# blank line on each side), a ")" on every line of it, and from 0.3 in right of the marks the case number and, a line
+# below, the judge; the title of the paper in bold, centred in a 5.6 in measure, a double line below and a single line
+# above the text.
+cover:
+  - {text: "{xd.court}", align: center, above: 36}
+  - {text: "{xd.district}", align: center}
+  - {text: "{division}", align: center, upper: true, optional: true}
+  - columns:
+      - width: 237.6
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}"}
+            between:
+              - {text: "v.", above: 13.8, below: 13.8}
+      - {width: 21.6, repeat: ")"}
+      - blocks:
+          - {text: "Case No. {case_number}", left: 21.6}
+          - {text: "Judge: {judge}", left: 21.6, above: 13.8, optional: true}
+    above: 27.6
+  - {text: "{title}", align: center, bold: true, left: 32.4, right: 32.4, above: 27.6, below: 13.8}
+# L.R. 7.1(f): a memorandum over 15 pages carries a table of contents and a table of authorities; the sample says so
+# with `contents: true` (their titles centred in bold, a double line below), which also sets the caption on a page
+# of its own before them (a cover the field switches, fb-595.92); otherwise the caption opens page 1 and the text
+# follows it.
+cover_when: contents
+front: []
+contents: {title: "TABLE OF CONTENTS", style: {align: center, hang: 0, below: 27.6}, when: contents, depth: 3, col: 36, hang: 36, step: 36, above: 8.3}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  style: {align: center, hang: 0, below: 27.6}
+  page_heading: "Page(s)"
+  passim: 7
+  kinds:
+    - {kind: case, title: "Cases"}
+    - {kind: constitution, title: "Constitutional Provisions"}
+    - {kind: statute, title: "Statutes"}
+    - {kind: regulation, title: "Regulations"}
+    - {kind: rule, title: "Rules"}
+    - {kind: other, title: "Other Authorities"}
+  col: 72
+  hang: 25.2
+  above: 8.3
+  group: {bold: true, above: 13.8}
+# FRCP 11(a), L.R. 10.1: a double line below the text, "Dated:" and the date at the left, from 2.8 in "Respectfully
+# submitted,", the firm lines and the signature lines a single line apart, kept with the last paragraph. L.R. 7.1(f):
+# then the certification of track and page limit, the page limit of the sample's `track` (dispositive: 10 expedited,
+# 20 administrative, standard and unassigned, 30 complex, 40 mass tort; any other motion 15), and the order that
+# changed it when the sample names one.
+closing:
+  - group:
+      - columns:
+          - {width: 201.6, blocks: [{text: "Dated: {date}", optional: true}]}
+          - blocks:
+              - {text: "Respectfully submitted,"}
+              - {text: "{signature.firm}", above: 13.8, optional: true}
+              - {text: "{signature.lines}", above: 13.8}
+    above: 27.6
+  - group:
+      - {text: "CERTIFICATION OF TRACK AND PAGE LIMIT", align: center, bold: true}
+      - when: dispositive
+        default: true
+        blocks:
+          - {when: track, is: expedited, blocks: [{text: "{xd.certifies} {track} track, and that this memorandum adheres to the 10-page limitation set by Local Rule 7.1(f) for that track.", pitch: body, indent: 36}]}
+          - {when: track, is: administrative, blocks: [{text: "{xd.certifies} {track} track, and that this memorandum adheres to the 20-page limitation set by Local Rule 7.1(f) for that track.", pitch: body, indent: 36}]}
+          - {when: track, is: standard, blocks: [{text: "{xd.certifies} {track} track, and that this memorandum adheres to the 20-page limitation set by Local Rule 7.1(f) for that track.", pitch: body, indent: 36}]}
+          - {when: track, is: unassigned, blocks: [{text: "{xd.certifies} {track} track, and that this memorandum adheres to the 20-page limitation set by Local Rule 7.1(f) for that track.", pitch: body, indent: 36}]}
+          - {when: track, is: complex, blocks: [{text: "{xd.certifies} {track} track, and that this memorandum adheres to the 30-page limitation set by Local Rule 7.1(f) for that track.", pitch: body, indent: 36}]}
+          - {when: track, is: mass tort, blocks: [{text: "{xd.certifies} {track} track, and that this memorandum adheres to the 40-page limitation set by Local Rule 7.1(f) for that track.", pitch: body, indent: 36}]}
+      - unless: dispositive
+        default: true
+        blocks:
+          - {text: "Pursuant to Local Rule 7.1(f), the undersigned certifies that this memorandum relates to a motion other than a dispositive motion, that this case is assigned to the {track} track, and that this memorandum adheres to the 15-page limitation set by Local Rule 7.1(f) for such motions.", pitch: body, indent: 36}
+      - {text: "The page limitation was modified by order ({page_limit_order}), and this memorandum complies with that modification.", pitch: body, indent: 36, optional: true}
+    above: 27.6

@@ -249,6 +249,16 @@ function M.switch_contents(spec, meta)
   if c and c["when"] and not M.is_set(v) then
     spec.contents = nil
   end
+  -- a cover a frontmatter field switches (layout.yaml cover_when, fb-595.92; lib/typst/xdoc.typ alike): unless the
+  -- field is set, the cover's blocks open page 1 above `front`, and the pages are numbered as one (no
+  -- page_number.front or .cover)
+  if spec.cover_when and not M.is_set(M.lookup(meta, spec.cover_when)) then
+    local front = {}
+    for _, b in ipairs(spec.cover or {}) do front[#front + 1] = b end
+    for _, b in ipairs(spec.front or {}) do front[#front + 1] = b end
+    spec.front, spec.cover = front, nil
+    if spec.page_number then spec.page_number.front, spec.page_number.cover = nil, nil end
+  end
 end
 -- The paragraphs of a markdown value (a `{markdown: "{field}"}` block; lib/typst/xdoc.typ md-paragraphs): split at
 -- its blank lines, each paragraph's lines joined by a space.
