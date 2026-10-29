@@ -118,9 +118,11 @@ function M.footer_lines(text, meta)
   return out
 end
 
--- Whether the layout reads the body's page count (fb-595.92): words.limit_pages, or a block `when: xd.pages`.
+-- Whether the layout reads the body's page count (fb-595.92): words.limit_pages, or a block `when: xd.pages`, or
+-- tables_over (fb-595.85).
 function M.uses_pages(spec)
   if spec.words and spec.words.limit_pages then return true end
+  if spec.tables_over then return true end
   local function scan(v)
     if type(v) ~= "table" then return false end
     if v.when == "xd.pages" then return true end
@@ -135,6 +137,16 @@ end
 function M.is_set(v)
   return v ~= nil and v ~= pandoc.json.null and v ~= false and v ~= ""
     and not (type(v) == "table" and next(v) == nil)
+end
+
+-- The tables a frontmatter field decides (layout.yaml `tables_over: {pages, field}`, fb-595.85): true or false when
+-- the frontmatter sets the field (a filer's tables on a short paper), nil when the body's page count decides (the
+-- contents and the authorities only past `pages` pages); lib/typst/xdoc.typ alike.
+function M.tables_forced(spec, meta)
+  local t = spec.tables_over
+  local v = t and t.field and M.lookup(meta, t.field)
+  if v == nil or v == pandoc.json.null then return nil end
+  return M.is_set(v)
 end
 
 -- The paragraphs of a text template (lib/typst/xdoc.typ `expand`): "{path}" alone with a list value gives one per

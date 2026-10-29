@@ -53,10 +53,14 @@ cover:
           - {text: "{hearing.judge}", left: 14.4, optional: true}
     above: 24
 front: []
-# Civil L.R. 7-4(a)(2) (CAND-CONT-003): a table of contents and a table of authorities. The contents: a row per heading
+# Civil L.R. 7-4(a)(2) (CAND-CONT-003): "If in excess of 10 pages, a table of contents and a table of authorities":
+# both only when the body (the first page after the tables through the signature) runs past 10 pages; a filer who
+# sets them on a shorter paper (the rule asks for them above 10 pages, and bars them nowhere) says so with the
+# frontmatter's `tables: true` (`tables: false` drops them) (fb-595.85). The contents: a row per heading
 # to the fourth level, a numbered heading's label in its box, each level half an inch further in, the page in a 36 pt
 # column, 6 pt between rows; the authorities from the sample's keyed `authorities` (`toa:` links), grouped (cases in
 # italics, a comma before the citation), the pages in an inch, "passim" for seven or more, "Page(s)" over the first group.
+tables_over: {pages: 10, field: tables}
 contents: {title: "Table of Contents", page_heading: "Page", depth: 4, col: 36, step: 36, above: 6}
 authorities:
   title: "Table of Authorities"

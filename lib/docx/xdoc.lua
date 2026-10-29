@@ -1025,12 +1025,7 @@ return function(spec)
         local s = { prev_after = 0, pending = 0 }
         hlabels = xd.heading_labels(spec, blocks)
         local out = pandoc.Blocks({})
-        -- pages numbered apart from the body: the tables, and the pages before them
-        local paged = spec.contents or (spec.authorities and meta.authorities) or spec.before_tables or spec.between_tables
-          or #pre > 0
         local front = spec.page_number and spec.page_number.front
-        -- the document writes its own sections and footers: for the tables, or for a cover numbered apart
-        local sectioned = paged or (spec.cover and front) or #lead > 0
         xd.check_fills(spec.front)
         xd.check_fills(spec.closing)
         xd.check_fills(spec.after_tail)
@@ -1053,6 +1048,20 @@ return function(spec)
             error("xdoc: " .. meta.xd.words_over, 0)
           end
         end
+        -- the contents and the authorities only when the body ran past `tables_over` pages in the pass before
+        -- (fb-595.85, N.D. Cal. Civil L.R. 7-4(a)(2); none in the first pass: the passes go on until the pages settle;
+        -- lib/typst/xdoc.typ alike); a frontmatter `tables_over.field` set true or false decides alone
+        -- (xd.tables_forced)
+        local forced = xd.tables_forced(spec, meta)
+        if spec.tables_over and (forced == false
+            or forced == nil and meta.xd.pages <= tonumber(spec.tables_over.pages)) then
+          spec.contents, spec.authorities = nil, nil
+        end
+        -- pages numbered apart from the body: the tables, and the pages before them
+        local paged = spec.contents or (spec.authorities and meta.authorities) or spec.before_tables or spec.between_tables
+          or #pre > 0
+        -- the document writes its own sections and footers: for the tables, or for a cover numbered apart
+        local sectioned = paged or (spec.cover and front) or #lead > 0
         -- the papers before the cover (lead, fb-595.92), each between its own blocks and closing, a section of its own
         -- numbered from 1 in its `numbering` (decimal by default; `none` unnumbered); a needle at each one's last
         -- paragraph, so the needles after it (the cover's first line) are found past it
@@ -1186,8 +1195,14 @@ return function(spec)
             out:insert(raw_block(brk(s)))
           end
         end
+        -- (no tables, fb-595.85: a body numbered apart from the cover still labels its pages from 1, at its first needle,
+        -- for the body's page count)
+        if front and paged_body and not paged then want = "decimal" end
         local fnodes = xd.tree(spec, spec.front, meta, true, true)
-        if paged_body and first_text(fnodes) then needle("P:start", "B", first_text(fnodes), first_text(fnodes)) end
+        if paged_body and first_text(fnodes) then
+          needle("P:start", "B", first_text(fnodes), first_text(fnodes))
+          section_at("P:start")
+        end
         plan(fnodes, s.top)
         for _, x in ipairs(emit_list(fnodes, s, false)) do out:insert(raw_block(x)) end
         -- the last paragraph kept whole on the page of the closing (keep_with_closing): Body Text Keep, kept with the

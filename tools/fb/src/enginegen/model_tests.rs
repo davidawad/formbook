@@ -3115,6 +3115,90 @@ fn blocks_and_a_word_limit_on_the_body_s_page_count() {
 }
 
 #[test]
+fn the_tables_only_past_tables_over_pages_in_every_engine() {
+    // fb-595.85 (N.D. Cal. Civil L.R. 7-4(a)(2): "If in excess of 10 pages, a table of contents and a table of
+    // authorities"): `tables_over: {pages: N, field}` sets the contents and the authorities only when the body runs
+    // past N pages; the frontmatter's field, set true or false, decides alone
+    let l = layout(
+        "page_number: {align: center, front: lower-roman}\ncover:\n  - {text: \"{court}\", align: center}\ntables_over: {pages: 1, field: tables}\ncontents: {title: Contents, depth: 1, col: 36}\nauthorities:\n  title: Authorities\n  kinds:\n    - {kind: case, title: Cases}\nheading:\n  - {bold: true}\n",
+    );
+    let sample = |extra: &str, paras: usize| {
+        format!(
+            "---\ncourt: COURT OF TESTS\n{extra}authorities:\n  roe: {{kind: case, name: \"Roe v. Doe\", cite: \"1 U.S. 1 (2000)\"}}\n---\n# Argument\n\nAs [Roe](toa:roe) holds.\n\n{}",
+            "A paragraph of the argument.\n\n".repeat(paras)
+        )
+    };
+    let tools = ["typst", "pandoc", "pdftotext"];
+    // a one-page body: the cover, then the body from 1, no tables
+    let Some(f) = fx("tables-short", &l, &sample("", 1), &tools) else {
+        return;
+    };
+    let pages = f.typst_pages().unwrap();
+    assert_eq!(pages.len(), 2, "{pages:?}");
+    assert!(pages
+        .iter()
+        .all(|p| !p.contains("Contents") && !p.contains("Authorities")));
+    assert!(pages[1].contains("Argument") && pages[1].trim_end().ends_with('1'));
+    // LaTeX: each table under \ifnum on the body's page count, the body's pages marked
+    let tex = f.latex().unwrap();
+    let at = tex.find("\\ifnum\\xd@bodypages>1\\relax").unwrap();
+    assert!(at < tex.find("Contents").unwrap(), "{tex}");
+    assert_eq!(
+        tex.matches("\\ifnum\\xd@bodypages>1\\relax").count(),
+        2,
+        "{tex}"
+    );
+    assert!(tex.contains("\\xd@pmark{start}") && tex.contains("\\xd@pmark{end}"));
+    // Word: no tables before the pages are known, nor after a pass with a one-page body; the body labelled from 1
+    let doc = f.docx().unwrap();
+    assert!(
+        !doc.contains(">Contents<") && !doc.contains(">Authorities<"),
+        "{doc}"
+    );
+    let needles = f.written("needles.tsv").unwrap();
+    assert!(needles.contains("#section\th1\tdecimal"), "{needles}");
+    let doc = f.docx_after("h1\t2\t1\nP:end\t2\t1\n").unwrap();
+    assert!(!doc.contains(">Contents<"), "{doc}");
+    // ... and both after a pass with a two-page body
+    let doc = f.docx_after("h1\t2\t1\nP:end\t3\t2\n").unwrap();
+    assert!(
+        doc.contains(">Contents<") && doc.contains(">Authorities<"),
+        "{doc}"
+    );
+    // a body past one page: the contents i, the authorities ii, the body from 1
+    let Some(g) = fx("tables-long", &l, &sample("", 60), &tools) else {
+        return;
+    };
+    let pages = g.typst_pages().unwrap();
+    assert!(pages.len() >= 5, "{pages:?}");
+    assert!(
+        pages[1].contains("Contents") && pages[1].trim_end().ends_with('i'),
+        "{pages:?}"
+    );
+    assert!(pages[2].contains("Authorities") && pages[2].contains("Roe v. Doe"));
+    assert!(pages[3].contains("Argument") && pages[3].trim_end().ends_with('1'));
+    // the field set: the tables on a one-page body; unset (false): none on a long one, in every engine
+    for (name, extra, paras, shown) in [
+        ("tables-on", "tables: true\n", 1, true),
+        ("tables-off", "tables: false\n", 60, false),
+    ] {
+        let Some(h) = fx(name, &l, &sample(extra, paras), &tools) else {
+            return;
+        };
+        let pages = h.typst_pages().unwrap();
+        assert_eq!(
+            pages.iter().any(|p| p.contains("Contents")),
+            shown,
+            "{name}: {pages:?}"
+        );
+        let tex = h.latex().unwrap();
+        assert!(!tex.contains("\\ifnum\\xd@bodypages"), "{name}: {tex}");
+        assert_eq!(tex.contains("Contents"), shown, "{name}");
+        assert_eq!(h.docx().unwrap().contains(">Contents<"), shown, "{name}");
+    }
+}
+
+#[test]
 fn papers_before_the_cover_are_numbered_on_their_own() {
     // fb-595.92 (E.D. Pa. LR 7.1, E.D. Mich. LR 7.1(d)): `lead` parts before the cover, each the body up to its marker,
     // between its own blocks and closing, numbered from 1 (or not at all); the document from 1 after them

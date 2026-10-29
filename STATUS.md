@@ -1194,7 +1194,7 @@ One row per doc-type folder (`COURT/<doctype>/`), plus the court folder itself a
 | caed | [motion-brief](courts/ninth-circuit/california/federal/eastern-district/motion-brief) | yes | 1 | yes | 2 | up for review | **complete** |
 | cand | [answer](courts/ninth-circuit/california/federal/northern-district/answer) | yes | 1 | yes | 2 | up for review | **complete** |
 | cand | [complaint](courts/ninth-circuit/california/federal/northern-district/complaint) | yes | 1 | yes | 2 | up for review | **complete** |
-| cand | [motion-brief](courts/ninth-circuit/california/federal/northern-district/motion-brief) | yes | 1 | yes | 2 | up for review | **complete** |
+| cand | [motion-brief](courts/ninth-circuit/california/federal/northern-district/motion-brief) | yes | 2 | yes | 2 | up for review | **complete** |
 | cand | [notice](courts/ninth-circuit/california/federal/northern-district/notice) | yes | 1 | yes | — | up for review | missing exemplar |
 | cand | [proposed-order](courts/ninth-circuit/california/federal/northern-district/proposed-order) | yes | 2 | yes | 3 | up for review | **complete** |
 | casd | [complaint](courts/ninth-circuit/california/federal/southern-district/complaint) | yes | 1 | yes | 3 | up for review | **complete** |

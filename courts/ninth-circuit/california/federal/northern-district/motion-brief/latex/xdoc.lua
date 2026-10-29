@@ -222,6 +222,10 @@ return require("latex.xdoc")({
     ["clearance"] = 12.6,
   },
   ["front"] = {},
+  ["tables_over"] = {
+    ["pages"] = 10,
+    ["field"] = "tables",
+  },
   ["contents"] = {
     ["title"] = "Table of Contents",
     ["page_heading"] = "Page",

@@ -1283,7 +1283,16 @@
     body-of(spec, meta, pre, h1-page: spec.body_before_tables.at("each_page", default: false))
     pagebreak()
   }
-  if "contents" in spec { contents-pages(spec, spec.contents) }
+  // the contents and the authorities only when the body runs past `tables_over` pages (fb-595.85, N.D. Cal. Civil L.R.
+  // 7-4(a)(2): "If in excess of 10 pages"): the body's page count (xd-pages) is known from the layout pass before,
+  // and does not change with the tables (they come before it); lib/latex/xdoc.lua, lib/docx/xdoc.lua alike
+  // (a frontmatter `tables_over.field` set true or false decides alone: a filer's tables on a short paper)
+  let tables-over = spec.at("tables_over", default: none)
+  let forced = if tables-over == none or "field" not in tables-over { none } else { lookup(meta, tables-over.field) }
+  let shown(t) = if tables-over == none { t } else if forced != none { if is-set(forced) { t } } else {
+    context if xd-pages() > tables-over.pages { t }
+  }
+  if "contents" in spec { shown(contents-pages(spec, spec.contents)) }
   if "between_tables" in spec {
     pagebreak(weak: true)
     blocks(spec, spec.between_tables, meta, first: true, page: true)
@@ -1292,7 +1301,7 @@
     pagebreak(weak: true)
     body-of(spec, meta, pre)
   }
-  if "authorities" in spec and "authorities" in meta { authorities-pages(spec, spec.authorities, meta) }
+  if "authorities" in spec and "authorities" in meta { shown(authorities-pages(spec, spec.authorities, meta)) }
   if "contents" in spec or "authorities" in spec or "between_tables" in spec or (pre != "" and between) {
     pagebreak(weak: true)
   }
@@ -1300,8 +1309,9 @@
   check-fills(spec.at("front", default: ()))
   check-fills(spec.at("closing", default: ()))
   check-fills(spec.at("after_tail", default: ()))
-  // the body's pages marked only when the layout reads them (when: xd.pages, words.limit_pages)
-  let paged-body = "limit_pages" in spec.at("words", default: (:)) or repr(spec).contains("\"xd.pages\"")
+  // the body's pages marked only when the layout reads them (when: xd.pages, words.limit_pages, tables_over)
+  let paged-body = ("limit_pages" in spec.at("words", default: (:)) or "tables_over" in spec
+    or repr(spec).contains("\"xd.pages\""))
   if paged-body [#metadata(none)<xd-body-start>]
   blocks(spec, spec.at("front", default: ()), meta, first: true, page: true)
   // the last paragraph kept whole on the page of the closing (layout.yaml keep_with_closing)

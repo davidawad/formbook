@@ -40,6 +40,9 @@ signature:
     - "Assistant United States Attorney"
     - "Counsel for Defendants"
 date: "April 20, 2017"
+# both tables, as filed: the filing's memorandum ran to 12 pages (Civil L.R. 7-4(a)(2): past 10); this
+# transcription stops after III.B.1 and renders 8 (README.md, Sample)
+tables: true
 authorities:
   iqbal: {kind: case, name: "Ashcroft v. Iqbal", cite: "556 U.S. 662 (2009)"}
   twombly: {kind: case, name: "Bell Atl. Corp. v. Twombly", cite: "550 U.S. 544 (2007)"}

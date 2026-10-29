@@ -22,7 +22,7 @@ Source: N.D. Cal. Civil Local Rules, full text (PDF, "Effective October 2, 2026"
 | CAND-FIRST-003 | Civil L.R. 7-2(b)(1), 7-4(a)(1) | The noticed hearing date and time on the first page, in the space opposite the caption and below the case number. | caption right column, `hearing` |
 | CAND-CONT-001 | Civil L.R. 7-2(b)(2)-(4), 7-4(a)(3)-(5) | Notice of motion in the first paragraph; a concise statement of relief in the second; then the points and authorities: statement of issues, succinct statement of facts, argument citing authorities. | body (author-written, see `usage/`) |
 | CAND-CONT-002 | Civil L.R. 7-2(b), 7-4(b) | Motion in one filed document not exceeding 25 pages (text limit for the points and authorities). Not checked by the template: no page counter exists yet. | not enforced |
-| CAND-CONT-003 | Civil L.R. 7-4(a)(2) | Table of contents and table of authorities when the brief is more than 10 pages. The template always produces both (generated from headings and `toa:` links). | layout.yaml `contents`, `authorities` (keyed, from the `toa:` links) |
+| CAND-CONT-003 | Civil L.R. 7-4(a)(2) | "If in excess of 10 pages, a table of contents and a table of authorities." Both, generated from the headings and the `toa:` links, only when the body (the first page after the tables through the signature) runs past 10 pages; the frontmatter's `tables: true` sets them on a shorter paper (the rule bars them nowhere; the exemplar's INPUT, transcribed short, keeps them as filed), `tables: false` drops them (fb-595.85). | layout.yaml `tables_over: {pages: 10, field: tables}`, `contents`, `authorities` (keyed, from the `toa:` links); `usage/INPUT-motion-brief-3.md` (short, no tables) |
 | CAND-CONT-004 | Civil L.R. 3-4(d) | Citation to authorities: parallel U.S.C. citation for Acts of Congress, C.F.R. title/section and date for regulations, U.S./S. Ct./L. Ed. for Supreme Court cases, F./F. Supp./F.R.D. for other federal courts, official or regional reporter for state courts. Not checked by the template; authorities are written by the author. | not enforced |
 
 Not used, and why: Civil L.R. 7-2(c) (proposed order) and 7-5 (declarations) are separate filings. No certificate of compliance or certificate of service is generated: the N.D. Cal. text above does not call for one, and the exemplar has neither (it is an ECF filing). The "signature block" is a convention, not a rule citation.
@@ -37,6 +37,8 @@ Not used, and why: Civil L.R. 7-2(c) (proposed order) and 7-5 (declarations) are
 
 - `usage/INPUT-motion-brief.md` is a transcription of the exemplar: caption and counsel block, notice of motion, relief sought, issues, the memorandum's introduction, facts, Argument III.A (venue) and III.B.1 (legal standard), the conclusion, and the signature block. Footnotes 1 and 2 are included.
 - It stops after III.B.1. Argument III.B.2-4 (sovereign immunity, agency failure to act, statute of limitations) are not transcribed, to keep the render within the 8-14 page target. The exemplar's pages 9-12 of the memorandum are therefore absent; the overlay shows this.
+- `usage/INPUT-motion-brief.md` sets `tables: true`: its render's body is 8 pages, under the 10 past which Civil L.R. 7-4(a)(2) asks for the tables, but the filing (12 pages of memorandum) has both.
+- `usage/INPUT-motion-brief-3.md` is fictional (no FILED-EXAMPLE): a short motion whose body runs 2 pages and whose frontmatter sets no `tables`, so every engine renders the cover and the memorandum from 1 with no table of contents or authorities (fb-595.85).
 - Frontmatter follows the ca9 contract in shape (`authorities:` registry, `toa:KEY` links, footnotes, `#` headings) with the N.D. Cal. fields (`court`, `counsel`, `caption`, `hearing`, `footer_title`). Headings are numbered by the template (I., A., 1., a.); the sample types no numbers.
 
 ## Render and checks
@@ -49,6 +51,7 @@ just overlay $D   # -> .overlay/<doc path>/OVERLAY-motion-brief.pdf and .txt (no
 ```
 
 - `usage/OUTPUT-motion-brief.typst.pdf`, `.latex.pdf`, `.docx.pdf`: 11 pages each of pleading paper (28 numbered lines, a double rule at the left and a single rule at the right), Times New Roman 12 pt, no warnings.
+- `usage/OUTPUT-motion-brief-3.typst.pdf`, `.latex.pdf`, `.docx.pdf`: 3 pages each: the cover, then the body numbered 1 and 2; no tables.
 
 ## Visual review (Gate 2 record)
 
@@ -66,6 +69,16 @@ just overlay $D   # -> .overlay/<doc path>/OVERLAY-motion-brief.pdf and .txt (no
 | all | | Footer: page number, the title in capitals (two lines), "No." and the case number, 10 pt, the last line 8 pt above the foot | OK. | OK |
 
 Reviewed pages: 11 of 11 on each engine (33).
+
+2026-10-29, `INPUT-motion-brief-3.md` (fb-595.85): the three renders (3 pages each, 9) read by their text layout (`pdftotext -layout`); XENG-001..003 PASS on every engine.
+
+| PDF page | Printed page | What it is | Finding (all three engines) | Status |
+|---|---|---|---|---|
+| 1 | cover | Counsel and role, court title, caption, case number, title, hearing | OK. | OK |
+| 2 | 1 | Notice of motion, relief, issue, memorandum I.-III.A, straight after the cover: no table of contents or authorities (a 2-page body, Civil L.R. 7-4(a)(2)) | OK. | OK |
+| 3 | 2 | III.B, conclusion, signature | OK. | OK |
+
+Reviewed pages: 3 of 3 on each engine (9).
 
 ## Known gaps and open choices
 

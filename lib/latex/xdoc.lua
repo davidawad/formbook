@@ -802,16 +802,27 @@ return function(spec)
           h1_page = false
           out:insert(raw("\\clearpage"))
         end
-        -- the tables in a group: their line boxes end with them
-        if spec.contents then out:insert(raw("\\begingroup" .. contents(spec.contents, heads) .. "\\par\\endgroup")) end
+        -- the tables in a group: their line boxes end with them; set only when the body runs past `tables_over` pages
+        -- (fb-595.85, N.D. Cal. Civil L.R. 7-4(a)(2); the pages from the .aux, xdoc.sty; lib/typst/xdoc.typ alike)
+        -- (a frontmatter `tables_over.field` set true or false decides alone: xd.tables_forced)
+        local function shown(t)
+          if not spec.tables_over then return t end
+          local forced = xd.tables_forced(spec, meta)
+          if forced ~= nil then return forced and t or "" end
+          return "\\ifnum\\xd@bodypages>" .. string.format("%d", tonumber(spec.tables_over.pages)) .. "\\relax " .. t
+            .. "\\fi "
+        end
+        if spec.contents then
+          out:insert(raw(shown("\\begingroup" .. contents(spec.contents, heads) .. "\\par\\endgroup")))
+        end
         if spec.between_tables then out:insert(raw("\\clearpage" .. emit(wnodes, false))) end
         if #pre > 0 and late then
           out:insert(raw("\\clearpage"))
           out:extend((body(pre, 0, nil, spec.paragraph_gap)))
         end
         if spec.authorities and meta.authorities then
-          out:insert(raw("\\begingroup" .. (xd.is_keyed(meta) and keyed_authorities(spec.authorities, meta, cited)
-            or authorities(spec.authorities, meta)) .. "\\par\\endgroup"))
+          out:insert(raw(shown("\\begingroup" .. (xd.is_keyed(meta) and keyed_authorities(spec.authorities, meta, cited)
+            or authorities(spec.authorities, meta)) .. "\\par\\endgroup")))
         end
         if tables then
           out:insert(raw("\\clearpage" .. (front and "\\pagenumbering{arabic}" or "")))
