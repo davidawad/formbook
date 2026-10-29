@@ -36,6 +36,39 @@
   if type(m) == length { m.to-absolute() } else { none }
 }
 
+/// Whether content holds a footnote (its mark).
+#let has-note(c) = {
+  if type(c) != content { return false }
+  if c.func() == footnote { return true }
+  if c.has("children") { return c.children.any(has-note) }
+  if c.has("body") { return has-note(c.body) }
+  if c.has("child") { return has-note(c.child) }
+  false
+}
+
+// A note never starts on a page before its mark. A footnote in a paragraph a template wraps in a breakable block
+// cannot take its line on with it: when the line and its note do not both fit, typst keeps the note where the line
+// was first laid and moves the line on alone (fb-595.54.11.1). A bare paragraph moves its line and the note together,
+// as LaTeX and Word do; so a block that only wraps such a paragraph (no size, box, fill, stroke, keep or label of its
+// own, its spacing the paragraph spacing) is laid out as the bare paragraph: the same lines and spacing, its first
+// line indented as the first paragraph of a block is (only with `all: true`).
+#let unwrap-note-par(it) = {
+  let b = it.body
+  if type(b) != content or b.func() != par or not has-note(b.body) or it.has("label") { return it }
+  let f = it.fields()
+  if not (f.breakable and f.height == auto and f.width in (auto, 100%) and f.fill == none and not f.clip
+    and not f.sticky and (f.stroke, f.inset, f.outset) == ((:), (:), (:))) { return it }
+  context {
+    let s = par.spacing.to-absolute()
+    if f.above.to-absolute() != s or f.below.to-absolute() != s { return it }
+    let pf = b.fields()
+    let body = pf.remove("body")
+    let fi = pf.at("first-line-indent", default: par.first-line-indent)
+    if type(fi) != dictionary { fi = (amount: fi, all: false) }
+    par(..pf, first-line-indent: (amount: if fi.at("all", default: false) { fi.amount } else { 0pt }, all: true), body)
+  }
+}
+
 // The marker the line count of a paragraph is measured under (so the measured copy does not place a guard itself).
 #let measuring = 0.0123pt
 
@@ -101,6 +134,8 @@
   show super: set text(top-edge: "baseline", bottom-edge: "baseline")
   // Footnote marks at 58 % of the type size: LibreOffice's superscript, which the LaTeX engine sets too.
   set super(size: 0.58em)
+  // A paragraph that anchors a footnote laid out bare, not in a block that only wraps it (unwrap-note-par, above).
+  show block: unwrap-note-par
   // Never break inside a token of adjacent parentheses, nor between a section sign / pilcrow and its number.
   // Unbreakable boxes, so the extracted text stays exactly the author's characters.
   show regex("\\S*\\)\\(\\S*"): it => box(it)

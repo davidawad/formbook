@@ -2650,3 +2650,67 @@ fn a_note_mark_is_attached_and_an_apostrophe_after_emphasis_is_closing() {
     let sty = std::fs::read_to_string(f.root.join("lib/latex/xdoc.sty")).unwrap();
     assert!(sty.contains("\\@beginparpenalty=0 \\@endparpenalty=0 \\@itempenalty=0"));
 }
+
+/// A footnote in a paragraph a template wraps in a block (`block(width: 100%, above: 0pt, below: 0pt, par(..))`, the
+/// fifth-circuit motion briefs' body paragraphs) starts on the page of its mark: when the mark's line and the note do
+/// not both fit, both move on (typst kept the note on the page the line was first laid on: lawb motion-brief note 7
+/// on page 4, its mark on page 5; lib/typst/xengine.typ unwrap-note-par, fb-595.54.11.1). The paragraph is set at
+/// each offset of a line's height down a page of its own, so some trial puts the mark's line at the foot of a page.
+#[test]
+fn a_note_never_starts_on_a_page_before_its_mark() {
+    if !have(&["typst"]) {
+        return;
+    }
+    let root = root();
+    let dir = root.join("tools/fb/target/model-tests/note-before-mark");
+    let _ = std::fs::remove_dir_all(&dir);
+    std::fs::create_dir_all(&dir).unwrap();
+    let words = "aaa bbb ccc ddd eee fff ggg hhh iii jjj kkk lll mmm nnn ooo ppp qqq rrr sss ttt uuu vvv www xxx yyy zzz ";
+    let main = format!(
+        r#"#import "/lib/typst/xengine.typ": xengine, edges
+#set page(paper: "us-letter", margin: 1in)
+#set text(font: "Liberation Serif", size: 12pt)
+#set par(first-line-indent: (amount: 0.5in, all: true))
+#show: xengine.with(pitch: 24pt, list-indent: none)
+#set footnote.entry(gap: 6pt, clearance: 8pt, indent: 0pt)
+#show footnote.entry: it => {{
+  set text(..edges(14pt))
+  context [#metadata((mark: it.note.location().page(), entry: here().page()))<entry>]
+  it
+}}
+#for n in range(540, 600, step: 1) {{
+  pagebreak(weak: true)
+  v(n * 1pt)
+  block(width: 100%, above: 0pt, below: 0pt, par[#context [#metadata(here().page())<start>]{a}{a}{a}#footnote[A note.] {a}{a}{a}{a}])
+  lorem(60)
+}}
+"#,
+        a = words
+    );
+    std::fs::write(dir.join("main.typ"), main).unwrap();
+    let query = |sel: &str| {
+        let o = Command::new("typst")
+            .args(["query", "--root"])
+            .arg(&root)
+            .arg("--font-path")
+            .arg(root.join("fonts"))
+            .arg("--ignore-system-fonts")
+            .arg(dir.join("main.typ"))
+            .args([sel, "--field", "value"])
+            .output()
+            .unwrap();
+        assert!(o.status.success(), "{}", String::from_utf8_lossy(&o.stderr));
+        serde_json::from_slice::<Vec<serde_json::Value>>(&o.stdout).unwrap()
+    };
+    let entries = query("<entry>");
+    let starts = query("<start>");
+    assert_eq!(entries.len(), starts.len());
+    for e in &entries {
+        assert_eq!(e["mark"], e["entry"], "a note starts on another page than its mark: {e}");
+    }
+    // the fixture moves some mark's line (and its note) to the page after its paragraph's first line
+    assert!(
+        entries.iter().zip(&starts).any(|(e, s)| e["mark"].as_i64() > s.as_i64()),
+        "no trial moved a mark's line on: {entries:?}"
+    );
+}
