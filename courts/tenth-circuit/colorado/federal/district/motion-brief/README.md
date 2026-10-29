@@ -88,3 +88,7 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
 - Gate 4: XENG-001..003 PASS (10 pages; 219/219 typst lines break after the same word), `params.cross_engine: gate` in `eval.yaml`. typst: `RESULT: 8 checks passed, 0 failed`; docx: `RESULT: 12 checks passed, 0 failed` (DEF-TOC-001 and DEF-COVER-001 pass on both).
 - Differs: LibreOffice sets Liberation Sans lines up to 0.76 pt narrower than typst over a full line (94 of 219 lines differ by more than 0.5 pt); no line of this sample is filled that close, but a line of other text may break differently. The page number sits 0.81 pt lower in the docx.
 - BLOCKED: none.
+
+## FRCP base port assessment (fb-595.17.19)
+
+Skipped: the D. Colo. sample's certificate of conferral (LCivR 7.1(a)-(b)) and its service certificate for a pro se recipient cannot be represented in the base's single signature closing. Although LCivR 7.1 exempts FRCP 12 motions from conferral, the current input explicitly includes the conferral statement and service block; moving to the base would silently drop them. The 1½-inch top margin and 12-point minimum themselves are expressible as overlays.

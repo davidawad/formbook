@@ -108,3 +108,7 @@ DOCX (`docx/`): `reference.xml` (`base="xengine"`: the face is the typst templat
 - `tools/check.sh <dir>`: RESULT: 9 checks passed, 0 failed (DEF-TOC-001, DEF-COVER-001 pass).
 - `tools/check.sh <dir> --engine docx`: RESULT: 13 checks passed, 0 failed; XENG-001..003 PASS (13 pages, 310/310 lines).
 - No latex engine for this folder.
+
+## FRCP base port assessment (fb-595.17.19)
+
+Skipped: D.N.M. LR-Civ. 7.1(b) requires every motion, response and reply to include a certificate of service on each party. The FRCP base has no certificate-of-service block after the signature. Its 1½-inch top margin and 12-point size can be expressed as overlays, but the required service block needs shared model support.

@@ -107,3 +107,7 @@ BLOCKED (docx gates cannot run on this box):
 - `docx.pdf` (LibreOffice conversion): `soffice` is not installed on the box, so `tools/render-docx.sh` stops after writing `usage/OUTPUT-motion-brief.docx`.
 - Visual review of the docx pages: 0 pages reviewed; the typst pages were viewed as the comparison.
 - Page limit (15 pages through the signature, D. Kan. R. 7.1(d)(3)): not measured for docx.
+
+## FRCP base port assessment (fb-595.17.19)
+
+Skipped: the D. Kan. sample includes the certificate-of-service fields required by D. Kan. R. 5.1(f) (recipient identity/address, capacity, manner and date of service). The FRCP base has no certificate-of-service block after the signature, so porting it would drop filed content. The 27.6-point body pitch and 15-page limit can otherwise be represented by the layout and eval parameters.

@@ -94,3 +94,7 @@ Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type 
   - Zip integrity step of `tools/render-docx.sh`: `unzip` is not installed, so the command exits 1 after writing `usage/OUTPUT-motion-brief.docx` (`unzip: not found`, then `... is not a valid zip`). The parts were checked instead with `ziptool` (17 parts) and `xmllint --noout`: all well formed.
   - Opening the .docx in Word or LibreOffice without a repair prompt: not done.
   - `tools/check.sh --engine docx`: not run (needs the `.docx.pdf`).
+
+## FRCP base port assessment (fb-595.17.19)
+
+Skipped: the existing filing contract includes a certificate-of-service page after the signature, which the FRCP base cannot express in that position. The base can represent the 13-point minimum, one-inch margins and double spacing under W.D. Okla. LCvR 7.1(d) and LCvR 5.2(a); porting without the service block would discard sample content. This folder does not use numbered pleading paper.
