@@ -1,0 +1,91 @@
+# U.S. District Court for the Eastern District of Washington (waed): a motion that serves as its memorandum (LCivR
+# 7(b)(1)), on the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with E.D. Wash.'s local rules
+# overlaid here, on pleading paper (fb-595.96). The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/
+# are generated from the merged layout by `fb engines gen`). Rules: E.D. Wash. LCivR 7, 10 (../README.md quotes them).
+base: /lib/layouts/frcp-motion-brief.yaml
+# LCivR 10(d): a serif face of 14 points or more, or a monospaced one (Courier New's twin, Liberation Mono, at 14 pt:
+# 8.6 characters an inch); text and footnotes double-spaced (32 pt lines); quotations, headings, captions, signature
+# blocks and certifications may be single-spaced (16 pt lines).
+size: 14
+pitch: {body: 32, single: 16}
+footnote: {size: 14, pitch: body, gap: 0}
+quote: {left: 36, right: 36, above: 0, below: 0}
+# LCivR 10(d): 8 1/2 x 11 inch paper with numbered lines: 20 numbered lines of 32 pt from the one-inch top margin, the
+# last inside an 80 pt bottom margin that holds the footer, less a twip: Word starts the page after a page break with
+# a paragraph of one twip (lib/docx/xdoc.lua brk), so a page the 20 lines fill to the margin lost its last line there
+# (measured); a 1.1 in left margin for the numbers and the rules.
+margin: {top: 72, bottom: 79.95, left: 79.2, right: 72}
+# pleading paper: the numbers 1 to 20 right-aligned 0.45 in left of the text, one a numbered line from the top margin;
+# a double rule at the text's left (0.9 in and 0.94 in from the page's left edge) and a single one 0.1 in right of it
+pleading: {lines: 20, numbers: 46.8, rules: [64.8, 67.7, 547.2]}
+# LCivR 10(a)(1)(E), 10(a)(2): a footer with the paper's title (an abbreviated one, `footer_title`, in capitals as
+# filed) and the page number, numbered through the whole filing: one line at the left, its foot 52 pt above the
+# page's.
+page_number: {align: left, foot: 52, text: "{footer_title} - {page}"}
+constants:
+  court: "UNITED STATES DISTRICT COURT"
+  district: "EASTERN DISTRICT OF WASHINGTON"
+# LCivR 10(a)(1)(A)-(D): counsel above line five (a box at least four numbered lines high), the court's title on line
+# five or below, single-spaced, centred; the caption: the parties at the left (each designation 1.2 in in, as filed),
+# ruled at their right and foot, "v." between them; at the right the case number, the paper's title in bold and (LCivR 7(i)(1)) the hearing date and its
+# kind. With a table of contents (the sample's `toc`), these blocks are a page of their own; without one, they open the
+# first page above the text.
+cover_when: toc
+cover:
+  - box:
+      - {text: "{counsel}"}
+    min_height: 128
+  - {text: "{xd.court}", align: center}
+  - {text: "{xd.district}", align: center}
+  - {text: "{division}", align: center, upper: true, optional: true}
+  - columns:
+      - width: 230.4
+        blocks:
+          - box:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", left: 86.4}
+                between:
+                  - {text: "v."}
+            stroke: {right: 0.75, bottom: 0.75}
+            inset: {right: 10, bottom: 8}
+      - blocks:
+          - {text: "Case No. {case_number}", left: 10.8}
+          - {text: "{brief_title}", bold: true, left: 10.8, above: 16}
+          - {text: "Hearing date: {hearing.date}", left: 10.8, above: 16, optional: true}
+          - {text: "{hearing.type}", left: 10.8, optional: true}
+          - {text: "{hearing.judge}", left: 10.8, optional: true}
+    gutter: 14.4
+    above: 32
+front: []
+# The table of contents, when the sample asks for one (`toc`): its title centred in bold, a row per heading to the
+# third level, the label in its box, each level 0.6 in further in, the page in a half-inch column.
+contents: {when: toc, title: "TABLE OF CONTENTS", style: {align: center, bold: true, below: 32}, pitch: body, depth: 3, col: 36, step: 43.2}
+# Headings numbered by the layout, bold, kept with what follows: a section centred in capitals ("I. INTRODUCTION", as
+# filed); a sub-section at the margin, its label in a 0.6 in box, the title hanging after it; the next level bold
+# italic 0.6 in further in.
+heading:
+  - {align: center, bold: true, upper: true, number: "I.", pitch: body, above: 0, below: 0}
+  - {bold: true, number: "A.", label_box: 43.2, pitch: body, above: 0, below: 0}
+  - {bold: true, italic: true, left: 43.2, number: "1.", label_box: 43.2, pitch: body, above: 0, below: 0}
+# FRCP 11(a): "DATED" and the date at the left; at 2.8 in "Respectfully submitted,", the firm and "By s/" with the signer
+# a single line apart, the signer's lines; kept with the body's last paragraph (the base's keep_with_closing).
+closing:
+  - columns:
+      - {width: 187.2, blocks: [{text: "DATED {date}"}]}
+      - blocks:
+          - {text: "Respectfully submitted,"}
+          - {text: "{signature.firm}", above: 16}
+          - {text: "By s/{signature.signer}", above: 16}
+          - {text: "{signature.lines}", optional: true}
+    gutter: 14.4
+    above: 16
+# FRCP 5(b), (d): the certificate of service on a page of its own, from the sample's `certificate_of_service` (its
+# paragraphs: the service, the date, the signature), double-spaced, not listed in the contents.
+after_tail:
+  - when: certificate_of_service
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, pitch: body}
+      - {markdown: "{certificate_of_service}", pitch: body, indent: 36}

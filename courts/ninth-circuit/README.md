@@ -10,15 +10,15 @@ Courts under `courts/ninth-circuit` (61).
 | [United States Bankruptcy Court, D. Alaska](alaska/federal/bankruptcy-district) | `akb` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court for the District of Alaska](alaska/federal/district) | `akd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Arizona](arizona/federal/bankruptcy-district) | `arb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the District of Arizona](arizona/federal/district) | `azd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the District of Arizona](arizona/federal/district) | `azd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, C.D. California](california/federal/bankruptcy-central-district) | `cacb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. California](california/federal/bankruptcy-eastern-district) | `caeb` | up for review | 1/1 | — | 1/1 | 14 |
 | [United States Bankruptcy Court, N.D. California](california/federal/bankruptcy-northern-district) | `canb` | up for review | 1/1 | — | 1/1 | 14 |
 | [United States Bankruptcy Court, S.D. California](california/federal/bankruptcy-southern-district) | `casb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Central District of California](california/federal/central-district) | `cacd` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Eastern District of California](california/federal/eastern-district) | `caed` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Northern District of California](california/federal/northern-district) | `cand` | up for review | 5/5 | — | 4/4 | 14 |
-| [United States District Court for the Southern District of California](california/federal/southern-district) | `casd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the Central District of California](california/federal/central-district) | `cacd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [United States District Court for the Eastern District of California](california/federal/eastern-district) | `caed` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [United States District Court for the Northern District of California](california/federal/northern-district) | `cand` | up for review | 5/5 | 1/1 | 4/4 | 14 |
+| [United States District Court for the Southern District of California](california/federal/southern-district) | `casd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Guam](guam/federal/bankruptcy-district) | `gub` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Guam](guam/federal/district) | `gud` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Hawaii](hawaii/federal/bankruptcy-district) | `hib` | up for review | 2/2 | — | 2/2 | 14 |
@@ -28,14 +28,14 @@ Courts under `courts/ninth-circuit` (61).
 | [United States Bankruptcy Court, D. Montana](montana/federal/bankruptcy-district) | `mtb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Montana](montana/federal/district) | `mtd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Nevada](nevada/federal/bankruptcy-district) | `nvb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. Nevada](nevada/federal/district) | `nvd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. Nevada](nevada/federal/district) | `nvd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, Northern Mariana Islands](northern-mariana-islands/federal/bankruptcy-district) | `nmib` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, Northern Mariana Islands](northern-mariana-islands/federal/district) | `nmid` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, Northern Mariana Islands](northern-mariana-islands/federal/district) | `nmid` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Oregon](oregon/federal/bankruptcy-district) | `orb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Oregon](oregon/federal/district) | `ord` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. Washington](washington/federal/bankruptcy-eastern-district) | `waeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Washington](washington/federal/bankruptcy-western-district) | `wawb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, E.D. Washington](washington/federal/eastern-district) | `waed` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. Washington](washington/federal/eastern-district) | `waed` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [District Court, W.D. Washington](washington/federal/western-district) | `wawd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Alaska Court of Appeals](alaska/state/court-of-appeals) | `alaskactapp` | up for review | 1/1 | 1/1 | 1/1 | 14 |
 | [Alaska Supreme Court](alaska/state/supreme-court) | `alaska` | up for review | 6/6 | 6/6 | 3/4 | 29 |
