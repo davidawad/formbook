@@ -18,7 +18,7 @@ front:
                   - {text: "{designation}", above: 13.8, left: 54}
                 between:
                   - {text: "v.", above: 13.8, below: 13.8}
-            stroke: {right: 0.75, bottom: 0.75}
+            stroke: {top: 0.75, right: 0.75}
             inset: {right: 12, bottom: 10}
       - valign: center
         blocks:
