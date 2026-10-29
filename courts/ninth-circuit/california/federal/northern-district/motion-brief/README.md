@@ -57,7 +57,7 @@ just overlay $D   # -> .overlay/<doc path>/OVERLAY-motion-brief.pdf and .txt (no
 | PDF page | Printed page | What it is | Finding (all three engines) | Status |
 |---|---|---|---|---|
 | 1 | cover | Counsel and role (lines 1-6), court title from line 8, caption ruled at the parties' right and foot, case number, title in bold capitals, hearing | OK. The title wraps in six lines in the 1.5 in page's right column; the exemplar's in four, past its own right margin (accepted in eval.yaml for DEF-COVER-002). | ACCEPTED (tier 3) |
-| 2 | i | Table of contents | OK: labels in their boxes, the page column. No "Page" label over the column (the model's contents have none; the authorities have "Page(s)"). | OPEN (tier 2) |
+| 2 | i | Table of contents | OK: "Page" over the page column, labels in their boxes. | OK |
 | 3 | ii | Table of authorities: cases (italic name, comma, citation), statutes, rules, regulations, other | OK: "Page(s)" over the first group, leaders, wrapped entries hang. | OK |
 | 4 | 1 | Notice of motion, relief sought; footnote 1 | OK. | OK |
 | 5 | 2 | Issues to be decided (double-spaced now), memorandum, introduction | OK (the old template's single-spaced issues, an open finding, are gone). | OK |

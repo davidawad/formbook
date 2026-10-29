@@ -224,6 +224,7 @@ return require("docx.xdoc")({
   ["front"] = {},
   ["contents"] = {
     ["title"] = "Table of Contents",
+    ["page_heading"] = "Page",
     ["depth"] = 4,
     ["col"] = 36,
     ["step"] = 36,

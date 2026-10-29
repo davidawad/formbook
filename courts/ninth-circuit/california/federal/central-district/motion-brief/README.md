@@ -74,7 +74,7 @@ After the move onto the shared model (fb-595.96): every page of the three render
 |---|---|---|---|---|
 | 1 | none | Cover: counsel, court title, caption, title, hearing | Structure as filed; the exemplar's tabbed hearing block and the party column ruled to the row's foot differ (eval.yaml `cover_structure: report`). | ACCEPTED (tier 3) |
 | 2 | 1 | Notice of motion, signature | OK. | OK |
-| 3 | i | Table of contents | OK. No "Page" label over the column (the model's contents have none). | OPEN (tier 2) |
+| 3 | i | Table of contents | OK: "Page" over the page column. | OK |
 | 4 | ii | Table of authorities | OK: "Page(s)", italic case names, a comma before the citation. | OK |
 | 5-9 | 1-5 | Memorandum: introduction, summary of facts, argument, conclusion, signature | OK: I./A. headings in their boxes, citations, signature kept with the last paragraph. | OK |
 | 10 | 6 | Certificate of compliance, signature | OK: "1,161 words". | OK |

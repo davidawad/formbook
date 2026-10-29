@@ -357,6 +357,7 @@ return require("latex.xdoc")({
   ["front"] = {},
   ["contents"] = {
     ["title"] = "Table of Contents",
+    ["page_heading"] = "Page",
     ["style"] = {
       ["align"] = "center",
       ["upper"] = true,

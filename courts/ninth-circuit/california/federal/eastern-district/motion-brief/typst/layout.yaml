@@ -76,9 +76,9 @@ lead:
             gutter: 14.4
         above: 24
 # L.R. 133(k): an indexed table of contents and table of authorities for a brief over fifteen pages: the contents the
-# memorandum's headings, half an inch further in per level, the page in a 36 pt column; the authorities the sample's
+# memorandum's headings, half an inch further in per level, the page in a 36 pt column under "Page"; the authorities the sample's
 # groups and entries with their filed page references, single-spaced, 12 pt apart, the references in an inch.
-contents: {title: "Table of Contents", style: {align: center, upper: true}, pitch: body, depth: 3, col: 36, step: 36}
+contents: {title: "Table of Contents", page_heading: "Page", style: {align: center, upper: true}, pitch: body, depth: 3, col: 36, step: 36}
 authorities:
   title: "Table of Authorities"
   style: {align: center, upper: true}

@@ -51,10 +51,10 @@ cover:
     above: 12
 front: []
 # The tables (the exemplar's, 30 pages long; CivLR 7.1 not verified): the contents to the fourth level, a numbered
-# heading's label in its box, each level half an inch further in, the page in a 36 pt column; the authorities from the
+# heading's label in its box, each level half an inch further in, the page in a 36 pt column under "Page"; the authorities from the
 # sample's keyed `authorities` (`toa:` links), grouped (cases in italics, a comma before the citation), "passim" for
 # seven or more, "Page(s)" over the first group.
-contents: {title: "Table of Contents", depth: 4, col: 36, step: 36, above: 6}
+contents: {title: "Table of Contents", page_heading: "Page", depth: 4, col: 36, step: 36, above: 6}
 authorities:
   title: "Table of Authorities"
   col: 72

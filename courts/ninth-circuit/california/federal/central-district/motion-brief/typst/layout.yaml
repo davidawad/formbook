@@ -88,7 +88,7 @@ front: []
 # 11-3.6): the contents a row per heading to the fourth level, the label in its box, each level half an inch further
 # in, the page in a half-inch column; the authorities from the sample's keyed `authorities` (`toa:` links), grouped
 # (cases in italics, a comma before the citation), the pages in an inch, "passim" for seven or more.
-contents: {title: "Table of Contents", style: {align: center, upper: true}, pitch: body, depth: 4, col: 36, step: 36}
+contents: {title: "Table of Contents", page_heading: "Page", style: {align: center, upper: true}, pitch: body, depth: 4, col: 36, step: 36}
 authorities:
   title: "Table of Authorities"
   style: {align: center, upper: true}

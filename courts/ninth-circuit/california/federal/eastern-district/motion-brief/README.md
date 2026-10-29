@@ -66,7 +66,7 @@ After the move onto the shared model (fb-595.96): every page of the three render
 |---|---|---|---|---|
 | 1 | 1 | Caption: counsel (lines 1-9), court title, caption with judges, title, concurrent note, hearing, action filed | Structure as the rules ask; the exemplar's wider title column and centred, ruled footer differ (eval.yaml `cover_structure: report`). | ACCEPTED (tier 3) |
 | 2-3 | 2-3 | Notice of motion, conference statement, signature | OK. | OK |
-| 4 | i | Table of contents | OK. No "Page" label over the column (the model's contents have none). | OPEN (tier 2) |
+| 4 | i | Table of contents | OK: "Page" over the page column. | OK |
 | 5-6 | ii-iii | Table of authorities: Cases, Statutes, Other Authorities, the filed page references | OK. | OK |
 | 7-9 | 1-3 | Memorandum: title, I. to IV., the list 1 to 7, conclusion, signature | OK. | OK |
 | all | | Footer: description at the left, number at the right (L.R. 130(d)) | OK. | OK |

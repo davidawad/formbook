@@ -65,7 +65,7 @@ After the move onto the shared model (fb-595.96): every page of the three render
 | Page | What it is | Finding (all three engines) | Status |
 |---|---|---|---|
 | 1 | Cover: counsel (lines 1-9), court title, caption, case number, judge, title, hearing | Structure as filed; the exemplar's hearing block is tabbed (accepted, gap 10). The case number wraps at its last hyphen in the 3.1 in right column. | ACCEPTED (tier 3) |
-| 2 | i: table of contents | OK: labels in their boxes, leaders, pages. | OK |
+| 2 | i: table of contents | OK: "Page" over the page column, labels in their boxes, leaders, pages. | OK |
 | 3 | ii: table of authorities | OK; one entry without a leader (gap 7). | OPEN (tier 2) |
 | 4-8 | 1-5: introduction, factual background, standard of review, argument I-III | OK: headings numbered by the layout, on the numbered lines. | OK |
 | 9 | 6: conclusion, "Dated:", signature at 3.2 in | OK. | OK |
