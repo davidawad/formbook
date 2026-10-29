@@ -10,7 +10,7 @@
 #let type-size = 12pt                 // L.R. 1.05(C): minimum 12-point type
 #let margin = 1in                     // L.R. 1.05(A): minimum one-inch margins
 #let double-leading = 1.6em          // L.R. 1.05(E): double-spaced text (calibrated: about 27pt pitch at 12pt, see README.md)
-#let single-leading = 0.2em
+#let single-leading = 0.46em         // caption, signature: single-spaced (0.46 em on the cap-height line: a 1.15 em pitch)
 #let para-indent = 0.5in
 
 /// Split the YAML frontmatter from the markdown body.

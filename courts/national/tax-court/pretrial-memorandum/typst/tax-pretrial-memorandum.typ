@@ -128,7 +128,7 @@
   v(0.9em)
 
   text(weight: "bold", [ATTORNEYS:])
-  v(0.3em)
+  v(single-leading)
   grid(
     columns: (1fr, 1fr), column-gutter: 0.3in,
     [*Petitioner:*\ #attorney-block(att.petitioner)],
@@ -137,7 +137,7 @@
   v(0.9em)
 
   text(weight: "bold", [AMOUNTS IN DISPUTE:])
-  v(0.3em)
+  v(single-leading)
   table(
     columns: (1fr, 1.6fr, 1.6fr),
     stroke: 0.5pt,
@@ -152,7 +152,7 @@
   v(0.9em)
 
   text(weight: "bold", [STATUS OF CASE:])
-  v(0.3em)
+  v(single-leading)
   grid(
     columns: (1fr, 1fr, 1fr),
     status-option([Probable Settlement], status == "probable-settlement"),
@@ -165,7 +165,7 @@
   v(0.9em)
 
   text(weight: "bold", [STATUS OF STIPULATION OF FACTS:])
-  v(0.3em)
+  v(single-leading)
   grid(
     columns: (1fr, 1fr),
     status-option([Completed, will be filed electronically], stip == "completed"),

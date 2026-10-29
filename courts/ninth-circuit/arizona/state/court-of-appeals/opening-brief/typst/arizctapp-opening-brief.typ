@@ -131,12 +131,12 @@
       #set par(leading: single-leading, first-line-indent: 0pt)
       #if "proceeding" in meta { inl(meta.proceeding) }
     ]
-    #v(1fr)
+    #v(1fr) #v(single-leading)
     #align(center)[
       #set par(leading: single-leading, first-line-indent: 0pt)
       #text(weight: "bold", size: 14pt, upper(inl(need(meta, "brief_title"))))
     ]
-    #v(1fr)
+    #v(1fr) #v(single-leading)   // the title keeps at least a single-spaced gap when the cover is full
     #{
       set par(leading: single-leading, first-line-indent: 0pt)
       pad(left: sig-indent, {
