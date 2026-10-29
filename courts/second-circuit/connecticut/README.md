@@ -7,8 +7,8 @@ Courts under `courts/second-circuit/connecticut` (4).
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Connecticut](federal/bankruptcy-district) | `ctb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the District of Connecticut](federal/district) | `ctd` | up for review | 2/2 | — | 2/2 | 14 |
-| [Connecticut Court of Appeals](state/court-of-appeals) | `connappct` | up for review | 6/6 | 6/6 | 0/5 | 29 |
-| [Connecticut Supreme Court](state/supreme-court) | `conn` | up for review | 7/7 | 7/7 | 1/7 | 29 |
+| [Connecticut Court of Appeals](state/court-of-appeals) | `connappct` | up for review | 6/6 | 6/6 | 1/5 | 29 |
+| [Connecticut Supreme Court](state/supreme-court) | `conn` | up for review | 7/7 | 7/7 | 4/7 | 29 |
 
 [Formbook index](../../../README.md)
 <!-- fb:generated:end -->
