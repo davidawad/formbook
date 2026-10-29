@@ -212,6 +212,14 @@ pub fn latex_face(face: &str) -> Result<(&'static str, Option<f64>), String> {
         // Bonum's advances in all four shapes (the printable ASCII, quotes, dashes, § and ¶ measured at 1000 pt: within
         // 0.0005 em); its \\textellipsis is three spaced periods (1.44 em), the font's glyph 1 em: \\xd@ellipsis
         "TeX Gyre Bonum" | "Bookman Old Style" => Ok(("\\usepackage{tgbonum}", Some(1.0))),
+        // Courier New (W.D. and E.D. Wash. LCivR 10(d) allow a monospaced face) and its metric twin Liberation Mono, the
+        // vendored face: TeX Gyre Cursor, a Courier clone of the same 0.6 em advance for every character in every shape
+        // (Liberation Mono's is 1229/2048 em, 0.0001 em wider: a 6.4 in line at 14 pt holds the same 54 characters);
+        // its ellipsis one character of 0.6 em, the period 0.6 em (fb-595.96)
+        "Liberation Mono" | "Courier New" | "TeX Gyre Cursor" => Ok((
+            "\\usepackage{tgcursor}\n\\renewcommand\\familydefault{\\ttdefault}",
+            Some(0.6),
+        )),
         "TeX Gyre Schola" | "Century Schoolbook" => Ok((
             "\\usepackage{tgschola}\n\\usepackage{graphicx}\n\\usepackage{xeschola} % lib/latex/xeschola.sty, inlined by fb render",
             None,
@@ -258,6 +266,7 @@ pub fn face_advances(face: &str) -> Option<[f64; 4]> {
         "TeX Gyre Schola" | "Century Schoolbook" => Some([0.556, 0.278, 0.278, 0.333]),
         "Liberation Sans" | "Arial" | "TeX Gyre Heros" => Some([0.556, 0.278, 0.278, 0.333]),
         "TeX Gyre Bonum" | "Bookman Old Style" => Some([0.62, 0.32, 0.32, 0.4]),
+        "Liberation Mono" | "Courier New" | "TeX Gyre Cursor" => Some([0.6, 0.6, 0.6, 0.6]),
         "EB Garamond" => Some([0.48, 0.23, 0.2, 0.274]),
         _ => None,
     }
@@ -268,6 +277,7 @@ pub fn latex_period(face: &str) -> f64 {
     match face {
         "Liberation Sans" | "Arial" | "TeX Gyre Heros" => 0.278,
         "TeX Gyre Bonum" | "Bookman Old Style" => 0.32,
+        "Liberation Mono" | "Courier New" | "TeX Gyre Cursor" => 0.6,
         _ => 0.25,
     }
 }

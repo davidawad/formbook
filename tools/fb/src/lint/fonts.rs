@@ -62,7 +62,12 @@ fn family_markers(f: &str) -> &'static [&'static str] {
             "liberation-sans",
             "\\usepackage{tgheros}",
         ],
-        "liberation-mono" => &["Liberation Mono", "liberation-mono"],
+        // latex: TeX Gyre Cursor has Liberation Mono's (Courier New's) 0.6 em advances (fb-595.96)
+        "liberation-mono" => &[
+            "Liberation Mono",
+            "liberation-mono",
+            "\\usepackage{tgcursor}",
+        ],
         "gelasio" => &["Gelasio", "gelasio"],
         "caladea" => &["Caladea", "caladea"],
         "carlito" => &["Carlito", "carlito"],
@@ -371,6 +376,7 @@ mod tests {
         assert!(!declaration(p, "\\setmainfont{Liberation Serif}", "schola"));
         assert!(declaration(p, "\\usepackage{tgbonum}", "bonum"));
         assert!(declaration(p, "\\usepackage{tgheros}", "heros"));
+        assert!(declaration(p, "\\usepackage{tgcursor}", "liberation-mono"));
         assert!(!declaration(p, "\\usepackage{tgheros}", "bonum"));
     }
 

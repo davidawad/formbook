@@ -3639,3 +3639,27 @@ fn a_doubled_sign_after_a_mark_stays_with_its_number() {
     );
     assert_eq!(out, "(§§~1805 ¶¶~4 § 9\t2");
 }
+
+#[test]
+fn a_monospaced_face_in_latex_and_word() {
+    // (fb-595.96) W.D. and E.D. Wash. LCivR 10(d) allow a monospaced face: Liberation Mono (Courier New's twin) in typst
+    // and Word, TeX Gyre Cursor (the same 0.6 em advances) in LaTeX
+    let l: serde_yaml::Value = serde_yaml::from_str(&layout("")).unwrap();
+    for face in ["Liberation Mono", "Courier New"] {
+        let files = gen::generate(&l, face).unwrap();
+        let tpl = &files
+            .iter()
+            .find(|(p, _)| p == "latex/template.tex")
+            .unwrap()
+            .1;
+        assert!(
+            tpl.contains("\\usepackage{tgcursor}\n\\renewcommand\\familydefault{\\ttdefault}"),
+            "{tpl}"
+        );
+        // three periods kerned to the face's one-character ellipsis: (0.6 - 3 x 0.6) / 2 em between them
+        assert!(tpl.contains(".\\kern-0.6em.\\kern-0.6em."), "{tpl}");
+        let docx = &files.iter().find(|(p, _)| p == "docx/xdoc.lua").unwrap().1;
+        assert!(docx.contains("[\"digit\"] = 0.6"), "{docx}");
+    }
+    assert_eq!(gen::latex_bias("Liberation Mono"), 0.0);
+}

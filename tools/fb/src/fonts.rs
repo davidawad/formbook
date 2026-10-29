@@ -109,7 +109,8 @@ pub fn times_embedded<'a>(fonts_txt: &'a str, engine: &str) -> Option<&'a str> {
 /// The extra pdf_prefix alternatives (`a|b`) the engine accepts for a declared `prefix`: on latex, a template
 /// that declares Times New Roman, or Liberation Serif (its metric twin, absent from stock TeX Live), may embed a
 /// metric-compatible Times; one that declares Arial or Liberation Sans, TeX Gyre Heros (Helvetica's advances, which
-/// are Arial's; tools/fb/src/enginegen/gen.rs latex_face); nothing otherwise.
+/// are Arial's; tools/fb/src/enginegen/gen.rs latex_face); one that declares Courier New or Liberation Mono, TeX Gyre
+/// Cursor; nothing otherwise.
 pub fn latex_alt_prefix(engine: &str, prefix: &str) -> String {
     let times = |p: &str| p == "TimesNewRoman" || p == "LiberationSerif";
     let arial = |p: &str| p == "Arial" || p == "LiberationSans";
@@ -119,6 +120,12 @@ pub fn latex_alt_prefix(engine: &str, prefix: &str) -> String {
     }
     if engine == "latex" && prefix.split('|').any(arial) {
         alt.push("TeXGyreHeros");
+    }
+    // Courier New or Liberation Mono: TeX Gyre Cursor, a Courier of the same 0.6 em advances (gen.rs latex_face,
+    // fb-595.96)
+    let mono = |p: &str| p == "CourierNew" || p == "LiberationMono";
+    if engine == "latex" && prefix.split('|').any(mono) {
+        alt.push("TeXGyreCursor");
     }
     alt.join("|")
 }
@@ -371,6 +378,11 @@ mod tests {
         assert_eq!(latex_alt_prefix("latex", "EBGaramond"), "");
         assert_eq!(latex_alt_prefix("latex", "LiberationSans"), "TeXGyreHeros");
         assert_eq!(latex_alt_prefix("docx", "LiberationSans"), "");
+        assert_eq!(latex_alt_prefix("latex", "LiberationMono"), "TeXGyreCursor");
+        assert_eq!(
+            latex_alt_prefix("latex", "CourierNew|LiberationMono"),
+            "TeXGyreCursor"
+        );
     }
 
     #[test]
