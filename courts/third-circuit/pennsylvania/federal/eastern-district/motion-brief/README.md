@@ -15,6 +15,10 @@ Doc type: **motion with memorandum of law** (a Rule 12(b) motion to dismiss, the
 
 Naming: file roles follow the repo's convention (`INPUT-` / `OUTPUT-` / `OVERLAY-`), which `tools/render.sh` and `tools/overlay.sh` read and write by default.
 
+## Not on the FRCP base (fb-595.17.21, 2026-10-29)
+
+This folder stays on its own template. The generic federal district brief (`lib/layouts/frcp-motion-brief.yaml`, set by `lib/typst/xdoc.typ`) lays out one paper: one cover, one body with its closing and tail, one page numbering. This folder's sample is the whole E.D. Pa. motion packet: the proposed order (LR 7.1(a)), the motion with its certificate of service (LR 7.1(d)) and the memorandum (LR 7.1(c)), each with its own caption, its own closing (the court's "BY THE COURT:" line, counsel's signature), and its own page numbering (none, 1.., none, i, 1..). The missing base feature: several papers in one sample, each with its own front blocks, closing and numbering (a shared change, a new bead).
+
 ## Governing rules
 
 Primary source: **Local Rules of Civil Procedure, E.D. Pa.** (consolidated civil rules PDF dated 05/08/2023, linked from https://www.paed.uscourts.gov/local-rules/Local%20Civil%20Rules): https://www.paed.uscourts.gov/sites/paed/files/documents/locrules/civil/cvrules.pdf. Downloaded and read 2026-10-14. Rule 7.1 text quoted from that PDF (page 18).

@@ -1,26 +1,14 @@
 ---
 title: "DEFENDANT CUMBERLAND COUNTY'S MEMORANDUM OF LAW IN SUPPORT OF ITS MOTION TO DISMISS PLAINTIFF'S COMPLAINT PURSUANT TO FEDERAL RULE OF CIVIL PROCEDURE 12(b)(6)"
 caption:
-  - left: "BARRY L. ORNDORFF,"
-    right: "CIVIL ACTION"
-  - left: "Plaintiff,"
-    indent: 1.0
-  - left: ""
-  - left: "v."
-    indent: 0.5
-    right: "No. 1:26-cv-02944"
-  - left: ""
-  - left: "CUMBERLAND COUNTY,"
-    right: "Judge Jennifer P. Wilson"
-  - left: "COMMONWEALTH OF"
-  - left: "PENNSYLVANIA –"
-  - left: "PENNSYLVANIA STATE POLICE,"
-  - left: "SPERANZA ANIMAL RESCUE,"
-  - left: "JANINE GUIDO, PAIGE KULSA,"
-  - left: "NICHOLAS BIERZONSKI,"
-  - left: "and DAVID SPADA,"
-  - left: "Defendants."
-    indent: 1.0
+  parties:
+    - names: ["BARRY L. ORNDORFF,"]
+      designation: "Plaintiff,"
+    - names:
+        - "CUMBERLAND COUNTY, COMMONWEALTH OF PENNSYLVANIA – PENNSYLVANIA STATE POLICE, SPERANZA ANIMAL RESCUE, JANINE GUIDO, PAIGE KULSA, NICHOLAS BIERZONSKI, and DAVID SPADA,"
+      designation: "Defendants."
+case_number: "1:26-cv-02944"
+judge: "Jennifer P. Wilson"
 date: "October 9, 2026"
 signature:
   firm:
@@ -32,7 +20,23 @@ signature:
     - "(215) 274-1724"
     - "ljsantia@travelers.com"
     - "Counsel for Defendant, Cumberland County"
+# LR 7.1: the certificate of non-concurrence (concurrence sought and denied), its paragraphs.
+non_concurrence: |
+  I, Leticia J. Santiago, Esquire, counsel for Defendant Cumberland County, do hereby certify, pursuant to Local Rule 7.1 and this Court's Civil Practice Order, that prior to filing the foregoing Motion to Dismiss Plaintiff's Complaint Pursuant to Federal Rule of Civil Procedure 12(b)(6), I sought the concurrence of Plaintiff's counsel, Matthew D. Fogal, Esquire, and Joshua P. Geist, Esquire, and made good faith efforts to confer with them to determine whether the identified pleading deficiencies may be cured by amendment.
+
+  Specifically, I left telephone messages for each of Plaintiff's counsel and, on October 9, 2026, followed up in writing by email addressed to both counsel. That email advised that the County intends to move to dismiss Count I, the sole cause of action against the County; explained the County's position that the Complaint does not state a *Monell* claim and that amendment would be futile; and invited counsel to confer before the Motion was filed.
+
+  As of the date of this certification, I have received no response from either counsel to my telephone messages or my email. Plaintiff's concurrence in the Motion has therefore not been obtained, and the Motion is presented as opposed.
+# The certificate of service: the statement, then each counsel served (the exemplar's four, in its order).
+service:
+  text: "I, Leticia J. Santiago, Esquire, do hereby certify that the attached document was filed electronically with the Court and was sent to the following via the ECF System on October 9, 2026."
+  served:
+    - ["Matthew D. Fogal, Esquire", "Matt Fogal Law Office, LLC", "52 West King Street", "Chambersburg, PA 17201", "matt@fogal.law", "Counsel for Plaintiff"]
+    - ["Joshua P. Geist, Esquire", "Geist & Geist, P.C.", "3634 California Avenue", "Pittsburgh, PA 15212", "josh@goodrichandgeist.com", "Counsel for Plaintiff"]
+    - ["Brian P. Gordon, Esq.", "Reilly, McDevitt & Henrich", "1339 Chestnut Street", "The Widener Bldg, Suite 410", "Philadelphia PA 19107", "BCorcoran@RMH-Law.com", "File Number: ANI611845", "Counsel for Co-Defendants Spranza Animal Rescue and Janine Guido"]
+    - ["Deputy Attorney General, Frank Pryzbylkowski, Esq.", "Pennsylvania Office of Attorney General, Bureau of Consumer Protection", "Strawberry Square, 15th Floor", "Harrisburg, PA 17120", "FPryzbylkowski@AttorneyGeneral.gov", "Counsel for Commonwealth of Pennsylvania – PA State Police, Nicholas Bierzonski, Paige Kulsa, and Michael Spada"]
 ---
+
 
 # I.    PRELIMINARY STATEMENT
 
@@ -94,29 +98,3 @@ Courts in this Circuit dismiss materially indistinguishable pleadings. In *Zerby
 # VII.   CONCLUSION
 
 For the foregoing reasons, Defendant Cumberland County respectfully requests that this Honorable Court grant its Motion, dismiss Count I of Plaintiff's Complaint with prejudice, and dismiss the County from this action.
-
-# CERTIFICATE OF NON-CONCURRENCE AND OF GOOD FAITH EFFORTS TO CONFER
-
-I, Leticia J. Santiago, Esquire, counsel for Defendant Cumberland County, do hereby certify, pursuant to Local Rule 7.1 and this Court's Civil Practice Order, that prior to filing the foregoing Motion to Dismiss Plaintiff's Complaint Pursuant to Federal Rule of Civil Procedure 12(b)(6), I sought the concurrence of Plaintiff's counsel, Matthew D. Fogal, Esquire, and Joshua P. Geist, Esquire, and made good faith efforts to confer with them to determine whether the identified pleading deficiencies may be cured by amendment.
-
-Specifically, I left telephone messages for each of Plaintiff's counsel and, on October 9, 2026, followed up in writing by email addressed to both counsel. That email advised that the County intends to move to dismiss Count I, the sole cause of action against the County; explained the County's position that the Complaint does not state a *Monell* claim and that amendment would be futile; and invited counsel to confer before the Motion was filed.
-
-As of the date of this certification, I have received no response from either counsel to my telephone messages or my email. Plaintiff's concurrence in the Motion has therefore not been obtained, and the Motion is presented as opposed.
-
-# CERTIFICATE OF SERVICE
-
-I, Leticia J. Santiago, Esquire, do hereby certify that the attached document was filed electronically with the Court and was sent to the following via the ECF System on October 9, 2026:
-
-Matthew D. Fogal, Esquire\
-Matt Fogal Law Office, LLC\
-52 West King Street, Chambersburg, PA 17201\
-matt@fogal.law\
-Counsel for Plaintiff
-
-Joshua P. Geist, Esquire\
-Geist & Geist, P.C.\
-3634 California Avenue, Pittsburgh, PA 15212\
-josh@goodrichandgeist.com\
-Counsel for Plaintiff
-
-[The remaining counsel of record listed in the filed certificate are omitted from this sample.]

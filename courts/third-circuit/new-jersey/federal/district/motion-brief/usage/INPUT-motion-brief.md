@@ -10,9 +10,6 @@ counsel:
   - "smassand@mcguirewoods.com"
   - ""
   - "*Attorneys for Defendant Bank of America, N.A.*"
-court:
-  - "UNITED STATES DISTRICT COURT"
-  - "DISTRICT OF NEW JERSEY"
 caption:
   parties:
     - names:

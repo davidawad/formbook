@@ -2318,8 +2318,6 @@ courts/third-circuit/delaware/federal/bankruptcy-district/motion-brief docx
 courts/third-circuit/delaware/federal/bankruptcy-district/motion-brief typst
 courts/third-circuit/delaware/federal/district/complaint docx
 courts/third-circuit/delaware/federal/district/complaint typst
-courts/third-circuit/delaware/federal/district/motion-brief docx
-courts/third-circuit/delaware/federal/district/motion-brief typst
 courts/third-circuit/delaware/state/court-of-chancery/opening-brief typst
 courts/third-circuit/delaware/state/supreme-court/amicus-brief typst
 courts/third-circuit/delaware/state/supreme-court/answering-brief typst
@@ -2331,8 +2329,6 @@ courts/third-circuit/new-jersey/federal/bankruptcy-district/motion-brief docx
 courts/third-circuit/new-jersey/federal/bankruptcy-district/motion-brief typst
 courts/third-circuit/new-jersey/federal/district/complaint docx
 courts/third-circuit/new-jersey/federal/district/complaint typst
-courts/third-circuit/new-jersey/federal/district/motion-brief docx
-courts/third-circuit/new-jersey/federal/district/motion-brief typst
 courts/third-circuit/new-jersey/state/supreme-court/amicus-brief docx
 courts/third-circuit/new-jersey/state/supreme-court/amicus-brief latex
 courts/third-circuit/new-jersey/state/supreme-court/amicus-brief typst
@@ -2363,8 +2359,6 @@ courts/third-circuit/pennsylvania/federal/eastern-district/motion-brief docx
 courts/third-circuit/pennsylvania/federal/eastern-district/motion-brief typst
 courts/third-circuit/pennsylvania/federal/western-district/complaint docx
 courts/third-circuit/pennsylvania/federal/western-district/complaint typst
-courts/third-circuit/pennsylvania/federal/western-district/motion-brief docx
-courts/third-circuit/pennsylvania/federal/western-district/motion-brief typst
 courts/third-circuit/pennsylvania/state/commonwealth-court/amicus-brief docx
 courts/third-circuit/pennsylvania/state/commonwealth-court/amicus-brief latex
 courts/third-circuit/pennsylvania/state/commonwealth-court/amicus-brief typst

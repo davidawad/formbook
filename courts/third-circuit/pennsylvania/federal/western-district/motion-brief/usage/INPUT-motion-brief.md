@@ -9,10 +9,11 @@ case_label: "Case No."
 case_number: "3:21-cv-00112-SLH"
 judge: "Judge Stephanie L. Haines"
 caption:
-  - names: ["BRIAN ALBRIGHT,", "RICHARD NEWMAN, and", "JACOB MULLINS,"]
-    designation: "Plaintiffs,"
-  - names: ["CONCURRENT TECHNOLOGIES CORPORATION,", "CONCURRENT TECHNOLOGIES CORPORATION FOUNDATION, and", "ENTERPRISE VENTURES CORPORATION,"]
-    designation: "Defendants."
+  parties:
+    - names: ["BRIAN ALBRIGHT,", "RICHARD NEWMAN, and", "JACOB MULLINS,"]
+      designation: "Plaintiffs,"
+    - names: ["CONCURRENT TECHNOLOGIES CORPORATION,", "CONCURRENT TECHNOLOGIES CORPORATION FOUNDATION, and", "ENTERPRISE VENTURES CORPORATION,"]
+      designation: "Defendants."
 electronically_filed: true
 title: "MEMORANDUM OF LAW IN SUPPORT OF DEFENDANTS’ MOTION TO DISMISS PLAINTIFFS’ COMPLAINT PURSUANT TO FED. R. CIV. P. 12(b)(6)"
 date: "September 7, 2021"

@@ -1,0 +1,100 @@
+# U.S. District Court for the Middle District of Pennsylvania (pamd): a brief in support of a motion, on the generic
+# FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with M.D. Pa.'s local rules overlaid here. The shared
+# document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`).
+# Rules: M.D. Pa. Local Rules (the court's "Local & Federal Rules Excerpts",
+# https://www.pamd.uscourts.gov/sites/pamd/files/Local%20%26%20Federal%20Rules%20Excerpts.pdf, read 2026-10-14;
+# ../README.md quotes them). The base already meets LR 5.1(c): 8 1/2 x 11 paper, margins of at least one inch on all
+# four sides, page numbers in the margin. The limit of LR 7.8(b) (15 pages, or 5,000 words with a certificate) is not
+# machine-checked; the tables of LR 7.8(a) (a brief over 15 pages) are not set (the exemplar, 16 pages, has none).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE MIDDLE DISTRICT OF PENNSYLVANIA"
+# LR 5.1(c): a typeface of at least 14 points, footnotes in the same face and size; the text double spaced (Word's
+# double line at 14 pt, 2 x 1.15 x 14), headings, footnotes and quotations of more than two lines single spaced
+# (1.15 x 14).
+size: 14
+pitch: {body: 32.2, single: 16.1}
+footnote: {size: 14, gap: 7}
+# LR 5.1(c): a quotation of more than two lines single spaced, indented half an inch each side, a single line around it.
+quote: {left: 36, right: 36, above: 16.1, below: 16.1, gap: 16.1}
+# Headings at the margin on the body pitch, no space of their own, the numbers typed by the filer (LR 7.8(a) sections,
+# "I.", "A.", "1." as the exemplar types them): a section in bold capitals, a point in bold, a sub-point bold italic.
+heading:
+  - {bold: true, upper: true, pitch: body, above: 0, below: 0}
+  - {bold: true, pitch: body, above: 0, below: 0}
+  - {bold: true, italic: true, pitch: body, above: 0, below: 0}
+# FRCP 10(a): the court's name; the caption as the exemplar sets it, unruled: the parties at the left (each party's
+# names, its designation an inch in a line below, "v." half an inch in a line from each), a column of colons beside
+# them; at the right "CIVIL ACTION", the number and the assigned judge, centered on their height. The title in bold,
+# centered, as the sample writes it (capitals), a double line below the caption.
+front:
+  - {text: "{xd.court}", align: center}
+  - {text: "{xd.district}", align: center}
+  - columns:
+      - width: 244.8
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 72}
+            between:
+              - {text: "v.", left: 36, above: 16.1, below: 16.1}
+      - {width: 28.8, repeat: ":"}
+      - valign: center
+        blocks:
+          - {text: "CIVIL ACTION", left: 14.4}
+          - {text: "No. {case_number}", left: 14.4}
+          - {text: "Judge {judge}", optional: true, left: 14.4, above: 16.1}
+    above: 16.1
+  - {text: "{title}", align: center, bold: true, left: 36, right: 36, above: 32.2, below: 16.1}
+# FRCP 11(a): the date at the left when the filer gives one; at the right "Respectfully submitted,", the firm, "By:" and
+# the signature line, the signer's name, address, telephone and e-mail; kept whole with the last paragraph.
+closing:
+  - group:
+      - columns:
+          - width: 201.6
+            blocks:
+              - {text: "Dated: {date}", optional: true}
+          - blocks:
+              - {text: "Respectfully submitted,"}
+              - {text: "{signature.firm}", above: 6}
+              - {text: "By: ________________________", above: 32.2}
+              - {text: "{signature.lines}", above: 6}
+    above: 32.2
+# LR 7.1: the certification that concurrence was sought, and the certificate of service, each on its own page with
+# its title centered in bold capitals and the counsel's signature, as the exemplar sets them; the counsel served two
+# to a row.
+after_tail:
+  - {break: true}
+  - {text: "Certificate of Non-Concurrence and of Good Faith Efforts to Confer", align: center, bold: true, upper: true, left: 72, right: 72, pitch: single, below: 16.1}
+  - {markdown: "{non_concurrence}", pitch: body, indent: 36}
+  - group:
+      - columns:
+          - {width: 201.6, blocks: []}
+          - blocks:
+              - {text: "Respectfully submitted,"}
+              - {text: "{signature.firm}", above: 6}
+              - {text: "By: ________________________", above: 32.2}
+              - {text: "{signature.lines}", above: 6}
+    above: 32.2
+  - {break: true}
+  - {text: "Certificate of Service", align: center, bold: true, upper: true, pitch: single, below: 16.1}
+  - {text: "{service.text}", pitch: body, indent: 36}
+  - columns:
+      each: service.served
+      per_row: 2
+      row_gap: 16.1
+      blocks:
+        - {text: "{.}"}
+    gutter: 14.4
+    above: 16.1
+  - group:
+      - columns:
+          - {width: 201.6, blocks: []}
+          - blocks:
+              - {text: "{signature.firm}"}
+              - {text: "By: ________________________", above: 32.2}
+              - {text: "{signature.lines}", above: 6}
+    above: 32.2

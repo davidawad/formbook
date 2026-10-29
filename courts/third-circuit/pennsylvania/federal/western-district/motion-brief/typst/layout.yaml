@@ -1,0 +1,67 @@
+# U.S. District Court for the Western District of Pennsylvania (pawd): a memorandum of law in support of a motion, on
+# the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with W.D. Pa.'s local rules overlaid here. The
+# shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb
+# engines gen`). Rules: W.D. Pa. Local Civil Rules, https://www.pawd.uscourts.gov/sites/pawd/files/lrmanual20181101.pdf
+# (read 2026-10-14; ../README.md quotes them). The base already meets LCvR 5.1.B: letter paper, type of at least 12
+# points (footnotes included), double spaced (24 pt at 12 pt), margins of at least one inch on all four sides.
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE WESTERN DISTRICT OF PENNSYLVANIA"
+# The caption page counted as i and unprinted, the contents from ii, the body from 1 (the exemplar's numbering).
+page_number: {align: center, front: lower-roman, cover: counted}
+# LCvR 5.1.B: a quotation of more than two lines single spaced, indented half an inch each side, half a line around it.
+quote: {left: 36, right: 36, above: 12, below: 12}
+# LCvR 5.1.B: headings single spaced, bold, a double line above and a single line below, numbered by the template: a
+# section "I." centered; a point "A." at the margin, a sub-point "1." half an inch in, each label in a half-inch box
+# with the title's later lines hung under it (the exemplar's headings).
+heading:
+  - {align: center, bold: true, number: "I.", above: 24, below: 12}
+  - {bold: true, number: "A.", label_box: 36, above: 24, below: 12}
+  - {bold: true, number: "1.", label_box: 36, left: 36, above: 24, below: 12}
+  - {bold: true, number: "a.", label_box: 36, left: 72, above: 24, below: 12}
+# A table of contents of the sections and points, half an inch in per level, a leader to the page (the exemplar's).
+contents: {title: "TABLE OF CONTENTS", depth: 2, col: 36, step: 36, above: 12}
+# FRCP 10(a): the court's name in bold; the caption as the exemplar sets it: the parties at the left (each party's
+# names, its designation an inch and a half in a line below, "v." an inch in a line from each), a column of ")" beside
+# them; at the right the case number, the assigned judge (LCvR 7.A: the judge's practices apply) and "Electronically
+# Filed" when the sample says so; the title centered in bold. A page of its own before the contents.
+front: ~
+cover:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 223.2
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 108, above: 13.8}
+            between:
+              - {text: "v.", left: 72}
+      - {width: 28.8, repeat: ")"}
+      - valign: center
+        blocks:
+          - {text: "{case_label|Civil Action No.} {case_number}", left: 7.2}
+          - {text: "{judge}", optional: true, left: 7.2, above: 13.8}
+          - when: electronically_filed
+            blocks:
+              - {text: "Electronically Filed", left: 7.2, above: 13.8}
+    above: 24
+  - {text: "{title}", align: center, bold: true, above: 24}
+# FRCP 11(a), LCvR 5.2.B: the date at the left when the filer gives one; from three inches the closing, the firm when
+# given, the "s/" signature and under it the signer's name, address, telephone, fax, e-mail and bar number; kept whole
+# with the last paragraph.
+closing:
+  - group:
+      - {text: "Date: {date}", optional: true}
+      - columns:
+          - {width: 216, blocks: []}
+          - blocks:
+              - {text: "{signature.lead}"}
+              - {text: "{signature.firm}", optional: true, above: 24}
+              - {text: "{signature.signer}", above: 24}
+              - {text: "{signature.lines}"}
+        above: 24
+    above: 24

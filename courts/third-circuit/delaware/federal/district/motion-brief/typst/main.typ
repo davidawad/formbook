@@ -1,7 +1,5 @@
-// Entry point. Compile with the court folder as --root; tools/render.sh does it:
-//   typst compile --root <court-dir> --font-path <repo>/fonts --ignore-system-fonts \
-//     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/NAME.md \
-//     typst/main.typ out.pdf
+// Entry point. tools/render.sh compiles it with this folder as --root:
+//   sh tools/render.sh courts/third-circuit/delaware/federal/district/motion-brief usage/<id>.md usage/<id>.pdf
 #import "ded-motion-brief.typ": ded-motion-brief, split-frontmatter
 
 #let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))

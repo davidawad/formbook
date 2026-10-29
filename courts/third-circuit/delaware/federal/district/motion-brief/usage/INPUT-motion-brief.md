@@ -6,12 +6,13 @@
 # built from those links, so the render's page numbers are ours, not the filing's. See ../README.md.
 case_number: "26-772-MN"
 caption:
-  - names:
-      - "STEWART ABRAMSON, individually and on behalf of a class of all person and entities similarly situated,"
-    designation: "Plaintiff,"
-  - names:
-      - "SAFE LIFE POLICY, LLC,"
-    designation: "Defendant."
+  parties:
+    - names:
+        - "STEWART ABRAMSON, individually and on behalf of a class of all person and entities similarly situated,"
+      designation: "Plaintiff,"
+    - names:
+        - "SAFE LIFE POLICY, LLC,"
+      designation: "Defendant."
 brief_title: "DEFENDANT’S OPENING BRIEF IN SUPPORT OF MOTION TO DISMISS"
 of_counsel:
   - "FELLOWS LABRIOLA LLP"
