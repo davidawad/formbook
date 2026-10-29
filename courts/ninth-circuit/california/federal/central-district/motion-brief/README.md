@@ -89,3 +89,7 @@ The overlap is a diagnostic, not a score. The sample transcribes portions of the
 - The table of contents and table of authorities take their page numbers from fb render's passes (needles: each heading with its label and the words after it, each `toa:` link; was BLOCKED without page numbers).
 - `sh tools/check.sh <dir> --engine docx`: 13 passed, 0 failed; XENG-001..003 pass (327/327 lines, 10 pages), `params.cross_engine: gate` in `eval.yaml`.
 - Differs from typst: the pleading rules are page borders around the text area.
+
+## FRCP base port assessment (fb-595.17.11)
+
+Skipped: pleading paper. C.D. Cal. L.R. 11-3.2 requires a numbered left margin with at most 28 lines a page; the template sets the numbered lines and the pleading rules (`lib/typst/pleading-paper.typ`). The FRCP base (`lib/layouts/frcp-motion-brief.yaml`) has no pleading paper yet (fb-595.84 brings it), so the folder stays on its own templates.

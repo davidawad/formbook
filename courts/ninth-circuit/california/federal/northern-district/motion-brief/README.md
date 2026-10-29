@@ -90,3 +90,7 @@ Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ
 Docx engine (fb-595.68.22): `docx/reference.xml` (the cross-engine style recipe, `base="xengine"`, in the typst face) and `docx/cand.lua`, no shell. The filter writes the cover (counsel and role, court title, the caption as a two-column table ruled at the parties' right and bottom, with the case number, the title and the noticed hearing), the table of contents and the table of authorities (page numbers from fb render's needles: the first block of the motion, every heading and every `toa:` link; the cover unnumbered, the tables in roman from i, the motion from 1), the numbered headings, the body (pandoc's paragraphs, so pandoc writes the footnotes), the signature block (one row that does not split), and the footer through `$FORMBOOK_FOOTERS`: the page number, the paper's title in capitals and the case number (CAND-FORM-003). The docx before this port had no tables, no hearing block, no caption rules and a page-number-only footer; all are built now.
 
 Pleading paper is the default (Known gap 2), as for the complaint. The `/s/ Signer` line of the signature block is italic in both engines.
+
+## FRCP base port assessment (fb-595.17.11)
+
+Skipped: pleading paper. N.D. Cal. Civil L.R. 3-4(c)(1)-(2) sets 28 numbered lines a page (the 60 pt top and bottom margins in `eval.yaml`, `params.pleading_lines: 28`). The FRCP base (`lib/layouts/frcp-motion-brief.yaml`) has no pleading paper yet (fb-595.84 brings it), so the folder stays on its own templates.

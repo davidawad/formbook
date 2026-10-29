@@ -97,3 +97,7 @@ Defects found and fixed during review: the signature block sat alone on a page (
 - Table of contents: rows as listing rows with a 36 pt page column; the page numbers come from `fb render`'s needles (the LibreOffice pagination). Word may paginate differently (fb-595.68.22).
 - Table of authorities: page references are printed from the `authorities` frontmatter (as in typst), not computed; entries as listing rows with a 1 in page column (fb-595.68.22).
 - Keep with signature: the block before each `---` is kept whole with the signature block, in both engines.
+
+## FRCP base port assessment (fb-595.17.11)
+
+Skipped: pleading paper. E.D. Cal. L.R. 130(b) asks for numbered lines in the left margin (the template sets 27 of 24 pt, the double and single rules), and L.R. 130(d) puts the page number and a brief description of the document on one footer line. The FRCP base (`lib/layouts/frcp-motion-brief.yaml`) has no pleading paper yet (fb-595.84 brings it), so the folder stays on its own templates.
