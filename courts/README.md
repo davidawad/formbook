@@ -160,7 +160,7 @@ Courts under `courts` (347).
 | [Michigan Court of Appeals](sixth-circuit/michigan/state/court-of-appeals) | `michctapp` | up for review | 6/6 | 6/6 | 0/6 | 29 |
 | [Michigan Supreme Court](sixth-circuit/michigan/state/supreme-court) | `mich` | up for review | 8/8 | 8/8 | 1/8 | 29 |
 | [Ohio Court of Appeals](sixth-circuit/ohio/state/court-of-appeals) | `ohioctapp` | up for review | 6/6 | 6/6 | 2/6 | 29 |
-| [Ohio Supreme Court](sixth-circuit/ohio/state/supreme-court) | `ohio` | up for review | 9/9 | 9/9 | 2/9 | 29 |
+| [Ohio Supreme Court](sixth-circuit/ohio/state/supreme-court) | `ohio` | up for review | 9/9 | 9/9 | 3/9 | 29 |
 | [Court of Appeals of Tennessee](sixth-circuit/tennessee/state/court-of-appeals) | `tennctapp` | up for review | 5/5 | 5/5 | 5/5 | 29 |
 | [Court of Criminal Appeals of Tennessee](sixth-circuit/tennessee/state/court-of-criminal-appeals) | `tenncrimapp` | up for review | 4/4 | 3/3 | 3/3 | 29 |
 | [Tennessee Supreme Court](sixth-circuit/tennessee/state/supreme-court) | `tenn` | up for review | 6/6 | 6/6 | 6/6 | 29 |
@@ -212,7 +212,7 @@ Courts under `courts` (347).
 | [Court of Appeals of Iowa](eighth-circuit/iowa/state/court-of-appeals) | `iowactapp` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Supreme Court of Iowa](eighth-circuit/iowa/state/supreme-court) | `iowa` | up for review | 8/8 | 7/7 | 7/7 | 29 |
 | [Court of Appeals of Minnesota](eighth-circuit/minnesota/state/court-of-appeals) | `minnctapp` | up for review | 7/7 | 3/3 | 0/3 | 29 |
-| [Supreme Court of Minnesota](eighth-circuit/minnesota/state/supreme-court) | `minn` | up for review | 8/8 | 2/2 | 0/2 | 29 |
+| [Supreme Court of Minnesota](eighth-circuit/minnesota/state/supreme-court) | `minn` | up for review | 8/8 | 2/2 | 1/2 | 29 |
 | [Missouri Court of Appeals](eighth-circuit/missouri/state/court-of-appeals) | `moctapp` | up for review | 5/5 | 1/1 | 0/1 | 29 |
 | [Missouri Court of Appeals, Eastern District](eighth-circuit/missouri/state/court-of-appeals-eastern-district) | `moctapped` | up for review | 4/4 | 4/4 | 0/4 | 29 |
 | [Missouri Court of Appeals, Southern District](eighth-circuit/missouri/state/court-of-appeals-southern-district) | `moctappsd` | up for review | 3/3 | 3/3 | 1/3 | 29 |

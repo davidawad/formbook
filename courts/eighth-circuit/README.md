@@ -32,7 +32,7 @@ Courts under `courts/eighth-circuit` (38).
 | [Court of Appeals of Iowa](iowa/state/court-of-appeals) | `iowactapp` | up for review | 4/4 | 4/4 | 4/4 | 29 |
 | [Supreme Court of Iowa](iowa/state/supreme-court) | `iowa` | up for review | 8/8 | 7/7 | 7/7 | 29 |
 | [Court of Appeals of Minnesota](minnesota/state/court-of-appeals) | `minnctapp` | up for review | 7/7 | 3/3 | 0/3 | 29 |
-| [Supreme Court of Minnesota](minnesota/state/supreme-court) | `minn` | up for review | 8/8 | 2/2 | 0/2 | 29 |
+| [Supreme Court of Minnesota](minnesota/state/supreme-court) | `minn` | up for review | 8/8 | 2/2 | 1/2 | 29 |
 | [Missouri Court of Appeals](missouri/state/court-of-appeals) | `moctapp` | up for review | 5/5 | 1/1 | 0/1 | 29 |
 | [Missouri Court of Appeals, Eastern District](missouri/state/court-of-appeals-eastern-district) | `moctapped` | up for review | 4/4 | 4/4 | 0/4 | 29 |
 | [Missouri Court of Appeals, Southern District](missouri/state/court-of-appeals-southern-district) | `moctappsd` | up for review | 3/3 | 3/3 | 1/3 | 29 |
