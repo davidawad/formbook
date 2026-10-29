@@ -548,21 +548,25 @@ return function(spec)
   end
 
   local nbody = 0 -- the body's headings so far (their labels: hlabels)
+  -- The needle of body heading n (its text, fallback and length): a numbered heading prints its label before its text,
+  -- and so may the next block; the whole heading and the start of what follows it (a long heading's first 48
+  -- characters are also its contents row's).
+  local function heading_needle(b, nxt, n)
+    local own = (hlabels[n] or "") .. " " .. plain(b)
+    local after = (nxt and nxt.t == "Header" and hlabels[n + 1] or "") .. " " .. plain(nxt)
+    local o = xd.norm(own)
+    if #o < NEEDLE - 8 then return own .. " " .. after, own end
+    return o .. xd.norm(after):sub(1, 16), own, #o + 16
+  end
   local in_lead = false -- a paper before the cover (lead): its headings are not the document's (no needle, no row)
+  local h1_page = false -- the body sections before the tables, each on a page of its own (body_before_tables.each_page)
   function needles_of(b, nxt)
     if in_lead and b.t == "Header" then
       nbody = nbody + 1
     elseif b.t == "Header" then
       hn = hn + 1
       nbody = nbody + 1
-      -- a numbered heading prints its label before its text, and so may the next block
-      local own = (hlabels[nbody] or "") .. " " .. plain(b)
-      local after = (nxt and nxt.t == "Header" and hlabels[nbody + 1] or "") .. " " .. plain(nxt)
-      -- the whole heading and the start of what follows it: a long heading's first 48 characters are also its
-      -- contents row's
-      local o = xd.norm(own)
-      if #o < NEEDLE - 8 then needle("h" .. hn, "B", own .. " " .. after, own)
-      else needle("h" .. hn, "B", o .. xd.norm(after):sub(1, 16), own, #o + 16) end
+      needle("h" .. hn, "B", heading_needle(b, nxt, nbody))
       section_at("h" .. hn)
     elseif want then
       pn = pn + 1
@@ -844,6 +848,8 @@ return function(spec)
         return para:find("^Body Text") and tw(spec.paragraph_gap) > 0 and (s.flow == "Para" or s.flow == "List")
       end
       if b.t == "Header" then
+        -- (body_before_tables.each_page: each level-1 section of them on a page of its own)
+        if h1_page and b.level == 1 and k > 1 then raw(brk(s)) end
         for _, x in ipairs(emit_list(heading(b, first and k == 1), s, false)) do raw(x) end
       elseif b.t == "Para" or b.t == "Plain" then
         flush()
@@ -1050,7 +1056,10 @@ return function(spec)
             -- the tables' numbering starts at the first page after the cover: the first of the pages before the tables
             -- (its first text), or the first table (its title and its first row)
             local b1 = first_text(bnodes) or (#pre > 0 and not late and plain(pre[1]))
-            if b1 then
+            if not first_text(bnodes) and #pre > 0 and not late and pre[1].t == "Header" then
+              -- (the first section's heading: its own needle, so that the heading's is found at the same place)
+              needle("front", "B", heading_needle(pre[1], pre[2], nbody + 1))
+            elseif b1 then
               needle("front", "B", b1, b1)
             else
               local t = spec.contents or spec.authorities
@@ -1068,7 +1077,9 @@ return function(spec)
             out:insert(raw_block(brk(s)))
           end
           if #pre > 0 and not late and not oncover then
+            h1_page = spec.body_before_tables.each_page == true
             out:extend(body(pre, s, "Body Text"))
+            h1_page = false
             out:insert(raw_block(brk(s)))
           end
           if spec.contents then

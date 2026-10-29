@@ -8,10 +8,10 @@ Folder: `courts/sixth-circuit/michigan/federal/eastern-district/motion-brief/`.
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (partial transcription, see Known gaps) |
 | typeface | required: none (LR 5.1(a)(3) sets 14 pt for proportional type and names no face); used: **Times New Roman** 14 pt (vendored, `docs/FONTS.md`), as the filed exemplar, in both engines |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf` and `usage/OUTPUT-motion-brief.docx.pdf`, 16 pages each (re-rendered 2026-10-22) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, `.latex.pdf`, `.docx` and `.docx.pdf`, 17 pages each, on the generic FRCP brief (fb-595.92); vendored fonts only, no warnings |
 | embedded fonts | `pdffonts`: TimesNewRomanPSMT, -BoldMT, -ItalicMT only (all embedded), both engines |
 | overlay | `just overlay` writes `.overlay/<doc path>/OVERLAY-motion-brief.pdf` (not committed) |
-| pages reviewed | 16 of 16, both engines (every page rendered at 60 dpi and viewed on 2026-10-22) |
+| pages reviewed | 17 of 17 on each engine (2026-10-29, the FRCP-base render: `reviews/2026-10-29.md`) |
 
 ## Governing rules
 
@@ -42,9 +42,9 @@ Both engines run on the shared cross-engine layout model (`lib/typst/xengine.typ
 ## Markdown contract (for samples)
 
 - YAML frontmatter, then the body.
-- Frontmatter: `division`, `caption.parties` (list of `{names, designation}`), `case_number`, `judge` or `judges` (list), `motion_title`, `brief_title`, `date` (optional), `signature` (`firm` lines, `signer`, `lines`).
-- Markers (HTML comments on lines of their own): `<!-- brief -->` starts the brief's cover (the motion is before it); `<!-- toc -->` places the contents; `<!-- body -->` starts the numbered text. `# CERTIFICATE OF SERVICE` closes the body and is kept out of the contents; its first paragraph is the certification, the paragraphs after it its signature lines.
-- Blocks: `#` to `###` headings, `>` quotations, `1.` lists (numbered issues), `-` lists (authorities), paragraphs. Headings in the front matter are not in the contents. Not supported: footnotes, tables, raw typst.
+- Frontmatter: `division`, `caption.parties` (list of `{names, designation}`), `case_number`, `judge` or `judges` (list), `motion_title`, `brief_title`, `date` (optional), `signature` (`firm` lines, `signer`, `lines`), `service` (`text`, `lines`: the certificate of service and its signature lines).
+- Markers (HTML comments on lines of their own): `<!-- brief -->` ends the motion (`lead`) and starts the brief; `<!-- toc -->` ends the statement of issues and the authorities (`body_before_tables.marker`), the contents following them; `<!-- body -->` is a comment the render drops.
+- Blocks: `#` to `###` headings, `>` quotations, `1.` lists (numbered issues), `-` lists (authorities), paragraphs, footnotes. Headings in the motion are not in the contents; the statement of issues and the authorities are (as filed). Not supported: raw typst.
 
 ## Known gaps and open choices
 
@@ -59,7 +59,7 @@ Both engines run on the shared cross-engine layout model (`lib/typst/xengine.typ
 9. **Selftest.** `tools/check-selftest.sh` needs a `court.json` in the folder it is given ("court.json unreadable" on this doc folder), so it does not apply here; `tools/check.sh` runs on the doc folder (typst and docx below).
 10. **Overlay.** The overlay map pairs each render page with the exemplar page sharing the most words; the pairing is by text, not index, so the page numbers on the overlay map are not the filed page numbers. Diagnostic, not a score.
 
-## Review of the rendered pages (typst and docx, 16 pages each, 2026-10-22)
+## Review of the rendered pages (before the FRCP base, 2026-10-22; the current record is `reviews/2026-10-29.md`)
 
 The docx render breaks every line and page as the typst render (XENG-001..003 PASS, 290/290 lines), so each row holds for both.
 
@@ -78,10 +78,23 @@ The docx render breaks every line and page as the typst render (XENG-001..003 PA
 
 ## Engines
 
-- **typst** (primary): `typst/mied-motion-brief.typ` on `lib/typst/xengine.typ`. `tools/check.sh --engine typst`: all tier-1 checks pass (DEF-TOC-001: 1 table page, 0 defects).
-- **docx**: `docx/reference.xml` (`base="xengine"`, `{font}` Times New Roman, size 28, body 644, single 322 twips, the three heading styles) and `docx/mied-motion-brief.lua` on `lib/docx/xengine.lua`, which writes the covers, the four sections and their footers (`$FORMBOOK_FOOTERS`, `$FORMBOOK_FINAL`), and the contents with the pages of fb render's passes (`$FORMBOOK_NEEDLES`, `$FORMBOOK_PAGES`; no TOC field); `fb render` builds the package (no scripts in `docx/`). `tools/check.sh --engine docx`: all tier-1 checks and XENG-001..003 pass (gated).
-- **latex**: none for this doc type.
+The folder is on the generic federal district brief (`lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and the shared
+document model (docs/EVAL-LOOP.md, "Generated engines"): `typst/layout.yaml` names the base and overlays E.D. Mich.'s
+local rules (the caption and the signature written once, YAML anchors); `typst/mied-motion-brief.typ` only names the
+face; `fb engines gen` writes `latex/` (`template.tex`, `xdoc.lua`) and `docx/` (`reference.xml`, `xdoc.lua`) from the
+merged layout; `eval.yaml` gates the cross-engine checks (XENG-001..003). `latex_bias: 0`: LaTeX's text block at
+typst's width (an authorities line LaTeX set fuller at the face's 0.05 bp). Word is not available here; the docx is
+checked with LibreOffice.
 
-## FRCP base (fb-595.17.17): not moved
+## FRCP base (fb-595.92): moved
 
-This folder stays on its own template. The generic federal district brief (`lib/layouts/frcp-motion-brief.yaml` on the shared document model) cannot set this paper without a shared change: the motion and its brief are one document (allowed by LR 7.1(d)(1)(A), and the exemplar's form), the motion numbered 1, 2 ahead of the brief's cover, the brief's front matter (statement of issues, controlling authorities, contents) in roman numerals from ii, and the brief's body restarting at 1. The model's numbering starts at its one cover (`page_number.front`: cover, tables, body), so it has no part before the cover with its own arabic numbering and no second cover. Missing base feature: a part before the cover numbered on its own (or a second cover with a numbering restart), in `lib/typst/xdoc.typ` and `lib/pandoc/xdoc.lua`.
+The motion before the brief's cover, numbered on its own, is the base's `lead` (fb-595.92): the body up to
+`<!-- brief -->` under the motion's caption and title, closed by counsel's signature, pages 1-2. The brief: its cover
+counted as i and unnumbered (`page_number.cover: counted`); the statement of issues and the controlling authorities
+(LR 7.1(d)(2)), the body up to `<!-- toc -->`, each on a page of its own (`body_before_tables.each_page`, fb-595.92),
+ii-iv; the table of contents, now listing them too (as filed), v; the text from 1; the certificate of service from the
+sample's `service` (moved from the body into the frontmatter, its signature lines from 3.2 in). The caption's party
+column is unruled, as filed. Open (tier 2): the model sets every list at the body pitch in a hanging indent, so the
+issue's number hangs at the margin (the exemplar runs the text under it) and the authorities are double-spaced over two
+pages (the exemplar single-spaces them on one); both are within LR 5.1(a)(2) (double spacing). The page number is at
+the type size, 14 pt (the earlier template's 12 pt; the model has no page-number size).

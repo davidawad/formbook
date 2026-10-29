@@ -822,7 +822,7 @@
 
 /// The body: markdown; paragraphs at the body pitch with a first-line indent, headings, quotations, lists and
 /// footnotes as layout.yaml says, the authorities marked.
-#let body-of(spec, meta, src) = {
+#let body-of(spec, meta, src, h1-page: false) = {
   let q = spec.at("quote", default: (:))
   // justified text (layout.yaml `justify`): the body, its quotations, lists and tail
   set par(..justified(spec))
@@ -831,6 +831,8 @@
   let pgap = spec.at("paragraph_gap", default: none)
   set par(..if pgap != none { (spacing: pt(pgap)) } else { (:) })
   show heading: show-heading(spec)
+  // (body_before_tables.each_page: each level-1 section on a page of its own)
+  show heading.where(level: 1): it => if h1-page { pagebreak(weak: true); it } else { it }
   show list: it => if pgap == none { list-items(spec, it, 0) } else { block(above: pt(pgap), below: pt(pgap), list-items(spec, it, 0)) }
   show enum: it => if pgap == none { list-items(spec, it, 0) } else { block(above: pt(pgap), below: pt(pgap), list-items(spec, it, 0)) }
   show table: it => body-table(spec, if type(it.columns) == int { it.columns } else { it.columns.len() }, it.children)
@@ -1205,7 +1207,9 @@
   // layout's `between_tables`
   let between = spec.at("body_before_tables", default: (:)).at("place", default: none) == "between"
   if pre != "" and not between and not pre-cover {
-    body-of(spec, meta, pre)
+    // `each_page` (fb-595.92, E.D. Mich.: the statement of issues, the controlling authorities): each level-1 section
+    // of them on a page of its own
+    body-of(spec, meta, pre, h1-page: spec.body_before_tables.at("each_page", default: false))
     pagebreak()
   }
   if "contents" in spec { contents-pages(spec, spec.contents) }

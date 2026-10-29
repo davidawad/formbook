@@ -27,6 +27,12 @@ signature:
     - "(313) 756-6404 | (313) 406-7373 (fax)"
     - "lwolf@grsm.com"
     - "Counsel for Defendant"
+service:
+  text: "I hereby certify that on June 15, 2026, the foregoing Motion to Dismiss Under Fed. R. Civ. P. 12(b)(6) and Brief in Support was filed with the Court Clerk via the Court’s CM/ECF Case Management Electronic Case Filing System, which automatically serves the foregoing on all counsel of record in this matter."
+  lines:
+    - "By: /s/ Luke D. Wolf"
+    - "Luke D. Wolf (P81932)"
+    - "Gordon Rees Scully Mansukhani, LLP"
 ---
 
 Defendant Earth Protect LLC (“Earth Protect”) hereby moves to dismiss Count I of the Complaint (ECF No. 1) filed by Plaintiff Victoria Soboleski with prejudice pursuant to Fed. R. Civ. P. 12(b)(6). As demonstrated in the brief in support that follows, Count I, purporting to allege a violation of 47 U.S.C. § 227(c)(5), fails as a matter of law under a plain reading of the statute, since Section 227(c)(5) does not apply to text messages.
@@ -136,12 +142,3 @@ Without the text messages to rely upon for Count I, Plaintiff is left with the i
 
 For the foregoing reasons, Count I must be dismissed with prejudice under Rule 12(b)(6) for failure to state a claim upon which relief can be granted.
 
-# CERTIFICATE OF SERVICE
-
-I hereby certify that on June 15, 2026, the foregoing Motion to Dismiss Under Fed. R. Civ. P. 12(b)(6) and Brief in Support was filed with the Court Clerk via the Court’s CM/ECF Case Management Electronic Case Filing System, which automatically serves the foregoing on all counsel of record in this matter.
-
-By: /s/ Luke D. Wolf
-
-Luke D. Wolf (P81932)
-
-Gordon Rees Scully Mansukhani, LLP

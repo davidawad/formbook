@@ -413,6 +413,7 @@ return function(spec)
   -- bodyn counts the body's headings alone (their labels, xd.heading_labels).
   local hn, bodyn = 0, 0
   local in_lead = false -- a paper before the cover (lead): its headings are not the document's (no mark, no row)
+  local h1_page = false -- the body sections before the tables, each on a page of its own (body_before_tables.each_page)
   local function mark_of(level, content)
     if in_lead then return "" end
     hn = hn + 1
@@ -617,6 +618,8 @@ return function(spec)
     end
     for k, b in ipairs(blocks) do
       if b.t == "Header" then
+        -- (body_before_tables.each_page: each level-1 section of them on a page of its own)
+        if h1_page and b.level == 1 and k > 1 then out:insert(raw("\\clearpage")) end
         out:insert(raw(heading(b, first and k == 1)))
       elseif b.t == "Para" or b.t == "Plain" then
         if prev == "Para" and gap > 0 then out:insert(raw("\\par\\addvspace{" .. bp(gap) .. "}")) end
@@ -771,7 +774,9 @@ return function(spec)
         -- the pages before the tables, numbered with them: the layout's before_tables, the body sections set before them
         if spec.before_tables then out:insert(raw(emit(bnodes, false) .. "\\clearpage")) end
         if #pre > 0 and not late and not oncover then
+          h1_page = spec.body_before_tables.each_page == true
           out:extend((body(pre, 0, nil, spec.paragraph_gap)))
+          h1_page = false
           out:insert(raw("\\clearpage"))
         end
         -- the tables in a group: their line boxes end with them

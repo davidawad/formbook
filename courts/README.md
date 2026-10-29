@@ -143,7 +143,7 @@ Courts under `courts` (347).
 | [District Court, W.D. Kentucky](sixth-circuit/kentucky/federal/western-district) | `kywd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. Michigan](sixth-circuit/michigan/federal/bankruptcy-eastern-district) | `mieb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Michigan](sixth-circuit/michigan/federal/bankruptcy-western-district) | `miwb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, E.D. Michigan](sixth-circuit/michigan/federal/eastern-district) | `mied` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. Michigan](sixth-circuit/michigan/federal/eastern-district) | `mied` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [District Court, W.D. Michigan](sixth-circuit/michigan/federal/western-district) | `miwd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Ohio](sixth-circuit/ohio/federal/bankruptcy-northern-district) | `ohnb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. Ohio](sixth-circuit/ohio/federal/bankruptcy-southern-district) | `ohsb` | up for review | 2/2 | — | 2/2 | 14 |
