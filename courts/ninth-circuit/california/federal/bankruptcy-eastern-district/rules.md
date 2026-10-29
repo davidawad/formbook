@@ -2,7 +2,7 @@
 
 Verified against the primary sources cited in this file on 2026-10-17.
 
-Alias `caeb`. Applies to adversary complaints. Primary sources verified 2026-10-17. Re-check on every published local rule amendment and at least annually; the court listed its Local Bankruptcy Rules effective April 2, 2026 as current at verification. Check judge procedures and current forms before filing.
+Alias `caeb`. Applies to adversary complaints and motion briefs. Primary sources verified 2026-10-17. Re-check on every published local rule amendment and at least annually; the court listed its Local Bankruptcy Rules effective April 2, 2026 as current at verification. Check judge procedures and current forms before filing.
 
 ## Sources
 
@@ -34,3 +34,24 @@ Applies to `adversary-complaint/`. The court's initiating-complaint cover sheet 
 | CAEB-CONT-004 | Attach completed Form B1040 at commencement of an adversary proceeding. | CAEB-LBR, LBR 7003-1 | M |
 | CAEB-CONT-005 | Separate claims into counts when appropriate; use numbered paragraphs. | FRCP 10(b); FRBP 7010 | M |
 | CAEB-CONT-006 | Demand for jury trial, when intended, appears immediately following the complaint title or in another permitted document. | CAEB-LBR, LBR 7055-1(b); FRCP 38(b) | M |
+
+### Motion brief
+
+Applies to `motion-brief/` (a memorandum of points and authorities in support of a motion, a document of its own).
+Verified 2026-10-29 against the Local Bankruptcy Rules effective April 2, 2026,
+https://www.caeb.uscourts.gov/documents/Forms/LocalRules/LBR%20April%202026%20FINAL%20FOR%20POSTING.pdf.
+
+| ID | Requirement | Source | Kind |
+|---|---|---|---|
+| CAEB-MB-FORM-001 | White letter-size paper; margins of at least one-half inch on all four sides. | LBR 9004-2(a)(1), (b)(2) | M |
+| CAEB-MB-FORM-002 | 12- to 14-point type, no more than an average of 10 characters per inch, in Arial, Courier, Times, Times New Roman or Helvetica or their equivalent. | LBR 9004-2(a)(4) | M |
+| CAEB-MB-FORM-003 | Consecutively numbered lines in the left margin; text double-spaced except counsel identification, title of action, headings, footnotes, quotations and property descriptions. | LBR 9004-2(a)(2), (b)(1) | M |
+| CAEB-MB-FORM-005 | Pages numbered consecutively at the bottom center; page 1 the page with the caption. | LBR 9004-2(c)(3) | M |
+| CAEB-MB-FIRST-001 | The total number of pages noted in the upper left-hand corner of the first page. | LBR 9004-2(c)(4) | M |
+| CAEB-MB-FIRST-002 | Counsel identification (name, address, e-mail, telephone, State Bar number, party and interest) at the upper left of page 1; a blank space 2½ in from the right edge and 3 in from the top for the clerk's stamp. | LBR 9004-1(b); 9004-2(b)(3) | M |
+| CAEB-MB-FIRST-003 | Caption: the court, the title of the case, the case and any adversary number, the title of the document, and the date, time and courtroom of the hearing. | LBR 9004-2(a)(6), (b)(5); 9014-1(d)(2) | M |
+| CAEB-MB-FIRST-004 | The Docket Control Number immediately below the case number (or the adversary number). | LBR 9014-1(c)(1)-(2); 9004-2(b)(6) | M |
+| CAEB-MB-FIRST-005 | The document's title just below or to the right of the caption, describing the paper, the filing party and the relief. | LBR 9004-2(b)(5)(A) | M |
+| CAEB-MB-CONT-001 | The memorandum is a separate document from the motion, notice, evidence and proof of service (combined only up to six pages). | LBR 9004-2(c)(1); 9014-1(d)(4) | M |
+| CAEB-MB-CONT-002 | A memorandum of more than 10 pages has a table of contents and a table of authorities. | LBR 9014-1(d)(3)(C) | M |
+| CAEB-MB-SIGN-001 | Signed by the attorney, the name typed underneath; electronically "/s/" and the name. | LBR 9004-1(c), (c)(1)(A) | M |

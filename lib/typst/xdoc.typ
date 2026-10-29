@@ -13,7 +13,7 @@
 //   `label_box` or the `hang`, `number_prefix`, `label_line`), front: [blocks], closing: [blocks],
 //   before_tables: [blocks], body_before_tables: {count | until | marker} (pages between the cover and the tables),
 //   tail: {at, pitch, indent, gap, above}
-//   blocks: {text: "literal with {field}, {a.b} or {a.b|default} ({body_words}, {xd.words}: computed)", <style>},
+//   blocks: {text: "literal with {field}, {a.b} or {a.b|default} ({body_words}, {xd.words}, {xd.last_page}: computed)", <style>},
 //           {markdown: "{field}", <style>, gap} (paragraphs at blank lines),
 //           {rule: <stroke>, above, below},
 //           {columns: [{width, blocks}, ..], gutter}, {each: field, blocks, between}, {group: [blocks], keep},
@@ -64,6 +64,10 @@
   cmarker.render(apostrophes(s), raw-typst: false, smart-punctuation: true, scope: markdown-scope())
 }
 #let pt(x) = if x == none { 0pt } else { x * 1pt }
+
+/// `{xd.last_page}` in a text block (fb-595.99): the value is this mark, a private-use character, which the document
+/// sets as the last page's number (a show rule in xdoc); lib/pandoc/xdoc.lua LAST_PAGE alike.
+#let LAST-PAGE = "\u{E0F0}"
 
 // A rule's line box besides its stroke (lib/pandoc/xdoc.lua RULE): LibreOffice's smallest exact line, one twip.
 #let RULE = 0.05
@@ -254,6 +258,8 @@
 #let computed(spec, meta, body) = {
   // `constants`: the layout's court constants (a district's name in the generic FRCP base, fb-595.17) as {xd.<key>}
   let meta = if "constants" in spec { meta + (xd: meta.at("xd", default: (:)) + spec.constants) } else { meta }
+  // {xd.last_page}: a mark the document sets as the last page's number (LAST-PAGE; lib/pandoc/xdoc.lua LAST_PAGE)
+  let meta = meta + (xd: meta.at("xd", default: (:)) + (last_page: LAST-PAGE))
   if "words" not in spec { return meta }
   let w = spec.words
   let n = if "given" in w and is-set(meta.at(w.given, default: none)) { int(meta.at(w.given)) } else {
@@ -1155,6 +1161,9 @@
   show: xengine.with(pitch: pt(spec.pitch.body), list-indent: none) // lists: list-items
   // a doubled section sign or pilcrow stays with its number, as LaTeX and Word bind it (xengine binds a single one)
   show regex("(§§|¶¶) \\S+"): it => box(it)
+  // {xd.last_page} (fb-595.99, E.D. Cal. LBR 9004-2(c)(4): the page total on the first page): the last page's number,
+  // as a page-number text's {pages} (LaTeX \pageref* of xd@lastpage, Word NUMPAGES)
+  show LAST-PAGE: context str(counter(page).final().first())
   // no punctuation hanging into the margin (typst's overhang): LaTeX and Word set none, and a hanging period moved a
   // centered line 1.4 pt and lets a line hold more
   set text(overhang: false)

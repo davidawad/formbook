@@ -54,6 +54,15 @@ end
 local function runs(text, o)
   local x = rpr(o or {})
   local out = {}
+  -- the last page's number ({xd.last_page}, the mark U+E0F0: lib/pandoc/xdoc.lua LAST_PAGE): a NUMPAGES field
+  local a, b = text:find("\u{E0F0}", 1, true)
+  if a then
+    local fld = "<w:r>" .. x .. '<w:fldChar w:fldCharType="begin"/></w:r><w:r>' .. x
+      .. '<w:instrText xml:space="preserve"> NUMPAGES </w:instrText></w:r><w:r>' .. x
+      .. '<w:fldChar w:fldCharType="separate"/></w:r><w:r>' .. x .. "<w:t>1</w:t></w:r><w:r>" .. x
+      .. '<w:fldChar w:fldCharType="end"/></w:r>'
+    return runs(text:sub(1, a - 1), o) .. fld .. runs(text:sub(b + 1), o)
+  end
   local pos = 1
   while pos <= #text do
     if text:sub(pos, pos) == "\t" then

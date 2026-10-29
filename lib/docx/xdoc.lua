@@ -469,7 +469,9 @@ return function(spec)
     local out = {}
     local function go(l)
       for _, el in ipairs(l) do
-        if el.t == "Str" then out[#out + 1] = el.text
+        -- (the last page's number, {xd.last_page}, a field whose value the needle can not know: left out, so a
+        -- paragraph of it alone is no needle's text)
+        if el.t == "Str" then out[#out + 1] = (el.text:gsub(xd.LAST_PAGE, ""))
         elseif el.t == "Space" or el.t == "SoftBreak" or el.t == "LineBreak" then out[#out + 1] = " "
         elseif el.t ~= "Note" and el.content then go(el.content) -- italics, quotes, links: their words
         end

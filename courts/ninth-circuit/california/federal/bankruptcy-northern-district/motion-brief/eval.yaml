@@ -1,0 +1,52 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.96), so they
+# break every line and page where the typst render does, and a difference fails.
+# Pleading paper (Civil L.R. 3-4(c)(1)-(2), applied by B.L.R. 1001-2(a)): 28 numbered lines of 24 pt = 672 pt of the
+# 792 pt page, so the top and bottom margins are 60 pt each. The rules set no minimum margin; the 72 pt default is not
+# a rule here.
+params:
+  cross_engine: gate
+  margin_top_pt: 60
+  margin_bottom_pt: 60
+  # pleading paper: the numbered lines a page (Civil L.R. 3-4(c)(1)); the checks read the margin numbers 1..28 as page
+  # furniture, not body text
+  pleading_lines: 28
+  # DEF-COVER-002 against FILED-EXAMPLE-motion-brief.pdf (Norton Rose Fulbright, one filer): the exemplar prints its
+  # firm's "DOCUMENT PREPARED ON RECYCLED PAPER" mark and a document number down its left margin, left of its line
+  # numbers, so the check reads the exemplar's text edge 82 pt left of its counsel and caption lines and finds them
+  # "indented", and its court title off centre; ours stand at the 1.5 in pleading margin and the title is centered
+  # (Civil L.R. 3-4(a)(3)). Its hearing lines (Date, Time, Judge, Place) are set beside the defendants' names a line
+  # higher than ours, so one pairing reads out of order. One filer's layout (tier 3).
+  cover_structure_accepted:
+    - finding: 'order: "25 CATHOLIC WELFARE CORPORATION'
+      reason: "the exemplar's hearing lines sit a line higher beside the defendants' names; the same lines in the same column"
+    - finding: 'alignment: "UNITED STATES BANKRUPTCY COURT"'
+      reason: "centered on the page in ours; the exemplar's text edge is read at its left-margin recycled-paper mark"
+    - finding: 'alignment: "NORTON ROSE FULBRIGHT US LLP"'
+      reason: "the exemplar's text edge is read at its left-margin recycled-paper mark; ours at the pleading margin"
+    - finding: 'alignment: "Los Angeles, California 90071"'
+      reason: "the exemplar's text edge is read at its left-margin recycled-paper mark; ours at the pleading margin"
+    - finding: 'alignment: "Facsimile: (213) 892-9494"'
+      reason: "the exemplar's text edge is read at its left-margin recycled-paper mark; ours at the pleading margin"
+    - finding: 'alignment: "JASON I. BLANCHARD (pro hac vice forthcoming)"'
+      reason: "the exemplar's text edge is read at its left-margin recycled-paper mark; ours at the pleading margin"
+    - finding: 'alignment: "Telephone: (214) 855-8000"'
+      reason: "the exemplar's text edge is read at its left-margin recycled-paper mark; ours at the pleading margin"
+    - finding: 'alignment: "ryan.manns@nortonrosefulbright.com"'
+      reason: "the exemplar's text edge is read at its left-margin recycled-paper mark; ours at the pleading margin"
+    - finding: 'alignment: "Oakland, Roman Catholic Cemeteries of the Dioces'
+      reason: "the exemplar's text edge is read at its left-margin recycled-paper mark; ours at the pleading margin"
+    - finding: 'alignment: "OAKLAND, a California corporation sole,"'
+      reason: "the exemplar's text edge is read at its left-margin recycled-paper mark; ours at the pleading margin"
+    - finding: 'alignment: "CEMETERIES OF THE DIOCESE OF"'
+      reason: "the exemplar's caption names wrap a word later in its wider left column and pair with another line"
+    - finding: 'alignment: "OF OAKLAND, AND THE ROMAN"'
+      reason: "the exemplar's text edge is read at its left-margin recycled-paper mark; ours at the pleading margin"
+    - finding: 'alignment: "1300 Clay Street"'
+      reason: "the exemplar sets the place's lines in a column after the label; ours wraps the one place line at the column's edge"
+    - finding: 'rules: between "OAKLAND, a California corporation sole," and "THE OFFICIAL COMMITTEE OF"'
+      reason: "the rule between the debtor and the adversary parties is in both; ours pairs with the right column's adversary number"
+    - finding: 'rules: between "Adv. Pro. No. 24-04053 WJL"'
+      reason: "the same rule between the debtor and the adversary parties, read beside the right column's line in ours"
+    - finding: 'rules: below "Oakland, CA 94612"'
+      reason: "the caption's bottom rule is in both; ours ends below the defendants' designation, after the hearing's last line"

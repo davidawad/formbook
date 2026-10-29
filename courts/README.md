@@ -230,8 +230,8 @@ Courts under `courts` (347).
 | [United States Bankruptcy Court, D. Arizona](ninth-circuit/arizona/federal/bankruptcy-district) | `arb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the District of Arizona](ninth-circuit/arizona/federal/district) | `azd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, C.D. California](ninth-circuit/california/federal/bankruptcy-central-district) | `cacb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States Bankruptcy Court, E.D. California](ninth-circuit/california/federal/bankruptcy-eastern-district) | `caeb` | up for review | 1/1 | — | 1/1 | 14 |
-| [United States Bankruptcy Court, N.D. California](ninth-circuit/california/federal/bankruptcy-northern-district) | `canb` | up for review | 1/1 | — | 1/1 | 14 |
+| [United States Bankruptcy Court, E.D. California](ninth-circuit/california/federal/bankruptcy-eastern-district) | `caeb` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [United States Bankruptcy Court, N.D. California](ninth-circuit/california/federal/bankruptcy-northern-district) | `canb` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. California](ninth-circuit/california/federal/bankruptcy-southern-district) | `casb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the Central District of California](ninth-circuit/california/federal/central-district) | `cacd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court for the Eastern District of California](ninth-circuit/california/federal/eastern-district) | `caed` | up for review | 2/2 | 1/1 | 2/2 | 14 |

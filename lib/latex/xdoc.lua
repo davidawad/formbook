@@ -238,6 +238,20 @@ end
 -- Inlines as LaTeX (the cross-engine inline rules first: lib/latex/xengine.lua); `plain`: without the face's glyph
 -- filter (a PDF bookmark).
 local function tex(inlines, plain)
+  -- {xd.last_page} (xd.LAST_PAGE): \pageref* of the label set at the document's end
+  inlines = pandoc.Inlines(inlines):walk({ Str = function(s)
+    if not s.text:find(xd.LAST_PAGE, 1, true) then return nil end
+    local out, rest = pandoc.Inlines({}), s.text
+    while true do
+      local a, b = rest:find(xd.LAST_PAGE, 1, true)
+      if not a then break end
+      if a > 1 then out:insert(pandoc.Str(rest:sub(1, a - 1))) end
+      out:insert(pandoc.RawInline("latex", "\\pageref*{xd@lastpage}"))
+      rest = rest:sub(b + 1)
+    end
+    if rest ~= "" then out:insert(pandoc.Str(rest)) end
+    return out
+  end })
   -- (every list of inlines: a quotation inside italics too, as the body's walk does)
   local doc = pandoc.Pandoc({ pandoc.Plain(switches(texify(pandoc.Inlines(inlines):walk({ Inlines = texify })))) })
   local s = pandoc.write(plain and doc or faced(doc), "latex")
@@ -859,7 +873,9 @@ return function(spec)
         -- the blocks after the tail (layout after_tail)
         if #anodes > 0 then out:insert(raw(emit(anodes, false))) end
         -- the last page, for a page-number text's {pages} (the generated template: \pageref*{xd@lastpage})
-        if spec.page_number and spec.page_number.text then out:insert(raw("\\label{xd@lastpage}")) end
+        if (spec.page_number and spec.page_number.text) or xd.uses_last_page(spec) then
+          out:insert(raw("\\label{xd@lastpage}"))
+        end
         return pandoc.Pandoc(out, doc.meta)
       end,
     },

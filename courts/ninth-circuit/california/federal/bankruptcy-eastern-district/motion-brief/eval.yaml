@@ -1,0 +1,34 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.96), so they
+# break every line and page where the typst render does, and a difference fails.
+# Pleading paper (LBR 9004-2(a)(2): numbered lines in the left margin; (b)(2): margins of at least half an inch): 28
+# numbered lines of 24 pt = 672 pt of the 792 pt page, so the top and bottom margins are 60 pt each.
+params:
+  cross_engine: gate
+  margin_top_pt: 60
+  margin_bottom_pt: 60
+  # pleading paper: the numbered lines a page; the checks read the margin numbers 1..28 as page furniture, not body text
+  pleading_lines: 28
+  # DEF-COVER-002 against FILED-EXAMPLE-motion-brief.pdf (Fox Rothschild, one filer): the exemplar rules its caption's
+  # right column under the chapter and sets the document's title between two rules across the page; it lists the
+  # joint debtors as "Affects ..." check boxes under the debtor (not transcribed), tab-aligns its telephone and fax
+  # numbers, and sets the hearing's place in a column after its label. Neither LBR 9004-2(b)(5) nor 9014-1(d)(2) asks
+  # for rules or a layout of the hearing lines: one filer's style (tier 3). Ours: the caption ruled at the parties'
+  # right and foot, the title centered in bold below it (LBR 9004-2(b)(5)(A)).
+  cover_structure_accepted:
+    - finding: 'alignment: "(310) 556-9828"'
+      reason: "the exemplar tab-aligns the fax number after its label; ours one line, label and number a space apart"
+    - finding: "alignment: \"\uF0A8 Affects OroHealth Corporation"
+      reason: "the exemplar's joint-debtor check boxes are not transcribed; the line pairs with another of ours"
+    - finding: 'alignment: "501 I Street, Sixth Floor"'
+      reason: "the exemplar sets the place's lines in a column after the label; ours wraps the one place line at the column's edge"
+    - finding: 'alignment: "Sacramento, California 95814"'
+      reason: "the exemplar sets the place's lines in a column after the label; ours wraps the one place line at the column's edge"
+    - finding: 'rules: between "Chapter 11" and "Hon. Christopher D. Jamie"'
+      reason: "the exemplar rules its right column under the chapter; no rule asks for it (tier 3)"
+    - finding: 'rules: between "Hon. Christopher D. Jamie" and "Hearing Date'
+      reason: "ours: the caption's bottom rule under the debtor's designation, read beside the judge's line"
+    - finding: 'rules: between "Sacramento, California 95814" and "MEMORANDUM OF POINTS AND AUTHORITIES IN"'
+      reason: "the exemplar sets its title between two rules across the page; ours centered in bold below the caption (tier 3)"
+    - finding: 'rules: below "CRITICAL VENDORS; AND (II) GRANTING RELATED RELI'
+      reason: "the exemplar sets its title between two rules across the page; ours centered in bold below the caption (tier 3)"

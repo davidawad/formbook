@@ -133,6 +133,23 @@ function M.uses_pages(spec)
     or scan(spec.between_tables)
 end
 
+-- `{xd.last_page}` in a text block (fb-595.99, E.D. Cal. LBR 9004-2(c)(4): the total number of pages noted on the
+-- first page): the last page's number, as a page-number text's {pages}. The value is this mark, a private-use
+-- character, which each engine sets as the number: typst counter(page).final(), LaTeX \pageref* of the label
+-- xd@lastpage (lib/latex/xdoc.lua), Word a NUMPAGES field (lib/docx/xengine.lua runs).
+M.LAST_PAGE = "\u{E0F0}"
+
+-- Whether the layout prints the last page's number in a block ({xd.last_page}).
+function M.uses_last_page(spec)
+  local function scan(v)
+    if type(v) == "string" then return v:find("{xd.last_page}", 1, true) ~= nil end
+    if type(v) ~= "table" then return false end
+    for _, x in pairs(v) do if scan(x) then return true end end
+    return false
+  end
+  return scan(spec)
+end
+
 -- Whether a frontmatter value is set (lib/typst/xdoc.typ is-set): present and not false, "" or an empty list or map.
 function M.is_set(v)
   return v ~= nil and v ~= pandoc.json.null and v ~= false and v ~= ""
@@ -1331,6 +1348,9 @@ function M.computed(spec, meta)
     meta.xd = meta.xd or {}
     for k, v in pairs(spec.constants) do meta.xd[k] = v end
   end
+  -- {xd.last_page}: a mark each engine sets as the last page's number (M.LAST_PAGE)
+  meta.xd = meta.xd or {}
+  meta.xd.last_page = M.LAST_PAGE
   if not spec.words then return meta end
   local w = spec.words
   local n
