@@ -6,9 +6,6 @@
 # "4(I)(1)" spelling. The motion itself (ECF No. 6, three pages) is a separate filing under LR 7.2(e) and is not
 # transcribed. See ../README.md.
 case_number: "3:26-CV-03048"
-court:
-  - "IN THE UNITED STATES DISTRICT COURT"
-  - "WESTERN DISTRICT OF ARKANSAS"
 division: "HARRISON DIVISION"
 caption:
   parties:
@@ -16,8 +13,7 @@ caption:
       designation: "PLAINTIFF"
     - names: ["STEVEN L. BRUCE, and", "STEVEN BRUCE & ASSOCIATES"]
       designation: "DEFENDANTS"
-title: "BRIEF IN SUPPORT OF DEFENDANTS’ MOTION TO DISMISS PURSUANT TO FED. R. CIV. P. 12(b)(2), 12(b)(4) AND 12(b)(5)"
-closing: "Respectfully submitted,"
+brief_title: "BRIEF IN SUPPORT OF DEFENDANTS’ MOTION TO DISMISS PURSUANT TO FED. R. CIV. P. 12(b)(2), 12(b)(4) AND 12(b)(5)"
 signature:
   firm:
     - "Stephen L. Bruce, Individually"
@@ -30,8 +26,8 @@ signature:
     - "Telephone: 405-330-4110"
     - "Email: bharris@sbrucelaw.com"
     - "Attorney for Defendants"
-certificate:
-  body: "I certify that on 9/25/2026, I filed the foregoing Motion to Dismiss and supporting Memorandum of Law through the Court’s electronic filing system and served a copy on Plaintiff by First Class Mail addressed as follows:"
+service:
+  text: "I certify that on 9/25/2026, I filed the foregoing Motion to Dismiss and supporting Memorandum of Law through the Court’s electronic filing system and served a copy on Plaintiff by First Class Mail addressed as follows:"
   served:
     - "Kurk Gasper"
     - "305 Tommy Ratzlaff Avenue"

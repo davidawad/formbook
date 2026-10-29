@@ -24,6 +24,29 @@ signature:
   signer: "Joseph W. Rust"
   lines:
     - "AT0013116"
+service:
+  text: "The undersigned certifies that a copy of the foregoing instrument was filed via the CM/ECF System and served upon all counsel of record in the above cause by transmitting a copy to all primary and secondary e-mail addresses of record designated by those individuals on the 13th day of April, 2026."
+  to:
+    - "To:"
+    - "Counsel for Plaintiff"
+    - "Richard A. Stefani"
+    - "Gray, Stefani, & Mitvalsky, P.L.C."
+    - "425 Second St., S.E., Suite 700"
+    - "P.O. Box 456"
+    - "Cedar Rapids, IA 52406-0456"
+    - "T: 319-364-1535"
+    - "rickstefani@gsmlawyers.com"
+  signed:
+    - "/s/ Sharon Skierkiewicz"
+    - "sskierkiewicz@heylroyster.com"
+    - "HEYL, ROYSTER, VOELKER & ALLEN"
+    - "33 N. Dearborn St., 7th Floor"
+    - "Chicago, IL 60602"
+    - "Telephone: 312.853.8700"
+    - "Primary E-service: chiecf@heylroyster.com"
+    - "Secondary E-service: kbayer@heylroyster.com"
+    - "Secondary E-service: lnolan@heylroyster.com"
+    - "Secondary E-service: lbuecker@heylroyster.com"
 ---
 
 NOW COMES Defendant, ALLYSON SCHWAB, by her attorneys, HEYL, ROYSTER, VOELKER & ALLEN, P.C., and for her Memorandum in Support of her Motion to Dismiss Pursuant to Federal Rule of Civil Procedure 12(b)(6) states as follows:
@@ -36,25 +59,25 @@ Additionally, Plaintiff failed to properly plead the damages required for defama
 
 # II. RELEVANT ALLEGATIONS
 
-<!--NUMBERED--> On December 31, 2025, Plaintiff filed his Complaint in which he admits wrestling videos he recorded and posted on his YouTube account of minor children were pirated and reposted on pornographic and inappropriate websites. Ct. Dkt. 1.
+1. On December 31, 2025, Plaintiff filed his Complaint in which he admits wrestling videos he recorded and posted on his YouTube account of minor children were pirated and reposted on pornographic and inappropriate websites. Ct. Dkt. 1.
 
-<!--NUMBERED--> The basis of Plaintiff's Complaint stems from four social media posts Defendant Schwab is alleged to have posted on her 'X' (formerly Twitter) account. Id.
+2. The basis of Plaintiff's Complaint stems from four social media posts Defendant Schwab is alleged to have posted on her 'X' (formerly Twitter) account. Id.
 
-<!--NUMBERED--> The first post, from December 30, 2023 states: [Image of the post; not in the text layer.] Id. at Exhibit A.
+3. The first post, from December 30, 2023 states: [Image of the post; not in the text layer.] Id. at Exhibit A.
 
-<!--NUMBERED--> The second social media post states, "This makes me sick and why I got this convo going. So many parents don't know their kids are on someone's YouTube." Id.
+4. The second social media post states, "This makes me sick and why I got this convo going. So many parents don't know their kids are on someone's YouTube." Id.
 
-<!--NUMBERED--> The third social media post states: [Image of the post; not in the text layer.] Id.
+5. The third social media post states: [Image of the post; not in the text layer.] Id.
 
-<!--NUMBERED--> The fourth social media post states: [Image of the post; not in the text layer.] Id.
+6. The fourth social media post states: [Image of the post; not in the text layer.] Id.
 
-<!--NUMBERED--> Additionally, in Plaintiff's Complaint, Plaintiff takes issue that Ms. Schwab allegedly expressed to someone else that he was her "hero" after Plaintiff was ejected from a youth wrestling match. Id. at Exhibit B.
+7. Additionally, in Plaintiff's Complaint, Plaintiff takes issue that Ms. Schwab allegedly expressed to someone else that he was her "hero" after Plaintiff was ejected from a youth wrestling match. Id. at Exhibit B.
 
-<!--NUMBERED--> Plaintiff interprets Defendant Schwab's statements as accusing him of posting videos with inappropriate intent, accusing him of allowing pornographic websites to embed his videos, posing a danger to minors, and engaging in conduct that warranted denial of credentials by schools and tournament directors. Ct. Dkt. 1 at 37.
+8. Plaintiff interprets Defendant Schwab's statements as accusing him of posting videos with inappropriate intent, accusing him of allowing pornographic websites to embed his videos, posing a danger to minors, and engaging in conduct that warranted denial of credentials by schools and tournament directors. Ct. Dkt. 1 at 37.
 
-<!--NUMBERED--> As a result of these statements, Plaintiff claims he has lost unspecified business opportunities, sponsorships, and revenue and suffers emotional distress, anxiety and anguish. Id. at 52 and 58.
+9. As a result of these statements, Plaintiff claims he has lost unspecified business opportunities, sponsorships, and revenue and suffers emotional distress, anxiety and anguish. Id. at 52 and 58.
 
-<!--NUMBERED--> In Plaintiff's Complaint, Plaintiff alleges Count I: Defamation Per Se, Count II: Defamation Per Quod, Count III: Invasion of Privacy by False Light, and Count IV: Intentional Infliction of Emotional Distress, and Count V: Tortious Interference with Prospective Business Relationships against Defendant Schwab. Id.
+10. In Plaintiff's Complaint, Plaintiff alleges Count I: Defamation Per Se, Count II: Defamation Per Quod, Count III: Invasion of Privacy by False Light, and Count IV: Intentional Infliction of Emotional Distress, and Count V: Tortious Interference with Prospective Business Relationships against Defendant Schwab. Id.
 
 # III. LEGAL STANDARD
 
@@ -104,7 +127,7 @@ She did not attribute the intent of Plaintiff in her posts and did not single ou
 
 ## b. Plaintiff's Counts of Defamation Per Se, Defamation Per Quod, and False Light must be dismissed because Defendant Schwab's post warning parents to be cognizant of where their children's videos were appearing online where those videos were appearing on pornographic and inappropriate websites was truthful.
 
-Defendant's Motion to Dismiss must be granted because the "sting" of the alleged defamation is substantially true. It is well established that truth is a complete defense to defamation. Delaney v. International Union UAW Local No. 94 of John Deere Manufacturing Company, 675 N.W.2d 832, 843 (Iowa 2004). It is not necessary for a defendant to establish "the literal truth of the publication in every detail as long as the 'sting' or the 'gist' of the defamatory charge is substantially true. Behr v. Meredith Corp., 414 N.W.2d 339, 342 (Iowa 1987). To determine the "gist" or "sting" Courts must look at "the highlight of the publication, the pertinent angle of it, and not to items of secondary importance which are inoffensive details, immaterial to the truth of the defamatory statement." Id. For example, Courts have found substantial truth where a newspaper article falsely reported Plaintiff was arrested on a warrant where in actuality Plaintiff was arrested and charged with harboring a suspected rapist of an elderly woman. Id. "If the underlying facts as to the gist or sting of the defamatory charge are undisputed, the court may determine substantial truth as a matter of law." Id.
+Defendant's Motion to Dismiss must be granted because the "sting" of the alleged defamation is substantially true. It is well established that truth is a complete defense to defamation. Delaney v. International Union UAW Local No. 94 of John Deere Manufacturing Company, 675 N.W.2d 832, 843 (Iowa 2004). It is not necessary for a defendant to establish “the literal truth of the publication in every detail as long as the 'sting' or the 'gist' of the defamatory charge is substantially true. Behr v. Meredith Corp., 414 N.W.2d 339, 342 (Iowa 1987). To determine the “gist” or “sting” Courts must look at “the highlight of the publication, the pertinent angle of it, and not to items of secondary importance which are inoffensive details, immaterial to the truth of the defamatory statement.” Id. For example, Courts have found substantial truth where a newspaper article falsely reported Plaintiff was arrested on a warrant where in actuality Plaintiff was arrested and charged with harboring a suspected rapist of an elderly woman. Id. "If the underlying facts as to the gist or sting of the defamatory charge are undisputed, the court may determine substantial truth as a matter of law." Id.
 
 Here, Defendant Schwab's statements are substantially true as a matter of law. While Plaintiff complains that he has lost business opportunities, sponsorships, and revenue as a result of Defendant's conduct, he sweeps under the rug that the videos he took and posted of minor children did appear on pornographic and inappropriate websites (even if through no intent of his own). Ms. Schwab's comments warning parents to check where their kids were posted (on pornographic and inappropriate websites) and commenting that minor children's wrestling videos should not have excessive views, is not untruthful. While Plaintiff contends he was "dismayed" when he learned some of the websites where his videos were posted contained pornographic or other offensive material, Plaintiff claims it is defamation when Defendant Schwab expresses the same concerns.
 
@@ -137,30 +160,3 @@ Further, any allegations stemming from Defendant Schwab's December 30, 2023 post
 As Defendant Schwab's statements are opinion statements regarding a matter of public concern, those statements are entitled to full constitutional protection. Further, Defendant Schwab's warning to parents to be aware of where their children are posted online was substantially true where those children were appearing on pornographic and other inappropriate websites. Additionally, Plaintiff has failed to properly plead the damages required for defamation per quod and tortious interference with a business relationship and has failed to plead facts to support the outrageous conduct required for claims of intentional infliction of emotional distress. Lastly, any claims stemming from the December 30, 2023 post are time barred. As such, Plaintiff's Complaint must be dismissed.
 
 WHEREFORE, Defendant Schwab respectfully requests the Court GRANT her Motion to Dismiss, enter an Order dismissing this matter with prejudice, and for any further relief the Court deems just and proper.
-
-<!--SIGNATURE-->
-
-# PROOF OF SERVICE
-
-The undersigned certifies that a copy of the foregoing instrument was filed via the CM/ECF System and served upon all counsel of record in the above cause by transmitting a copy to all primary and secondary e-mail addresses of record designated by those individuals on the 13th day of April, 2026.
-
-<!--SINGLE--> To:
-Counsel for Plaintiff
-Richard A. Stefani
-Gray, Stefani, & Mitvalsky, P.L.C.
-425 Second St., S.E., Suite 700
-P.O. Box 456
-Cedar Rapids, IA 52406-0456
-T: 319-364-1535
-rickstefani@gsmlawyers.com
-
-<!--SINGLE--> /s/ Sharon Skierkiewicz
-sskierkiewicz@heylroyster.com
-HEYL, ROYSTER, VOELKER & ALLEN
-33 N. Dearborn St., 7th Floor
-Chicago, IL 60602
-Telephone: 312.853.8700
-Primary E-service: chiecf@heylroyster.com
-Secondary E-service: kbayer@heylroyster.com
-Secondary E-service: lnolan@heylroyster.com
-Secondary E-service: lbuecker@heylroyster.com

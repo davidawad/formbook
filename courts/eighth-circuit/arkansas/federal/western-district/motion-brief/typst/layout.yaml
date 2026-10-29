@@ -1,0 +1,82 @@
+# U.S. District Court for the Western District of Arkansas (arwd): a brief in support of a motion (to dismiss), on the
+# generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with W.D. Ark.'s local rules overlaid here. The
+# shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by
+# `fb engines gen`). Rules: Local Rules of the U.S. District Courts for the Eastern and Western Districts of Arkansas,
+# https://www.arwd.uscourts.gov/local-rules (read 2026-10-14; ../README.md quotes them). The base already meets LR 5.5(a):
+# letter size, type not less than elite (12 pt), one side; LR 5.5 sets no margin, so the base's one inch stands. LR 7.2
+# sets no page limit.
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, as the court's own captions set it.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "WESTERN DISTRICT OF ARKANSAS"
+# LR 5.5(a): double space, on the exemplar's 27.6 pt pitch (2.3 x the type size; usage/SOURCE.md).
+pitch: {body: 27.6}
+# Pages numbered "Page n of N" at the foot, as the exemplar numbers them.
+page_number: {align: center, text: "Page {page} of {pages}"}
+# Block quotations single spaced, half an inch in on each side, a single line around them.
+quote: {left: 36, right: 36, above: 12, below: 12}
+# A section in bold capitals half an inch in (the exemplar), a sub-heading centered in bold, a point bold at the margin,
+# each a blank double line above and below (unnumbered: a filer types any number).
+heading:
+  - {left: 36, bold: true, upper: true, pitch: body, above: 27.6, below: 27.6}
+  - {align: center, bold: true, pitch: body, above: 27.6, below: 27.6}
+  - {bold: true, pitch: body, above: 27.6, below: 27.6}
+# FRCP 10(a): the court's name with the division, single spaced and centered; the caption: each party's names at the
+# left with its designation at the right of the first line, "v." and the case number on the row between the parties;
+# the paper's title centered in bold (FRCP 7(b)(2)), a blank double line above it.
+front:
+  - {text: "{xd.court}", align: center}
+  - {text: "{xd.district}", align: center}
+  - {text: "{division}", align: center, upper: true, optional: true}
+  - each: caption.parties
+    blocks:
+      - columns:
+          - {width: 259.2, blocks: [{text: "{names}"}]}
+          - blocks: [{text: "{designation}", align: right}]
+        gutter: 14.4
+    between:
+      - columns:
+          - {width: 259.2, blocks: [{text: "v."}]}
+          - blocks: [{text: "{case_label|CASE NO.} {case_number}"}]
+        gutter: 14.4
+        above: 13.8
+        below: 13.8
+    above: 27.6
+  - {text: "{brief_title}", align: center, bold: true, above: 27.6, below: 19.8}
+# LR 5.5(c)(1), FRCP 11(a): signed by an attorney of record in the attorney's own name, with the address, telephone
+# number and Arkansas bar number: the date at the left when the filer gives one; at the right "Respectfully
+# submitted,", the party or firm, "By: /s/" the signer and the signer's lines; kept whole with the body's last paragraph.
+closing:
+  - group:
+      - columns:
+          - width: 187.2
+            blocks:
+              - {text: "Dated: {signature.date}", optional: true}
+          - blocks:
+              - {text: "Respectfully submitted,"}
+              - {text: "{signature.firm}", above: 12}
+              - {text: "By: /s/ {signature.signer}", above: 12}
+              - {text: "{signature.lines}"}
+        gutter: 14.4
+    above: 19.8
+# FRCP 5(b)(2)(C), 5(d)(1)(B): a party served by mail (a pro se plaintiff) needs a certificate of service: the heading,
+# the filer's sentence half an inch in at the body pitch, the party served half an inch in, the signer at the right;
+# never split.
+after_tail:
+  - when: service
+    blocks:
+      - group:
+          - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, pitch: body}
+          - {text: "{service.text}", pitch: body, indent: 36}
+          - each: service.served
+            blocks: [{text: "{.}", left: 36}]
+            above: 12
+          - columns:
+              - {width: 187.2, blocks: []}
+              - blocks:
+                  - {text: "/s/ {signature.signer}"}
+                  - {text: "{signature.signer}"}
+            gutter: 14.4
+            above: 12
+        above: 27.6

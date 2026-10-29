@@ -1,0 +1,75 @@
+# U.S. District Court for the Northern District of Iowa (iand): a memorandum in support of a motion, on the generic FRCP
+# brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with N.D. Iowa's local rules overlaid here. The shared document
+# model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`). Rules:
+# N.D. Iowa Local Rules (revised August 1, 2020, effective December 1, 2020),
+# https://www.iand.uscourts.gov/sites/iand/files/Local%20Rules%208.1.2020%20edits.%20clean.pdf (read 2026-10-14;
+# ../README.md quotes them). The base already meets LR 10(a) (8 1/2 x 11 paper) and LR 10(b): double spaced (24 pt at
+# 12 pt), one side, a top margin of at least one inch, pages numbered at the bottom. LR 10 names no face or size: the
+# base's 12 pt stands. The 20-page limit of LR 7(h) (tables and signature not counted) is not machine-checked.
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a), LR 10(d): the court's name, with the division.
+constants:
+  court: "UNITED STATES DISTRICT COURT"
+  district: "NORTHERN DISTRICT OF IOWA"
+# LR 10(b): every page numbered at the bottom, the caption page too (its contents run on from it).
+page_number: {align: center}
+# Block quotations single spaced, half an inch in on each side, a single line below.
+quote: {left: 36, right: 36, above: 0, below: 12}
+# Headings single spaced with a single line above and below, as the exemplar sets its argument headings: a section
+# centered in bold capitals, an argument heading bold at the margin, a sub-heading italic; unnumbered (the filer types
+# the numbers, as the exemplar).
+heading:
+  - {align: center, bold: true, upper: true, above: 12, below: 12}
+  - {bold: true, above: 12, below: 12}
+  - {italic: true, above: 12, below: 12}
+# LR 10(d), FRCP 10(a): the district and division; the parties at the left (each party's names, its designation an
+# inch in, "v." half an inch in, a line apart), closed by a column of ")" as high as they are; at the right the case
+# number and the judges; under them the paper's designation centered in bold, as the exemplar sets it. The first page;
+# the contents follow on it.
+cover:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{division}", align: center, bold: true, upper: true, optional: true}
+  - columns:
+      - width: 223.2
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 72, above: 13.8}
+            between:
+              - {text: "v.", left: 36, above: 13.8, below: 13.8}
+      - {width: 21.6, repeat: ")"}
+      - blocks:
+          - {text: "{case_label|No.} {case_number}", left: 10.8}
+          - {text: "Judge: {judge}", optional: true, left: 10.8, above: 13.8}
+          - {text: "Magistrate Judge: {magistrate_judge}", optional: true, left: 10.8, above: 13.8}
+    above: 24
+  - {text: "{brief_title}", align: center, bold: true, left: 36, right: 36, above: 24}
+# The caption is the cover (above): nothing more above the body.
+front: []
+# LR 10(b)(4): a brief of more than 10 pages has a subject matter table of contents on its first page: the sections and
+# argument headings with their pages, a step in per level, under the caption (unless the sample sets `toc: false`).
+contents: {title: "TABLE OF CONTENTS", depth: 2, col: 36, hang: 18, step: 18, above: 24, break: false, when: toc, default: true}
+# LR 10(d), FRCP 11(a): the date at the margin when the filer gives one, then three inches in the party, the firm with
+# its address and service addresses, "/s/" and the signer with the signer's lines; kept whole with the last paragraph.
+closing:
+  - group:
+      - {text: "Dated: {date}", optional: true, pitch: body}
+      - columns:
+          - {width: 216, blocks: []}
+          - blocks:
+              - {text: "{signature.party}", optional: true}
+              - {text: "{signature.firm}", above: 12}
+              - {text: "/s/ {signature.signer}", above: 12}
+              - {text: "{signature.lines}", optional: true}
+    above: 24
+# FRCP 5(d)(1)(A): the proof of service, when the sample gives one: the heading, the filer's statement at the body
+# pitch, whom it went to and the signer, single spaced, a single line apart; the heading kept with the statement.
+after_tail:
+  - when: service
+    blocks:
+      - {text: "PROOF OF SERVICE", align: center, bold: true, pitch: body, keep: true, above: 24}
+      - {markdown: "{service.text}", pitch: body, indent: 36}
+      - {text: "{service.to}", below: 12}
+      - {text: "{service.signed}", above: 12}

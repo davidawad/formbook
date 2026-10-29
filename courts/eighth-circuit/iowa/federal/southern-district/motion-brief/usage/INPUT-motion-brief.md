@@ -1,7 +1,6 @@
 ---
 division: "Central Division"
 caption:
-  versus: "v."
   parties:
     - names: ["EYAL HANFLING, individually and on behalf of all others similarly situated,"]
       designation: "Plaintiff,"
@@ -13,47 +12,47 @@ oral_argument: true
 authorities:
   jones:
     kind: case
-    name: "Jones v. Bloomingdales.com, LLC"
+    name: "*Jones v. Bloomingdales.com, LLC*"
     cite: "124 F.4th 535 (8th Cir. 2024)"
   spokeo:
     kind: case
-    name: "Spokeo, Inc. v. Robins"
+    name: "*Spokeo, Inc. v. Robins*"
     cite: "578 U.S. 330 (2016)"
   transunion:
     kind: case
-    name: "TransUnion LLC v. Ramirez"
+    name: "*TransUnion LLC v. Ramirez*"
     cite: "594 U.S. 413 (2021)"
   zean:
     kind: case
-    name: "Zean v. Fairview Health Servs."
+    name: "*Zean v. Fairview Health Servs.*"
     cite: "858 F.3d 520 (8th Cir. 2017)"
   leveke:
     kind: case
-    name: "Leveke v. Hearst Props., Inc."
+    name: "*Leveke v. Hearst Props., Inc.*"
     cite: "764 F. Supp. 3d 817 (S.D. Iowa 2025)"
   butler:
     kind: case
-    name: "Butler v. U.S. Bancorp"
+    name: "*Butler v. U.S. Bancorp*"
     cite: "No. 24-CV-03700 (JMB/SGE), 2026 WL 883904 (D. Minn. Mar. 31, 2026)"
   whitby:
     kind: case
-    name: "Whitby v. Cerner Corp."
+    name: "*Whitby v. Cerner Corp.*"
     cite: "No. 25-04087-CV-C-BP, 2026 WL 1520742 (W.D. Mo. Apr. 13, 2026)"
   arndt:
     kind: case
-    name: "Arndt v. Gov't Emps. Ins. Co."
+    name: "*Arndt v. Gov't Emps. Ins. Co.*"
     cite: "750 F. Supp. 3d 518 (D. Md. 2024)"
   supervalu:
     kind: case
-    name: "In re SuperValu, Inc."
+    name: "*In re SuperValu, Inc.*"
     cite: "870 F.3d 763 (8th Cir. 2017)"
   adams:
     kind: case
-    name: "Adams v. PSP Grp., LLC"
+    name: "*Adams v. PSP Grp., LLC*"
     cite: "691 F. Supp. 3d 1031 (E.D. Mo. 2023)"
   koeppel:
     kind: case
-    name: "Koeppel v. Spiers"
+    name: "*Koeppel v. Spiers*"
     cite: "808 N.W.2d 177 (Iowa 2011)"
   wiretap:
     kind: statute
@@ -85,11 +84,11 @@ signature:
     - "ATTORNEYS FOR DEFENDANT GRINNELL COLLEGE"
 ---
 
-# Introduction
+# INTRODUCTION
 
 Plaintiff's claims are foreclosed in their entirety by controlling authority. The Eighth Circuit has held that plaintiffs raising Wiretap Act and other tort claims relating to ordinary web browsing activity, as alleged here, have not suffered an injury-in-fact and cannot establish standing. See [*Jones v. Bloomingdales.com, LLC*, 124 F.4th 535, 538–39 (8th Cir. 2024)](toa:jones). Nor does Plaintiff state a valid claim for relief. A well-developed body of Wiretap Act caselaw makes clear that website operators such as Grinnell may collect and/or share web-browsing information provided by a website visitor in the course of the communication constituting the web-browsing experience. Such allegations also fail to state a claim under New York statutory law or under the common law.
 
-# Factual Background
+# FACTUAL BACKGROUND
 
 Grinnell is a private, liberal arts college located in Grinnell, Iowa. (Compl. ¶ 2, ECF No. 1.) Grinnell operates a website, http://www.grinnell.edu/, where it provides information to the public about its educational mission and offerings. (Compl. ¶ 3.)[^allegations]
 
@@ -107,7 +106,7 @@ The Privacy Statement contains Grinnell College's Privacy Policy (the "Privacy P
 
 > Cookies: Unless you take steps to browse the internet anonymously, or opt out, Grinnell College, similar to most institutions and organizations on the internet, tracks web-browsing patterns to inform our understanding of how our website is being used. Generic information is collected through the use of "cookies," which are text files placed on your computer to evaluate usage patterns so that we can improve both content and distribution.
 
-# Argument
+# ARGUMENT
 
 ## Plaintiff does not possess Article III standing.
 
@@ -125,7 +124,7 @@ Consistent with *Jones*, courts routinely require a plaintiff allege the unautho
 
 Plaintiff alleges that he browsed Grinnell's website once and that Grinnell employed technology that collected data regarding his browsing activity on Grinnell's website. (Compl. ¶ 19.)
 
-# Conclusion
+# CONCLUSION
 
 For the reasons stated above, the Court should dismiss Plaintiff's Class Action Complaint, ECF No. 1.
 

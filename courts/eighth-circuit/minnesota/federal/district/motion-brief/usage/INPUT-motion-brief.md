@@ -1,12 +1,11 @@
 ---
 case_number: "0:26-cv-02415-JMB-SGE"
 caption:
-  - names:
-      - "Eli Adams, an individual, and Reyna Balboa, an individual,"
-    designation: "Plaintiffs and Counterclaim Defendants,"
-  - names:
-      - "Peter Innes, an individual,"
-    designation: "Defendant and Counterclaim Plaintiff."
+  parties:
+    - names: ["Eli Adams, an individual, and", "Reyna Balboa, an individual,"]
+      designation: "Plaintiffs and<br>Counterclaim Defendants,"
+    - names: ["Peter Innes, an individual,"]
+      designation: "Defendant and<br>Counterclaim Plaintiff."
 certificate_signer: "s/ Andrew S. Dosdall"
 brief_title: "Plaintiffs Eli Adams and Reyna Balboa’s Memorandum in Support of Motion for Partial Dismissal of Counterclaims"
 rule_line: "Fed. R. Civ. P. 12(b)(6)"

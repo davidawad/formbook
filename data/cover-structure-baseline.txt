@@ -50,9 +50,6 @@ courts/eighth-circuit/arkansas/federal/bankruptcy-western-district/motion-brief 
 courts/eighth-circuit/arkansas/federal/bankruptcy-western-district/motion-brief typst
 courts/eighth-circuit/arkansas/federal/eastern-district/complaint docx
 courts/eighth-circuit/arkansas/federal/eastern-district/complaint typst
-courts/eighth-circuit/arkansas/federal/eastern-district/motion-brief docx
-courts/eighth-circuit/arkansas/federal/western-district/motion-brief docx
-courts/eighth-circuit/arkansas/federal/western-district/motion-brief typst
 courts/eighth-circuit/arkansas/state/court-of-appeals/amicus-brief docx
 courts/eighth-circuit/arkansas/state/court-of-appeals/amicus-brief latex
 courts/eighth-circuit/arkansas/state/court-of-appeals/amicus-brief typst
@@ -107,12 +104,8 @@ courts/eighth-circuit/iowa/federal/bankruptcy-southern-district/adversary-compla
 courts/eighth-circuit/iowa/federal/bankruptcy-southern-district/adversary-complaint typst
 courts/eighth-circuit/iowa/federal/northern-district/complaint docx
 courts/eighth-circuit/iowa/federal/northern-district/complaint typst
-courts/eighth-circuit/iowa/federal/northern-district/motion-brief docx
-courts/eighth-circuit/iowa/federal/northern-district/motion-brief typst
 courts/eighth-circuit/iowa/federal/southern-district/complaint docx
 courts/eighth-circuit/iowa/federal/southern-district/complaint typst
-courts/eighth-circuit/iowa/federal/southern-district/motion-brief docx
-courts/eighth-circuit/iowa/federal/southern-district/motion-brief typst
 courts/eighth-circuit/iowa/state/court-of-appeals/amicus-brief docx
 courts/eighth-circuit/iowa/state/court-of-appeals/amicus-brief latex
 courts/eighth-circuit/iowa/state/court-of-appeals/amicus-brief typst

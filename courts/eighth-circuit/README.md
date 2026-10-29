@@ -9,14 +9,14 @@ Courts under `courts/eighth-circuit` (38).
 | [Court of Appeals for the Eighth Circuit](court-of-appeals) | `ca8` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court, E.D. Arkansas](arkansas/federal/bankruptcy-eastern-district) | `areb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Arkansas](arkansas/federal/bankruptcy-western-district) | `arwb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Eastern District of Arkansas](arkansas/federal/eastern-district) | `ared` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Western District of Arkansas](arkansas/federal/western-district) | `arwd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the Eastern District of Arkansas](arkansas/federal/eastern-district) | `ared` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [United States District Court for the Western District of Arkansas](arkansas/federal/western-district) | `arwd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Iowa](iowa/federal/bankruptcy-northern-district) | `ianb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. Iowa](iowa/federal/bankruptcy-southern-district) | `iasb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, N.D. Iowa](iowa/federal/northern-district) | `iand` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, S.D. Iowa](iowa/federal/southern-district) | `iasd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, N.D. Iowa](iowa/federal/northern-district) | `iand` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, S.D. Iowa](iowa/federal/southern-district) | `iasd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Minnesota](minnesota/federal/bankruptcy-district) | `mnb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. Minnesota](minnesota/federal/district) | `mnd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. Minnesota](minnesota/federal/district) | `mnd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. Missouri](missouri/federal/bankruptcy-eastern-district) | `moeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Missouri](missouri/federal/bankruptcy-western-district) | `mowb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, E.D. Missouri](missouri/federal/eastern-district) | `moed` | up for review | 2/2 | — | 2/2 | 14 |

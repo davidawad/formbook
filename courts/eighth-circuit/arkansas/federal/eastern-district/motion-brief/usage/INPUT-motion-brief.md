@@ -1,7 +1,5 @@
 ---
-word:
-  justify: true
-  shrink: 0.76
+case_label: "Case No.:"
 case_number: "4:26-CV-387-LPR"
 division: "CENTRAL DIVISION"
 caption:
@@ -19,7 +17,7 @@ signature:
 
 Defendant Ensurety Ventures, LLC respectfully moves the Court for an Order dismissing Plaintiff's Complaint with prejudice for failing to allege any facts that Defendant initiated more than one telephone call, which is necessary to maintain the sole alleged cause of action. In support thereof, Defendant states:
 
-# <!--unnumbered--> INTRODUCTION AND BACKGROUND
+# INTRODUCTION AND BACKGROUND
 
 Plaintiff Mary Ann Campbell ("Plaintiff") brings this action under the Telephone Consumer Protection Act ("TCPA"), 47 U.S.C. § 227, against "Defendant Ensurety Ventures LLC d/b/a Omega Auto Care" ("Ensurety"), based on three telephone calls that Plaintiff alleges to have received from Ensurety. Specifically, Plaintiff's single cause of action, alleging telephone solicitations to a phone number on the Federal Do Not Call Registry, is predicated on the receipt of more than one offending phone call in a twelve-month period. 47 U.S.C. § 227(c)(5). The Complaint is devoid of any factual allegations to attribute any of the three alleged calls to Ensurety, let alone the multiple calls necessary to maintain this action.
 
@@ -29,7 +27,7 @@ While factual allegations surrounding the third call actually pay lip service to
 
 Accordingly, Plaintiff's Complaint is subject to dismissal for failure to state a claim pursuant to Fed. R. Civ. Pro. 12(b)(6).
 
-# RELEVANT PLED FACTS
+# I. RELEVANT PLED FACTS
 
 Plaintiff's single cause of action is predicated on three phone calls that she allegedly received between August 26 and September 15, 2025. (Compl., ¶¶ 22-34.) Aside from the conclusory allegation that she "received multiple telemarketing calls from Defendant promotion automobile warranty services in 2025," (*id.* ¶ 21) – which this Court must disregard – Plaintiff pleads no *facts* that show any commonality between the calls or any basis to demonstrate that more than one call, *if any*, should be attributed to Ensurety:
 
@@ -44,13 +42,13 @@ Plaintiff's single cause of action is predicated on three phone calls that she a
 
 As reflected above, the first two calls appear to have some factual similarities, including identifying a 2016 Nissan Maxima and the same originating phone number. The Complaint is devoid of any factual allegation to tie the first two calls to Ensurety. Moreover, although the Third Call stated that the product discussed was offered by "Omega Auto Care," there is no common factor with the first two calls – it involved a separate originating phone number, did not identify the Nissan Maxima, and did not provide a quote. Therefore, even if this Court finds that the caller identifying "Omega Auto Care" as the provider of the product sufficient to attribute the Third Call to Ensurety, a single call is insufficient as a matter of law to support Plaintiff's TCPA claim. Therefore, Ensurety respectfully submits that Plaintiff's Complaint is subject to dismissal.
 
-# STANDARD OF REVIEW
+# II. STANDARD OF REVIEW
 
 "To survive a motion to dismiss, a complaint must contain sufficient factual matter, accepted as true, to state a claim to relief that is plausible on its face." *Ashcroft v. Iqbal*, 556 U.S. 662, 678 (2009) (internal quotation marks omitted). Plausibility requires "more than a sheer possibility that a defendant has acted unlawfully." *Id.* "[A] plaintiff's obligation to provide the 'grounds' of his 'entitle[ment] to relief' requires more than labels and conclusions, and a formulaic recitation of the elements of a cause of action will not do." *Id.*
 
 "Threadbare recitals of the elements of a cause of action, supported by mere conclusory statements, do not suffice." *Iqbal* 556 U.S. 662 at 678. While a court must accept as true all well-pleaded facts, the same does not hold true for "[m]ere conclusory statements and factual allegations lacking enough specificity to raise a right to relief above the speculative level", which "are insufficient to support a reasonable inference that the defendant is liable." *Richardson v. BNSF Ry. Co.*, 2 F.4th 1063, 1068 (8th Cir. 2021).
 
-# LAW AND ARGUMENT
+# III. LAW AND ARGUMENT
 
 ## Plaintiff's DNC Registry Claim Requires the Existence of More than One Violating Phone Call in a Twelve-Month Period.
 
@@ -76,6 +74,6 @@ As such, the Complaint, at best, only alleges a potential commercial relationshi
 
 Even if this Court found that the mere mention of "Omega Auto Care" during the Third Call is enough to plausibly allege that Ensurety initiated the Third Call, or is vicariously liable for whomever initiated the call, this single call does not rise to the legally cognizable injury identified in 47 U.S.C. 227(c)(5). Unless Plaintiff has plausibly alleged that *multiple* calls originated from Ensurety which violated the law, Plaintiff has not stated a claim for relief under Section 227(c)(5). As Plaintiff may have at best alleged a single call of this nature, Plaintiff's Complaint does not allege the harm addressed by Section 227(c)(5) and should be dismissed for failure to state a claim.
 
-# <!--unnumbered--> CONCLUSION
+# CONCLUSION
 
 For the foregoing reasons, Plaintiff's Complaint fails to state any plausible claim for relief against Ensurety. Accordingly, Ensurety respectfully requests that the Court grant this Motion to Dismiss and enter an order dismissing Plaintiff's Complaint with prejudice.
