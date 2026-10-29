@@ -2655,9 +2655,13 @@ fn a_note_mark_is_attached_and_an_apostrophe_after_emphasis_is_closing() {
 /// fifth-circuit motion briefs' body paragraphs) starts on the page of its mark: when the mark's line and the note do
 /// not both fit, both move on (typst kept the note on the page the line was first laid on: lawb motion-brief note 7
 /// on page 4, its mark on page 5; lib/typst/xengine.typ unwrap-note-par, fb-595.54.11.1). The paragraph is set at
-/// each offset of a line's height down a page of its own, so some trial puts the mark's line at the foot of a page.
+/// offsets down a page of its own (one point apart) where the mark's line meets the foot of the page.
+/// (A note too long for the rest of its mark's page may still follow on the next page, as before.)
 #[test]
 fn a_note_never_starts_on_a_page_before_its_mark() {
+    let abc = "aaa bbb ccc ddd eee fff ggg hhh iii jjj kkk lll mmm nnn ooo ppp qqq rrr sss ttt uuu vvv www xxx yyy zzz";
+    let (to_t, from_u) = abc.split_at(abc.find(" uuu").unwrap());
+    let para = format!("A{} {to_t}#footnote[Note C.]{from_u} {abc} {abc} {abc}", &abc[1..]);
     if !have(&["typst"]) {
         return;
     }
@@ -2665,7 +2669,6 @@ fn a_note_never_starts_on_a_page_before_its_mark() {
     let dir = root.join("tools/fb/target/model-tests/note-before-mark");
     let _ = std::fs::remove_dir_all(&dir);
     std::fs::create_dir_all(&dir).unwrap();
-    let words = "aaa bbb ccc ddd eee fff ggg hhh iii jjj kkk lll mmm nnn ooo ppp qqq rrr sss ttt uuu vvv www xxx yyy zzz ";
     let main = format!(
         r#"#import "/lib/typst/xengine.typ": xengine, edges
 #set page(paper: "us-letter", margin: 1in)
@@ -2675,17 +2678,20 @@ fn a_note_never_starts_on_a_page_before_its_mark() {
 #set footnote.entry(gap: 6pt, clearance: 8pt, indent: 0pt)
 #show footnote.entry: it => {{
   set text(..edges(14pt))
+  set par(first-line-indent: 0pt)
   context [#metadata((mark: it.note.location().page(), entry: here().page()))<entry>]
   it
 }}
-#for n in range(540, 600, step: 1) {{
+#for n in range(568, 580) {{
   pagebreak(weak: true)
+  context [#metadata(here().page())<start>]
   v(n * 1pt)
-  block(width: 100%, above: 0pt, below: 0pt, par[#context [#metadata(here().page())<start>]{a}{a}{a}#footnote[A note.] {a}{a}{a}{a}])
-  lorem(60)
+  block(width: 100%, above: 0pt, below: 0pt, par[{p}])
+  parbreak()
+  lorem(40)
 }}
 "#,
-        a = words
+        p = para
     );
     std::fs::write(dir.join("main.typ"), main).unwrap();
     let query = |sel: &str| {
@@ -2706,7 +2712,7 @@ fn a_note_never_starts_on_a_page_before_its_mark() {
     let starts = query("<start>");
     assert_eq!(entries.len(), starts.len());
     for e in &entries {
-        assert_eq!(e["mark"], e["entry"], "a note starts on another page than its mark: {e}");
+        assert!(e["entry"].as_i64() >= e["mark"].as_i64(), "a note starts on a page before its mark: {e}");
     }
     // the fixture moves some mark's line (and its note) to the page after its paragraph's first line
     assert!(

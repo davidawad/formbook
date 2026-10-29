@@ -46,12 +46,15 @@
   false
 }
 
-// A note never starts on a page before its mark. A footnote in a paragraph a template wraps in a breakable block
-// cannot take its line on with it: when the line and its note do not both fit, typst keeps the note where the line
-// was first laid and moves the line on alone (fb-595.54.11.1). A bare paragraph moves its line and the note together,
-// as LaTeX and Word do; so a block that only wraps such a paragraph (no size, box, fill, stroke, keep or label of its
-// own, its spacing the paragraph spacing) is laid out as the bare paragraph: the same lines and spacing, its first
-// line indented as the first paragraph of a block is (only with `all: true`).
+// A note never starts on a page before its mark (fb-595.54.11.1). A footnote in a paragraph a template wraps in a
+// breakable block cannot take its line on with it: when the line and its note do not both fit, typst may keep the
+// note where the line was first laid and move the line on alone (lawb motion-brief: note 7 on page 4, its mark on
+// page 5). A bare paragraph moves the line and its note on together, as LaTeX and Word do. So a block that only wraps
+// a paragraph (no size, box, fill, stroke, keep or label of its own, its spacing the paragraph spacing) is laid out
+// as the bare paragraph, with the same lines and spacing and its first line indented as the first paragraph of a
+// block is (only with `all: true`), once one of its notes started on a page before its mark: on the next layout
+// pass, and from then on (<xe-bare> holds it, so the layout converges). A block whose notes all start on their marks'
+// pages is laid out as before (a note too long for the rest of its mark's page then follows on the next page).
 #let unwrap-note-par(it) = {
   let b = it.body
   if type(b) != content or b.func() != par or not has-note(b.body) or it.has("label") { return it }
@@ -59,13 +62,24 @@
   if not (f.breakable and f.height == auto and f.width in (auto, 100%) and f.fill == none and not f.clip
     and not f.sticky and (f.stroke, f.inset, f.outset) == ((:), (:), (:))) { return it }
   context {
+    let me = here()
     let s = par.spacing.to-absolute()
-    if f.above.to-absolute() != s or f.below.to-absolute() != s { return it }
-    let pf = b.fields()
-    let body = pf.remove("body")
-    let fi = pf.at("first-line-indent", default: par.first-line-indent)
-    if type(fi) != dictionary { fi = (amount: fi, all: false) }
-    par(..pf, first-line-indent: (amount: if fi.at("all", default: false) { fi.amount } else { 0pt }, all: true), body)
+    let bare = if f.above.to-absolute() != s or f.below.to-absolute() != s { false }
+      else if query(<xe-bare>).any(m => m.value == me) { true } else {
+      let end = query(<xe-np-end>).filter(m => m.value == me)
+      let notes = if end.len() == 0 { () } else { query(selector(footnote).after(me).before(end.first().location())) }
+      let marks = notes.map(n => n.location())
+      query(footnote.entry).any(e => e.note.location() in marks and e.location().page() < e.note.location().page())
+    }
+    if bare {
+      let pf = b.fields()
+      let body = pf.remove("body")
+      let fi = pf.at("first-line-indent", default: par.first-line-indent)
+      if type(fi) != dictionary { fi = (amount: fi, all: false) }
+      [#metadata(me)<xe-bare>]
+      par(..pf, first-line-indent: (amount: if fi.at("all", default: false) { fi.amount } else { 0pt }, all: true), body)
+    } else { it }
+    [#metadata(me)<xe-np-end>]
   }
 }
 
