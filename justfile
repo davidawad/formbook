@@ -68,6 +68,10 @@ lint:
 lint-metadata sample:
     {{fb}} lint metadata "{{sample}}"
 
+# rules.md freshness: one line per courts/**/rules.md, FRESH|DUE|UNDATED (docs/RULES-RESEARCH.md); ARGS: --today D --max-age N
+rules-fresh *ARGS:
+    {{fb}} lint rules --fresh {{ARGS}}
+
 # regenerate data/worklist.json; ARGS: --stdout | --check (fb worklist)
 worklist *ARGS:
     {{fb}} worklist {{ARGS}}

@@ -143,6 +143,7 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         [a] if a == "paths" => return paths::main(),
         [a] if a == "pipefail" => return pipefail::main(),
         [a] if a == "rules" => return rules::main(),
+        [a, b, rest @ ..] if a == "rules" && b == "--fresh" => return rules::fresh_main(rest),
         [a, files @ ..] if a == "docx" => return docx::main(files),
         [a, path] if a == "metadata" => return metadata::main(Path::new(path)),
         _ => {}

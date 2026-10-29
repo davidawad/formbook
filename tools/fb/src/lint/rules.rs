@@ -7,6 +7,8 @@
 //!   - a line `Verified against <what> on YYYY-MM-DD`.
 //!
 //! Output: `LINT rules <path>:<line>: <detail>`; exit 1 on findings.
+//!
+//! `fb lint rules --fresh`: a freshness report, not part of `just lint` (see `fresh_main`).
 use crate::{repo_root, Res};
 use std::collections::HashMap;
 use std::path::{Path, PathBuf};
@@ -204,6 +206,174 @@ pub fn main() -> Res<ExitCode> {
     }
 }
 
+/// Days since 1970-01-01 of a `YYYY-MM-DD` date (H. Hinnant's days_from_civil).
+fn day_number(s: &str) -> Option<i64> {
+    if !is_date(s) {
+        return None;
+    }
+    let (y, m, d): (i64, i64, i64) = (
+        s[..4].parse().ok()?,
+        s[5..7].parse().ok()?,
+        s[8..].parse().ok()?,
+    );
+    if !(1..=12).contains(&m) || !(1..=31).contains(&d) {
+        return None;
+    }
+    let y = if m <= 2 { y - 1 } else { y };
+    let era = y.div_euclid(400);
+    let yoe = y - era * 400;
+    let doy = (153 * (m + if m > 2 { -3 } else { 9 }) + 2) / 5 + d - 1;
+    let doe = yoe * 365 + yoe / 4 - yoe / 100 + doy;
+    Some(era * 146097 + doe - 719468)
+}
+
+/// `YYYY-MM-DD` of a day number (H. Hinnant's civil_from_days).
+fn civil(z: i64) -> String {
+    let z = z + 719468;
+    let era = z.div_euclid(146097);
+    let doe = z - era * 146097;
+    let yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;
+    let doy = doe - (365 * yoe + yoe / 4 - yoe / 100);
+    let mp = (5 * doy + 2) / 153;
+    let d = doy - (153 * mp + 2) / 5 + 1;
+    let m = if mp < 10 { mp + 3 } else { mp - 9 };
+    let y = yoe + era * 400 + i64::from(m <= 2);
+    format!("{y:04}-{m:02}-{d:02}")
+}
+
+/// Every `YYYY-MM-DD` date in `s` after `key`.
+fn dates_after<'a>(s: &'a str, key: &str) -> Vec<&'a str> {
+    let Some(at) = s.find(key) else {
+        return Vec::new();
+    };
+    let rest = &s[at..];
+    (0..rest.len().saturating_sub(9))
+        .filter_map(|i| rest.get(i..i + 10))
+        .filter(|d| is_date(d))
+        .collect()
+}
+
+/// The freshness of one rules.md: the latest `Verified against ... on` date, whether a re-check cadence is
+/// recorded (a line naming `Re-check`/`Recheck`), and the due date: the file's own `next routine review by
+/// <date>` when it states one, else the verified date plus `max_age` days.
+#[derive(Debug, PartialEq)]
+pub struct Freshness {
+    pub verified: Option<String>,
+    pub cadence: bool,
+    pub due: Option<String>,
+}
+
+pub fn freshness(text: &str, max_age: i64) -> Freshness {
+    let verified = text
+        .lines()
+        .filter(|l| verified_line(l))
+        .flat_map(|l| {
+            let at = l.find("Verified against ").unwrap_or(0);
+            let rest = &l[at..];
+            rest.match_indices(" on ")
+                .filter_map(|(i, _)| rest.get(i + 4..i + 14).filter(|d| is_date(d)))
+                .collect::<Vec<_>>()
+        })
+        .max()
+        .map(str::to_string);
+    let lower = text.to_lowercase();
+    let cadence = lower.contains("re-check") || lower.contains("recheck");
+    let stated = dates_after(&lower, "next routine review by")
+        .into_iter()
+        .next();
+    let due = match stated {
+        Some(d) => Some(d.to_string()),
+        None => verified
+            .as_deref()
+            .and_then(day_number)
+            .map(|v| civil(v + max_age)),
+    };
+    Freshness {
+        verified,
+        cadence,
+        due,
+    }
+}
+
+fn today() -> i64 {
+    let secs = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map(|d| d.as_secs() as i64)
+        .unwrap_or(0);
+    secs.div_euclid(86400)
+}
+
+/// `fb lint rules --fresh [--today YYYY-MM-DD] [--max-age DAYS]`: one line per `courts/**/rules.md`,
+/// `FRESH`, `DUE` (today is on or past the due date) or `UNDATED` (no Verified against date), with
+/// `no-cadence` when the file records no re-check cadence. Exit 1 when any file is DUE or UNDATED.
+pub fn fresh_main(args: &[String]) -> Res<ExitCode> {
+    let (mut now, mut max_age) = (today(), 365i64);
+    let mut it = args.iter();
+    while let Some(a) = it.next() {
+        let v = it.next().map(String::as_str).unwrap_or("");
+        match a.as_str() {
+            "--today" => {
+                now = day_number(v).ok_or_else(|| {
+                    crate::fail(2, format!("fb lint rules: --today `{v}` is not YYYY-MM-DD"))
+                })?
+            }
+            "--max-age" => {
+                max_age = v.parse().map_err(|_| {
+                    crate::fail(
+                        2,
+                        format!("fb lint rules: --max-age `{v}` is not a number of days"),
+                    )
+                })?
+            }
+            _ => {
+                return Err(crate::fail(
+                    2,
+                    "usage: fb lint rules [--fresh [--today YYYY-MM-DD] [--max-age DAYS]]",
+                ))
+            }
+        }
+    }
+    let root = repo_root()?;
+    let mut files = Vec::new();
+    rules_files(&root.join("courts"), &mut files);
+    let (mut due_n, mut undated, mut no_cadence) = (0usize, 0usize, 0usize);
+    for p in &files {
+        let name = p.strip_prefix(&root).unwrap_or(p).display().to_string();
+        let f = freshness(&std::fs::read_to_string(p).unwrap_or_default(), max_age);
+        let state = match f.due.as_deref().and_then(day_number) {
+            None => {
+                undated += 1;
+                "UNDATED"
+            }
+            Some(d) if now >= d => {
+                due_n += 1;
+                "DUE"
+            }
+            Some(_) => "FRESH",
+        };
+        if !f.cadence {
+            no_cadence += 1;
+        }
+        println!(
+            "RULES {name} verified {} due {} {state}{}",
+            f.verified.as_deref().unwrap_or("-"),
+            f.due.as_deref().unwrap_or("-"),
+            if f.cadence { "" } else { " no-cadence" }
+        );
+    }
+    println!(
+        "RESULT: RULES FRESHNESS {} ({} files, as of {}: {due_n} due, {undated} undated, {no_cadence} without a re-check cadence)",
+        if due_n + undated == 0 { "PASS" } else { "FAIL" },
+        files.len(),
+        civil(now)
+    );
+    Ok(if due_n + undated == 0 {
+        ExitCode::SUCCESS
+    } else {
+        ExitCode::from(1)
+    })
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -255,5 +425,39 @@ mod tests {
         assert!(check_text("r.md", &m_no_src)[0].contains("non-empty source"));
         let no_tbl = "# T\n\nVerified against x on 2026-01-01.\n\n## Sources\n\n| a | b |\n|--|--|\n| x | http://y |\n";
         assert!(check_text("r.md", no_tbl)[0].contains("no requirement table"));
+    }
+
+    #[test]
+    fn dates_round_trip() {
+        for d in ["1970-01-01", "2000-02-29", "2026-10-20", "2027-12-31"] {
+            assert_eq!(civil(day_number(d).unwrap()), d);
+        }
+        assert_eq!(day_number("2026-13-01"), None);
+        assert_eq!(day_number("2026-1-01"), None);
+    }
+
+    #[test]
+    fn freshness_reads_verified_cadence_and_due() {
+        let f = freshness(GOOD, 365);
+        assert_eq!(
+            f,
+            Freshness {
+                verified: Some("2026-10-17".into()),
+                cadence: false,
+                due: Some("2027-10-17".into()),
+            }
+        );
+        let stated = GOOD.replace(
+            "2026-10-17.\n",
+            "2026-10-17.\nRe-check cadence: annually (next routine review by 2027-06-01).\n",
+        );
+        let f = freshness(&stated, 365);
+        assert!(f.cadence);
+        assert_eq!(f.due.as_deref(), Some("2027-06-01"));
+        let two = format!(
+            "{GOOD}\nVerified against FRAP on 2025-01-01 and the circuit rules on 2026-11-02.\n"
+        );
+        assert_eq!(freshness(&two, 30).verified.as_deref(), Some("2026-11-02"));
+        assert_eq!(freshness("# no date\n", 365).due, None);
     }
 }

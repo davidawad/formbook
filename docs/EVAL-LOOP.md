@@ -153,12 +153,12 @@ All gates green on every sample, for an engine, writes that engine's stamp. A co
 - **R6. The checker is tested.** `tools/check-selftest.sh <court-dir>` makes one deliberate break at a time (drop a paragraph, strip italics, alter a footnote, single-space the body, shrink the type, narrow the margins, left-align headings, swap the font, miscount the words, mislabel an Argument heading, shift a TOA page) and requires the named check to fail. Run it after changing any check. A check that cannot fail is not a check.
 - **R7. Log the loop.** Each iteration (what failed, what changed) is one short entry in the court's `LOG.md`.
 - **R8. Stable IDs.** `CA9-...` IDs are never renumbered. Withdraw one by marking it `(withdrawn)` in `rules.md`.
-- **R9. Primary sources.** Every requirement cites the rule text and URL it came from, with the date it was verified, and says whether it is mandated or conventional.
+- **R9. Primary sources.** Every requirement cites the rule text and URL it came from, with the date it was verified, and says whether it is mandated or conventional. It also records a re-check cadence; `just rules-fresh` lists the files due ([RULES-RESEARCH.md](RULES-RESEARCH.md), which has the fan-out prompt for research).
 
 ## Adding a court
 
 0. Claim the court (`just claim --next`, `--random` or an alias; see AGENTS.md) so no other agent works it.
-1. `rules.md`: research the current rules from primary sources; number every requirement with a stable ID; mark each M/C/T/A, and group them by tier (tier 1 = the `M` ones). For tier-2 choices, record whether each is a convention (seen across filers) or one filer's style. Note where the court's local rules override the national ones (ca9 does: no disclosure statement in the brief, 14,000 words).
+1. `rules.md` (prompt and format: [RULES-RESEARCH.md](RULES-RESEARCH.md)): research the current rules from primary sources; number every requirement with a stable ID; mark each M/C/T/A, and group them by tier (tier 1 = the `M` ones). For tier-2 choices, record whether each is a convention (seen across filers) or one filer's style. Note where the court's local rules override the national ones (ca9 does: no disclosure statement in the brief, 14,000 words).
 1a. Exemplars: collect 2 or 3 public filings from **different filers** into `usage/FILED-EXAMPLE-<doctype>[-<n>].pdf` and record each file's source URL (and filer, case, date) in `usage/SOURCE.md`.
 2. `checks.yaml`: one entry per mechanically checkable ID. Reuse the methods in `tools/check/lib.sh`; add a method (one shell function, one `method:` name) only for something new.
 3. Typst template in `typst/` (entry point `main.typ`), consuming markdown with a YAML frontmatter contract documented in the court's README. Then the latex template in `latex/` and the docx template in `docx/` (see Engines above).
@@ -1518,7 +1518,7 @@ The three REPORTED pairs carry `params.cross_engine_<engine>: report` with the r
 | `tools/check.sh <court-dir> [--engine E] [--no-render] [--only ID]` | Gates 0 to 3 as far as they can be mechanical, on that engine's PDF. Exit 0 only if every check passes; writes/removes `usage/.check-<engine>.txt`. |
 | `tools/overlay.sh <doc-dir> <id> [FILED-EXAMPLE.pdf]` | Red/blue overlay of `OUTPUT-<id>.typst.pdf` on `FILED-EXAMPLE-<id>.pdf`, into the gitignored `.overlay/`. A diagnostic (tier 3), not a score. |
 | `tools/calibrate.sh [--engine E] [--no-render] [dir]` | The word-compat calibration run over `data/calibration-set.json`: G0, G2, identical and same-start line breaks, word positions (`fb diff --content`, `fb diff --breaks`). |
-| `justfile` | `just render\|overlay\|check\|diff <doc-dir>`, `just render-all\|overlay-all\|check-all`, `just lint` (`fb lint fonts`, `fb lint paths`, `fb lint rules`). Straight pipelines into `fb` and the scripts above. |
+| `justfile` | `just render\|overlay\|check\|diff <doc-dir>`, `just render-all\|overlay-all\|check-all`, `just lint` (`fb lint fonts`, `fb lint paths`, `fb lint rules`). `just rules-fresh` (`fb lint rules --fresh`): which `rules.md` are due for a re-check. Straight pipelines into `fb` and the scripts above. |
 | `fb usage doctype\|dir\|inputs\|examples\|pairs\|input\|example\|pair\|output\|overlay <doc-dir> ...` | Prints the `usage/` and `.overlay/` names of a doc folder, so no script parses file names. |
 | `fb engines families [--threshold T] [--json FILE]`, `fb engines gen <doc-dir>... [--check]` | The state templates clustered into families; the latex and docx engines of a folder on the shared document model, written (or checked) from its `typst/layout.yaml` and face ("Generated engines" above). |
 | `tools/check-selftest.sh <court-dir>` | Mutation test of the checker. |
