@@ -1,0 +1,82 @@
+# U.S. District Court for the Northern District of Georgia (gand): a motion with its supporting memorandum of law (LR
+# 7.1(A)(1)), on the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with N.D. Ga.'s local rules
+# overlaid here. The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged
+# layout by `fb engines gen`). Rules: N.D. Ga. Local Rules (../README.md, GAND-FORM-001..007, GAND-LIM-001,
+# GAND-CERT-001, which quote and cite them). The base already meets LR 5.1(D) (margins at least one inch) and 5.1(E)
+# (pages numbered consecutively at the bottom center). The 25-page limit of LR 7.1(D) is checked on the render
+# (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# LR 5.1(C) (GAND-FORM-001): Times New Roman at least 14 point, footnotes and quotations too.
+size: 14
+# LR 5.1(C) (GAND-FORM-002): double-spaced, 32.2 pt, twice the 16.1 pt single line of 14 pt type (the exemplar's
+# pitch); footnotes, headings and indented citations single-spaced.
+pitch: {body: 32.2, single: 16.1}
+footnote: {size: 14, gap: 7, clearance: 12.6}
+# LR 5.1(C): an indented quotation single-spaced, half an inch in on each side, a single line above and below.
+quote: {left: 36, right: 36, above: 16.1, below: 16.1}
+# Headings single-spaced (LR 5.1(C)), bold, a single line above and below: a section centered in capitals; a point at
+# the margin, its letter typed in the sample.
+heading:
+  - {align: center, bold: true, upper: true, above: 16.1, below: 16.1}
+  - {bold: true, above: 16.1, below: 16.1}
+  - {bold: true, italic: true, above: 16.1, below: 16.1}
+# FRCP 10(a): the court's name in the form of exemplars 2 and 3 (two filers), then the division.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE NORTHERN DISTRICT OF GEORGIA"
+# FRCP 10(a), LR 5.1(J), (K) (GAND-FORM-006, -007): the court's name and the division bold and centered; the parties
+# at the left (each party's names, its designation half an inch in, "v." between them, a blank line between each,
+# as exemplars 1 and 2 of two filers), a ")" beside every line, the case number with the judge's suffix at the right,
+# centered on the parties' height; the title of the paper bold and centered in capitals.
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{division} DIVISION", align: center, bold: true, upper: true}
+  - columns:
+      - width: 230.4
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 36, above: 16.1}
+            between:
+              - {text: "v.", above: 16.1, below: 16.1}
+      - {width: 25.2, repeat: ")"}
+      - valign: center
+        blocks:
+          - {text: "{case_label|Civil Action No.} {case_number}"}
+    above: 16.1
+  - {text: "{title}", align: center, bold: true, upper: true, above: 16.1, below: 16.1}
+# FRCP 11(a), LR 5.1(G) (GAND-FORM-005): "Respectfully submitted," at the margin; a double line below it, 2.7 inches
+# in, the "s/" signature, each attorney's name and Georgia Bar number, the office, its address and telephone, each
+# attorney's e-mail and whom they represent; kept whole and with the last paragraph.
+closing:
+  - group:
+      - {text: "Respectfully submitted,"}
+      - {text: "s/ {signature.signer}", left: 194.4, above: 32.2}
+      - each: signature.attorneys
+        blocks:
+          - {text: "{name}, Georgia Bar No. {bar}", left: 194.4}
+      - {text: "{signature.firm}", left: 194.4, above: 4}
+      - {text: "{signature.address}", left: 194.4}
+      - {text: "Telephone: {signature.phone}", left: 194.4}
+      - each: signature.attorneys
+        blocks:
+          - {text: "{email}", left: 194.4}
+      - {text: "{signature.role}", left: 194.4, above: 4}
+    above: 32.2
+# LR 7.1(D) (GAND-CERT-001): at the end of the brief, counsel certifies the font and point size of LR 5.1(C), the face
+# and size this layout sets; then the certificate of service through CM/ECF (FRCP 5(b)), dated from the sample. Each
+# certificate's title centered and bold, its text double-spaced, the "s/" line at the right; each kept on one page.
+after_tail:
+  - group:
+      - {text: "CERTIFICATE PURSUANT TO LOCAL RULE 7.1(D)", heading: 1}
+      - {text: "I certify that the foregoing brief conforms to the requirements of LR 5.1(C). The brief is prepared in 14-point Times New Roman font.", pitch: body, indent: 36}
+      - {text: "s/ {signature.signer}", align: right, above: 32.2}
+    above: 32.2
+  - group:
+      - {text: "CERTIFICATE OF SERVICE", heading: 1}
+      - {text: "I certify that I have this day served the foregoing pleading with the Clerk of Court using the CM/ECF system which will automatically send email notification of such filing to all counsel of record.", pitch: body, indent: 36}
+      - {text: "This {service_text}.", pitch: body, indent: 36}
+      - {text: "s/ {signature.signer}", align: right, above: 32.2}
+    above: 32.2

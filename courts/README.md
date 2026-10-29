@@ -327,13 +327,13 @@ Courts under `courts` (347).
 | [United States Bankruptcy Court, Southern District Florida](eleventh-circuit/florida/federal/bankruptcy-southern-district) | `flsb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the Middle District of Florida](eleventh-circuit/florida/federal/middle-district) | `flmd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court for the Northern District of Florida](eleventh-circuit/florida/federal/northern-district) | `flnd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
-| [United States District Court for the Southern District of Florida](eleventh-circuit/florida/federal/southern-district) | `flsd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the Southern District of Florida](eleventh-circuit/florida/federal/southern-district) | `flsd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, M.D. Georgia](eleventh-circuit/georgia/federal/bankruptcy-middle-district) | `gamb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Georgia](eleventh-circuit/georgia/federal/bankruptcy-northern-district) | `ganb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. Georgia](eleventh-circuit/georgia/federal/bankruptcy-southern-district) | `gasb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Middle District of Georgia](eleventh-circuit/georgia/federal/middle-district) | `gamd` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Northern District of Georgia](eleventh-circuit/georgia/federal/northern-district) | `gand` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Southern District of Georgia](eleventh-circuit/georgia/federal/southern-district) | `gasd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the Middle District of Georgia](eleventh-circuit/georgia/federal/middle-district) | `gamd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [United States District Court for the Northern District of Georgia](eleventh-circuit/georgia/federal/northern-district) | `gand` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [United States District Court for the Southern District of Georgia](eleventh-circuit/georgia/federal/southern-district) | `gasd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Alabama Court of Civil Appeals](eleventh-circuit/alabama/state/court-of-civil-appeals) | `alacivapp` | up for review | 3/3 | — | — | 29 |
 | [Alabama Court of Criminal Appeals](eleventh-circuit/alabama/state/court-of-criminal-appeals) | `alacrimapp` | up for review | 3/3 | — | — | 29 |
 | [Supreme Court of Alabama](eleventh-circuit/alabama/state/supreme-court) | `ala` | up for review | 7/7 | 5/5 | 3/6 | 29 |

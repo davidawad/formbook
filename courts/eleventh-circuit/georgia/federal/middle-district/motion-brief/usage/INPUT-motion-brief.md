@@ -5,9 +5,6 @@
 # block, and the certificate of service. The exemplar's "{Signature on following page.}" line is not transcribed.
 # Case-name italics are not transcribed (the text layer carries no italic markup). Filed spelling and citations are
 # kept as filed. See ../README.md for the meaning of every field.
-court:
-  - "IN THE UNITED STATES DISTRICT COURT"
-  - "FOR THE MIDDLE DISTRICT OF GEORGIA"
 division: "MACON DIVISION"
 case_label: "CIVIL ACTION FILE NO."
 case_number: "5:16-CV-00123-LJA"
@@ -85,12 +82,8 @@ WHEREFORE, for the reasons set forth above and for such other reasons as may be 
 
 This 10th day of June, 2016.
 
-<!--signature-->
-
 # CERTIFICATE OF SERVICE
 
 This is to certify that on this date I served the foregoing document upon all parties by filing with the CM/ECF system of the United States District Court which sends automatic notification to all attorneys of record.
 
 This 10th day of June, 2016.
-
-<!--signature-->

@@ -1,0 +1,89 @@
+# U.S. District Court for the Southern District of Georgia (gasd): a memorandum of law in support of a motion (LR
+# 7.1(b)), on the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with S.D. Ga.'s local rules
+# overlaid here. The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged
+# layout by `fb engines gen`). Rules: S.D. Ga. Local Rules, rev. June 2016 (../README.md quotes and cites them). The
+# base already meets LR 5.4 (letter paper) and LR 10.1 (double-spaced: 24 pt, twice 12 pt type); no S.D. Ga. rule sets
+# the face, size or margins, so the base's 12-point type and one-inch margins stand, as the exemplar sets them. The
+# 26-page limit of LR 7.1(a), the certificate of service included, is checked on the render (../eval.yaml
+# params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# 16.2 pt between two paragraphs, as the exemplar.
+paragraph_gap: 16.2
+# LR 10.1: numbered on each page, from the first page of the submission (the base's number centered at the foot).
+footnote: {size: 12, gap: 7, clearance: 12.6}
+# Block quotations single-spaced, three quarters of an inch in on each side, a paragraph's gap above and below.
+quote: {left: 54, right: 54, above: 16.2, below: 16.2}
+# Headings bold on the body pitch, a paragraph's gap above and below, numbered by the template (the sample types none):
+# a section centered in capitals, "I."; a point at the margin, "A."; a sub-point in bold italics, "1.".
+heading:
+  - {align: center, bold: true, upper: true, number: "I.", pitch: body, above: 16.2, below: 16.2}
+  - {bold: true, number: "A.", pitch: body, above: 16.2, below: 16.2}
+  - {bold: true, italic: true, number: "1.", pitch: body, above: 16.2, below: 16.2}
+# FRCP 10(a): the court's name, as the exemplar sets it, then the division.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE SOUTHERN DISTRICT OF GEORGIA"
+# FRCP 10(a), 7(b)(2): the court's name and the division bold and centered; the parties single-spaced at the left (each
+# party's names, its designation two inches in a blank line below, "v." between them, a blank line from each), ruled
+# at their right and foot; the file number at the right on the first designation's line, as the exemplar; the paper's
+# title bold, underlined and centered in capitals.
+front:
+  - &caption
+    group:
+      - {text: "{xd.court}", align: center, bold: true}
+      - {text: "{xd.district}", align: center, bold: true}
+      - {text: "{division}", align: center, bold: true, upper: true, optional: true}
+      - columns:
+          - width: 237.6
+            blocks:
+              - box:
+                  - box:
+                      - each: caption.parties
+                        blocks:
+                          - {text: "{names}"}
+                          - {text: "{designation}", left: 144, above: 13.8}
+                        between:
+                          - {text: "v.", above: 13.8, below: 13.8}
+                    stroke: {right: 0.5}
+                    inset: {right: 7.2, bottom: 12}
+                stroke: {bottom: 0.5}
+          - blocks:
+              - {text: "{case_label|Civil Action No.} {case_number}", above: 27.6}
+        gutter: 9.6
+        above: 16.2
+  - {text: "{title}", align: center, bold: true, upper: true, underline: true, left: 18, right: 18, above: 16.2, below: 16.2}
+# FRCP 11(a), LR 11.1 (signature, counsel's name, complete address, telephone and State Bar number): the date line at
+# the margin; from 3.2 inches in "Respectfully submitted," and each signer ("By: /s/", the name, the bar number, the
+# firm, its address, telephone, e-mail and whom they represent); kept whole and with the last paragraph.
+closing:
+  - group:
+      - {text: "This the {signature.date}.", optional: true}
+      - {text: "Respectfully submitted,", left: 230.4, above: 16.2}
+      - each: signature.signers
+        blocks:
+          - {text: "By: /s/ {name}", left: 230.4}
+          - {text: "{name}", left: 230.4}
+          - {text: "{lines}", left: 230.4}
+        gap: 8.1
+        above: 8.1
+    above: 16.2
+# LR 5.1: the certificate of the person making service (the date, method and address of service), signed: on a page of
+# its own with the caption again, as the exemplar; the statement as the sample gives it, double-spaced; each party
+# served by mail centered, single-spaced; the signer's "/s/" signature and lines from 3.2 inches in.
+after_tail:
+  - when: service
+    blocks:
+      - {break: true}
+      - *caption
+      - {text: "CERTIFICATE OF SERVICE", heading: 1}
+      - {markdown: "{service.text}", pitch: body, indent: 36}
+      - each: service.unregistered
+        blocks:
+          - {text: "{.}", align: center}
+        gap: 8.1
+        above: 8.1
+      - group:
+          - {text: "/s/ {service.signer.name}", left: 230.4}
+          - {text: "{service.signer.name}", left: 230.4}
+          - {text: "{service.signer.lines}", left: 230.4}
+        above: 16.2

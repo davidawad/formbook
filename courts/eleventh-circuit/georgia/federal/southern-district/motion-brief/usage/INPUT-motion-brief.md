@@ -1,25 +1,20 @@
 ---
 title: "Defendants Nationstar Mortgage LLC and Lakeview Loan Servicing, LLC's Memorandum of Law in Support of Motion to Dismiss Plaintiff's Complaint"
 division: AUGUSTA DIVISION
+case_number: "1:25-CV-00203-JRH-BKE"
 caption:
-  rows:
-    - {left: "NIKKI HARPER,", right: ""}
-    - {left: "", right: ""}
-    - {left: "Plaintiff,", right: "Civil Action No."}
-    - {left: "", right: "1:25-CV-00203-JRH-BKE"}
-    - {left: "v.", right: ""}
-    - {left: "", right: ""}
-    - {left: "BARRETT FINANCIAL LLC, et al.,", right: ""}
-    - {left: "", right: ""}
-    - {left: "Defendants.", right: ""}
+  parties:
+    - names: ["NIKKI HARPER,"]
+      designation: "Plaintiff,"
+    - names: ["BARRETT FINANCIAL LLC, et al.,"]
+      designation: "Defendants."
 signature:
   date: "27th day of February, 2026"
   signers:
     - name: "Jennifer R. Burbine"
       lines: ["Georgia Bar No. 167807", "McGuireWoods LLP", "1075 Peachtree Street, N.E.", "35th Floor", "Atlanta, GA 30309-3900", "Telephone: 404-443-5736", "Fax: 404-443-5798", "jburbine@mcguirewoods.com", "Attorney for Defendants Nationstar Mortgage LLC and Lakeview Loan Servicing, LLC"]
 service:
-  date: "February 27, 2026"
-  document: "Defendants Nationstar Mortgage LLC and Lakeview Loan Servicing, LLC's Memorandum of Law in Support of Motion to Dismiss Plaintiff's Complaint"
+  text: "I hereby certify that on February 27, 2026, I electronically filed the foregoing DEFENDANTS NATIONSTAR MORTGAGE LLC AND LAKEVIEW LOAN SERVICING, LLC'S MEMORANDUM OF LAW IN SUPPORT OF MOTION TO DISMISS PLAINTIFF'S COMPLAINT and its attachments with the Clerk of the Court using the CM/ECF System and served a true and correct copy of same on all attorneys of record and to the following by First-Class Mail, postage prepaid, addressed to:"
   unregistered:
     - ["Nikki Harper", "1529 Pinebrook Court, Apt. A2", "Greenville, NC 27858", "Plaintiff Pro Se"]
   signer:

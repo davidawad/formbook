@@ -350,8 +350,6 @@ courts/eleventh-circuit/florida/federal/northern-district/complaint docx
 courts/eleventh-circuit/florida/federal/northern-district/complaint typst
 courts/eleventh-circuit/florida/federal/southern-district/complaint docx
 courts/eleventh-circuit/florida/federal/southern-district/complaint typst
-courts/eleventh-circuit/florida/federal/southern-district/motion-brief docx
-courts/eleventh-circuit/florida/federal/southern-district/motion-brief typst
 courts/eleventh-circuit/florida/state/district-courts-of-appeal/amicus-brief typst
 courts/eleventh-circuit/florida/state/district-courts-of-appeal/answering-brief typst
 courts/eleventh-circuit/florida/state/district-courts-of-appeal/motion-brief typst
@@ -474,16 +472,10 @@ courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district/adversary-c
 courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district/adversary-complaint typst
 courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district/motion-brief docx
 courts/eleventh-circuit/georgia/federal/bankruptcy-southern-district/motion-brief typst
-courts/eleventh-circuit/georgia/federal/middle-district/motion-brief docx
-courts/eleventh-circuit/georgia/federal/middle-district/motion-brief typst
 courts/eleventh-circuit/georgia/federal/northern-district/complaint docx
 courts/eleventh-circuit/georgia/federal/northern-district/complaint typst
-courts/eleventh-circuit/georgia/federal/northern-district/motion-brief docx
-courts/eleventh-circuit/georgia/federal/northern-district/motion-brief typst
 courts/eleventh-circuit/georgia/federal/southern-district/complaint docx
 courts/eleventh-circuit/georgia/federal/southern-district/complaint typst
-courts/eleventh-circuit/georgia/federal/southern-district/motion-brief docx
-courts/eleventh-circuit/georgia/federal/southern-district/motion-brief typst
 courts/eleventh-circuit/georgia/state/court-of-appeals/amicus-brief docx
 courts/eleventh-circuit/georgia/state/court-of-appeals/amicus-brief latex
 courts/eleventh-circuit/georgia/state/court-of-appeals/amicus-brief typst
