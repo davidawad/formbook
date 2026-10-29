@@ -77,10 +77,23 @@ The first render showed overlapping caption and counsel lines and paragraphs col
 - WebSearch for S.D. W. Va. memoranda in support of motions to dismiss: no standalone memorandum PDF other than the Castro docket.
 - Clearinghouse (clearinghouse.net) listed other S.D. W. Va. motion and memorandum documents but returned HTTP 403 to every request, so none could be downloaded.
 
+## On the FRCP base (fb-595.17.10, 2026-10-29)
+
+`typst/layout.yaml` names the generic federal district brief (`base: /lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and overlays only what S.D. W. Va. sets itself, each rule cited there; `typst/wvsd-motion-brief.typ` names the face and hands the merged layout to the shared document model (`lib/typst/xdoc.typ`). `latex/` and `docx/` are generated from the merged layout by `fb engines gen` (do not edit them; `fb engines gen --check` fails on a stale one). The per-folder typst code and the docx filter `motion-brief.lua` are gone. The Layout and Markdown contract sections above describe the earlier template where they differ from this list.
+
+- Face: Times New Roman, 12 pt, footnotes too (LR Civ P 7.1(a)(4)), as before.
+- The caption page is the model's `cover`, unnumbered (`page_number.front`), the body numbered from 1, as before: the court's name, the caption (each side's `lead`, names and designation, a blank line between sides, a repeat column of `)`, the file number and the judge centered on their height), the title, the counsel 3.25 inches in.
+- Frontmatter: `civil_action` is gone (the layout prints "Civil Action No." and `case_number`; `case_label` changes the label); a side's `lead` is printed only when given (the earlier template defaulted it to "v."), so the sample gives `lead: "v."` on the defendants' side.
+- Headings, footnotes, block quotations and the signature as before; the points numbered by the template (`I.`, `A.`, `1.`, `a.`). The signature block ("Dated:" and the filer's lines) is kept whole.
+- The 20-page limit of LR Civ P 7.1(a)(2) is still not checked: DEF-LEN-001 counts the whole render, and the caption page would count against a memorandum at the limit.
+
+Pages reviewed: 13 of 13 on typst, latex and docx after the move, as text layout (`pdftotext -layout`) and word boxes (`-bbox`): this pod's image viewer could not open a PNG, so no page was looked at as a picture. The latex and docx renders break every line where typst does (XENG-003), so their pages carry the same text.
+
 ## Engines
 
-**docx** (`docx/`): fb render builds the reference document from `reference.xml` (`base="xengine"`, the shared cross-engine recipe in the typst face); `motion-brief.lua` builds the cover (caption table, title, counsel block at 3.25 in) and the numbered headings; the body and footnotes are pandoc's, in the styles of `reference.xml`.
+All three engines on the shared document model; Gate 4 CROSS-ENGINE gates the latex and docx renders against typst (`params.cross_engine: gate` in `eval.yaml`).
 
-- Matches the typst form: Times New Roman 12 pt; body lines exact 24 pt (double); caption, counsel, quotations, footnotes and signature lines exact 13.8 pt (single); 1 in margins on letter paper; cover without a page number; body numbered from 1; level 1 headings centered and bold, level 2 bold with I., A., 1., a. on the template's indents; no first-line indent for the paragraph after a heading; footnotes 12 pt single; the "Dated" line and signature block at 3.25 in, kept together.
-- Differs (the earlier build by `build-reference.sh`, before the fb-595.68 cross-engine port; `eval.yaml` now gates the docx on typst's line and page breaks): the docx had 13 PDF pages (12 body) against typst's 12. LibreOffice places exact-spaced text about 3 to 11 pt lower on the page, so one line less fits per page; the last signature block is kept with the conclusion (same page in typst). Level 1 and 2 heading sizes follow typst's default (16.8 pt and 14.4 pt); levels 3 to 5 are 12 pt (the sample uses only levels 1 and 2). Caption blank rows differ from typst by a few points.
-- Gates: `sh tools/check.sh <this folder> --engine docx` exits 2 (`Error: open .../checks.yaml: no such file or directory`; this snapshot has no `checks.yaml` for this court). No check ID is BLOCKED for a content reason.
+- `tools/check.sh <dir>`: RESULT: 11 checks passed, 0 failed.
+- `tools/check.sh <dir> --engine latex`: RESULT: 14 checks passed, 0 failed; XENG-001..003 PASS (13 pages, 351/351 lines).
+- `tools/check.sh <dir> --engine docx`: RESULT: 15 checks passed, 0 failed; XENG-001..003 PASS (13 pages, 351/351 lines).
+- `tools/check-selftest.sh` reads a court folder's `court.json`; this doc-type folder has none, so it does not run here.

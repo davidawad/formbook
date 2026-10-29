@@ -147,10 +147,25 @@ Azimi sample (9 pages):
 
 [Vawd court README](../README.md) | [Federal courts README](../../README.md)
 
+## On the FRCP base (fb-595.17.10, 2026-10-29)
+
+`typst/layout.yaml` names the generic federal district brief (`base: /lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and overlays only what W.D. Va. sets, or what both exemplars show where its rules are silent; `typst/vawd-motion-brief.typ` names the face and hands the merged layout to the shared document model (`lib/typst/xdoc.typ`). `latex/` and `docx/` are generated from the merged layout by `fb engines gen` (do not edit them; `fb engines gen --check` fails on a stale one). The per-folder typst code and the docx filter `vawd-motion-brief.lua` are gone. The status table, Layout, Markdown contract and Gate 2 sections above describe the earlier template where they differ from this list.
+
+- Face: Times New Roman, 12 pt (no rule names one; both exemplars' face); the earlier template already set it (the "EB Garamond 13 pt" notes above are older than fb-595.68).
+- Both caption styles stay, chosen by `caption.style` (`parens` or `box`, the default) with the model's `when`/`unless ... is:`. The `)` column is the model's repeat column, as high as the parties; the file number is centered on their height (the earlier template set it on the line of the first "v.").
+- `parens` caption: the designations half an inch in and "v." at the margin, as exemplar 1 sets them (DEF-COVER-002 measured 36 pt in the exemplar; the earlier template set 1.5 and 0.6 inches). `box` caption: a rule above the parties too, as exemplar 2 rules them (DEF-COVER-002).
+- The division is printed as the filer writes it (exemplar 1 "X Division", exemplar 2 "LYNCHBURG DIVISION"); the earlier template set it in capitals.
+- Headings, footnotes (11 pt), block quotations and the signature as before; the headings numbered by the template (`1.`, `a.`, `(i)`). The body's last paragraph is kept on the page of the signature (`keep_with_closing`; the earlier template kept a short last section); the certificate of service, when given, a double line below the signature, kept whole.
+- The INPUT's `word:` map is not read, as before.
+- DEF-COVER-002 passes on latex and docx for both samples, so the folder's docx line left `data/cover-structure-baseline.txt`. On typst it passes for sample 1 and is still REPORTED for sample 2 (the typst line stays): the measurer reads typst's three-sided caption box as one box, not as rules (`tools/fb/src/measure/svg.rs` `drawing`), while LaTeX and Word draw it as rules.
+
+Pages reviewed: 21 of 21 (9 and 12) on typst, latex and docx after the move, as text layout (`pdftotext -layout`) and word boxes (`-bbox`): this pod's image viewer could not open a PNG, so no page was looked at as a picture. The latex and docx renders break every line where typst does (XENG-003), so their pages carry the same text.
+
 ## Engines
 
-DOCX (`docx/`): `reference.xml` declares the shared xengine styles with `{font}` inherited from Typst; `vawd-motion-brief.lua` builds the cover, caption, title, numbered headings, lists, signature and service certificate. `fb render --engine docx` writes the DOCX and LibreOffice PDF in `usage/`. Cross-engine and tier-1 checks pass.
+All three engines on the shared document model; Gate 4 CROSS-ENGINE gates the latex and docx renders against typst (`params.cross_engine: gate` in `eval.yaml`).
 
-- Matches the typst form: EB Garamond 13 pt (embedded), 1 in margins on letter, 27.6 pt double spacing, 0.5 in first-line indent on every paragraph, footnotes at 11 pt single spaced, centered caps section headings, bold numbered sub-headings, block quotations single spaced and indented 0.5 in each side, the signature block at 3.25 in, the certificate of service on its own block, centered page number at 12 pt. The last section is kept with the signature block when it is short (no footnote), as in typst.
-- Differs: pagination of the LibreOffice PDF is longer than typst: azimi 10 pages (typst 9), fitch 12 (typst 12). The last section of azimi moves to the next page with its signature block, leaving page 8 short. Word may paginate differently again.
-- BLOCKED: every gate of `sh tools/check.sh <court-dir> --engine docx` (gates 0 to 3). The court folder has no `checks.yaml` (and no `rules.md`), so check.sh cannot run; `check-selftest.sh` needs the same file and is not run.
+- `tools/check.sh <dir>`: RESULT: 21 checks passed, 0 failed.
+- `tools/check.sh <dir> --engine latex`: RESULT: 28 checks passed, 0 failed; XENG-001..003 PASS (9 pages, 218/218 lines; 12 pages, 305/305 lines).
+- `tools/check.sh <dir> --engine docx`: RESULT: 30 checks passed, 0 failed; XENG-001..003 PASS (9 pages, 218/218 lines; 12 pages, 305/305 lines).
+- `tools/check-selftest.sh` reads a court folder's `court.json`; this doc-type folder has none, so it does not run here.

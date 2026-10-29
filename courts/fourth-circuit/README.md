@@ -18,12 +18,12 @@ Courts under `courts/fourth-circuit` (29).
 | [District Court, D. South Carolina](south-carolina/federal/district) | `scd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. Virginia](virginia/federal/bankruptcy-eastern-district) | `vaeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Virginia](virginia/federal/bankruptcy-western-district) | `vawb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, E.D. Virginia](virginia/federal/eastern-district) | `vaed` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, W.D. Virginia](virginia/federal/western-district) | `vawd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. Virginia](virginia/federal/eastern-district) | `vaed` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, W.D. Virginia](virginia/federal/western-district) | `vawd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court, N.D. West Virginia](west-virginia/federal/bankruptcy-northern-district) | `wvnb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. West Virginia](west-virginia/federal/bankruptcy-southern-district) | `wvsb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, N.D. West Virginia](west-virginia/federal/northern-district) | `wvnd` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, S.D. West Virginia](west-virginia/federal/southern-district) | `wvsd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, N.D. West Virginia](west-virginia/federal/northern-district) | `wvnd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, S.D. West Virginia](west-virginia/federal/southern-district) | `wvsd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Court of Appeals of Maryland](maryland/state/court-of-appeals) | `md` | up for review | 9/9 | 8/8 | 2/9 | 29 |
 | [Court of Special Appeals of Maryland](maryland/state/court-of-special-appeals) | `mdctspecapp` | up for review | 6/6 | 6/6 | 1/6 | 29 |
 | [Court of Appeals of North Carolina](north-carolina/state/court-of-appeals) | `ncctapp` | up for review | 7/7 | 7/7 | 1/7 | 29 |

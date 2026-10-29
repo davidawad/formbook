@@ -14,10 +14,8 @@ caption:
   - lead: "v."
     names: ["SECRETARY OF STATE", "ANDREW WARNER and", "DONALD JOHN TRUMP,"]
     designation: "Defendants."
-  - lead: ""
-    names: ["WEST VIRGINIA REPUBLICAN PARTY", "and STATE OF WEST VIRGINIA,"]
+  - names: ["WEST VIRGINIA REPUBLICAN PARTY", "and STATE OF WEST VIRGINIA,"]
     designation: "Intervenors."
-civil_action: "Civil Action No. 2:23-cv-00598"
 brief_title: "STATE OF WEST VIRGINIA’S MEMORANDUM OF LAW IN SUPPORT OF ITS MOTION TO DISMISS"
 counsel:
   - names: ["PATRICK MORRISEY", "ATTORNEY GENERAL"]

@@ -1,0 +1,129 @@
+# U.S. District Court for the Western District of Virginia (vawd): a brief in support of a motion, on the generic FRCP
+# brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with what W.D. Va. sets overlaid here. The shared document model
+# sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`). Rules: W.D.
+# Va. Local Rules (revised 2025-10-01), https://www.vawd.uscourts.gov/sites/Public/assets/File/court/local_rules.pdf
+# (verified 2026-10-14; ../README.md quotes them). The local rules set no type size, margin, spacing or page limit for a
+# brief, so the base's floor stands (12-point type, one-inch margins, pages numbered at the foot); what follows is the
+# convention both exemplars (two filers) show, tier 2, unless a rule is cited.
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name.
+constants:
+  district: "WESTERN DISTRICT OF VIRGINIA"
+# Double spacing as both exemplars set it: Word's double line at 12 pt, 2 x 13.8 pt.
+pitch: {body: 27.6}
+# Footnotes in 11 pt, single-spaced (1.15 x 11 pt), 7 pt apart, 7 pt from the text to the rule (both exemplars).
+footnote: {size: 11, pitch: 12.65, gap: 7, clearance: 7}
+# Block quotations single-spaced, half an inch in on each side, a single line above and below.
+quote: {left: 36, right: 36, above: 13.8, below: 13.8, pitch: single}
+# Headings a single line below the text above: a section centered in bold capitals at the body pitch, unnumbered; the
+# argument headings single-spaced in bold, numbered by the template "1.", "a.", "(i)", each label in a 0.4-inch box
+# with the title's later lines hung under it, each level half an inch further in.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body, above: 13.8, below: 0}
+  - {bold: true, number: "1.", label_box: 28.8, above: 13.8, below: 0}
+  - {bold: true, number: "a.", label_box: 28.8, left: 36, above: 13.8, below: 0}
+  - {bold: true, number: "(i)", label_box: 28.8, left: 72, above: 13.8, below: 0}
+# FRCP 10(a), 7(b)(2): the court's name and the division the case sits in, centered, single-spaced (both exemplars);
+# a double line below it the caption in the filer's style (`caption.style`): `parens`, the parties beside a column of
+# ")" as high as they are, each party's names, its designation half an inch in, "v." at the margin (exemplar 1);
+# `box` (the default), the parties closed by a rule above, at their right and at their foot, a single line between
+# their lines, the designations 1.5 inches in and "v." 0.6 inch in (exemplar 2); the file number beside them,
+# centered on their height; a double line below, the paper's title centered in bold capitals.
+front:
+  - {text: "UNITED STATES DISTRICT COURT", align: center}
+  - {text: "{xd.district}", align: center}
+  - {text: "{division}", optional: true, align: center}
+  - when: caption.style
+    is: parens
+    blocks:
+      - columns:
+          - width: 237.6
+            blocks:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", optional: true, left: 36}
+                between:
+                  - {text: "v.", left: 0}
+          - {width: 28.8, repeat: ")", align: center}
+          - valign: center
+            blocks:
+              - {text: "{case_label|Civil Action No.} {case_number}"}
+        gutter: 0
+        above: 27.6
+  - unless: caption.style
+    is: parens
+    blocks:
+      - columns:
+          - width: 237.6
+            blocks:
+              - box:
+                  - each: caption.parties
+                    blocks:
+                      - {text: "{names}"}
+                      - {text: "{designation}", optional: true, left: 108, above: 13.8}
+                    between:
+                      - {text: "v.", left: 43.2, above: 13.8, below: 13.8}
+                stroke: {top: 0.75, right: 0.75, bottom: 0.75}
+                inset: {top: 9, right: 9, bottom: 9}
+          - valign: center
+            blocks:
+              - {text: "{case_label|Civil Action No.} {case_number}", left: 7.2}
+        gutter: 10.8
+        above: 27.6
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 27.6, below: 13.8}
+# FRCP 11(a), W.D. Va. L.R. 11(a) (the attorney's office address, telephone number, e-mail address and bar number): a
+# double line below the body "Dated:" at the margin when the filer dates it; in a column 3.25 inches in, the
+# preamble (the parties, or "Respectfully submitted,"), the signature with the first counsel's lines under it, each
+# further counsel and the role a single line apart. Kept with the body's last paragraph.
+keep_with_closing: true
+closing:
+  - when: date
+    blocks:
+      - group:
+          - {text: "Dated: {date}"}
+          - columns:
+              - {width: 234, blocks: []}
+              - blocks: &signer
+                  - {text: "{signature.preamble}", optional: true}
+                  - {text: "{signature.signed_by}", above: 13.8}
+                  - each: signature.counsel
+                    gap: 13.8
+                    blocks:
+                      - {text: "{names}"}
+                      - {text: "{lines}", optional: true}
+                  - {text: "{signature.role}", optional: true, above: 13.8}
+            gutter: 0
+            above: 13.8
+        above: 27.6
+  - unless: date
+    blocks:
+      - group:
+          - columns:
+              - {width: 234, blocks: []}
+              - blocks: *signer
+            gutter: 0
+        above: 27.6
+# FRCP 5(d)(1)(B): a certificate of service when the paper is served other than through the court's electronic-filing
+# system (a mailed copy), when the frontmatter gives one: a double line below the signature, kept whole, its title
+# centered in bold, the statement double-spaced, the persons served half an inch in, the signer again.
+after_tail:
+  - when: service
+    blocks:
+      - group:
+          - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 13.8}
+          - {text: "{service.text}", pitch: body, indent: 36, below: 13.8}
+          - {text: "{service.recipients}", left: 36}
+          - columns:
+              - {width: 234, blocks: []}
+              - blocks:
+                  - {text: "{signature.signed_by}"}
+                  - each: signature.counsel
+                    gap: 13.8
+                    blocks:
+                      - {text: "{names}"}
+                      - {text: "{lines}", optional: true}
+                  - {text: "{signature.role}", optional: true, above: 13.8}
+            gutter: 0
+            above: 13.8
+        above: 27.6

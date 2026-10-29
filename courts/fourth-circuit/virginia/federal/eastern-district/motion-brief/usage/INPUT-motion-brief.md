@@ -1,24 +1,21 @@
 ---
-court:
-  - IN THE UNITED STATES DISTRICT COURT
-  - FOR THE EASTERN DISTRICT OF VIRGINIA
-  - NEWPORT NEWS DIVISION
+division: NEWPORT NEWS DIVISION
+case_label: "Case No.:"
+case_number: "4:26-CV-00112-MSD-LRL"
 caption:
   parties:
-    - lines:
+    - names:
         - DR. CYNTHIA E. KEPPEL,
       designation: Plaintiff,
-    - lines:
+    - names:
         - JEFFERSON SCIENCE ASSOCIATES, LLC,
         - SOUTHEASTERN UNIVERSITIES RESEARCH ASSOCIATION, INC.,
         - JENS DILLING, AND
         - SEAN HEARNE,
       designation: Defendants.
-  case_number: "Case No.: 4:26-CV-00112-MSD-LRL"
 brief_title: MEMORANDUM OF LAW IN SUPPORT OF DEFENDANT JENS DILLING'S MOTION TO DISMISS
 signature:
   date: August 10, 2026
-  closing: Respectfully submitted,
   party: JENS DILLING
   by: /s/ Kristina H. Vaquera
   lines:
@@ -42,7 +39,6 @@ signature:
     - Winston.west@jacksonlewis.com
     - Counsel for Defendant Jens Dilling
 certificate:
-  title: CERTIFICATE OF SERVICE
   text: I hereby certify that on this 10th day of August 2026, I electronically filed the foregoing with the Clerk of Court using the CM/ECF system, which will send a notification of such filing to all counsel of record, including the following.
   served:
     - Deborah Y. Collins
@@ -84,9 +80,9 @@ To survive a motion under Rule 12(b)(6), a complaint must contain sufficient fac
 
 # ARGUMENT
 
-## I. Count XII: Plaintiff Fails to State a Claim for Defamation
+## Count XII: Plaintiff Fails to State a Claim for Defamation
 
-### A. Virginia law requires a defamation plaintiff to plead the exact words allegedly spoken
+### Virginia law requires a defamation plaintiff to plead the exact words allegedly spoken
 
 The Complaint alleges only that Dilling made "statements alleging that Dr. Keppel had mismanaged the fiscal, safety and operational aspects of her position." (Compl. ¶¶ 71, 168.) It does not identify a single actual word attributed to Dilling. That allegation is a characterization of the supposed gist of a statement, not a pleading in haec verba. However, in Virginia, a "[g]ood pleading requires that the exact words spoken or written must be set out in the declaration in haec verba [sic]. Indeed, the pleading must go further; -- that is it must purport to give the exact words. . . . Words of equivalent or similar import are not sufficient." *Federal Land Bank of Baltimore v. Birchfield*, 173 Va. 200, 215 (1939). Judge Giles recently affirmed that the Virginia pleading requirement for in haec verba for defamation claims applies in federal court. *See Chacko v. Preston*, Case No. 1:23-cv-551, 2024 U.S. Dist. LEXIS 38816, at \*14 (E.D. Va. Mar. 5, 2024), *aff'd*, 2024 U.S. App. LEXIS 29228 (4th Cir. Nov. 18, 2024).
 
@@ -96,7 +92,7 @@ This specificity permits the court to determine whether the alleged statement is
 
 Plaintiff's omission is dispositive. Without the exact words, neither Dilling nor the Court can evaluate whether Plaintiff alleges a false statement of fact instead of an opinion; whether the words have a defamatory sting; whether the claimed statement is susceptible to proof; or whether the communication was privileged. Count XII should be dismissed. (Citations to *Sloane*, *Harless*, and *Cretella* omitted from this transcription.)
 
-### B. The alleged statements are, at most, non-actionable expressions of opinion
+### The alleged statements are, at most, non-actionable expressions of opinion
 
 Moreover, pure expressions of opinion, statements relative in nature that depend largely on the speaker's viewpoint, cannot support a defamation claim. *Schaecher v. Bouffault*, 290 Va. 83, 101-102 (2015); *Raytheon Tech. Servs. Co. v. Hyland*, 273 Va. 292, 303 (2007). Although a performance review can contain actionable false factual assertions, statements that are merely evaluative and lack a provably false factual connotation are protected opinion. *Raytheon*, 273 Va. at 303-06.
 
@@ -104,13 +100,13 @@ Courts have consistently rejected defamation claims based on opinions. *See Am. 
 
 Here, the Complaint's bare characterization that Dilling said Plaintiff "mismanaged" certain aspects of her position provides no actual language, no underlying factual assertion, and no contextual detail from which the Court could determine that an actionable factual statement was made. Even if this allegation wasn't an expression of opinion, how Plaintiff managed her position, which received federal funding, is a matter of public concern. The pleading therefore does not plausibly establish the required actionable statement element.
 
-### C. The alleged statements are protected by a qualified privilege
+### The alleged statements are protected by a qualified privilege
 
 Virginia recognizes a qualified privilege for communications made in good faith between persons sharing a corresponding interest or duty in the subject matter. *Larimore v. Blaylock*, 259 Va. 568, 572 (2000); *Cashion v. Smith*, 286 Va. 327, 338 (2013). Employment matters are a familiar occasion for the privilege, including communications made between employers and employees in disciplinary or discharge matters. *Larimore*, 259 Va. at 572-74.
 
 The pleaded context is a conference involving institutional employees and persons allegedly connected to Jefferson Lab's scientific and professional community, concerning Plaintiff's former leadership role. (Compl. ¶¶ 70-72.) Plaintiff offers only the conclusory label "actual malice," without facts identifying the alleged words or showing a malicious abuse of any privilege. (*Id.* ¶¶ 73-74, 168-71.) That is insufficient under *Twombly* and *Iqbal*.
 
-## II. Count XI: The DCHRA Does Not Reach Plaintiff's Virginia-Based Employment, And the Aiding-And-Abetting Claim Against Dilling Is Derivative
+## Count XI: The DCHRA Does Not Reach Plaintiff's Virginia-Based Employment, And the Aiding-And-Abetting Claim Against Dilling Is Derivative
 
 The DCHRA makes it unlawful for an employer to discriminate in the "terms, conditions, or privileges of employment." D.C. Code § 2-1402.11. The Act does not apply extraterritorially. When an employee is not employed in the District, either the [adverse employment] decision must be made, or its effects must be felt, or both must have occurred, in the District of Columbia. *See Cole v. Boeing Co.*, 845 F. Supp. 2d 277, 284-85 (D.D.C. 2012). Likewise, the Fourth Circuit rejected a claim under Maryland law for conduct allegedly occurring in Virginia. *See Elyazidi v. SunTrust Bank*, 780 F.3d 227, 237-38 (4th Cir. 2015).
 
@@ -120,7 +116,7 @@ The Complaint alleges that Plaintiff worked at Jefferson Lab in Newport News, Vi
 
 Count XI alleges that Dilling is liable solely as an aider and abettor. (Compl. ¶ 164.) Because the Complaint does not plausibly allege a DCHRA violation applicable to Plaintiff's Virginia employment, it fails to state an aiding-and-abetting claim against Dilling as well.
 
-## III. Counts XI & XII: The Court Lacks Subject Matter Jurisdiction Over the Claims Against Dilling and Should Decline Supplemental Jurisdiction
+## Counts XI & XII: The Court Lacks Subject Matter Jurisdiction Over the Claims Against Dilling and Should Decline Supplemental Jurisdiction
 
 Alternatively, and to the extent the Court is inclined to deny the motion to dismiss on the merits, the Court should decline supplemental jurisdiction over Counts XI and XII.
 
@@ -130,7 +126,7 @@ The Virginia defamation claim against Dilling does not arise from the same commo
 
 A district court may decline to exercise supplemental jurisdiction where the state-law claim raises novel or complex issues of state law, substantially predominates, or for other compelling reasons. *See id.* The DCHRA's extraterritorial reach (discussed below) is precisely such a novel and complex question, and the individual-capacity state and local claims against Dilling should be dismissed. *See* 28 U.S.C. § 1367(c); *United Mine Workers of America v. Gibbs*, 383 U.S. 715, 726 (1966); *ESAB Group, Inc. v. Zurich Insurance PLC*, 685 F.3d 376, 394 (4th Cir. 2012); *see also Carnegie-Mellon Univ. v. Cohill*, 484 U.S. 343, 350 n.7 (1988).
 
-## IV. To The Extent Plaintiff Asserts Any Title VII or VHRA Claim Against Dilling Individually, It Fails As A Matter Of Law
+## To The Extent Plaintiff Asserts Any Title VII or VHRA Claim Against Dilling Individually, It Fails As A Matter Of Law
 
 Counts I through X are pleaded against JSA and/or SURA. But to the extent the Complaint's reference to Dilling "individually and in his official capacity" is construed to assert Title VII or VHRA claims against him personally, those claims fail.
 

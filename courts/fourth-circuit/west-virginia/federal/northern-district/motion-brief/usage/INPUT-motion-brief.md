@@ -7,21 +7,14 @@
 case_number: "1:26-cv-00046-TSK"
 division: "CLARKSBURG DIVISION"
 caption:
-  case_row: 5
-  lines:
-    - "WEST VIRGINIA RIVERS COALITION and"
-    - "WEST VIRGINIA HIGHLANDS"
-    - "CONSERVANCY,"
-    - ""
-    - indent: 1.5
-      text: "Plaintiffs,"
-    - ""
-    - "v."
-    - ""
-    - "AMSTED GRAPHITE MATERIALS LLC,"
-    - ""
-    - indent: 1.5
-      text: "Defendant."
+  parties:
+    - names:
+        - "WEST VIRGINIA RIVERS COALITION and"
+        - "WEST VIRGINIA HIGHLANDS CONSERVANCY,"
+      designation: "Plaintiffs,"
+    - names:
+        - "AMSTED GRAPHITE MATERIALS LLC,"
+      designation: "Defendant."
 brief_title: "MEMORANDUM OF LAW IN SUPPORT OF DEFENDANT'S MOTION TO DISMISS COMPLAINT"
 date: "August 5, 2026"
 signature:

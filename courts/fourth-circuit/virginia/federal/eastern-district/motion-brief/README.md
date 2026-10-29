@@ -79,12 +79,25 @@ Notes on what the rules do not say:
 - Page 8: CONCLUSION heading and paragraph, "Date:", "Respectfully submitted," party name, "/s/" line, counsel block single-spaced. Pass.
 - Page 9: CERTIFICATE OF SERVICE on its own page, served list, date, signature block repeated. Pass.
 
+## On the FRCP base (fb-595.17.10, 2026-10-29)
+
+`typst/layout.yaml` names the generic federal district brief (`base: /lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and overlays only what E.D. Va. sets itself, each rule cited there; `typst/vaed-motion-brief.typ` names the face and hands the merged layout to the shared document model (`lib/typst/xdoc.typ`). `latex/` and `docx/` are generated from the merged layout by `fb engines gen` (do not edit them; `fb engines gen --check` fails on a stale one). The per-folder typst code and the docx filter `vaed-motion-brief.lua` are gone. The status table, Layout and Markdown contract sections above describe the earlier template where they differ from this list.
+
+- Face: Times New Roman, 12 pt, footnotes too (L.R. 7(F)(3)); the earlier template already set it (the "EB Garamond" notes above are older than fb-595.68).
+- The court's name is the layout's (`constants`); the frontmatter gives `division`, `case_label` ("Case No.:") and `case_number` at the top level, `caption.parties[].names`; `signature.closing` and `certificate.title` are gone ("Respectfully submitted," and "CERTIFICATE OF SERVICE" are the layout's).
+- Headings double spaced with the body, as before; the argument headings are numbered by the template (`I.`, `A.`, each label in a half-inch box), so the sample no longer types its labels.
+- The 30-page cap of L.R. 7(F)(3) is checked on the render (`eval.yaml` `params.page_limit: 30`, DEF-LEN-001, the whole render counted) instead of a typst assertion, so it holds for every engine.
+- The last body paragraph is kept on the page of the signature (`keep_with_closing`); the certificate of service opens a page of its own with the signer again, as before.
+- Tier 2, OPEN: the case number is centered on the height of the party box; the exemplar sets it on the line of "v." (the model has no anchor to a line inside another column). One filer only.
+- Tier 2, OPEN (tool): DEF-COVER-002 passes on latex and docx; on typst it is still REPORTED (the folder's line in `data/cover-structure-baseline.txt` stays) because the measurer reads typst's four-sided caption box as one box, not as rules (`tools/fb/src/measure/svg.rs` `drawing`), while LaTeX and Word draw the same box as four rules.
+
+Pages reviewed: 9 of 9 on typst, latex and docx after the move, as text layout (`pdftotext -layout`) and word boxes (`-bbox`): this pod's image viewer could not open a PNG, so no page was looked at as a picture. The latex and docx renders break every line where typst does (XENG-003), so their pages carry the same text.
+
 ## Engines
 
-DOCX (`docx/`): declarative styles in `reference.xml` (base `xengine`, face inherited through `{font}` from Typst) and `vaed-motion-brief.lua` for the court title, caption, headings, signature and service certificate. `fb render --engine docx` writes `usage/OUTPUT-motion-brief.docx` and its LibreOffice PDF. Cross-engine and tier-1 checks pass.
+All three engines on the shared document model; Gate 4 CROSS-ENGINE gates the latex and docx renders against typst (`params.cross_engine: gate` in `eval.yaml`).
 
-- Matches the typst form: EB Garamond 12 pt only (`pdffonts`); letter, 1 in margins; body at an exact 24 pt pitch; 0.5 in first-line indent; caption party box and case number; underlined bold title; headings with hanging labels (level 2 at 0, level 3 at 0.5 in); the last paragraph kept with the signature block; certificate of service on its own page; centered PAGE number at 12 pt. Nine pages in both, with the same page breaks, including the conclusion moving to page 8.
-- Differs: the court heading is single-spaced in the docx (see the complaint's Engines note). The docx's first page holds about two more body lines than typst's for that reason. The served list is followed by the "Date" line slightly closer than in typst. Footnotes: none in the sample; the footnote style is 12 pt single-spaced, not tested. LibreOffice breaks lines after hyphens in some citations where typst does not.
-- The 30-page cap (L.R. 7(F)(3)) is a typst build assertion. The docx has no equivalent; the sample is 9 pages.
-- Not verified: Word (see the complaint note).
-- BLOCKED: `tools/check.sh --engine docx` (all gates) cannot run on this folder: exit 2, because the court folder has no `checks.yaml` and no `court.json` at this level. No gate result and no stamp.
+- `tools/check.sh <dir>`: RESULT: 11 checks passed, 0 failed.
+- `tools/check.sh <dir> --engine latex`: RESULT: 15 checks passed, 0 failed; XENG-001..003 PASS (9 pages, 257/257 lines).
+- `tools/check.sh <dir> --engine docx`: RESULT: 16 checks passed, 0 failed; XENG-001..003 PASS (9 pages, 257/257 lines).
+- `tools/check-selftest.sh` reads a court folder's `court.json`; this doc-type folder has none, so it does not run here.

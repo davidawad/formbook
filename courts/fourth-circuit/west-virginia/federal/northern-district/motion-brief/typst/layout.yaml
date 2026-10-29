@@ -1,0 +1,80 @@
+# U.S. District Court for the Northern District of West Virginia (wvnd): a memorandum of law supporting a motion, on the
+# generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with the N.D. W. Va. local rules overlaid here. The
+# shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb
+# engines gen`). Rules: N.D. W. Va. Local Rules (2018 compilation, the court's current local rules),
+# https://www.wvnd.uscourts.gov/sites/wvnd/files/NDWV%20Local%20Rules%202018%20MASTER.pdf%20with%20appendix.pdf
+# (fetched 2026-10-14; ../README.md quotes them). The base already meets LR Civ P 7.02(a): 8 1/2 x 11 paper, one-inch
+# margins on all four sides with only the page number in them, 12-point proportional type, the memorandum double
+# spaced. The 25-page limit of 7.02(a) is checked on the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, as the exemplar sets it.
+constants:
+  district: "NORTHERN DISTRICT OF WEST VIRGINIA"
+# LR Civ P 7.02(a): footnotes may be single spaced, in at least 11-point proportional type: 1.15 x 11 pt lines, 6 pt
+# apart, a 12.6 pt clearance above the rule.
+footnote: {size: 11, pitch: 12.65, gap: 6, clearance: 12.6}
+# LR Civ P 7.02(a): indented quotations may be single spaced: half an inch in on each side, a single line above and
+# below.
+quote: {left: 36, right: 36, above: 13.8, below: 13.8}
+# The headings double spaced with the text, no added space: a section centered, bold and underlined; the argument
+# headings numbered by the template, "I." at the margin and "A." half an inch in, in bold, "1." an inch in, in italics,
+# each label in a half-inch box with the title's later lines hung under it (the exemplar's).
+heading:
+  - {align: center, bold: true, underline: true, pitch: body, above: 0, below: 0}
+  - {bold: true, number: "I.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, number: "A.", label_box: 36, left: 36, pitch: body, above: 0, below: 0}
+  - {italic: true, number: "1.", label_box: 36, left: 72, pitch: body, above: 0, below: 0}
+# FRCP 10(a), 7(b)(2): the court's name and the division the case sits in, centered, double spaced; 12 pt below it
+# the caption: the parties at the left, each party's names, its designation half an inch in, "v." at the margin, a
+# blank single line between each; a column of ")" beside them as high as they are; the file number beside it,
+# centered on their height (the exemplar's); 12 pt below, the paper's title centered in bold.
+front:
+  - &caption
+    group:
+      - {text: "UNITED STATES DISTRICT COURT", align: center, pitch: body}
+      - {text: "{xd.district}", align: center, pitch: body}
+      - {text: "{division}", optional: true, align: center, pitch: body}
+      - columns:
+          - width: 244.8
+            blocks:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", optional: true, left: 36, above: 13.8}
+                between:
+                  - {text: "v.", above: 13.8, below: 13.8}
+          - {width: 21.6, repeat: ")", align: center}
+          - valign: center
+            blocks:
+              - {text: "No. {case_number}", left: 14.4}
+        gutter: 0
+        above: 12
+      - columns:
+          - {width: 266.4, blocks: [{rule: 0.5}]}
+          - {blocks: []}
+        gutter: 0
+  - {text: "{brief_title}", align: center, bold: true, underline: true, pitch: body, above: 12, keep: true}
+# FRCP 11(a) (the signer's address, e-mail address and telephone number), LR Gen P 5.03(c) (the signature "s/" and the
+# attorney's name): a double line below the body the date at the margin; 3.25 inches in, "Respectfully submitted,", a
+# double line below it the signature, a single line below that the signer's lines, one paragraph each, so the block
+# may run on to the next page as the exemplar's does.
+closing:
+  - {text: "DATED: {date}", pitch: body, above: 24, keep: true}
+  - {text: "Respectfully submitted,", pitch: body, left: 234, above: 24, keep: true}
+  - {text: "s/ {signature.signer}", left: 234, above: 24, keep: true}
+  - {text: "{signature.lines}", left: 234, above: 13.8}
+# LR Gen P 5.06(e): a certificate of service on every filing, naming who was served and how: on a page of its own with
+# the caption again, its title centered in bold, the statement (service through CM/ECF), each person served half an
+# inch in a single line apart, the signer and role 3.25 inches in.
+after_tail:
+  - {break: true}
+  - *caption
+  - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, pitch: body, above: 12, keep: true}
+  - {text: "I hereby certify that on {certificate_of_service.date}, I electronically filed the foregoing with the Clerk of the District Court using the CM/ECF system, which will send notification of such filing electronically to the following counsel of record, who are served by that means:", pitch: body, indent: 36}
+  - each: certificate_of_service.served
+    blocks:
+      - {text: "{.}", left: 36, above: 13.8}
+  - group:
+      - {text: "s/ {certificate_of_service.signer}", left: 234}
+      - {text: "{certificate_of_service.role}", left: 234, above: 13.8}
+    above: 24

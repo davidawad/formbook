@@ -79,11 +79,24 @@ Primary sources: the Local Rules of the Northern District of West Virginia (the 
 
 Overlay (`usage/OVERLAY-amsted-motion-brief.txt`): pages 1–5 pair with the same filed pages (95.6%, 85.8%, 79.3%, 68.9%, 50.2% word overlap); page 6 and page 7 pair with filed page 24 (the sample skips filed pages 8 to 22), page 8 with filed page 26 (the certificate). The pairing is a diagnostic, not a score.
 
+## On the FRCP base (fb-595.17.10, 2026-10-29)
+
+`typst/layout.yaml` names the generic federal district brief (`base: /lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and overlays only what N.D. W. Va. sets itself, each rule cited there; `typst/wvnd-motion-brief.typ` names the face, keeps the folder's rule asserts and hands the merged layout to the shared document model (`lib/typst/xdoc.typ`). `latex/` and `docx/` are generated from the merged layout by `fb engines gen` (do not edit them; `fb engines gen --check` fails on a stale one). The per-folder typst code and the docx filter `wvnd-motion-brief.lua` are gone. The status table, Layout and Markdown contract sections above describe the earlier template where they differ from this list.
+
+- Face: Times New Roman, 12 pt (LR Civ P 7.02(a) names it); footnotes 11 pt single spaced, as before.
+- The caption is no longer typed row by row (`caption.lines` with blank rows and `case_row`): the frontmatter gives `caption.parties` (`names`, `designation`), and the layout sets each party's names, its designation half an inch in (the exemplar's; the earlier template set 1.5 inches), "v." at the margin, a blank line between each, a repeat column of `)` as high as they are, and the file number centered on their height. A rule closes the party column and the title is underlined, as the exemplar sets them: DEF-COVER-002 now passes on every engine, so the folder's typst and docx lines left `data/cover-structure-baseline.txt`.
+- The certificate of service repeats the caption on a page of its own, as before (one layout block used twice).
+- The signature lines are one paragraph each, so the block may run on to the next page, as the exemplar's does (pages 24 to 25): in the sample it runs from page 7 to page 8. Tier 2, ACCEPTED (the exemplar's practice). The earlier template set it unbreakable.
+- The 25-page limit of LR Civ P 7.02(a) is checked on the render (`eval.yaml` `params.page_limit: 25`, DEF-LEN-001) in every engine; it counts the whole render, the certificate of service too, which is stricter than the rule (the earlier typst assertion counted the pages before the certificate).
+- The Fed. R. Civ. P. 11(a) asserts (an e-mail address and a telephone number among the signature lines) and the LR Gen P 5.06(e) assert (`served` given) stay in the typst template; they stop the typst render, which the latex and docx renders follow.
+
+Pages reviewed: 9 of 9 on typst, latex and docx after the move, as text layout (`pdftotext -layout`) and word boxes (`-bbox`): this pod's image viewer could not open a PNG, so no page was looked at as a picture. The latex and docx renders break every line where typst does (XENG-003), so their pages carry the same text.
+
 ## Engines
 
-DOCX (`docx/`): declarative `reference.xml` uses the shared xengine styles and inherits `{font}` from Typst; `wvnd-motion-brief.lua` writes the caption, heading numbers, signature block and certificate. `fb render --engine docx` creates the DOCX and LibreOffice PDF. Tier-1 and cross-engine checks pass.
+All three engines on the shared document model; Gate 4 CROSS-ENGINE gates the latex and docx renders against typst (`params.cross_engine: gate` in `eval.yaml`).
 
-- Matches the typst form: Liberation Serif 12 pt (`pdffonts`: LiberationSerif only), letter, 1 in margins, body double spaced at an exact 24 pt pitch, 0.5 in first-line indent, the caption with a ")" column (each line an exact 13.8 pt row; the case number beside its row), the brief title bold and centered, level 1 headings centered bold underlined, level 2 headings "I." with a hanging label, signature block at 3.25 in ("DATED:", "Respectfully submitted,", the "s/" line), footnotes native and 11 pt single spaced, page number centered at the foot, the certificate of service on its own page with the caption repeated.
-- Differs: the gap after a heading number is a tab stop (typst: a grid cell). Levels 3 and 4 do not occur in the sample; they are set as hanging labels at 0.5 in and 1 in (typst: grid cells, not checked). Pagination differs slightly (docx memorandum 7 pages, typst 7 pages; the certificate is page 8 in both).
-- BLOCKED: `sh tools/check.sh <court-dir> --engine docx` cannot run. It exits 2 with `Error: open .../motion-brief/checks.yaml: no such file or directory` (no `checks.yaml` for this court in this snapshot; not authored here).
-- The 25-page limit of LR Civ P 7.02(a) is checked by the typst template only; the docx memorandum runs 7 pages on the LibreOffice PDF.
+- `tools/check.sh <dir>`: RESULT: 12 checks passed, 0 failed.
+- `tools/check.sh <dir> --engine latex`: RESULT: 15 checks passed, 0 failed; XENG-001..003 PASS (9 pages, 218/218 lines).
+- `tools/check.sh <dir> --engine docx`: RESULT: 16 checks passed, 0 failed; XENG-001..003 PASS (9 pages, 218/218 lines).
+- `tools/check-selftest.sh` reads a court folder's `court.json`; this doc-type folder has none, so it does not run here.

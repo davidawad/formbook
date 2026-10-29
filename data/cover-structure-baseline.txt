@@ -1031,7 +1031,6 @@ courts/fourth-circuit/virginia/federal/eastern-district/complaint typst
 courts/fourth-circuit/virginia/federal/eastern-district/motion-brief typst
 courts/fourth-circuit/virginia/federal/western-district/complaint docx
 courts/fourth-circuit/virginia/federal/western-district/complaint typst
-courts/fourth-circuit/virginia/federal/western-district/motion-brief docx
 courts/fourth-circuit/virginia/federal/western-district/motion-brief typst
 courts/fourth-circuit/virginia/state/court-of-appeals/amicus-brief docx
 courts/fourth-circuit/virginia/state/court-of-appeals/amicus-brief latex
@@ -1080,8 +1079,6 @@ courts/fourth-circuit/west-virginia/federal/bankruptcy-southern-district/motion-
 courts/fourth-circuit/west-virginia/federal/bankruptcy-southern-district/motion-brief typst
 courts/fourth-circuit/west-virginia/federal/northern-district/complaint docx
 courts/fourth-circuit/west-virginia/federal/northern-district/complaint typst
-courts/fourth-circuit/west-virginia/federal/northern-district/motion-brief docx
-courts/fourth-circuit/west-virginia/federal/northern-district/motion-brief typst
 courts/fourth-circuit/west-virginia/state/intermediate-court-of-appeals/amicus-brief docx
 courts/fourth-circuit/west-virginia/state/intermediate-court-of-appeals/amicus-brief latex
 courts/fourth-circuit/west-virginia/state/intermediate-court-of-appeals/amicus-brief typst

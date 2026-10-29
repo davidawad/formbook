@@ -1,0 +1,78 @@
+# U.S. District Court for the Eastern District of Virginia (vaed): a memorandum in support of a motion, on the generic
+# FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with the E.D. Va. local rules overlaid here. The shared
+# document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines
+# gen`). Rules: E.D. Va. Local Civil Rules (amended December 1, 2024), https://www.vaed.uscourts.gov/sites/vaed/files/
+# Local%20Rules%20EDVA%20December%201%202024.pdf (../README.md quotes them). The base already meets L.R. 7(F)(3):
+# 12-point type, footnotes included, one-inch margins, the brief double-spaced on 8-1/2 x 11 inch pages. The 30-page
+# limit of an opening brief (7(F)(3)) is checked on the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, as the exemplar sets it.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE EASTERN DISTRICT OF VIRGINIA"
+# L.R. 7(F)(3): the brief double-spaced, its headings too: each at the body pitch with no added space; a section
+# centered in bold capitals, the argument headings numbered by the template, "I." at the margin and "A." half an inch
+# in, each label in a half-inch box with the title's later lines hung under it (the exemplar's).
+heading:
+  - {align: center, bold: true, upper: true, pitch: body, above: 0, below: 0}
+  - {bold: true, number: "I.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, number: "A.", label_box: 36, left: 36, pitch: body, above: 0, below: 0}
+# FRCP 10(a), 7(b)(2): the court's name and the division the case sits in (the exemplar's), centered in bold; the
+# parties in a box ruled on all four sides, each party's names, its designation 1.4
+# inches in, "v." a single line from each; the file number beside the box, centered on its height; the paper's title
+# centered, bold and underlined (the exemplar's caption).
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{division}", optional: true, align: center, bold: true}
+  - columns:
+      - width: 237.6
+        blocks:
+          - box:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", optional: true, left: 100.8}
+                between:
+                  - {text: "v.", above: 13.8, below: 13.8}
+            stroke: {top: 0.75, right: 0.75, bottom: 0.75, left: 0.75}
+            inset: 10.8
+      - valign: center
+        blocks:
+          - {text: "{case_label|Civil Action No.} {case_number}"}
+    gutter: 18
+    above: 24
+  - {text: "{brief_title}", align: center, bold: true, underline: true, left: 36, right: 36, above: 24, below: 24}
+# FRCP 11(a), L.R. 7(B) (the attorney's office address and telephone number): a double line below the body the date at
+# the margin; a double line below it, in a column 3.25 inches in, "Respectfully submitted,", the party, the signature
+# and the signer's lines, each a single line apart. Kept with the body's last paragraph.
+keep_with_closing: true
+closing:
+  - group:
+      - {text: "Date: {signature.date}"}
+      - columns:
+          - {width: 234, blocks: []}
+          - blocks:
+              - {text: "Respectfully submitted,"}
+              - {text: "{signature.party}", optional: true, above: 13.8}
+              - {text: "{signature.by}", above: 13.8}
+              - {text: "{signature.lines}", above: 13.8}
+        gutter: 0
+        above: 24
+    above: 24
+# FRCP 5(d)(1)(B): the certificate of service, when the frontmatter gives one, on a page of its own (the exemplar's):
+# its statement double-spaced, the persons served (an empty entry a blank line between two), the signer again.
+after_tail:
+  - when: certificate
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, pitch: body, keep: true}
+      - {text: "{certificate.text}", pitch: body, indent: 36}
+      - {text: "{certificate.served}", above: 13.8}
+      - columns:
+          - {width: 234, blocks: []}
+          - blocks:
+              - {text: "{signature.by}"}
+              - {text: "{signature.lines}", above: 13.8}
+        gutter: 0
+        above: 24
