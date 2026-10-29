@@ -13,7 +13,7 @@
 #let type-size = 14pt                       // MRAP 20(a)(4)(B) (MA-FORM-002): proportional font of 14 point or larger, footnotes included.
 #let page-margin = 1in                      // MRAP 20(a)(4)(A) (MA-FORM-003): top, bottom, left and right margins at least 1 inch.
 #let body-leading = 1.02em                  // MRAP 20(a)(4)(C) (MA-FORM-004): double spacing, at most 3 lines per vertical inch.
-#let single-leading = 0.25em                // MRAP 20(a)(4)(C): argument headings, footnotes, indented quotations may be single-spaced.
+#let single-leading = 0.46em                // MRAP 20(a)(4)(C): argument headings, footnotes, indented quotations may be single-spaced (0.46 em on the cap-height line: a 1.15 em pitch).
 #let para-indent = 0.5in                    // style: first-line indent of text paragraphs.
 #let toc-depth = 3
 #let sig-indent = 3.2in                     // style: signature and counsel blocks start right of centre.
@@ -38,17 +38,17 @@
   meta.at(key)
 }
 
-/// Items one per line, flush left, no spacing beyond `spacing`.
+/// Items one per line, flush left, single-spaced.
 #let lines-of(items, bold: false) = stack(
   dir: ttb,
-  spacing: 0.3em,
+  spacing: single-leading,
   ..items.map(l => if bold { text(weight: "bold", inl(l)) } else { inl(l) }),
 )
 
 /// One caption side: the party names, then the designation (none for the "v." line between the sides).
 #let caption-side(side) = align(center)[
   #set par(leading: single-leading, first-line-indent: 0pt)
-  #stack(dir: ttb, spacing: 0.4em, ..side.names.map(n => inl(n)))
+  #stack(dir: ttb, spacing: single-leading, ..side.names.map(n => inl(n)))
   #if "designation" in side [
     #v(0.25em)
     #emph(side.designation)
@@ -60,7 +60,7 @@
   set par(leading: single-leading, first-line-indent: 0pt)
   stack(
     dir: ttb,
-    spacing: 0.3em,
+    spacing: single-leading,
     ..g.names.map(n => text(weight: "bold", inl(n))),
     ..g.at("lines", default: ()).map(l => inl(l)),
   )
@@ -76,7 +76,7 @@
   #for s in sig.at("signers", default: ()) [
     #v(1.2em)
     #underline[#inl(s.name)]
-    #v(0.2em)
+    #v(single-leading)
     #lines-of(s.at("lines", default: ()))
   ]
   #if sig.at("lines", default: ()).len() > 0 [
@@ -152,7 +152,7 @@
     number-align: center + bottom,
   )
   set text(font: font-family, size: type-size, lang: "en", hyphenate: false)
-  set par(leading: body-leading, spacing: 0pt, first-line-indent: (amount: para-indent, all: true), justify: false)
+  set par(leading: body-leading, spacing: body-leading, first-line-indent: (amount: para-indent, all: true), justify: false)
   set heading(numbering: none)
 
   // Heading levels in the markdown body: level 1 is a section (centred, capitals, bold); levels 2 and 3 are

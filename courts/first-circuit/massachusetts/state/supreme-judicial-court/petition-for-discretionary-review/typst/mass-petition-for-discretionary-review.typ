@@ -193,6 +193,7 @@
   set par(justify: false, leading: body-leading, spacing: para-spacing, first-line-indent: para-indent)
 
   // Headings: level 1 centered bold; level 2 bold, left; single-spaced (MRAP 20(a)(4)(C) allows argument headings).
+  show heading: set text(size: type-size) // headings in the text size, not typst's larger default (MRAP 20(a)(4)(B))
   show heading.where(level: 1): it => {
     v(para-spacing)
     block(sticky: true, width: 100%, par(leading: single-leading, spacing: single-leading, first-line-indent: 0pt, align(center, text(weight: "bold", it.body))))

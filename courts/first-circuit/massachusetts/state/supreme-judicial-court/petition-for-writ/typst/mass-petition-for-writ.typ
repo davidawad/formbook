@@ -15,7 +15,7 @@
 #let font-family = "Times New Roman"
 #let type-size = 14pt                      // MRAP 20 (a) (4) (B): proportionally spaced font of 14 point or larger, footnotes included.
 #let body-leading = 1.65em                 // MRAP 20 (a) (4) (C): double-spaced (not more than 3 lines per vertical inch, 27 lines per page).
-#let single-leading = 0.2em                // MRAP 20 (a) (4) (C): headings, footnotes, indented quotations may be single-spaced; also the cover and counsel blocks.
+#let single-leading = 0.46em               // MRAP 20 (a) (4) (C): headings, footnotes, indented quotations may be single-spaced; also the cover and counsel blocks (0.46 em on the cap-height line: a 1.15 em pitch).
 #let page-margin = 1in                     // MRAP 20 (a) (4) (A): top, bottom, left and right margins at least 1 inch.
 #let para-indent = 0.5in                   // style: first-line paragraph indent.
 #let sig-indent = 3.2in                    // style: the signature block starts right of centre.
@@ -41,10 +41,10 @@
   meta.at(key)
 }
 
-/// A list of lines set as a stack: each entry is one line of the block (no forced breaks).
+/// A list of lines set as a stack: each entry is one line of the block (no forced breaks), single-spaced.
 #let lines-stack(items, style: none) = stack(
   dir: ttb,
-  spacing: 0.15em,
+  spacing: single-leading,
   ..items.map(i => if style == none { inl(i) } else { style(inl(i)) }),
 )
 
@@ -60,9 +60,9 @@
 #let counsel-group(g) = {
   set par(leading: single-leading, spacing: 0pt, first-line-indent: 0pt)
   lines-stack(g.names)
-  v(0.15em)
+  v(single-leading)
   lines-stack(g.lines)
-  if "for" in g [ #v(0.3em) #emph(inl(g.at("for"))) ]
+  if "for" in g [ #v(single-leading) #emph(inl(g.at("for"))) ]
 }
 
 /// Two-column grid of counsel groups; the cover and the signature block both use it.
@@ -85,9 +85,9 @@
       set par(leading: single-leading, first-line-indent: 0pt, spacing: 0pt)
       if "signer" in b { lines-stack(("/s/ " + b.signer,)); v(0.5em) }
       lines-stack(b.at("names", default: ()))
-      v(0.3em)
+      v(single-leading)
       lines-stack(b.at("lines", default: ()))
-      if "for" in b [ #v(0.3em) #emph(inl(b.at("for"))) ]
+      if "for" in b [ #v(single-leading) #emph(inl(b.at("for"))) ]
     })
     #if "date" in meta [ #v(1em) Dated: #inl(meta.date) ]
   ]
@@ -151,7 +151,7 @@
   page[
     #set par(leading: single-leading, first-line-indent: 0pt)
     #align(center)[
-      #stack(dir: ttb, spacing: 0.15em, text(weight: "bold")[#court-name], [#court-division])
+      #stack(dir: ttb, spacing: single-leading, text(weight: "bold")[#court-name], [#court-division])
     ]
     #v(0.2in)
     #grid(
