@@ -359,29 +359,34 @@ pub fn lookup_all(
     // head, or where the tail starts when the find (`text`, an authority's fallback) ends in the tail: typst marks a
     // citation before its last character, so one that runs over a page end is on the next page. Only a head that starts
     // before `until`, of `min_head` characters or more (a split before a whole match, below)
-    let split =
-        |s: &str, text: &str, upto: usize, from: usize, until: usize, min_head: usize| -> Option<usize> {
-            for q in page_at(from)..starts.len() {
-                let (b, a) = (starts[q], starts[q - 1].max(from));
-                if a >= until {
-                    break;
-                }
-                if b <= a {
-                    continue;
-                }
-                for k in (min_head.max(1)..=s.len().saturating_sub(MIN_TAIL)).rev() {
-                    let (head, tail) = s.split_at(k);
-                    if all[b..].starts_with(tail) {
-                        if let Some(i) = all[a..b].find(head).filter(|i| a + i < until) {
-                            let ends_in_tail = !text.is_empty()
-                                && s.find(text).is_some_and(|t| t + upto > k);
-                            return Some(if ends_in_tail { b } else { a + i });
-                        }
+    let split = |s: &str,
+                 text: &str,
+                 upto: usize,
+                 from: usize,
+                 until: usize,
+                 min_head: usize|
+     -> Option<usize> {
+        for q in page_at(from)..starts.len() {
+            let (b, a) = (starts[q], starts[q - 1].max(from));
+            if a >= until {
+                break;
+            }
+            if b <= a {
+                continue;
+            }
+            for k in (min_head.max(1)..=s.len().saturating_sub(MIN_TAIL)).rev() {
+                let (head, tail) = s.split_at(k);
+                if all[b..].starts_with(tail) {
+                    if let Some(i) = all[a..b].find(head).filter(|i| a + i < until) {
+                        let ends_in_tail =
+                            !text.is_empty() && s.find(text).is_some_and(|t| t + upto > k);
+                        return Some(if ends_in_tail { b } else { a + i });
                     }
                 }
             }
-            None
-        };
+        }
+        None
+    };
     let mut cur = 0;
     // the last body needle found, where, and its id: a needle equal to it is found at the same place, not after it,
     // when the two are two authorities' (their finds mark the same word) or the last one a section's start (the
