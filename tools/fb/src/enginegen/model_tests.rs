@@ -2661,7 +2661,10 @@ fn a_note_mark_is_attached_and_an_apostrophe_after_emphasis_is_closing() {
 fn a_note_never_starts_on_a_page_before_its_mark() {
     let abc = "aaa bbb ccc ddd eee fff ggg hhh iii jjj kkk lll mmm nnn ooo ppp qqq rrr sss ttt uuu vvv www xxx yyy zzz";
     let (to_t, from_u) = abc.split_at(abc.find(" uuu").unwrap());
-    let para = format!("A{} {to_t}#footnote[Note C.]{from_u} {abc} {abc} {abc}", &abc[1..]);
+    let para = format!(
+        "A{} {to_t}#footnote[Note C.]{from_u} {abc} {abc} {abc}",
+        &abc[1..]
+    );
     if !have(&["typst"]) {
         return;
     }
@@ -2712,11 +2715,17 @@ fn a_note_never_starts_on_a_page_before_its_mark() {
     let starts = query("<start>");
     assert_eq!(entries.len(), starts.len());
     for e in &entries {
-        assert!(e["entry"].as_i64() >= e["mark"].as_i64(), "a note starts on a page before its mark: {e}");
+        assert!(
+            e["entry"].as_i64() >= e["mark"].as_i64(),
+            "a note starts on a page before its mark: {e}"
+        );
     }
     // the fixture moves some mark's line (and its note) to the page after its paragraph's first line
     assert!(
-        entries.iter().zip(&starts).any(|(e, s)| e["mark"].as_i64() > s.as_i64()),
+        entries
+            .iter()
+            .zip(&starts)
+            .any(|(e, s)| e["mark"].as_i64() > s.as_i64()),
         "no trial moved a mark's line on: {entries:?}"
     );
 }
