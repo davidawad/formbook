@@ -254,7 +254,17 @@ fn a_list_offset_moves_every_list_style() {
     assert!(!plain[0].1.contains("\\setlist[1]"));
     let l = layout(&format!("{LAYOUT}list: {{left: 36}}\n"));
     let files = super::gen::generate(&l, "Times New Roman").unwrap();
-    assert!(files[0].1.contains("\\setlist[1]{leftmargin=72bp}"), "{}", files[0].1);
+    assert!(
+        files[0].1.contains("\\setlist[1]{leftmargin=72bp}"),
+        "{}",
+        files[0].1
+    );
     assert!(files[2].1.contains(r#"w:styleId="XdList1""#));
-    assert!(files[2].1.contains(r#"<w:ind w:left="1440" w:hanging="720"/>"#), "{}", files[2].1);
+    assert!(
+        files[2]
+            .1
+            .contains(r#"<w:ind w:left="1440" w:hanging="720"/>"#),
+        "{}",
+        files[2].1
+    );
 }

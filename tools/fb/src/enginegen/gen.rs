@@ -461,7 +461,11 @@ pub fn is_running(text: &str) -> bool {
 
 /// The number of lines of the page-number footer: a running footer's lines, else one.
 pub fn footer_lines(l: &Value) -> usize {
-    match l.get("page_number").and_then(|p| p.get("text")).and_then(Value::as_str) {
+    match l
+        .get("page_number")
+        .and_then(|p| p.get("text"))
+        .and_then(Value::as_str)
+    {
         Some(t) if is_running(t) => t.matches("<br>").count() + 1,
         _ => 1,
     }

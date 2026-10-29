@@ -2821,7 +2821,11 @@ fn a_running_footer_prints_frontmatter_fields_in_every_engine() {
     };
     // typst: three lines under the text, the number first
     let pages = f.typst_pages().unwrap();
-    let tail: Vec<&str> = pages[0].lines().map(str::trim).filter(|s| !s.is_empty()).collect();
+    let tail: Vec<&str> = pages[0]
+        .lines()
+        .map(str::trim)
+        .filter(|s| !s.is_empty())
+        .collect();
     assert_eq!(
         tail[tail.len() - 3..],
         ["1", "Short Title", "Doe v. Roe, Case No. 1:26-cv-1"],
@@ -2829,17 +2833,36 @@ fn a_running_footer_prints_frontmatter_fields_in_every_engine() {
     );
     // LaTeX: \xd@foot, a line box per line, the case name in italics
     let tex = f.latex().unwrap();
-    let def = tex.split("\\csname xd@foot\\endcsname{").nth(1).expect("no \\xd@foot");
-    assert_eq!(def.matches("\\setbox0\\hbox to\\textwidth").count(), 3, "{def}");
-    assert!(def.contains("\\thepage{}") && def.contains("Short Title") && def.contains("{\\xd@em Doe}"));
+    let def = tex
+        .split("\\csname xd@foot\\endcsname{")
+        .nth(1)
+        .expect("no \\xd@foot");
+    assert_eq!(
+        def.matches("\\setbox0\\hbox to\\textwidth").count(),
+        3,
+        "{def}"
+    );
+    assert!(
+        def.contains("\\thepage{}") && def.contains("Short Title") && def.contains("{\\xd@em Doe}")
+    );
     assert!(def.contains("Case No. 1:26-cv\\mbox{-}1"), "{def}");
     // Word: the document writes its footer, a paragraph per line, the PAGE field in the first, the distance three
     // lines above the one-line footer's bottom
     f.docx().unwrap();
     let footers = f.written("footers.tsv").unwrap();
-    let page = footers.lines().find(|l| l.starts_with("rIdXdPage\t")).unwrap();
-    assert_eq!(page.matches("<w:p>").count() + page.matches("<w:p ").count(), 3, "{page}");
-    assert!(page.contains(" PAGE ") && page.contains(">Title<") && page.contains("<w:i/>"), "{page}");
+    let page = footers
+        .lines()
+        .find(|l| l.starts_with("rIdXdPage\t"))
+        .unwrap();
+    assert_eq!(
+        page.matches("<w:p>").count() + page.matches("<w:p ").count(),
+        3,
+        "{page}"
+    );
+    assert!(
+        page.contains(" PAGE ") && page.contains(">Title<") && page.contains("<w:i/>"),
+        "{page}"
+    );
     let fin = f.written("final.xml").unwrap();
     assert!(fin.contains(r#"w:footer="180""#), "{fin}");
 }
@@ -2894,8 +2917,15 @@ fn the_body_before_the_tables_on_the_cover_s_page() {
     };
     let pages = f.typst_pages().unwrap();
     assert_eq!(pages.len(), 3, "{pages:?}");
-    assert!(pages[0].contains("COURT OF TESTS") && pages[0].contains("The motion."), "{pages:?}");
-    assert!(pages[1].contains("Contents") && pages[1].contains("MEMORANDUM") && !pages[1].contains("The motion."));
+    assert!(
+        pages[0].contains("COURT OF TESTS") && pages[0].contains("The motion."),
+        "{pages:?}"
+    );
+    assert!(
+        pages[1].contains("Contents")
+            && pages[1].contains("MEMORANDUM")
+            && !pages[1].contains("The motion.")
+    );
     assert!(pages[2].contains("The memorandum."));
     // LaTeX: the motion between the cover and its \clearpage, the contents after it
     let tex = f.latex().unwrap();
@@ -2905,7 +2935,11 @@ fn the_body_before_the_tables_on_the_cover_s_page() {
         tex.find("Contents").unwrap(),
     );
     assert!(court < motion && motion < contents, "{tex}");
-    assert!(!tex[court..motion].contains("\\clearpage") && tex[motion..contents].contains("\\clearpage"), "{tex}");
+    assert!(
+        !tex[court..motion].contains("\\clearpage")
+            && tex[motion..contents].contains("\\clearpage"),
+        "{tex}"
+    );
     // Word: the motion before the first page break, the contents after it
     let doc = f.docx().unwrap();
     let brk = doc.find("pageBreakBefore").unwrap();
@@ -2920,7 +2954,12 @@ fn blocks_and_a_word_limit_on_the_body_s_page_count() {
     let base = "page_number: {align: center}\nfront:\n  - {text: MEMORANDUM, align: center}\nwords: {limit: 5, limit_pages: 1}\nafter_tail:\n  - when: xd.pages\n    over: 1\n    blocks:\n      - {text: \"CERTIFIED {xd.words}\"}\n";
     let l = layout(base);
     // one page and six words: no certificate, no stop
-    let Some(f) = fx("pages-short", &l, "---\nx: 1\n---\nOne two three four five six.\n", &["typst", "pandoc", "pdftotext"]) else {
+    let Some(f) = fx(
+        "pages-short",
+        &l,
+        "---\nx: 1\n---\nOne two three four five six.\n",
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
         return;
     };
     let pages = f.typst_pages().unwrap();
@@ -2928,16 +2967,28 @@ fn blocks_and_a_word_limit_on_the_body_s_page_count() {
     assert!(!pages[0].contains("CERTIFIED"), "{pages:?}");
     // LaTeX: the certificate under \ifnum on the body's page count, the marks around the body
     let tex = f.latex().unwrap();
-    assert!(tex.contains("\\xd@pmark{start}") && tex.contains("\\xd@pmark{end}"), "{tex}");
-    assert!(tex.contains("\\ifnum\\xd@bodypages>1\\relax") && tex.contains("CERTIFIED"), "{tex}");
+    assert!(
+        tex.contains("\\xd@pmark{start}") && tex.contains("\\xd@pmark{end}"),
+        "{tex}"
+    );
+    assert!(
+        tex.contains("\\ifnum\\xd@bodypages>1\\relax") && tex.contains("CERTIFIED"),
+        "{tex}"
+    );
     assert!(tex.contains("\\PackageError{xdoc}"), "{tex}");
     // Word: the start and end needles; no pages known yet, no certificate
     let doc = f.docx().unwrap();
     let needles = f.written("needles.tsv").unwrap();
-    assert!(needles.contains("P:start\tB\tmemorandum") && needles.contains("P:end\tB\t"), "{needles}");
+    assert!(
+        needles.contains("P:start\tB\tmemorandum") && needles.contains("P:end\tB\t"),
+        "{needles}"
+    );
     assert!(!doc.contains("CERTIFIED"));
     // two pages and six words: typst stops the render
-    let long = format!("---\nx: 1\n---\nOne two three four five six.\n\n{}\n", "Word\n\n".repeat(60));
+    let long = format!(
+        "---\nx: 1\n---\nOne two three four five six.\n\n{}\n",
+        "Word\n\n".repeat(60)
+    );
     let Some(g) = fx("pages-long", &l, &long, &["typst"]) else {
         return;
     };
@@ -2949,7 +3000,10 @@ fn blocks_and_a_word_limit_on_the_body_s_page_count() {
         return;
     };
     let pages = h.typst_pages().unwrap();
-    assert!(pages.len() >= 2 && pages.last().unwrap().contains("CERTIFIED"), "{pages:?}");
+    assert!(
+        pages.len() >= 2 && pages.last().unwrap().contains("CERTIFIED"),
+        "{pages:?}"
+    );
 }
 
 #[test]
@@ -2969,19 +3023,53 @@ fn papers_before_the_cover_are_numbered_on_their_own() {
     };
     let pages = f.typst_pages().unwrap();
     assert_eq!(pages.len(), 5, "{pages:?}");
-    let last_line = |p: &str| p.lines().rev().find(|l| !l.trim().is_empty()).unwrap_or("").trim().to_string();
+    let last_line = |p: &str| {
+        p.lines()
+            .rev()
+            .find(|l| !l.trim().is_empty())
+            .unwrap_or("")
+            .trim()
+            .to_string()
+    };
     // the order unnumbered, the motion 1, the cover 1, the contents (only the memorandum's heading) 2, the body 3
-    assert!(pages[0].contains("ORDER") && pages[0].contains("BY THE COURT:") && last_line(&pages[0]) == "BY THE COURT:");
-    assert!(pages[1].contains("MOTION") && pages[1].contains("Signed.") && last_line(&pages[1]) == "1", "{pages:?}");
-    assert!(pages[2].contains("MEMORANDUM") && last_line(&pages[2]) == "1", "{pages:?}");
-    assert!(pages[3].contains("Argument") && !pages[3].contains("Grounds"), "{pages:?}");
-    assert!(pages[4].contains("The argument.") && last_line(&pages[4]) == "3", "{pages:?}");
+    assert!(
+        pages[0].contains("ORDER")
+            && pages[0].contains("BY THE COURT:")
+            && last_line(&pages[0]) == "BY THE COURT:"
+    );
+    assert!(
+        pages[1].contains("MOTION") && pages[1].contains("Signed.") && last_line(&pages[1]) == "1",
+        "{pages:?}"
+    );
+    assert!(
+        pages[2].contains("MEMORANDUM") && last_line(&pages[2]) == "1",
+        "{pages:?}"
+    );
+    assert!(
+        pages[3].contains("Argument") && !pages[3].contains("Grounds"),
+        "{pages:?}"
+    );
+    assert!(
+        pages[4].contains("The argument.") && last_line(&pages[4]) == "3",
+        "{pages:?}"
+    );
     // LaTeX: the order under \pagestyle{empty}, the motion from 1 in arabic, the document from 1 again; the motion's
     // heading without a mark
     let tex = f.latex().unwrap();
-    let (o, m, c) = (tex.find("It is ordered.").unwrap(), tex.find("The motion.").unwrap(), tex.find("MEMORANDUM").unwrap());
-    assert!(tex[..o].contains("\\pagestyle{empty}") && tex[o..m].contains("\\pagenumbering{arabic}"), "{tex}");
-    assert!(tex[m..c].contains("\\clearpage\\pagenumbering{arabic}") || tex[m..c].matches("\\pagenumbering{arabic}").count() >= 1, "{tex}");
+    let (o, m, c) = (
+        tex.find("It is ordered.").unwrap(),
+        tex.find("The motion.").unwrap(),
+        tex.find("MEMORANDUM").unwrap(),
+    );
+    assert!(
+        tex[..o].contains("\\pagestyle{empty}") && tex[o..m].contains("\\pagenumbering{arabic}"),
+        "{tex}"
+    );
+    assert!(
+        tex[m..c].contains("\\clearpage\\pagenumbering{arabic}")
+            || tex[m..c].matches("\\pagenumbering{arabic}").count() >= 1,
+        "{tex}"
+    );
     assert_eq!(tex.matches("\\xd@hmark{").count(), 1, "{tex}");
     // Word: a section per paper (the order's without a footer, the motion's numbered from 1), the body from 1 again;
     // the motion's heading no needle, a needle at each paper's last paragraph
@@ -2990,7 +3078,10 @@ fn papers_before_the_cover_are_numbered_on_their_own() {
     let after_order = &doc[o..];
     assert!(after_order.contains("rIdXdNone"), "{doc}");
     let needles = f.written("needles.tsv").unwrap();
-    assert!(needles.contains("L1\tB\titisordered") && needles.contains("L2\tB\tthemotion"), "{needles}");
+    assert!(
+        needles.contains("L1\tB\titisordered") && needles.contains("L2\tB\tthemotion"),
+        "{needles}"
+    );
     assert!(!needles.contains("\tgrounds"), "{needles}");
     let fin = f.written("final.xml").unwrap();
     assert!(fin.contains(r#"w:fmt="decimal" w:start="1""#), "{fin}");
