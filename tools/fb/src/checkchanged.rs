@@ -266,14 +266,19 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         &todo,
         n,
         |(folder, engine)| {
-            Command::new(&exe)
+            let t = std::time::Instant::now();
+            let out = Command::new(&exe)
                 .current_dir(&root)
                 .env("FB_ROOT", &root)
                 .args(["check", folder, "--engine", engine, "--no-render"])
-                .output()
+                .output();
+            (out, t.elapsed())
         },
-        |(folder, engine), out| {
-            eprintln!("fb check-changed: {folder} --engine {engine}");
+        |(folder, engine), (out, took)| {
+            eprintln!(
+                "fb check-changed: {folder} --engine {engine} ({:.1} s)",
+                took.as_secs_f64()
+            );
             match out {
                 Ok(o) => {
                     print!("{}", String::from_utf8_lossy(&o.stdout));
