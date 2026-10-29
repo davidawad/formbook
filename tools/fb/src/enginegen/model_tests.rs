@@ -2789,7 +2789,12 @@ fn the_first_note_s_space_is_typst_s_clearance_and_gap() {
         let s = &refx[at..end];
         let b = s.find("w:before=\"").unwrap() + 10;
         let v: i64 = s[b..b + s[b..].find('"').unwrap()].parse().unwrap();
-        assert!(refx.contains(&format!(" note-before=\"{v}\" ")), "{refx}");
+        // the recipe's attribute, left out at its default
+        assert_eq!(
+            refx.contains(&format!(" note-before=\"{v}\" ")),
+            v > 0,
+            "{refx}"
+        );
         v
     };
     // 12 pt: 9.1 + 7 - 13.8 = 2.3 pt

@@ -135,7 +135,8 @@ footer in a single line box {} pt above the page foot, and the page's margins. T
         fmt(foot as f64 / 20.0),
     ));
     out.push_str(&format!(
-        r#"<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="{half}" body="{body}" single="{single}" indent="{indent}" list="{list}" note="{note}" note-size="{nsize}" note-before="{before}" note-after="{gap}" footer="{foot}"{just}>"#,
+        r#"<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="{half}" body="{body}" single="{single}" indent="{indent}" list="{list}" note="{note}" note-size="{nsize}"{nb} note-after="{gap}" footer="{foot}"{just}>"#,
+        nb = if before > 0 { format!(r#" note-before="{before}""#) } else { String::new() },
         just = if justify { r#" justify="true""# } else { "" }
     ));
     out.push('\n');
