@@ -184,10 +184,12 @@
     ]
     #v(1fr)
     #{
+      // One counsel group sits at the signature indent; several stand side by side, as filed.
       set par(leading: single-leading, first-line-indent: 0pt)
-      pad(left: sig-indent, {
-        for g in need(meta, "counsel") { counsel-group(g) }
-      })
+      let groups = need(meta, "counsel")
+      if groups.len() == 1 { pad(left: sig-indent, counsel-group(groups.at(0))) } else {
+        grid(columns: groups.map(_ => 1fr), column-gutter: 0.3in, ..groups.map(counsel-group))
+      }
     }
   ]
 

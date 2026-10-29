@@ -16,7 +16,7 @@
 #let font-family = ("Liberation Sans",)  // FLADISTCTAPP-FORM-003: Arial 14-point (Rule 9.045(b)). Arial is not vendored and typst warns on an unknown family (warnings fail), so the vendored metric twin Liberation Sans is declared alone (docs/FONTS.md, Arial row).
 #let type-size = 14pt                            // FLADISTCTAPP-FORM-003: 14-point; footnotes and quotations are the same size (FLADISTCTAPP-FORM-005).
 #let body-leading = 1.25em                       // FLADISTCTAPP-FORM-004: double-spaced. Liberation Sans single line is about 1.12 em, so this is about double.
-#let single-leading = 0.2em                      // FLADISTCTAPP-FORM-005, -006: footnotes, quotations and headings may be single-spaced.
+#let single-leading = 0.46em                     // FLADISTCTAPP-FORM-005, -006: footnotes, quotations and headings may be single-spaced (0.46 em on the cap-height line: a 1.15 em pitch).
 #let page-margin = 1in                           // FLADISTCTAPP-FORM-002: at least one inch on all four sides.
 #let para-indent = 0.5in                         // Tier 2: first-line indent of body paragraphs, as in the exemplars.
 #let caption-indent = 0.3in                      // Tier 2: party designations ("Appellants,") set in from the party names.
@@ -127,7 +127,7 @@
       block(width: 100%)[
         #set par(leading: single-leading, first-line-indent: 0pt, spacing: 0pt)
         #block(width: 85%, inl(side.names))
-        #v(0.2em)
+        #v(single-leading)
         #pad(left: caption-indent)[#emph(side.designation)]
       ]
     }

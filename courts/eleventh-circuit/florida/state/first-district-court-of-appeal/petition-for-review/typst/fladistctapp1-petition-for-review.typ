@@ -13,7 +13,7 @@
 #let font-family = "Liberation Sans"            // Rule 9.045(b) names Arial 14-point; Liberation Sans is the vendored metric-compatible Arial (docs/FONTS.md)
 #let type-size = 14pt                            // Rule 9.045(b): 14-point, footnotes and quotations in the same size as the text
 #let body-leading = 1.55em                        // Rule 9.045(b): double-spaced body text (extra leading added to a single line)
-#let single-leading = 0.3em                      // footnotes, block quotations, headings, captions and cover are single-spaced (Rule 9.045(b))
+#let single-leading = 0.46em                     // footnotes, block quotations, headings, captions and cover are single-spaced (Rule 9.045(b)); 0.46 em on the cap-height line is a 1.15 em pitch
 #let page-margin = 1in                           // Rule 9.210(a)(2): margins no less than 1 inch
 #let page-top-margin = 1.1in                     // a little more than 1 inch so a superscript on the first line stays inside the margin
 #let para-indent = 0.5in
@@ -187,12 +187,12 @@
         #for l in meta.lower_tribunal [ #inl(l) \ ]
       ]
     ]
-    #v(1fr)
+    #v(1fr) #v(single-leading)
     #align(center)[
       #set par(leading: single-leading, first-line-indent: 0pt)
       #text(weight: "bold", upper(inl(need(meta, "brief_title"))))
     ]
-    #v(1fr)
+    #v(1fr) #v(single-leading)
     #{
       set par(leading: single-leading, first-line-indent: 0pt)
       pad(left: sig-indent, {

@@ -113,6 +113,9 @@
 /// Counsel group for the cover: names and lines beneath.
 #let counsel-group(g) = {
   set par(leading: single-leading, spacing: 0pt, first-line-indent: 0pt)
+  // An e-mail address wider than its column may break after the "@": its two halves are adjacent boxes, a break
+  // opportunity that adds no character to the text.
+  show regex("\\S+@\\S+"): it => { let i = it.text.position("@") + 1; box(it.text.slice(0, i)) + box(it.text.slice(i)) }
   for n in g.names [ #inl(n) \ ]
   for l in g.lines [ #inl(l) \ ]
 }
