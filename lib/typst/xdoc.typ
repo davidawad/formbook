@@ -1098,11 +1098,26 @@
   set document(title: str(meta.at("title", default: meta.at("doc_title", default: meta.at("brief_title", default: "")))))
   // The page number centered in a single line box in the bottom margin, where Word's footer sets it.
   set page(paper: PAPER.at(spec.at("paper", default: "letter")), margin: (top: pt(m.top), bottom: pt(m.bottom), left: pt(m.left), right: pt(m.right)),
-    // (`page_number.descent`: the footer's top that far below the text, 30 % of the bottom margin by default)
-    footer-descent: if pn != none and "descent" in pn { pt(pn.descent) } else { 30% }, footer: context {
+    // (`page_number.descent`: the footer's top that far below the text, 30 % of the bottom margin by default;
+    // `page_number.foot`, fb-595.96: its last line's box ends that far above the page's foot, the lines stacked upward
+    // from there and wrapping at the text's width, as Word's footer grows)
+    footer-descent: if pn != none and "foot" in pn { 0pt } else if pn != none and "descent" in pn { pt(pn.descent) } else { 30% },
+    footer: context {
       let n = counter(page).get().first()
       let fmt = xd-num.get()
-      if pn != none and fmt != none and n >= pn.at("from", default: 1) {
+      let footed(body) = if pn != none and "foot" in pn {
+        // (measured and placed from the footer's top, the text's foot: a footer taller than the margin under the text
+        // grows up into it, as in Word)
+        layout(size => {
+          let lines = block(width: size.width, {
+            set text(hyphenate: false, kerning: false, ligatures: false)
+            set par(leading: 0pt, spacing: 0pt, linebreaks: "simple", justify: false, first-line-indent: 0pt)
+            body
+          })
+          place(top + left, dy: pt(m.bottom - pn.foot) - measure(lines).height, lines)
+        })
+      } else { body }
+      if pn != none and fmt != none and n >= pn.at("from", default: 1) { footed({
         let al = (left: left, center: center, right: right).at(pn.at("align", default: "center"))
         // the number alone, or the layout's `page_number.text` ("Page {page} of {pages}": pages, the last page's count)
         let label = numbering(fmt, n)
@@ -1116,7 +1131,7 @@
           let shown = if "text" in pn { pn.text.replace("{pages}", last).replace("{page}", label) } else { label }
           align(al, text(..foot-text(spec, pn), shown))
         }
-      }
+      }) }
     }, ..{
       // the page background: a coloured cover (cover_fill) and pleading paper (pleading), each when the layout sets it
       let fill = cover-fill(spec).at("background", default: none)

@@ -215,6 +215,17 @@ pub fn template(l: &Value, face: &str) -> Result<String, String> {
         "right" => format!("\\hfil{shown}"),
         _ => format!("\\hfil{shown}\\hfil"),
     };
+    // a footer anchored at its foot (layout.yaml page_number.foot, fb-595.96): its lines in a box of no height above the
+    // footer's baseline, the last line's box ending on the foot (\xd@foot's paragraphs wrap at the text's width)
+    let number = match (super::gen::footed(l)?, running) {
+        (None, _) => number,
+        (Some(_), true) => "\\vbox to0pt{\\vss\\csname xd@foot\\endcsname}".to_string(),
+        (Some(_), false) => format!(
+            "\\vbox to0pt{{\\vss\\setbox0\\hbox to\\textwidth{{{number}}}\\ht0={}bp\\dp0={}bp\\box0}}",
+            fmt(0.8 * foot),
+            fmt(0.2 * foot)
+        ),
+    };
     let style = if l.get("page_number").is_some_and(Value::is_null) {
         "empty"
     } else {

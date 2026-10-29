@@ -782,6 +782,8 @@ return function(spec)
     local descent = spec.page_number and tonumber(spec.page_number.descent) or 0.3 * m.bottom
     local fp = spec.page_number and tonumber(spec.page_number.pitch) or spec.pitch.single
     local foot = tw(math.floor((m.bottom - descent - nlines * fp) * 20 + 0.5) / 20)
+    -- (page_number.foot, fb-595.96: the footer's last line ends that far above the page's foot, its lines growing upward)
+    if spec.page_number and spec.page_number.foot then foot = tw(spec.page_number.foot) end
     -- (pleading paper: the header that draws it on every page, the first page's too)
     local hdr = spec.pleading and ('<w:headerReference w:type="default" r:id="' .. PLEADING_ID .. '"/>'
       .. (first and '<w:headerReference w:type="first" r:id="' .. PLEADING_ID .. '"/>' or "")) or ""

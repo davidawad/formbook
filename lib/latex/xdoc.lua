@@ -729,8 +729,16 @@ return function(spec)
               elseif x.field then il:extend(xd.inlines(x.field))
               else il:insert(pandoc.RawInline("latex", x.key == "page" and "\\thepage{}" or "\\pageref*{xd@lastpage}")) end
             end
-            ls[#ls + 1] = "\\setbox0\\hbox to\\textwidth{" .. (al ~= "left" and "\\hfil " or "") .. tex(il)
-              .. (al ~= "right" and "\\hfil" or "") .. "}\\ht0=" .. bp(0.8 * p) .. "\\dp0=" .. bp(0.2 * p) .. "\\box0 "
+            if spec.page_number.foot then
+              -- (a footer anchored at its foot, page_number.foot, fb-595.96: each line a paragraph of the text's width
+              -- that wraps, as Word's footer paragraphs do, in line boxes of the footer's pitch)
+              ls[#ls + 1] = "{\\hsize\\textwidth\\parindent0pt\\parskip0pt\\parfillskip0pt\\leftskip0pt"
+                .. (al ~= "left" and " plus 1fil" or "") .. "\\rightskip0pt" .. (al ~= "right" and " plus 1fil" or "")
+                .. "\\relax\\noindent " .. tex(il) .. "\\par}"
+            else
+              ls[#ls + 1] = "\\setbox0\\hbox to\\textwidth{" .. (al ~= "left" and "\\hfil " or "") .. tex(il)
+                .. (al ~= "right" and "\\hfil" or "") .. "}\\ht0=" .. bp(0.8 * p) .. "\\dp0=" .. bp(0.2 * p) .. "\\box0 "
+            end
           end
           out:insert(raw("\\expandafter\\gdef\\csname xd@foot\\endcsname{" .. table.concat(ls) .. "}"))
         end

@@ -315,10 +315,23 @@ pub fn word_layout(l: &Value) -> Result<Value, String> {
 pub fn footer(l: &Value) -> Result<(f64, f64, f64), String> {
     let mb = num(l, "margin.bottom", None)?;
     let ps = num(l, "page_number.pitch", Some(num(l, "pitch.single", None)?))?;
+    // `page_number.foot` (fb-595.96): the last line's box ends that far above the page's foot (its baseline a fifth of
+    // the pitch above that), the footer growing upward as Word's does; its distance is Word's footer distance
+    if let Some(foot) = footed(l)? {
+        return Ok((ps, mb - foot - 0.2 * ps, foot));
+    }
     let descent = num(l, "page_number.descent", Some(0.3 * mb))?;
     let skip = descent + 0.8 * ps;
     let dist = mb - descent - ps;
     Ok((ps, skip, dist))
+}
+
+/// The layout's `page_number.foot` (points), when it anchors the footer at its foot.
+pub fn footed(l: &Value) -> Result<Option<f64>, String> {
+    match l.get("page_number").and_then(|p| p.get("foot")) {
+        None => Ok(None),
+        Some(_) => num(l, "page_number.foot", None).map(Some),
+    }
 }
 
 /// The generated files of a folder whose template sets `face` and whose layout is `l`.

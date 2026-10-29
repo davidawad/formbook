@@ -3415,20 +3415,104 @@ fn a_box_at_least_its_min_height_in_every_engine() {
     };
     f.typst_pages().unwrap();
     let m = crate::measure::measure(&f.dir.join("out.pdf"), &[]).unwrap();
-    let court = m.pages[0].lines.iter().find(|ln| ln.text == "COURT").unwrap();
+    let court = m.pages[0]
+        .lines
+        .iter()
+        .find(|ln| ln.text == "COURT")
+        .unwrap();
     // the box from the top margin (72) to 192, the next line's baseline at 0.8 x 13.8 below that
     assert!((court.baseline - (192.0 + 11.04)).abs() < 0.05, "{court:?}");
     let tex = f.latex().unwrap();
-    assert!(tex.contains("\\ifdim\\ht4<\\dimexpr120bp-0bp-0bp\\relax"), "{tex}");
+    assert!(
+        tex.contains("\\ifdim\\ht4<\\dimexpr120bp-0bp-0bp\\relax"),
+        "{tex}"
+    );
     let doc = f.docx().unwrap();
-    assert!(doc.contains(r#"<w:trHeight w:val=\"2400\" w:hRule=\"atLeast\"/>"#), "{doc}");
+    assert!(
+        doc.contains(r#"<w:trHeight w:val=\"2400\" w:hRule=\"atLeast\"/>"#),
+        "{doc}"
+    );
     // taller blocks: the box is their height
-    let many = format!("---\ncounsel: [{}]\n---\nBody.\n", vec!["\"C\""; 12].join(", "));
+    let many = format!(
+        "---\ncounsel: [{}]\n---\nBody.\n",
+        vec!["\"C\""; 12].join(", ")
+    );
     let Some(g) = fx("box-min-tall", &l, &many, &["typst", "pdftotext"]) else {
         return;
     };
     g.typst_pages().unwrap();
     let m = crate::measure::measure(&g.dir.join("out.pdf"), &[]).unwrap();
-    let court = m.pages[0].lines.iter().find(|ln| ln.text == "COURT").unwrap();
-    assert!((court.baseline - (72.0 + 12.0 * 13.8 + 11.04)).abs() < 0.05, "{court:?}");
+    let court = m.pages[0]
+        .lines
+        .iter()
+        .find(|ln| ln.text == "COURT")
+        .unwrap();
+    assert!(
+        (court.baseline - (72.0 + 12.0 * 13.8 + 11.04)).abs() < 0.05,
+        "{court:?}"
+    );
+}
+
+#[test]
+fn a_footer_anchored_at_its_foot_wraps_and_grows_upward_in_every_engine() {
+    // (fb-595.96) page_number.foot: N.D. Cal.'s footer, the page number, the paper's title (two lines at 10 pt) and the
+    // case number, its last line ending 8 pt above the page's foot
+    let l = layout("page_number: {align: center, size: 10, pitch: 11.5, foot: 8, text: \"{page}<br>{footer_title}<br>No. {case_number}\"}\n");
+    let title = "DEFENDANTS' NOTICE OF MOTION AND MOTION TO DISMISS OR TRANSFER FOR IMPROPER VENUE OR, IN THE ALTERNATIVE, MOTION TO DISMISS FOR FAILURE TO STATE A CLAIM";
+    let Some(f) = fx(
+        "footer-foot",
+        &l,
+        &format!("---\nfooter_title: \"{title}\"\ncase_number: 16-cv-7189\n---\nBody.\n"),
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
+        return;
+    };
+    f.typst_pages().unwrap();
+    let m = crate::measure::measure(&f.dir.join("out.pdf"), &[]).unwrap();
+    let lines = &m.pages[0].lines;
+    let case = lines.iter().find(|ln| ln.text == "No. 16-cv-7189").unwrap();
+    let num = lines.iter().find(|ln| ln.text == "1").unwrap();
+    // the last line's baseline 792 - 8 - 0.2 x 11.5; the title two lines above it, the number above those
+    assert!((case.baseline - 781.7).abs() < 0.05, "{case:?}");
+    assert!(
+        (num.baseline - (781.7 - 3.0 * 11.5)).abs() < 0.05,
+        "{num:?} {lines:?}"
+    );
+    assert_eq!(
+        lines
+            .iter()
+            .filter(|ln| ln.size == 10.0 && ln.text.contains("MOTION"))
+            .count(),
+        2,
+        "{lines:?}"
+    );
+    // LaTeX: the footer in a box of no height on its baseline, 72 - 8 - 2.3 bp below the text; the lines paragraphs
+    let tpl = std::fs::read_to_string(f.dir.join("latex/template.tex")).unwrap();
+    assert!(
+        tpl.contains("footskip=61.7bp")
+            && tpl.contains("\\vbox to0pt{\\vss\\csname xd@foot\\endcsname}"),
+        "{tpl}"
+    );
+    assert!(f
+        .latex()
+        .unwrap()
+        .contains("\\leftskip0pt plus 1fil\\rightskip0pt plus 1fil\\relax\\noindent"));
+    // Word: the footer 8 pt (160 twips) from the foot, its paragraphs growing upward
+    f.docx().unwrap();
+    assert!(f
+        .written("final.xml")
+        .unwrap()
+        .contains(r#"w:footer="160""#));
+    let refx = std::fs::read_to_string(f.dir.join("docx/reference.xml")).unwrap();
+    assert!(refx.contains(r#"w:footer="160""#), "{refx}");
+    // the number alone, anchored at its foot: one line box on that foot in LaTeX
+    let l = layout("page_number: {align: center, foot: 8}\n");
+    let d: serde_yaml::Value = serde_yaml::from_str(&l).unwrap();
+    let files = gen::generate(&d, "Times New Roman").unwrap();
+    let tpl = &files
+        .iter()
+        .find(|(p, _)| p == "latex/template.tex")
+        .unwrap()
+        .1;
+    assert!(tpl.contains("\\vbox to0pt{\\vss\\setbox0\\hbox to\\textwidth{\\hfil\\thepage\\hfil}\\ht0=11.04bp\\dp0=2.76bp\\box0}"), "{tpl}");
 }

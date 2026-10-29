@@ -99,7 +99,12 @@ pub fn reference(l: &Value, _face: &str) -> Result<String, String> {
     let numbered = !pn.is_some_and(Value::is_null);
     // (a running footer of n lines: its last line box ends n - 1 lines lower, where typst stacks them; lib/docx/xdoc.lua
     // writes its paragraphs from the sample)
-    let lines = super::gen::footer_lines(l) as f64;
+    // (a footer anchored at its foot, page_number.foot: the distance itself, whatever its lines)
+    let lines = if super::gen::footed(l)?.is_some() {
+        1.0
+    } else {
+        super::gen::footer_lines(l) as f64
+    };
     let foot = tw(
         ((dist - (lines - 1.0) * single_pt) * 20.0).round() / 20.0,
         "the page number's distance from the page foot",
