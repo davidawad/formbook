@@ -30,7 +30,7 @@
 // Double spacing (EFILE Part VII (D)): Word "double" for Times New Roman is two 1.15 em single lines, so the
 // extra leading between lines is about 2.3 em minus the font's own line height (about 1.1 em).
 #let body-leading = 1.2em
-#let single-leading = 0.2em            // caption, counsel, headings, block quotations, footnotes (convention)
+#let single-leading = 0.46em           // caption, counsel, headings, block quotations, footnotes (convention); 0.46 em on the cap-height line is a 1.15 em pitch
 #let margins = (top: 1.5in, bottom: 1in, x: 1in)   // L.C.C.R. 4 (A) (1): top 1 1/2 in left blank; the rest: convention
 #let para-indent = 0.5in
 #let sig-indent = 3.25in

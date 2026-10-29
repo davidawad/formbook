@@ -96,7 +96,7 @@
 }
 
 #let lines-of(list, italic: false) = for l in list {
-  block(width: 100%, spacing: 0pt, if italic { emph[#l] } else { [#l] })
+  block(width: 100%, spacing: single, if italic { emph[#l] } else { [#l] })   // one line each, single-spaced
 }
 
 #let front-title(t) = align(center, block(above: 0pt, below: 1.2em, strong(t)))

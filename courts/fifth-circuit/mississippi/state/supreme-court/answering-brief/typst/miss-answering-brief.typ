@@ -16,7 +16,7 @@
 #let indent = 0.5in
 // Double spacing (MRAP 32(a)): line pitch = 1.1em ascent+descent of Liberation Serif plus leading. Single = leading 0.1em.
 #let leading-double = 1.2em
-#let leading-single = 0.25em
+#let leading-single = 0.46em // 0.46 em on the cap-height line: a 1.15 em single-spaced pitch
 
 // ---- Constants (court-wide, not case text) ----------------------------------------------------
 #let court-name = "IN THE SUPREME COURT OF MISSISSIPPI"
