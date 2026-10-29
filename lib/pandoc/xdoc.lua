@@ -1158,6 +1158,11 @@ end
 -- field `words.limit_field` names) stops the render; `words.given`: a frontmatter field that states the count instead
 -- (lib/typst/xdoc.typ computed alike).
 function M.computed(spec, meta)
+  -- `constants`: the layout's court constants (a district's name in the generic FRCP base, fb-595.17) as {xd.<key>}
+  if spec.constants then
+    meta.xd = meta.xd or {}
+    for k, v in pairs(spec.constants) do meta.xd[k] = v end
+  end
   if not spec.words then return meta end
   local w = spec.words
   local n

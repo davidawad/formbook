@@ -1767,7 +1767,6 @@ courts/second-circuit/vermont/federal/bankruptcy-district/motion-brief docx
 courts/second-circuit/vermont/federal/bankruptcy-district/motion-brief typst
 courts/second-circuit/vermont/federal/district/complaint docx
 courts/second-circuit/vermont/federal/district/complaint typst
-courts/second-circuit/vermont/federal/district/motion-brief docx
 courts/second-circuit/vermont/federal/district/motion-brief typst
 courts/second-circuit/vermont/state/supreme-court/amicus-brief docx
 courts/second-circuit/vermont/state/supreme-court/amicus-brief latex

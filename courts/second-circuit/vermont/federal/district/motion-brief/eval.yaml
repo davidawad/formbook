@@ -1,4 +1,14 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (fb-595.68.26, on the shared layout model lib/*/xengine*), so a difference fails.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.17), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
   cross_engine: gate
+  # DEF-LEN-001: L.R. 7(a)(4)(A), a memorandum supporting or opposing a dispositive motion is at most 25 pages,
+  # excluding exhibits and attachments.
+  page_limit: 25
+  # DEF-COVER-002, tier 3: only exemplar 1 (Coulter; Langrock Sperry & Wool) rules the top of the party block; the
+  # exemplars of the two other filers (motion-brief-2, Vermont Attorney General; motion-brief-3, Verdantas, Gardner
+  # Preston) rule it at its right and foot only, as the template does (usage/SOURCE.md).
+  cover_structure_accepted:
+    - finding: 'rules: between "FOR THE DISTRICT OF VERMONT" and "BLACKBERRY CORPORATION, AND"'
+      reason: "exemplars 2 and 3 (two other filers) draw no rule over the party block; exemplar 1's top rule is that filer's style"

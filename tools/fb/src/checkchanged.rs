@@ -76,6 +76,33 @@ pub fn model_folders<C: Fn(&str) -> bool, D: Fn(&str) -> bool>(
         .collect()
 }
 
+/// The doc folders whose layout.yaml names a changed base (`base: /lib/layouts/<name>.yaml`, fb-595.17): of the
+/// tracked `files`, each `<folder>/typst/layout.yaml` whose `base_of(path)` is a changed path under lib/layouts/; only
+/// folders for which `is_doc` holds.
+pub fn base_folders<B: Fn(&str) -> Option<String>, D: Fn(&str) -> bool>(
+    paths: &[String],
+    files: &[String],
+    base_of: B,
+    is_doc: D,
+) -> BTreeSet<String> {
+    let changed: BTreeSet<String> = paths
+        .iter()
+        .filter(|p| p.starts_with("lib/layouts/"))
+        .map(|p| format!("/{p}"))
+        .collect();
+    if changed.is_empty() {
+        return BTreeSet::new();
+    }
+    files
+        .iter()
+        .filter(|p| p.starts_with("courts/"))
+        .filter_map(|p| p.strip_suffix("/typst/layout.yaml").map(|d| (d, p)))
+        .filter(|(_, p)| base_of(p).is_some_and(|b| changed.contains(&b)))
+        .map(|(d, _)| d.to_string())
+        .filter(|d| is_doc(d))
+        .collect()
+}
+
 /// The doc folders of `paths` (repo-relative), given `is_doc(dir)`: does `dir` hold a usage/ folder.
 pub fn doc_folders<F: Fn(&str) -> bool>(paths: &[String], is_doc: F) -> BTreeSet<String> {
     paths
@@ -245,6 +272,24 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
     let is_doc = |d: &str| root.join(d).join("usage").is_dir();
     let mut folders = doc_folders(&paths, is_doc);
     let model = touches_model(&paths);
+    if paths.iter().any(|p| p.starts_with("lib/layouts/")) {
+        let tracked = git_lines(&root, &["ls-files", "--", "courts"])?;
+        let on_base = base_folders(
+            &paths,
+            &tracked,
+            |p| {
+                std::fs::read_to_string(root.join(p))
+                    .ok()
+                    .and_then(|t| crate::enginegen::base::named(&t))
+            },
+            is_doc,
+        );
+        eprintln!(
+            "fb check-changed: the diff touches a base layout (lib/layouts); checking the {} folders on it",
+            on_base.len()
+        );
+        folders.extend(on_base);
+    }
     if model {
         let tracked = git_lines(&root, &["ls-files", "--", "courts"])?;
         let on_model = model_folders(
@@ -390,6 +435,37 @@ mod tests {
             "tools/check.sh",
             "tools/fbx/a"
         ])));
+    }
+
+    #[test]
+    fn a_changed_base_layout_checks_the_folders_on_it_and_only_those() {
+        let files = s(&[
+            "courts/a/brief/typst/layout.yaml",
+            "courts/b/brief/typst/layout.yaml",
+            "courts/c/brief/typst/layout.yaml",
+            "courts/d/brief/typst/main.typ",
+        ]);
+        let base_of = |p: &str| match p {
+            "courts/a/brief/typst/layout.yaml" | "courts/c/brief/typst/layout.yaml" => {
+                Some("/lib/layouts/x.yaml".to_string())
+            }
+            "courts/b/brief/typst/layout.yaml" => Some("/lib/layouts/y.yaml".to_string()),
+            _ => None,
+        };
+        let got = base_folders(
+            &s(&["lib/layouts/x.yaml", "docs/a.md"]),
+            &files,
+            base_of,
+            |d| d != "courts/c/brief",
+        );
+        assert_eq!(got, ["courts/a/brief".to_string()].into_iter().collect());
+        assert!(base_folders(
+            &s(&["courts/a/brief/typst/layout.yaml"]),
+            &files,
+            base_of,
+            |_| true
+        )
+        .is_empty());
     }
 
     #[test]

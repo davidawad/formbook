@@ -1,0 +1,79 @@
+# The generic federal district court brief (fb-595.17): a memorandum of law in support of (or opposing) a motion, as
+# the Federal Rules of Civil Procedure shape it, for the shared document model (lib/typst/xdoc.typ, docs/EVAL-LOOP.md
+# "Generated engines"). A district's folder overlays its local rules on this base:
+#
+#   base: /lib/layouts/frcp-motion-brief.yaml
+#   constants: {district: "FOR THE DISTRICT OF VERMONT"}   # the court's name, second line (FRCP 10(a))
+#   pitch: {body: 27.6}                                    # what the local rule says differently, with its rule
+#
+# The overlay merges key by key into this file (a mapping recursively; a list or a number replaces this one's; `~`
+# drops a key: tools/fb/src/enginegen/base.rs, lib/typst/xdoc.typ with-base). Every number below is the common
+# floor of the district local rules (letter paper, one-inch margins, 12-point type, double-spaced text, numbered
+# pages); a district whose rule differs overrides it in its own layout.yaml, citing the rule. No case text: every
+# string printed comes from the sample's frontmatter ({field}) or from the overlay's constants ({xd.<key>}).
+#
+# Frontmatter (the folder's INPUT): case_number, case_label (default "Civil Action No."), caption.parties: [{names:
+# [..], designation}] ("v." between them), brief_title, signature: {date_line, firm, blocks: [[line, ..], ..],
+# counsel_for}.
+size: 12                  # local rules: 12-point type or larger (D. Vt. L.R. 10(a)(4), D. Me. L.R. 10(b)(1), S.D.N.Y. L. Civ. R. 7.1(b)(1))
+pitch:
+  body: 24                # text double-spaced (D. Vt. L.R. 10(a)(6), S.D.N.Y. L. Civ. R. 7.1(b)(3)): 2 x the type size
+  single: 13.8            # caption, headings, block quotations, footnotes, signature: single, 1.15 x the type size
+margin: {top: 72, bottom: 72, left: 72, right: 72}   # at least one inch on every side (D. Vt. L.R. 10(a)(3))
+indent: 36                # a paragraph's first line, half an inch
+list_indent: 36           # a list item's number in a half-inch box, its text hanging after it
+page_number: {align: center}                          # pages numbered consecutively at the bottom (D. Vt. L.R. 10(a)(5))
+footnote: {size: 12, gap: 7}                          # footnotes at the text size (the 12-point floor includes them)
+quote: {left: 36, right: 36, above: 0, below: 24}     # block quotations single-spaced, indented half an inch each side
+heading:
+  - {align: center, bold: true, upper: true, above: 13.8, below: 13.8}   # a section: centered, bold capitals
+  - {bold: true, above: 13.8, below: 13.8}                               # an argument heading at the margin
+  - {bold: true, italic: true, left: 36, above: 13.8, below: 13.8}       # a sub-heading, half an inch in
+# The court's name, two lines (FRCP 10(a): "a caption with the court's name"): the second line is the district's.
+constants:
+  court: "UNITED STATES DISTRICT COURT"
+  district: ""
+# FRCP 10(a), 7(b)(2): the caption (the court's name, the title of the action with the parties, the file number) and
+# the paper's designation. The parties at the left, closed by a rule at their right and foot, each party's names, its
+# designation a line below, "v." a line from each; the file number beside them, centered on their height; then the
+# paper's title centered, bold and underlined across the page (the convention of the D. Vt. exemplars of three filers:
+# ../courts/second-circuit/vermont/federal/district/motion-brief/usage/SOURCE.md).
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 223.2
+        blocks:
+          - box:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", above: 13.8}
+                between:
+                  - {text: "v.", above: 13.8, below: 13.8}
+            stroke: {right: 0.75, bottom: 0.75}
+            inset: {right: 12, bottom: 10}
+      - valign: center
+        blocks:
+          - {text: "{case_label|Civil Action No.} {case_number}", left: 10.8}
+    gutter: 18
+    above: 24
+  - {text: "{brief_title}", align: center, bold: true, underline: true, left: 36, right: 36, above: 24, below: 13.8}
+# FRCP 11(a): the paper signed by an attorney of record, with the signer's address, e-mail address and telephone
+# number: the date line at the body pitch, a double line below it the firm, the signature line and each signer's
+# lines a line apart, and whom they represent, in a column at the right; kept with the body's last paragraph.
+keep_with_closing: true
+closing:
+  - group:
+      - {text: "{signature.date_line}", pitch: body, indent: 36}
+      - columns:
+          - {width: 208.8, blocks: []}
+          - blocks:
+              - {text: "{signature.firm}", optional: true}
+              - {text: "__________________________________"}
+              - each: signature.blocks
+                blocks:
+                  - {text: "{.}", above: 13.8}
+              - {text: "{signature.counsel_for}", optional: true, above: 13.8}
+        above: 24
+    above: 24

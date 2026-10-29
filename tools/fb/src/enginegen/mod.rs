@@ -6,6 +6,7 @@
 //!   fb engines gen <doc-folder> [--check]
 //!       write latex/template.tex and docx/reference.xml (+ the docx filter) for a folder whose typst template is
 //!       on the shared model (gen.rs); --check writes nothing and exits 1 when a generated file differs
+pub mod base;
 pub mod families;
 pub mod gen;
 mod tex;

@@ -224,6 +224,8 @@
 /// `words.limit` (or the frontmatter field `words.limit_field` names, a court order's limit) stops the render;
 /// `words.given`: a frontmatter field that states the count (the filer's certified count) instead.
 #let computed(spec, meta, body) = {
+  // `constants`: the layout's court constants (a district's name in the generic FRCP base, fb-595.17) as {xd.<key>}
+  let meta = if "constants" in spec { meta + (xd: meta.at("xd", default: (:)) + spec.constants) } else { meta }
   if "words" not in spec { return meta }
   let w = spec.words
   let n = if "given" in w and is-set(meta.at(w.given, default: none)) { int(meta.at(w.given)) } else {
@@ -959,8 +961,31 @@
   ((blocks.slice(0, i) + blocks.slice(i + 1)).join("\n\n"), b)
 }
 
+/// `over` merged onto `base` (a layout's `base`, fb-595.17): a dictionary merges key by key, recursively; any other
+/// value replaces the base's; none (YAML `~`) drops the base's key (tools/fb/src/enginegen/base.rs merge alike).
+#let merge-layout(base, over) = {
+  if type(base) != dictionary or type(over) != dictionary { return over }
+  let out = base
+  for (k, v) in over {
+    if v == none { let _ = out.remove(k, default: none) } else if k in out { out.insert(k, merge-layout(out.at(k), v)) } else { out.insert(k, v) }
+  }
+  out
+}
+
+/// The layout with its `base` merged under it: `base: /lib/layouts/<name>.yaml`, a path from the repo root (the
+/// generic FRCP brief, a federal district's local rules overlaid on it); a base may name its own base.
+#let with-base(spec, depth: 0) = {
+  if type(spec) != dictionary or "base" not in spec { return spec }
+  let over = spec
+  let path = over.remove("base")
+  if type(path) != str or not path.starts-with("/") { panic("xdoc: layout.yaml `base` is a path from the repo root (/lib/layouts/<name>.yaml)") }
+  if depth >= 8 { panic("xdoc: layout.yaml `base` " + path + ": bases chain more than 8 deep (a cycle?)") }
+  merge-layout(with-base(yaml(path), depth: depth + 1), over)
+}
+
 /// The whole document: page, type, the cross-engine model, front matter, body, closing, tail.
 #let xdoc(spec, meta, body) = {
+  let spec = with-base(spec)
   // the values the model computes ({xd.words}), from the sample as written
   let meta = computed(spec, meta, body)
   let m = spec.margin

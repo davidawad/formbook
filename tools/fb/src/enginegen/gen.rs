@@ -384,6 +384,9 @@ pub fn for_folder(dir: &Path) -> Res<Files> {
         ))
     })?;
     let l: Value = serde_yaml::from_str(&text).map_err(|e| bad(format!("layout.yaml: {e}")))?;
+    let root =
+        super::base::root_of(dir).ok_or_else(|| bad("no repo root (data/index.json)".into()))?;
+    let l = super::base::resolve(l, &super::base::reader(&root)).map_err(bad)?;
     let face = crate::typstface::face(dir)
         .ok_or_else(|| bad("the typst template names no face (#let font-family = ..)".into()))?;
     if super::engines_of(dir).contains(&"docx-sh") {

@@ -1,0 +1,13 @@
+# U.S. District Court for the District of Vermont (vtd): a memorandum of law supporting a motion, on the generic FRCP
+# brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D. Vt.'s local rules overlaid here. The shared document
+# model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`).
+# Rules: D. Vt. Local Rules of Procedure (April 20, 2026), https://www.vtd.uscourts.gov/court-info/local-rules-and-orders
+# (../README.md quotes them). The base already meets L.R. 10(a): letter paper (10(a)(1)), one-inch margins (10(a)(3)),
+# 12-point type, footnotes included (10(a)(4)), pages numbered consecutively (10(a)(5)), double spacing except quoted
+# material (10(a)(6)). The 25-page limit of L.R. 7(a)(4)(A) is checked on the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, second line.
+constants:
+  district: "FOR THE DISTRICT OF VERMONT"
+# Word sets a footnote's rule 7.5 pt under the text with the 7 pt gap (the space LibreOffice keeps above its separator).
+footnote: {clearance: 7.5}
