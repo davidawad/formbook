@@ -4,14 +4,15 @@
 //! From pandoc's default reference document: one font (the typst template's, typstface.rs) and size everywhere;
 //! widow control on and no paragraph spacing by default; exact line spacing: Body Text and List Item at the body
 //! pitch, Block Text and Footnote Text at the single pitch, headings at their own; Body Text with a first-line
-//! indent, List Item hanging, Block Text indented both sides; footnotes kept whole with a space after each; headings
-//! black and bold, level 1 centered capitals, levels 4 and 5 italic; links black; letter paper, 1 in margins and a
-//! centered page-number footer (`rIdFooter1`). The styles part is then written as `xmllint --format` writes it
-//! (xmlfmt.rs), so a template built by the shell recipe renders byte-identical.
+//! indent, List Item hanging, Block Text indented both sides; footnotes kept whole with a space after each (and one
+//! before, which LibreOffice sets above a page's first note only); headings black and bold, level 1 centered
+//! capitals, levels 4 and 5 italic; links black; letter paper, 1 in margins and a centered page-number footer
+//! (`rIdFooter1`). The styles part is then written as `xmllint --format` writes it (xmlfmt.rs), so a template built
+//! by the shell recipe renders byte-identical.
 //!
 //! Attributes of `<reference>` (twips, sizes in half points): `size`, `body`, `single` (required); `indent` (720),
-//! `list` (indent), `heading` (single), `heading-before` (240), `heading-after` (120), `quote` (280), `note-after`
-//! (140), `note` (single), `note-size` (size), `footer` (432).
+//! `list` (indent), `heading` (single), `heading-before` (240), `heading-after` (120), `quote` (280), `note-before` (0),
+//! `note-after` (140), `note` (single), `note-size` (size), `footer` (432).
 
 /// The recipe's parameters.
 #[derive(Debug, Clone, PartialEq)]
@@ -26,6 +27,7 @@ pub struct Recipe {
     pub heading_before: String,
     pub heading_after: String,
     pub quote: String,
+    pub note_before: String,
     pub note_after: String,
     pub note: String,
     pub note_size: String,
@@ -47,6 +49,7 @@ pub fn recipe(attr: impl Fn(&str) -> Option<String>, font: &str) -> Result<Recip
         heading_before: or("heading-before", "240"),
         heading_after: or("heading-after", "120"),
         quote: or("quote", "280"),
+        note_before: or("note-before", "0"),
         note_after: or("note-after", "140"),
         note: or("note", &single),
         note_size: or("note-size", &size),
@@ -193,7 +196,7 @@ fn edit(styles: &str, r: &Recipe) -> Result<String, String> {
         at,
         &format!(
             r#"<w:pPr><w:keepLines/>{}</w:pPr><w:rPr><w:sz w:val="{1}"/><w:szCs w:val="{1}"/></w:rPr>"#,
-            exact("0", &r.note_after, &r.note),
+            exact(&r.note_before, &r.note_after, &r.note),
             r.note_size
         ),
     );

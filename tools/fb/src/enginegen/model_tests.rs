@@ -2771,3 +2771,31 @@ fn a_note_never_starts_on_a_page_before_its_mark() {
         "no trial moved a mark's line on: {entries:?}"
     );
 }
+
+/// Word's Footnote Text keeps above a page's first note what typst does (clearance + gap) less the Normal line
+/// LibreOffice reserves there itself (1.15 x the size), from the layout's own values; none where that line is larger.
+#[test]
+fn the_first_note_s_space_is_typst_s_clearance_and_gap() {
+    let before = |extra: &str| {
+        let l: serde_yaml::Value = serde_yaml::from_str(&layout(extra)).unwrap();
+        let files = gen::generate(&l, "Times New Roman").unwrap();
+        let refx = &files
+            .iter()
+            .find(|(n, _)| n.ends_with("reference.xml"))
+            .unwrap()
+            .1;
+        let at = refx.find("w:styleId=\"FootnoteText\"").unwrap();
+        let end = at + refx[at..].find("</w:style>").unwrap();
+        let s = &refx[at..end];
+        let b = s.find("w:before=\"").unwrap() + 10;
+        let v: i64 = s[b..b + s[b..].find('"').unwrap()].parse().unwrap();
+        assert!(refx.contains(&format!(" note-before=\"{v}\" ")), "{refx}");
+        v
+    };
+    // 12 pt: 9.1 + 7 - 13.8 = 2.3 pt
+    assert_eq!(before(""), 46);
+    // the layout's own clearance and gap: 10 + 8 - 13.8 = 4.2 pt
+    assert_eq!(before("footnote: {clearance: 10, gap: 8}\n"), 84);
+    // a clearance that leaves less than LibreOffice's line: 0, not less
+    assert_eq!(before("footnote: {clearance: 4}\n"), 0);
+}

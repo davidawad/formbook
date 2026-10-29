@@ -26,6 +26,19 @@ fn pitch(l: &Value, v: Option<&Value>) -> Result<f64, String> {
     }
 }
 
+/// Footnote Text's space before (twips): max(0, typst's clearance + gap - LibreOffice's 1.15 x size line).
+pub fn note_before(l: &Value, size: f64) -> Result<i64, String> {
+    let clear = num(l, "footnote.clearance", Some(CLEARANCE))?;
+    let gap = num(l, "footnote.gap", Some(NOTE_GAP))?;
+    Ok(((clear + gap - LO_NOTE_LINE * size) * 20.0)
+        .round()
+        .max(0.0) as i64)
+}
+
+/// LibreOffice's space above the first footnote line, in Word-compatible layout: one line of the Normal style, 1.15 x
+/// its size (13.8 pt at 12 pt, 16.1 at 14; fb-595.54.13, fb-595.54.11.2).
+pub const LO_NOTE_LINE: f64 = 1.15;
+
 pub fn reference(l: &Value, _face: &str) -> Result<String, String> {
     let tw = |x: f64, w: &str| twips(x, w);
     let size = num(l, "size", None)?;
@@ -54,7 +67,11 @@ pub fn reference(l: &Value, _face: &str) -> Result<String, String> {
     )?;
     let nsize = (num(l, "footnote.size", Some(size))? * 2.0).round() as i64;
     let gap = tw(num(l, "footnote.gap", Some(NOTE_GAP))?, "footnote.gap")?;
-    let _ = CLEARANCE; // LibreOffice sets the space above the footnote rule itself (typst and LaTeX follow it: tex.rs)
+    // the space above the first note's line box: typst keeps the clearance and the gap; LibreOffice (Word-compatible
+    // layout) one Normal line, 1.15 x the size, whatever the separator footnotes say (sw/source/core/layout/ftnfrm.cxx;
+    // measured fb-595.54.11.2), so Footnote Text adds the rest before it (LibreOffice sets it above a page's first
+    // note only, not between two). None where LibreOffice's line is the larger (a smaller clearance, a larger size).
+    let before = note_before(l, size)?;
     let q = l.get("quote");
     let qn = |k: &str, d: f64| num(l, &format!("quote.{k}"), Some(d));
     let (qa, qb, qg) = (
@@ -118,7 +135,7 @@ footer in a single line box {} pt above the page foot, and the page's margins. T
         fmt(foot as f64 / 20.0),
     ));
     out.push_str(&format!(
-        r#"<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="{half}" body="{body}" single="{single}" indent="{indent}" list="{list}" note="{note}" note-size="{nsize}" note-after="{gap}" footer="{foot}"{just}>"#,
+        r#"<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" size="{half}" body="{body}" single="{single}" indent="{indent}" list="{list}" note="{note}" note-size="{nsize}" note-before="{before}" note-after="{gap}" footer="{foot}"{just}>"#,
         just = if justify { r#" justify="true""# } else { "" }
     ));
     out.push('\n');
@@ -131,7 +148,7 @@ footer in a single line box {} pt above the page foot, and the page's margins. T
         ),
         format!(
             r#"<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="Footnote Text"/><w:basedOn w:val="Normal"/><w:next w:val="FootnoteText"/><w:uiPriority w:val="9"/><w:unhideWhenUsed/><w:qFormat/><w:pPr><w:keepLines/>{}{jc_both}</w:pPr><w:rPr><w:sz w:val="{nsize}"/><w:szCs w:val="{nsize}"/></w:rPr></w:style>"#,
-            exact(0, gap, note)
+            exact(before, gap, note)
         ),
         style(
             "XdQuote",
