@@ -3626,3 +3626,16 @@ fn a_page_label_over_the_contents_column_in_every_engine() {
         "{doc}"
     );
 }
+
+#[test]
+fn a_doubled_sign_after_a_mark_stays_with_its_number() {
+    // (fb-595.96) "(§§ 175-10.1-1805(b)(15)": typst's regex binds "§§" to its number inside "(§§"; the pandoc half bound
+    // a bare "§§" only, so LaTeX and Word ended a line after "(§§"
+    let out = lua(
+        "local xd = require(\"pandoc.xdoc\")\n\
+         local l = xd.bind_double_signs(pandoc.Inlines({ pandoc.Str(\"(§§\"), pandoc.Space(), pandoc.Str(\"1805\"), \
+         pandoc.Space(), pandoc.Str(\"¶¶\"), pandoc.Space(), pandoc.Str(\"4\"), pandoc.Space(), pandoc.Str(\"§\"), pandoc.Space(), pandoc.Str(\"9\") }))\n\
+         print(pandoc.utils.stringify(l):gsub(\"\\u{00A0}\", \"~\"))",
+    );
+    assert_eq!(out, "(§§~1805 ¶¶~4 § 9\t2");
+}

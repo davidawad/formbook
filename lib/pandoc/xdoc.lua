@@ -846,7 +846,9 @@ end
 -- space (lib/typst/xdoc.typ boxes the signs with their number; xengine binds a single sign only).
 function M.bind_double_signs(l)
   for i = 1, #l - 1 do
-    if l[i].t == "Str" and (l[i].text == "§§" or l[i].text == "¶¶") and l[i + 1].t == "Space" then
+    -- (a word that ends in the doubled sign, "(§§", too: typst's regex binds the sign there, fb-595.96)
+    local t = l[i].t == "Str" and l[i].text or ""
+    if (t:sub(-4) == "§§" or t:sub(-4) == "¶¶") and l[i + 1].t == "Space" then
       l[i + 1] = pandoc.Str("\u{00A0}")
     end
   end
