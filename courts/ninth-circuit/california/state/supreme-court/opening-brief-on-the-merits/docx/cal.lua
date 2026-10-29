@@ -109,7 +109,7 @@ local function p(body, o)
       .. '" w:space="1" w:color="000000"/></w:pBdr>'
   end
   if o.tabs then s = s .. "<w:tabs>" .. o.tabs .. "</w:tabs>" end
-  local line = o.line and ('w:line="' .. o.line .. '" w:lineRule="exact"') or 'w:line="240" w:lineRule="auto"'
+  local line = o.line and ('w:line="' .. o.line .. '" w:lineRule="exact"') or 'w:line="271" w:lineRule="auto"'   -- single: see reference.xml
   s = s .. '<w:spacing w:before="' .. (o.before or 0) .. '" w:after="' .. (o.after or 0) .. '" ' .. line .. "/>"
   s = s .. '<w:ind w:left="' .. (o.left or 0) .. '" w:right="' .. (o.right or 0) .. '"'
   if o.hanging then s = s .. ' w:hanging="' .. o.hanging .. '"' else s = s .. ' w:firstLine="' .. (o.first or 0) .. '"' end
