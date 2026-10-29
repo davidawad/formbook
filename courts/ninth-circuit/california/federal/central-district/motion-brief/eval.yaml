@@ -1,4 +1,14 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (fb-595.68.22, on the shared layout model lib/*/xengine*), so a difference fails.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.96), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
   cross_engine: gate
+  # pleading paper (L.R. 11-3.2: a numbered left margin): the numbered lines a page; the checks read the margin numbers
+  # 1..27 as page furniture, not body text
+  pleading_lines: 27
+  # DEF-COVER-002 against FILED-EXAMPLE-motion-brief.pdf (Greenberg Traurig, one filer): its hearing block sets each
+  # value at a tab 345 pt in ("Date:" and "March 6, 2019" apart) and rules its party column down to the foot of the
+  # hearing block; ours sets "Date: March 6, 2019" as one line and rules the party column at its own foot (L.R.
+  # 11-3.8(d)-(e) place the names and the case number, not the rules). One filer's layout (tier 3); typst and docx
+  # report it through data/cover-structure-baseline.txt, the new latex engine alike.
+  cover_structure: report

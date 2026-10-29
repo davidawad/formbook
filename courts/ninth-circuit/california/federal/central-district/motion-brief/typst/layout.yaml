@@ -1,0 +1,122 @@
+# U.S. District Court for the Central District of California (cacd): a notice of motion and motion with the
+# memorandum of points and authorities in support (L.R. 7-4, 7-5), on the generic FRCP brief
+# (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with C.D. Cal.'s local rules overlaid here, on pleading paper
+# (fb-595.96). The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged
+# layout by `fb engines gen`). Rules: C.D. Cal. Local Rules, Chapter I, L.R. 7-3 to 7-5, 11-3.1 to 11-3.8, 11-6, 11-8
+# (../README.md quotes them).
+base: /lib/layouts/frcp-motion-brief.yaml
+# L.R. 11-3.1.1: a standard proportional font of 14 point or larger; L.R. 11-3.6: double-spaced, citations and
+# quotations included (24 pt lines); counsel, the caption and the signature single-spaced (16 pt lines, Word's single
+# line at 14 pt); footnotes single-spaced (11-3.6.1).
+size: 14
+pitch: {body: 24, single: 16}
+footnote: {size: 14, pitch: single, gap: 7}
+quote: {left: 36, right: 36, above: 0, below: 0, pitch: body}
+# L.R. 11-3.2: 8 1/2 x 11 inch paper with a numbered left margin, not more than 28 lines a page, line 1 at least one
+# inch below the top: 27 numbered lines of 24 pt from the one-inch top margin leave 72 pt for the footer.
+margin: {top: 72, bottom: 72, left: 108, right: 72}
+# pleading paper: the numbers 1 to 27 right-aligned on 1 in, one a numbered line from the top margin; a double rule at
+# the text's left (1.3 in and 1.34 in from the page's left edge) and a single one 0.1 in right of the text
+pleading: {lines: 27, rules: [93.6, 96.5, 547.2]}
+# L.R. 11-3.3: pages numbered consecutively at the bottom: the page number, the paper's short title (the sample's
+# `footer_title`, in capitals as filed; a title of two lines wraps) and the case number, 10 pt in 12 pt lines, the last
+# 12 pt above the page's foot. The cover unnumbered and without a footer, the notice from 1, the tables from i (L.R.
+# 11-8), the memorandum from 1, as the exemplar numbers them.
+page_number: {align: center, front: lower-roman, size: 10, pitch: 12, foot: 12, text: "{page}<br>{footer_title}<br>CASE NO. {case_number}"}
+constants:
+  court: "UNITED STATES DISTRICT COURT"
+  district: "CENTRAL DISTRICT OF CALIFORNIA"
+# L.R. 11-6.1: the memorandum at most 7,000 words; L.R. 11-6.2: the certificate of compliance states the count, the
+# filer's (`word_count`, as filed: the sample transcribes part of the memorandum).
+words: {limit: 7000, given: word_count}
+# The papers before the tables, each on its own pages, the body's text before them empty (the sample opens with their
+# markers): the cover, unnumbered (L.R. 11-3.8: counsel from line 1 in a box at least seven numbered lines high, so the
+# court title is centred on line 8 or below; the title of the court in bold; the caption: the parties at the left
+# (each designation half an inch in, as filed), "v." between them, ruled at their right and foot; at the right the case number, the paper's title in bold and,
+# below it, the hearing's date, time, courtroom and judge, L.R. 7-4, 11-3.8(e)); then the notice of motion (L.R. 7-4:
+# the relief, the hearing, the L.R. 7-3 conference; the sample's `notice_to` and `notice` paragraphs), numbered from 1,
+# signed.
+lead:
+  - marker: "<!-- notice -->"
+    numbering: none
+    blocks:
+      - box:
+          - {text: "{counsel}"}
+        min_height: 168
+      - {text: "{xd.court}", align: center, bold: true, pitch: body}
+      - {text: "{xd.district}", align: center, bold: true, pitch: body}
+      - {text: "{division}", align: center, bold: true, upper: true, pitch: body, optional: true}
+      - columns:
+          - width: 194.4
+            blocks:
+              - box:
+                  - each: caption
+                    blocks:
+                      - {text: "{names}"}
+                      - {text: "{designation}", left: 36}
+                    between:
+                      - {text: "v."}
+                stroke: {right: 0.75, bottom: 0.75}
+                inset: {right: 10, bottom: 8}
+          - blocks:
+              - {text: "Case No. {case_number}", left: 21.6}
+              - {text: "{brief_title}", bold: true, left: 21.6, above: 16}
+              - {text: "Date: {hearing.date}", left: 21.6, above: 16, optional: true}
+              - {text: "Time: {hearing.time}", left: 21.6, optional: true}
+              - {text: "Courtroom: {hearing.place}", left: 21.6, optional: true}
+              - {text: "Judge: {hearing.judge}", left: 21.6, optional: true}
+        above: 24
+  - marker: "<!-- memorandum -->"
+    blocks:
+      - {text: "{notice_to}", pitch: body, optional: true}
+      - {text: "{notice}", pitch: body, indent: 36}
+    closing:
+      - &signature
+        group:
+          - columns:
+              - {width: 187.2, blocks: [{text: "Dated: {date}"}]}
+              - blocks:
+                  - {text: "Respectfully submitted,"}
+                  - {text: "{signature.firm}", above: 16, optional: true}
+                  - {text: "By: /s/ {signature.signer}", above: 16}
+                  - {text: "{signature.signer}"}
+                  - {text: "{signature.lines}", optional: true}
+            gutter: 14.4
+        above: 24
+front: []
+# L.R. 11-8: a table of contents and a table of authorities for a memorandum over ten pages, at the body pitch (L.R.
+# 11-3.6): the contents a row per heading to the fourth level, the label in its box, each level half an inch further
+# in, the page in a half-inch column; the authorities from the sample's keyed `authorities` (`toa:` links), grouped
+# (cases in italics, a comma before the citation), the pages in an inch, "passim" for seven or more.
+contents: {title: "Table of Contents", style: {align: center, upper: true}, pitch: body, depth: 4, col: 36, step: 36}
+authorities:
+  title: "Table of Authorities"
+  style: {align: center, upper: true}
+  pitch: body
+  col: 72
+  hang: 25.2
+  passim: 7
+  page_heading: "Page(s)"
+  group: {bold: true, pitch: body}
+  kinds:
+    - {kind: case, title: "Cases", italic: true, separator: ", "}
+    - {kind: statute, title: "Federal Statutes"}
+    - {kind: rule, title: "Federal Rules"}
+    - {kind: regulation, title: "Federal Regulations"}
+    - {kind: other, title: "Other Authorities"}
+# Headings at the body pitch, bold, kept with what follows: numbered I., A., 1., a. by the layout, the label in a
+# half-inch box and the title hanging after it, each level half an inch further in.
+heading:
+  - {bold: true, number: "I.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, left: 36, number: "A.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, left: 72, number: "1.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, left: 108, number: "a.", label_box: 36, pitch: body, above: 0, below: 0}
+# FRCP 11(a): the memorandum signed as the notice; kept with the body's last paragraph (the base's keep_with_closing).
+closing:
+  - *signature
+# L.R. 11-6.2: the certificate of compliance on the last page, signed: the word count of the memorandum.
+after_tail:
+  - {break: true}
+  - {text: "CERTIFICATE OF COMPLIANCE", align: center, bold: true, pitch: body, keep: true}
+  - {text: "The undersigned, counsel of record for {certificate_party}, certifies that this brief contains {xd.words} words, which complies with the word limit of L.R. 11-6.1.", pitch: body, indent: 36}
+  - *signature
