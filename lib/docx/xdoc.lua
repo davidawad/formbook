@@ -64,6 +64,33 @@ return function(spec)
     return xe.para({ keep and xe.KEEP or "", xe.spacing(0, 0, math.max(h, 1)) }, "")
   end
 
+  -- A footnote in a paragraph written as raw XML (a heading, a block of the layout): Word's footnotes are pandoc's
+  -- to write (footnotes.xml), so the paragraph's runs carry a mark for each one, and raw_block hands the paragraph to
+  -- pandoc as a Para of raw runs around its Notes, in the paragraph style Xd Note Host. Pandoc writes that style's
+  -- <w:pPr> before the paragraph's own; fb render drops it (docxpass.rs drop_note_host) (fb-595.89).
+  local notes = {}
+  local function note_mark(note)
+    -- its text under the break rules of the body's footnotes (styled)
+    notes[#notes + 1] = note:walk({ Inlines = xe.inlines })
+    return "<!--xd-note:" .. #notes .. "-->"
+  end
+  local function raw_block(xml)
+    if not xml:find("<!--xd-note:", 1, true) then return xe.raw(xml) end
+    local inner = xml:match("^<w:p>(.*)</w:p>$")
+    -- a paragraph in a table (a cell, a box, a group) has no Para of its own to hold the Note
+    if not inner or inner:find("<w:p>", 1, true) or inner:find("<w:tbl>", 1, true) then
+      error("xdoc: a footnote in a table, box or group of the layout is not supported in Word", 0)
+    end
+    local ils, pos = pandoc.Inlines({}), 1
+    for a, k, b in inner:gmatch("()<!%-%-xd%-note:(%d+)%-%->()") do
+      ils:insert(pandoc.RawInline("openxml", xe.bind_raw(inner:sub(pos, a - 1))))
+      ils:insert(notes[tonumber(k)])
+      pos = b
+    end
+    ils:insert(pandoc.RawInline("openxml", xe.bind_raw(inner:sub(pos))))
+    return pandoc.Div({ pandoc.Para(ils) }, { ["custom-style"] = "Xd Note Host" })
+  end
+
   local bmid = 9000 -- bookmark ids (pandoc numbers its own from 0)
   local function par(n, before, after)
     local st = n.st
@@ -79,7 +106,7 @@ return function(spec)
     props[#props + 1] = xe.jc(st.align == "center" and "center" or st.align == "right" and "right" or "left")
     local size = st.size and tw(st.size) // 10 or nil
     local text = n.text:walk({ Str = breaks })
-    local o = { b = st.bold, i = st.italic, u = st.underline, sz = size }
+    local o = { b = st.bold, i = st.italic, u = st.underline, sz = size, note = note_mark }
     local runs = xe.inl(bind_double_signs(text), o)
     -- a numbered heading's label, a tab to its box (the hanging indent) or a space
     if n.label then runs = xe.runs(n.label .. (n.labeltab and "\t" or " "), o) .. runs end
@@ -761,7 +788,7 @@ return function(spec)
   -- The body blocks as Word paragraphs; `para` the style of a plain paragraph (Body Text, or XdTail in the tail).
   local function body(blocks, s, para, first)
     local out = pandoc.Blocks({})
-    local function raw(xml) out:insert(xe.raw(xml)) end
+    local function raw(xml) out:insert(raw_block(xml)) end
     local function flush()
       if s.pending > s.prev_after and not s.top then raw(spacer(s.pending - s.prev_after)) end
       s.pending, s.top = 0, false
@@ -897,17 +924,17 @@ return function(spec)
               if a then xs[i] = x:sub(1, b) .. cover_fill(spec.cover_fill) .. x:sub(b + 1); break end
             end
           end
-          for _, x in ipairs(xs) do out:insert(xe.raw(x)) end
+          for _, x in ipairs(xs) do out:insert(raw_block(x)) end
           -- the cover a section of its own (no page number) when the pages after it are numbered apart
           -- (the contents on the cover's page, contents.break: false: no break)
           -- (page_number.cover: the cover counted in the tables' numbering, printed when `numbered`)
           local cmode = spec.page_number and spec.page_number.cover
           if front and cmode then
-            out:insert(xe.raw(section_end(s, cmode == "numbered" and "rIdXdPage" or "rIdXdNone", WORD_FMT[front])))
+            out:insert(raw_block(section_end(s, cmode == "numbered" and "rIdXdPage" or "rIdXdNone", WORD_FMT[front])))
           elseif front then
-            out:insert(xe.raw(section_end(s, "rIdXdNone", nil)))
+            out:insert(raw_block(section_end(s, "rIdXdNone", nil)))
           elseif not (spec.contents and spec.contents["break"] == false) then
-            out:insert(xe.raw(brk(s)))
+            out:insert(raw_block(brk(s)))
           end
         end
         if paged then
@@ -936,41 +963,41 @@ return function(spec)
           -- the pages before the tables, numbered with them
           if spec.before_tables then
             plan(bnodes, false)
-            for _, x in ipairs(emit_list(bnodes, s, false)) do out:insert(xe.raw(x)) end
-            out:insert(xe.raw(brk(s)))
+            for _, x in ipairs(emit_list(bnodes, s, false)) do out:insert(raw_block(x)) end
+            out:insert(raw_block(brk(s)))
           end
           if #pre > 0 and not late then
             out:extend(body(pre, s, "Body Text"))
-            out:insert(xe.raw(brk(s)))
+            out:insert(raw_block(brk(s)))
           end
           if spec.contents then
-            for _, x in ipairs(contents(spec.contents, heads, s)) do out:insert(xe.raw(x)) end
+            for _, x in ipairs(contents(spec.contents, heads, s)) do out:insert(raw_block(x)) end
           end
           -- between the contents and the authorities: the layout's blocks, the body sections set there (place: between)
           if spec.between_tables then
-            if not s.top then out:insert(xe.raw(brk(s))) end
+            if not s.top then out:insert(raw_block(brk(s))) end
             plan(wnodes, false)
-            for _, x in ipairs(emit_list(wnodes, s, false)) do out:insert(xe.raw(x)) end
+            for _, x in ipairs(emit_list(wnodes, s, false)) do out:insert(raw_block(x)) end
           end
           if #pre > 0 and late then
-            if not s.top then out:insert(xe.raw(brk(s))) end
+            if not s.top then out:insert(raw_block(brk(s))) end
             out:extend(body(pre, s, "Body Text"))
           end
           if spec.authorities and meta.authorities then
-            out:insert(xe.raw(brk(s)))
+            out:insert(raw_block(brk(s)))
             local tbl = xd.is_keyed(meta) and keyed_authorities or authorities
-            for _, x in ipairs(tbl(spec.authorities, meta, s, counts)) do out:insert(xe.raw(x)) end
+            for _, x in ipairs(tbl(spec.authorities, meta, s, counts)) do out:insert(raw_block(x)) end
           end
           if front then
-            out:insert(xe.raw(section_end(s, "rIdXdPage", WORD_FMT[front], spec.page_number.cover ~= nil)))
+            out:insert(raw_block(section_end(s, "rIdXdPage", WORD_FMT[front], spec.page_number.cover ~= nil)))
             want = "decimal" -- the body from 1, at its first needle
           else
-            out:insert(xe.raw(brk(s)))
+            out:insert(raw_block(brk(s)))
           end
         end
         local fnodes = xd.tree(spec, spec.front, meta, true, true)
         plan(fnodes, s.top)
-        for _, x in ipairs(emit_list(fnodes, s, false)) do out:insert(xe.raw(x)) end
+        for _, x in ipairs(emit_list(fnodes, s, false)) do out:insert(raw_block(x)) end
         -- the last paragraph kept whole on the page of the closing (keep_with_closing): Body Text Keep, kept with the
         -- next paragraph, and the spacer before a closing that opens with a table kept too
         local kept
@@ -983,17 +1010,17 @@ return function(spec)
         local cnodes = xd.tree(spec, spec.closing, meta, false, true)
         plan(cnodes, false)
         for _, x in ipairs(emit_list(cnodes, s, false)) do
-          out:insert(xe.raw(x))
+          out:insert(raw_block(x))
         end
         if #rest > 0 then
-          if spec.tail["break"] then out:insert(xe.raw(brk(s))) end
+          if spec.tail["break"] then out:insert(raw_block(brk(s))) end
           s.pending = math.max(tw(spec.tail.above), s.pending)
           out:extend(body(rest, s, "XdTail", true))
         end
         -- the blocks after the tail (layout after_tail)
         local anodes = xd.tree(spec, spec.after_tail, meta, false, true)
         plan(anodes, false)
-        for _, x in ipairs(emit_list(anodes, s, false)) do out:insert(xe.raw(x)) end
+        for _, x in ipairs(emit_list(anodes, s, false)) do out:insert(raw_block(x)) end
         if paged or measured then
           local f = io.open(os.getenv("FORMBOOK_NEEDLES"), "w")
           f:write(table.concat(sections, "\n") .. "\n" .. table.concat(needles, "\n") .. "\n")

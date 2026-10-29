@@ -128,9 +128,11 @@ function M.inlines(s)
   return out
 end
 
--- Inlines in capitals (a style's `upper`).
+-- Inlines in capitals (a style's `upper`); a footnote's text keeps its case (typst's upper() leaves the note, which
+-- it sets at the foot of the page, alone).
 function M.upper(inlines)
-  return inlines:walk({ Str = function(x) return pandoc.Str(pandoc.text.upper(x.text)) end })
+  return inlines:walk({ traverse = "topdown", Note = function(n) return n, false end,
+    Str = function(x) return pandoc.Str(pandoc.text.upper(x.text)) end })
 end
 
 local function num(x) return tonumber(x) or 0 end

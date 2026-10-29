@@ -968,6 +968,43 @@ fn keyed_frontmatter_without_a_keyed_table_leaves_the_links() {
 }
 
 #[test]
+fn a_footnote_in_a_heading_is_kept_in_every_engine() {
+    // fb-595.89: the Word heading, written as raw XML, dropped its footnote; a capitals heading also set the note's
+    // text in capitals in LaTeX and Word
+    let l = layout("heading:\n  - {align: center, bold: true, upper: true}\n");
+    let Some(f) = fx(
+        "heading-note",
+        &l,
+        "---\nx: 1\n---\n# Facts as alleged[^1]\n\nThe body.\n\n[^1]: Accepted for this motion only.\n",
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
+        return;
+    };
+    // typst: the heading's mark and the note at the foot of the page, in its own case
+    let text = f.typst_pages().unwrap().join("\n");
+    assert!(
+        text.contains("FACTS AS ALLEGED1") && text.contains("Accepted for this motion only."),
+        "{text}"
+    );
+    // LaTeX: the note in the heading, in its own case
+    let tex = f.latex().unwrap();
+    assert!(tex.contains("ALLEGED"), "{tex}");
+    assert!(tex.contains("Accepted for this motion only."), "{tex}");
+    assert!(!tex.contains("ACCEPTED FOR"), "{tex}");
+    // Word: the heading handed to pandoc in Xd Note Host (its raw paragraph properties, then its runs around the Note,
+    // which pandoc writes as a footnote of footnotes.xml), the note in its own case
+    let doc = f.docx().unwrap();
+    let host = doc
+        .find("\"Xd Note Host\"")
+        .unwrap_or_else(|| panic!("no Xd Note Host in {doc}"));
+    let rest = &doc[host..];
+    let note = rest.find(", Note").unwrap_or_else(|| panic!("no Note in {rest}"));
+    assert!(rest[..note].contains("<w:pPr>") && rest[..note].contains(">ALLEGED<"), "{rest}");
+    assert!(rest[note..].contains("\"Accepted\""), "{rest}");
+    assert!(!doc.contains("xd-note"), "a mark left in {doc}");
+}
+
+#[test]
 fn certificates_set_by_the_layout_are_headings_and_follow_the_tail() {
     let l = layout("heading:\n  - {bold: true, upper: true}\ncontents: {title: Contents, depth: 1, col: 36}\nclosing:\n  - {text: \"Signed.\"}\n  - {text: \"Certificate of Compliance\", heading: 1}\n  - {text: \"It complies.\"}\ntail: {at: Appendix}\nafter_tail:\n  - {text: \"Certificate of Service\", heading: 1}\n  - {text: \"Served.\"}\n");
     let Some(f) = fx(

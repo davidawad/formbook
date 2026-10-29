@@ -123,7 +123,8 @@ local function bind_token_strings(inlines)
   return inlines
 end
 
--- Pandoc inlines (or a metadata value) as Word runs; links keep their text.
+-- Pandoc inlines (or a metadata value) as Word runs; links keep their text. A footnote is left out, unless `o.note`
+-- gives the XML that stands for it (lib/docx/xdoc.lua: a mark pandoc's footnote replaces).
 local function inl(x, o)
   o = o or {}
   if x == nil then return "" end
@@ -146,6 +147,8 @@ local function inl(x, o)
       out[#out + 1] = runs(q[1], o) .. inl(el.content, o) .. runs(q[2], o)
     elseif t == "Link" or t == "Span" or t == "SmallCaps" or t == "Underline" then
       out[#out + 1] = inl(el.content, o)
+    elseif t == "Note" and o.note then
+      out[#out + 1] = o.note(el)
     else
       out[#out + 1] = runs(stringify(el), o)
     end

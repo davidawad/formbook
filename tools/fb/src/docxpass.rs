@@ -96,6 +96,28 @@ pub(crate) fn replace_final_sect(doc: &str, last: &str) -> Option<String> {
     Some(format!("{}{}{}", &doc[..start], last, &doc[end..]))
 }
 
+/// The paragraph properties pandoc wrote for the style Xd Note Host, dropped: lib/docx/xdoc.lua hands pandoc a
+/// paragraph it wrote as raw XML (its own `<w:pPr>` first) in that style when the paragraph holds a footnote, which
+/// only pandoc can write (fb-595.89); pandoc's `<w:pPr>` before it would be a second one.
+pub(crate) fn drop_note_host(doc: &str) -> String {
+    doc.replace(r#"<w:pPr><w:pStyle w:val="XdNoteHost" /></w:pPr>"#, "")
+        .replace(r#"<w:pPr><w:pStyle w:val="XdNoteHost"/></w:pPr>"#, "")
+}
+
+/// drop_note_host in a .docx that `finish` does not rewrite (a filter without sections of its own), in place.
+fn drop_note_host_in(docx: &Path, work: &Path) -> Res<()> {
+    let x = work.join("parts-host");
+    crate::docxzip::unpack(docx, &x)?;
+    let dp = x.join("word/document.xml");
+    let doc = read(&dp)?;
+    let tidy = drop_note_host(&doc);
+    if tidy == doc {
+        return Ok(());
+    }
+    write(&dp, &tidy)?;
+    crate::docxzip::pack(&x, docx)
+}
+
 /// The footers a filter wrote to `$FORMBOOK_FOOTERS` (`prefix` "ftr"), or the headers it wrote to `$FORMBOOK_HEADERS`
 /// ("hdr"): one per line, `ID <TAB> paragraphs` (the `w:p` elements of the part), as `(id, file, paragraphs)`; the
 /// file names follow the line order.
@@ -175,7 +197,7 @@ fn finish(docx: &Path, work: &Path) -> Res<()> {
     )?;
     let dp = x.join("word/document.xml");
     let last = read(&work.join("final.xml"))?;
-    let doc = replace_final_sect(&read(&dp)?, last.trim())
+    let doc = replace_final_sect(&drop_note_host(&read(&dp)?), last.trim())
         .ok_or_else(|| fail(1, "fb render: the document has no final sectPr"))?;
     write(&dp, &doc)?;
     crate::docxzip::pack(&x, docx)
@@ -266,6 +288,8 @@ pub fn render(court: &Path, args: &[String], sample: &str, out: &Path, work: &Pa
     if !work.join("needles.tsv").is_file() {
         if work.join("final.xml").is_file() {
             finish(&pass(1), work)?;
+        } else {
+            drop_note_host_in(&pass(1), work)?;
         }
         return crate::proc::move_file(&pass(1), out).map_err(|e| io(out, e));
     }
@@ -303,6 +327,15 @@ mod tests {
             r#"<w:body><w:p><w:pPr><w:sectPr><a/></w:sectPr></w:pPr></w:p><w:sectPr><c/></w:sectPr></w:body>"#
         );
         assert!(replace_final_sect("<w:body></w:body>", "x").is_none());
+    }
+
+    #[test]
+    fn drops_the_note_host_s_paragraph_properties() {
+        let doc = r#"<w:p><w:pPr><w:pStyle w:val="XdNoteHost" /></w:pPr><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:t>A</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="BodyText" /></w:pPr></w:p>"#;
+        assert_eq!(
+            drop_note_host(doc),
+            r#"<w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r><w:t>A</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="BodyText" /></w:pPr></w:p>"#
+        );
     }
 
     #[test]
