@@ -127,6 +127,7 @@ impl Fx {
             .env("FORMBOOK_NEEDLES", self.dir.join("needles.tsv"))
             .env("FORMBOOK_FINAL", self.dir.join("final.xml"))
             .env("FORMBOOK_FOOTERS", self.dir.join("footers.tsv"))
+            .env("FORMBOOK_HEADERS", self.dir.join("headers.tsv"))
             .env("FORMBOOK_PAGES", "")
             .args(["--from", crate::docxref::MODEL_FROM, "--to", to])
             .arg(format!("--lua-filter={filter}"))
@@ -3192,4 +3193,109 @@ fn papers_before_the_cover_are_numbered_on_their_own() {
     assert!(!needles.contains("\tgrounds"), "{needles}");
     let fin = f.written("final.xml").unwrap();
     assert!(fin.contains(r#"w:fmt="decimal" w:start="1""#), "{fin}");
+}
+
+#[test]
+fn pleading_paper_in_every_engine() {
+    // 28 lines of 24 pt from the 1 in top margin (C.D. Cal. L.R. 11-3.2), the numbers right-aligned on 1 in, a double
+    // rule at the left and a single one at the right
+    let l = "size: 12\npitch: {body: 24, single: 12}\nmargin: {top: 72, bottom: 48, left: 108, right: 72}\nindent: 36\npleading: {lines: 28, numbers: 72, rules: [93.6, 97.2, 547.2]}\n";
+    let body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. "
+        .repeat(60);
+    let Some(f) = fx(
+        "pleading",
+        l,
+        &format!("---\nx: 1\n---\n{body}\n"),
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
+        return;
+    };
+    // typst: the numbers 1 to 28 at the left of every page, each on the baseline of its body line; none in the text the
+    // checks read (measure with params.pleading_lines)
+    let pages = f.typst_pages().unwrap();
+    assert!(pages.len() >= 2, "{pages:?}");
+    let pdf = f.dir.join("out.pdf");
+    let all = crate::measure::measure_pleading(&pdf, &[], 0).unwrap();
+    for p in &all.pages {
+        // (unmeasured as pleading paper, a number joins the body line beside it: the same baseline)
+        let nums: Vec<(&str, f64)> = p
+            .lines
+            .iter()
+            .flat_map(|ln| ln.words.iter().map(move |w| (w, ln.baseline)))
+            .filter(|(w, _)| w.t.parse::<usize>().is_ok() && w.x1 <= 72.5)
+            .map(|(w, b)| (w.t.as_str(), b))
+            .collect();
+        assert_eq!(nums.len(), 28, "page {}: {nums:?}", p.n);
+        // line 1's baseline at 72 + 0.8 x 24, line 28's at 72 + 27 x 24 + 19.2
+        let base = |n: &str| nums.iter().find(|(t, _)| *t == n).unwrap().1;
+        assert!(
+            (base("1") - 91.2).abs() < 0.3 && (base("28") - 739.2).abs() < 0.3,
+            "{nums:?}"
+        );
+    }
+    let kept = crate::measure::measure_pleading(&pdf, &[], 28).unwrap();
+    assert!(
+        kept.pages
+            .iter()
+            .flat_map(|p| &p.lines)
+            .all(|ln| ln.left >= 108.0 - 0.5),
+        "{kept:?}"
+    );
+    // LaTeX: the generated template draws the numbers and rules in every page's background
+    let tpl = std::fs::read_to_string(f.dir.join("latex/template.tex")).unwrap();
+    assert!(tpl.contains("\\AddToHook{shipout/background}"), "{tpl}");
+    assert!(
+        tpl.contains("\\put(72,-91.2){\\llap{1}}") && tpl.contains("\\put(72,-739.2){\\llap{28}}"),
+        "{tpl}"
+    );
+    assert!(!tpl.contains("{\\llap{29}}"));
+    assert_eq!(tpl.matches("{\\rule{0.75bp}{792bp}}").count(), 3, "{tpl}");
+    assert!(tpl.contains("\\put(93.225,-792)"), "{tpl}");
+    // Word: a header every section names, its text box of 28 exact 24 pt lines from 1 in, and three rules
+    f.docx().unwrap();
+    let fin = f.written("final.xml").unwrap();
+    assert!(
+        fin.contains(r#"<w:headerReference w:type="default" r:id="rIdXdPleading"/>"#),
+        "{fin}"
+    );
+    let hdr = f.written("headers.tsv").unwrap();
+    assert!(hdr.starts_with("rIdXdPleading\t"), "{hdr}");
+    assert_eq!(
+        hdr.matches(r#"w:line="480" w:lineRule="exact""#).count(),
+        28,
+        "{hdr}"
+    );
+    assert!(hdr.contains("<w:t>28</w:t>") && !hdr.contains("<w:t>29</w:t>"));
+    assert!(
+        hdr.contains("<wp:posOffset>914400</wp:posOffset>")
+            && hdr.contains(r#"cx="914400" cy="8534400""#),
+        "{hdr}"
+    );
+    assert_eq!(hdr.matches("Pleading rule").count(), 3);
+    assert!(
+        hdr.contains("<wp:posOffset>1188720</wp:posOffset>") && hdr.contains(r#"<a:ln w="9525">"#)
+    );
+    // none without the key
+    let plain = layout("");
+    let Some(g) = fx(
+        "pleading-none",
+        &plain,
+        "---\nx: 1\n---\nBody.\n",
+        &["pandoc"],
+    ) else {
+        return;
+    };
+    assert!(!std::fs::read_to_string(g.dir.join("latex/template.tex"))
+        .unwrap()
+        .contains("shipout/background"));
+    g.docx().unwrap();
+    assert!(!g
+        .written("final.xml")
+        .is_some_and(|x| x.contains("headerReference")));
+    assert!(g.written("headers.tsv").is_none());
+    // a bad key stops the generator
+    let bad: serde_yaml::Value = serde_yaml::from_str(&layout("pleading: {lines: 0}\n")).unwrap();
+    assert!(gen::generate(&bad, "Times New Roman")
+        .unwrap_err()
+        .contains("pleading.lines"));
 }

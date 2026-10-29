@@ -329,6 +329,9 @@ pub fn generate(l: &Value, face: &str) -> Result<Files, String> {
     if let Err(e) = paper(l) {
         errs.push(e);
     }
+    if let Err(e) = super::tex::pleading(l) {
+        errs.push(e);
+    }
     if !errs.is_empty() {
         return Err(errs.join("\n"));
     }

@@ -6,7 +6,7 @@
 // does by construction. The grammar of layout.yaml is in docs/EVAL-LOOP.md, "Generated engines"; in short:
 //
 //   font, size, pitch: {body, single}, margin: {top, bottom, left, right}, paper (letter, legal), justify, indent,
-//   list_indent,
+//   list_indent, pleading: {lines, pitch, top, numbers, size, rules, stroke} (pleading paper: numbered lines, rules),
 //   page_number: {align, from, front, cover, text ("{page}", "{pages}", frontmatter fields, "<br>" lines), descent},
 //   footnote: {size, pitch, gap, clearance}, quote: {left, right, above, below, gap},
 //   heading: [level 1, level 2, ...] (each a text style plus above/below; `number`: "I." etc., the label in a box of
@@ -729,6 +729,29 @@
     }
   })
 }
+/// Pleading paper (layout.yaml `pleading`, fb-595.96: C.D. Cal. L.R. 11-3.2, N.D. Cal. Civil L.R. 3-4(c)): on every
+/// page the numbers 1 to `lines`, one a line box of `pitch` (the body's by default) from `top` (the top margin by
+/// default) down, the baseline at 0.8 of the box as the body's lines, right-aligned on `numbers` (from the page's left
+/// edge; the left margin less half an inch by default) at `size` (the type size by default); and the `rules`, vertical
+/// lines of `stroke` the page's full height, each at its distance from the page's left edge. None otherwise. The
+/// numbers are page furniture: the checks drop them (eval.yaml params.pleading_lines). lib/latex/xdoc.lua (the
+/// generated template's shipout hook, tools/fb/src/enginegen/tex.rs) and lib/docx/xdoc.lua (a header) draw the same.
+#let pleading-paper(spec) = {
+  let p = spec.at("pleading", default: none)
+  if p == none { return none }
+  let pitch = pt(p.at("pitch", default: spec.pitch.body))
+  let first = pt(p.at("top", default: spec.margin.top))
+  let edge = pt(p.at("numbers", default: spec.margin.left - 36))
+  for i in range(1, int(p.lines) + 1) {
+    place(top + left, dy: first + (i - 1) * pitch, box(width: edge, height: pitch, align(right,
+      text(size: pt(p.at("size", default: spec.size)), ..edges(pitch), str(i)))))
+  }
+  let stroke = pt(p.at("stroke", default: 0.75))
+  for x in p.at("rules", default: ()) {
+    place(top + left, dx: pt(x), line(start: (0pt, 0pt), end: (0pt, 100%), stroke: stroke))
+  }
+}
+
 /// The label of the page at a location.
 #let page-label(loc) = {
   let fmt = xd-num.at(loc)
@@ -1078,7 +1101,12 @@
           align(al, text(..edges(pt(spec.pitch.single)), shown))
         }
       }
-    }, ..cover-fill(spec))
+    }, ..{
+      // the page background: a coloured cover (cover_fill) and pleading paper (pleading), each when the layout sets it
+      let fill = cover-fill(spec).at("background", default: none)
+      let paper = pleading-paper(spec)
+      if fill == none and paper == none { (:) } else { (background: { fill; paper }) }
+    })
   set text(font: spec.font, size: pt(spec.size), lang: "en", region: "us", fallback: false)
   set par(first-line-indent: (amount: pt(spec.indent), all: true))
   show: xengine.with(pitch: pt(spec.pitch.body), list-indent: none) // lists: list-items

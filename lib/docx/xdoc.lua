@@ -505,6 +505,55 @@ return function(spec)
       .. hex:gsub("^#", ""):upper() .. '"/></a:solidFill><a:ln><a:noFill/></a:ln></wps:spPr><wps:bodyPr/></wps:wsp>'
       .. '</a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>'
   end
+  -- Pleading paper (layout.yaml pleading, fb-595.96; lib/typst/xdoc.typ pleading-paper): the paragraph of the page
+  -- header fb render adds (FORMBOOK_HEADERS, docxpass.rs), holding shapes anchored to the page behind the text: the
+  -- numbers 1 to `lines` in one text box from the page's left edge to `numbers`, its top at `top`, one exact line of
+  -- `pitch` each, right-aligned, at `size`; each rule a line the page's height centred on its distance from the page's
+  -- left edge, `stroke` wide. EMU: 12700 a point. Nil without the key.
+  local PLEADING_ID = "rIdXdPleading"
+  local function pleading_header()
+    local p = spec.pleading
+    if not p then return nil end
+    local emu = function(x) return math.floor(x * 12700 + 0.5) end
+    local pitch = tonumber(p.pitch) or spec.pitch.body
+    local top = tonumber(p.top) or spec.margin.top
+    local right = tonumber(p.numbers) or (spec.margin.left - 36)
+    local half = math.floor((tonumber(p.size) or spec.size) * 2 + 0.5)
+    local A = 'xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"'
+    local WPS = 'xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"'
+    local function anchored(n, name, x, y, cx, cy, shape)
+      -- (the header part declares only w: and r: (docxpass.rs): the drawing declares wp:)
+      return '<w:r><w:drawing xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"><wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" relativeHeight="' .. n
+        .. '" behindDoc="1" locked="1" layoutInCell="1" allowOverlap="1"><wp:simplePos x="0" y="0"/>'
+        .. '<wp:positionH relativeFrom="page"><wp:posOffset>' .. x .. '</wp:posOffset></wp:positionH>'
+        .. '<wp:positionV relativeFrom="page"><wp:posOffset>' .. y .. '</wp:posOffset></wp:positionV>'
+        .. '<wp:extent cx="' .. cx .. '" cy="' .. cy .. '"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:wrapNone/>'
+        .. '<wp:docPr id="' .. (9910 + n) .. '" name="' .. name .. '"/><wp:cNvGraphicFramePr/><a:graphic ' .. A .. '>'
+        .. '<a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"><wps:wsp ' .. WPS .. '>'
+        .. shape .. '</wps:wsp></a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>'
+    end
+    local function xfrm(cx, cy, geom)
+      return '<a:xfrm><a:off x="0" y="0"/><a:ext cx="' .. cx .. '" cy="' .. cy .. '"/></a:xfrm><a:prstGeom prst="'
+        .. geom .. '"><a:avLst/></a:prstGeom>'
+    end
+    local nums = {}
+    for i = 1, math.floor(p.lines) do
+      nums[i] = xe.para({ xe.spacing(0, 0, tw(pitch)), '<w:ind w:left="0" w:right="0" w:firstLine="0"/>', xe.jc("right") },
+        '<w:r><w:rPr><w:sz w:val="' .. half .. '"/><w:szCs w:val="' .. half .. '"/></w:rPr><w:t>' .. i .. '</w:t></w:r>')
+    end
+    local h = emu(pitch * p.lines)
+    local out = { anchored(1, "Pleading line numbers", 0, emu(top), emu(right), h, '<wps:cNvSpPr txBox="1"/><wps:spPr>'
+      .. xfrm(emu(right), h, "rect") .. '<a:noFill/><a:ln><a:noFill/></a:ln></wps:spPr><wps:txbx><w:txbxContent>'
+      .. table.concat(nums) .. '</w:txbxContent></wps:txbx><wps:bodyPr rot="0" vert="horz" wrap="square" lIns="0" '
+      .. 'tIns="0" rIns="0" bIns="0" anchor="t" anchorCtr="0"><a:noAutofit/></wps:bodyPr>') }
+    local stroke = emu(tonumber(p.stroke) or 0.75)
+    for k, x in ipairs(p.rules or {}) do
+      out[#out + 1] = anchored(1 + k, "Pleading rule " .. k, emu(x), 0, 0, emu(PAGE_H), '<wps:cNvCnPr/><wps:spPr>'
+        .. xfrm(0, emu(PAGE_H), "line") .. '<a:ln w="' .. stroke .. '"><a:solidFill><a:srgbClr val="000000"/>'
+        .. '</a:solidFill></a:ln></wps:spPr><wps:bodyPr/>')
+    end
+    return xe.para({ xe.spacing(0, 0, 20) }, table.concat(out))
+  end
   -- The text of the first paragraph of a tree (inside columns, groups and boxes too), or nil.
   local function first_text(nodes)
     for _, n in ipairs(nodes or {}) do
@@ -729,7 +778,10 @@ return function(spec)
     -- (the footer's top `page_number.descent` below the text, 30 % of the bottom margin by default)
     local descent = spec.page_number and tonumber(spec.page_number.descent) or 0.3 * m.bottom
     local foot = tw(math.floor((m.bottom - descent - nlines * spec.pitch.single) * 20 + 0.5) / 20)
-    return '<w:sectPr><w:footerReference w:type="default" r:id="' .. footer .. '"/>'
+    -- (pleading paper: the header that draws it on every page, the first page's too)
+    local hdr = spec.pleading and ('<w:headerReference w:type="default" r:id="' .. PLEADING_ID .. '"/>'
+      .. (first and '<w:headerReference w:type="first" r:id="' .. PLEADING_ID .. '"/>' or "")) or ""
+    return '<w:sectPr>' .. hdr .. '<w:footerReference w:type="default" r:id="' .. footer .. '"/>'
       .. (first and '<w:footerReference w:type="first" r:id="rIdXdNone"/>' or "")
       .. '<w:pgSz w:w="' .. tw(PAGE_W) .. '" w:h="' .. tw(PAGE_H) .. '"/><w:pgMar w:top="' .. tw(m.top) .. '" w:right="' .. tw(m.right)
       .. '" w:bottom="' .. tw(m.bottom) .. '" w:left="' .. tw(m.left) .. '" w:header="720" w:footer="' .. foot
@@ -798,6 +850,13 @@ return function(spec)
     local f = io.open(os.getenv("FORMBOOK_FOOTERS"), "w")
     f:write("rIdXdPage\t" .. (page_xml and ftr(page_xml) or fld) .. "\n" .. "rIdXdNone\t" .. ftr("") .. "\n")
     f:close()
+    -- pleading paper: the header every section names (sect_xml)
+    local paper = pleading_header()
+    if paper and os.getenv("FORMBOOK_HEADERS") then
+      f = io.open(os.getenv("FORMBOOK_HEADERS"), "w")
+      f:write(PLEADING_ID .. "\t" .. paper .. "\n")
+      f:close()
+    end
     f = io.open(os.getenv("FORMBOOK_FINAL"), "w")
     -- (the body from 1 when numbered apart from the tables, or after the papers before the cover: lead)
     f:write(sect_xml("rIdXdPage", (pn.front or spec.lead) and "decimal" or nil, (pn.from or 1) > 1))
@@ -1144,8 +1203,10 @@ return function(spec)
           f:write(table.concat(sections, "\n") .. "\n" .. table.concat(needles, "\n") .. "\n")
           f:close()
         end
-        -- (a running footer names frontmatter fields: the document writes its footer)
-        if sectioned or measured or xd.is_running(spec.page_number and spec.page_number.text) then write_section() end
+        -- (a running footer names frontmatter fields: the document writes its footer; pleading paper: its header)
+        if sectioned or measured or spec.pleading or xd.is_running(spec.page_number and spec.page_number.text) then
+          write_section()
+        end
         return pandoc.Pandoc(out, pandoc.Meta({}))
       end,
     },

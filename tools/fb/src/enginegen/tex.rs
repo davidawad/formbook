@@ -59,6 +59,95 @@ fn list_left(l: &Value, list: f64) -> Result<String, String> {
     ))
 }
 
+/// The geometry of pleading paper (layout.yaml `pleading`, fb-595.96; lib/typst/xdoc.typ pleading-paper): the number of
+/// lines, their pitch, the first line's top, the numbers' right edge, their size, the rules' distances from the page's
+/// left edge and their stroke, all in points; None without the key.
+pub struct Pleading {
+    pub lines: usize,
+    pub pitch: f64,
+    pub top: f64,
+    pub numbers: f64,
+    pub size: f64,
+    pub rules: Vec<f64>,
+    pub stroke: f64,
+}
+
+pub fn pleading(l: &Value) -> Result<Option<Pleading>, String> {
+    let Some(p) = l.get("pleading").filter(|p| !p.is_null()) else {
+        return Ok(None);
+    };
+    let lines = p
+        .get("lines")
+        .and_then(Value::as_u64)
+        .filter(|n| (1..=99).contains(n))
+        .ok_or("layout.yaml: `pleading.lines` is the numbered lines a page, a whole number from 1 to 99")?;
+    let rules = match p.get("rules") {
+        None => Vec::new(),
+        Some(Value::Sequence(s)) => s
+            .iter()
+            .map(|x| {
+                x.as_f64()
+                    .ok_or("layout.yaml: `pleading.rules` is a list of points")
+            })
+            .collect::<Result<_, _>>()?,
+        Some(_) => return Err("layout.yaml: `pleading.rules` is a list of points".into()),
+    };
+    Ok(Some(Pleading {
+        lines: lines as usize,
+        pitch: num(l, "pleading.pitch", Some(num(l, "pitch.body", None)?))?,
+        top: num(l, "pleading.top", Some(num(l, "margin.top", None)?))?,
+        numbers: num(
+            l,
+            "pleading.numbers",
+            Some(num(l, "margin.left", None)? - 36.0),
+        )?,
+        size: num(l, "pleading.size", Some(num(l, "size", None)?))?,
+        rules,
+        stroke: num(l, "pleading.stroke", Some(0.75))?,
+    }))
+}
+
+/// Pleading paper in LaTeX: every page's background (the kernel's shipout/background hook, its origin the page's top
+/// left corner, y up) holds the numbers, each right-aligned on its baseline at 0.8 of its line box, and the rules, each
+/// centred on its distance as typst strokes a line. Empty without the key.
+fn pleading_tex(l: &Value) -> Result<String, String> {
+    let Some(p) = pleading(l)? else {
+        return Ok(String::new());
+    };
+    let (_, h) = super::gen::paper(l)?;
+    let h = h as f64 / 20.0;
+    let mut s = format!(
+        "% pleading paper (layout.yaml pleading): the numbers 1 to {n}, one a {pitch} bp line from {top} bp, right-aligned on\n\
+% {x} bp, and {r} rule(s) the page's height; every page's background (lib/typst/xdoc.typ pleading-paper)\n\
+\\AddToHook{{shipout/background}}{{\\begingroup\\setlength\\unitlength{{1bp}}\\normalfont\\fontsize{{{size}bp}}{{0bp}}\\selectfont\n",
+        n = p.lines,
+        pitch = fmt(p.pitch),
+        top = fmt(p.top),
+        x = fmt(p.numbers),
+        r = p.rules.len(),
+        size = fmt(p.size),
+    );
+    for i in 1..=p.lines {
+        let y = p.top + (i as f64 - 1.0) * p.pitch + 0.8 * p.pitch;
+        s.push_str(&format!(
+            "  \\put({},-{}){{\\llap{{{i}}}}}\n",
+            fmt(p.numbers),
+            fmt(y)
+        ));
+    }
+    for x in &p.rules {
+        s.push_str(&format!(
+            "  \\put({},-{}){{\\rule{{{}bp}}{{{}bp}}}}\n",
+            fmt(x - p.stroke / 2.0),
+            fmt(h),
+            fmt(p.stroke),
+            fmt(h)
+        ));
+    }
+    s.push_str("\\endgroup}\n");
+    Ok(s)
+}
+
 pub fn template(l: &Value, face: &str) -> Result<String, String> {
     let (pkg, ellipsis) = latex_face(face)?;
     // three periods (newtx: 0.25 em each; latex_period) kerned to the face's ellipsis, read as one "…" (/ActualText)
@@ -157,7 +246,7 @@ pub fn template(l: &Value, face: &str) -> Result<String, String> {
 \def\ps@plain{{\let\@mkboth\@gobbletwo\let\@oddhead\@empty\let\@evenhead\@empty
   \def\@oddfoot{{\reset@font\xe@lines{{{size}}}{{{single}}}{number}}}\let\@evenfoot\@oddfoot}}
 \pagestyle{{{style}}}
-% lists: the number or bullet in a {list} bp box at the margin, the text hanging after it
+{pleading}% lists: the number or bullet in a {list} bp box at the margin, the text hanging after it
 \providecommand{{\tightlist}}{{\setlength{{\itemsep}}{{0pt}}\setlength{{\parskip}}{{0pt}}}}
 \providecommand{{\pandocbounded}}[1]{{#1}}
 \xe@lists{{{list}bp}}
@@ -197,6 +286,7 @@ $body$
         nraise = fmt(0.29 * nsize),
         nmark = fmt(0.58 * nsize),
         markers = markers(l) + &list_left(l, list)?,
+        pleading = pleading_tex(l)?,
         ellipsis = ellipsis,
         justify = if justify { JUSTIFY } else { "" },
         fnright = if justify { "0pt" } else { "0pt plus 1fil" },
