@@ -1,50 +1,17 @@
 ---
-civil_action_no: "3:26-cv-00182"
-judges: ["BAJ", "EWD"]
+case_number: "3:26-cv-00182-BAJ-EWD"
 caption:
-  - "FIRST HORIZON CORPORATION"
-  - ""
-  - "VERSUS"
-  - ""
-  - "KARL HOEFER and DMMS HOLDINGS, LLC"
+  parties:
+    - names: ["FIRST HORIZON CORPORATION"]
+    - names: ["KARL HOEFER and DMMS HOLDINGS, LLC"]
 judge: "JUDGE BRIAN A. JACKSON"
 magistrate: "MAGISTRATE JUDGE ERIN WILDER-DOOMES"
-title: "MEMORANDUM IN SUPPORT OF RULE 12(b)(6) MOTION TO DISMISS"
-signature_lines:
-  - "Respectfully submitted,"
-  - ""
-  - "/s/ Thomas M. Flanagan"
-  - "Thomas M. Flanagan, T.A. (#19569)"
-  - "Anders F. Holmgren (#34597)"
-  - "Alixe L. Duplechain (#39167)"
-  - "Jordan B. Redmon (#37272)"
-  - "FLANAGAN PARTNERS LLP"
-  - "201 St. Charles Avenue, Suite 3300"
-  - "New Orleans Louisiana 70170"
-  - "Telephone: (504) 569-0235"
-  - "Facsimile: (504) 592-0251"
-  - "tflanagan@flanaganpartners.com"
-  - "aholmgren@flanaganpartners.com"
-  - "aduplechain@flanaganpartners.com"
-  - "jredmon@flanaganpartners.com"
-  - ""
-  - "/s/ Joelle F. Evans"
-  - "Kyle Schonekas, T.A. (#11817)"
-  - "Joelle F. Evans (#23730)"
-  - "Andrea V. Timpa (#29455)"
-  - "Benjamin O. Flaxenburg (#37682)"
-  - "SCHONEKAS EVANS McGOEY & McEACHIN, LLC"
-  - "909 Poydras Street, Suite 1600"
-  - "New Orleans, Louisiana 70112"
-  - "Telephone: 504-680-6050"
-  - "Facsimile: 504-680-6051"
-  - "kyle@semmlaw.com"
-  - "joelle@semmlaw.com"
-  - "andrea@semmlaw.com"
-  - "benjamin@semmlaw.com"
-  - ""
-  - "Attorneys for defendant, Karl Hoefer"
-  - "Attorneys for defendant, DMMS Holdings, LLC"
+brief_title: "MEMORANDUM IN SUPPORT OF RULE 12(b)(6) MOTION TO DISMISS"
+signature:
+  blocks:
+    - ["/s/ Thomas M. Flanagan", "Thomas M. Flanagan, T.A. (#19569)", "Anders F. Holmgren (#34597)", "Alixe L. Duplechain (#39167)", "Jordan B. Redmon (#37272)", "FLANAGAN PARTNERS LLP", "201 St. Charles Avenue, Suite 3300", "New Orleans Louisiana 70170", "Telephone: (504) 569-0235", "Facsimile: (504) 592-0251", "tflanagan@flanaganpartners.com", "aholmgren@flanaganpartners.com", "aduplechain@flanaganpartners.com", "jredmon@flanaganpartners.com"]
+    - ["/s/ Joelle F. Evans", "Kyle Schonekas, T.A. (#11817)", "Joelle F. Evans (#23730)", "Andrea V. Timpa (#29455)", "Benjamin O. Flaxenburg (#37682)", "SCHONEKAS EVANS McGOEY & McEACHIN, LLC", "909 Poydras Street, Suite 1600", "New Orleans, Louisiana 70112", "Telephone: 504-680-6050", "Facsimile: 504-680-6051", "kyle@semmlaw.com", "joelle@semmlaw.com", "andrea@semmlaw.com", "benjamin@semmlaw.com"]
+    - ["Attorneys for defendant, Karl Hoefer", "Attorneys for defendant, DMMS Holdings, LLC"]
 ---
 
 Defendants, Karl Hoefer (“Hoefer”) and DMMS Holdings, LLC (“DMMS”), respectfully submit this Memorandum in Support of their Rule 12(b)(6) Motion to Dismiss in response to the Complaint brought against them by plaintiff, First Horizon Corporation (“First Horizon”). As shown herein, the Complaint fails to state any claim and should be dismissed with prejudice.
@@ -132,8 +99,6 @@ Here, because First Horizon fails to state any plausible substantive claims, its
 # CONCLUSION
 
 For the foregoing reasons, the Rule 12(b)(6) Motion filed by defendants, Karl Hoefer and DMMS Holdings, LLC, should be granted and the Complaint filed against them by plaintiff, First Horizon Corporation, should be dismissed with prejudice.
-
-<!-- signature -->
 
 # CERTIFICATE OF SERVICE
 

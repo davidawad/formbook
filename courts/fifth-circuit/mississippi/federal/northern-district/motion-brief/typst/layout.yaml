@@ -1,0 +1,63 @@
+# U.S. District Court for the Northern District of Mississippi (msnd): a memorandum brief supporting a motion, on the
+# generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with the Mississippi districts' local rules
+# overlaid here. The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged
+# layout by `fb engines gen`). Rules: Local Uniform Civil Rules of the Northern and Southern Districts of Mississippi
+# (2024), https://www.mssd.uscourts.gov/sites/mssd/files/2024%20Local%20Civil%20Rules%20MSSD%20MSND%20(.pdf) (verified
+# 2026-10-14; ../README.md quotes them). The base already meets L.U.Civ.R. 7(b)(5)(A)'s 8 1/2 x 11 paper, one-inch
+# margins and page numbers in the margin, and 7(b)(5)(B)'s 12-point text. The 35-page limit of 7(b)(5) is checked on
+# the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, as the exemplar sets it.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE NORTHERN DISTRICT OF MISSISSIPPI"
+# L.U.Civ.R. 7(b)(5)(A): text double-spaced, Word's double in this face (2 x 1.15 x 12 pt, the exemplar's pitch).
+pitch: {body: 27.6, single: 13.8}
+# L.U.Civ.R. 7(b)(5)(A), (B): footnotes single spaced, 11-point or larger.
+footnote: {size: 11, pitch: 12.65, gap: 7, clearance: 10}
+# L.U.Civ.R. 7(b)(5)(A): quotations indented and single spaced, a blank single line above and below.
+quote: {left: 36, right: 36, above: 13.8, below: 13.8}
+# Headings on the body pitch, as the exemplar sets them: a section centered in bold capitals, an argument heading
+# bold, a sub-heading bold italic.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body}
+  - {bold: true, pitch: body}
+  - {bold: true, italic: true, pitch: body}
+# FRCP 10(a): the court's name with the division (when the sample gives one); the parties in bold, each designation in
+# capitals at the right of its last line, "v." between them a line from each with the file number at the right, no
+# rules (the exemplar's caption); the title bold, centered and underlined.
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{division} DIVISION", align: center, bold: true, upper: true, optional: true}
+  - each: caption.parties
+    blocks:
+      - columns:
+          - width: 288
+            blocks:
+              - {text: "{names}", bold: true}
+          - valign: bottom
+            blocks:
+              - {text: "{designation}", bold: true, upper: true, align: right}
+    between:
+      - columns:
+          - width: 216
+            blocks:
+              - {text: "v.", bold: true}
+          - blocks:
+              - {text: "{case_label|Civil Action No.} {case_number}", bold: true, align: right}
+        above: 13.8
+        below: 13.8
+    above: 27.6
+  - {text: "{brief_title}", align: center, bold: true, underline: true, pitch: body, above: 13.8}
+# L.U.Civ.R. 11(a): the date line at the paragraph indent; "Respectfully submitted," then the signing party, the
+# signer and counsel (name and bar number) at three inches; then counsel's firm, address, telephone, fax and e-mail at
+# the margin. Kept whole and with the last paragraph.
+closing:
+  - group:
+      - {text: "{signature.date_line}", pitch: body, indent: 36}
+      - {text: "Respectfully submitted,", left: 216, above: 13.8}
+      - {text: "{signature.party}", left: 216, above: 13.8}
+      - {text: "{signature.signer}", left: 216}
+      - {text: "{signature.counsel}", left: 216}
+      - {text: "{signature.of_counsel}", above: 13.8}

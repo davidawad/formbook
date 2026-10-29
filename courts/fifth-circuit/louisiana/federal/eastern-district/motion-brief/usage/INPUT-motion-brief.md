@@ -4,19 +4,20 @@
 # A complete transcription of the whole memorandum (every word, filer typos kept: heading "C." twice, "Ltd. V.", "2016)(internal"). Left out: the CM/ECF banner, the "CIVIL ACTION NO.:" colon and the certificate's typed name under the /s/ line (the template has no field), and the template prints a SECTION blank the filer did not. The filed motion (Document 18-0) and the notice of
 # submission (Document 18-2) are separate filings and are not reproduced. The template sets the page breaks.
 # See ../README.md, "Markdown contract", for the meaning of every field.
-civil_action_no: "2:26-cv-00726-EEF-DPC"
-section: ""
+case_number: "2:26-cv-00726-EEF-DPC"
 judge: "ELDON E. FALLON"
 magistrate: "DONNA PHILLIPS CURRAULT"
 caption:
-  - names: ["CHARLES D. WALKER"]
-    designation: "Plaintiff"
-  - names: ["AMERIGAS PROPANE, L.P."]
-    designation: "Defendant"
-title: "MEMORANDUM IN SUPPORT OF DEFENDANT’S RULE 12(b)(6) MOTION FOR PARTIAL DISMISSAL OF AMENDED COMPLAINT"
+  parties:
+    - names: ["CHARLES D. WALKER"]
+      designation: "Plaintiff"
+    - names: ["AMERIGAS PROPANE, L.P."]
+      designation: "Defendant"
+brief_title: "MEMORANDUM IN SUPPORT OF DEFENDANT’S RULE 12(b)(6) MOTION FOR PARTIAL DISMISSAL OF AMENDED COMPLAINT"
 signature:
-  - names: ["/s/ *Sara Grace Sirera*", "Hal D. Ungar, La. Bar No. 31344", "Sara Grace Sirera, La. Bar No. 38405", "Ogletree, Deakins, Nash, Smoak & Stewart, P.C.", "701 Poydras Street, Suite 3500", "New Orleans, LA 70139", "Telephone: 504.648.3840", "Facsimile: 504.648.3859", "Email: hal.ungar@ogletreedeakins.com", "sara.sirera@ogletreedeakins.com"]
-  - names: ["*Attorneys for Defendant, AmeriGas Propane, L.P.*"]
+  blocks:
+    - ["/s/ *Sara Grace Sirera*", "Hal D. Ungar, La. Bar No. 31344", "Sara Grace Sirera, La. Bar No. 38405", "Ogletree, Deakins, Nash, Smoak & Stewart, P.C.", "701 Poydras Street, Suite 3500", "New Orleans, LA 70139", "Telephone: 504.648.3840", "Facsimile: 504.648.3859", "Email: hal.ungar@ogletreedeakins.com", "sara.sirera@ogletreedeakins.com"]
+  counsel_for: "*Attorneys for Defendant, AmeriGas Propane, L.P.*"
 service:
   date: "28th day of September, 2026"
   signer: "Sara Grace Sirera"

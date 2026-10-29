@@ -1,0 +1,82 @@
+# U.S. District Court for the Western District of Louisiana (lawd): a memorandum supporting a motion, on the generic
+# FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with W.D. La.'s local rules overlaid here. The shared
+# document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`).
+# Rules: W.D. La. Local Civil Rules (Ver3 030526),
+# https://www.lawd.uscourts.gov/sites/lawd/files/UPLOADS/CivilCrimLRs.Barbara.updated.Ver3.030526.ppm.pdf (linked from
+# https://www.lawd.uscourts.gov/local-rules; ../README.md quotes them). LR 10.1: 8 1/2 x 11 paper, paginated, double
+# spaced except footnotes and quotations (the base); the rules set no face, size or margin, so the base's floor
+# stands. The 25-page limit of LR 7.1 and 7.8 (exclusive of the tables) is checked on the render (../eval.yaml).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, second line.
+constants:
+  district: "WESTERN DISTRICT OF LOUISIANA"
+# LR 10.1: paginated. The caption page counted, unprinted, the tables from ii, the text from 1 (the exemplar's numbering).
+page_number: {align: center, front: lower-roman, cover: counted}
+# Headings on the body pitch, a blank double line above, as the exemplar sets them: a section centered in bold
+# capitals, an argument heading bold, a sub-heading bold italic.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body, above: 24}
+  - {bold: true, pitch: body, above: 24}
+  - {bold: true, italic: true, pitch: body, above: 24}
+# FRCP 10(a), LR 10.1: the court's name with the division; the parties at the left, "VERSUS" between them (the
+# exemplar's word, a line from each), each designation at the right of its names, a column of asterisks as high as the parties, then the civil action number and the district and
+# magistrate judges (LR 10.1) a line apart, a bold legend (a jury demand) when the sample gives one; the title bold and centered, the
+# filer line under it in capitals; then the sample's `opening` (the text before the first section) at the body
+# pitch. The first page, before the tables.
+cover:
+  - {text: "{xd.court}", align: center}
+  - {text: "{xd.district}", align: center}
+  - {text: "{division} DIVISION", align: center, upper: true}
+  - columns:
+      - width: 216
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", align: right}
+            between:
+              - {text: "VERSUS", above: 13.8, below: 13.8}
+      - {width: 18, repeat: "*", align: center}
+      - blocks:
+          - {text: "CIVIL ACTION NO.:"}
+          - {text: "{case_number|_______________________}"}
+          - {text: "JUDGE {judge|_______________________}", above: 13.8}
+          - {text: "MAGISTRATE JUDGE {magistrate|_______________________}", above: 13.8}
+          - {text: "{legend}", bold: true, optional: true, above: 13.8}
+    above: 24
+  - {text: "{brief_title}", align: center, bold: true, above: 24}
+  - {text: "{subtitle}", align: center, bold: true, upper: true, optional: true, above: 6}
+  - {markdown: "{opening}", optional: true, pitch: body, indent: 36, above: 24}
+front: []
+# LR 7.1, 7.8: a memorandum over 10 pages has a table of contents and a table of authorities (when the sample lists
+# its authorities), each with the pages; the contents a step in per level.
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 18, step: 18, above: 0, when: authorities}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  col: 36
+  hang: 36
+  above: 0
+  passim: 5
+  group: {bold: true, above: 13.8, below: 0}
+# LR 11.1: the signature block, the date at the left and "Respectfully submitted," at the right over the signer's
+# lines, kept whole with the last paragraph; FRCP 5(b): the certificate of service, when the sample gives one.
+closing:
+  - columns:
+      - width: 234
+        blocks:
+          - {text: "Dated: {signature.date}", optional: true}
+      - blocks:
+          - {text: "Respectfully submitted,"}
+          - {text: "{signature.lines}", above: 13.8}
+    above: 24
+  - when: certificate
+    blocks:
+      - group:
+          - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, pitch: body}
+          - {text: "{certificate.text}", pitch: body, indent: 36}
+          - columns:
+              - {width: 234, blocks: []}
+              - blocks:
+                  - {text: "{certificate.signature.lines}"}
+            above: 24
+        above: 24

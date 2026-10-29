@@ -5,10 +5,7 @@
 # a few spans, and most case names are roman in it (see ../README.md, gaps). The filing has no fax number for counsel;
 # L.U.Civ.R. 11(a) requires one, so the sample says "None". Footnote 1 and 2 are at the foot of page 1 in the filing.
 case_number: "3:24-CV-260-KHJ-MTP"
-court:
-  - "IN THE UNITED STATES DISTRICT COURT"
-  - "FOR THE SOUTHERN DISTRICT OF MISSISSIPPI"
-  - "NORTHERN DIVISION"
+division: "Northern"
 caption:
   parties:
     - names: ["PHIL BRYANT & DEBORAH BRYANT"]

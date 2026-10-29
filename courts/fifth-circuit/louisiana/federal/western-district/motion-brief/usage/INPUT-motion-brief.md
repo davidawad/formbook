@@ -2,8 +2,8 @@
 # Sample 1 of 1. Transcribed from the filed exemplar (usage/FILED-EXAMPLE-motion-brief.pdf),
 # pages 1 to 8 and 15 to 16 of the 20-page filing, for visual comparison. Omitted: the footnotes and their markers, Part II
 # from the Monell discussion on (filed pages 9 to 15) and Part III (state law), which are replaced by a bracketed note. The
-# table of authorities lists only the authorities cited in the transcribed text; its page numbers were taken from this
-# sample's own render (not the filed pages). The table of contents is generated from the body headings. Italics of case
+# table of authorities lists only the authorities cited in the transcribed text; each entry names the text that cites it
+# (`find`), and the template finds its pages. The table of contents is generated from the body headings. Italics of case
 # names are transcribed. See ../README.md for the meaning of every field.
 case_number: "1:26-cv-00172"
 division: "Alexandria"
@@ -13,53 +13,52 @@ caption:
       designation: "Plaintiffs,"
     - names: ["HARRIS COUNTY, TEXAS, et al.,"]
       designation: "Defendants."
-  separator: "VERSUS"
 judge: "DRELL"
 magistrate: "PEREZ-MONTES"
 legend: "JURY TRIAL REQUESTED"
-title: "MEMORANDUM IN SUPPORT OF RULE 12(b)(6) MOTION TO DISMISS"
+brief_title: "MEMORANDUM IN SUPPORT OF RULE 12(b)(6) MOTION TO DISMISS"
 subtitle: "LaSalle Correctional Center, L.L.C., LaSalle Management Company, L.L.C., and LaSalle Corrections, LLC"
 authorities:
-  - category: "Cases"
-    items:
+  - heading: "Cases"
+    entries:
       - cite: "*Alvarado v. CITGO Petro. Corp.*, No. 25-40455, 2026 U.S. App. LEXIS 6463 (5th Cir. Mar. 4, 2026)"
-        pages: "3"
+        find: "Alvarado"
       - cite: "*Ashcroft v. Iqbal*, 556 U.S. 662 (2009)"
-        pages: "3, 4"
+        find: "Iqbal"
       - cite: "*Bell Atl. Corp. v. Twombly*, 550 U.S. 544 (2007)"
-        pages: "3"
+        find: "Twombly"
       - cite: "*Johnson v. Harris County*, 83 F.4th 941 (5th Cir. 2023)"
-        pages: "3"
+        find: "Johnson"
       - cite: "*Ruiz v. Brennan*, 851 F.3d 464 (5th Cir. 2017)"
-        pages: "3"
+        find: "Ruiz"
       - cite: "*Armstrong v. Ashley*, 60 F.4th 262 (5th Cir. 2023)"
-        pages: "5, 6"
+        find: "Armstrong"
       - cite: "*Edwards v. City of Balch Springs, Texas*, 70 F.4th 302 (5th Cir. 2023)"
-        pages: "5"
+        find: "Edwards"
       - cite: "*Martinez v. City of N. Richland Hills*, 846 F. App’x 238 (5th Cir. 2021)"
-        pages: "5"
+        find: "Martinez"
       - cite: "*Pembaur v. City of Cincinnati*, 475 U.S. 469 (1986)"
-        pages: "6"
+        find: "Pembaur"
       - cite: "*Peterson v. City of Fort Worth*, 588 F.3d 838 (5th Cir. 2009)"
-        pages: "4"
+        find: "Peterson"
       - cite: "*Piotrowski v. City of Houston*, 237 F.3d 567 (5th Cir. 2001)"
-        pages: "4, 6"
+        find: "Piotrowski"
       - cite: "*Thomas v. Gilley*, No. 3:22-06174, 2023 U.S. Dist. LEXIS 181030 (W.D. La. Sep. 20, 2023)"
-        pages: "4"
+        find: "Gilley"
       - cite: "*Webster v. City of Houston*, 735 F.2d 838 (5th Cir. 1984) (en banc)"
-        pages: "6"
-  - category: "Statutes"
-    items:
+        find: "Webster"
+  - heading: "Statutes"
+    entries:
       - cite: "42 U.S.C. § 1983"
-        pages: "passim"
-  - category: "Other Authorities"
-    items:
+        find: "§ 1983"
+  - heading: "Other Authorities"
+    entries:
       - cite: "Fed. R. Civ. P. 8"
-        pages: "3"
+        find: "8(a)"
       - cite: "Fed. R. Civ. P. 10"
-        pages: "2"
+        find: "Civ. Proc. 10"
       - cite: "Fed. R. Civ. P. 12"
-        pages: "2, 3"
+        find: "12(b)(6)"
 signature:
   date: "April 16, 2026"
   lines:
@@ -83,11 +82,11 @@ certificate:
     lines:
       - "/s/ Ryan G. Lavelle"
       - "RYAN G. LAVELLE"
+opening: |
+  MAY IT PLEASE THE COURT:
+
+  Plaintiffs, Kim Carlson Lewis, as Personal Representative of Erik Carlson, deceased, and on her own behalf, and Lindsey Gratehouse, on behalf of her minor child M.G. (“Plaintiffs”), have filed suit against Defendants, LaSalle Correctional Center, L.L.C. (“LCC”), LaSalle Management Company, L.L.C. (“LMC”), and LaSalle Corrections, LLC (“LC”) (collectively the “LaSalle-branded Entities”). Pursuant to Fed. R. Civ. P. 12(b)(6), and for the reasons set forth below, the LaSalle-branded Entities respectfully request the Court to enter an order dismissing all Plaintiffs’ claims brought against them, with prejudice.
 ---
-
-MAY IT PLEASE THE COURT:
-
-Plaintiffs, Kim Carlson Lewis, as Personal Representative of Erik Carlson, deceased, and on her own behalf, and Lindsey Gratehouse, on behalf of her minor child M.G. (“Plaintiffs”), have filed suit against Defendants, LaSalle Correctional Center, L.L.C. (“LCC”), LaSalle Management Company, L.L.C. (“LMC”), and LaSalle Corrections, LLC (“LC”) (collectively the “LaSalle-branded Entities”). Pursuant to Fed. R. Civ. P. 12(b)(6), and for the reasons set forth below, the LaSalle-branded Entities respectfully request the Court to enter an order dismissing all Plaintiffs’ claims brought against them, with prejudice.
 
 # BACKGROUND
 

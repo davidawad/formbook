@@ -7,9 +7,9 @@ Folder: `courts/fifth-circuit/mississippi/federal/northern-district/motion-brief
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer, 12 pp; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (transcription of the brief: caption, the introduction, facts, standard, the argument with its three headings, conclusion, footnotes 1–3, the signature block and the OF COUNSEL block) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 13 pages (11 on the earlier EB Garamond render, before fb-595.68), typst 0.15.0, pinned Times New Roman only, no warnings (`sh tools/render.sh <this dir> usage/INPUT-motion-brief.md`) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, `.latex.pdf`, `.docx` and `.docx.pdf`, 13 pages each, vendored Times New Roman only, no warnings, on the shared document model: the generic FRCP brief `lib/layouts/frcp-motion-brief.yaml` with the local rules overlaid in `typst/layout.yaml` (fb-595.17.6) |
 | overlay | ok: `usage/OVERLAY-stokes-motion-brief.pdf` and `OVERLAY-stokes-motion-brief.txt` (`sh tools/overlay.sh <this dir> stokes-motion-brief`) |
-| pages reviewed | 11 of 11 on the earlier EB Garamond render, before fb-595.68 (every page rendered at 60 dpi and viewed after the last template change) |
+| pages reviewed | 13 of 13 on typst, latex and docx (every page of the three renders viewed at 40 dpi after the move onto the FRCP base, 2026-10-29; see "Engines"; older reviews below were made on earlier renders) |
 
 File names follow `tools/render.sh` and `tools/overlay.sh` (`OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf`/`.txt`), so the sample is `INPUT-<id>.md` and the id is `stokes-motion-brief`.
 
@@ -81,28 +81,21 @@ Defects found during review and fixed in the template: (a) headings came out at 
 
 The page review checks the layout of the render. Text fidelity to the exemplar rests on the transcription and the overlay's word pairing; the exemplar's filed page images were not compared pixel by pixel.
 
+## Gate 2 review on the FRCP base (2026-10-29, every page of the typst, latex and docx renders viewed)
+
+- Page 1: court name and division, caption (now as the exemplar: no box), title, opening paragraphs. Pass.
+- Pages 2 to 12: body, footnotes at 11 pt under a rule, the indented quotation on page 10, headings. Pass.
+- Page 13: conclusion, the date line, the signing party and counsel at 3 inches, the of-counsel block. Pass.
+- OPEN (tier 2): a party's designation stands at the right of its first name line, the exemplar's at its last.
+- Frontmatter now: `case_label`, `brief_title`, `signature.date_line` (the base's names; the Markdown contract above predates them).
+
 ## Engines
 
-Two engines are built from the same sample: typst (primary, `typst/`) and docx (`docx/`). This doc type has no latex template yet.
+On the shared document model (docs/EVAL-LOOP.md, "Generated engines"; fb-595.17.6): `typst/layout.yaml` names the generic FRCP brief (`base: /lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and overlays what this court sets itself, each with its rule: the court's name as "IN THE UNITED STATES DISTRICT COURT / FOR THE NORTHERN DISTRICT OF MISSISSIPPI" with the division; the 27.6 pt double pitch (L.U.Civ.R. 7(b)(5)(A)); footnotes at 11 pt, single spaced (7(b)(5)(B)); quotations; the caption as the exemplar sets it (bold parties, each designation in capitals at the right, "v." with the file number at the right, no rules); the title bold and underlined; the signature block of L.U.Civ.R. 11(a) with the of-counsel lines at the margin. The 35-page limit (7(b)(5)) is `params.page_limit`. `typst/msnd-motion-brief.typ` names the face and hands the layout to `lib/typst/xdoc.typ`. `latex/` and `docx/` are generated from the merged layout by `fb engines gen` (do not edit them); the old per-folder template code and docx filter are removed. The page limit is `eval.yaml` `params.page_limit` (DEF-LEN-001, every engine).
 
-**docx** (`docx/`): `docx/reference.xml` (`base="xengine"`: `fb render --engine docx` builds the reference document from it, the shared cross-engine recipe in the typst template's face) and the Lua filter `docx/msnd-motion-brief.lua` (pandoc, CommonMark reader). Render with `sh tools/render.sh --engine docx <this dir> usage/INPUT-motion-brief.md`; it writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice 26.8.1; `SOFFICE` must point at `soffice`). Its 13 pages match the typst render's 13. The lists below were checked on the earlier EB Garamond build (`docx/make-reference.sh` and `docx/render.sh`, since retired into fb render), except the face, sizes, pitch and quotation spacing, which are read from the current files.
+| Engine | Status |
+|---|---|
+| typst | reference; `sh tools/check.sh <dir>` exits 0 |
+| latex | generated; `--engine latex` exits 0, XENG-001..003 pass (every page and line breaks where typst breaks it) |
+| docx | generated; `--engine docx` exits 0, XENG-001..003 pass; `.docx.pdf` by LibreOffice. BLOCKED: none |
 
-What matches typst, checked on the LibreOffice PDF:
-
-- Times New Roman only (`pdffonts`); text 12 pt; footnotes 11 pt.
-- Body double-spaced at an exact 27.6 pt (24 pt before fb-595.68); first-line indent 0.5 in; block quotations indented half an inch on both sides and single-spaced in 13.8 pt lines (double-spaced before fb-595.68); letter paper with 1-inch margins; page number centered at the foot of each page.
-- Court title, caption, title, body, footnotes at the foot of their pages, argument headings (level 2 bold at the left, level 3 bold italic), level 1 headings centered in capitals, and the signature block with the OF COUNSEL block.
-- The signature block (date line, "Respectfully submitted," the signing party and counsel, OF COUNSEL) is kept together with keep-with-next, as typst's signature block is unbreakable.
-- A space before a footnote mark is dropped, as typst does, so a mark never wraps onto a line of its own.
-
-What differs:
-
-- Page count matched (11, on the earlier build), but the page breaks do not. The title sits lower under the caption than in typst, and heading keep-with-next moves a few lines; the block quotation falls on a different page. No page break is forced.
-
-docx BLOCKED items:
-
-- No check IDs: this doc type has no `rules.md` or `checks.yaml` (Known gaps, item 8), so `tools/check.sh --engine docx` has nothing to run here. The docx was reviewed by page, not by gate.
-- Font (before fb-595.68): EB Garamond was vendored as OpenType CFF (`.otf`), which Word cannot embed; the docx is now Times New Roman. Not verified in Word.
-- Word: the file was converted by LibreOffice without error but was not opened in Word, so the "no repair prompt" check is not done.
-
-Review of the docx PDF (the earlier EB Garamond build, before fb-595.68): all 11 pages rendered at 60 dpi and viewed after the last change. Typst pages compared: 1 (caption and first paragraphs) and 11 (signature block).

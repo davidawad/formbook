@@ -7,11 +7,11 @@ Folder: `courts/fifth-circuit/louisiana/federal/eastern-district/motion-brief/`.
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (the whole memorandum, 9 pages in the filing) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, pinned Times New Roman only, no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, `.latex.pdf`, `.docx` and `.docx.pdf`, 8 pages each, vendored Times New Roman only, no warnings, on the shared document model: the generic FRCP brief `lib/layouts/frcp-motion-brief.yaml` with the local rules overlaid in `typst/layout.yaml` (fb-595.17.6) |
 | overlay | ok: `usage/OVERLAY-walker-motion-brief.pdf` and `OVERLAY-walker-motion-brief.txt` (page map; re-run 2026-10-14 against a copy of the exemplar fetched from the URL in `usage/SOURCE.md`, not committed) |
 | page limit | LR 7.7 (25 pages) is enforced by the build: a 27-page test memorandum fails with the rule's message (checked 2026-10-14) |
 | typeface | Rule names no face (LR 10.1 "standard font"). Times New Roman 12 pt (the pinned install, `docs/FONTS.md` rule 1; Liberation Serif fallback), the house standard (`docs/FONTS.md` rule 6) and the exemplar's face; see known gap 1. |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed in its final state; re-checked 2026-10-14 after the fonts pass, no change to the template; the earlier EB Garamond render, before fb-595.68) |
+| pages reviewed | 8 of 8 on typst, latex and docx (every page of the three renders viewed at 40 dpi after the move onto the FRCP base, 2026-10-29; see "Engines"; older reviews below were made on earlier renders) |
 
 ## Governing rules
 
@@ -104,28 +104,22 @@ Our pages 4 to 8 pair with filed pages 5 to 9, so filed page 4 is not paired wit
 | 7 | Argument D ending (*Brooks*, *D.L. Markham*); "Conclusion" (centered bold); "Respectfully submitted," with the counsel group single spaced, firm and email lines. | Pass. |
 | 8 | CERTIFICATE OF SERVICE (centered bold), the service sentence, "This 28th day of September, 2026.", and the `/s/` line on the right. | Pass. |
 
+## Gate 2 review on the FRCP base (2026-10-29, every page of the typst, latex and docx renders viewed)
+
+- Page 1: court title, caption (no rules now, as the exemplar), title bold and centered half an inch in from each side, opening paragraphs. No page number (LR 10.1). Pass.
+- Pages 2 to 7: body at the 24 pt pitch, centered and bold headings, italic case names; page numbers centered. Pass.
+- Page 8: conclusion, "Respectfully submitted," and the counsel group at 3 inches, the certificate of service with its /s/ line. Pass.
+- ACCEPTED (tier 3): the exemplar underlines its title; the template does not (LibreOffice splits an underlined "12(b)(6)", so the docx would break the line elsewhere than typst). ACCEPTED (tier 1 over the exemplar): the SECTION blank, LR 10.1 (`eval.yaml` `cover_structure_accepted`).
+- Frontmatter now: `case_number`, `section`, `judge`, `magistrate`, `caption.parties`, `brief_title`, `signature: {date, blocks, counsel_for}`, `service` (the base's names; the Markdown contract above predates them).
+
 ## Engines
 
-Typst is the primary engine. The DOCX engine is `docx/`: `fb render --engine docx` (`tools/render-docx.sh` and `sh tools/render.sh --engine docx` call it) builds the reference document from `docx/reference.xml` (the shared cross-engine recipe in the typst template's face) and runs pandoc with the filter `laed-motion-brief.lua`. Output: `usage/OUTPUT-motion-brief.docx`. The LibreOffice PDF, `usage/OUTPUT-walker-motion-brief.docx.pdf`, was not produced (see BLOCKED).
+On the shared document model (docs/EVAL-LOOP.md, "Generated engines"; fb-595.17.6): `typst/layout.yaml` names the generic FRCP brief (`base: /lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and overlays what this court sets itself, each with its rule: the district's name; page numbers from page 2 (LR 10.1); the LR 10.1 caption (civil action number, Section, judge and magistrate judge, each a label over its value, a blank for a field the sample leaves out; the parties with "VERSUS" a line from each, no rules, as the exemplar); headings on the body pitch as typed; the signature block from 3 inches beside an optional date; the certificate of service when the sample gives `service`. `typst/laed-motion-brief.typ` names the face and hands the layout to `lib/typst/xdoc.typ`. `latex/` and `docx/` are generated from the merged layout by `fb engines gen` (do not edit them); the old per-folder template code and docx filter are removed. The page limit is `eval.yaml` `params.page_limit` (DEF-LEN-001, every engine).
 
 | Engine | Status |
 |---|---|
-| typst | the render above; tier-1 form per LR 10.1, LR 7.7 guard |
-| latex | not built |
-| docx | `.docx` built; read back with pandoc and every XML part well-formed. `.docx.pdf` BLOCKED. Not viewed. |
-
-**What the DOCX form sets** (from the reference and the filter; no page has been looked at): letter page, 1 in margins; Times New Roman 12 pt, the same face as typst; 24 pt exact line pitch (double spacing); 0.5 in first-line indent; page number centered 0.6 in from the bottom edge, none on page 1; the caption as a borderless table, the party column closed by a right and a bottom rule, VERSUS between the sides, the case fields as label-over-value on the right; title bold and centered; headings centered bold, bold and bold italic; body paragraphs not numbered; lettered items with a hanging indent; single-spaced block quotations indented 0.5 in on each side; the signature block with "Dated" (when the sample gives a date) on the left and "Respectfully submitted," at 3 in; the certificate of service when `service` is given.
-
-**Differences and open checks**
-
-- No page of the `.docx` has been rendered or compared with the typst pages (0 of 8 reviewed). The spacing around the caption, the quotations and the signature block is set from the typst values and not tuned against a render.
-- The typst build stops with an error when the memorandum passes 25 pages (LR 7.7). The docx has no such guard: its page count must be read from the LibreOffice PDF, and it is not checked yet.
-- Word and LibreOffice may paginate differently (DOCX.md, "Known limits"). The page count and the page numbers must be checked in the LibreOffice PDF.
-
-**docx BLOCKED items**
-
-- `docx.pdf`, Gates 0 and 1, the LR 7.7 page count and the page review: BLOCKED. The LibreOffice 25.2 build unpacked from Debian trixie debs (no root here) aborts at startup with `com::sun::star::uno::DeploymentException`: the extracted packages have no `libdeploymentlo.so`. No PDF was produced, so no check ran. Unblock: install LibreOffice so it runs on this box, then `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`.
-- `tools/check.sh --engine docx`: not run. It needs `court.json` and `rules.md` in the folder (known gap 9). The check stamp `usage/.check-docx.txt` was not written.
-- The LibreOffice conversion needs the pinned Times New Roman visible to LibreOffice (`docs/FONTS.md` rule 1; DOCX.md, "Fonts").
+| typst | reference; `sh tools/check.sh <dir>` exits 0 |
+| latex | generated; `--engine latex` exits 0, XENG-001..003 pass (every page and line breaks where typst breaks it) |
+| docx | generated; `--engine docx` exits 0, XENG-001..003 pass; `.docx.pdf` by LibreOffice. BLOCKED: none |
 
 [Formbook index](../../../../../README.md) | [Status table](../../../../../STATUS.md)

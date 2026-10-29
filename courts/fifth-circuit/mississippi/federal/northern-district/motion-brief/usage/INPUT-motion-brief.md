@@ -1,15 +1,16 @@
 ---
 division: "Oxford"
+case_label: "Case No.:"
 case_number: "3:25-cv-307-GHD-RP"
-title: "DEFENDANT’S BRIEF IN SUPPORT OF HIS MOTION TO DISMISS"
+brief_title: "DEFENDANT’S BRIEF IN SUPPORT OF HIS MOTION TO DISMISS"
 caption:
   parties:
     - names: ["LAUREN STOKES"]
       designation: "Plaintiff,"
     - names: ["GLENN BOYCE, CHANCELLOR OF THE UNIVERSITY OF MISSISSIPPI,", "In his official and personal capacities,"]
       designation: "Defendant."
-date_line: "This, the 10th day of December 2025."
 signature:
+  date_line: "This, the 10th day of December 2025."
   party: "GLENN BOYCE, CHANCELLOR OF THE UNIVERSITY OF MISSISSIPPI, in his official and personal capacities"
   signer: "s/J. Cal Mayo, Jr."
   counsel:

@@ -7,9 +7,9 @@ Folder: `courts/fifth-circuit/mississippi/federal/southern-district/motion-brief
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (defendant's counsel; see `usage/SOURCE.md`). A second filer is saved too: `usage/FILED-EXAMPLE-motion-brief-2.pdf` (15 pp., not transcribed). |
 | sample md | `usage/INPUT-motion-brief.md`: the whole memorandum transcribed (filed as 8 pages, with the certificate of service). |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0 via `tools/render.sh`, vendored Times New Roman only, no typst warnings. |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, `.latex.pdf`, `.docx` and `.docx.pdf`, 8 pages each, vendored Times New Roman only, no warnings, on the shared document model: the generic FRCP brief `lib/layouts/frcp-motion-brief.yaml` with the local rules overlaid in `typst/layout.yaml` (fb-595.17.6) |
 | overlay | ok: `usage/OVERLAY-bryant-memorandum.pdf` and `usage/OVERLAY-bryant-memorandum.txt` (`tools/overlay.sh`). |
-| pages reviewed | 7 of 7 (every page rendered at 60 dpi and viewed; see the review below). |
+| pages reviewed | 8 of 8 on typst, latex and docx (every page of the three renders viewed at 40 dpi after the move onto the FRCP base, 2026-10-29; see "Engines"; older reviews below were made on earlier renders) |
 
 The file names follow the tools' conventions (`INPUT-`, `OUTPUT-`, `OVERLAY-`), not the `<id>.pdf` / `<id>-overlay.pdf` names in the brief (see the complaint README).
 
@@ -78,11 +78,20 @@ The local rules say nothing about a table of contents or a table of authorities 
 
 Overlay: the overlay pairs each page of our render with the exemplar page that shares the most words. Word overlap runs from 80% (page 7) to 97% (page 3). The overlay is a diagnostic, not a score: the differences are the typeface, the italics (the sample italicizes every case name, the filing only a few), and line wrapping.
 
+## Gate 2 review on the FRCP base (2026-10-29, every page of the typst, latex and docx renders viewed)
+
+- Page 1: court name and division, caption, title, introduction with two footnotes at 11 pt. Pass.
+- Pages 2 to 7: body, underlined section headings, bold argument headings. Pass.
+- Page 8: conclusion, "Respectfully submitted, this the ...", the counsel block at 3 inches, the certificate of service. Pass.
+- OPEN (tier 3): the exemplar sets a designation on the line of its party's names; here on its own line at the right.
+
 ## Engines
 
-Both engines follow the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): first-fit line breaking, ragged right, no kerning, ligatures or hyphenation, every line a box of its pitch (27.6 pt double for the body, 13.8 pt single for the court title, caption, headings and signature block, 12.65 pt for the 11 pt footnotes). `eval.yaml` sets `params.cross_engine: gate`.
+On the shared document model (docs/EVAL-LOOP.md, "Generated engines"; fb-595.17.6): `typst/layout.yaml` names the generic FRCP brief (`base: /lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and overlays what this court sets itself, each with its rule: the court's name as "IN THE UNITED STATES DISTRICT COURT / FOR THE SOUTHERN DISTRICT OF MISSISSIPPI" with the division (now the frontmatter's `division`, not three `court` lines); the 27.6 pt double pitch (L.U.Civ.R. 7(b)(5)(A)); footnotes at 11 pt (7(b)(5)(B)); single-spaced headings, level 1 in bold underlined capitals; the caption with each designation at the right margin as the exemplar; the L.U.Civ.R. 11(a) counsel block (the template refuses to render without its fields) and the certificate of service. The 35-page limit (7(b)(5)) is `params.page_limit`. `typst/mssd-motion-brief.typ` names the face and hands the layout to `lib/typst/xdoc.typ`. `latex/` and `docx/` are generated from the merged layout by `fb engines gen` (do not edit them); the old per-folder template code and docx filter are removed. The page limit is `eval.yaml` `params.page_limit` (DEF-LEN-001, every engine).
 
-- **typst** (`typst/mssd-motion-brief.typ`): the reference render, `usage/OUTPUT-motion-brief.typst.pdf` (8 pages). The 35-page limit of L.U.Civ.R. 7(b)(5) is an assert here.
-- **docx** (`docx/reference.xml`, the cross-engine recipe in the typst face plus the styles Body Text Noted and Body Keep, built by `fb render`; filter `docx/mssd-motion-brief.lua`). Samples: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf` (8 pages). XENG-001..003 pass: every page and every line breaks where typst breaks it.
-- A paragraph that anchors a footnote has no widow or orphan control in either engine (typst left a note on the page before its moved line; Word keeps a note with its line), and the last paragraph stays on the page with the signature block.
-- BLOCKED: none.
+| Engine | Status |
+|---|---|
+| typst | reference; `sh tools/check.sh <dir>` exits 0 |
+| latex | generated; `--engine latex` exits 0, XENG-001..003 pass (every page and line breaks where typst breaks it) |
+| docx | generated; `--engine docx` exits 0, XENG-001..003 pass; `.docx.pdf` by LibreOffice. BLOCKED: none |
+

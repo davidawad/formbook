@@ -1,0 +1,68 @@
+# U.S. District Court for the Eastern District of Louisiana (laed): a memorandum supporting a motion, on the generic
+# FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with E.D. La.'s local rules overlaid here. The shared
+# document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`).
+# Rules: E.D. La. Local Civil Rules (2022, amended Feb. 4, 2025), https://www.laed.uscourts.gov/attorney-information/rules-and-orders/local-rules
+# (verified 2026-10-14; ../README.md quotes them). The base already meets LR 10.1's 8-1/2 x 11 paper, double spacing,
+# standard font and one-inch margins. The 25-page limit of LR 7.7 is checked on the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, second line.
+constants:
+  district: "EASTERN DISTRICT OF LOUISIANA"
+# LR 10.1: pages numbered from "2" (page 1 unnumbered), the number at least half an inch from the bottom edge.
+page_number: {align: center, from: 2}
+# The exemplar's headings (one filer, usage/SOURCE.md): set as typed, not in capitals, on the body pitch.
+heading:
+  - {align: center, bold: true, pitch: body}
+  - {bold: true, pitch: body}
+  - {bold: true, italic: true, pitch: body}
+# LR 10.1: the caption shows the civil action number, the Section and the district and magistrate judges. The parties
+# at the left, "VERSUS" a line from each (the exemplar's word); each case field a
+# label over its value at the right, a field not yet assigned a blank to fill in; no rules (the exemplar draws none).
+# The title bold and centered, half an inch in from each side as the exemplar sets it (its underline is that filer's
+# style, tier 3: LibreOffice splits an underlined "12(b)(6)" into two words, so the docx would not match typst).
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 234
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 108}
+            between:
+              - {text: "VERSUS", above: 13.8, below: 13.8}
+      - blocks:
+          - {text: "CIVIL ACTION NO."}
+          - {text: "{case_number|______________}"}
+          - {text: "SECTION:"}
+          - {text: "{section|______________}"}
+          - {text: "JUDGE"}
+          - {text: "{judge|______________}"}
+          - {text: "MAGISTRATE JUDGE"}
+          - {text: "{magistrate|______________}"}
+    gutter: 25.2
+    above: 13.8
+  - {text: "{brief_title}", align: center, bold: true, left: 36, right: 36, above: 24, below: 12}
+# FRCP 11(a): the signature block in the right half of the page, "Respectfully submitted," (beside the date, when the
+# sample gives one), each counsel group a blank single line apart, kept whole and with the last paragraph. FRCP
+# 5(b)(2)(E): the certificate of service by the Court's electronic filing system, when the sample gives `service`.
+closing:
+  - group:
+      - columns:
+          - width: 216
+            blocks:
+              - {text: "Dated: {signature.date}", optional: true}
+          - blocks:
+              - {text: "Respectfully submitted,"}
+              - each: signature.blocks
+                blocks:
+                  - {text: "{.}", above: 13.8}
+              - {text: "{signature.counsel_for}", optional: true, above: 13.8}
+    above: 12
+  - when: service
+    blocks:
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, pitch: body, above: 24, keep: true}
+      - {text: "I hereby certify that a copy of the foregoing has been served on all counsel of record via the Court’s Electronic Filing System.", pitch: body, indent: 36}
+      - {text: "This {service.date}.", pitch: body, indent: 36}
+      - {text: "/s/ {service.signer}", left: 216, above: 12}

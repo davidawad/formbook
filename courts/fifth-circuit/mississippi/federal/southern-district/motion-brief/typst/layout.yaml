@@ -1,0 +1,68 @@
+# U.S. District Court for the Southern District of Mississippi (mssd): a memorandum brief supporting a motion, on the
+# generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with the Mississippi districts' local rules
+# overlaid here. The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged
+# layout by `fb engines gen`). Rules: Local Uniform Civil Rules of the Northern and Southern Districts of Mississippi
+# (2024), https://www.mssd.uscourts.gov/sites/mssd/files/2024%20Local%20Civil%20Rules%20MSSD%20MSND%20(.pdf) (verified
+# 2026-10-14; ../README.md quotes them). The base already meets L.U.Civ.R. 7(b)(5)(A)'s 8 1/2 x 11 paper, one-inch
+# margins and page numbers in the margin, and 7(b)(5)(B)'s 12-point text. The 35-page limit of 7(b)(5) is checked on
+# the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, as the exemplar sets it.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE SOUTHERN DISTRICT OF MISSISSIPPI"
+# L.U.Civ.R. 7(b)(5)(A): text double-spaced, Word's double in this face (2 x 1.15 x 12 pt, the exemplar's pitch).
+pitch: {body: 27.6, single: 13.8}
+# L.U.Civ.R. 7(b)(5)(A), (B): footnotes single spaced, 11-point or larger.
+footnote: {size: 11, pitch: 12.65, gap: 7, clearance: 12.6}
+# L.U.Civ.R. 7(b)(5)(A): headings may be single spaced, a blank single line above and below: a section centered in bold
+# underlined capitals, an argument heading bold at the margin (the exemplars' headings).
+heading:
+  - {align: center, bold: true, underline: true, upper: true, above: 13.8, below: 13.8}
+  - {bold: true, above: 13.8, below: 13.8}
+  - {bold: true, italic: true, above: 13.8, below: 13.8}
+# FRCP 10(a): the court's name with the division (when the sample gives one); each party's names, its designation at
+# the right margin (the exemplar's), "v." between them a blank line from each, the civil action number at the right
+# from the line of "v."; no rules. The title centered in bold underlined capitals.
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{division} DIVISION", align: center, bold: true, upper: true, optional: true}
+  - each: caption.parties
+    blocks:
+      - {text: "{names}"}
+      - {text: "{designation}", align: right}
+    between:
+      - columns:
+          - width: 259.2
+            blocks:
+              - {text: "v."}
+          - blocks:
+              - {text: "CIVIL ACTION NO."}
+              - {text: "{case_number}"}
+        gutter: 7.2
+        above: 13.8
+    above: 27.6
+  - {text: "{brief_title}", align: center, bold: true, underline: true, upper: true, above: 27.6, below: 13.8}
+# L.U.Civ.R. 11(a): "Respectfully submitted, this the <date>", then counsel's firm, address, telephone, fax, the
+# signature, name and bar number and e-mail in the right half of the page; kept whole and with the last paragraph.
+# FRCP 5(b): the certificate of service, when the sample gives one, signed alike.
+closing:
+  - group:
+      - {text: "Respectfully submitted, this the {signature.date}", indent: 36, optional: true, below: 13.8}
+      - {text: "{signature.firm}", left: 216}
+      - {text: "{signature.address}", left: 216}
+      - {text: "Telephone: {signature.telephone}", left: 216}
+      - {text: "Facsimile: {signature.fax}", left: 216}
+      - {text: "s/ {signature.signer}", left: 216, above: 13.8}
+      - {text: "{signature.signer}, {signature.bar_no}", upper: true, left: 216}
+      - {text: "Email: {signature.email}", left: 216}
+    above: 27.6
+  - when: certificate
+    blocks:
+      - group:
+          - {text: "Certificate of Service", align: center, bold: true, underline: true, upper: true, below: 13.8}
+          - {text: "{certificate.text}", pitch: body, indent: 36}
+          - {text: "s/ {certificate.signer}", left: 216, above: 13.8}
+          - {text: "{certificate.signer}, {certificate.bar_no}", upper: true, left: 216}
+        above: 27.6

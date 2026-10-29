@@ -589,12 +589,8 @@ courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/motion-brief 
 courts/fifth-circuit/louisiana/federal/bankruptcy-western-district/motion-brief typst
 courts/fifth-circuit/louisiana/federal/eastern-district/complaint docx
 courts/fifth-circuit/louisiana/federal/eastern-district/complaint typst
-courts/fifth-circuit/louisiana/federal/eastern-district/motion-brief docx
-courts/fifth-circuit/louisiana/federal/eastern-district/motion-brief typst
 courts/fifth-circuit/louisiana/federal/western-district/complaint docx
 courts/fifth-circuit/louisiana/federal/western-district/complaint typst
-courts/fifth-circuit/louisiana/federal/western-district/motion-brief docx
-courts/fifth-circuit/louisiana/federal/western-district/motion-brief typst
 courts/fifth-circuit/louisiana/state/court-of-appeal/answering-brief docx
 courts/fifth-circuit/louisiana/state/court-of-appeal/answering-brief latex
 courts/fifth-circuit/louisiana/state/court-of-appeal/answering-brief typst
@@ -643,12 +639,8 @@ courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district/adversary-
 courts/fifth-circuit/mississippi/federal/bankruptcy-southern-district/adversary-complaint typst
 courts/fifth-circuit/mississippi/federal/northern-district/complaint docx
 courts/fifth-circuit/mississippi/federal/northern-district/complaint typst
-courts/fifth-circuit/mississippi/federal/northern-district/motion-brief docx
-courts/fifth-circuit/mississippi/federal/northern-district/motion-brief typst
 courts/fifth-circuit/mississippi/federal/southern-district/complaint docx
 courts/fifth-circuit/mississippi/federal/southern-district/complaint typst
-courts/fifth-circuit/mississippi/federal/southern-district/motion-brief docx
-courts/fifth-circuit/mississippi/federal/southern-district/motion-brief typst
 courts/fifth-circuit/mississippi/state/court-of-appeals/amicus-brief docx
 courts/fifth-circuit/mississippi/state/court-of-appeals/amicus-brief latex
 courts/fifth-circuit/mississippi/state/court-of-appeals/amicus-brief typst

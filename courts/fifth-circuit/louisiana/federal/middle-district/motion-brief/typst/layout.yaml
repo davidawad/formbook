@@ -1,0 +1,54 @@
+# U.S. District Court for the Middle District of Louisiana (lamd): a memorandum supporting a motion, on the generic
+# FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with M.D. La.'s local rules overlaid here. The shared
+# document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`).
+# Rules: M.D. La. Local Civil Rules (2022, effective June 30, 2022),
+# https://www.lamd.uscourts.gov/sites/default/files/pdf/2022_Local_Rules_6-30-2022.pdf (verified 2026-10-14; ../README.md
+# quotes them). The base already meets LR 10(a)(1): 8 1/2 x 11 paper, standard 12-point type, double spacing, margins
+# of at least one inch, every page numbered at the bottom (at least half an inch from the edge); quotations and
+# footnotes single spaced. The 25-page limit of LR 7(g) is checked on the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, second line.
+constants:
+  district: "MIDDLE DISTRICT OF LOUISIANA"
+# Headings on the body pitch with no space of their own, as both exemplars (two filers) set them: a section centered
+# in bold capitals, an argument heading bold at the margin, a sub-heading bold half an inch in.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body}
+  - {bold: true, pitch: body}
+  - {bold: true, left: 36, pitch: body}
+# LR 10(a)(1): quotations may be single spaced; indented an inch on each side, a blank double line below.
+quote: {left: 72, right: 72, above: 0, below: 24}
+# FRCP 10(a), LR 10(a)(2): the court's name double spaced; the parties at the left, "VERSUS" a line from each (the
+# exemplars' word); at the right the civil action number (after allotment with the judges' initials, LR 10(a)(2)), the
+# district judge and the magistrate judge a line apart; no rules. The title bold and centered a blank line below.
+front:
+  - {text: "{xd.court}", align: center, bold: true, pitch: body}
+  - {text: "{xd.district}", align: center, bold: true, pitch: body}
+  - columns:
+      - width: 194.4
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", optional: true}
+            between:
+              - {text: "VERSUS", above: 13.8, below: 13.8}
+      - blocks:
+          - {text: "CIVIL ACTION NO. {case_number}"}
+          - {text: "{judge}", optional: true, above: 13.8}
+          - {text: "{magistrate}", optional: true, above: 13.8}
+    gutter: 21.6
+    above: 24
+  - {text: "{brief_title}", align: center, bold: true, pitch: body, above: 24, below: 24}
+# LR 11(a)(3): counsel's block under the signature, from mid-page, single spaced, each counsel group a blank line
+# apart, kept whole and with the last paragraph; a blank double line above it.
+closing:
+  - group:
+      - {text: "Respectfully submitted,", left: 180}
+      - each: signature.blocks
+        blocks:
+          - {text: "{.}", left: 180, above: 13.8}
+    above: 24
+# The certificate of service (FRCP 5(b)) after the signature, double spaced as the text: the body's level-1 section
+# that starts with it.
+tail: {at: "CERTIFICATE", pitch: body, indent: 36, above: 24}

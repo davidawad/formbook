@@ -9,13 +9,13 @@ Courts under `courts/fifth-circuit` (27).
 | [United States Bankruptcy Court, E.D. Louisiana](louisiana/federal/bankruptcy-eastern-district) | `laeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, M.D. Louisiana](louisiana/federal/bankruptcy-middle-district) | `lamb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Louisiana](louisiana/federal/bankruptcy-western-district) | `lawb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court Eastern District of Louisiana](louisiana/federal/eastern-district) | `laed` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, M.D. Louisiana](louisiana/federal/middle-district) | `lamd` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, W.D. Louisiana](louisiana/federal/western-district) | `lawd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court Eastern District of Louisiana](louisiana/federal/eastern-district) | `laed` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, M.D. Louisiana](louisiana/federal/middle-district) | `lamd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, W.D. Louisiana](louisiana/federal/western-district) | `lawd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Mississippi](mississippi/federal/bankruptcy-northern-district) | `msnb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. Mississippi](mississippi/federal/bankruptcy-southern-district) | `mssb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, N.D. Mississippi](mississippi/federal/northern-district) | `msnd` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, S.D. Mississippi](mississippi/federal/southern-district) | `mssd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, N.D. Mississippi](mississippi/federal/northern-district) | `msnd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, S.D. Mississippi](mississippi/federal/southern-district) | `mssd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. Texas](texas/federal/bankruptcy-eastern-district) | `txeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Texas](texas/federal/bankruptcy-northern-district) | `txnb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. Texas](texas/federal/bankruptcy-southern-district) | `txsb` | up for review | 2/2 | — | 2/2 | 14 |
