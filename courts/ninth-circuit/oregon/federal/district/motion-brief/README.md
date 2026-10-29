@@ -105,4 +105,8 @@ reference document, runs pandoc and LibreOffice and packs the archive: no shell 
 `reference.docx`. Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf`. Not verified in Word (only LibreOffice
 here).
 
+## FRCP base port assessment (fb-595.17.13)
+
+Skipped: a shared change is needed. LR 10-1(e)(1) requires a footer on every page with a brief description of the document and the consecutive page number; the template sets "Page n - TITLE", the title from the frontmatter's `footer_title`. The base's footer (`page_number`, lib/typst/xdoc.typ, lib/latex/xdoc.lua, lib/docx/xdoc.lua and tools/fb/src/enginegen) is one line box whose `text` takes only `{page}` and `{pages}`: it cannot print a frontmatter field, and writing the description into `layout.yaml` would be case-specific text. Missing base feature: a running footer with frontmatter fields (`{footer_title}`, and for other districts `{case_name}`, `{case_number}`) beside the page number, in all three engines (the same gap as the District of Alaska's, fb-595.17.11). The rest is expressible as an overlay: one-inch margins and 12-point type (LR 10-1(c), (d)), the counsel block upper left and the court title at least an inch below it (LR 10-2(a), (b)), the caption with the case number from the page's center (LR 10-2(d), (f)), the title two lines below in capitals (LR 10-2(g)), the signature and the certificate of service. This folder does not use pleading paper (LR 10-1(d): no line numbers).
+
 [District index](../README.md) | [Formbook index](../../../../../../README.md)

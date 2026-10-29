@@ -99,3 +99,7 @@ in `$FORMBOOK_FINAL`). pandoc reads the sample as CommonMark (`pandoc-from="comm
 a Westlaw star page such as "*2" stays literal. No shell. Only the LibreOffice PDF was checked; Word was not available.
 
 Pages reviewed: typst and docx, 13 of 13 each, rendered at 60 dpi side by side and viewed in their final state.
+
+## FRCP base port assessment (fb-595.17.13)
+
+Skipped: pleading paper. LCR 10(e)(5) asks for line numbers in the left margin, at least half an inch to their left; the template sets 27 numbered lines on the 24 pt pitch with the pleading rules. The FRCP base (`lib/layouts/frcp-motion-brief.yaml`) has no pleading paper yet (fb-595.84 brings it), so the folder stays on its own templates. (LCR 10(e)(3)'s bottom notation, the abbreviated title and case number with the page number and the firm block at the right, would also need the running footer the base lacks; see the District of Oregon's motion-brief README.)

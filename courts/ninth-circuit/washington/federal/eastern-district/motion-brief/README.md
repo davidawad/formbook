@@ -108,3 +108,7 @@ What differs (not a rule; tier 2 or 3):
 - The pleading rules are page borders that run from the text area, not from the page edge (the typst rules run the full page height).
 - The leader in the contents starts three spaces after the title and runs to the page number (Word's tab leader); typst's dots stop short of the page column.
 - Word may paginate differently from LibreOffice; the gate and the contents' page numbers are the LibreOffice PDF's.
+
+## FRCP base port assessment (fb-595.17.13)
+
+Skipped: pleading paper. LCivR 10(d) asks for line numbers; the template sets 20 numbered lines of 32 pt down the left margin with the double and single pleading rules. The FRCP base (`lib/layouts/frcp-motion-brief.yaml`) has no pleading paper yet (fb-595.84 brings it), so the folder stays on its own templates. (LCivR 10(a)(1)(E)'s footer, the paper's title or an abbreviated one with the page number, would also need the running footer the base lacks; see the District of Oregon's motion-brief README.)

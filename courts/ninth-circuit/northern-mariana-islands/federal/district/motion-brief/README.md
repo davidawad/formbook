@@ -110,3 +110,7 @@ Reviewed pages: 10 of 10 (typst) and 10 of 10 (docx).
 
 - Matches typst line for line and page for page (XENG-001..003, gated).
 - Differs: the tables are text with dot leaders, not TOC/TOA fields (LibreOffice does not honour TA/TOA fields); their page numbers are LibreOffice's pagination, and Word may place a line differently. The footnote separator is 2 in long (typst 30 % of the text width).
+
+## FRCP base port assessment (fb-595.17.13)
+
+Skipped: pleading paper. D.N.M.I. LR 5.2.a asks for double-spaced numbering down the left margin; the template sets the numbered lines on the 24 pt pitch with the pleading rules. The FRCP base (`lib/layouts/frcp-motion-brief.yaml`) has no pleading paper yet (fb-595.84 brings it), so the folder stays on its own templates. (Its footer, the paper's title and the case number from the frontmatter beside the page number, would also need the running footer the base lacks; see the District of Oregon's motion-brief README.)

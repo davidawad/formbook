@@ -113,3 +113,7 @@ Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ
 - Not verified in Word (only LibreOffice here).
 
 `sh tools/check.sh <dir>`: 9 passed, 0 failed (typst); `--engine docx`: 13 passed, 0 failed, XENG-001..003 PASS.
+
+## FRCP base port assessment (fb-595.17.13)
+
+Skipped: pleading paper. LR IA 10-1(a)(1) allows no more than 28 numbered lines a page; the template sets the numbers 1 to 28 down the left margin, the double rule at the text's left edge and the single rule at its right, on a 1.5-inch left margin. The FRCP base (`lib/layouts/frcp-motion-brief.yaml`) has no pleading paper yet (fb-595.84 brings it), so the folder stays on its own templates.
