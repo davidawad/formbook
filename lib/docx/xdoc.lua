@@ -521,6 +521,23 @@ return function(spec)
     return nil
   end
 
+  -- the last text of the nodes (lib/pandoc/xdoc.lua tree), inside columns and groups too
+  local function last_text(nodes)
+    for i = #(nodes or {}), 1, -1 do
+      local n = nodes[i]
+      if n.t == "par" then
+        local t = plain({ t = "Plain", content = n.text })
+        if t:find("%S") then return t end
+      end
+      local inner = n.items and last_text(n.items)
+      if not inner and n.cols then
+        for c = #n.cols, 1, -1 do inner = inner or last_text(n.cols[c].items) end
+      end
+      if inner then return inner end
+    end
+    return nil
+  end
+
   -- The needles of a body block: a heading by its text and the text after it; each authority mark by its text and
   -- the words after it in its run, and before it when few follow (kind N in a footnote).
   -- The numbering of the page labels (docxpages.rs `#section`): a numbering starts at the page of a needle; the one
@@ -929,6 +946,24 @@ return function(spec)
         xd.check_fills(spec.closing)
         xd.check_fills(spec.after_tail)
         read_pages()
+        -- the body's page count (fb-595.92: when: xd.pages, words.limit_pages), from the previous pass's needles: the
+        -- first page of `front` (P:start, its first text; page 1 when the body is numbered apart and `front` has none)
+        -- through the closing's last (P:end); 0 before they are known
+        local paged_body = xd.uses_pages(spec)
+        if paged_body then
+          measured = true
+          local a = first_text(xd.tree(spec, spec.front, meta, true, true)) and tonumber(labels["P:start"])
+            or (front and 1)
+          if not first_text(xd.tree(spec, spec.front, meta, true, true)) and not front then
+            error("xdoc: when: xd.pages and words.limit_pages need a `front` with text or page_number.front (Word)", 0)
+          end
+          local b = tonumber(labels["P:end"])
+          meta.xd = meta.xd or {}
+          meta.xd.pages = (a and b) and (b - a + 1) or 0
+          if meta.xd.words_over and meta.xd.pages > tonumber(spec.words.limit_pages) then
+            error("xdoc: " .. meta.xd.words_over, 0)
+          end
+        end
         if paged then
           -- the numbering starts at the first line of the document (page 1)
           -- (its first paragraph's text, inside columns too: a cover may open with a caption's columns)
@@ -1024,6 +1059,7 @@ return function(spec)
           end
         end
         local fnodes = xd.tree(spec, spec.front, meta, true, true)
+        if paged_body and first_text(fnodes) then needle("P:start", "B", first_text(fnodes), first_text(fnodes)) end
         plan(fnodes, s.top)
         for _, x in ipairs(emit_list(fnodes, s, false)) do out:insert(raw_block(x)) end
         -- the last paragraph kept whole on the page of the closing (keep_with_closing): Body Text Keep, kept with the
@@ -1039,6 +1075,11 @@ return function(spec)
         plan(cnodes, false)
         for _, x in ipairs(emit_list(cnodes, s, false)) do
           out:insert(raw_block(x))
+        end
+        -- the closing's last text (or the body's last block's), on the body's last page
+        if paged_body then
+          local t = last_text(cnodes) or plain(kept or main[#main])
+          needle("P:end", "B", t, t)
         end
         if #rest > 0 then
           if spec.tail["break"] then out:insert(raw_block(brk(s))) end

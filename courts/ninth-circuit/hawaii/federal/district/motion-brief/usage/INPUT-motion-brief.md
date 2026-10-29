@@ -49,19 +49,19 @@ service:
     - "KALIKOʻONĀLANI D. FERNANDES"
     - "Attorneys for Defendants"
 authorities:
-  sunoco: {kind: case, name: "City & Cty. of Honolulu v. Sunoco LP", cite: "537 P.3d 1173 (Haw. 2023)"}
-  gregg: {kind: case, name: "Gregg v. Haw. Dep’t of Pub. Safety", cite: "870 F.3d 883 (9th Cir. 2017)"}
-  laidlaw: {kind: case, name: "Friends of the Earth, Inc. v. Laidlaw Envtl. Servs. (TOC), Inc.", cite: "528 U.S. 167 (2000)"}
-  whitmore: {kind: case, name: "Whitmore v. Arkansas", cite: "495 U.S. 149 (1990)"}
-  lake: {kind: case, name: "Lake v. Fontes", cite: "83 F.4th 1199 (9th Cir. 2023)"}
-  transunion: {kind: case, name: "TransUnion LLC v. Ramirez", cite: "594 U.S. 413 (2021)"}
-  pierce: {kind: case, name: "Pierce v. Ducey", cite: "965 F.3d 1085 (9th Cir. 2020)"}
-  lujan: {kind: case, name: "Lujan v. Defenders of Wildlife", cite: "504 U.S. 555 (1992)"}
-  sbal: {kind: case, name: "Susan B. Anthony List v. Driehaus", cite: "573 U.S. 149 (2014)"}
-  bates: {kind: case, name: "Bates v. Dow Agrosciences LLC", cite: "544 U.S. 431 (2005)"}
-  suncor: {kind: case, name: "Bd. of Cty. Comm’rs of Boulder Cty. v. Suncor Energy (U.S.A.) Inc.", cite: "25 F.4th 1238 (10th Cir. 2022)"}
-  shell: {kind: case, name: "Rhode Island v. Shell Oil Products Co.", cite: "35 F.4th 44 (1st Cir. 2022)"}
-  baltimore: {kind: case, name: "Mayor & City Council of Baltimore v. BP P.L.C.", cite: "31 F.4th 178 (4th Cir. 2022)"}
+  sunoco: {kind: case, name: "*City & Cty. of Honolulu v. Sunoco LP*", cite: "537 P.3d 1173 (Haw. 2023)"}
+  gregg: {kind: case, name: "*Gregg v. Haw. Dep’t of Pub. Safety*", cite: "870 F.3d 883 (9th Cir. 2017)"}
+  laidlaw: {kind: case, name: "*Friends of the Earth, Inc. v. Laidlaw Envtl. Servs. (TOC), Inc.*", cite: "528 U.S. 167 (2000)"}
+  whitmore: {kind: case, name: "*Whitmore v. Arkansas*", cite: "495 U.S. 149 (1990)"}
+  lake: {kind: case, name: "*Lake v. Fontes*", cite: "83 F.4th 1199 (9th Cir. 2023)"}
+  transunion: {kind: case, name: "*TransUnion LLC v. Ramirez*", cite: "594 U.S. 413 (2021)"}
+  pierce: {kind: case, name: "*Pierce v. Ducey*", cite: "965 F.3d 1085 (9th Cir. 2020)"}
+  lujan: {kind: case, name: "*Lujan v. Defenders of Wildlife*", cite: "504 U.S. 555 (1992)"}
+  sbal: {kind: case, name: "*Susan B. Anthony List v. Driehaus*", cite: "573 U.S. 149 (2014)"}
+  bates: {kind: case, name: "*Bates v. Dow Agrosciences LLC*", cite: "544 U.S. 431 (2005)"}
+  suncor: {kind: case, name: "*Bd. of Cty. Comm’rs of Boulder Cty. v. Suncor Energy (U.S.A.) Inc.*", cite: "25 F.4th 1238 (10th Cir. 2022)"}
+  shell: {kind: case, name: "*Rhode Island v. Shell Oil Products Co.*", cite: "35 F.4th 44 (1st Cir. 2022)"}
+  baltimore: {kind: case, name: "*Mayor & City Council of Baltimore v. BP P.L.C.*", cite: "31 F.4th 178 (4th Cir. 2022)"}
   hrs480-2: {kind: statute, cite: "HRS § 480-2"}
   frcp12: {kind: rule, cite: "Fed. R. Civ. P. 12(c)"}
 ---

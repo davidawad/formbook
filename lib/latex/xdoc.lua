@@ -441,6 +441,9 @@ return function(spec)
       elseif n.t == "rule" then out[#out + 1] = rule(n)
       elseif n.t == "cols" then out[#out + 1] = columns(n)
       elseif n.t == "box" then out[#out + 1] = rbox(n)
+      -- blocks set only when the body runs past `over` pages (when: xd.pages; the pages from the .aux, xdoc.sty)
+      elseif n.t == "if" then out[#out + 1] = "\\ifnum\\xd@bodypages>" .. string.format("%d", n.over) .. "\\relax\n"
+        .. emit(n.items, false) .. "%\n\\fi"
       else out[#out + 1] = group(n) end
     end
     return table.concat(out, "%\n")
@@ -758,6 +761,9 @@ return function(spec)
         if tables then
           out:insert(raw("\\clearpage" .. (front and "\\pagenumbering{arabic}" or "")))
         end
+        -- the body's first page, for its page count (when: xd.pages, words.limit_pages; lib/latex/xdoc.sty)
+        local paged_body = xd.uses_pages(spec)
+        if paged_body then out:insert(raw("\\xd@pmark{start}")) end
         out:insert(raw(emit(xd.tree(spec, spec.front, meta, true, true), false)))
         -- the last paragraph kept whole on the page of the closing (keep_with_closing): no break in it or after it
         local kept
@@ -770,6 +776,14 @@ return function(spec)
           out:insert(raw("\\par\\endgroup\\nobreak"))
         end
         out:insert(raw(emit(cnodes, false)))
+        -- the body's last page (the closing's), and the word limit of a body past words.limit_pages pages
+        if paged_body then
+          out:insert(raw("\\xd@pmark{end}"))
+          if meta.xd and meta.xd.words_over then
+            out:insert(raw("\\ifnum\\xd@bodypages>" .. string.format("%d", tonumber(spec.words.limit_pages))
+              .. "\\relax\\PackageError{xdoc}{" .. meta.xd.words_over .. "}{}\\fi"))
+          end
+        end
         if #rest > 0 then
           local t = spec.tail
           out:insert(raw((t["break"] and "\\clearpage" or "") .. "\\par\\addvspace{" .. bp(t.above) .. "}" .. lines(t) .. "\\setlength{\\parindent}{"

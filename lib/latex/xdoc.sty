@@ -14,6 +14,13 @@
 \newcommand\xd@hat[2]{\expandafter\gdef\csname xd@h@#1\endcsname{#2}}
 \newcommand\xd@hpage[1]{\@ifundefined{xd@h@#1}{00}{\csname xd@h@#1\endcsname}}
 
+% \xd@pmark{<id>}: the page counter's value where it stands goes to the .aux; \xd@bodypages: the pages from the
+% body's first (`start`) through its closing's last (`end`), 0 before they are known (fb-595.92, layout.yaml
+% when: xd.pages and words.limit_pages).
+\newcommand\xd@pmark[1]{\protected@write\@auxout{}{\string\xd@pat{#1}{\the\c@page}}}
+\newcommand\xd@pat[2]{\expandafter\gdef\csname xd@p@#1\endcsname{#2}}
+\newcommand\xd@bodypages{\ifcsname xd@p@end\endcsname\the\numexpr\csname xd@p@end\endcsname-\csname xd@p@start\endcsname+1\relax\else 0\fi}
+
 \newcommand\xd@amark[1]{\protected@write\@auxout{}{\string\xd@aat{#1}{\thepage}}}
 % A page joins authority k's list unless it is the last one there (the marks come in page order).
 % xd@an@k counts the pages of the list.

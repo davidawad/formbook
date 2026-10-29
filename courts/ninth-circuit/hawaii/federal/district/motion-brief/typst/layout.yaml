@@ -1,0 +1,123 @@
+# U.S. District Court for the District of Hawaii (hid): a motion with its memorandum in support (LR 7.1, 7.3, 7.4, 7.8,
+# 10.2), on the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D. Haw.'s local rules overlaid
+# here. The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by
+# `fb engines gen`). Rules: D. Haw. Local Rules (../README.md quotes them, with the URL and the date verified). The base
+# already meets LR 10.2(a)(1)'s one-inch margins.
+base: /lib/layouts/frcp-motion-brief.yaml
+# LR 10.2(a)(2), (4): 14-point Times New Roman, footnotes included, double-spaced: 32.2 pt lines (2.3 x the size, the
+# exemplar's 32.3), the single line 16.1 pt (counsel, the title of the case, footnotes, quotations, tables, signature).
+size: 14
+pitch: {body: 32.2, single: 16.1}
+footnote: {size: 14, gap: 7, clearance: 7.5}
+quote: {left: 36, right: 36, above: 14, below: 14}
+# The motion (the cover: unnumbered on each of its pages), the tables in lower-case roman (LR 7.4(f)), the memorandum
+# from 1 (LR 7.4(a) counts its pages).
+page_number: {align: center, front: lower-roman}
+# Headings bold and single-spaced, a single line (8 pt for the deeper levels) above and 8 pt below, kept with what
+# follows; numbered by the template, "I.", "A.", "1.", the label in a half-inch box and the title's later lines hung
+# under it.
+heading:
+  - {bold: true, number: "I.", label_box: 36, above: 16.1, below: 8}
+  - {bold: true, number: "A.", label_box: 36, above: 8, below: 8}
+  - {bold: true, number: "1.", label_box: 36, above: 8, below: 8}
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE DISTRICT OF HAWAII"
+# The motion (LR 7.1, 7.3, 7.8, 10.2): LR 10.2(b), counsel at the upper left in 12-point lines, the sample's columns
+# side by side, whom they represent in italics a line below; LR 10.2(c), the title of the court centred in bold two
+# lines below; the parties in a 3.1 in box ruled at its right and foot (each party's names, its designation at the
+# right in italics a line below, "v." between them a line from each), and 0.2 in right of it the case number, the
+# title of the document in bold capitals and the judge (LR 7.3(b)), a line apart; the motion's paragraphs (LR 7.1:
+# the relief and its grounds; LR 7.8: the conference), double-spaced; the date and the signature lines from 3 in, kept
+# together.
+cover:
+  - columns:
+      - {width: 234, blocks: [{text: "{counsel.columns.0}", size: 12, pitch: 13.8}]}
+      - blocks: [{text: "{counsel.columns.1}", size: 12, pitch: 13.8, optional: true}]
+  - {text: "{counsel_for}", italic: true, above: 16.1, optional: true}
+  - {text: "{xd.court}", align: center, bold: true, above: 32.2}
+  - {text: "{xd.district}", align: center, bold: true, below: 16.1}
+  - columns:
+      - width: 223.2
+        blocks:
+          - box:
+              - box:
+                  - each: parties
+                    blocks:
+                      - {text: "{names}"}
+                      - {text: "{designation}", align: right, italic: true, above: 16.1}
+                    between:
+                      - {text: "v.", above: 16.1, below: 16.1}
+                stroke: {right: 0.75}
+                inset: {right: 9, bottom: 8}
+            stroke: {bottom: 0.75}
+      - blocks:
+          - {text: "No. {case_number}", left: 14.4, above: 16.1}
+          - {text: "{title}", bold: true, upper: true, left: 14.4, above: 16.1}
+          - {text: "Judge: {judge}", left: 14.4, above: 16.1}
+          - {text: "Hearing: {hearing}", left: 14.4, optional: true}
+          - {text: "Trial Date: {trial_date}", left: 14.4, optional: true}
+    below: 16.1
+  - {text: "{motion}", pitch: body, indent: 36}
+  - group:
+      - {text: "{date}", optional: true}
+      - each: signature.blocks
+        gap: 16.1
+        blocks:
+          - {text: "{lines}", left: 216, above: 16.1}
+    above: 16.1
+# LR 7.4(f): a table of contents (the headings to the third level, half an inch in per level, the page in a half-inch
+# column) and a table of authorities (from the `toa:` links, grouped, the page lists in an inch, "passim" for seven
+# pages or more), their titles centred in bold.
+contents: {title: "TABLE OF CONTENTS", style: {align: center, below: 16.1}, depth: 3, col: 36, hang: 36, step: 36, above: 8}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  style: {align: center, below: 16.1}
+  page_heading: "Page(s)"
+  passim: 7
+  kinds:
+    - {kind: case, title: "Cases"}
+    - {kind: constitution, title: "Constitutional Provisions"}
+    - {kind: statute, title: "Statutes"}
+    - {kind: regulation, title: "Regulations"}
+    - {kind: rule, title: "Rules"}
+    - {kind: other, title: "Other Authorities"}
+  col: 72
+  hang: 25.2
+  above: 8
+  group: {bold: true, above: 16.1}
+# The memorandum from page 1, under its title.
+front:
+  - {text: "MEMORANDUM IN SUPPORT OF MOTION", align: center, bold: true, below: 16.1}
+# FRCP 11(a): the date, a line below the signature lines from 3 in; kept with the last paragraph.
+closing:
+  - group:
+      - {text: "{date}", optional: true}
+      - each: signature.blocks
+        gap: 16.1
+        blocks:
+          - {text: "{lines}", left: 216, above: 16.1}
+    above: 16.1
+# LR 7.4(a), (b), (d): a memorandum past 25 pages holds at most 6,250 words (headings, footnotes and quotations
+# counted; the tables and certificates are not in the body), else the render stops (`limit_pages`, fb-595.92).
+words: {limit: 6250, limit_pages: 25}
+# LR 7.4(e): past 25 pages, the attorney's certificate of the word count, on a page of its own (when: xd.pages,
+# fb-595.92); FRCP 5(b), (d)(1)(B): the certificate of service when the sample asks for it (`service.certificate`).
+after_tail:
+  - when: xd.pages
+    over: 25
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF COMPLIANCE", align: center, bold: true, below: 16.1}
+      - {text: "The undersigned certifies that the foregoing memorandum complies with the word limit of LR 7.4(b) and contains {xd.words} words, counted from the headings, text, quotations and footnotes of the memorandum. The caption, table of contents, table of authorities and certificates are not counted (LR 7.4(d)).", pitch: body, indent: 36}
+      - {text: "{date}", above: 16.1, optional: true}
+      - each: signature.blocks
+        gap: 16.1
+        blocks:
+          - {text: "{lines}", left: 216, above: 16.1}
+  - when: service.certificate
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 16.1}
+      - {text: "I hereby certify that on {service.date}, the foregoing document was filed electronically through the CM/ECF system, which will send notice of the filing to all counsel of record.", pitch: body, indent: 36}
+      - {text: "{service.signature}", left: 216, above: 16.1}

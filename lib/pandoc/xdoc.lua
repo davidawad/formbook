@@ -98,6 +98,19 @@ function M.footer_lines(text, meta)
   return out
 end
 
+-- Whether the layout reads the body's page count (fb-595.92): words.limit_pages, or a block `when: xd.pages`.
+function M.uses_pages(spec)
+  if spec.words and spec.words.limit_pages then return true end
+  local function scan(v)
+    if type(v) ~= "table" then return false end
+    if v.when == "xd.pages" then return true end
+    for _, x in pairs(v) do if scan(x) then return true end end
+    return false
+  end
+  return scan(spec.cover) or scan(spec.front) or scan(spec.closing) or scan(spec.after_tail) or scan(spec.before_tables)
+    or scan(spec.between_tables)
+end
+
 -- Whether a frontmatter value is set (lib/typst/xdoc.typ is-set): present and not false, "" or an empty list or map.
 function M.is_set(v)
   return v ~= nil and v ~= pandoc.json.null and v ~= false and v ~= ""
@@ -404,6 +417,19 @@ function M.tree(spec, list, ctx, first, page)
         for _, n in ipairs(M.tree(spec, bl, ictx, first and i == 1, page)) do out[#out + 1] = n end
       end
       if #items > 0 then first = false end
+    elseif b.when == "xd.pages" then
+      -- (fb-595.92, D. Haw. LR 7.4(e)) the blocks when the body runs past `over` pages: the pages from the first of
+      -- `front` through the last of the closing (lib/typst/xdoc.typ xd-pages); Word knows them from the previous
+      -- pass (meta.xd.pages), LaTeX from the .aux (an `if` node: \ifnum\xd@bodypages)
+      local v = M.lookup(ctx, "xd.pages")
+      local items = M.tree(spec, b.blocks, ctx, first, page)
+      if v == nil then
+        out[#out + 1] = { t = "if", over = num(b.over), items = items, lead = 0, above = 0, below = 0 }
+        first = false
+      elseif num(v) > num(b.over) then
+        for _, n in ipairs(items) do out[#out + 1] = n end
+        first = false
+      end
     elseif b.when ~= nil or b.unless ~= nil then
       -- the blocks when the field is set (`when`) or not (`unless`): false, "" and an empty list are not set; a
       -- field the frontmatter lacks has the block's `default`
@@ -1223,7 +1249,13 @@ function M.computed(spec, meta)
   if w.given and M.is_set(meta[w.given]) then n = math.floor(tonumber(meta[w.given])) else
     n = M.count_words(M.counted_text(spec, M.sample_body())) end
   local limit = tonumber(w.limit_field and meta[w.limit_field] or nil) or tonumber(w.limit)
-  if limit and n > limit then
+  meta.xd = meta.xd or {}
+  -- `limit_pages` (fb-595.92, D. Haw. LR 7.4(a), (b)): the limit holds only for a body past that many pages, which
+  -- each engine checks once it knows them (xd.words_over)
+  if limit and n > limit and w.limit_pages then
+    meta.xd.words_over = "the body has " .. n .. " words, over the limit of " .. string.format("%d", limit)
+      .. " for a body of more than " .. string.format("%d", tonumber(w.limit_pages)) .. " pages (layout.yaml words.limit_pages)"
+  elseif limit and n > limit then
     error("xdoc: the body has " .. n .. " words, over the limit of " .. string.format("%d", limit)
       .. " (layout.yaml words.limit)", 0)
   end

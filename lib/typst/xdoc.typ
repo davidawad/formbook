@@ -256,6 +256,13 @@
     count-words(counted-text(spec, body)) }
   let limit = meta.at(w.at("limit_field", default: ""), default: w.at("limit", default: none))
   let limit = if limit == none { none } else { int(limit) }
+  // `limit_pages` (fb-595.92, D. Haw. LR 7.4(a), (b)): the limit holds only for a body past that many pages, which
+  // xdoc checks once it knows them (xd.words_over)
+  if limit != none and n > limit and "limit_pages" in w {
+    return meta + (xd: meta.at("xd", default: (:)) + (words: group-digits(n), words_over: "the body has " + str(n)
+      + " words, over the limit of " + str(limit) + " for a body of more than " + str(w.limit_pages)
+      + " pages (layout.yaml words.limit_pages)"))
+  }
   if limit != none and n > limit {
     panic("xdoc: the body has " + str(n) + " words, over the limit of " + str(limit) + " (layout.yaml words.limit)")
   }
@@ -349,6 +356,15 @@
     at = i + 1
   }
 }
+/// The pages of the body (fb-595.92): from the first page of `front` through the last of the closing (the marks
+/// <xd-body-start>, <xd-body-end>); 0 before they are known. In a context.
+#let xd-pages() = {
+  let (s, e) = (query(<xd-body-start>), query(<xd-body-end>))
+  if s.len() == 0 or e.len() == 0 { 0 } else {
+    counter(page).at(e.first().location()).first() - counter(page).at(s.first().location()).first() + 1
+  }
+}
+
 /// The paragraphs of a markdown value (a `{markdown: "{field}"}` block): split at its blank lines, each paragraph's
 /// lines joined by a space (lib/pandoc/xdoc.lua md_paragraphs).
 #let md-paragraphs(ps) = {
@@ -478,6 +494,11 @@
         blocks(spec, bl, item-ctx(ctx, it, i: i), first: first and i == 0, page: page)
       }
       if items.len() > 0 { first = false }
+    } else if b.at("when", default: none) == "xd.pages" {
+      // (fb-595.92, D. Haw. LR 7.4(e)) the blocks when the body runs past `over` pages (xd-pages; lib/pandoc/xdoc.lua
+      // tree alike)
+      context if xd-pages() > b.over { blocks(spec, b.blocks, ctx, first: first, page: page) }
+      first = false
     } else if "when" in b or "unless" in b {
       // the blocks when the field is set (`when`) or not (`unless`): false, "" and an empty list are not set; a
       // field the frontmatter lacks has the block's `default`
@@ -1171,6 +1192,9 @@
   check-fills(spec.at("front", default: ()))
   check-fills(spec.at("closing", default: ()))
   check-fills(spec.at("after_tail", default: ()))
+  // the body's pages marked only when the layout reads them (when: xd.pages, words.limit_pages)
+  let paged-body = "limit_pages" in spec.at("words", default: (:)) or repr(spec).contains("\"xd.pages\"")
+  if paged-body [#metadata(none)<xd-body-start>]
   blocks(spec, spec.at("front", default: ()), meta, first: true, page: true)
   // the last paragraph kept whole on the page of the closing (layout.yaml keep_with_closing)
   let (main, last) = if spec.at("keep_with_closing", default: false) { split-last(main) } else { (main, none) }
@@ -1178,6 +1202,10 @@
   // (a parbreak: inline content alone in a block is no paragraph, and would lose its first-line indent)
   if last != none { block(width: 100%, above: 0pt, below: 0pt, breakable: false, sticky: true, { body-of(spec, meta, last); parbreak() }) }
   blocks(spec, spec.at("closing", default: ()), meta, page: true)
+  if paged-body [#metadata(none)<xd-body-end>]
+  // a word limit that holds only past words.limit_pages pages (computed: xd.words_over)
+  let over = meta.at("xd", default: (:)).at("words_over", default: none)
+  if over != none { context if xd-pages() > spec.words.limit_pages { panic("xdoc: " + over) } }
   if rest != "" {
     if tail.at("break", default: false) { pagebreak(weak: true) }
     block(width: 100%, above: pt(tail.at("above", default: 0)), below: 0pt, {

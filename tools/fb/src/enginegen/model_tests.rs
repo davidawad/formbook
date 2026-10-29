@@ -2912,3 +2912,42 @@ fn the_body_before_the_tables_on_the_cover_s_page() {
     assert!(doc.find("motion.").unwrap() < brk, "{doc}");
     assert!(doc.find(">Contents<").unwrap() > brk);
 }
+
+#[test]
+fn blocks_and_a_word_limit_on_the_body_s_page_count() {
+    // fb-595.92 (D. Haw. LR 7.4(a), (b), (e)): `when: xd.pages, over: N` sets its blocks only when the body runs past N
+    // pages; `words.limit_pages`: the word limit holds only then
+    let base = "page_number: {align: center}\nfront:\n  - {text: MEMORANDUM, align: center}\nwords: {limit: 5, limit_pages: 1}\nafter_tail:\n  - when: xd.pages\n    over: 1\n    blocks:\n      - {text: \"CERTIFIED {xd.words}\"}\n";
+    let l = layout(base);
+    // one page and six words: no certificate, no stop
+    let Some(f) = fx("pages-short", &l, "---\nx: 1\n---\nOne two three four five six.\n", &["typst", "pandoc", "pdftotext"]) else {
+        return;
+    };
+    let pages = f.typst_pages().unwrap();
+    assert_eq!(pages.len(), 1);
+    assert!(!pages[0].contains("CERTIFIED"), "{pages:?}");
+    // LaTeX: the certificate under \ifnum on the body's page count, the marks around the body
+    let tex = f.latex().unwrap();
+    assert!(tex.contains("\\xd@pmark{start}") && tex.contains("\\xd@pmark{end}"), "{tex}");
+    assert!(tex.contains("\\ifnum\\xd@bodypages>1\\relax") && tex.contains("CERTIFIED"), "{tex}");
+    assert!(tex.contains("\\PackageError{xdoc}"), "{tex}");
+    // Word: the start and end needles; no pages known yet, no certificate
+    let doc = f.docx().unwrap();
+    let needles = f.written("needles.tsv").unwrap();
+    assert!(needles.contains("P:start\tB\tmemorandum") && needles.contains("P:end\tB\t"), "{needles}");
+    assert!(!doc.contains("CERTIFIED"));
+    // two pages and six words: typst stops the render
+    let long = format!("---\nx: 1\n---\nOne two three four five six.\n\n{}\n", "Word\n\n".repeat(60));
+    let Some(g) = fx("pages-long", &l, &long, &["typst"]) else {
+        return;
+    };
+    let err = g.typst_pages().unwrap_err();
+    assert!(err.contains("words.limit_pages"), "{err}");
+    // two pages within the limit: the certificate is set
+    let l2 = layout(&base.replace("limit: 5", "limit: 500"));
+    let Some(h) = fx("pages-cert", &l2, &long, &["typst", "pdftotext"]) else {
+        return;
+    };
+    let pages = h.typst_pages().unwrap();
+    assert!(pages.len() >= 2 && pages.last().unwrap().contains("CERTIFIED"), "{pages:?}");
+}

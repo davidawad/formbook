@@ -22,7 +22,7 @@ Courts under `courts/ninth-circuit` (61).
 | [United States Bankruptcy Court, D. Guam](guam/federal/bankruptcy-district) | `gub` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Guam](guam/federal/district) | `gud` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Hawaii](hawaii/federal/bankruptcy-district) | `hib` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the District of Hawaii](hawaii/federal/district) | `hid` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the District of Hawaii](hawaii/federal/district) | `hid` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Idaho](idaho/federal/bankruptcy-district) | `idb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the District of Idaho](idaho/federal/district) | `idd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Montana](montana/federal/bankruptcy-district) | `mtb` | up for review | 2/2 | — | 2/2 | 14 |
