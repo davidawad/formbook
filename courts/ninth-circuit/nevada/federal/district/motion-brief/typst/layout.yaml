@@ -1,0 +1,78 @@
+# U.S. District Court for the District of Nevada (nvd): a motion and its memorandum of points and authorities in one
+# document (LR 7-2(a)), on the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D. Nev.'s local
+# rules overlaid here, on pleading paper (fb-595.96). The shared document model sets it (lib/typst/xdoc.typ; latex/ and
+# docx/ are generated from the merged layout by `fb engines gen`). Rules: D. Nev. Local Rules of Practice (amended
+# 2020; PDF modified 2025-07-30), LR IA 10-1, 10-2, 7-2, 7-3 (../README.md quotes them). The base already meets LR IA
+# 10-1(a)(3) (12-point type) and 10-1(c) (letter paper).
+base: /lib/layouts/frcp-motion-brief.yaml
+# LR IA 10-1(a)(1) (NVD-FORM-001): double-spaced text on lines numbered from 1 on the left margin, no more than 28 a
+# page; LR IA 10-1(a)(6) (NVD-FORM-006): margins of at least one inch on all four sides. 28 lines of 23 pt fill 644 of
+# the 648 pt between the one-inch margins (the exemplar's 24 pt grid runs past the bottom margin: README Known gaps 3).
+pitch: {body: 23, single: 13.8}
+# the 1.5 in left margin holds the line numbers and the pleading rules (the pleading form; the rule sets the minimum)
+margin: {top: 72, bottom: 72, left: 108, right: 72}
+# pleading paper: the numbers 1 to 28 right-aligned on 1.05 in (a one-digit number starts left of 1 in), one a numbered
+# line from the top margin; a double rule at the text's left (1.3 in and 1.34 in from the page's left edge) and a
+# single one 0.1 in right of the text (7.6 in)
+pleading: {lines: 28, numbers: 75.6, rules: [93.6, 96.5, 547.2]}
+constants: {district: "DISTRICT OF NEVADA"}
+# LR IA 10-2 (NVD-FIRST-001, -002): the first page: the counsel's name, bar number, address, telephone, e-mail and the
+# party represented single-spaced from the top margin (an empty line a blank one); a blank numbered line; the court
+# title, bold, centered, a numbered line each; a blank numbered line; the caption: the parties at the left (each
+# party's names, its designation 1.2 in in, "vs." a single line from each), closed by a rule at their right and foot;
+# the case number and the paper's title in bold at the right; the motion on the same page a blank numbered line below
+# (as the exemplar files it).
+front:
+  - {text: "{counsel}"}
+  - {text: "{xd.court}", align: center, bold: true, pitch: body, above: 23}
+  - {text: "{xd.district}", align: center, bold: true, pitch: body}
+  - columns:
+      - width: 230.4
+        blocks:
+          - box:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", left: 86.4}
+                between:
+                  - {text: "{caption.separator|v.}", above: 13.8, below: 13.8}
+            stroke: {right: 0.75, bottom: 0.75}
+            inset: {right: 10, bottom: 8.7}
+      - blocks:
+          - {text: "Case No.: {case_number}", left: 7.2}
+          - {text: "{brief_title}", bold: true, left: 7.2, above: 13.8}
+    gutter: 14.4
+    above: 23
+    below: 23
+# Headings on the numbered lines, kept with what follows: the memorandum's title centered in bold capitals; a section
+# bold half an inch in, its number (I., II.) in a half-inch box and the title hanging after it; a sub-section (A., B.)
+# alike.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body, above: 0, below: 0}
+  - {bold: true, left: 36, number: "I.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, left: 36, number: "A.", label_box: 36, pitch: body, above: 0, below: 0}
+# LR IA 10-1(a)(4) (NVD-FORM-004): quotations of more than 50 words indented and single-spaced: half an inch on each
+# side, a little space above and below.
+quote: {left: 36, right: 36, above: 9.2, below: 9.2}
+# FRCP 11(a): the date at the margin on a numbered line, a blank numbered line, then at 2.6 in the firm, "By: /s/" and
+# the signer a single line below, the signer's lines; kept with the body's last paragraph (the base's
+# keep_with_closing).
+closing:
+  - group:
+      - {text: "{date}", pitch: body}
+      - {text: "{signature.firm}", left: 187.2, above: 23}
+      - {text: "By: /s/ {signature.signer}", left: 187.2, above: 13.8}
+      - {text: "{signature.lines}", left: 187.2}
+    above: 0
+# FRCP 5(b), (d)(1)(B): the certificate of service on a page of its own (as the exemplar), from the sample's
+# `certificate`: its paragraphs double-spaced, the service list single-spaced half an inch in, a numbered line below it
+# the server's signature at 2.6 in.
+after_tail:
+  - when: certificate
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", heading: 1}
+      - {text: "{certificate.paragraphs}", pitch: body, indent: 36}
+      - {text: "{certificate.recipients}", left: 36}
+      - {text: "By: /s/ {certificate.signer}", left: 187.2, above: 23}
+      - {text: "{certificate.lines}", left: 187.2}

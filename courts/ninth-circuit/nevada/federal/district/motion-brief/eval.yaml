@@ -1,4 +1,16 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (fb-595.68.23, on the shared layout model lib/*/xengine*), so a difference fails.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.96), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
   cross_engine: gate
+  # pleading paper (LR IA 10-1(a)(1)): the numbered lines a page; the checks read the margin numbers 1..28 as page
+  # furniture, not body text
+  pleading_lines: 28
+  # NVD-MOT-002: LR 7-3(b), a motion other than for summary judgment at most 24 pages, excluding exhibits.
+  page_limit: 24
+  # DEF-COVER-002 against FILED-EXAMPLE-motion-brief.pdf (O'Hagan Meyer PLLC): the exemplar rules a line above its page
+  # number across the text (y 754); LR IA 10-1 asks for no footer rule (one filer's style, tier 3). The typst and docx
+  # renders report it through data/cover-structure-baseline.txt.
+  cover_structure_accepted:
+    - finding: 'rules: below "22 underlying and related Eighth Judicial Distri..."'
+      reason: "the exemplar's footer rule above the page number; LR IA 10-1 asks for none"

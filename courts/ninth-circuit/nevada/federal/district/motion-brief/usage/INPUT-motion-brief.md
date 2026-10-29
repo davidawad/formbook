@@ -58,9 +58,9 @@ This motion is made and is based on the following Memorandum of Points and Autho
 
 # MEMORANDUM OF POINTS AND AUTHORITIES
 
-## I. INTRODUCTION
+## INTRODUCTION
 
-### A. Prior Litigation, Remand and First Amended Complaint Realleging Federal Claim
+### Prior Litigation, Remand and First Amended Complaint Realleging Federal Claim
 
 Plaintiff Ossiris Lynch ("Plaintiff") originally filed this lawsuit on September 8, 2025, proceeding *pro se*, in the District Court of Clark County. On October 13, 2025, Granbury filed a timely notice of removal to this Honorable Court. [*See Lynch v. Granbury at Valley Vista Homeowners Ass'n*, No. 2:25-cv-01959 (hereinafter the "Prior Action"), ECF No. 1.]
 
@@ -68,11 +68,11 @@ On October 20, 2025, Granbury filed a motion to dismiss the Prior Action. [*See*
 
 On February 24, 2026, Plaintiff filed his First Amended Complaint ("FAC") and realleged the federal claim made pursuant to the Fair Housing Act (42 U.S.C. § 3617). [*See* ECF No. 1-1, FAC, Second Cause of Action.] Accordingly, on March 25, 2026, Granbury again removed this dispute to this Court. [ECF No. 1.]
 
-### B. Motion to Dismiss First Amended Complaint
+### Motion to Dismiss First Amended Complaint
 
 Plaintiff's FAC lacks sufficient allegations to support his claims for (1) Retaliation under NRS 116.31183, (2) Violation of 42 U.S.C. § 3617, (3) Breach of Fiduciary Duty, and (4) Intentional Infliction of Emotional Distress. As detailed within, Plaintiff's claims should be dismissed for failure to state a claim pursuant to Fed. R. Civ. P. 12(b)(5).
 
-## II. PLAINTIFF'S FAC SHOULD BE DISMISSED FOR FAILURE TO STATE A CLAIM
+## PLAINTIFF'S FAC SHOULD BE DISMISSED FOR FAILURE TO STATE A CLAIM
 
 This Motion to Dismiss is brought pursuant to FRCP 12(b)(6):
 
@@ -90,7 +90,7 @@ Further, the Court in *Iqbal* indicated that the *Twombly* decision "expounded t
 
 "A claim has facial plausibility when the plaintiff pleads factual content that allows the court to draw the reasonable inference that the defendant is liable for the misconduct alleged." *Id.* at 1949. And those well pleaded facts must go beyond the "sheer possibility that a defendant has acted unlawfully" or facts that are "merely consistent with" a defendant's liability. *Id.* "Where a complaint pleads facts that are 'merely consistent with' a defendant's liability, it . . . stops short of the line between possibility and plausibility of 'entitlement to relief.'" *Id.* And while a court must accept all allegations as true, that tenant "is inapplicable to legal conclusions. Threadbare recitals of the elements of a cause of action, supported by mere conclusory statements, do not suffice." *Id.* And ultimately, Rule 8 "does not unlock the doors of discovery for a plaintiff armed with nothing more than mere conclusions." *Id.* Dismissal is proper where there is either a "lack of a cognizable legal theory" or "the absence of sufficient facts alleged under a cognizable legal theory." *Balisteri v. Pacifica Police Dep't*, 901 F.2d 696, 699 (9th Cir. 1990).
 
-### A. Plaintiff's Claims For Retaliation Under NRS 116.31183 and Breach of Fiduciary Duty Should Be Dismissed For Failing To Allege Exhaustion Of All Administrative Remedies.
+### Plaintiff's Claims For Retaliation Under NRS 116.31183 and Breach of Fiduciary Duty Should Be Dismissed For Failing To Allege Exhaustion Of All Administrative Remedies.
 
 NRS 38.310 provides that a Plaintiff must exhaust all administrative remedies prior to filing an action.
 
@@ -106,7 +106,7 @@ NRS 116.31181 provides an action for retaliation when "[a]n executive board, a m
 >
 > (b) Recommended the selection or replacement of an attorney, community manager or vendor; or
 >
-> (c) Requested in good faith to review the books, records or other papers of the association."
+> (c) Requested in good faith to review the books, records or other papers of the association.”
 
 NRS 116.31183(1). (emphasis added)
 
@@ -114,7 +114,7 @@ A claim for retaliation pursuant to NRS 116.31183 must first be administratively
 
 As a threshold issue, Plaintiff fails to allege that he administratively exhausted this claim in accordance with NRS 38.310, warranting dismissal of the claim on that ground alone. Beyond that, however, Plaintiff also fails to attach documentation (e.g., an Alternative Dispute Resolution Claim Form with the Nevada Real Estate Division) predicating this claim, which might ostensibly support this action and demonstrate that the claims now at issue were in fact raised and properly exhausted (i.e., that the grounds in the NRED action are those alleged here). As a result, Plaintiff's FAC is devoid of any allegations (or exhibits) that demonstrate he has – as required by Nevada law – first administratively exhausted the claims he now asserts before this Court. Accordingly, Plaintiff's claim should be dismissed for his failure to administratively exhaust his claims for retaliation and breach of fiduciary duty pursuant to NRS 38.310.
 
-### B. Plaintiff's Claim For Retaliation Under NRS 116.31183 Should Be Dismissed For Failing To Set Forth Allegations Supporting the Claim.
+### Plaintiff's Claim For Retaliation Under NRS 116.31183 Should Be Dismissed For Failing To Set Forth Allegations Supporting the Claim.
 
 Plaintiff's claim for retaliation under NRS 116.31183 should be dismissed because it lacks the requisite factual predicate. To wit, Plaintiff alleges that he engaged in a protected activity and was subsequently subject to "frivolous and meritless 'violations' of the CC&Rs, social media attacks, and other forms of harassment." [See FAC, ¶¶ 33, 34.] Plaintiff also generally alleges that he was subject to "further attacks and harassment[.]" [See FAC, ¶ 36.] Plaintiff then concludes that "[t]hese forms of harassment of expressly prohibited by NRS § 116.311874." [FAC, ¶ 35.] But the FAC fails to set forth legally actionable allegations and a causal nexus and, accordingly, Plaintiff's retaliation claim should be dismissed.
 
@@ -122,7 +122,7 @@ Critically, the FAC makes plain that Granbury took no retaliatory action against
 
 As currently pled, the FAC fails to allege any actions by Granbury that occurred after Plaintiff filed his complaints with NRED and HUD. At best, he identifies actions that allegedly occurred before those complaints. At worst, he generally concludes – without factual support – that Granbury retaliated against him. In either event, he fails to set forth a factual basis to pursue a retaliation claim and therefore, Plaintiff's First Cause of Action should be dismissed.
 
-### C. Plaintiff's Claim For Violation Of 42 U.S.C. § 3617 (Fair Housing Act) Should Be Dismissed For Lack Of Protected Activity And Lack Of Protected Characteristic.
+### Plaintiff's Claim For Violation Of 42 U.S.C. § 3617 (Fair Housing Act) Should Be Dismissed For Lack Of Protected Activity And Lack Of Protected Characteristic.
 
 Under 42 U.S.C. § 3617, it is unlawful to "coerce, intimidate, threaten, or interfere with any person in the exercise or enjoyment of . . . any right granted or protected by [the FHA]." (emphasis added) "As with any retaliation claim, [courts must] apply the familiar burden-shifting analysis established by the Supreme Court in *McDonnell Douglas Corp. v. Green*, 411 U.S. 792, 93 S. Ct. 1817, 36 L. Ed. 2d 668 (1973)." *Scoggins v. Falcon Ct.*, No. 24-00188, 2025 U.S. Dist. LEXIS 59060, at \*2 (E.D. Cal. Mar. 27, 2025) (quoting *Walker v. City of Lakewood*, 272 F.3d 1114, 1128 (9th Cir. 2001)). To establish a prima facie case of retaliation under the FHA, a plaintiff must allege (1) he engaged in protected activity; (2) the defendant(s) subjected him to an adverse action; and (3) "a causal link exists between the protected activity and the adverse action." *Walker*, 272 F.3d at 1128 (citing *Steiner v. Showboat Operating Co.*, 25 F.3d 1459, 1464 (9th Cir. 1994)). "Protected activity" covers many types of actions but must relate to a plaintiff exercising his rights "granted or protected" by the FHA. *Macon v. Proud Ground Org.*, No. 20-01660, 2021 U.S. Dist. LEXIS 143910, at \*17-18 (D. Or. July 30, 2021) (citing 42 U.S.C. § 3617).
 
@@ -132,12 +132,12 @@ Plaintiff's claim pursuant to 42 U.S.C. § 3617 is vaguely plead but without set
 
 As result, given the lack of any factual allegations supporting this claim, Plaintiff's FHA claim should be dismissed.
 
-### D. Plaintiff's Claim For Emotional Distress Should Be Dismissed For Failure To State a Claim
+### Plaintiff's Claim For Emotional Distress Should Be Dismissed For Failure To State a Claim
 
 To establish an IIED claim, a plaintiff must show: "(1) extreme and outrageous conduct with either the intention of, or reckless disregard for, causing emotional distress, (2) the plaintiff's having suffered severe or extreme emotional distress and (3) actual or proximate causation." *Olivero v. Lowe*, 116 Nev. 395, 995 P.2d 1023, 1025 (Nev. 2000).
 
 Plaintiff cannot establish a prima facie claim for IIED pursuant to his allegations and exhibits. Plaintiff's Complaint does not include any allegations of extreme or outrageous conduct. The only allegation against Granbury involve the issuance of violation notices that must be supported by allegations that Plaintiff administratively exhausted the claim pursuant to NRS 38.310. The remaining allegations of conduct are directed at the HOA board members and the allegations do not explain their independent actions can be imputed to Granbury. Accordingly, for all these reasons, Plaintiff's IIED claim should be dismissed.
 
-## III. CONCLUSION
+## CONCLUSION
 
 For the reasons stated within, Granbury request that the Court dismiss Plaintiff's claims for (1) Retaliation under NRS 116.31183, (2) Violation of 42 U.S.C. § 3617, (3) Breach of Fiduciary Duty, and (4) Intentional Infliction of Emotional Distress.
