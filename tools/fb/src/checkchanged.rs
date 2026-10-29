@@ -11,6 +11,9 @@
 //! rendered on the previous model, and only a full recheck shows whether its committed outputs still pass.
 //! A change under tools/fb/src/enginegen does both. The RESULT line counts the folder/engine checks plus the fb test
 //! build when it ran, and says when the shared model changed.
+//! The folder/engine checks run in parallel (fb-595.86: a model diff's serial run passed the 4500 s land-gate
+//! deadline) on `FB_JOBS` workers, default the host's available parallelism; each check's output is buffered and
+//! printed in job order, so the log reads as a serial run's.
 //! Exit 0 only when every check passes (or nothing under courts/, tools/fb/ or the model changed).
 
 use crate::{fail, Res};
@@ -127,6 +130,57 @@ fn fb_tests_compile(root: &Path) -> bool {
         .unwrap_or(false)
 }
 
+/// The worker count for `jobs` checks: `FB_JOBS` when it is a positive integer, else the host's available
+/// parallelism; never more than the jobs, never fewer than one.
+pub fn workers(fb_jobs: Option<&str>, jobs: usize) -> usize {
+    fb_jobs
+        .and_then(|s| s.trim().parse::<usize>().ok())
+        .filter(|&n| n > 0)
+        .unwrap_or_else(|| std::thread::available_parallelism().map_or(1, |n| n.get()))
+        .min(jobs)
+        .max(1)
+}
+
+/// Run `work` on every item on `n` threads, and `report` each item with its result in item order on the calling
+/// thread as soon as it and every item before it are done (so the log reads as a serial run's); the reports'
+/// return values, in item order.
+pub fn run_ordered<T: Sync, R: Send, W, P, O>(
+    items: &[T],
+    n: usize,
+    work: W,
+    mut report: P,
+) -> Vec<O>
+where
+    W: Fn(&T) -> R + Sync,
+    P: FnMut(&T, R) -> O,
+{
+    use std::sync::atomic::{AtomicUsize, Ordering};
+    let next = AtomicUsize::new(0);
+    let (tx, rx) = std::sync::mpsc::channel();
+    std::thread::scope(|s| {
+        for _ in 0..n.max(1).min(items.len()) {
+            let (tx, next, work) = (tx.clone(), &next, &work);
+            s.spawn(move || loop {
+                let i = next.fetch_add(1, Ordering::Relaxed);
+                let Some(item) = items.get(i) else { break };
+                if tx.send((i, work(item))).is_err() {
+                    break;
+                }
+            });
+        }
+        drop(tx);
+        let mut done: std::collections::BTreeMap<usize, R> = std::collections::BTreeMap::new();
+        let mut out = Vec::with_capacity(items.len());
+        for (i, r) in rx {
+            done.insert(i, r);
+            while let Some(r) = done.remove(&out.len()) {
+                out.push(report(&items[out.len()], r));
+            }
+        }
+        out
+    })
+}
+
 /// The RESULT line: folder/engine checks plus the fb test build when it ran (`fb`), and a note when the diff
 /// touched the shared model (`model`), so every folder on it was checked.
 pub fn result_line(
@@ -201,19 +255,43 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
     let exe = std::env::current_exe().map_err(|e| fail(2, format!("fb check-changed: {e}")))?;
     let fb_job = touches_fb(&paths);
     let fb_failed = fb_job && !fb_tests_compile(&root);
-    let failed: Vec<String> = todo
-        .iter()
-        .filter(|(folder, engine)| {
-            eprintln!("fb check-changed: {folder} --engine {engine}");
-            !Command::new(&exe)
+    let n = workers(std::env::var("FB_JOBS").ok().as_deref(), todo.len());
+    eprintln!(
+        "fb check-changed: {} folder/engine checks on {n} workers",
+        todo.len()
+    );
+    // each child is its own process: fb check's scratch (and a LibreOffice -env:UserInstallation profile under
+    // it) is a TempDir named by pid, so concurrent children never share one
+    let passed = run_ordered(
+        &todo,
+        n,
+        |(folder, engine)| {
+            Command::new(&exe)
                 .current_dir(&root)
                 .env("FB_ROOT", &root)
                 .args(["check", folder, "--engine", engine, "--no-render"])
-                .status()
-                .map(|s| s.success())
-                .unwrap_or(false)
-        })
-        .map(|(folder, engine)| format!("{folder} --engine {engine}"))
+                .output()
+        },
+        |(folder, engine), out| {
+            eprintln!("fb check-changed: {folder} --engine {engine}");
+            match out {
+                Ok(o) => {
+                    print!("{}", String::from_utf8_lossy(&o.stdout));
+                    eprint!("{}", String::from_utf8_lossy(&o.stderr));
+                    o.status.success()
+                }
+                Err(e) => {
+                    eprintln!("fb check-changed: {}: {e}", exe.display());
+                    false
+                }
+            }
+        },
+    );
+    let failed: Vec<String> = todo
+        .iter()
+        .zip(&passed)
+        .filter(|(_, ok)| !**ok)
+        .map(|((folder, engine), _)| format!("{folder} --engine {engine}"))
         .chain(fb_failed.then(|| "tools/fb: cargo test --release --no-run".to_string()))
         .collect();
     println!(
@@ -353,6 +431,46 @@ mod tests {
                 .map(|x| x.to_string())
                 .collect()
         );
+    }
+
+    #[test]
+    fn parallel_jobs_report_in_item_order_and_every_job_runs_once() {
+        // later items finish first: the reports still come in item order, each job once, on any worker count
+        let items: Vec<u64> = (0..23).collect();
+        for n in [1, 2, 4, 7, 64] {
+            let ran = std::sync::Mutex::new(Vec::new());
+            let mut order = Vec::new();
+            let got = run_ordered(
+                &items,
+                n,
+                |&i| {
+                    std::thread::sleep(std::time::Duration::from_millis((23 - i) % 5));
+                    ran.lock().unwrap().push(i);
+                    i * 10
+                },
+                |&i, r| {
+                    order.push(i);
+                    r == i * 10 && i % 3 != 0
+                },
+            );
+            assert_eq!(order, items, "workers {n}");
+            assert_eq!(got, items.iter().map(|i| i % 3 != 0).collect::<Vec<_>>());
+            let mut ran = ran.into_inner().unwrap();
+            ran.sort();
+            assert_eq!(ran, items, "workers {n}");
+        }
+        assert!(run_ordered(&[] as &[u8], 4, |_| (), |_, _| ()).is_empty());
+    }
+
+    #[test]
+    fn the_worker_count_is_fb_jobs_or_the_host_capped_by_the_jobs() {
+        assert_eq!(workers(Some("3"), 10), 3);
+        assert_eq!(workers(Some("30"), 10), 10);
+        assert_eq!(workers(Some("0"), 0), 1);
+        let host = std::thread::available_parallelism().map_or(1, |n| n.get());
+        assert_eq!(workers(None, 1000), host.min(1000));
+        assert_eq!(workers(Some("x"), 1000), host.min(1000));
+        assert_eq!(workers(None, 1), 1);
     }
 
     #[test]
