@@ -1,4 +1,4 @@
-//! `fb measure <pdf> [-o measured.json]`: the geometry of a PDF as JSON, the same for a filed exemplar and
+//! `fb measure <pdf> [-o measured.jsoif pleading > 0 { format!(" pleading {pleading}") } else { String::new() }]`: the geometry of a PDF as JSON, the same for a filed exemplar and
 //! for our render, so `fb diff` can compare them gate by gate.
 //!
 //! Sources (poppler only): words and lines from `pdftotext -bbox-layout`, baselines, rules, boxes, vectors and
@@ -181,9 +181,15 @@ pub fn sha256_file(p: &Path) -> Res<String> {
 
 /// Measure a PDF with the given mask regions (from a mask file; built-in masks always apply).
 pub fn measure(pdf: &Path, regions: &[MaskRegion]) -> Res<Measured> {
+    measure_pleading(pdf, regions, 0)
+}
+
+/// `measure` of a PDF on pleading paper of `pleading` numbered lines a page (0: none), its line numbers left out
+/// (build.rs unpleading).
+pub fn measure_pleading(pdf: &Path, regions: &[MaskRegion], pleading: usize) -> Res<Measured> {
     let sha256 = sha256_file(pdf)?;
     let raw = poppler::read(pdf)?;
-    let pages = build::pages(raw.pages, regions);
+    let pages = build::pages_pleading(raw.pages, regions, pleading);
     Ok(Measured {
         schema: SCHEMA,
         source: pdf.display().to_string(),
@@ -210,6 +216,12 @@ pub fn measure_first(pdf: &Path, n: usize) -> Res<Measured> {
 /// Measured form of `p`: a measured.json is read as is; a PDF is measured, through the cache in
 /// `$root/out/measure/<sha256>-<schema>-<masks and fb build>.json`.
 pub fn load(p: &Path) -> Res<Measured> {
+    load_pleading(p, 0)
+}
+
+/// `load` of a PDF on pleading paper of `pleading` numbered lines a page (0: none; measure_pleading). A measured.json
+/// is read as is.
+pub fn load_pleading(p: &Path, pleading: usize) -> Res<Measured> {
     if p.extension().is_some_and(|e| e == "json") {
         let text =
             std::fs::read_to_string(p).map_err(|e| fail(2, format!("fb: {}: {e}", p.display())))?;
@@ -228,8 +240,13 @@ pub fn load(p: &Path) -> Res<Measured> {
         sha256_file(p)?,
         Sha256::digest(
             format!(
-                "{}{exe}",
-                serde_json::to_string(&regions).unwrap_or_default()
+                "{}{exe}{}",
+                serde_json::to_string(&regions).unwrap_or_default(),
+                [pleading]
+                    .iter()
+                    .filter(|n| **n > 0)
+                    .map(|n| format!(" pleading {n}"))
+                    .collect::<String>()
             )
             .as_bytes()
         )
@@ -243,7 +260,7 @@ pub fn load(p: &Path) -> Res<Measured> {
             ..m
         });
     }
-    let m = measure(p, &regions)?;
+    let m = measure_pleading(p, &regions, pleading)?;
     if let Some(c) = cache {
         let _ = std::fs::create_dir_all(c.parent().unwrap_or(Path::new(".")));
         let _ = std::fs::write(&c, serde_json::to_string(&m).unwrap_or_default());
@@ -259,21 +276,28 @@ fn read_cache(c: &Path) -> Option<Measured> {
 }
 
 pub fn main(args: &[String]) -> Res<ExitCode> {
-    let usage = "usage: fb measure <pdf> [-o measured.json] [--page N]";
+    let usage = "usage: fb measure <pdf> [-o measured.json] [--page N] [--pleading N]";
     let mut pdf: Option<PathBuf> = None;
     let mut out: Option<PathBuf> = None;
     let mut page: Option<usize> = None;
+    let mut pleading = 0;
     let mut it = args.iter();
     while let Some(a) = it.next() {
         match a.as_str() {
             "-o" => out = it.next().map(PathBuf::from),
             "--page" => page = it.next().and_then(|n| n.parse().ok()),
+            "--pleading" => {
+                pleading = it
+                    .next()
+                    .and_then(|n| n.parse().ok())
+                    .ok_or_else(|| fail(2, usage))?
+            }
             s if !s.starts_with('-') && pdf.is_none() => pdf = Some(PathBuf::from(s)),
             _ => return Err(fail(2, usage)),
         }
     }
     let pdf = pdf.ok_or_else(|| fail(2, usage))?;
-    let mut m = load(&pdf)?;
+    let mut m = load_pleading(&pdf, pleading)?;
     if let Some(n) = page {
         m.pages.retain(|p| p.n == n);
     }

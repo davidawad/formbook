@@ -2,3 +2,6 @@
 # typst render does (fb-595.68.22, on the shared layout model lib/*/xengine*), so a difference fails.
 params:
   cross_engine: gate
+  # pleading paper: the numbered lines a page (Civil L.R. 3-4(c)(1)); the checks read the margin numbers 1..27 as page
+  # furniture, not body text
+  pleading_lines: 27

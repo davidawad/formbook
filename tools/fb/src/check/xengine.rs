@@ -25,6 +25,14 @@ pub fn gated(c: &Ctx) -> Res<bool> {
     Ok(cfg(&c.env, &c.checks, &mode_expr(&c.engine))?.trim() == "gate")
 }
 
+/// The numbered lines a page of a folder on pleading paper (`params.pleading_lines`; 0 when it declares none).
+pub fn pleading_lines(c: &Ctx) -> Res<usize> {
+    Ok(cfg(&c.env, &c.checks, ".params.pleading_lines // 0")?
+        .trim()
+        .parse()
+        .unwrap_or(0))
+}
+
 /// The typst render of the sample whose `engine` render is `pdf` (usage/OUTPUT-<id>.<engine>.pdf).
 pub fn reference(pdf: &str, engine: &str) -> String {
     let stem = pdf.strip_suffix(&format!(".{engine}.pdf")).unwrap_or(pdf);
@@ -85,9 +93,10 @@ pub fn evaluate(c: &Ctx, s: &Sample, method: &str) -> Res<Option<Verdict>> {
             &[],
         )));
     }
+    let n = pleading_lines(c)?;
     let x = xengine::compare(
-        &measure::load(Path::new(&r))?,
-        &measure::load(Path::new(&s.pdf))?,
+        &measure::load_pleading(Path::new(&r), n)?,
+        &measure::load_pleading(Path::new(&s.pdf), n)?,
     );
     Ok(judge(&x, method))
 }

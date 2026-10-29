@@ -6,3 +6,6 @@ params:
   cross_engine: gate
   margin_top_pt: 60
   margin_bottom_pt: 60
+  # pleading paper: the numbered lines a page (Civil L.R. 3-4(c)(1)); the checks read the margin numbers 1..28 as page
+  # furniture, not body text
+  pleading_lines: 28

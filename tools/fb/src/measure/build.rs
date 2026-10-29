@@ -4,7 +4,51 @@ use super::poppler::{RawPage, Run, Seg};
 use super::{mask, r2, stats, Frame, Line, MaskRegion, Page, Rect, Word};
 
 pub fn pages(raw: Vec<RawPage>, regions: &[MaskRegion]) -> Vec<Page> {
-    raw.into_iter().map(|p| page(p, regions)).collect()
+    pages_pleading(raw, regions, 0)
+}
+
+/// `pages` of a PDF on pleading paper of `pleading` numbered lines a page (0: none): the line numbers are dropped
+/// before the segments are merged into lines (unpleading).
+pub fn pages_pleading(raw: Vec<RawPage>, regions: &[MaskRegion], pleading: usize) -> Vec<Page> {
+    raw.into_iter()
+        .map(|mut p| {
+            unpleading(&mut p.segs, pleading);
+            page(p, regions)
+        })
+        .collect()
+}
+
+/// `segs` without the pleading-paper line numbers 1 ..= `n`: a word that is such a number alone, left of every other
+/// word of its page. Typst prints them in the page background and Word (`w:lnNumType`) beside the line, a little
+/// higher and in a taller box; merged into the visual lines, a number would join the body line beside it (and through
+/// its box the line above), so the engines' lines would differ in page furniture, not in body text.
+fn unpleading(segs: &mut Vec<Seg>, n: usize) {
+    if n == 0 {
+        return;
+    }
+    let num = |t: &str| t.parse::<usize>().is_ok_and(|v| (1..=n).contains(&v));
+    let body = segs
+        .iter()
+        .flat_map(|s| &s.words)
+        .filter(|w| !num(&w.t))
+        .map(|w| w.x0)
+        .fold(f64::INFINITY, f64::min);
+    for s in segs.iter_mut() {
+        let before = s.words.len();
+        s.words.retain(|w| !(num(&w.t) && w.x1 <= body));
+        if s.words.len() != before && !s.words.is_empty() {
+            let r = |w: &Word| Rect {
+                x0: w.x0,
+                y0: w.y0,
+                x1: w.x1,
+                y1: w.y1,
+            };
+            s.bbox = s.words[1..]
+                .iter()
+                .fold(r(&s.words[0]), |b, w| b.union(&r(w)));
+        }
+    }
+    segs.retain(|s| !s.words.is_empty());
 }
 
 fn page(raw: RawPage, regions: &[MaskRegion]) -> Page {
@@ -125,10 +169,18 @@ fn majority<'a>(vals: impl Iterator<Item = (&'a str, usize)>) -> String {
 fn line(bbox: Rect, words: Vec<Word>, glyphs: &[(f64, f64)], runs: &[Run]) -> Line {
     let lo = glyphs.partition_point(|g| g.1 < bbox.y0);
     let hi = glyphs.partition_point(|g| g.1 <= bbox.y1 + 0.5);
+    // the glyphs of the line's own words: a line merged from two columns spans the band of both, and LibreOffice's
+    // tall word boxes reach the next line's glyphs in the other column, which may outnumber its own
     let baseline = mode(
         glyphs[lo..hi]
             .iter()
             .filter(|g| g.0 >= bbox.x0 - 1.0 && g.0 <= bbox.x1 + 1.0)
+            .filter(|g| {
+                words.is_empty()
+                    || words.iter().any(|w| {
+                        g.0 >= w.x0 - 1.0 && g.0 <= w.x1 + 1.0 && g.1 >= w.y0 && g.1 <= w.y1 + 0.5
+                    })
+            })
             .map(|g| (g.1, 1.0)),
     );
     let mid = |r: &Rect| (r.y0 + r.y1) / 2.0;
@@ -204,6 +256,32 @@ mod tests {
     }
 
     #[test]
+    fn pleading_line_numbers_do_not_join_body_lines() {
+        // Word's number 13, in its taller box, overlaps both the right column's line above and the left column's
+        // line beside it: merged, the two become one line. Without the numbers they stay apart; a body word that
+        // is a number (12, at the text's left edge) stays.
+        let segs = || {
+            vec![
+                seg(338.0, 350.5, 470.0, 363.8, "ALTERNATIVE,"),
+                seg(59.0, 350.5, 72.0, 372.2, "13"),
+                seg(108.0, 362.5, 250.0, 375.8, "UNITED"),
+                seg(59.0, 374.5, 72.0, 396.2, "14"),
+                seg(108.0, 386.5, 120.0, 399.8, "12"),
+            ]
+        };
+        let mut s = segs();
+        unpleading(&mut s, 0);
+        assert_eq!(merge(s).len(), 2);
+        let mut s = segs();
+        unpleading(&mut s, 28);
+        let t: Vec<Vec<String>> = merge(s)
+            .into_iter()
+            .map(|(_, w)| w.into_iter().map(|w| w.t).collect())
+            .collect();
+        assert_eq!(t, [["ALTERNATIVE,"], ["UNITED"], ["12"]]);
+    }
+
+    #[test]
     fn baseline_is_glyph_mode() {
         let glyphs = vec![
             (73.0, 80.0),
@@ -238,5 +316,33 @@ mod tests {
         );
         assert!(l.baseline_est);
         assert_eq!(l.baseline, 87.8);
+    }
+
+    #[test]
+    fn baseline_counts_only_the_lines_own_glyphs() {
+        // "v." (left column) and "CAUSE" (right) merged into one line whose band reaches the line above in the
+        // right column ("SHOW", baseline 253.2, more glyphs): the baseline is the line's own, 265.2
+        let w = |t: &str, x0: f64, y0: f64, x1: f64, y1: f64| Word {
+            t: t.into(),
+            x0,
+            y0,
+            x1,
+            y1,
+        };
+        let words = vec![
+            w("v.", 204.0, 250.9, 213.0, 264.2),
+            w("CAUSE", 338.0, 254.5, 379.0, 267.8),
+        ];
+        let mut glyphs: Vec<(f64, f64)> = vec![(205.0, 265.2), (209.0, 265.2)];
+        glyphs.extend((0..5).map(|i| (340.0 + 8.0 * i as f64, 265.2)));
+        glyphs.extend((0..8).map(|i| (338.0 + 22.0 * i as f64, 253.2)));
+        glyphs.sort_by(|a, b| a.1.total_cmp(&b.1));
+        let bbox = Rect {
+            x0: 204.0,
+            y0: 250.9,
+            x1: 379.0,
+            y1: 267.8,
+        };
+        assert_eq!(line(bbox, words, &glyphs, &[]).baseline, 265.2);
     }
 }

@@ -450,7 +450,8 @@ local function signature_table(name, title, dated, out)
     if l ~= "" then right[#right + 1] = p(xe.runs(l)) end
   end
   if #right == 0 then right[1] = p("") end
-  local left = dated and p(xe.runs("Dated: ____________________")) or p("")
+  -- the blank of typst's 1.5 in box of repeated underscores: 18 of Times New Roman's 6 pt (0.5 em at 12 pt)
+  local left = dated and p(xe.runs("Dated: " .. string.rep("_", 18))) or p("")
   out[#out + 1] = tbl({ TEXTW - SIG_W, SIG_W }, {
     { body = { left } },
     { pr = '<w:tcBorders><w:top ' .. rule .. '/></w:tcBorders>', body = right } })
