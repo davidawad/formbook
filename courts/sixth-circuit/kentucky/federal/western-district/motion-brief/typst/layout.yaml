@@ -1,0 +1,56 @@
+# U.S. District Court for the Western District of Kentucky (kywd): a memorandum of law supporting a motion, on the
+# generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with W.D. Ky.'s local rules overlaid here. The
+# shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines
+# gen`). Rules: Joint Local Rules of Civil Practice, E.D. and W.D. Ky. (amended August 2026),
+# https://www.kywd.uscourts.gov/local-rules (../README.md quotes them). The base already meets LR 5.2(a): 8 1/2 x 11
+# paper, margins of at least one inch on all sides, text double spaced except block quotes, headings and footnotes, at
+# least 12-point proportionately spaced type. The 25-page limit of LR 7.1(d) is checked on the render (../eval.yaml
+# params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, as the exemplars set it (the division follows, from the sample).
+constants:
+  district: "WESTERN DISTRICT OF KENTUCKY"
+# LR 5.2(a): block quotations single spaced, half an inch in on each side, half a double line above and below.
+quote: {left: 36, right: 36, above: 12, below: 12}
+# A list item at the paragraph indent, its number in a half-inch box, the text hanging after it.
+list_indent: 72
+# Headings on the body pitch with half a double line above, as the exemplars set them: a section centered in bold
+# capitals; an argument heading and a point bold at the margin. The author types their numbers ("I.", "A.").
+heading:
+  - {align: center, bold: true, upper: true, pitch: body, above: 12}
+  - {bold: true, pitch: body, above: 12}
+  - {bold: true, pitch: body, above: 12}
+# FRCP 10(a), 7(b)(2): the court's name, the division (LR 3.1 assigns each case to a division) and the file number,
+# centered; then each party's names at the left with its designation at the right margin on their last line, "vs."
+# between them a blank line from each (the transcribed filer's caption, usage/SOURCE.md; the second filer closes the
+# parties with a column of ")" instead, tier 3). Then the paper's title centered in bold between two
+# rules across the page (the transcribed filer's), a blank double line above the text.
+front:
+  - {text: "{xd.court}", align: center}
+  - {text: "{xd.district}", align: center}
+  - {text: "{division}", align: center, upper: true, optional: true}
+  - {text: "{case_label|Civil Action No.} {case_number}", align: center}
+  - each: caption.parties
+    blocks:
+      - columns:
+          - width: 324
+            blocks:
+              - {text: "{names}"}
+          - valign: bottom
+            blocks:
+              - {text: "{designation}", align: right}
+    between:
+      - {text: "vs.", above: 13.8, below: 13.8}
+    above: 27.6
+  - {rule: 0.75, above: 27.6}
+  - {text: "{brief_title}", align: center, bold: true, left: 18, right: 18, above: 13.8}
+  - {rule: 0.75, above: 13.8, below: 24}
+# FRCP 11(a): "Respectfully submitted," the signature line and the signer's lines (name, firm, address, e-mail, whom
+# they represent) three and a quarter inches in, a blank single line between the groups (an empty line in the sample),
+# kept whole and with the last paragraph.
+closing:
+  - group:
+      - {text: "Respectfully submitted,", left: 234}
+      - {text: "/s/ {signature.by}", left: 234, above: 13.8}
+      - {text: "{signature.lines}", left: 234, above: 13.8}
+    above: 24

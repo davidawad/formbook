@@ -1918,10 +1918,6 @@ courts/sixth-circuit/kentucky/federal/bankruptcy-western-district/motion-brief d
 courts/sixth-circuit/kentucky/federal/bankruptcy-western-district/motion-brief typst
 courts/sixth-circuit/kentucky/federal/eastern-district/complaint docx
 courts/sixth-circuit/kentucky/federal/eastern-district/complaint typst
-courts/sixth-circuit/kentucky/federal/eastern-district/motion-brief docx
-courts/sixth-circuit/kentucky/federal/eastern-district/motion-brief typst
-courts/sixth-circuit/kentucky/federal/western-district/motion-brief docx
-courts/sixth-circuit/kentucky/federal/western-district/motion-brief typst
 courts/sixth-circuit/kentucky/state/court-of-appeals/amicus-brief typst
 courts/sixth-circuit/kentucky/state/court-of-appeals/answering-brief typst
 courts/sixth-circuit/kentucky/state/court-of-appeals/motion-brief docx
@@ -1954,8 +1950,6 @@ courts/sixth-circuit/michigan/federal/eastern-district/complaint typst
 courts/sixth-circuit/michigan/federal/eastern-district/motion-brief docx
 courts/sixth-circuit/michigan/federal/western-district/complaint docx
 courts/sixth-circuit/michigan/federal/western-district/complaint typst
-courts/sixth-circuit/michigan/federal/western-district/motion-brief docx
-courts/sixth-circuit/michigan/federal/western-district/motion-brief typst
 courts/sixth-circuit/michigan/state/court-of-appeals/amicus-brief docx
 courts/sixth-circuit/michigan/state/court-of-appeals/amicus-brief latex
 courts/sixth-circuit/michigan/state/court-of-appeals/amicus-brief typst

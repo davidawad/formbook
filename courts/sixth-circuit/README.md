@@ -9,12 +9,12 @@ Courts under `courts/sixth-circuit` (29).
 | [Court of Appeals for the Sixth Circuit](court-of-appeals) | `ca6` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court, E.D. Kentucky](kentucky/federal/bankruptcy-eastern-district) | `kyeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Kentucky](kentucky/federal/bankruptcy-western-district) | `kywb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, E.D. Kentucky](kentucky/federal/eastern-district) | `kyed` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, W.D. Kentucky](kentucky/federal/western-district) | `kywd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. Kentucky](kentucky/federal/eastern-district) | `kyed` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, W.D. Kentucky](kentucky/federal/western-district) | `kywd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. Michigan](michigan/federal/bankruptcy-eastern-district) | `mieb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Michigan](michigan/federal/bankruptcy-western-district) | `miwb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, E.D. Michigan](michigan/federal/eastern-district) | `mied` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, W.D. Michigan](michigan/federal/western-district) | `miwd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, W.D. Michigan](michigan/federal/western-district) | `miwd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Ohio](ohio/federal/bankruptcy-northern-district) | `ohnb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. Ohio](ohio/federal/bankruptcy-southern-district) | `ohsb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, N.D. Ohio](ohio/federal/northern-district) | `ohnd` | up for review | 2/2 | — | 2/2 | 14 |

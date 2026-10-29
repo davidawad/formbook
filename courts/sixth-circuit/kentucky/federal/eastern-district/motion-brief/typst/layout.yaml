@@ -1,0 +1,87 @@
+# U.S. District Court for the Eastern District of Kentucky (kyed): a memorandum of law supporting a motion, on the
+# generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with E.D. Ky.'s local rules overlaid here. The
+# shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines
+# gen`). Rules: Joint Local Rules of Civil Practice, E.D. and W.D. Ky. (amended August 2026),
+# https://www.kyed.uscourts.gov/sites/kyed/files/KY_Amended_Civil_Rules_August_2026.pdf (read 2026-10-14; ../README.md
+# quotes them). The base already meets LR 5.2(a): 8 1/2 x 11 paper, margins of at least one inch on all sides, text
+# double spaced except block quotes, headings and footnotes, at least 12-point proportionately spaced type (footnotes
+# too). The 25-page limit of LR 7.1(d) is checked on the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, as the exemplar sets it (the division follows, from the sample).
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "EASTERN DISTRICT OF KENTUCKY"
+# LR 5.2(a): block quotations single spaced, here three quarters of an inch in on each side, a blank single line
+# above and below.
+# Word sets a footnote's rule 7.5 pt under the text with the 7 pt gap (the space LibreOffice keeps above its separator),
+# as in the D. Vt. folder.
+footnote: {clearance: 7.5}
+quote: {left: 54, right: 54, above: 13.8, below: 13.8}
+# LR 5.2(a): headings single spaced. The author types each heading's number ("I.", "A.", "1.", "a."), as the exemplar
+# does: a section centered in bold capitals on the body pitch; an argument heading bold, its later lines hung half an
+# inch; a point and a sub-point each half an inch further in, the sub-point bold italic.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body}
+  - {bold: true, hang: 36, above: 13.8, below: 13.8}
+  - {bold: true, left: 36, hang: 36, above: 13.8, below: 13.8}
+  - {bold: true, italic: true, left: 72, hang: 36, above: 13.8, below: 13.8}
+# FRCP 10(a), 7(b)(2): the court's name and the division (LR 3.1 assigns each case to a division); the base's caption, the
+# exemplar's: the parties at the left, ruled at their right and foot (the foot a rule of its own:
+# one horizontal line in every engine), each party's names with its designation a line
+# below, "v." a blank line from each; the file number at the right, centered on their height. Then the paper's title
+# centered in bold underlined capitals.
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{division}", align: center, bold: true, upper: true, optional: true}
+  - columns:
+      - width: 234
+        blocks:
+          - box:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}"}
+                between:
+                  - {text: "v.", above: 13.8, below: 13.8}
+            stroke: {right: 0.75}
+            inset: {right: 12, bottom: 10}
+      - valign: center
+        blocks:
+          - {text: "{case_label|Civil Action No.} {case_number}", left: 10.8}
+    gutter: 18
+    above: 24
+  - columns:
+      - {width: 234, blocks: [{rule: 0.75}]}
+      - {blocks: []}
+  - {text: "{brief_title}", align: center, bold: true, upper: true, underline: true, left: 36, right: 36, above: 24, below: 13.8}
+# FRCP 11(a): the date at the margin, then "Respectfully submitted," the signature line and the signer's lines (name,
+# firm, address, e-mail, telephone, whom they represent) three inches in, as the exemplar sets them, kept whole and with
+# the last paragraph. FRCP 5(d)(1)(B): no certificate is needed for a paper served through CM/ECF; when the sample gives
+# one, it starts a new page (the exemplar's), the counsel served two to a row (the exemplar's two columns), each kept
+# whole, signed three inches in.
+closing:
+  - group:
+      - {text: "Dated: {signature.date}", optional: true}
+      - {text: "Respectfully submitted,", left: 216, above: 13.8}
+      - {text: "{signature.preamble}", left: 216, optional: true, above: 13.8}
+      - {text: "{signature.sign_line}", left: 216, above: 13.8}
+      - {text: "{signature.lines}", left: 216}
+    above: 24
+  - when: certificate
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, pitch: body, keep: true}
+      - {markdown: "{certificate.text}", pitch: body, indent: 36}
+      - columns:
+          each: certificate.services
+          per_row: 2
+          row_gap: 13.8
+          blocks:
+            - {text: "{.}"}
+        gutter: 21.6
+        above: 13.8
+      - group:
+          - {text: "{certificate.sign_line}", left: 216}
+          - {text: "{certificate.designation}", left: 216}
+        above: 24

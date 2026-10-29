@@ -1,19 +1,18 @@
 ---
-court:
-  - IN THE UNITED STATES DISTRICT COURT
-  - EASTERN DISTRICT OF KENTUCKY
-  - NORTHERN DIVISION AT COVINGTON
+division: "NORTHERN DIVISION AT COVINGTON"
 caption:
-  - names:
-      - "JAIMEE SEITZ, individually, and as personal representative of AUDREE HEINE, a minor,"
-    designation: "Plaintiff,"
-  - names:
-      - "ROBLOX CORPORATION, DISCORD INC., TIKTOK LLC, TIKTOK INC., AND BYTEDANCE INC.,"
-    designation: "Defendants."
+  parties:
+    - names:
+        - "JAIMEE SEITZ, individually, and as personal representative of AUDREE HEINE, a minor,"
+      designation: "Plaintiff,"
+    - names:
+        - "ROBLOX CORPORATION, DISCORD INC., TIKTOK LLC, TIKTOK INC., AND BYTEDANCE INC.,"
+      designation: "Defendants."
+case_label: "Civil Case No."
 case_number: "2:25-cv-00166-DLB-CJS"
-title: "MEMORANDUM OF LAW IN SUPPORT OF DEFENDANT DISCORD INC.'S MOTION TO DISMISS"
-date: "August 7, 2026"
+brief_title: "MEMORANDUM OF LAW IN SUPPORT OF DEFENDANT DISCORD INC.'S MOTION TO DISMISS"
 signature:
+  date: "August 7, 2026"
   sign_line: "/s/ Palmer G. Vance II"
   signer: "Palmer G. Vance II"
   lines:

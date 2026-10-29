@@ -7,8 +7,8 @@ Courts under `courts/sixth-circuit/kentucky/federal` (4).
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, E.D. Kentucky](bankruptcy-eastern-district) | `kyeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Kentucky](bankruptcy-western-district) | `kywb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, E.D. Kentucky](eastern-district) | `kyed` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, W.D. Kentucky](western-district) | `kywd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. Kentucky](eastern-district) | `kyed` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, W.D. Kentucky](western-district) | `kywd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 
 [Formbook index](../../../../README.md)
 <!-- fb:generated:end -->

@@ -1,7 +1,13 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render is on the shared layout model
-# (lib/*/xengine*, fb-595.68.29) but stays REPORTED, not gated: where a line's footnotes do not fit below it, typst
-# keeps the line and sets the notes on the next page (a note kept whole; split, typst starts it on the page before
-# its reference), while LibreOffice carries the line over with its notes. The sample's p4 line "(citing such cases).
-# Both appellate courts[^3] and trial courts[^4] ..." is such a line, so every page after it ends one line apart.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.17.17), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
-  cross_engine: report
+  cross_engine: gate
+  # DEF-LEN-001: E.D. Ky. LR 7.1(d), a motion or response is at most 25 pages without leave of court (counted here
+  # with the certificate of service, the conservative reading).
+  page_limit: 25
+  # DEF-COVER-002, tier 3: the exemplar (one filer, usage/SOURCE.md) sets a section's number at a Word tab stop before
+  # its centered title ("I.<tab>INTRODUCTION"); the template centers the number the author types with its title.
+  cover_structure_accepted:
+    - finding: 'alignment: "I." is indented'
+      reason: "the exemplar's section number sits at a tab stop before its centered title (one filer's Word tabs, tier 3); the template centers the typed number with the title"
