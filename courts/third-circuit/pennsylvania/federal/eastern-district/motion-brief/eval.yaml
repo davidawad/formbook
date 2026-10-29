@@ -1,4 +1,10 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (fb-595.68.35, on the shared layout model lib/*/xengine*), so a difference fails.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.92), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
   cross_engine: gate
+  # DEF-COVER-002 reported, not gated, on every engine (typst and docx are listed in data/cover-structure-baseline.txt;
+  # latex, new with fb-595.92, alike): the first filer rules the caption above and below and sets "v." and the
+  # designations in from the margin; the second filer (motion-brief-2) draws no rules and no ":" column. The template
+  # keeps the earlier template's caption (tier 3, reviews/2026-10-29.md).
+  cover_structure: report

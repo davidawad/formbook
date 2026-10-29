@@ -13,7 +13,7 @@ Courts under `courts/third-circuit` (18).
 | [United States Bankruptcy Court, E.D. Pennsylvania](pennsylvania/federal/bankruptcy-eastern-district) | `paeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, M.D. Pennsylvania](pennsylvania/federal/bankruptcy-middle-district) | `pamb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Pennsylvania](pennsylvania/federal/bankruptcy-western-district) | `pawb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, E.D. Pennsylvania](pennsylvania/federal/eastern-district) | `paed` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. Pennsylvania](pennsylvania/federal/eastern-district) | `paed` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [District Court, M.D. Pennsylvania](pennsylvania/federal/middle-district) | `pamd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [District Court, W.D. Pennsylvania](pennsylvania/federal/western-district) | `pawd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Virgin Islands](virgin-islands/federal/bankruptcy-district) | `vib` | up for review | 2/2 | — | 2/2 | 14 |

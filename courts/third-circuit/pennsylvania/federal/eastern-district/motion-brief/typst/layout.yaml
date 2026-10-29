@@ -1,0 +1,93 @@
+# U.S. District Court for the Eastern District of Pennsylvania (paed): the motion packet, on the generic FRCP brief
+# (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with E.D. Pa.'s local rules overlaid here: the proposed order (LR
+# 7.1(a)), the motion with its certificate of service (LR 7.1(d), 5.1.2(7)(b)) and the memorandum of law (LR 7.1(c)),
+# each paper with its own caption, closing and page numbering (`lead`, fb-595.92). The shared document model sets it
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`). The local rules set
+# no typeface, size, spacing or margin (../README.md): the base's 12-point type, double spacing and one-inch margins,
+# as the exemplar.
+base: /lib/layouts/frcp-motion-brief.yaml
+# Pages numbered at the foot, centred, the number's line box ending half an inch above the page edge (its top 22.2 pt
+# below the text): the order none, the motion from 1, the memorandum's cover none, its contents i, its text from 1.
+page_number: {align: center, front: lower-roman, descent: 22.2}
+quote: {left: 36, right: 36, above: 12, below: 12}
+# Lists (the order's numbered items): the number half an inch in, in a 0.4 in box, the text hanging 0.9 in from the
+# margin.
+list_indent: 28.8
+list: {left: 36}
+# The memorandum's headings at the type size on the body pitch, no space of their own, kept with what follows; numbered
+# by the template: "I." with the title, centred in bold capitals; "A." and "1." in a half-inch box, the title bold
+# (bold italic at the third level) hanging after it.
+heading:
+  - {align: center, bold: true, upper: true, number: "I.", pitch: body, above: 0, below: 0}
+  - {bold: true, number: "A.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, italic: true, number: "1.", label_box: 36, pitch: body, above: 0, below: 0}
+# The papers before the memorandum, each from its marker in the body: the proposed order (LR 7.1(a)) under its
+# caption, unnumbered, the court's "BY THE COURT:" and the judge's line from 3.7 in; the motion (FRCP 7(b)(1)) under
+# its caption, numbered from 1, counsel's signature and the certificate of service (LR 7.1(d), 5.1.2(7)(b)). Each
+# caption: the court's name centred in bold; a single line below, the parties in a 3.3 in column ("v." between them),
+# a ":" on each of its lines, and from 0.15 in past them "CIVIL ACTION" and the number from its second line;
+# a single line below, the paper's title in bold, centred, single-spaced; a single line above the text.
+lead:
+  - marker: "<!-- motion -->"
+    numbering: none
+    blocks:
+      - &caption
+        group:
+          - {text: "{court_lines}", align: center, bold: true}
+          - columns:
+              - width: 237.6
+                blocks:
+                  - each: caption.parties
+                    blocks:
+                      - {text: "{names}"}
+                      - {text: "{designation}"}
+                    between:
+                      - {text: "v."}
+              - {width: 25.2, repeat: ":"}
+              - blocks:
+                  - {text: "CIVIL ACTION", left: 10.8, above: 13.8}
+                  - {text: "No. {case_number}", left: 10.8}
+            above: 13.8
+      - {text: "{order_title}", align: center, bold: true, above: 13.8, below: 13.8}
+    closing:
+      - group:
+          - {text: "BY THE COURT:", left: 266.4}
+          - {text: "______________________________ J.", left: 266.4, above: 41.4}
+        above: 24
+  - marker: "<!-- memorandum -->"
+    blocks:
+      - *caption
+      - {text: "{motion_title}", align: center, bold: true, above: 13.8, below: 13.8}
+    closing:
+      - &signature
+        group:
+          - columns:
+              - {width: 201.6, blocks: [{text: "Date: {date}"}]}
+              - blocks:
+                  - {text: "Respectfully submitted,"}
+                  - each: signature.blocks
+                    blocks:
+                      - {text: "{firm}", above: 12}
+                      - {text: "By: /s/ {signer}", above: 12}
+                      - {text: "{lines}"}
+        above: 24
+      - group:
+          - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, upper: true, pitch: body}
+          - {text: "{service.text}", pitch: body, indent: 36}
+          - columns:
+              - {width: 201.6, blocks: [{text: "Date: {service.date}"}]}
+              - blocks:
+                  - {text: "/s/ {service.signer}"}
+                  - {text: "{service.lines}"}
+            above: 24
+        above: 24
+# The memorandum of law (LR 7.1(c)): its caption page, unnumbered; the table of contents in roman from i (the titles
+# centred in bold, a double line below; a row per heading, half an inch in per level, the label in a half-inch box,
+# the page in a half-inch column); the text from 1; counsel's signature after it.
+cover:
+  - *caption
+  - {text: "{memo_title}", align: center, bold: true, above: 13.8}
+front: []
+contents: {title: "TABLE OF CONTENTS", style: {pitch: single, below: 24}, depth: 3, col: 36, hang: 36, step: 36, above: 12}
+closing:
+  - *signature

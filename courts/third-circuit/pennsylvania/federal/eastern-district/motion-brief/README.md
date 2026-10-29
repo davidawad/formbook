@@ -4,20 +4,29 @@ Doc type: **motion with memorandum of law** (a Rule 12(b) motion to dismiss, the
 
 | Item | Status |
 |---|---|
-| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer, defense counsel; see `usage/SOURCE.md`) |
+| exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` and `usage/FILED-EXAMPLE-motion-brief-2.pdf` (two filers; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (a portion of the 38-page filing; see the frontmatter comment) |
 | typeface | face required: **none** (the E.D. Pa. local civil rules name no face; see Governing rules). Font: **Times New Roman** 12 pt (vendored, docs/FONTS.md), the exemplar's face and the house standard; the typst, docx and LibreOffice PDF all name it (`fb lint fonts` does not report the folder) |
-| render | ok (2026-10-22): `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, and `usage/OUTPUT-motion-brief.docx` with its LibreOffice PDF, 10 pages; `fb render`, vendored fonts only, no warnings |
+| render | ok (2026-10-29): `usage/OUTPUT-motion-brief.typst.pdf`, `.latex.pdf`, `.docx` and `.docx.pdf`, 10 pages each, on the generic FRCP brief (fb-595.92); vendored fonts only, no warnings; latex and docx break every line and page where typst does (XENG-001..003 gated) |
 | overlay | `just overlay` writes `.overlay/<doc path>/OVERLAY-motion-brief.pdf` (not committed); a diagnostic, not a score |
-| pages reviewed | 10 of 10, both engines, side by side at 50 dpi (2026-10-22, the renders of fb-595.68.35) |
+| pages reviewed | 10 of 10 on each engine (2026-10-29, the FRCP-base render: `reviews/2026-10-29.md`) |
 | tier 1 (mandated form) | checked against the rules below; no typography rule in the E.D. Pa. local civil rules |
 | tier 2 (professional convention) | judged against one filer only; no table of authorities (see Known gaps) |
 
 Naming: file roles follow the repo's convention (`INPUT-` / `OUTPUT-` / `OVERLAY-`), which `tools/render.sh` and `tools/overlay.sh` read and write by default.
 
-## Not on the FRCP base (fb-595.17.21, 2026-10-29)
+## FRCP base (fb-595.92): moved
 
-This folder stays on its own template. The generic federal district brief (`lib/layouts/frcp-motion-brief.yaml`, set by `lib/typst/xdoc.typ`) lays out one paper: one cover, one body with its closing and tail, one page numbering. This folder's sample is the whole E.D. Pa. motion packet: the proposed order (LR 7.1(a)), the motion with its certificate of service (LR 7.1(d)) and the memorandum (LR 7.1(c)), each with its own caption, its own closing (the court's "BY THE COURT:" line, counsel's signature), and its own page numbering (none, 1.., none, i, 1..). The missing base feature: several papers in one sample, each with its own front blocks, closing and numbering (a shared change, a new bead).
+The folder is on the generic federal district brief (`lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and the shared
+document model (docs/EVAL-LOOP.md, "Generated engines"). The packet's papers before the memorandum are the base's
+`lead` (fb-595.92): the proposed order (LR 7.1(a)) from `<!-- order -->` to `<!-- motion -->`, unnumbered, under its
+caption and `ORDER`, closed by the court's "BY THE COURT:" and the judge's line; the motion (FRCP 7(b)(1)) from
+`<!-- motion -->` to `<!-- memorandum -->`, numbered from 1, closed by counsel's signature and the certificate of
+service (LR 7.1(d), 5.1.2(7)(b)); then the memorandum (LR 7.1(c)): its caption page unnumbered, the contents in roman
+from i, the text from 1 with I./A./1. headings numbered by the layout, counsel's signature. The order's numbered items
+stand half an inch in (`list.left`, fb-595.92). `typst/layout.yaml` names the base and holds the papers (the caption
+written once, a YAML anchor); `typst/paed-motion-brief.typ` only names the face; `fb engines gen` writes `latex/` and
+`docx/` from the merged layout. The render's text is the old template's, line for line and page for page.
 
 ## Governing rules
 
@@ -69,7 +78,7 @@ just overlay courts/third-circuit/pennsylvania/federal/eastern-district/motion-b
 
 The overlay (red = our render, blue = exemplar, black = both) is a diagnostic, not a score: the filed exemplar has an ECF header, bold and underlined captions and its own line breaking.
 
-## Visual review (all 10 pages, typst and docx side by side at 50 dpi, 2026-10-22)
+## Visual review (before the FRCP base, 2026-10-22; the current record is `reviews/2026-10-29.md`)
 
 | Page | What it is | Finding |
 |---|---|---|
@@ -103,9 +112,7 @@ Defects of the earlier template (fixed by the cross-engine port, fb-595.68.35): 
 
 ## Engines
 
-Both engines are on the shared cross-engine layout model (`lib/typst/xengine.typ`, `lib/docx/xengine.lua`; docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and every page where the typst render does, and `eval.yaml` gates it (`params.cross_engine: gate`, fb-595.68.35).
-
-- **typst** (primary, `typst/paed-motion-brief.typ`): the reference.
-- **docx** (`docx/`): `docx/reference.xml` (`base="xengine"`, the typst face `{font}` = Times New Roman, 12 pt; Body Text in exact 24 pt line boxes with a 0.5 in first-line indent, single lines 13.8 pt; the heading levels bold at the type size on the body pitch; "Lettered" hanging at 0.9 in for the order's items; letter page, 1 in margins, the footer 0.5 in above the edge) and `docx/paed-motion-brief.lua` on `lib/docx/xengine.lua`, which writes the five sections (order and memorandum cover without a number, motion 1.., contents i.., memorandum 1..; each sectPr on its section's last paragraph), their footers (`$FORMBOOK_FOOTERS`, `$FORMBOOK_FINAL`), the covers, the order's items and the court's signature, the headings with their labels, the quotations, the signatures and the certificate, and the contents with real page numbers from fb render's passes (needles per memorandum heading with the words after it, `#section` at the first; was a TOC field with no entries). `fb render` builds the reference and runs the passes; no shell script (fb-595.68).
-- Checks (2026-10-22): typst 9 passed, 0 failed; docx 13 passed, 0 failed, XENG-001..003 PASS (212/212 lines, 10/10 pages).
-- Word: not available here. The file converts in LibreOffice with no error; Word may paginate slightly differently, and its contents' page numbers are LibreOffice's (docs/DOCX.md).
+All three engines are generated from the merged layout (`fb engines gen`): `typst/` (the reference), `latex/`
+(`template.tex`, `xdoc.lua`) and `docx/` (`reference.xml`, `xdoc.lua`; each paper a Word section, the order's without
+a footer, the motion's numbered from 1). Checks (2026-10-29): typst 10 passed, latex 13 passed, docx 14 passed, 0
+failed; XENG-001..003 PASS on latex and docx. Word is not available here; the docx is checked with LibreOffice.

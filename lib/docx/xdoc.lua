@@ -975,8 +975,12 @@ return function(spec)
         -- the papers before the cover (lead, fb-595.92), each between its own blocks and closing, a section of its own
         -- numbered from 1 in its `numbering` (decimal by default; `none` unnumbered); a needle at each one's last
         -- paragraph, so the needles after it (the cover's first line) are found past it
+        -- (a section after a paper opens with an empty paragraph of one twip: LibreOffice drops the page numbering's
+        -- restart of a section whose first paragraph is in a table, a caption's columns)
+        local function section_start() out:insert(raw_block(xe.para({ xe.spacing(0, 0, 1) }, ""))) end
         for li, lp in ipairs(lead) do
           local fmt = lp.part.numbering or "decimal"
+          if li > 1 then section_start() end
           local bn = xd.tree(spec, lp.part.blocks or {}, meta, true, true)
           plan(bn, s.top)
           for _, x in ipairs(emit_list(bn, s, false)) do out:insert(raw_block(x)) end
@@ -997,6 +1001,7 @@ return function(spec)
           out:insert(raw_block(section_end(s, fmt == "none" and "rIdXdNone" or "rIdXdPage",
             fmt ~= "none" and WORD_FMT[fmt] or nil)))
         end
+        if #lead > 0 then section_start() end
         if paged then
           -- the numbering starts at the first line of the document (page 1)
           -- (its first paragraph's text, inside columns too: a cover may open with a caption's columns)
