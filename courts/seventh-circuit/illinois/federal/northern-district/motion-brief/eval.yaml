@@ -1,4 +1,7 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (on the shared layout model lib/*/xengine*), so a difference fails. (fb-595.68.27)
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.17.23), so they
+# break every line and page where the typst render does, and a difference fails.
+# DEF-LEN-001: N.D. Ill. LR 7.1: a brief in support of a motion may not exceed 15 pages without prior approval.
 params:
   cross_engine: gate
+  page_limit: 15

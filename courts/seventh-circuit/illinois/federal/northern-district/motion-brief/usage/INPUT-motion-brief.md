@@ -8,9 +8,9 @@ caption:
     - names: ["NORTHWESTERN UNIVERSITY,"]
       designation: "Defendant."
 division: "Eastern Division"
-brief_title: ["DEFENDANT’S MEMORANDUM OF LAW IN SUPPORT OF ITS", "MOTION TO DISMISS PLAINTIFFS’ COMPLAINT"]
+brief_title: "DEFENDANT’S MEMORANDUM OF LAW IN SUPPORT OF ITS MOTION TO DISMISS PLAINTIFFS’ COMPLAINT"
 counsel:
-  - ["Monica H. Khetarpal", "Carol R. Ashley", "Jacqueline M. Brown", "Jackson Lewis P.C.", "150 North Michigan Avenue, Suite 2500", "Chicago, IL 60601", "Tel.: 312.787.4949", "Monica.Khetarpal@jacksonlewis.com", "Carol.Ashley@Jacksonlewis.com", "Jacqueline.Brown@jacksonlewis.com", "*Attorneys for Defendant*"]
+  - lines: ["Monica H. Khetarpal", "Carol R. Ashley", "Jacqueline M. Brown", "Jackson Lewis P.C.", "150 North Michigan Avenue, Suite 2500", "Chicago, IL 60601", "Tel.: 312.787.4949", "Monica.Khetarpal@jacksonlewis.com", "Carol.Ashley@Jacksonlewis.com", "Jacqueline.Brown@jacksonlewis.com", "*Attorneys for Defendant*"]
 date: "November 19, 2025"
 signature:
   party: ["NORTHWESTERN UNIVERSITY"]
@@ -54,19 +54,19 @@ Federal Rule of Civil Procedure 8(a)(2) requires that a pleading contain “a sh
 
 # ARGUMENT
 
-## I. COUNTS I AND II FAIL TO STATE A CLAIM FOR RACE OR NATIONAL-ORIGIN DISCRIMINATION UNDER § 1981 AND TITLE VI AND SHOULD BE DISMISSED PURSANT TO FED. R. CIV. P. 12(b)(6).
+## COUNTS I AND II FAIL TO STATE A CLAIM FOR RACE OR NATIONAL-ORIGIN DISCRIMINATION UNDER § 1981 AND TITLE VI AND SHOULD BE DISMISSED PURSANT TO FED. R. CIV. P. 12(b)(6).
 
-### A. § 1981 and Title VI Are Analyzed Under the Same Framework.
+### § 1981 and Title VI Are Analyzed Under the Same Framework.
 
 Section 1981 protects against intentional discrimination based on race, color,[^5] or ethnicity in making and enforcing contracts—not religion, national origin, or political ideology. 42 U.S.C. § 1981(a); *Pourghoraishi v. Flying J, Inc.*, 449 F.3d 751, 756 (7th Cir. 2006). Likewise, Title VI provides that “[n]o person in the United States shall, on the ground of race, color, or national origin, be excluded from participation in, be denied the benefits of, or be subjected to discrimination under any program or activity receiving Federal financial assistance.” 42 U.S.C. § 2000d.
 
 Courts in this Circuit analyze § 1981 and Title VI claims together because they require proof of the same elements. *See Lubavitch-Chabad of Ill., Inc. v. Northwestern Univ.*, 6 F. Supp. 3d 806 816 (N.D. Ill. 2013); *Friedel v. City of Madison*, 832 F.2d 965, 971 (7th Cir. 1987). Because Plaintiffs’ § 1981 and Title VI claims rest on the same factual allegations and legal theory of intentional race discrimination, this Court should evaluate them under a unified standard for intentional race discrimination, with the exception that Title VI, but not § 1981, prohibits national origin discrimination.
 
-### B. Plaintiffs Have Not Alleged Intentional Race-Based Discrimination.[^6]
+### Plaintiffs Have Not Alleged Intentional Race-Based Discrimination.[^6]
 
 Title VI and § 1981 only protect against intentional discrimination. *Alexander v. Sandoval*, 532 U. S. 275, 280 (2001) (Title VI); *Gen. Bldg. Contractors Ass’n v. Pennsylvania*, 458 U.S. 375, 391 (1982) (§ 1981). To survive dismissal, Plaintiffs must plausibly allege that their race, ethnicity, or national origin was the but-for cause of the adverse action. *Comcast Corp. v. Nat’l Ass’n of African Am.-Owned Media*, 140 S. Ct. 1009, 1014–15 (2020). They can do so via the direct or indirect method. *Montgomery v. Am. Airlines, Inc.*, 626 F.3d 382, 393 (7th Cir. 2010). Plaintiffs fail on both counts because they only summarily state that “Defendant Northwestern University intentionally discriminate[d]” against them. Compl. ¶¶ 56, 63. This conclusory statement is inadequate to establish intentional discrimination under either method. *See Iqbal*, 556 U.S. at 680–81 (rejecting as conclusory allegation that officials “adopted a policy ‘because of,’ not merely ‘in spite of,’ its adverse effects upon an identifiable group’” (quoting *Pers. Admin’r of Mass. v. Feeney*, 442 U.S. 256, 279 (1979))).
 
-#### 1. There Are No Allegations of Direct or Circumstantial Evidence of Race-Based Animus.
+#### There Are No Allegations of Direct or Circumstantial Evidence of Race-Based Animus.
 
 To demonstrate discrimination under the direct method, Plaintiffs must provide “direct evidence of — or sufficient circumstantial evidence to allow an inference of — intentional racial discrimination . . .” *Montgomery*, 626 F.3d at 393 (citing *Coffman v. Indianapolis Fire Department*, 578 F.3d 559, 563 (7th Cir. 2009). “Direct evidence typically requires an admission of discriminatory animus,” or through circumstantial evidence that establishes “discriminatory motive through a longer chain of inferences.” *Mach v. Will County Sheriff*, 580 F.3d 495 (7th Cir. 2009); *Goodman v. Bowdoin Coll.*, 380 F.3d 33, 43 (1st Cir. 2004) (observing that “racial animus” is “a necessary component of . . . claims under” Title VI). Plaintiffs’ Complaint does not include any such allegations. There are no allegations of racial epithets, slurs, statements reflecting bias, or facts suggesting that Northwestern acted with hostility toward Arabs, Palestinians, or any other race or ethnicity in adopting or enforcing its training and attestation requirements. Indeed, nothing in the Complaint asserts that Plaintiffs were required to comply with these requirements because of their race or ethnicity.
 

@@ -1,0 +1,88 @@
+# U.S. District Court for the Northern District of Illinois (ilnd): a memorandum of law in support of a motion, on the
+# generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with N.D. Ill.'s local rules overlaid here. The
+# shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb
+# engines gen`). Rules: N.D. Ill. Local Rules, https://www.ilnd.uscourts.gov/_assets/_documents/_rules/lrrules.pdf
+# (read 2026-10-14; ../README.md quotes them). The base already meets LR 5.2(e) (8 1/2 x 11 paper, one-inch margins,
+# 12-point body type). The 15-page limit of LR 7.1 is checked by eval.yaml (page_limit); the template sets no table of
+# contents or of cases, which LR 7.1 asks of a longer brief only.
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE NORTHERN DISTRICT OF ILLINOIS"
+# LR 5.2(e): line spacing at least 2.0 lines: Word's double line at 12 pt (2 x 13.8 pt), the exemplar's pitch.
+pitch: {body: 27.6}
+# The cover unnumbered, the body numbered from 1, centered at the foot, as the exemplar.
+page_number: {align: center, front: lower-roman}
+# LR 5.2(e)(1): footnotes no less than 11 points, single spaced (Word's single line at 11 pt), 6 pt apart; the note
+# area 12.6 pt below the text, where LibreOffice sets Word's separator.
+footnote: {size: 11, pitch: 12.65, gap: 6, clearance: 12.6}
+# Block quotations single spaced, half an inch in on each side, a blank single line above and below.
+quote: {left: 36, right: 36, above: 13.8, below: 13.8}
+# Headings single spaced in bold, a blank single line above and half of one below, as filed: a section centered in
+# capitals (the exemplar underlines it too: not here, as LaTeX sets underlined text in a box and drops a footnote
+# called from it, lib/latex/xdoc.sty \xd@ulp; RELEVANT FACTUAL BACKGROUND calls one); below it the argument headings
+# numbered by the template as the exemplar numbers them ("I.", "A.", "1."), the label in a half-inch box, each level
+# half an inch further in, the title's later lines hung under it; the fourth level italic too.
+heading:
+  - {align: center, bold: true, upper: true, above: 13.8, below: 6.9}
+  - {bold: true, number: "I.", label_box: 36, above: 13.8, below: 6.9}
+  - {bold: true, number: "A.", label_box: 36, left: 36, above: 13.8, below: 6.9}
+  - {bold: true, italic: true, number: "1.", label_box: 36, left: 72, above: 13.8, below: 6.9}
+# FRCP 10(a), LR 5.2(e): the cover page, unnumbered: the court's name and the division in bold; the caption, one single
+# line per row: each party's names, a blank row and the designation an inch and a half in, a blank row, "v." an inch in and a
+# blank row between the parties, closed by a column of ")"; the case number and the judge beside them, centered on
+# their height; the paper's title centered in bold one body line below; the counsel block in the right half of the
+# page two body lines below the title, a blank line between its groups.
+cover:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{division}", align: center, bold: true, upper: true, optional: true}
+  - columns:
+      - width: 230.4
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 108, above: 13.8}
+            between:
+              - {text: "v.", left: 72, above: 13.8, below: 13.8}
+      - {width: 21.6, repeat: ")"}
+      - valign: center
+        blocks:
+          - {text: "Case No. {case_number}"}
+          - {text: "Honorable {judge}", optional: true, above: 13.8}
+    gutter: 0
+    above: 13.8
+  - {text: "{brief_title}", align: center, bold: true, left: 36, right: 36, above: 27.6}
+  - each: counsel
+    blocks:
+      - {text: "{lines}", left: 237.6}
+    gap: 13.8
+    above: 55.2
+front: []
+# FRCP 11(a): "Dated:" at the margin and "Respectfully submitted," three inches in on the same line; below it the
+# party, the "/s/" signature and the signer's role, a blank single line between the groups; kept whole with the last
+# paragraph.
+closing:
+  - group:
+      - columns:
+          - {width: 216, blocks: [{text: "Dated: {date}"}]}
+          - blocks:
+              - {text: "Respectfully submitted,"}
+              - {text: "{signature.party}", above: 13.8}
+              - {text: "By: /s/ {signature.signer}", above: 13.8}
+              - {text: "{signature.role}"}
+    above: 13.8
+# LR 5.5(a) to (c), FRCP 5(b): the certificate of service when the sample gives one, on its own page: the heading as a
+# section's, the statement at the body pitch, the signer's lines in the right half one body line below.
+after_tail:
+  - when: certificate
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", heading: 1}
+      - {markdown: "{certificate.text}", pitch: body, indent: 36}
+      - group:
+          - {text: "/s/ {certificate.signer}", left: 237.6}
+          - {text: "{certificate.role}", left: 237.6}
+        above: 27.6

@@ -169,7 +169,7 @@ Courts under `courts` (347).
 | [United States Bankruptcy Court, N.D. Illinois](seventh-circuit/illinois/federal/bankruptcy-northern-district) | `ilnb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. Illinois](seventh-circuit/illinois/federal/bankruptcy-southern-district) | `ilsb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, C.D. Illinois](seventh-circuit/illinois/federal/central-district) | `ilcd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
-| [District Court, N.D. Illinois](seventh-circuit/illinois/federal/northern-district) | `ilnd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, N.D. Illinois](seventh-circuit/illinois/federal/northern-district) | `ilnd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [District Court, S.D. Illinois](seventh-circuit/illinois/federal/southern-district) | `ilsd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Indiana](seventh-circuit/indiana/federal/bankruptcy-northern-district) | `innb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. Indiana](seventh-circuit/indiana/federal/bankruptcy-southern-district) | `insb` | up for review | 2/2 | — | 2/2 | 14 |

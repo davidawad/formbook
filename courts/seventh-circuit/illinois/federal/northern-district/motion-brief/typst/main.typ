@@ -1,7 +1,5 @@
-// Entry point. Compile with the court folder as --root; tools/render.sh does it:
-//   typst compile --root <court-dir> --font-path <repo>/fonts --ignore-system-fonts \
-//     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/NAME.md \
-//     typst/main.typ out.pdf
+// Entry point. Compile through tools/render.sh, which passes the court folder as --root,
+// the repo's vendored fonts only, and fails on any typst warning.
 #import "ilnd-motion-brief.typ": ilnd-motion-brief, split-frontmatter
 
 #let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))

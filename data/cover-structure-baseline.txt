@@ -1747,8 +1747,6 @@ courts/seventh-circuit/illinois/federal/central-district/complaint docx
 courts/seventh-circuit/illinois/federal/central-district/complaint typst
 courts/seventh-circuit/illinois/federal/central-district/motion-brief typst
 courts/seventh-circuit/illinois/federal/northern-district/complaint typst
-courts/seventh-circuit/illinois/federal/northern-district/motion-brief docx
-courts/seventh-circuit/illinois/federal/northern-district/motion-brief typst
 courts/seventh-circuit/illinois/state/appellate-court/amicus-brief docx
 courts/seventh-circuit/illinois/state/appellate-court/amicus-brief latex
 courts/seventh-circuit/illinois/state/appellate-court/amicus-brief typst
