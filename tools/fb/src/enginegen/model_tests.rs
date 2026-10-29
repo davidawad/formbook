@@ -3299,3 +3299,29 @@ fn pleading_paper_in_every_engine() {
         .unwrap_err()
         .contains("pleading.lines"));
 }
+
+#[test]
+fn a_list_in_a_quotation_runs_to_the_quotation_s_right_indent_in_typst() {
+    // typst's block quotation sets a 1em right inset on `pad`: a list item padded at its left only took it and broke
+    // 12 pt short of the quotation's right indent, where LaTeX and Word run to it (fb-595.96)
+    let l = layout("quote: {left: 72, right: 72, pitch: single}\n");
+    let words = "ii ".repeat(80);
+    let Some(f) = fx(
+        "quote-list-measure",
+        &l,
+        &format!("---\nx: 1\n---\n> 1. {words}\n> 2. x\n"),
+        &["typst", "pdftotext"],
+    ) else {
+        return;
+    };
+    f.typst_pages().unwrap();
+    let m = crate::measure::measure(&f.dir.join("out.pdf"), &[]).unwrap();
+    // the text runs from 144 to 468 pt; a line of "ii " ends within one word's advance of it
+    let right = m.pages[0]
+        .lines
+        .iter()
+        .filter(|ln| ln.text.starts_with("ii") || ln.text.starts_with("1."))
+        .map(|ln| ln.right)
+        .fold(0.0, f64::max);
+    assert!(right > 459.0 && right <= 468.0, "{right}");
+}

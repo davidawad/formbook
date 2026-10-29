@@ -566,7 +566,9 @@
     if numbered and item.at("number", default: none) not in (none, auto) { n = item.number }
     let lab = if numbered { numbering(it.numbering, n) } else { markers.at(calc.min(level, markers.len() - 1)) }
     let (head, subs) = split-item(item.body)
-    block(above: 0pt, below: 0pt, pad(left: level * li + off,
+    // (right: 0pt: a pad that names only its left side takes the right one from the styles around it, and typst's
+    // block quotation sets one of 1em: a list in a quotation lost 12 pt at the right that LaTeX and Word keep)
+    block(above: 0pt, below: 0pt, pad(left: level * li + off, right: 0pt,
       par(first-line-indent: 0pt, hanging-indent: li, { box(width: li, lab); head })))
     for s in subs { list-items(spec, s, level + 1) }
     n += 1
