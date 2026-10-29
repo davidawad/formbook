@@ -5,6 +5,7 @@ base: /lib/layouts/frcp-motion-brief.yaml
 pitch: {body: 27.6}
 footnote: {size: 11}
 constants:
+  # Fed. R. Civ. P. 10(a): identify the district in the caption.
   district: "DISTRICT OF MAINE"
 # LR 10(a) caption convention: party designations are indented beneath the names. The title is set in capitals as
 # in the filed Maine motion briefs; the rule requires the title below the caption, not a particular case style.
@@ -21,7 +22,7 @@ front:
                   - {text: "{designation}", above: 13.8, left: 108}
                 between:
                   - {text: "v.", above: 13.8, below: 13.8}
-            stroke: {right: 0.75, bottom: 0.75}
+            stroke: 0
             inset: {right: 12, bottom: 10}
       - valign: center
         blocks:

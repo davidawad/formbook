@@ -41,10 +41,7 @@ return require("latex.xdoc")({
                   },
                 },
               },
-              ["stroke"] = {
-                ["right"] = 0.75,
-                ["bottom"] = 0.75,
-              },
+              ["stroke"] = 0,
               ["inset"] = {
                 ["right"] = 12,
                 ["bottom"] = 10,

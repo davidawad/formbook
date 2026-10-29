@@ -96,3 +96,9 @@ docx: `fb render --engine docx` builds the reference document from `docx/referen
 - Certificate of service: tested with a temporary copy of the sample that carried a certificate (rendered through the same filter, 11 pages, not committed). The committed sample has none.
 - Differs: footnote separator is pandoc's default separator line, shorter than the 2.5 inch rule typst draws; the "Civil Action No." label sits above its blank rule when the case number is blank (typst: one line), as in the complaint.
 - BLOCKED (as recorded on the earlier EB Garamond build, before fb-595.68): lines per page: the same exact 27.6 pt limit as the complaint (23 lines per page against typst's 24, because typst's first line on each page overhangs the top margin by about 4.6 pt). Page breaks match typst on pages 1 to 3 and differ from page 4 on; the conclusion and signature move to page 10 in both.
+
+## FRCP base migration (fb-595.17.8, 2026-10-29)
+
+The current implementation extends `/lib/layouts/frcp-motion-brief.yaml` in `typst/layout.yaml`. The overlay sets D. Me. LR 10(b)(1)-(5) form values, the 27.6 pt double-space pitch and 11 pt footnotes under LR 10(b)(2). It sets the LR 7(d)(1) 20-page ceiling in `eval.yaml`. The generated LaTeX and DOCX templates come from `fb engines gen`; the local Typst file only loads the merged layout. The former hand-written engine templates were removed.
+
+All three engines pass `sh tools/check.sh`: Typst 12 checks, LaTeX 15 checks, DOCX 16 checks; XENG-001..003 pass for LaTeX and DOCX. Every page of all three 10-page renders was reviewed at thumbnail scale. Gate 2 page 1 has no open findings.
