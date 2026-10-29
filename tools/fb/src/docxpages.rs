@@ -10,7 +10,8 @@
 //! string. Body needles (kind `B`) are found in document order, each from where the one before it was found, so a
 //! short citation ("Id.") is found after the text before it, not earlier on the page. A needle inside a footnote
 //! (kind `N`) is searched from where the body has reached (its mark comes after that, and footnotes are printed at the
-//! foot of the page, after its body text), else from the start of that page, and moves nothing. When NEEDLE runs over
+//! foot of the page, after its body text), else from the start of that page, and moves nothing; a heading's (id `h..`
+//! or `H..`) equal to the heading's before it (both kept with one block) is where that one was found. When NEEDLE runs over
 //! a page break with footnotes between, it is found by its halves: a body needle's head on a page and its tail where
 //! the next page starts (the longest head first), also when its whole text comes again later (the halves, when they
 //! come first, win); failing both, FALLBACK (the text alone) is tried. An authority's needle (id `a..`) that runs over
@@ -407,6 +408,7 @@ pub fn lookup_all(
             .map(|(k, _)| k.to_string())
     };
     let section = |id: &str| id == "front" || id == "start";
+    let is_heading = |id: &str| id.starts_with('h') || id.starts_with('H');
     let mut last: Option<(String, usize, &str)> = None;
     // just after the last footnote needle found
     let mut note = 0;
@@ -429,7 +431,7 @@ pub fn lookup_all(
             continue;
         }
         ys.push(None);
-        let heading = n.id.0.starts_with('h') || n.id.0.starts_with('H');
+        let heading = is_heading(&n.id.0);
         let (k, at) = anchored(n);
         let from = if n.place == Place::Body {
             match &last {
@@ -469,13 +471,15 @@ pub fn lookup_all(
             // foot of this page or a later one, after its body text), else from the start of the body's page, and after
             // the last note's needle found (notes are printed in document order: a note that repeats an earlier one's
             // text is found after it, not on the earlier note's page)
-            // (an equal needle of another authority, the same note's: where the last note needle was found)
+            // (an equal needle of another authority, the same note's, or of a heading right after a heading, the block
+            // both are kept with: where the last note needle was found)
             let note = match &last_note {
                 Some((t, p, id))
                     if *t == at
-                        && authority(id)
+                        && (authority(id)
                             .zip(authority(&n.id.0))
-                            .is_some_and(|(a, b)| a != b) =>
+                            .is_some_and(|(a, b)| a != b)
+                            || (heading && is_heading(id))) =>
                 {
                     *p
                 }
@@ -664,6 +668,16 @@ mod tests {
             lookup(notes, &p).unwrap(),
             "a30.2\t1\t-\na28.2\t1\t-\na5.1\t1\t-\na30.7\t2\t-\n"
         );
+    }
+
+    #[test]
+    fn a_heading_right_after_a_heading_is_found_where_it_is() {
+        // two headings kept with one paragraph: their note-kind needles (its first words) are equal, both on page 2
+        let pdf =
+            "Intro text\n1\n\u{c}III. Legal Standard\nA. Party Standard\nRule 17 says\n2\n\u{c}";
+        let p = page_texts(pdf);
+        let needles = "H:1\tN\trule17says\tlegalstandard\nH:2\tN\trule17says\tpartystandard\n";
+        assert_eq!(lookup(needles, &p).unwrap(), "H:1\t2\t-\nH:2\t2\t-\n");
     }
 
     #[test]

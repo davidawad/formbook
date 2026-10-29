@@ -519,7 +519,7 @@ function Pandoc(doc)
 
   -- Every citation in document order, as a needle for the page lookup of fb render: the link text and the words
   -- after it in its paragraph (up to a footnote, a quotation or another link), so that the same words elsewhere in
-  -- the brief, unlinked, are not taken for it; its first words alone are the fallback. Kind T (body) moves the search
+  -- the brief, unlinked, are not taken for it; its first words alone are the fallback. Kind B (body) moves the search
   -- on; N (in a footnote) is searched from the page the body has reached.
   local cites = {}
   local scan_blocks
@@ -551,7 +551,7 @@ function Pandoc(doc)
       end
     end
   end
-  scan_blocks(doc.blocks, "T")
+  scan_blocks(doc.blocks, "B")
 
   -- Where each needle sits: the top-level block of every citation (in the order the walk below meets them), of every
   -- heading and of the first paragraph; a needle's place is its block, then its order in it (the heading first).
