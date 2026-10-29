@@ -869,7 +869,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 8 | 26 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 4 | 3 | 4 | 17.7% |
 | Fifth Circuit | 1 | 0 | 1 | 0 | 0 | 0.0% | 100.0% | 1 | 0 | 0 | 14.0% |
-| **Total** | 377 | 0 | 354 | 23 | 0 | 0.0% | 93.8% | 353 | 119 | 327 | 19.0% |
+| **Total** | 377 | 0 | 354 | 23 | 0 | 0.0% | 93.8% | 353 | 124 | 327 | 19.0% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
