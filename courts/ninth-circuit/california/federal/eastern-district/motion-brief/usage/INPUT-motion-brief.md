@@ -47,7 +47,7 @@ signature:
     - "MORNING LAW GROUP, P.C."
 memo_title: "Memorandum of Points and Authorities"
 authorities:
-  - category: "Cases"
+  - heading: "Cases"
     entries:
       - cite: "*A.B. Concrete Coating Inc. v. Wells Fargo Bank, Nat’l Ass’n*, 491 F. Supp. 3d 727 (E.D. Cal. 2020)"
         pages: "13"
@@ -111,7 +111,7 @@ authorities:
         pages: "5"
       - cite: "*Zetz v. Bos. Sci. Corp.*, 398 F. Supp. 3d 700 (E.D. Cal. 2019)"
         pages: "5, 9"
-  - category: "Statutes"
+  - heading: "Statutes"
     entries:
       - cite: "11 U.S.C. § 101(5)"
         pages: "3, 7"
@@ -127,7 +127,7 @@ authorities:
         pages: "11"
       - cite: "Cal. Corp. Code § 200(c)"
         pages: "6"
-  - category: "Other Authorities"
+  - heading: "Other Authorities"
     entries:
       - cite: "Fed. R. Civ. P. 9(b)"
         pages: "passim"
@@ -148,13 +148,10 @@ This Motion is based upon this Notice, the accompanying Memorandum of Points and
 
 The parties met and conferred on August 24, 2026 pursuant to Section 4(A) of the Court’s Civil Standing Order. During that conference, Plaintiff’s counsel indicated that Plaintiff intended to amend the Complaint to address certain of MLG’s concerns. As of the filing of this Motion, Plaintiff has not filed an amended complaint or dismissal, necessitating this Motion.
 
----
+<!-- memorandum -->
 
-[[TOC]]
 
-[[TOA]]
 
-[[MEMO]]
 
 # I. INTRODUCTION
 
@@ -192,4 +189,3 @@ Without those details, MLG cannot determine whether Plaintiff’s claims are dir
 
 For the foregoing reasons, MLG respectfully requests that the Court dismiss the Complaint in its entirety. In the alternative, MLG requests that the Court dismiss Counts V and VI, with prejudice as to the October 2021 enrollment-related statements, for failure to satisfy Rule 9(b), and dismiss the remaining counts without prejudice to the filing of an amended complaint that pleads MLG-specific conduct and a cognizable legal theory for attributing pre-incorporation conduct to MLG. In the further alternative, MLG requests that the Court order Plaintiff to file a more definite statement under Rule 12(e) addressing the deficiencies identified above.
 
----
