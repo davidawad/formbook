@@ -558,13 +558,15 @@
 #let list-items(spec, it, level) = {
   let li = pt(spec.at("list_indent", default: spec.indent))
   let markers = spec.at("list", default: (:)).at("markers", default: ("•",))
+  // (layout.yaml list.left, fb-595.92: the list that far in from the margin; gen.rs tex list_left, word.rs alike)
+  let off = pt(spec.at("list", default: (:)).at("left", default: 0))
   let numbered = it.func() == enum
   let n = if numbered and it.start != auto { it.start } else { 1 }
   for item in it.children {
     if numbered and item.at("number", default: none) not in (none, auto) { n = item.number }
     let lab = if numbered { numbering(it.numbering, n) } else { markers.at(calc.min(level, markers.len() - 1)) }
     let (head, subs) = split-item(item.body)
-    block(above: 0pt, below: 0pt, pad(left: level * li,
+    block(above: 0pt, below: 0pt, pad(left: level * li + off,
       par(first-line-indent: 0pt, hanging-indent: li, { box(width: li, lab); head })))
     for s in subs { list-items(spec, s, level + 1) }
     n += 1
@@ -990,6 +992,21 @@
   let defs = body.matches(regex("(?m)^\\[\\^[^\\]]+\\]:.*(\\n(    |\\t).*)*")).map(m => m.text).join("\n\n")
   (body.slice(0, at) + "\n\n" + defs, body.slice(end))
 }
+/// The papers before the cover (layout.yaml `lead`, fb-595.92: E.D. Pa. LR 7.1, E.D. Mich. LR 7.1(d)): for each part,
+/// in order, the body up to a line that is its `marker` alone (literal text, "<!-- motion -->"; dropped), with the
+/// sample's footnote definitions, and the rest (lib/pandoc/xdoc.lua split_lead alike). A missing marker stops the render.
+#let split-lead(spec, body) = {
+  let defs = body.matches(regex("(?m)^\\[\\^[^\\]]+\\]:.*(\\n(    |\\t).*)*")).map(m => m.text).join("\n\n")
+  let (parts, rest) = ((), body)
+  for part in spec.at("lead", default: ()) {
+    let m = rest.match(regex("(?m)^[ \\t]*" + literal(str(part.marker)) + "[ \\t]*$"))
+    if m == none { panic("xdoc: lead: no line `" + str(part.marker) + "` in the body") }
+    parts.push((part, rest.slice(0, m.start) + "\n\n" + defs))
+    rest = rest.slice(m.end)
+  }
+  (parts, rest)
+}
+
 /// The body's markdown less its last paragraph, and that paragraph (or none): the last block that is not a footnote
 /// definition, when it is a paragraph (not a heading, quotation, list, table, code or HTML) and calls no footnote
 /// (layout.yaml `keep_with_closing`; lib/pandoc/xdoc.lua last_para takes the paragraph pandoc reads there).
@@ -1128,6 +1145,22 @@
     s.page_number = p
     (s, p)
   } else { (spec, pn) }
+  // the papers before the cover (lead, fb-595.92), each between its own blocks and closing, on its own pages,
+  // numbered from 1 in its `numbering` (decimal by default; `none` unnumbered); the document from 1 after them; their
+  // headings are not the contents' (they come before <xd-heads>)
+  let (lead, main) = split-lead(spec, main)
+  for (part, src) in lead {
+    let fmt = part.at("numbering", default: "decimal")
+    xd-num.update(if fmt == "none" { none } else { FORMATS.at(fmt) })
+    counter(page).update(1)
+    blocks(spec, part.at("blocks", default: ()), meta, first: true, page: true)
+    let (src, last) = if spec.at("keep_with_closing", default: false) { split-last(src) } else { (src, none) }
+    body-of(spec, meta, src)
+    if last != none { block(width: 100%, above: 0pt, below: 0pt, breakable: false, sticky: true, { body-of(spec, meta, last); parbreak() }) }
+    blocks(spec, part.at("closing", default: ()), meta, page: true)
+    pagebreak()
+  }
+  if lead.len() > 0 { xd-num.update("1"); counter(page).update(1) }
   let front = if pn == none { none } else { pn.at("front", default: none) }
   // `page_number.cover`: the cover counted in the tables' numbering (counted: unprinted, the tables from ii; numbered:
   // printed too); otherwise unnumbered and the tables from i

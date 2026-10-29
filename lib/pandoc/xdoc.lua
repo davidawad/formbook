@@ -839,6 +839,46 @@ end
 -- level-1 heading that starts with it; `marker: <text>`, the blocks before a paragraph that is that text alone (the
 -- paragraph dropped; the text literal, "{{contents}}"). A count or heading may read a field ("{before_toc}",
 -- "{body_start}"); a missing or empty one, or a split the body does not hold, sets nothing before the tables.
+-- The text of a block a marker may be: a paragraph's, or an HTML block's ("<!-- motion -->"), trimmed.
+function M.block_text(x)
+  if x.t == "Para" or x.t == "Plain" then return pandoc.utils.stringify(x) end
+  if x.t == "RawBlock" and x.format == "html" then return (x.text:gsub("^%s+", ""):gsub("%s+$", "")) end
+  return nil
+end
+
+-- The blocks without HTML comments (a marker the layout did not take, "<!-- order -->"): typst's cmarker sets none.
+function M.drop_comments(blocks)
+  local out = pandoc.Blocks({})
+  for _, x in ipairs(blocks) do
+    if not (x.t == "RawBlock" and x.format == "html" and (M.block_text(x) or ""):match("^<!%-%-.*%-%->$")) then
+      out:insert(x)
+    end
+  end
+  return out
+end
+
+-- The papers before the cover (layout.yaml `lead`, fb-595.92: E.D. Pa. LR 7.1, E.D. Mich. LR 7.1(d)): for each part, in
+-- order, the body up to a block that is its `marker` alone (a paragraph, or an HTML comment "<!-- motion -->"; dropped),
+-- and the rest; lib/typst/xdoc.typ split-lead alike. A marker the body lacks stops the render.
+function M.split_lead(spec, blocks)
+  local parts, rest = {}, blocks
+  for _, part in ipairs(spec.lead or {}) do
+    local m = tostring(part.marker)
+    local at
+    for i, x in ipairs(rest) do
+      if M.block_text(x) == m then at = i; break end
+    end
+    if not at then error("xdoc: lead: no block `" .. m .. "` in the body", 0) end
+    local mine, after = pandoc.Blocks({}), pandoc.Blocks({})
+    for i, x in ipairs(rest) do
+      if i < at then mine:insert(x) elseif i > at then after:insert(x) end
+    end
+    parts[#parts + 1] = { part = part, blocks = mine }
+    rest = after
+  end
+  return parts, rest
+end
+
 function M.split_head(spec, blocks, meta)
   local b = spec.body_before_tables
   local pre, main = pandoc.Blocks({}), pandoc.Blocks({})
@@ -851,7 +891,7 @@ function M.split_head(spec, blocks, meta)
   if b.marker then
     local m = tostring(b.marker) -- literal text ("{{contents}}")
     for i, x in ipairs(blocks) do
-      if m and (x.t == "Para" or x.t == "Plain") and pandoc.utils.stringify(x) == m then at, drop = i, true; break end
+      if m and M.block_text(x) == m then at, drop = i, true; break end
     end
   elseif b["until"] then
     local u = value(b["until"])

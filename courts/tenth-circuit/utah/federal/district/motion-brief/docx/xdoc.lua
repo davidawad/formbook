@@ -61,11 +61,8 @@ return require("docx.xdoc")({
     ["gap"] = 6,
     ["clearance"] = 7.8,
   },
-  ["quote"] = {
-    ["above"] = 13.8,
+  ["list"] = {
     ["left"] = 36,
-    ["right"] = 36,
-    ["below"] = 13.8,
   },
   ["constants"] = {
     ["court"] = "UNITED STATES DISTRICT COURT",
@@ -165,6 +162,12 @@ return require("docx.xdoc")({
     },
   },
   ["keep_with_closing"] = true,
+  ["quote"] = {
+    ["above"] = 13.8,
+    ["left"] = 36,
+    ["right"] = 36,
+    ["below"] = 13.8,
+  },
   ["heading"] = {
     {
       ["align"] = "center",

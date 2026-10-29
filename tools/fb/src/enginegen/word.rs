@@ -60,6 +60,8 @@ pub fn reference(l: &Value, _face: &str) -> Result<String, String> {
         num(l, "list_indent", Some(num(l, "indent", None)?))?,
         "list_indent",
     )?;
+    // a list's offset from the margin (layout.yaml list.left, fb-595.92): every list style that much further in
+    let lleft = tw(num(l, "list.left", Some(0.0))?, "list.left")?;
     let fnv = l.get("footnote");
     let note = tw(
         pitch(l, fnv.and_then(|f| f.get("pitch")))?,
@@ -205,7 +207,7 @@ footer in a single line box {} pt above the page foot, and the page's margins. T
     // list items per nesting level, in the body and in the tail: the label at the level's indent, the text hanging
     for (base, line) in [("XdList", body), ("XdTailList", tp)] {
         for lv in 1..=3i64 {
-            let ind = format!(r#"<w:ind w:left="{}" w:hanging="{list}"/>"#, lv * list);
+            let ind = format!(r#"<w:ind w:left="{}" w:hanging="{list}"/>"#, lleft + lv * list);
             out.push_str(&style(
                 &format!("{base}{lv}"),
                 &format!("{base} {lv}"),
@@ -250,7 +252,7 @@ footer in a single line box {} pt above the page foot, and the page's margins. T
     for lv in 1..=3i64 {
         let ind = format!(
             r#"<w:ind w:left="{}" w:right="{qr}" w:hanging="{list}"/>"#,
-            ql + lv * list
+            ql + lleft + lv * list
         );
         out.push_str(&style(
             &format!("XdQuoteList{lv}"),

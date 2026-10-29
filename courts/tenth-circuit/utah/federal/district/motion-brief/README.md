@@ -118,5 +118,5 @@ the move. Changes: the caption's right column now runs title, case number, judge
 column's rules are a box ruled at its right inside one ruled at its foot (typst draws a two-side stroke as one
 polygon); the contents indent "I." half an inch and "A." an inch (both filers); the contents' "Page" label is gone (the
 model has none; neither filer prints one); the last paragraph, not the whole conclusion, is kept with the signature.
-Open (tier 2): the bullets of the motion's list stand at the margin, the text half an inch in; the first filer sets the
-bullet half an inch in (the model has no list offset).
+The motion's bullets stand half an inch in, the text an inch in (`list.left: 36`, fb-595.92; the first filer sets the
+bullet half an inch in).

@@ -412,7 +412,9 @@ return function(spec)
   -- Every heading in document order is numbered (hn): its page goes to the .aux (\xd@hmark), and it is a bookmark;
   -- bodyn counts the body's headings alone (their labels, xd.heading_labels).
   local hn, bodyn = 0, 0
+  local in_lead = false -- a paper before the cover (lead): its headings are not the document's (no mark, no row)
   local function mark_of(level, content)
+    if in_lead then return "" end
     hn = hn + 1
     return "\\xd@hmark{" .. hn .. "}\\pdfbookmark[" .. (level - 1) .. "]{"
       .. tex(pandoc.Inlines({ pandoc.Str(pandoc.utils.stringify(content)) }), true) .. "}{xd.h." .. hn .. "}"
@@ -675,8 +677,12 @@ return function(spec)
         blocks = xd.unlink(spec, blocks)
         local main, rest = xd.split_tail(spec, blocks)
         -- the body sections set before the tables (body_before_tables)
-        local pre
+        local pre, lead
+        lead, main = xd.split_lead(spec, main)
         pre, main = xd.split_head(spec, main, meta)
+        -- (HTML comments, a marker the layout did not take, set nothing, as in typst)
+        pre, main, rest = xd.drop_comments(pre), xd.drop_comments(main), xd.drop_comments(rest)
+        for _, lp in ipairs(lead) do lp.blocks = xd.drop_comments(lp.blocks) end
         labels = xd.heading_labels(spec, blocks)
         -- the closing and after_tail trees now: their layout headings are rows of the contents
         local cnodes = xd.tree(spec, spec.closing, meta, false, true)
@@ -696,7 +702,6 @@ return function(spec)
         local hidden = front and cmode ~= "numbered"
         if (spec.page_number and spec.page_number.from or 1) > 1 or hidden then first:insert(raw("\\thispagestyle{empty}")) end
         if cmode then first:insert(raw("\\pagenumbering{" .. TEX_FMT[front] .. "}")) end
-        out:extend(first)
         -- a running footer (page_number.text with frontmatter fields, lines at "<br>"): \xd@foot, the lines the
         -- generated template's footer stacks, each a line box of the single pitch (lib/typst/xdoc.typ footer-lines)
         local pt = spec.page_number and spec.page_number.text
@@ -722,6 +727,28 @@ return function(spec)
         end
         -- justified text: the body's spaces stretch from here (each block of the layout sets RAGGED in its group)
         if spec.justify then out:insert(raw("\\xd@justtrue\\selectfont")) end
+        -- the papers before the cover (lead, fb-595.92), each between its own blocks and closing, on its own pages,
+        -- numbered from 1 in its `numbering` (decimal by default; `none` unnumbered); the document from 1 after them
+        local LEAD_FMT = { ["lower-roman"] = "roman", ["upper-roman"] = "Roman", decimal = "arabic" }
+        for _, lp in ipairs(lead) do
+          local fmt = lp.part.numbering or "decimal"
+          out:insert(raw(fmt == "none" and "\\pagestyle{empty}" or ("\\pagenumbering{" .. LEAD_FMT[fmt] .. "}")))
+          in_lead = true
+          out:insert(raw(emit(xd.tree(spec, lp.part.blocks or {}, meta, true, true), false)))
+          local lb, lkept = xd.last_para(spec, lp.blocks)
+          local lblocks, llast = body(lb, 0, nil, spec.paragraph_gap)
+          out:extend(lblocks)
+          if lkept then
+            out:insert(raw("\\par\\begingroup\\interlinepenalty=10000\\relax"))
+            out:extend((body({ lkept }, 0, nil, spec.paragraph_gap, llast)))
+            out:insert(raw("\\par\\endgroup\\nobreak"))
+          end
+          out:insert(raw(emit(xd.tree(spec, lp.part.closing or {}, meta, false, true), false)))
+          in_lead = false
+          out:insert(raw("\\clearpage" .. (fmt == "none" and "\\pagestyle{plain}" or "")))
+        end
+        if #lead > 0 then out:insert(raw("\\pagenumbering{arabic}")) end
+        out:extend(first)
         -- a cover numbered apart is unnumbered on every page it runs to (typst: no page label before the tables)
         -- the body sections before the tables on the cover's page (body_before_tables.place: cover, fb-595.92)
         local oncover = #pre > 0 and spec.body_before_tables.place == "cover"

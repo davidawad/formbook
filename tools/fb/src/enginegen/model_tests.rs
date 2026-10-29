@@ -2951,3 +2951,47 @@ fn blocks_and_a_word_limit_on_the_body_s_page_count() {
     let pages = h.typst_pages().unwrap();
     assert!(pages.len() >= 2 && pages.last().unwrap().contains("CERTIFIED"), "{pages:?}");
 }
+
+#[test]
+fn papers_before_the_cover_are_numbered_on_their_own() {
+    // fb-595.92 (E.D. Pa. LR 7.1, E.D. Mich. LR 7.1(d)): `lead` parts before the cover, each the body up to its marker,
+    // between its own blocks and closing, numbered from 1 (or not at all); the document from 1 after them
+    let l = layout(
+        "page_number: {align: center}\nlead:\n  - {marker: \"<!-- motion -->\", numbering: none, blocks: [{text: ORDER, align: center}], closing: [{text: \"BY THE COURT:\"}]}\n  - {marker: \"<!-- memorandum -->\", blocks: [{text: MOTION, align: center}], closing: [{text: \"Signed.\"}]}\ncover:\n  - {text: MEMORANDUM, align: center}\ncontents: {title: Contents, depth: 1, col: 36}\nheading:\n  - {bold: true}\n",
+    );
+    let Some(f) = fx(
+        "lead",
+        &l,
+        "---\nx: 1\n---\n<!-- order -->\n\nIt is ordered.\n\n<!-- motion -->\n\n# Grounds\n\nThe motion.\n\n<!-- memorandum -->\n\n# Argument\n\nThe argument.\n",
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
+        return;
+    };
+    let pages = f.typst_pages().unwrap();
+    assert_eq!(pages.len(), 5, "{pages:?}");
+    let last_line = |p: &str| p.lines().rev().find(|l| !l.trim().is_empty()).unwrap_or("").trim().to_string();
+    // the order unnumbered, the motion 1, the cover 1, the contents (only the memorandum's heading) 2, the body 3
+    assert!(pages[0].contains("ORDER") && pages[0].contains("BY THE COURT:") && last_line(&pages[0]) == "BY THE COURT:");
+    assert!(pages[1].contains("MOTION") && pages[1].contains("Signed.") && last_line(&pages[1]) == "1", "{pages:?}");
+    assert!(pages[2].contains("MEMORANDUM") && last_line(&pages[2]) == "1", "{pages:?}");
+    assert!(pages[3].contains("Argument") && !pages[3].contains("Grounds"), "{pages:?}");
+    assert!(pages[4].contains("The argument.") && last_line(&pages[4]) == "3", "{pages:?}");
+    // LaTeX: the order under \pagestyle{empty}, the motion from 1 in arabic, the document from 1 again; the motion's
+    // heading without a mark
+    let tex = f.latex().unwrap();
+    let (o, m, c) = (tex.find("It is ordered.").unwrap(), tex.find("The motion.").unwrap(), tex.find("MEMORANDUM").unwrap());
+    assert!(tex[..o].contains("\\pagestyle{empty}") && tex[o..m].contains("\\pagenumbering{arabic}"), "{tex}");
+    assert!(tex[m..c].contains("\\clearpage\\pagenumbering{arabic}") || tex[m..c].matches("\\pagenumbering{arabic}").count() >= 1, "{tex}");
+    assert_eq!(tex.matches("\\xd@hmark{").count(), 1, "{tex}");
+    // Word: a section per paper (the order's without a footer, the motion's numbered from 1), the body from 1 again;
+    // the motion's heading no needle, a needle at each paper's last paragraph
+    let doc = f.docx().unwrap();
+    let o = doc.find("ordered.").unwrap();
+    let after_order = &doc[o..];
+    assert!(after_order.contains("rIdXdNone"), "{doc}");
+    let needles = f.written("needles.tsv").unwrap();
+    assert!(needles.contains("L1\tB\titisordered") && needles.contains("L2\tB\tthemotion"), "{needles}");
+    assert!(!needles.contains("\tgrounds"), "{needles}");
+    let fin = f.written("final.xml").unwrap();
+    assert!(fin.contains(r#"w:fmt="decimal" w:start="1""#), "{fin}");
+}

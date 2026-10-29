@@ -45,6 +45,20 @@ fn markers(l: &Value) -> String {
         .collect()
 }
 
+/// A list's offset from the margin (layout.yaml `list.left`, fb-595.92): the first level's label that far in, the text
+/// a list indent after it (enumitem's leftmargin of level 1; the deeper levels a list indent further each).
+fn list_left(l: &Value, list: f64) -> Result<String, String> {
+    let left = num(l, "list.left", Some(0.0))?;
+    if left == 0.0 {
+        return Ok(String::new());
+    }
+    Ok(format!(
+        "% lists {} bp in from the margin (layout.yaml list.left)\n\\setlist[1]{{leftmargin={}bp}}\n",
+        fmt(left),
+        fmt(left + list)
+    ))
+}
+
 pub fn template(l: &Value, face: &str) -> Result<String, String> {
     let (pkg, ellipsis) = latex_face(face)?;
     // three periods (newtx: 0.25 em each; latex_period) kerned to the face's ellipsis, read as one "…" (/ActualText)
@@ -182,7 +196,7 @@ $body$
         bias = fmt(super::gen::folder_latex_bias(l, face)),
         nraise = fmt(0.29 * nsize),
         nmark = fmt(0.58 * nsize),
-        markers = markers(l),
+        markers = markers(l) + &list_left(l, list)?,
         ellipsis = ellipsis,
         justify = if justify { JUSTIFY } else { "" },
         fnright = if justify { "0pt" } else { "0pt plus 1fil" },

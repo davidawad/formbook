@@ -548,8 +548,11 @@ return function(spec)
   end
 
   local nbody = 0 -- the body's headings so far (their labels: hlabels)
+  local in_lead = false -- a paper before the cover (lead): its headings are not the document's (no needle, no row)
   function needles_of(b, nxt)
-    if b.t == "Header" then
+    if in_lead and b.t == "Header" then
+      nbody = nbody + 1
+    elseif b.t == "Header" then
       hn = hn + 1
       nbody = nbody + 1
       -- a numbered heading prints its label before its text, and so may the next block
@@ -792,7 +795,8 @@ return function(spec)
     f:write("rIdXdPage\t" .. (page_xml and ftr(page_xml) or fld) .. "\n" .. "rIdXdNone\t" .. ftr("") .. "\n")
     f:close()
     f = io.open(os.getenv("FORMBOOK_FINAL"), "w")
-    f:write(sect_xml("rIdXdPage", pn.front and "decimal" or nil, (pn.from or 1) > 1))
+    -- (the body from 1 when numbered apart from the tables, or after the papers before the cover: lead)
+    f:write(sect_xml("rIdXdPage", (pn.front or spec.lead) and "decimal" or nil, (pn.from or 1) > 1))
     f:close()
   end
 
@@ -928,8 +932,12 @@ return function(spec)
         end })
         local main, rest = xd.split_tail(spec, blocks)
         -- the body sections set before the tables (body_before_tables)
-        local pre
+        local pre, lead
+        lead, main = xd.split_lead(spec, main)
         pre, main = xd.split_head(spec, main, meta)
+        -- (HTML comments, a marker the layout did not take, set nothing, as in typst)
+        pre, main, rest = xd.drop_comments(pre), xd.drop_comments(main), xd.drop_comments(rest)
+        for _, lp in ipairs(lead) do lp.blocks = xd.drop_comments(lp.blocks) end
         local bnodes = xd.tree(spec, spec.before_tables, meta, true, true)
         local wnodes = xd.tree(spec, spec.between_tables, meta, true, true)
         local late = spec.body_before_tables and spec.body_before_tables.place == "between"
@@ -941,7 +949,7 @@ return function(spec)
           or #pre > 0
         local front = spec.page_number and spec.page_number.front
         -- the document writes its own sections and footers: for the tables, or for a cover numbered apart
-        local sectioned = paged or (spec.cover and front)
+        local sectioned = paged or (spec.cover and front) or #lead > 0
         xd.check_fills(spec.front)
         xd.check_fills(spec.closing)
         xd.check_fills(spec.after_tail)
@@ -963,6 +971,31 @@ return function(spec)
           if meta.xd.words_over and meta.xd.pages > tonumber(spec.words.limit_pages) then
             error("xdoc: " .. meta.xd.words_over, 0)
           end
+        end
+        -- the papers before the cover (lead, fb-595.92), each between its own blocks and closing, a section of its own
+        -- numbered from 1 in its `numbering` (decimal by default; `none` unnumbered); a needle at each one's last
+        -- paragraph, so the needles after it (the cover's first line) are found past it
+        for li, lp in ipairs(lead) do
+          local fmt = lp.part.numbering or "decimal"
+          local bn = xd.tree(spec, lp.part.blocks or {}, meta, true, true)
+          plan(bn, s.top)
+          for _, x in ipairs(emit_list(bn, s, false)) do out:insert(raw_block(x)) end
+          in_lead = true
+          local lb, lkept = xd.last_para(spec, lp.blocks)
+          out:extend(body(lb, s, "Body Text"))
+          if lkept then
+            out:extend(body({ lkept }, s, "Body Text Keep"))
+            s.keepnext = true
+          end
+          in_lead = false
+          local cn = xd.tree(spec, lp.part.closing or {}, meta, false, true)
+          plan(cn, false)
+          for _, x in ipairs(emit_list(cn, s, false)) do out:insert(raw_block(x)) end
+          local t = plain(lkept or lb[#lb])
+          if not t:find("%S") then t = last_text(cn) or "" end
+          if t:find("%S") then needle("L" .. li, "B", t, t) end
+          out:insert(raw_block(section_end(s, fmt == "none" and "rIdXdNone" or "rIdXdPage",
+            fmt ~= "none" and WORD_FMT[fmt] or nil)))
         end
         if paged then
           -- the numbering starts at the first line of the document (page 1)

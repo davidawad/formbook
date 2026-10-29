@@ -14,6 +14,9 @@ page_number: {align: center, descent: 22.2}
 footnote: {size: 12, gap: 6, clearance: 7.8}
 # DUCivR 10-1(4): block quotations single-spaced, half an inch in on each side, a single line around them.
 quote: {left: 36, right: 36, above: 13.8, below: 13.8}
+# Lists half an inch in, the label in a half-inch box, the text an inch from the margin (the first filer's bullets
+# half an inch in; list.left, fb-595.92).
+list: {left: 36}
 # Headings bold on the body pitch, no space of their own, kept with what follows: a section centred in capitals; the
 # argument headings numbered by the template, "I." at the margin, "A." and "1." half an inch further in each, the
 # label in a half-inch box with the title's later lines hung under it.

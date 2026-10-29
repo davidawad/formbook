@@ -246,3 +246,15 @@ fn a_footer_descent_moves_the_page_number() {
     assert!(files[0].1.contains("footskip=17.96bp"), "{}", files[0].1);
     assert!(files[2].1.contains(r#"w:footer="1021""#));
 }
+
+#[test]
+fn a_list_offset_moves_every_list_style() {
+    // layout.yaml list.left (fb-595.92): LaTeX's first-level leftmargin, Word's list styles that much further in
+    let plain = super::gen::generate(&layout(LAYOUT), "Times New Roman").unwrap();
+    assert!(!plain[0].1.contains("\\setlist[1]"));
+    let l = layout(&format!("{LAYOUT}list: {{left: 36}}\n"));
+    let files = super::gen::generate(&l, "Times New Roman").unwrap();
+    assert!(files[0].1.contains("\\setlist[1]{leftmargin=72bp}"), "{}", files[0].1);
+    assert!(files[2].1.contains(r#"w:styleId="XdList1""#));
+    assert!(files[2].1.contains(r#"<w:ind w:left="1440" w:hanging="720"/>"#), "{}", files[2].1);
+}
