@@ -1,4 +1,14 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (fb-595.68.21, on the shared layout model lib/*/xengine*), so a difference fails.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.96), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
   cross_engine: gate
+  # pleading paper (LRCiv 7.1(b)(1), the local rules' Appendix C form): the numbered lines a page; the checks read the
+  # margin numbers 1..27 as page furniture, not body text
+  pleading_lines: 27
+  # DEF-COVER-002 against FILED-EXAMPLE-motion-brief.pdf (Curl, Glasson & Patrascioiu, one filer): its first page sets
+  # the counsel block in its letterhead's columns (lines indented 90 pt), the court title at 195 pt and the parties
+  # 103 pt in; LRCiv 7.1(a) puts counsel left of center from line 1 and the title on or below line 6, which every
+  # engine does. The same ten differences are listed for typst and docx in data/cover-structure-baseline.txt; the new
+  # latex engine reports them alike (one filer's layout, tier 3).
+  cover_structure: report

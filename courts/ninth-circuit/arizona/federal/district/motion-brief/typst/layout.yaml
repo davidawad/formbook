@@ -1,0 +1,89 @@
+# U.S. District Court for the District of Arizona (azd): a motion with its memorandum of points and authorities in one
+# document (LRCiv 7.2(b)), on the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D. Ariz.'s
+# local rules overlaid here, on pleading paper (fb-595.96). The shared document model sets it (lib/typst/xdoc.typ;
+# latex/ and docx/ are generated from the merged layout by `fb engines gen`). Rules: D. Ariz. Local Rules of Civil
+# Procedure (Local Rules Master File 2020), LRCiv 7.1(a), 7.1(b)(1), 7.2(b), 12.1(c) (../README.md quotes them).
+base: /lib/layouts/frcp-motion-brief.yaml
+# LRCiv 7.1(b)(1): a proportional font of no less than 13 point, footnotes included; the body double-spaced (24 pt
+# lines), no more than 28 lines a page; counsel, caption, signature and service list single-spaced (16 pt lines at 13
+# pt).
+size: 13
+pitch: {body: 24, single: 16}
+footnote: {size: 13}
+# LRCiv 7.1(b)(1): a left margin of at least 1 1/2 inches, a right one of at least 1/2 inch; letter paper. 27 numbered
+# lines of 24 pt from the one-inch top margin leave 72 pt at the foot for the page number.
+margin: {top: 72, bottom: 72, left: 108, right: 72}
+# pleading paper (the exemplar's and the local rules' Appendix C form): the numbers 1 to 27 right-aligned on 1 in, one
+# a numbered line from the top margin; a double rule at the text's left (1.3 in and 1.34 in from the page's left edge)
+# and a single one 0.1 in right of the text
+pleading: {lines: 27, rules: [93.6, 96.5, 547.2]}
+# LRCiv 7.1(b)(1): pages numbered, centered below the last numbered line; under the number a running line (case
+# number, short title, judge: the exemplar's running header, a convention no rule fixes, set in the footer as before),
+# both at 9 pt in 11 pt lines, the number's line 8 pt below the text.
+page_number: {align: center, size: 9, pitch: 11, descent: 8, text: "{page}<br>{running_header.0} | {running_header.1} | {running_header.2}"}
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE DISTRICT OF ARIZONA"
+# LRCiv 7.1(a)(1): counsel's name, address, e-mail, State Bar number, telephone and the party represented, left of
+# center from line 1, single-spaced; LRCiv 7.1(a)(2): "The title of the Court must begin on or below line six (6)":
+# the counsel block at least four numbered lines high and the court title a numbered line below it (line 6 at the
+# earliest); LRCiv 7.1(a)(3): the parties at the left (ruled at their right and foot, "v." between them); right of
+# center the case number, the paper's title in bold and the judge; then the notice paragraph (`lead_in`).
+front:
+  - box:
+      - {text: "{counsel}"}
+    min_height: 96
+  - {text: "{xd.court}", align: center, bold: true, pitch: body, above: 24}
+  - {text: "{xd.district}", align: center, bold: true, pitch: body}
+  - columns:
+      - width: 230.4
+        blocks:
+          - box:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}"}
+                between:
+                  - {text: "v."}
+            stroke: {right: 0.75, bottom: 0.75}
+            inset: {right: 10, bottom: 9.6}
+      - blocks:
+          - {text: "Case No. {case_number}", left: 7.2}
+          - {text: "{brief_title}", bold: true, left: 7.2, above: 16}
+          - {text: "{judge}", left: 7.2, above: 16}
+    gutter: 14.4
+    above: 24
+  - {text: "{lead_in}", pitch: body, indent: 36, above: 24, optional: true}
+# Headings on the numbered lines, kept with what follows: the memorandum's title centered in bold capitals; then
+# numbered by the layout (I., A., 1., a.), bold (the fifth level bold italic), each level half an inch further in, the
+# label in a half-inch box and the title hanging after it.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body, above: 0, below: 0}
+  - {bold: true, number: "I.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, left: 36, number: "A.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, left: 72, number: "1.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, italic: true, left: 108, number: "a.", label_box: 36, pitch: body, above: 0, below: 0}
+# LRCiv 12.1(c): the certification a Rule 12(b)(6) motion needs (the sample's `certification`, when it has one); FRCP
+# 11(a): "DATED:" on a numbered line, then at 2.6 in the firm, a blank single line, "By: /s/" and the signer's lines;
+# kept with the body's last paragraph (the base's keep_with_closing).
+closing:
+  - when: certification
+    blocks:
+      - {text: "{certification.heading}", align: center, bold: true, pitch: body, keep: true}
+      - {text: "{certification.text}", pitch: body, indent: 36}
+  - group:
+      - {text: "DATED: {date}", pitch: body}
+      - {text: "{signature.firm}", left: 187.2}
+      - {text: "By: /s/ {signature.signer}", left: 187.2, above: 16}
+      - {text: "{signature.lines}", left: 187.2}
+    above: 0
+# FRCP 5(b), (d): the certificate of service a numbered line below the signature (the sample's `certificate`): its
+# heading, the paragraph double-spaced, the service list single-spaced, the server's "/s/" at 2.6 in on a numbered
+# line.
+after_tail:
+  - when: certificate
+    blocks:
+      - {text: "{certificate.heading}", align: center, bold: true, pitch: body, above: 24, keep: true}
+      - {text: "{certificate.text}", pitch: body, indent: 36}
+      - {text: "{certificate.service}"}
+      - {text: "/s/ {certificate.signer}", left: 187.2, pitch: body}
