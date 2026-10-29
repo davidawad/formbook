@@ -848,13 +848,16 @@ return function(spec)
     if xd.is_running(pn.text) then
       local ps = {}
       for _, pieces in ipairs(xd.footer_lines(pn.text, xd.meta())) do
-        local xml = {}
+        local xml, tabbed = {}, false
         for _, p in ipairs(pieces) do
-          if p.lit then xml[#xml + 1] = xe.runs(p.lit, fo)
+          -- (a <tab>, fb-595.96: a tab to a right tab stop at the text's width, the line at the left)
+          if p.tab then xml[#xml + 1] = "<w:r><w:tab/></w:r>"; tabbed = true
+          elseif p.lit then xml[#xml + 1] = xe.runs(p.lit, fo)
           elseif p.field then xml[#xml + 1] = xe.inl(bind_double_signs(xd.inlines(p.field):walk({ Str = breaks })), fo)
           else xml[#xml + 1] = page_text("{" .. p.key .. "}", pages, fo) end
         end
-        ps[#ps + 1] = ftr(table.concat(xml))
+        ps[#ps + 1] = tabbed and xe.para({ '<w:tabs><w:tab w:val="right" w:pos="' .. TEXTW .. '"/></w:tabs>',
+          xe.spacing(0, 0, single), xe.jc("left") }, table.concat(xml)) or ftr(table.concat(xml))
       end
       page_xml = nil
       fld = table.concat(ps)

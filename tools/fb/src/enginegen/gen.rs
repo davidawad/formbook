@@ -455,7 +455,7 @@ pub fn main(args: &[String]) -> Res<std::process::ExitCode> {
 /// besides `{page}` and `{pages}`, or holds a "<br>"): its lines set by the shared model from the sample
 /// (lib/typst/xdoc.typ footer-lines, lib/pandoc/xdoc.lua footer_lines), not by the generated template.
 pub fn is_running(text: &str) -> bool {
-    if text.contains("<br>") {
+    if text.contains("<br>") || text.contains("<tab>") {
         return true;
     }
     let mut rest = text;

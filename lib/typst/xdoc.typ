@@ -92,9 +92,10 @@
 /// A running footer (layout.yaml `page_number.text` that names a frontmatter field or holds a "<br>": D. Alaska
 /// L.Civ.R. 7.5(a)(1)(C), D. Or. LR 10-1(e)(1)): its lines, split at "<br>", each a list of pieces: `(lit: text)` as
 /// written, `(key: "page")` or `(key: "pages")`, `(field: value)` a frontmatter value as markdown inlines (a path,
-/// `{a.b|text}` as in a text block; a missing one stops the render). lib/pandoc/xdoc.lua footer_lines alike.
+/// `{a.b|text}` as in a text block; a missing one stops the render), `(tab: true)` a `<tab>` (fb-595.96, E.D. Cal.
+/// L.R. 130(d): the text before it at the left margin, after it at the right). lib/pandoc/xdoc.lua footer_lines alike.
 #let FOOT-FIELD = regex("\\{([^{}]+)\\}")
-#let is-running(t) = t.contains("<br>") or t.matches(FOOT-FIELD).any(m => m.captures.at(0) not in ("page", "pages"))
+#let is-running(t) = t.contains("<br>") or t.contains("<tab>") or t.matches(FOOT-FIELD).any(m => m.captures.at(0) not in ("page", "pages"))
 #let footer-lines(t, meta) = t.split("<br>").map(line => {
   let out = ()
   let at = 0
@@ -109,7 +110,10 @@
     at = m.end
   }
   if at < line.len() { out.push((lit: line.slice(at))) }
-  out
+  // a `<tab>` in a literal piece: a tab piece between its parts
+  out.map(p => if "lit" in p and p.lit.contains("<tab>") {
+    p.lit.split("<tab>").map(s => (lit: s)).intersperse((tab: true)).filter(q => q.at("lit", default: none) != "")
+  } else { (p,) }).flatten()
 })
 
 /// Whether a frontmatter value is set: present and not false, "" or an empty list or map.
@@ -1127,7 +1131,7 @@
         if "text" in pn and is-running(pn.text) {
           // a running footer: its lines stacked, each a single line box (the first where the number alone is)
           stack(..footer-lines(pn.text, meta).map(pieces => align(al, text(..foot-text(spec, pn),
-            pieces.map(p => if "lit" in p { p.lit } else if "field" in p { md(p.field) }
+            pieces.map(p => if "lit" in p { p.lit } else if "field" in p { md(p.field) } else if "tab" in p { h(1fr) }
               else if p.key == "page" { label } else { last }).join()))))
         } else {
           let shown = if "text" in pn { pn.text.replace("{pages}", last).replace("{page}", label) } else { label }

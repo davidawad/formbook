@@ -61,10 +61,11 @@ end
 
 -- A running footer (layout.yaml `page_number.text` that names a frontmatter field or holds a "<br>"; lib/typst/xdoc.typ
 -- footer-lines): its lines, split at "<br>", each a list of pieces: `{lit = text}` as written, `{key = "page"}` or
--- `{key = "pages"}`, `{field = value}` a frontmatter value (markdown inlines; a missing one stops the render).
+-- `{key = "pages"}`, `{field = value}` a frontmatter value (markdown inlines; a missing one stops the render), `{tab =
+-- true}` a `<tab>` (the text before it at the left margin, after it at the right).
 function M.is_running(text)
   if not text then return false end
-  if text:find("<br>", 1, true) then return true end
+  if text:find("<br>", 1, true) or text:find("<tab>", 1, true) then return true end
   for p in text:gmatch("{([^{}]+)}") do
     if p ~= "page" and p ~= "pages" then return true end
   end
@@ -94,7 +95,25 @@ function M.footer_lines(text, meta)
       at = e
     end
     if at <= #line then pieces[#pieces + 1] = { lit = line:sub(at) } end
-    out[#out + 1] = pieces
+    -- (`<tab>` in a line, fb-595.96: what comes before it at the left margin, what comes after it at the right: `{tab =
+    -- true}`, E.D. Cal. L.R. 130(d): the page number and the paper's description on one line)
+    local split = {}
+    for _, pc in ipairs(pieces) do
+      if pc.lit and pc.lit:find("<tab>", 1, true) then
+        local rest = pc.lit
+        while true do
+          local a, b = rest:find("<tab>", 1, true)
+          if not a then break end
+          if a > 1 then split[#split + 1] = { lit = rest:sub(1, a - 1) } end
+          split[#split + 1] = { tab = true }
+          rest = rest:sub(b + 1)
+        end
+        if rest ~= "" then split[#split + 1] = { lit = rest } end
+      else
+        split[#split + 1] = pc
+      end
+    end
+    out[#out + 1] = split
   end
   return out
 end

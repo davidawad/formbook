@@ -730,6 +730,8 @@ return function(spec)
                   if w ~= "" then il:insert(pandoc.Str(w)) end
                 end
               elseif x.field then il:extend(xd.inlines(x.field))
+              -- (a <tab>: the text after it at the right margin, fb-595.96)
+              elseif x.tab then il:insert(pandoc.RawInline("latex", "\\hfill "))
               else il:insert(pandoc.RawInline("latex", x.key == "page" and "\\thepage{}" or "\\pageref*{xd@lastpage}")) end
             end
             if spec.page_number.foot then

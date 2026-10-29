@@ -3539,3 +3539,45 @@ fn a_keyed_authority_s_separator_between_name_and_citation() {
         "*Doe v. Roe* 1 U.S. 1\n*Doe v. Roe*, 1 U.S. 1\nDoe v. Roe, 1 U.S. 1"
     );
 }
+
+#[test]
+fn a_footer_line_with_its_parts_at_both_margins_in_every_engine() {
+    // (fb-595.96) E.D. Cal. L.R. 130(d): the paper's description and the page number on the same line, a `<tab>` between
+    let l = layout("page_number: {align: center, size: 10, pitch: 12, foot: 24, text: \"{footer_title}<tab>{page}\"}\n");
+    let Some(f) = fx(
+        "footer-tab",
+        &l,
+        "---\nfooter_title: \"DEF.'S MOTION TO DISMISS\"\n---\nBody.\n",
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
+        return;
+    };
+    f.typst_pages().unwrap();
+    let m = crate::measure::measure(&f.dir.join("out.pdf"), &[]).unwrap();
+    let line = m.pages[0]
+        .lines
+        .iter()
+        .find(|ln| ln.text.starts_with("DEF."))
+        .unwrap();
+    // one line from the left margin (72) to the right one (540): the description, then the number
+    assert!(
+        line.text.ends_with(" 1")
+            && (line.left - 72.0).abs() < 0.5
+            && (line.right - 540.0).abs() < 0.5,
+        "{line:?}"
+    );
+    assert!(
+        f.latex().unwrap().contains("\\hfill 1")
+            || f.latex().unwrap().contains("\\hfill \\thepage")
+    );
+    f.docx().unwrap();
+    let ftr = f.written("footers.tsv").unwrap();
+    assert!(
+        ftr.contains(r#"<w:tabs><w:tab w:val="right" w:pos="9360"/></w:tabs>"#)
+            && ftr.contains("<w:r><w:tab/></w:r>"),
+        "{ftr}"
+    );
+    // a line without one: as before
+    assert_eq!(super::gen::is_running("Page {page}"), false);
+    assert!(super::gen::is_running("{page}<tab>x"));
+}
