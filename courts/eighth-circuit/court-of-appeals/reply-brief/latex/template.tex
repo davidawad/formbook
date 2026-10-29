@@ -20,11 +20,9 @@
 \usepackage{newtxtext,newtxmath}
 % FRAP 32(a)(4): letter, 1 in margins; the page number in the bottom margin, as typst sets it.
 \usepackage[letterpaper,margin=1in,headheight=0pt,headsep=0pt,footskip=36bp]{geometry}
-% The text 0.05 bp wider than typst's: newtx sets a full line up to about 0.04 bp wider than Times New Roman (measured:
-% p9 line 11 of the reply INPUT, which typst fills to within 0.02 bp, 0.035 bp wider here), so such a line still fits.
-\AtBeginDocument{\advance\hsize 0.05bp \textwidth\hsize \linewidth\hsize \columnwidth\hsize}
 \usepackage{enumitem}
 \usepackage{xengine} % lib/latex/xengine.sty, inlined by fb render
+\usepackage{xetimes} % lib/latex/xetimes.sty: newtx at Times New Roman's advances; a space in em is a multiple of \xe@em
 % Links in the brief are citations (toa:) or none; the fallbacks keep pandoc's output valid.
 \providecommand{\href}[2]{#2}
 \providecommand{\hypertarget}[2]{#2}
@@ -59,11 +57,11 @@
 \renewcommand\footnoterule{\vskip 0pt plus 1fill\kern-0.25bp\hrule width 0.3\textwidth height 0.5bp\kern-0.25bp}
 \xe@footnotemarks{14}
 \renewcommand\@makefntext[1]{\rightskip=0pt plus 1fil\relax\parfillskip=0pt plus 1fil\relax\parskip=7bp\relax
-  \vskip 0pt\noindent\xe@mark{\@thefnmark}\hskip 0.25em #1}
+  \vskip 0pt\noindent\xe@mark{\@thefnmark}\hskip 0.25\xe@em #1}
 
 % An ellipsis: one 1 em glyph in typst and Word; here three periods spread over 1 em, U+2026 in the PDF text.
 \newcommand\caellipsis{\pdfliteral page{/Span<</ActualText<FEFF2026>>>BDC}%
-  \makebox[1em]{\hfil.\hfil.\hfil.\hfil}\pdfliteral page{EMC}}
+  \makebox[\xe@em]{\hfil.\hfil.\hfil.\hfil}\pdfliteral page{EMC}}
 
 % [short-rule]: 2 in, 0.7 bp, centered, costing its own height.
 \newcommand\cashortrule{\par\nointerlineskip\hbox to\linewidth{\hss\vrule width 2in height 0.7bp\hss}\nointerlineskip}

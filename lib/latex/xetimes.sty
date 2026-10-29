@@ -1,0 +1,297 @@
+% lib/latex/xetimes.sty: newtx's Times at Times New Roman's advance widths, for a template on the cross-engine layout
+% model (docs/EVAL-LOOP.md, "Cross-engine gate"; lib/latex/xengine.sty) that sets Times with newtxtext (T1).
+% typst and Word set Times New Roman 2.82 (the pinned install, data/render-pin.json), whose advances are whole
+% 2048ths of an em; TeXGyreTermesX's are whole 1000ths, so nearly every glyph is a few ten-thousandths of an em wider
+% or narrower (a: 909/2048 = 443.85/1000 em, newtx 444), and a line of them moves by up to about 0.07 pt at 14 pt.
+% That is enough to end a line a word earlier or later than typst does, and to move the end of an italic run across
+% the twip LibreOffice floors it to (xengine.sty, \xeportions; fb-595.54.84).
+% Here every character of a newtx text face (ntxtlf, T1; upright or italic, medium or bold) gets the difference as a
+% kern after it (pdfTeX \pdfappendkern, \knaccode; \knbccode for a difference past the after-kern's range), so each
+% glyph advances as far as Times New Roman's, the line breaks and every position on the line with it. The PDF keeps
+% newtx's glyphs and text. pdfTeX gives such a kern in thousandths of the font's quad (\fontdimen6), read as each
+% character is set, so the quad of each adjusted font is set to a hundredth of an em: a step of 1/100000 em, at most
+% 0.01 em a kern. The design em stays in \xe@em (a dimen, set as each font is selected): a template writes a
+% space in em as a multiple of \xe@em, never `em`. Characters whose newtx and Times New Roman advances differ by more
+% than 0.02 em (d, l and t with caron, Eng, the IJ ligature, the italic inverted exclamation mark) keep newtx's
+% advance.
+% The table is Times New Roman's advance of each T1 slot, in 2048ths of an em, for the regular, italic, bold and
+% bold italic faces; tools/gen-xetimes.sh writes it from the pinned fonts (the slot's character from newtx's own
+% ToUnicode map). fb render inlines this file in place of \usepackage{xetimes}.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{xetimes}[2026/10/29 newtx at Times New Roman advances]
+
+\pdfappendkern=1
+\pdfprependkern=1
+\newdimen\xe@em
+\newcount\xe@k
+\def\xe@ntx{T1/ntxtlf}
+% \xe@tnr@col: the table's column for the face selected (2 regular, 3 italic, 4 bold, 5 bold italic), empty if none.
+\def\xe@tnr@col{%
+  \edef\xe@tmp{\f@series/\f@shape}%
+  \def\xe@col@{}%
+  \def\xe@a{m/n}\ifx\xe@tmp\xe@a\def\xe@col@{2}\fi
+  \def\xe@a{m/it}\ifx\xe@tmp\xe@a\def\xe@col@{3}\fi
+  \def\xe@a{b/n}\ifx\xe@tmp\xe@a\def\xe@col@{4}\fi
+  \def\xe@a{bx/n}\ifx\xe@tmp\xe@a\def\xe@col@{4}\fi
+  \def\xe@a{b/it}\ifx\xe@tmp\xe@a\def\xe@col@{5}\fi
+  \def\xe@a{bx/it}\ifx\xe@tmp\xe@a\def\xe@col@{5}\fi}
+% \xe@tnr@set{<slot>}{<advance>}: the kerns that take the slot's newtx advance to <advance>/2048 em.
+\def\xe@tnr@set#1#2{%
+  \xe@k=\fpeval{round((#2/2048-\the\fontcharwd\font#1/\the\fontdimen6\font)*100000)}\relax
+  \ifnum\xe@k>2000 \else\ifnum\xe@k<-2000 \else
+    \ifnum\xe@k>1000 \knbccode\font#1=\numexpr\xe@k-1000\relax\xe@k=1000 \fi
+    \ifnum\xe@k<-1000 \knbccode\font#1=\numexpr\xe@k+1000\relax\xe@k=-1000 \fi
+    \knaccode\font#1=\xe@k
+  \fi\fi}
+\def\xe@tnr@select{%
+  \ifcsname xe@em@\fontname\font\endcsname
+    \xe@em=\csname xe@em@\fontname\font\endcsname\relax
+  \else
+    \xe@em=\fontdimen6\font
+    \expandafter\xdef\csname xe@em@\fontname\font\endcsname{\the\xe@em}%
+    \edef\xe@tmp{\f@encoding/\f@family}%
+    \ifx\xe@tmp\xe@ntx\xe@tnr@col\ifx\xe@col@\@empty\else
+      \def\xe@do##1##2##3##4##5{\xe@tnr@set{##1}{\ifcase\xe@col@\or\or##2\or##3\or##4\or##5\fi}}%
+      \xe@tnr@table
+      \fontdimen6\font=0.01\fontdimen6\font
+    \fi\fi
+  \fi}
+\AddToHook{selectfont}[xetimes]{\xe@tnr@select}
+% xengine.sty's leader, its 0.75 em in the design em.
+\renewcommand\xe@leader{\nobreak\hskip0.75\xe@em\leaders\hbox{.}\hskip 0pt plus 1fill}
+
+% BEGIN TABLE (tools/gen-xetimes.sh): \xe@do{<T1 slot>}{<regular>}{<italic>}{<bold>}{<bold italic>}
+\def\xe@tnr@table{%
+\xe@do{13}{682}{682}{682}{682}%
+\xe@do{14}{682}{682}{682}{682}%
+\xe@do{15}{682}{682}{682}{682}%
+\xe@do{16}{909}{1139}{1024}{1024}%
+\xe@do{17}{909}{1139}{1024}{1024}%
+\xe@do{18}{909}{1139}{1024}{1024}%
+\xe@do{19}{1024}{1024}{1024}{1024}%
+\xe@do{20}{1024}{1024}{1024}{1024}%
+\xe@do{21}{1024}{1024}{1024}{1024}%
+\xe@do{22}{2048}{1821}{2048}{2048}%
+\xe@do{25}{569}{569}{569}{569}%
+\xe@do{33}{682}{682}{682}{797}%
+\xe@do{34}{836}{860}{1137}{1137}%
+\xe@do{35}{1024}{1024}{1024}{1024}%
+\xe@do{36}{1024}{1024}{1024}{1024}%
+\xe@do{37}{1706}{1706}{2048}{1706}%
+\xe@do{38}{1593}{1593}{1706}{1593}%
+\xe@do{39}{682}{682}{682}{682}%
+\xe@do{40}{682}{682}{682}{682}%
+\xe@do{41}{682}{682}{682}{682}%
+\xe@do{42}{1024}{1024}{1024}{1024}%
+\xe@do{43}{1155}{1382}{1167}{1167}%
+\xe@do{44}{512}{512}{512}{512}%
+\xe@do{45}{682}{682}{682}{682}%
+\xe@do{46}{512}{512}{512}{512}%
+\xe@do{47}{569}{569}{569}{569}%
+\xe@do{48}{1024}{1024}{1024}{1024}%
+\xe@do{49}{1024}{1024}{1024}{1024}%
+\xe@do{50}{1024}{1024}{1024}{1024}%
+\xe@do{51}{1024}{1024}{1024}{1024}%
+\xe@do{52}{1024}{1024}{1024}{1024}%
+\xe@do{53}{1024}{1024}{1024}{1024}%
+\xe@do{54}{1024}{1024}{1024}{1024}%
+\xe@do{55}{1024}{1024}{1024}{1024}%
+\xe@do{56}{1024}{1024}{1024}{1024}%
+\xe@do{57}{1024}{1024}{1024}{1024}%
+\xe@do{59}{569}{682}{682}{682}%
+\xe@do{60}{1155}{1382}{1167}{1167}%
+\xe@do{61}{1155}{1382}{1167}{1167}%
+\xe@do{62}{1155}{1382}{1167}{1167}%
+\xe@do{63}{909}{1024}{1024}{1024}%
+\xe@do{64}{1886}{1884}{1905}{1704}%
+\xe@do{65}{1479}{1251}{1479}{1366}%
+\xe@do{66}{1366}{1251}{1366}{1366}%
+\xe@do{67}{1366}{1366}{1479}{1366}%
+\xe@do{68}{1479}{1479}{1479}{1479}%
+\xe@do{69}{1251}{1251}{1366}{1366}%
+\xe@do{70}{1139}{1251}{1251}{1366}%
+\xe@do{71}{1479}{1479}{1593}{1479}%
+\xe@do{72}{1479}{1479}{1593}{1593}%
+\xe@do{73}{682}{682}{797}{797}%
+\xe@do{74}{797}{909}{1024}{1024}%
+\xe@do{75}{1479}{1366}{1593}{1366}%
+\xe@do{76}{1251}{1139}{1366}{1251}%
+\xe@do{77}{1821}{1706}{1933}{1821}%
+\xe@do{78}{1479}{1366}{1479}{1479}%
+\xe@do{79}{1479}{1479}{1593}{1479}%
+\xe@do{80}{1139}{1251}{1251}{1251}%
+\xe@do{81}{1479}{1479}{1593}{1479}%
+\xe@do{82}{1366}{1251}{1479}{1366}%
+\xe@do{83}{1139}{1024}{1139}{1139}%
+\xe@do{84}{1251}{1139}{1366}{1251}%
+\xe@do{85}{1479}{1479}{1479}{1479}%
+\xe@do{86}{1479}{1251}{1479}{1366}%
+\xe@do{87}{1933}{1706}{2048}{1821}%
+\xe@do{88}{1479}{1251}{1479}{1366}%
+\xe@do{89}{1479}{1139}{1479}{1251}%
+\xe@do{90}{1251}{1139}{1366}{1251}%
+\xe@do{91}{682}{797}{682}{682}%
+\xe@do{92}{569}{569}{569}{569}%
+\xe@do{93}{682}{797}{682}{682}%
+\xe@do{94}{961}{864}{1190}{1167}%
+\xe@do{95}{1024}{1024}{1024}{1024}%
+\xe@do{96}{682}{682}{682}{682}%
+\xe@do{97}{909}{1024}{1024}{1024}%
+\xe@do{98}{1024}{1024}{1139}{1024}%
+\xe@do{99}{909}{909}{909}{909}%
+\xe@do{100}{1024}{1024}{1139}{1024}%
+\xe@do{101}{909}{909}{909}{909}%
+\xe@do{102}{682}{569}{682}{682}%
+\xe@do{103}{1024}{1024}{1024}{1024}%
+\xe@do{104}{1024}{1024}{1139}{1139}%
+\xe@do{105}{569}{569}{569}{569}%
+\xe@do{106}{569}{569}{682}{569}%
+\xe@do{107}{1024}{909}{1139}{1024}%
+\xe@do{108}{569}{569}{569}{569}%
+\xe@do{109}{1593}{1479}{1706}{1593}%
+\xe@do{110}{1024}{1024}{1139}{1139}%
+\xe@do{111}{1024}{1024}{1024}{1024}%
+\xe@do{112}{1024}{1024}{1139}{1024}%
+\xe@do{113}{1024}{1024}{1139}{1024}%
+\xe@do{114}{682}{797}{909}{797}%
+\xe@do{115}{797}{797}{797}{797}%
+\xe@do{116}{569}{569}{682}{569}%
+\xe@do{117}{1024}{1024}{1139}{1139}%
+\xe@do{118}{1024}{909}{1024}{909}%
+\xe@do{119}{1479}{1366}{1479}{1366}%
+\xe@do{120}{1024}{909}{1024}{1024}%
+\xe@do{121}{1024}{909}{1024}{909}%
+\xe@do{122}{909}{797}{909}{797}%
+\xe@do{123}{983}{819}{807}{713}%
+\xe@do{124}{410}{563}{451}{451}%
+\xe@do{125}{983}{819}{807}{713}%
+\xe@do{126}{1108}{1108}{1065}{1167}%
+\xe@do{128}{1479}{1251}{1479}{1366}%
+\xe@do{129}{1479}{1251}{1479}{1366}%
+\xe@do{130}{1366}{1366}{1479}{1366}%
+\xe@do{131}{1366}{1366}{1479}{1366}%
+\xe@do{132}{1479}{1479}{1479}{1479}%
+\xe@do{133}{1251}{1251}{1366}{1366}%
+\xe@do{134}{1251}{1251}{1366}{1366}%
+\xe@do{135}{1479}{1479}{1593}{1479}%
+\xe@do{136}{1251}{1139}{1366}{1251}%
+\xe@do{137}{1251}{1139}{1366}{1251}%
+\xe@do{138}{1251}{1139}{1366}{1251}%
+\xe@do{139}{1479}{1366}{1479}{1479}%
+\xe@do{140}{1479}{1366}{1479}{1479}%
+\xe@do{141}{1437}{1426}{1575}{1605}%
+\xe@do{142}{1479}{1479}{1593}{1479}%
+\xe@do{143}{1366}{1251}{1479}{1366}%
+\xe@do{144}{1366}{1251}{1479}{1366}%
+\xe@do{145}{1139}{1024}{1139}{1139}%
+\xe@do{146}{1139}{1024}{1139}{1139}%
+\xe@do{147}{1139}{1024}{1139}{1139}%
+\xe@do{148}{1251}{1139}{1366}{1251}%
+\xe@do{149}{1251}{1139}{1366}{1251}%
+\xe@do{150}{1479}{1479}{1479}{1479}%
+\xe@do{151}{1479}{1479}{1479}{1479}%
+\xe@do{152}{1479}{1139}{1479}{1251}%
+\xe@do{153}{1251}{1139}{1366}{1251}%
+\xe@do{154}{1251}{1139}{1366}{1251}%
+\xe@do{155}{1251}{1139}{1366}{1251}%
+\xe@do{156}{1451}{1536}{1685}{1685}%
+\xe@do{157}{682}{682}{797}{797}%
+\xe@do{158}{1024}{1024}{1139}{1024}%
+\xe@do{159}{1024}{1024}{1024}{1024}%
+\xe@do{160}{909}{1024}{1024}{1024}%
+\xe@do{161}{909}{1024}{1024}{1024}%
+\xe@do{162}{909}{909}{909}{909}%
+\xe@do{163}{909}{909}{909}{909}%
+\xe@do{164}{1324}{1246}{1502}{1533}%
+\xe@do{165}{909}{909}{909}{909}%
+\xe@do{166}{909}{909}{909}{909}%
+\xe@do{167}{1024}{1024}{1024}{1024}%
+\xe@do{168}{569}{569}{569}{569}%
+\xe@do{169}{832}{745}{960}{1067}%
+\xe@do{170}{569}{569}{569}{569}%
+\xe@do{171}{1024}{1024}{1139}{1139}%
+\xe@do{172}{1024}{1024}{1139}{1139}%
+\xe@do{173}{1013}{987}{1139}{1107}%
+\xe@do{174}{1024}{1024}{1024}{1024}%
+\xe@do{175}{682}{797}{909}{797}%
+\xe@do{176}{682}{797}{909}{797}%
+\xe@do{177}{797}{797}{797}{797}%
+\xe@do{178}{797}{797}{797}{797}%
+\xe@do{179}{797}{797}{797}{797}%
+\xe@do{180}{875}{745}{1067}{1088}%
+\xe@do{181}{569}{569}{682}{569}%
+\xe@do{182}{1024}{1024}{1139}{1139}%
+\xe@do{183}{1024}{1024}{1139}{1139}%
+\xe@do{184}{1024}{909}{1024}{909}%
+\xe@do{185}{909}{797}{909}{797}%
+\xe@do{186}{909}{797}{909}{797}%
+\xe@do{187}{909}{797}{909}{797}%
+\xe@do{188}{1131}{1025}{1131}{1131}%
+\xe@do{189}{682}{797}{682}{797}%
+\xe@do{190}{909}{1024}{1024}{1024}%
+\xe@do{191}{1024}{1024}{1024}{1024}%
+\xe@do{192}{1479}{1251}{1479}{1366}%
+\xe@do{193}{1479}{1251}{1479}{1366}%
+\xe@do{194}{1479}{1251}{1479}{1366}%
+\xe@do{195}{1479}{1251}{1479}{1366}%
+\xe@do{196}{1479}{1251}{1479}{1366}%
+\xe@do{197}{1479}{1251}{1479}{1366}%
+\xe@do{198}{1821}{1821}{2048}{1933}%
+\xe@do{199}{1366}{1366}{1479}{1366}%
+\xe@do{200}{1251}{1251}{1366}{1366}%
+\xe@do{201}{1251}{1251}{1366}{1366}%
+\xe@do{202}{1251}{1251}{1366}{1366}%
+\xe@do{203}{1251}{1251}{1366}{1366}%
+\xe@do{204}{682}{682}{797}{797}%
+\xe@do{205}{682}{682}{797}{797}%
+\xe@do{206}{682}{682}{797}{797}%
+\xe@do{207}{682}{682}{797}{797}%
+\xe@do{208}{1479}{1479}{1479}{1479}%
+\xe@do{209}{1479}{1366}{1479}{1479}%
+\xe@do{210}{1479}{1479}{1593}{1479}%
+\xe@do{211}{1479}{1479}{1593}{1479}%
+\xe@do{212}{1479}{1479}{1593}{1479}%
+\xe@do{213}{1479}{1479}{1593}{1479}%
+\xe@do{214}{1479}{1479}{1593}{1479}%
+\xe@do{215}{1821}{1933}{2048}{1933}%
+\xe@do{216}{1479}{1479}{1593}{1479}%
+\xe@do{217}{1479}{1479}{1479}{1479}%
+\xe@do{218}{1479}{1479}{1479}{1479}%
+\xe@do{219}{1479}{1479}{1479}{1479}%
+\xe@do{220}{1479}{1479}{1479}{1479}%
+\xe@do{221}{1479}{1139}{1479}{1251}%
+\xe@do{222}{1139}{1251}{1251}{1251}%
+\xe@do{224}{909}{1024}{1024}{1024}%
+\xe@do{225}{909}{1024}{1024}{1024}%
+\xe@do{226}{909}{1024}{1024}{1024}%
+\xe@do{227}{909}{1024}{1024}{1024}%
+\xe@do{228}{909}{1024}{1024}{1024}%
+\xe@do{229}{909}{1024}{1024}{1024}%
+\xe@do{230}{1366}{1366}{1479}{1479}%
+\xe@do{231}{909}{909}{909}{909}%
+\xe@do{232}{909}{909}{909}{909}%
+\xe@do{233}{909}{909}{909}{909}%
+\xe@do{234}{909}{909}{909}{909}%
+\xe@do{235}{909}{909}{909}{909}%
+\xe@do{236}{569}{569}{569}{569}%
+\xe@do{237}{569}{569}{569}{569}%
+\xe@do{238}{569}{569}{569}{569}%
+\xe@do{239}{569}{569}{569}{569}%
+\xe@do{240}{1024}{1024}{1024}{1024}%
+\xe@do{241}{1024}{1024}{1139}{1139}%
+\xe@do{242}{1024}{1024}{1024}{1024}%
+\xe@do{243}{1024}{1024}{1024}{1024}%
+\xe@do{244}{1024}{1024}{1024}{1024}%
+\xe@do{245}{1024}{1024}{1024}{1024}%
+\xe@do{246}{1024}{1024}{1024}{1024}%
+\xe@do{247}{1479}{1366}{1479}{1479}%
+\xe@do{248}{1024}{1024}{1024}{1024}%
+\xe@do{249}{1024}{1024}{1139}{1139}%
+\xe@do{250}{1024}{1024}{1139}{1139}%
+\xe@do{251}{1024}{1024}{1139}{1139}%
+\xe@do{252}{1024}{1024}{1139}{1139}%
+\xe@do{253}{1024}{909}{1024}{909}%
+\xe@do{254}{1024}{1024}{1139}{1024}%
+\xe@do{255}{1024}{1024}{1139}{1024}%
+}
+% END TABLE
