@@ -403,6 +403,11 @@ return function(spec)
       .. "\\hbox to\\hsize{\\kern\\dimexpr" .. bp(i.l) .. "-" .. bp(s.l) .. "\\relax\\vbox{\\hsize=\\dimexpr\\dimen0-"
       .. bp(i.l) .. "-" .. bp(i.r) .. "\\relax\\linewidth=\\hsize\\vskip0pt " .. emit(n.items, true) .. "}\\hss}" .. f[2]
       .. "\\kern\\dimexpr" .. bp(i.b) .. "-" .. bp(s.b) .. "\\relax}"
+    -- (min_height: the blocks' natural box, made that high, less the rules, when it is lower; their space below it)
+    if not n.height and n.min_height then
+      local m = "\\dimexpr" .. bp(n.min_height) .. "-" .. bp(s.t) .. "-" .. bp(s.b) .. "\\relax"
+      inner = "\\setbox4=" .. inner .. "\\ifdim\\ht4<" .. m .. "\\setbox4=\\vbox to" .. m .. "{\\unvbox4\\vfil}\\fi\\box4 "
+    end
     return open(n) .. "\\begingroup\\dimen0=" .. W .. "\\relax\\hbox to\\dimen0{\\vrule width" .. bp(s.l)
       .. "\\vbox{\\hsize=\\dimexpr\\dimen0-" .. bp(s.l) .. "-" .. bp(s.r) .. "\\relax\\hrule height" .. bp(s.t)
       .. "\\relax" .. inner .. "\\hrule height" .. bp(s.b) .. "\\relax}\\vrule width" .. bp(s.r) .. "}\\endgroup"

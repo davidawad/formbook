@@ -11,7 +11,8 @@
 --   { t = "cols", cols = { { width = <pt or nil>, valign = <"center" or nil>, items = <nodes> }, .. }, gutter = <pt> }
 --   { t = "group", items = <nodes>, keep = <bool> }
 --   { t = "break" }                                     a page break (what follows has no space above)
---   { t = "box", items = <nodes>, width = <pt or nil>, height = <pt or nil>, stroke = {t, r, b, l}, inset = {t, r, b, l},
+--   { t = "box", items = <nodes>, width = <pt or nil>, height = <pt or nil>, min_height = <pt or nil>,
+--     stroke = {t, r, b, l}, inset = {t, r, b, l},
 --     valign = <"top", "center" or "bottom"> }    a ruled box (lib/typst/xdoc.typ: a block with stroke and inset)
 --   { t = "fill", w = <weight> }                        space that fills the page, shared by weight (a page's own
 --                                                       blocks only; the blocks next to it lose their space toward it)
@@ -451,7 +452,7 @@ function M.tree(spec, list, ctx, first, page)
         return { t = num(v), r = num(v), b = num(v), l = num(v) }
       end
       out[#out + 1] = { t = "box", items = M.tree(spec, b.box, ctx, true), width = tonumber(b.width),
-        height = tonumber(b.height), stroke = sides(b.stroke), inset = sides(b.inset), valign = b.valign or "top",
+        height = tonumber(b.height), min_height = tonumber(b.min_height), stroke = sides(b.stroke), inset = sides(b.inset), valign = b.valign or "top",
         lead = lead, above = above, below = below }
       first = false
     elseif b.fill ~= nil then

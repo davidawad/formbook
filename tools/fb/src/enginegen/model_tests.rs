@@ -3399,3 +3399,36 @@ fn a_footer_of_its_own_size_and_pitch_in_every_engine() {
         .1;
     assert!(!r[r.find("<footer id=").unwrap()..].contains("<w:sz "));
 }
+
+#[test]
+fn a_box_at_least_its_min_height_in_every_engine() {
+    // (fb-595.96) a box `min_height` high, taller when its blocks are: the text after it starts there (LRCiv 7.1(a)(2):
+    // the court title on or below line 6)
+    let l = layout("front:\n  - box:\n      - {text: \"{counsel}\"}\n    min_height: 120\n  - {text: \"COURT\"}\n");
+    let Some(f) = fx(
+        "box-min",
+        &l,
+        "---\ncounsel: [\"Counsel\"]\n---\nBody.\n",
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
+        return;
+    };
+    f.typst_pages().unwrap();
+    let m = crate::measure::measure(&f.dir.join("out.pdf"), &[]).unwrap();
+    let court = m.pages[0].lines.iter().find(|ln| ln.text == "COURT").unwrap();
+    // the box from the top margin (72) to 192, the next line's baseline at 0.8 x 13.8 below that
+    assert!((court.baseline - (192.0 + 11.04)).abs() < 0.05, "{court:?}");
+    let tex = f.latex().unwrap();
+    assert!(tex.contains("\\ifdim\\ht4<\\dimexpr120bp-0bp-0bp\\relax"), "{tex}");
+    let doc = f.docx().unwrap();
+    assert!(doc.contains(r#"<w:trHeight w:val=\"2400\" w:hRule=\"atLeast\"/>"#), "{doc}");
+    // taller blocks: the box is their height
+    let many = format!("---\ncounsel: [{}]\n---\nBody.\n", vec!["\"C\""; 12].join(", "));
+    let Some(g) = fx("box-min-tall", &l, &many, &["typst", "pdftotext"]) else {
+        return;
+    };
+    g.typst_pages().unwrap();
+    let m = crate::measure::measure(&g.dir.join("out.pdf"), &[]).unwrap();
+    let court = m.pages[0].lines.iter().find(|ln| ln.text == "COURT").unwrap();
+    assert!((court.baseline - (72.0 + 12.0 * 13.8 + 11.04)).abs() < 0.05, "{court:?}");
+}

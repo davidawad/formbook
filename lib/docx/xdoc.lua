@@ -185,7 +185,8 @@ return function(spec)
   end
 
   -- A ruled box: a one-cell table `width` twips wide (the container's unless the box gives one), its borders the
-  -- box's strokes, its cell margins the insets, an exact row height when the box has one, the blocks at its valign.
+  -- box's strokes, its cell margins the insets, an exact row height when the box has one (a least one for a
+  -- min_height), the blocks at its valign.
   local function rbox(n, width)
     local W = n.width and tw(n.width) or width
     local st, i = n.stroke, n.inset
@@ -200,7 +201,9 @@ return function(spec)
       .. mar("bottom", i.b) .. mar("right", i.r) .. '</w:tblCellMar><w:tblLook w:val="0000" w:firstRow="0" '
       .. 'w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="0" w:noVBand="0"/></w:tblPr><w:tblGrid>'
       .. '<w:gridCol w:w="' .. W .. '"/></w:tblGrid><w:tr><w:trPr><w:cantSplit/>'
-      .. (n.height and ('<w:trHeight w:val="' .. tw(n.height) .. '" w:hRule="exact"/>') or "")
+      .. (n.height and ('<w:trHeight w:val="' .. tw(n.height) .. '" w:hRule="exact"/>')
+        -- (min_height: the row at least that high, taller when its blocks are)
+        or n.min_height and ('<w:trHeight w:val="' .. tw(n.min_height) .. '" w:hRule="atLeast"/>') or "")
       .. '</w:trPr><w:tc><w:tcPr><w:tcW w:w="' .. W .. '" w:type="dxa"/>'
       .. (n.valign ~= "top" and ('<w:vAlign w:val="' .. n.valign .. '"/>') or "") .. '</w:tcPr>'
       .. cell(n.items, W - tw(i.l) - tw(i.r)) .. '</w:tc></w:tr></w:tbl>'

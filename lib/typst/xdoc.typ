@@ -18,7 +18,7 @@
 //           {rule: <stroke>, above, below},
 //           {columns: [{width, blocks}, ..], gutter}, {each: field, blocks, between}, {group: [blocks], keep},
 //           {fill: <weight>} (a page's own blocks: the space the page leaves, shared by weight),
-//           {box: [blocks], width, height, stroke, inset, valign} (a ruled box; stroke and inset per side or one)
+//           {box: [blocks], width, height, min_height, stroke, inset, valign} (a ruled box; stroke and inset per side or one)
 //   style: align (left, center, right), bold, italic, upper, underline, left, right, hang, above, below, pitch
 //          (body, single or a number), keep, optional
 //
@@ -518,11 +518,18 @@
         ("top", "right", "bottom", "left").map(k => (k, f(v.at(k, default: 0)))).to-dict()
       } else { f(v) }
       let al = (top: top, center: horizon, bottom: bottom).at(b.at("valign", default: "top"))
-      block(width: if "width" in b { pt(b.width) } else { 100% },
-        height: if "height" in b { pt(b.height) } else { auto },
+      let ruled(height, above, below) = block(width: if "width" in b { pt(b.width) } else { 100% }, height: height,
         stroke: sides(b.at("stroke", default: 0), x => if x > 0 { pt(x) } else { none }),
         inset: sides(b.at("inset", default: 0), pt), above: above, below: below, breakable: false,
         align(al, blocks(spec, b.box, ctx, first: true)))
+      // `min_height` (fb-595.96, LRCiv 7.1(a)(2): counsel on lines 1 to 5 at least): at least that high, taller when
+      // its blocks are (LaTeX a \vbox made that high, Word a row height "at least")
+      if "height" in b { ruled(pt(b.height), above, below) } else if "min_height" in b {
+        block(width: 100%, above: above, below: below, breakable: false, layout(size => {
+          let h = measure(block(width: size.width, ruled(auto, 0pt, 0pt))).height
+          ruled(calc.max(h, pt(b.min_height)), 0pt, 0pt)
+        }))
+      } else { ruled(auto, above, below) }
       first = false
     } else if "fill" in b {
       // space that fills the page: what the page leaves, shared by weight among its fills (typst drops the space
