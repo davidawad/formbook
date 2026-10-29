@@ -30,76 +30,73 @@ signature:
 authorities:
   bartlett:
     kind: case
-    name: "Bartlett v. Strickland"
+    name: "*Bartlett v. Strickland*"
     cite: "556 U.S. 1 (2009)"
   mcconchie:
     kind: case
-    name: "McConchie v. Scholz"
+    name: "*McConchie v. Scholz*"
     cite: "567 F. Supp. 3d 861 (N.D. Ill. 2021)"
   spokeo:
     kind: case
-    name: "Spokeo, Inc. v. Robins"
+    name: "*Spokeo, Inc. v. Robins*"
     cite: "578 U.S. 330 (2016)"
   taylor:
     kind: case
-    name: "Taylor v. McCament"
+    name: "*Taylor v. McCament*"
     cite: "875 F.3d 849 (7th Cir. 2017)"
   twombly:
     kind: case
-    name: "Bell Atlantic Corp. v. Twombly"
+    name: "*Bell Atlantic Corp. v. Twombly*"
     cite: "550 U.S. 544 (2007)"
   neita:
     kind: case
-    name: "Neita v. City of Chicago"
+    name: "*Neita v. City of Chicago*"
     cite: "830 F.3d 494 (7th Cir. 2016)"
   kirksey:
     kind: case
-    name: "Kirksey v. R.J. Reynolds Tobacco Co."
+    name: "*Kirksey v. R.J. Reynolds Tobacco Co.*"
     cite: "168 F.3d 1039 (7th Cir. 1999)"
   gill:
     kind: case
-    name: "Gill v. Whitford"
+    name: "*Gill v. Whitford*"
     cite: "585 U.S. 48 (2018)"
   lujan:
     kind: case
-    name: "Lujan v. Defenders of Wildlife"
+    name: "*Lujan v. Defenders of Wildlife*"
     cite: "504 U.S. 555 (1992)"
   sweeney:
     kind: case
-    name: "Sweeney v. Raoul"
+    name: "*Sweeney v. Raoul*"
     cite: "990 F.3d 555 (7th Cir. 2021)"
   larkin:
     kind: case
-    name: "Larkin v. Finance System of Green Bay, Inc."
+    name: "*Larkin v. Finance System of Green Bay, Inc.*"
     cite: "982 F.3d 1060 (7th Cir. 2020)"
   doe-reed:
     kind: case
-    name: "Doe v. Reed"
+    name: "*Doe v. Reed*"
     cite: "561 U.S. 186 (2010)"
   salerno:
     kind: case
-    name: "United States v. Salerno"
+    name: "*United States v. Salerno*"
     cite: "481 U.S. 739 (1987)"
   radogno:
     kind: case
-    name: "Radogno v. ISBE"
+    name: "*Radogno v. ISBE*"
     cite: "No. 11-cv-4884, 2011 WL 5025251 (N.D. Ill. Oct. 21, 2011)"
   callais:
     kind: case
-    name: "Louisiana v. Callais"
+    name: "*Louisiana v. Callais*"
     cite: "146 S. Ct. 1131 (2026)"
   us-const:
     kind: constitution
-    name: "U.S. Const. amend. XV, § 1"
-    cite: ""
+    cite: "U.S. Const. amend. XV, § 1"
   act-10:
     kind: statute
-    name: "10 ILCS 120/5-5(a)"
-    cite: ""
+    cite: "10 ILCS 120/5-5(a)"
   vra-2:
     kind: statute
-    name: "52 U.S.C. § 10301(b)"
-    cite: ""
+    cite: "52 U.S.C. § 10301(b)"
 ---
 
 # INTRODUCTION

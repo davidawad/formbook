@@ -1,22 +1,13 @@
 ---
-court:
-  - UNITED STATES DISTRICT COURT
-  - SOUTHERN DISTRICT OF INDIANA
-  - INDIANAPOLIS DIVISION
+division: "Indianapolis Division"
+case_number: "1:26-cv-01669-JPH-MKK"
 caption:
-  left:
-    - UNIVERSITY OF INDIANAPOLIS,
-    - "                                    Plaintiff,"
-    - ""
-    - "vs."
-    - ""
-    - THE TRUSTEES OF INDIANA
-    - UNIVERSITY,
-    - "                                    Defendant."
-  right:
-    - ""
-    - ""
-    - "Case No.: 1:26-cv-01669-JPH-MKK"
+  parties:
+    - names: ["UNIVERSITY OF INDIANAPOLIS,"]
+      designation: "Plaintiff,"
+      versus: "vs."
+    - names: ["THE TRUSTEES OF INDIANA UNIVERSITY,"]
+      designation: "Defendant."
 title: "IU'S BRIEF IN SUPPORT OF PARTIAL MOTION TO DISMISS AND MOTION FOR MORE DEFINITE STATEMENT"
 jury_demand: false
 signature:

@@ -1,0 +1,78 @@
+# U.S. District Court for the Southern District of Illinois (ilsd): a motion to dismiss with its brief in support, on
+# the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with S.D. Ill.'s local rules overlaid here.
+# The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb
+# engines gen`). Rules: S.D. Ill. Local Rules (LocalRules10-30-2023.pdf,
+# https://www.ilsd.uscourts.gov/sites/ilsd/files/LocalRules10-30-2023.pdf, read 2026-10-14; ../README.md quotes them).
+# The base already meets LR 7.1(a)(3) (12-point type, footnotes too; double spaced, 24 pt) and LR 5.1 (8 1/2 x 11
+# paper, every page numbered consecutively, centered at the foot). The 20-page limit of LR 7.1(a)(3) is not
+# machine-checked.
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE SOUTHERN DISTRICT OF ILLINOIS"
+# LR 7.1(a)(3): footnotes in 12-point type too, single spaced.
+footnote: {size: 12, gap: 7, clearance: 7}
+# Block quotations single spaced, half an inch in on each side.
+quote: {left: 36, right: 36, above: 14, below: 14}
+# Headings single spaced, in bold, numbered by the template as the exemplar numbers them: a section's "I." centered on
+# a line of its own above its title; "A." at the margin and "1." half an inch in, the label in a half-inch box with
+# the title's later lines hung under it.
+heading:
+  - {align: center, bold: true, number: "I.", label_line: true, above: 18, below: 12}
+  - {bold: true, number: "A.", label_box: 36, above: 12, below: 12}
+  - {bold: true, number: "1.", label_box: 36, left: 36, above: 12, below: 12}
+  - {bold: true, number: "a.", label_box: 36, left: 72, above: 12, below: 12}
+# FRCP 10(a): the court's name; the parties (each party's names, its designation an inch and four tenths in, "v."
+# centered, a single line between them) closed by a column of ")" as high as they are; the civil action number beside
+# them, centered on their height; the paper's title centered in bold in the middle four fifths of the line.
+front:
+  - {text: "{xd.court}", align: center}
+  - {text: "{xd.district}", align: center}
+  - columns:
+      - width: 252
+        blocks:
+          - each: caption
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 100.8, above: 13.8}
+            between:
+              - {text: "v.", align: center, above: 13.8, below: 13.8}
+      - {width: 28.8, repeat: ")", align: center}
+      - valign: center
+        blocks:
+          - {text: "Civil Action No. {case_number}", left: 18}
+    gutter: 0
+    above: 24
+  - {text: "{title}", align: center, bold: true, left: 46.8, right: 46.8, above: 24, below: 12}
+# FRCP 11(a): the date line at the margin; two and three quarter inches in "Respectfully submitted,", the "/s/"
+# signature, the signer's lines and the party represented in bold, a single line between the groups; kept whole with
+# the last paragraph.
+closing:
+  - group:
+      - {text: "{date_line}"}
+      - columns:
+          - {width: 198, blocks: []}
+          - blocks:
+              - {text: "Respectfully submitted,", above: 13.8}
+              - {text: "By: /s/ {signature.signer}", above: 13.8}
+              - {text: "{signature.lines}"}
+              - {text: "{signature.role}", bold: true, optional: true, above: 13.8}
+    above: 13.8
+# FRCP 5(b)(2)(E), 5(d)(1)(B): the certificate of service through the court's electronic filing system, on its own page,
+# in the exemplar's wording: the heading centered in bold, the statement at the body pitch, each recipient an inch in,
+# then the date at the margin and the signer at the right.
+after_tail:
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 12}
+      - {text: "I certify that a true and correct copy of the foregoing pleading was electronically filed with the clerk for the U.S. District Court, Southern District of Illinois, using the electronic case filing system of the court, and the electronic case filing system sent a \"Notice of Electronic Filing\" to the following attorneys of record who have consented in writing to accept this Notice as service of this document by electronic means, as follows:", pitch: body, indent: 36, below: 6}
+      - each: service.recipients
+        blocks:
+          - {text: "{name}", left: 72, above: 6}
+          - {text: "Email: {email}", left: 72, below: 6}
+      - columns:
+          - {width: 234, blocks: [{text: "{service.date}"}]}
+          - blocks: [{text: "/s/ {service.signer}", align: right}]
+        above: 12

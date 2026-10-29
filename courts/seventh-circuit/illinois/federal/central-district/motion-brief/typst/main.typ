@@ -1,7 +1,5 @@
-// Entry point. Compile with the doc-type folder as --root; tools/render.sh does it:
-//   typst compile --root <doc-type-dir> --font-path <repo>/fonts --ignore-system-fonts \
-//     --package-cache-path <repo>/vendor/typst-packages --input sample=usage/NAME.md \
-//     typst/main.typ out.pdf
+// Entry point. tools/render.sh compiles it with this folder as --root:
+//   sh tools/render.sh courts/seventh-circuit/illinois/federal/central-district/motion-brief usage/<id>.md usage/<id>.pdf
 #import "ilcd-motion-brief.typ": ilcd-motion-brief, split-frontmatter
 
 #let src = read("/" + sys.inputs.at("sample", default: "usage/INPUT-motion-brief.md"))

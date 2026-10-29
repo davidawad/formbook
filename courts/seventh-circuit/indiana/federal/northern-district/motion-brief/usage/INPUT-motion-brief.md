@@ -1,8 +1,5 @@
 ---
 case_number: "1:25-cv-00398-ALT"
-court:
-  - "UNITED STATES DISTRICT COURT"
-  - "NORTHERN DISTRICT OF INDIANA"
 division: "Fort Wayne Division"
 caption:
   parties:
@@ -12,7 +9,7 @@ caption:
     - names:
         - "MORIARTY GEM CORP.,"
       designation: "Defendant."
-title: "Defendant Moriarty Gem Corp.’s Memorandum in Support of Its Motion to Dismiss Under Rule 12(b)(6)"
+title: "DEFENDANT MORIARTY GEM CORP.’S MEMORANDUM IN SUPPORT OF ITS MOTION TO DISMISS UNDER RULE 12(b)(6)"
 signature:
   dated: "September 12, 2025"
   by: "/s/ Andrew J. Miroff"
@@ -44,19 +41,19 @@ certificate:
     - "drew.miroff@icemiller.com"
 ---
 
-# I. INTRODUCTION
+# INTRODUCTION
 
 Instead of just texting “STOP,” Plaintiff has filed this putative class action over a few text messages that Moriarty Gem Corp. (“Moriarty”)—a local, family-owned jewelry shop—meant to send to the prior, consenting subscriber of Plaintiff’s new phone number. Unbeknownst to Moriarty, Plaintiff allegedly became the new user of the phone number in August 2024, shortly before Moriarty’s messages were sent. Plaintiff’s Complaint asserts one claim under Subsection 227(c) of the Telephone Consumer Protection Act (“TCPA”), 47 U.S.C. § 227(c)(5).
 
 Congress created a private right of action in Subsection 227(c)(5), but only for a certain type of “telephone call”—not text messages. As everyone knows, Congress included, phone calls and text messages are two entirely different things. When dismissing an identical Subsection 227(c) claim recently, the Chief Judge of another federal court noted that “[c]ertainly, no ordinary person would think of a text message as a ‘telephone call.’”[^1] If Congress would like to expand Subsection 227(c)(5) of the TCPA to provide for a private right of action for text messages that violate the Federal Communication Commission’s (“FCC”) National Do-Not-Call Registry-related rule, 47 § 64.1200(c)(2), it is of course within its Article I powers to do so. Indeed, it has promulgated recent laws relating to text messages. But it never has for the law that matters here: TCPA Subsection 227(c). Thus, this Court should follow the likes of *Davis* and dismiss this claim for lack of any Congressionally authorized private right of action.
 
-# II. STANDARD OF REVIEW
+# STANDARD OF REVIEW
 
 Federal Rule of Civil Procedure 12(b)(6) authorizes the dismissal of claims for “failure to state a claim upon which relief can be granted.” A court may grant a Rule 12(b)(6) motion to dismiss where a complaint lacks “enough facts to state a claim to relief that is plausible on its face.” *Bell Atlantic Corp. v. Twombly*, 550 U.S. 544, 570 (2007). A complaint must provide more than “labels and conclusions, and a formulaic recitation of the elements of a cause of action will not do.” *Id.* at 555. And while courts “accept the well-pleaded facts in the complaint as true, legal conclusions and conclusory allegations ... are not entitled to this presumption of truth.” *Dix v. Edelman Fin. Servs., LLC*, 978 F.3d 507, 513 (7th Cir. 2020) (citations omitted).
 
-# III. PLAINTIFF HAS NO PRIVATE RIGHT OF ACTION FOR HIS TEXT-MESSAGE CLAIM.
+# PLAINTIFF HAS NO PRIVATE RIGHT OF ACTION FOR HIS TEXT-MESSAGE CLAIM.
 
-## A. A Text Message is Not a “Telephone Call.”
+## A Text Message is Not a “Telephone Call.”
 
 Plaintiff mistakenly claims that a “text message is a ‘call’ as defined by the TCPA.” Compl. ¶ 62. The TCPA does no such thing. The TCPA only defines five terms, all in 47 U.S.C. § 227(a) (“Definitions”). “Call” is not one of them. Nor is “telephone call,” the phrase actually used in Subsection 227(c)(5), the source of Plaintiff’s alleged private right of action here. *See* 47 U.S.C. § 227(c)(5) (establishing a private right of action only for a “person who has received more than one telephone call within any 12-month period by or on behalf of the same entity in violation of the regulations prescribed under this subsection[.]” (emphasis added)); *cf.* Compl. ¶¶ 67-68. The TCPA does not define a “call” to include a “text message,” as Plaintiff alleges.[^2] And the phrase “text message” does not appear in Subsection 227(c), and never has.
 
@@ -68,7 +65,7 @@ As the Supreme Court recently held, district courts “should interpret the TCPA
 
 Telephone calls were commonplace in 1991. But text messaging did not even exist yet. Thus, the only plausible interpretation of Congress’s private right of action in Subsection 227(c)(5) for certain “telephone calls” is that Congress meant what it said—and did not mean to silently smuggle in text messages, a yet-to-be-created form of communication. “Thus, under a plain reading, TCPA Section 227(c)(5) of the TCPA does not regulate text messages.” *Jones*, 2025 U.S. Dist. LEXIS 138371, at \*11; *see also Davis*, 2025 U.S. Dist. LEXIS 167366, at \*9 (“To succeed on his § 227(c)(5) [claim], Davis had to allege that he received at least two ‘telephone calls.’ He alleged receiving only text messages. And because text messages are not telephone calls, he has not stated a claim.”).[^4] The Court’s inquiry can end here. A text message is not a “telephone call,” and therefore Plaintiff’s Subsection 227(c)(5) claim fails as a matter of law for want of any “telephone calls” at issue here.
 
-## B. Plaintiff Also Lacks a Violation of an FCC Regulation Prescribed Under Subsection 227(c).
+## Plaintiff Also Lacks a Violation of an FCC Regulation Prescribed Under Subsection 227(c).
 
 Even if the Court somehow concluded that Congress’s 1991 reference to “telephone calls” somehow included the still-nonexistent “text message,” Plaintiff’s claim is also missing the second necessary element of his private right of action: telephone calls that violate an FCC regulation that was promulgated under the FCC’s Subsection 227(c) statutory authority. Again, 47 U.S.C. § 227(c)(5) creates a private right of action for a “person who has received more than one telephone call within any 12-month period by or on behalf of the same entity in violation of the regulations prescribed under this subsection.” 47 U.S.C. § 227(c)(5) (emphasis added). Plaintiff’s claim fails because it is missing (a) a “telephone call” and (b) a violation of a regulation that the FCC “prescribed under this subsection.”
 
@@ -84,7 +81,7 @@ Here, Plaintiff is essentially trying to parlay two later FCC orders, both issue
 
 But both of these FCC orders were issued long after the 1992 expiration of Congress’s time-limited grant of authority to the FCC under the TCPA to create regulations for which a private cause of action would exist under Subsection 227(c)(5). Thus, neither order provides Plaintiff with a private right of action to bring a claim under Subsection 227(c)(5) for his alleged receipt of text messages that allegedly violated 47 C.F.R. § 64.1200(c)(2).
 
-### 1. The FCC’s 2003 TCPA Order did Not Create any Private Right of Action Under Subsection 227(c).
+### The FCC’s 2003 TCPA Order did Not Create any Private Right of Action Under Subsection 227(c).
 
 When Congress enacted the TCPA in 1991, it gave the FCC the authority, under Subsection 227(c), to establish “a single national database [for] compil[ing] a list of telephone numbers of residential subscribers who object to receiving telephone solicitations[.]” 47 U.S.C. § 227(c)(3).
 
@@ -92,7 +89,7 @@ But Congress required the FCC, if it was going to establish such a database, to 
 
 It was not until 2003, in its 2003 TCPA Order, that the FCC promulgated rules relating to a national do-not-call database. But those rules were not issued pursuant to authority from Subsection 227(c) of the TCPA. Rather, the FCC adopted rules implementing the FTC’s newly created NDNCR,[^8] and enacted 47 C.F.R. § 64.1200(c)(2) to marry up its regulations with the FTC’s, which Congress gave it time-limited authority to do in The Do-Not-Call Implementation Act (“2003 DNC Act”), Pub. L. No. 108-10, § 3, 117 Stat. 557 (2003).[^9] Thus, the FCC’s 2003 NDNCR-related rules, including 47 C.F.R. § 64.1200(c)(2), were promulgated pursuant to the authority Congress temporarily granted the FCC in the 2003 DNC Act—not the TCPA-linked authority that expired in 1992. Accordingly, there is no Congressionally created private right of action under Section 227(c)(5) for violations of those 2003 NDNCR-related rules, of which 47 C.F.R. § 64.1200(c)(2) is one.[^10]
 
-### 2. The FCC’s 2003 NDNCR-Related Rules Do Not Apply to Text Messages.
+### The FCC’s 2003 NDNCR-Related Rules Do Not Apply to Text Messages.
 
 In all events, the FCC’s 2003 TCPA Order made clear that its new NDNCR-related rules did not apply to text messages. In that 2003 Order, the FCC expanded its rules under Subsection 227(b) of the TCPA to equate (or conflate) “call” with “text message”; the statutory authority or wisdom of that FCC conclusion is not at issue here, because this is not a Subsection 227(b) case. The FCC ruled that Congress’s Subsection 227(b) proscription “encompasses both voice calls and text calls to wireless numbers including, for example, short message service (SMS) calls.” 2003 TCPA Order, 18 FCC Rcd. 14014 ¶ 165 (emphasis added).[^11] Thus, in 2003 the FCC treated “call” and “SMS” as synonymous only for purposes of Subsection 227(b) of the TCPA—i.e., calls to cell phones made with an ‘automatic telephone dialing system’ or artificial or prerecorded voice (what is colloquially referred to as a “robocall” or “robotext”).
 
@@ -102,7 +99,7 @@ But in the very next paragraph, the FCC turned to its decision about the applica
 
 *2003 TCPA Order*, 18 FCC Rcd. 14014 ¶ 166 (emphasis added). The FCC’s 2003 NDNCR-related rules clearly only applied to “live” telemarketing phone calls—not text messages, a subject the FCC had just addressed in the previous paragraph relating to Subsection 227(b) issues.
 
-### 3. The FCC’s 2023 TCPA Order did not Create a Private Right of Action Under Subsection 227(c) for Sales Text Messages.
+### The FCC’s 2023 TCPA Order did not Create a Private Right of Action Under Subsection 227(c) for Sales Text Messages.
 
 Plaintiff’s claim is about a text message to a cell phone number registered on the NDNCR. None of those three elements are included in the FCC’s 1992 regulations promulgated under Subsection 227(c). Again, FCC rules relating to live sales calls to cellular telephone numbers registered on the NDNCR were not addressed until the FCC’s 2003 TCPA Order. Then it took the FCC another twenty years, through its 2023 TCPA Order, to expand its 47 C.F.R. § 64.1200(c) and (d) rules to sales text messages, despite no new grant of statutory authority to do so.
 
@@ -114,7 +111,7 @@ Second, as noted above, the FCC has open-ended rulemaking authority under Subsec
 
 Whatever statutory authority the FCC had to adopt NDNCR-related rules in 2003, or to enlarge them to text messages in December 2023, it had no right in 2003 or 2023 to create new private rights of action under Subsection 227(c)(5). *See Sandoval*, 532 U.S. at 291 (an agency regulation cannot “conjure up a private cause of action that has not been authorized by Congress. Agencies may play the sorcerer’s apprentice but not the sorcerer himself.”); *see also West Virginia v. EPA*, 597 U.S. 697, 723 (2022) (agencies “have only those powers given to them by Congress, and ‘enabling legislation’ is generally not an ‘open book to which the agency [may] add pages and change the plot line.’” (citation modified)). A federal agency “‘literally has no power to act’—including under its regulations—unless and until Congress authorizes it to do so by statute.” *FEC v. Ted Cruz for Senate*, 596 U.S. 289, 301 (2022) (quoting *Louisiana Pub. Serv. Comm’n v. FCC*, 476 U.S. 355, 374 (1986)). The FCC’s long-expired authority under Subsection 227(c)(1) cannot have provided it the necessary statutory authority for its 2023 TCPA Order. As such, Plaintiff’s claim that Moriarty violated Sections 64.1200(c) by sending him text messages also lacks an FCC regulation promulgated under Subsection 227(c), and thus has no private right of action exists for this claim under Subsection 227(c)(5). Plaintiff’s Complaint must be dismissed.
 
-# IV. CONCLUSION
+# CONCLUSION
 
 The Court should dismiss Plaintiff’s one-count TCPA Complaint with prejudice because Plaintiff lacks a private right of action for these text-message claims under Subsection 227(c)(5). Text messages are not telephone calls, and the FCC had no authority under Subsection 227(c) to promulgate any such regulation in any case.
 

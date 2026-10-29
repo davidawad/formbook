@@ -1,4 +1,11 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (on the shared layout model lib/*/xengine*), so a difference fails. (fb-595.68.27)
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.17.15), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
   cross_engine: gate
+  # DEF-COVER-002 against FILED-EXAMPLE-motion-brief.pdf: the date on the exemplar's page 1 is the CM/ECF header the
+  # court's system stamps on every page of a filed paper ("Filed: 07/10/26 Page 1 of 28"), not the filer's text; the
+  # filer's cover carries no date. fb-595.17.15.
+  cover_structure_accepted:
+    - finding: 'date line:'
+      reason: "the exemplar's only date on page 1 is the CM/ECF header stamped by the court on every page; the filer's cover has none"

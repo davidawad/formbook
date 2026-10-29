@@ -1,0 +1,62 @@
+# U.S. District Court for the Southern District of Indiana (insd): a brief in support of a motion, on the generic FRCP
+# brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with S.D. Ind.'s local rules overlaid here. The shared document
+# model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`). Rules:
+# S.D. Ind. L.R. 5-1 and 7-1,
+# https://www.insd.uscourts.gov/sites/insd/files/local_rules/Local%20Rule%205-1%20-%20Format%20of%20Documents%20Presented%20for%20Filing_5.pdf
+# and https://www.insd.uscourts.gov/sites/insd/files/local_rules/Local%20Rule%207-1%20-%20Motion%20Practice_2.pdf
+# (read 2026-10-14; ../README.md quotes them). The base already meets L.R. 5-1(b): one-inch margins, 12-point type in
+# the body, double spaced (24 pt) except headings and quotations, pages numbered consecutively, the first too. The
+# page limits of L.R. 7-1(e) are not machine-checked.
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name.
+constants:
+  court: "UNITED STATES DISTRICT COURT"
+  district: "SOUTHERN DISTRICT OF INDIANA"
+# L.R. 5-1(b): block quotations single spaced, half an inch in on each side.
+quote: {left: 36, right: 36, above: 0, below: 0}
+# L.R. 5-1(b): headings single spaced, in bold, a single line above, as typed (the filer types the labels): a section
+# centered in capitals, a sub-section centered, a point at the margin.
+heading:
+  - {align: center, bold: true, upper: true, above: 12, below: 0}
+  - {align: center, bold: true, above: 12, below: 0}
+  - {bold: true, above: 12, below: 0}
+# FRCP 10(a), L.R. 5-1(b): the court's name with the division in bold; the parties (each party's names, its
+# designation two and a fifth inches in a line below, the filer's "v." or "vs." four fifths of an inch in, a line
+# from the next party) closed by a column of ")" as high as they are; the case number beside them, centered on their
+# height; the paper's title centered in bold capitals, and the jury demand under it when the filer makes one.
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{division}", align: center, bold: true, upper: true, optional: true}
+  - columns:
+      - width: 234
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 158.4}
+            between:
+              - {text: "{versus|v.}", left: 57.6, below: 13.8}
+      - {width: 18, repeat: ")"}
+      - valign: center
+        blocks:
+          - {text: "{case_label|Case No.:} {case_number}"}
+    gutter: 0
+    above: 24
+  - unless: jury_demand
+    blocks:
+      - {text: "{title}", align: center, bold: true, upper: true, left: 36, right: 36, above: 18, below: 24}
+  - when: jury_demand
+    blocks:
+      - {text: "{title}", align: center, bold: true, upper: true, left: 36, right: 36, above: 18}
+      - {text: "JURY TRIAL DEMANDED", align: center, bold: true, above: 6, below: 24}
+# FRCP 11(a), L.R. 5-1(b): the date at the margin, then three and a quarter inches in the signer's lines (the "/s/"
+# signature, name, firm, address, telephone and e-mail); kept whole with the last paragraph.
+closing:
+  - group:
+      - {text: "{signature.date}"}
+      - columns:
+          - {width: 234, blocks: []}
+          - blocks: [{text: "{signature.lines}"}]
+        above: 12
+    above: 24

@@ -1,0 +1,114 @@
+# U.S. District Court for the Central District of Illinois (ilcd): a memorandum of law in support of a motion, on the
+# generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with C.D. Ill.'s local rules overlaid here. The
+# shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb
+# engines gen`). Rules: Civil Local Rules of the C.D. Ill., "September 2026 Version" (General Order 26-go-1),
+# https://www.ilcd.uscourts.gov/sites/ilcd/files/September%202026%20Version%20.pdf (read 2026-10-14; ../README.md quotes
+# them). The base already meets LR 5.1(A) (8 1/2 x 11 paper, one-inch margins, pages numbered) and LR 5.1(B)(1), 7.1(B)(4)
+# (double spaced: 24 pt at 12 pt). LR 5.1(B)(2): body 12 point, the base's size. The 15-page limit of LR 7.1(B)(4)(a) is
+# not machine-checked (a longer memorandum certifies its words instead).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name.
+constants:
+  court: "UNITED STATES DISTRICT COURT"
+  district: "FOR THE CENTRAL DISTRICT OF ILLINOIS"
+# LR 5.1(A): pages numbered; the cover unnumbered, the tables in lower-case roman, the body from 1, as the exemplar.
+page_number: {align: center, front: lower-roman}
+# LR 5.1(B)(2): footnotes no smaller than 10 point, single spaced (1.15 x 10 pt).
+footnote: {size: 10, pitch: 11.5, gap: 6}
+# Block quotations single spaced, half an inch in on each side, a single line above and below.
+quote: {left: 36, right: 36, above: 13.8, below: 13.8}
+# LR 5.1(B)(1): headings on the double-spaced pitch, as typed (the filer types the labels): a section centered in bold
+# capitals; an argument heading bold, its later lines hung half an inch; a sub-heading the same half an inch in; a
+# fourth level bold italic an inch in.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body, above: 0, below: 0}
+  - {bold: true, hang: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, left: 36, hang: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, italic: true, left: 72, pitch: body, above: 0, below: 0}
+# FRCP 10(a), LR 40.1(E)(1): the court's name with the division in bold; the parties in a column ruled at its right,
+# head and foot (each party's names, its designation an inch and three quarters in, "v." a quarter inch in, a single
+# line apart, as the exemplar), the case number beside them, centered on their height; the paper's title centered in
+# bold capitals; the cover counsel block in the right half of the page.
+cover:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{division}", align: center, bold: true, upper: true}
+  - columns:
+      - width: 234
+        blocks:
+          - box:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", left: 126, above: 13.8}
+                between:
+                  - {text: "v.", left: 18, above: 13.8, below: 13.8}
+            stroke: {top: 0.5, right: 0.5, bottom: 0.5}
+            inset: {top: 6, right: 10.8, bottom: 13.8, left: 5.4}
+      - valign: center
+        blocks:
+          - {text: "No. {case_number}", left: 24}
+    gutter: 0
+    above: 24
+  - {text: "{brief_title}", align: center, bold: true, upper: true, left: 36, right: 36, above: 24}
+  - each: counsel
+    blocks:
+      - columns:
+          - {width: 234, blocks: []}
+          - blocks:
+              - {text: "{names}"}
+              - {text: "{lines}", optional: true}
+    gap: 13.8
+    above: 48
+front: []
+# The contents (page i) and authorities (page ii), generated: the title centered in bold, a double line below it; a
+# row a single line apart, the level-2 and level-3 headings half an inch in per level.
+contents: {title: "TABLE OF CONTENTS", style: {below: 24}, depth: 3, col: 36, hang: 36, step: 36, above: 13.8}
+# The authorities the body cites (its `toa:` links), grouped as the exemplar groups them, each name (a case name in
+# italics, as the sample writes it), a comma and the citation; seven pages or more "passim".
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  style: {below: 24}
+  page_heading: "Page(s)"
+  passim: 7
+  kinds:
+    - {kind: case, title: "Cases"}
+    - {kind: constitution, title: "Constitutional Provisions"}
+    - {kind: statute, title: "Statutes"}
+    - {kind: regulation, title: "Regulations"}
+    - {kind: rule, title: "Rules"}
+    - {kind: other, title: "Other Authorities"}
+  col: 54
+  hang: 36
+  above: 13.8
+  group: {bold: true, above: 13.8}
+# FRCP 11(a), LR 5.11(A)(2), LR 11.1: "Dated:" at the left; in the right half "Respectfully submitted,", the firm, the
+# "/s/" signature and the signer's typed name, address, e-mail and telephone, a single line between the parts; kept
+# whole with the last paragraph.
+closing:
+  - group:
+      - columns:
+          - {width: 234, blocks: [{text: "Dated: {date}"}]}
+          - blocks:
+              - {text: "Respectfully submitted,"}
+              - {text: "{signature.firm}", above: 13.8}
+              - {text: "/s/ {signature.signer}", above: 13.8}
+              - {text: "{signature.lines}"}
+    above: 24
+# LR 7.1(B)(4)(c), (d): a memorandum under the type-volume limit certifies its words (headings, footnotes and quotations
+# counted; the cover, tables and signature block not), on its own page, listed in the contents; the count is the
+# template's count of the body, which the filer confirms with the word processor (LR 7.1(B)(4)(c)).
+words: {}
+after_tail:
+  - when: type_volume
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF COMPLIANCE", heading: 1}
+      - {text: "I certify pursuant to Civil Local Rule 7.1(B)(4)(c) that this memorandum complies with the type-volume limitation. This memorandum contains {xd.words} words, including headings, footnotes, and quotations, and excluding the cover page, tables, and signature block.", pitch: body, indent: 36}
+      - group:
+          - columns:
+              - {width: 234, blocks: []}
+              - blocks:
+                  - {text: "/s/ {signature.signer}"}
+                  - {text: "{signature.lines.0}"}
+        above: 24
