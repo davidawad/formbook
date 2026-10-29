@@ -20,21 +20,21 @@ Primary source: S.D. Ala. Local Rules (Order Promulgating Local Rules, "Effectiv
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
-| S.D. Ala. Gen. L.R. 5(a)(1) | 8½ × 11 paper; double-spaced text (quotations of more than two lines may be single-spaced); headings and footnotes may be single-spaced; margins of at least 1 inch on all four sides; page numbers only in the margins. | `margin = 1in`, `pitch-double` (24 pt), `pitch-single` (13.8 pt) for block quotes, headings, signature and certificate; footer page number in the bottom margin. |
-| S.D. Ala. Gen. L.R. 5(a)(2) | "A plain, Roman style (or similar) font"; case names italic or underlined; 12 point or larger, footnotes included. Names no typeface. | `font-family` = Times New Roman (the house standard, `docs/FONTS.md` rule 6: any plain roman face satisfies the rule), `type-size = 12pt`; case names italic from `*...*`. See Known gaps 1. |
-| S.D. Ala. Gen. L.R. 5(a)(3) | Signature line, with the typed name, address and telephone of every attorney of record directly beneath. | `signature-block()`. |
+| S.D. Ala. Gen. L.R. 5(a)(1) | 8½ × 11 paper; double-spaced text (quotations of more than two lines may be single-spaced); headings and footnotes may be single-spaced; margins of at least 1 inch on all four sides; page numbers only in the margins. | `margin = 1in`, `pitch.body` (24 pt), `pitch.single` (13.8 pt) for block quotes, headings, signature and certificate; footer page number in the bottom margin. |
+| S.D. Ala. Gen. L.R. 5(a)(2) | "A plain, Roman style (or similar) font"; case names italic or underlined; 12 point or larger, footnotes included. Names no typeface. | `font-family` = Times New Roman (the house standard, `docs/FONTS.md` rule 6: any plain roman face satisfies the rule), `size: 12`; case names italic from `*...*`. See Known gaps 1. |
+| S.D. Ala. Gen. L.R. 5(a)(3) | Signature line, with the typed name, address and telephone of every attorney of record directly beneath. | `typst/layout.yaml`. |
 | S.D. Ala. Civ. L.R. 7(a) | Every motion must state the statute, rule, or legal or equitable principle under which it is made. | Not checked by the template. The sample states the rule in its introduction and in section VI (Rule 12(e)); the Rule 12(b)(6) basis appears in the argument, not in a separate statement. |
 | S.D. Ala. Civ. L.R. 7(b) | A Rule 12(b) motion must be supported by a brief; the brief may be included within the body of the motion. | The document is the brief; the title says "Memorandum of Law in Support of Its Motion". |
 | S.D. Ala. Civ. L.R. 7(e) | Principal briefs at most 30 pages, excluding caption, cover page, table of contents, table of authorities and signature block. | Not checked by the template. The sample (8 pages) and the filed exemplar (22 pages) are within the limit. |
 | Fed. R. Civ. P. 12(b)(6); 12(e) | Failure to state a claim; motion for a more definite statement of a pleading "so vague or ambiguous that the party cannot reasonably prepare a response". Fetched https://www.law.cornell.edu/rules/frcp/rule_12 on 2026-10-14. | Argument I to V (12(b)(6)) and section VI (12(e)) in the sample. |
 | Fed. R. Civ. P. 10(b) | Numbered paragraphs, each limited to a single set of circumstances (quoted in the exemplar's section VI). Fetched https://www.law.cornell.edu/rules/frcp/rule_10 on 2026-10-14. | Quoted in the sample; not a template rule (briefs are not numbered). |
-| Fed. R. Civ. P. 5(b) | Certificate of service for a paper served through the court's electronic system. Not fetched in this pass. | `certificate-block()`: added to the sample because the exemplar has none. See Known gaps 5. |
+| Fed. R. Civ. P. 5(b) | Certificate of service for a paper served through the court's electronic system. Not fetched in this pass. | `typst/layout.yaml`: added to the sample because the exemplar has none. See Known gaps 5. |
 
 ## Layout
 
 - Court title on the first page, centered and bold (three lines, single-spaced); caption as in the complaint (party column, ")" column, "Civil Action No." on the middle line).
 - Title of the paper centered and bold under the caption.
-- Body double-spaced (24 pt pitch, `pitch-double`). Paragraphs are unnumbered with a 0.5 inch first-line indent.
+- Body double-spaced (24 pt pitch, `pitch.body`). Paragraphs are unnumbered with a 0.5 inch first-line indent.
 - Headings: level 1 centered bold caps (INTRODUCTION, FACTUAL BACKGROUND, LEGAL ARGUMENT, CONCLUSION); level 2 bold at the left with a hanging indent for the roman numeral; level 3 bold, indented, for the lettered sub-heading. Headings are single-spaced and stay with the text after them.
 - Lists: bulleted in the sample (the exemplar's claim list); lettered if the markdown is numbered.
 - Block quotes single-spaced, indented 0.5 inch on both sides.
@@ -43,9 +43,7 @@ Primary source: S.D. Ala. Local Rules (Order Promulgating Local Rules, "Effectiv
 
 ## Markdown contract (for samples)
 
-- YAML frontmatter, then the body. Frontmatter: `case_number` (the civil action number as printed on the caption), `division`, `caption.parties` (as in the complaint), `brief_title`, `date`, `signature.blocks` (list of attorney blocks), `certificate` (optional: `text` paragraph and `signature` lines).
-- Body: blank-line-separated chunks. `#` is level 1, `##` level 2, `###` level 3. A chunk starting with `-` or `1.` is a list. A chunk starting with `>` is a block quote. Any other chunk is a body paragraph with a first-line indent.
-- Not supported: footnotes (the exemplar has them; the sample drops the markers and their text, see Known gaps 3), tables, raw typst.
+See "Engines" below: the frontmatter fields are those the layout (`typst/layout.yaml`) reads. Body: markdown (headings `#` to `####`, paragraphs, lists, block quotations, footnotes, `*italics*`), set by the shared document model.
 
 ## Overlay (red/blue)
 
@@ -84,23 +82,13 @@ The pairing is not in order because the sample elides the exemplar's pages 8 to 
 
 ## Engines
 
-The typst template is the reference. The docx engine is `docx/reference.xml` (from which `fb render --engine docx` builds the reference document: the cross-engine recipe, `base="xengine"`, in the typst template's face; `docx/make-reference.sh` is retired) with the Lua filter `docx/alsd-motion-brief.lua`; it renders with `sh tools/render.sh --engine docx <this folder> usage/INPUT-motion-brief.md`, which writes `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice converts the file; 8 pages, the same count as the typst render). Times New Roman must be installed for LibreOffice (the pinned install, `docs/FONTS.md` rule 1); `pdffonts` shows only Times New Roman faces. The table below was written before fb-595.68; its paper, font and spacing rows are current.
+On the generic federal district brief since fb-595.17.4: `typst/layout.yaml` is `base: /lib/layouts/frcp-motion-brief.yaml` plus this court's overlay, each value with its rule; the typst template only names the face; `latex/` (`template.tex`, `xdoc.lua`) and `docx/` (`reference.xml`, `xdoc.lua`) are generated from the merged layout by `fb engines gen` (do not edit them; change the layout and generate again). The old per-folder typst code and Word filter are removed. docs/EVAL-LOOP.md, "Generated engines", has the layout grammar.
 
-| Element | Typst | DOCX |
-|---|---|---|
-| Paper, margins, font, size | Letter, 1 in, Times New Roman 12 pt | same (in `reference.xml`) |
-| Body spacing | 24 pt pitch, paragraphs indented 0.5 in | exact 24 pt, first line indented 0.5 in |
-| Caption and cover | a grid with a ")" column; "Civil Action No." on the middle row | a borderless table with the same rows and columns |
-| Headings | level 1 centered caps, 1.4 em; level 2 bold with a hanging indent, 1.2 em; level 3 bold, 1 em | level 1 centered caps, 17 pt; level 2 bold with the same hanging indent, 14.5 pt; level 3 bold, 12 pt (rounded to half points) |
-| Bullets and lettered lists | bullet at 0.5 in, text at 0.9 in | the same measures |
-| Block quotes | single-spaced, indented 0.5 in both sides | the same |
-| Signature block and certificate of service | signature at 3.0 in; certificate kept together | the same measures; certificate kept together |
-| Page numbers | centered, bottom margin | centered, bottom margin (a PAGE field) |
+| engine | output | check.sh | XENG-001..003 |
+|---|---|---|---|
+| typst (reference) | `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages | 11 checks passed, 0 failed | reference |
+| latex | `usage/OUTPUT-motion-brief.latex.pdf` | 15 checks passed, 0 failed | PASS (216/216 lines) |
+| docx | `usage/OUTPUT-motion-brief.docx`, `.docx.pdf` (LibreOffice) | 16 checks passed, 0 failed | PASS (216/216 lines) |
 
-What differs (on the earlier EB Garamond renders, before fb-595.68):
+Frontmatter: `division`, `case_label` (default "CIVIL ACTION NO."), `case_number`, `caption.parties` (`names`, `designation`), `brief_title`, `signature` (`date`, `blocks`), `service` (`text`, `signature`). The move changed the caption to the form of the exemplar of the same id (the parties closed by a rule at their right and foot instead of a column of ")"; the title underlined); the page limit of Civ. L.R. 7(e) (30 pages) is now checked (`eval.yaml` `params.page_limit`). The list labels stand at the margin in a half-inch box (the base), not half an inch in (tier 3).
 
-- Line breaks: some lines break a word earlier or later than the typst render (the second line of the brief title, for one), so text is not in the same place on every line.
-- The CONCLUSION heading and its paragraph move to page 8 in the DOCX, with the signature block and the certificate of service; the typst render keeps them on page 7. The signature block and certificate are on the last page in both engines (open item 6 above).
-- The space between the title of the paper and the first heading is set by measurement of the typst render (a blank line of 16.2 pt in `alsd-motion-brief.lua`), not by a rule.
-
-DOCX BLOCKED items: none. This folder has no `checks.yaml`, so `tools/check.sh --engine docx` does not run here; the docx PDF was reviewed page by page instead (before fb-595.68) (every page of `OUTPUT-motion-brief.docx.pdf`, against the typst render). The `.docx` was converted by LibreOffice without error but was not opened in Microsoft Word, so the Word repair check is not done.

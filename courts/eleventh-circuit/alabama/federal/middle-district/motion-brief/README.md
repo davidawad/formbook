@@ -22,9 +22,9 @@ Verified 2026-10-14. Sources:
 
 | ID | Source | Requirement | Kind | Where in the template |
 |---|---|---|---|---|
-| FRCP-10a | FRCP 10(a) | Caption with the court's name, a title, a file number and a Rule 7(a) designation; a later paper names the first party on each side and may refer generally to others. | M | `court`, `caption`, `title`; `caption()`, `court-title()` |
-| FRCP-11a | FRCP 11(a) | Signed by at least one attorney of record, with the signer's address, e-mail and telephone. | M | `signature`, `of_counsel`; `signature-block()`, `of-counsel()` |
-| FRCP-5d | FRCP 5(d)(1)(B) | "No certificate of service is required when a paper is served by filing it with the court's electronic-filing system." | C (the exemplars include one) | `certificate`; `certificate()` |
+| FRCP-10a | FRCP 10(a) | Caption with the court's name, a title, a file number and a Rule 7(a) designation; a later paper names the first party on each side and may refer generally to others. | M | `court`, `caption`, `title`; `typst/layout.yaml`, `typst/layout.yaml` |
+| FRCP-11a | FRCP 11(a) | Signed by at least one attorney of record, with the signer's address, e-mail and telephone. | M | `signature`, `of_counsel`; `typst/layout.yaml`, `typst/layout.yaml` |
+| FRCP-5d | FRCP 5(d)(1)(B) | "No certificate of service is required when a paper is served by filing it with the court's electronic-filing system." | C (the exemplars include one) | `certificate`; `typst/layout.yaml` |
 | LR-5.6 | M.D. Ala. LR 5.6 | 8-1/2 x 11 inch white paper, flat, not stapled; "double-spaced, except for quoted material"; each page numbered consecutively. | M | `page(paper: "us-letter")`, page numbers, body leading (32.2 pt baseline pitch at 14 pt), block quotations single-spaced |
 | LR-7.1a | M.D. Ala. LR 7.1(a) | A Conflict Disclosure Statement with the initial pleading or other paper (form in Appendix A). | M (author) | Not produced: a separate filing. |
 | LR-5.2a | M.D. Ala. LR 5.2(a) | Redact SSNs to the last four digits, minors' names to initials, dates of birth to the year, financial account numbers to the last four digits, and an individual's address to city and state where relevant. | M (author) | Not templated. |
@@ -56,12 +56,15 @@ Overlay (`usage/OVERLAY-nutrien-motion-brief.pdf`; measured on the earlier EB Ga
 
 ## Engines
 
-- **typst** (primary): `typst/`, unchanged. Renders `usage/OUTPUT-motion-brief.typst.pdf` (10 pages).
-- **docx**: `docx/reference.xml` (from which `fb render --engine docx` builds the reference document: the cross-engine recipe, `base="xengine"`, in the typst template's face; `docx/make-reference.sh` is retired), `docx/almd.lua`. Writes `usage/OUTPUT-motion-brief.docx` and the LibreOffice `usage/OUTPUT-motion-brief.docx.pdf` from `usage/INPUT-motion-brief.md`. Needs Times New Roman installed where the file is opened.
-  - Matches the typst values, set in the reference and the filter (the face from `docx/reference.xml`; the other values were checked before fb-595.68): Times New Roman 14 pt; US Letter with 1-inch margins; body lines double-spaced at 32.2 pt exact, 0.5 in first-line indent, 23.1 pt between paragraphs; the title and the court title centered and bold; the FRCP 10(a) caption as a borderless three-column table (3.4 in, 0.15 in, 2.95 in) with "Case No.:"; headings: level 1 centered and bold, levels 2 and 3 flush left with a hanging half inch; a block quotation single-spaced and indented 0.5 in on both sides; the date line; the signature block; the "OF COUNSEL" block; the certificate of service; a centered page number in the footer.
-  - Differs or unknown (recorded before fb-595.68): none checked on a rendered page yet (see BLOCKED). Word and LibreOffice may break lines and pages differently from typst. The argument headings keep the typed "I." and "A." of the sample, as the typst template does. No table of contents or table of authorities is built (the sample has none); a brief that needs one needs a field or a written table, and this folder has neither yet.
-  - Checked so far (before fb-595.68): the package unzips, every XML part is well formed, and the text reads back in order (`pandoc -f docx -t plain`), with the caption, the date line, the "OF COUNSEL" block and the certificate in place.
-  - BLOCKED (recorded before fb-595.68, when this box had no LibreOffice): `BLOCKED: docx.pdf checks (Gates 0 to 3 on usage/OUTPUT-nutrien-motion-brief.docx.pdf): LibreOffice (soffice) cannot be installed on this box. conda-forge has no LibreOffice package, and apt needs root. So no .docx.pdf was made, no page was rendered to PNG, and tools/check.sh --engine docx cannot run. Pages reviewed: 0 of 10.` The .docx must still be opened in LibreOffice and Word, with the result recorded under `## sample nutrien-motion-brief docx` in a review file (none exists in this folder yet).
+On the generic federal district brief since fb-595.17.4: `typst/layout.yaml` is `base: /lib/layouts/frcp-motion-brief.yaml` plus this court's overlay, each value with its rule; the typst template only names the face; `latex/` (`template.tex`, `xdoc.lua`) and `docx/` (`reference.xml`, `xdoc.lua`) are generated from the merged layout by `fb engines gen` (do not edit them; change the layout and generate again). The old per-folder typst code and Word filter are removed. docs/EVAL-LOOP.md, "Generated engines", has the layout grammar.
+
+| engine | output | check.sh | XENG-001..003 |
+|---|---|---|---|
+| typst (reference) | `usage/OUTPUT-motion-brief.typst.pdf`, 11 pages | 11 checks passed, 0 failed | reference |
+| latex | `usage/OUTPUT-motion-brief.latex.pdf` | 14 checks passed, 0 failed | PASS (226/226 lines) |
+| docx | `usage/OUTPUT-motion-brief.docx`, `.docx.pdf` (LibreOffice) | 15 checks passed, 0 failed | PASS (226/226 lines) |
+
+Frontmatter (`usage/INPUT-motion-brief.md`): `division`, `case_label`, `case_number`, `caption.parties` (`names`, one line each, and `designation`), `brief_title`, `signature` (`date_line`, `blocks`: one list of lines per signer, the "/s/" line first, `of_counsel`), `service` (`text`, `served`, `signer`, `lines`). The move changed the render: the paper's title is underlined (the Nutrien exemplar), the case number sits centered on the caption's height, the signer's block stands in the right half (both exemplars), and the conclusion with the signature and "OF COUNSEL" block moves to page 10 whole (kept with the last paragraph), so the render is 11 pages. Typography is unchanged: Times New Roman 14 pt, 32.2 pt double and 16.1 pt single pitch.
 
 ## Known gaps
 

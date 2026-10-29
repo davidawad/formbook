@@ -1,41 +1,33 @@
 ---
-court:
-  - IN THE UNITED STATES DISTRICT COURT
-  - FOR THE MIDDLE DISTRICT OF ALABAMA
-  - SOUTHERN DIVISION
+division: SOUTHERN DIVISION
+case_label: "Case No.:"
+case_number: 1:25-cv-00302-RAH-SMD
 caption:
-  case_label: "Case No.:"
-  case_number: 1:25-cv-00302-RAH-SMD
-  sides:
-    - names:
-        - NUTRIEN AG SOLUTIONS, INC.,
-      designation: Plaintiff,
-    - names:
-        - TROY FILLINGIM, individually;
-        - KAELYN FILLINGIM, individually;
-        - FILLINGIM FARMS, INC.,
-        - a corporation; and
-        - FLINT FARMS, LLC,
-        - a limited liability company,
-      designation: Defendants.
-title: BRIEF IN SUPPORT OF MOTION TO DISMISS DEFENDANTS’ AMENDED COUNTERCLAIM
-signature_date: "Respectfully submitted this 17th day of December, 2025."
+  parties:
+    - names: "NUTRIEN AG SOLUTIONS, INC.,"
+      designation: "Plaintiff,"
+    - names: |-
+        TROY FILLINGIM, individually;
+        KAELYN FILLINGIM, individually;
+        FILLINGIM FARMS, INC.,
+        a corporation; and
+        FLINT FARMS, LLC,
+        a limited liability company,
+      designation: "Defendants."
+brief_title: BRIEF IN SUPPORT OF MOTION TO DISMISS DEFENDANTS’ AMENDED COUNTERCLAIM
 signature:
-  - signer: Patrick L.W. Sefton
-    lines:
-      - Patrick L.W. Sefton (ASB-8341-N47P)
-      - Kazia J. Hale (ASB-1232-M00F)
-      - Attorneys for Nutrien Ag Solutions, Inc.
-of_counsel:
-  - "OF COUNSEL:"
-  - CAPELL & HOWARD, P.C.
-  - P. O. Box 2069
-  - Montgomery, AL 36102-2069
-  - "Telephone: (334) 241-8000"
-  - "Email: pat.sefton@chlaw.com"
-  - kazia.hale@chlaw.com
-certificate:
-  heading: CERTIFICATE OF SERVICE
+  date_line: "Respectfully submitted this 17th day of December, 2025."
+  blocks:
+    - ["/s/ Patrick L.W. Sefton", "Patrick L.W. Sefton (ASB-8341-N47P)", "Kazia J. Hale (ASB-1232-M00F)", "Attorneys for Nutrien Ag Solutions, Inc."]
+  of_counsel:
+    - "OF COUNSEL:"
+    - CAPELL & HOWARD, P.C.
+    - P. O. Box 2069
+    - Montgomery, AL 36102-2069
+    - "Telephone: (334) 241-8000"
+    - "Email: pat.sefton@chlaw.com"
+    - kazia.hale@chlaw.com
+service:
   text: "I hereby certify that a true and correct copy of the foregoing has been e-filed using the CM/ECF system, which will send notification of such filing to the following counsel of record, on this 17th day of December,  2025:"
   served:
     - Alyse Phillips Fowler
@@ -44,7 +36,7 @@ certificate:
     - Elba, AL 36323
     - alyse@alysefowlerlaw.com
     - Counsel for Defendants
-  signer: Patrick L.W. Sefton
+  signer: "/s/ Patrick L.W. Sefton"
   lines:
     - Of Counsel
 ---

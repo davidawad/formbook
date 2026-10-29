@@ -1,0 +1,69 @@
+# U.S. District Court for the Northern District of Florida (flnd): a motion with its incorporated memorandum, on the
+# generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with N.D. Fla.'s local rules overlaid here. The
+# shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by
+# `fb engines gen`). Rules: N.D. Fla. Local Rules, https://flnd.uscourts.gov/sites/flnd/files/local_rules/local_rules_0.pdf
+# (verified 2026-10-14; ../README.md quotes them). The base already meets Loc. R. 5.1(C): double spaced, margins of at
+# least one inch, pages numbered.
+base: /lib/layouts/frcp-motion-brief.yaml
+# Loc. R. 5.1(C): at least 14-point font, everywhere (footnotes too).
+size: 14
+# Loc. R. 5.1(C): double spaced; 32.2 pt, twice the 16.1 pt single line of 14 pt type, the exemplar's pitch.
+pitch: {body: 32.2, single: 16.1}
+footnote: {size: 14}
+quote: {left: 36, right: 36, above: 0, below: 32.2}
+# Loc. R. 7.1(F): a memorandum of at most 8,000 words (headings, footnotes and quotations counted; the case style,
+# signature block and certificate of service not): the body before the certificate of service, counted in every
+# engine; over the limit the render stops.
+words: {limit: 8000}
+# Headings bold, as the exemplar: a section centered in capitals on the body pitch; an argument heading single-spaced
+# at the margin, a single line around it, its later lines hung half an inch under the letter the sample types.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body}
+  - {bold: true, hang: 36, above: 16.1, below: 16.1}
+  - {bold: true, left: 36, hang: 36, above: 16.1, below: 16.1}
+# Loc. R. 5.1(B): the case style on the first page: the court's name and division bold and centered; the parties at
+# the left (each party's names, its designation a line below, "v." a line from each), no rule, as the exemplar; the
+# case number with the judges' initials at the right; then the heading identifying the document, bold and centered.
+constants:
+  court: "UNITED STATES DISTRICT COURT"
+  district: "NORTHERN DISTRICT OF FLORIDA"
+front:
+  - {text: "{xd.court}", align: center, bold: true, pitch: single}
+  - {text: "{xd.district}", align: center, bold: true, pitch: single}
+  - {text: "{division}", align: center, bold: true, upper: true, optional: true}
+  - columns:
+      - width: 237.6
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", above: 16.1}
+            between:
+              - {text: "v.", above: 16.1, below: 16.1}
+      - blocks:
+          - {text: "{case_label|CASE NO.}", left: 7.2}
+          - {text: "{case_number}", left: 7.2}
+    gutter: 21.6
+    above: 32.2
+  - {text: "{brief_title}", align: center, bold: true, above: 32.2, below: 32.2}
+# Loc. R. 5.1(D): the date at the left and, from three inches in, "Respectfully submitted," the firm (its address and
+# e-mail), the "/s/" signature, the signers' names and bar numbers and the party they represent; kept whole and with
+# the last paragraph, a double line around it.
+closing:
+  - columns:
+      - width: 216
+        blocks:
+          - {text: "Dated: {signature.date}", optional: true}
+      - blocks:
+          - {text: "Respectfully submitted,"}
+          - group:
+              - {text: "{signature.firm}"}
+            above: 16.1
+          - {text: "{signature.by}", above: 16.1}
+          - {text: "{signature.lines}", optional: true}
+    gutter: 14.4
+    above: 32.2
+    below: 32.2
+# Loc. R. 5.1(F): the certificate of service after the signature, double spaced as the text: the body's level-1
+# section that starts with it.
+tail: {at: "CERTIFICATE OF SERVICE", pitch: body, indent: 36, above: 32.2}

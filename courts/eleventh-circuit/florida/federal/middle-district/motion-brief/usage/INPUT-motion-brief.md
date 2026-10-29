@@ -2,11 +2,13 @@
 case_number: "8:26-cv-02634-SDM-AEP"
 division: "Tampa Division"
 caption:
-  versus: "v."
   parties:
-    - names: ["DAVID PHILLIP and CARLY PHILLIP, each individually and as Next Friends to C.P, P.P, S.P. and R.P.,"]
+    - names: "DAVID PHILLIP and CARLY PHILLIP, each individually and as Next Friends to C.P, P.P, S.P. and R.P.,"
       designation: "Plaintiffs,"
-    - names: ["THE MICHAELS ORGANIZATION, LLC;", "AMC EAST COMMUNITIES, LLC,", "MMS AIR FORCE LLC,"]
+    - names: |-
+        THE MICHAELS ORGANIZATION, LLC;
+        AMC EAST COMMUNITIES, LLC,
+        MMS AIR FORCE LLC,
       designation: "Defendants."
 brief_title: "DEFENDANTS' MOTION TO DISMISS PLAINTIFFS' COMPLAINT OR IN THE ALTERNATIVE MOTION FOR JUDGMENT ON THE PLEADINGS"
 footer_title: "Defendants' Motion to Dismiss"
@@ -18,6 +20,14 @@ signature:
     - ["G. WILLIAM HUNT", "Florida Bar Number 126838", "Email: william.hunt@lewisbrisbois.com;", "flcourtmail@lewisbrisbois.com;", "Brenda.Howard@lewisbrisbois.com"]
   address: ["401 East Jackson Street, Suite 3400", "Tampa, Florida 33602", "Phone: 813.739.1900; Fax: 813.739.1919"]
   for: "Attorneys for Defendants"
+service:
+  text: "I HEREBY CERTIFY that on October 8, 2026, I electronically filed the foregoing with the Clerk of the Court by using the Clerk's CM/ECF System, which will send a Notice of Electronic Filing to the following:"
+  served:
+    - "Robert J. McKee: rmckee@themckeelawgroup.com"
+    - "Vincent J. Colatriano: vcolatriano@cooperkik.com"
+    - "Michael Weitzner: mweitzner@cooperkik.com"
+    - "Kristina Baehr: Kristina@well.law"
+  signer: ["s/Jonathan Kepko", "Attorney"]
 ---
 
 # MEMORANDUM OF LAW
@@ -38,7 +48,7 @@ Rule 9(b) of the Federal Rules of Civil Procedure heightens pleading standard fo
 
 "The standard for Rule 12(c) motions for judgment on the pleadings is identical to the standard for Rule 12(b)(6) motions to dismiss for failure to state a claim." Waller v. Hanlon, 922 F.3d 590, 599 (5th Cir. 2019). The complaint "must contain sufficient factual matter, accepted as true, to 'state a claim to relief that is plausible on its face.'" Iqbal, 556 U.S. at 678 (quoting Twombly, 550 U.S. at 570). The court must set aside unsupported legal conclusions and focus on well-pled facts, then judge the plausibility of those facts to decide whether the complaint shows more than "the mere possibility of misconduct." Id. at 679; Waller, 922 F.3d at 599.
 
-~ *[Transcription omits Section III, Request for Judicial Notice (filed pages 5 to 7), and Section IV.a.ii.D to F (filed pages 14 to 15). The text of the filing is not reproduced here.]*
+*[Transcription omits Section III, Request for Judicial Notice (filed pages 5 to 7), and Section IV.a.ii.D to F (filed pages 14 to 15). The text of the filing is not reproduced here.]*
 
 ## IV. ARGUMENT
 
@@ -99,18 +109,3 @@ For all of these reasons, Defendants move to dismiss the Complaint.
 # LOCAL RULE 3.01(g) CERTIFICATE
 
 Per to Local Rule 3.01(g), Defendants certify that the undersigned has conferred with counsel for Plaintiffs who oppose this Motion.
-
-# CERTIFICATE OF SERVICE
-
-I HEREBY CERTIFY that on October 8, 2026, I electronically filed the foregoing with the Clerk of the Court by using the Clerk's CM/ECF System, which will send a Notice of Electronic Filing to the following:
-
-~ Robert J. McKee: rmckee@themckeelawgroup.com
-
-~ Vincent J. Colatriano: vcolatriano@cooperkik.com
-
-~ Michael Weitzner: mweitzner@cooperkik.com
-
-~ Kristina Baehr: Kristina@well.law
-
-~ s/Jonathan Kepko\
-Attorney

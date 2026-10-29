@@ -8,14 +8,15 @@ case_number: "4:26-cv-00294-RH-MAF"
 division: "TALLAHASSEE DIVISION"
 caption:
   parties:
-    - names: ["KINSALE INSURANCE COMPANY,"]
+    - names: "KINSALE INSURANCE COMPANY,"
       designation: "Plaintiff,"
-    - names: ["MILITANT SECURITY, LLC, and", "SHANNON JONES, as Parent and Natural Guardian of AS, a minor,"]
+    - names: |-
+        MILITANT SECURITY, LLC, and
+        SHANNON JONES, as Parent and Natural Guardian of AS, a minor,
       designation: "Defendants."
 brief_title: "MILITANT SECURITY, LLC’S PARTIAL MOTION TO DISMISS OR STAY AND MOTION TO STRIKE"
-lead_in: "Defendant Militant Security, LLC (“Militant”), pursuant to Federal Rules of Civil Procedure 12(b)(1), 12(b)(6), and 12(f), moves for an order (1) dismissing without prejudice the portions of Counts I and II that seek a declaration that Plaintiff Kinsale Insurance Company (“Kinsale”) has no duty to indemnify Militant or, in the alternative, staying those requests until the underlying liability action is resolved; and (2) dismissing or striking paragraph b(iii) of Kinsale’s prayer for relief, which seeks reimbursement of attorneys’ fees and expenses incurred in defending Militant. Militant does not ask the Court through this motion to decide Kinsale’s duty to defend. In support, Militant states:"
-date: "September 14, 2026"
 signature:
+  date: "September 14, 2026"
   firm:
     - "Gendler & Gendler, PLLC"
     - "*Attorneys for Defendant*"
@@ -31,6 +32,8 @@ signature:
     - "Florida Bar No. 755842"
     - "*Counsel for Militant Security, LLC*"
 ---
+
+Defendant Militant Security, LLC (“Militant”), pursuant to Federal Rules of Civil Procedure 12(b)(1), 12(b)(6), and 12(f), moves for an order (1) dismissing without prejudice the portions of Counts I and II that seek a declaration that Plaintiff Kinsale Insurance Company (“Kinsale”) has no duty to indemnify Militant or, in the alternative, staying those requests until the underlying liability action is resolved; and (2) dismissing or striking paragraph b(iii) of Kinsale’s prayer for relief, which seeks reimbursement of attorneys’ fees and expenses incurred in defending Militant. Militant does not ask the Court through this motion to decide Kinsale’s duty to defend. In support, Militant states:
 
 # I. INTRODUCTION
 

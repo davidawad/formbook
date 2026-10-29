@@ -20,12 +20,12 @@ Primary sources, verified 2026-10-14:
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | N.D. Fla. Loc. R. 5.1(B) | Case style on the first page (court, case number with judges' initials, a party on each side), then a heading identifying the document. Source: https://flnd.uscourts.gov/sites/flnd/files/local_rules/local_rules_0.pdf (see known gap 8). | `court-title`, `caption`, `brief_title`. |
-| N.D. Fla. Loc. R. 5.1(C) | Double spaced; at least 14-point font; at least one-inch margins on all four sides; pages numbered. Same source. | `type-size = 14pt`, `pitch-double` (32.2 pt, measured on the filed exemplar), `margin: 1in`, centered page-number footer. |
+| N.D. Fla. Loc. R. 5.1(C) | Double spaced; at least 14-point font; at least one-inch margins on all four sides; pages numbered. Same source. | `size: 14`, `pitch.body` (32.2 pt, measured on the filed exemplar), `margin` (base), centered page-number footer. |
 | N.D. Fla. Loc. R. 5.1(D) | Attorney signature block: signature, typed name, bar number, street and email addresses, telephone; identifies the party. Same source. | `signature-block`: `firm`, `by`, `lines`. |
 | N.D. Fla. Loc. R. 5.1(F) | Certificate of service with date and method, unless each party is served through the electronic system or by formal process. Same source. | The sample's "CERTIFICATE OF SERVICE" (a heading and a paragraph). The template sets the signature block before it. |
 | N.D. Fla. Loc. R. 7.1(A) | A motion is in writing in the form required by Loc. R. 5.1 and 7.1. Same source. | The whole template. |
 | N.D. Fla. Loc. R. 7.1(B)-(D) | Attorney conference and a certificate under a separate heading, unless the motion would determine the outcome of a claim (7.1(D)). Same source. | Content: the sample carries the 7.1(D) statement under its own heading ("LOCAL RULE 7.1(D) STATEMENT"), as the filing does. The template does not check which exception applies. |
-| N.D. Fla. Loc. R. 7.1(E) | The supporting memorandum is in the same document as the motion. Same source. | `body()`: the motion and memorandum are one document; unnumbered paragraphs, headings I., A., and so on. |
+| N.D. Fla. Loc. R. 7.1(E) | The supporting memorandum is in the same document as the motion. Same source. | `typst/layout.yaml`: the motion and memorandum are one document; unnumbered paragraphs, headings I., A., and so on. |
 | N.D. Fla. Loc. R. 7.1(F) | A memorandum must not exceed 8,000 words and must include a certificate of the word count. Headings, footnotes and quotations count; the case style, signature block and certificate of service do not. Same source. | The sample's "CERTIFICATE OF COMPLIANCE WITH WORD LIMIT" (a heading and a sentence). The number is the sample's count (see below). |
 | Fed. R. Civ. P. 12(b)(1), 12(b)(6), 12(f) | Lack of subject-matter jurisdiction; failure to state a claim; motion to strike. Fetched from https://www.law.cornell.edu/rules/frcp/rule_12 on 2026-10-14 (latest amendment listed: eff. Dec. 1, 2024). | Content (the sample's argument). The template does not check the defenses. |
 
@@ -45,8 +45,7 @@ The sample's own count: **2,308 words**, from the lead-in paragraph through the 
 
 ## Markdown contract (for samples)
 
-- YAML frontmatter, then the body. Fields: `case_number` (with judge initials), `division`, `caption.parties`, `brief_title`, `lead_in`, `date`, `signature` (`firm` lines, `by`, `lines`).
-- Body: blank-line-separated chunks. `#`, `##` headings; paragraphs. Italic with `*...*`. No footnotes, no tables (none in the filing).
+See "Engines" below: the frontmatter fields are those the layout (`typst/layout.yaml`) reads. Body: markdown (headings `#` to `####`, paragraphs, lists, block quotations, footnotes, `*italics*`), set by the shared document model.
 
 ## What the overlay shows
 
@@ -89,22 +88,13 @@ Fixed during review: (1) the signature block moved before the certificate of ser
 
 ## Engines
 
-typst (`typst/`) is the reference. The docx engine (`docx/`) follows it; the LaTeX engine is not built for this doc type.
+On the generic federal district brief since fb-595.17.4: `typst/layout.yaml` is `base: /lib/layouts/frcp-motion-brief.yaml` plus this court's overlay, each value with its rule; the typst template only names the face; `latex/` (`template.tex`, `xdoc.lua`) and `docx/` (`reference.xml`, `xdoc.lua`) are generated from the merged layout by `fb engines gen` (do not edit them; change the layout and generate again). The old per-folder typst code and Word filter are removed. docs/EVAL-LOOP.md, "Generated engines", has the layout grammar.
 
-| Engine | Output (`usage/`) | Status |
-|---|---|---|
-| typst | `OUTPUT-motion-brief.typst.pdf` (12 pp) | reference |
-| docx | `OUTPUT-motion-brief.docx` and `OUTPUT-motion-brief.docx.pdf` (12 pp) | ok: rendered with LibreOffice; every page compared with the typst page at 60 dpi (on the earlier EB Garamond renders, LibreOffice 26.8.1) |
+| engine | output | check.sh | XENG-001..003 |
+|---|---|---|---|
+| typst (reference) | `usage/OUTPUT-motion-brief.typst.pdf`, 12 pages | 11 checks passed, 0 failed | reference |
+| latex | `usage/OUTPUT-motion-brief.latex.pdf` | 14 checks passed, 0 failed | PASS (248/248 lines) |
+| docx | `usage/OUTPUT-motion-brief.docx`, `.docx.pdf` (LibreOffice) | 15 checks passed, 0 failed | PASS (248/248 lines) |
 
-```sh
-sh tools/render.sh --engine docx courts/eleventh-circuit/florida/federal/northern-district/motion-brief usage/INPUT-motion-brief.md
-```
+Frontmatter: `division`, `case_label` (default "CASE NO."), `case_number`, `caption.parties` (`names`, `designation`), `brief_title`, `signature` (`date`, `firm`, `by`, `lines`). The motion's opening paragraph moved from the frontmatter (`lead_in`) to the start of the body, so it is counted with the text. Loc. R. 7.1(F)'s 8,000 words are counted by the layout (`words.limit`, every engine: the body before the certificate of service; the render stops over it); the template asserts the certificate of the word count. The certificate of service is the body's tail, after the signature. The caption has no rule under the parties now (the exemplar has none; DEF-COVER-002 passes).
 
-`fb render --engine docx` builds the reference document from `docx/reference.xml` (the cross-engine recipe, `base="xengine"`, in the typst template's face; `docx/make-reference.sh` and `docx/render.sh` are retired) and runs pandoc on the sample, reading it as CommonMark with smart punctuation (so "at *7" keeps its literal star, as in typst); `docx/flnd-motion-brief.lua` builds the cover, the signature block and its place before the certificate of service.
-
-- *Matches typst* (the face from the committed PDFs; the rest checked on the earlier EB Garamond renders, before fb-595.68): Times New Roman 14 pt everywhere, including the footer (embedded); US Letter with 1-inch margins; body double spaced at 32.2 pt; the caption and its closing rule; the title; the lead-in; headings: level 1 centered capitals, level 2 bold and flush left (as typst draws it), level 3 bold; italic case names, signals and *Id.*; the signature block before the CERTIFICATE OF SERVICE with typst's gaps; the centered page number.
-- *Differs* (on the earlier EB Garamond renders): the caption has no "v." between parties, as in the typst template (its comment says the defendants are one side; a clerk may expect "v."; David to decide, and the typst should change with the docx). Level-2 headings: the typst template sets a 0.5 in hanging indent, but typst does not apply it to these lines, so the docx has none either. Lines break at slightly different words, and the page breaks fall a line or two apart from typst's (the lead-in's ninth line moves to page 2 here). The docx has 12 pages as the typst does; the signature block is on page 12 with the certificate, where typst's is on page 11.
-- *Not checked:* not opened in Microsoft Word (none on this box). LibreOffice converts it with no warning. The gate scripts were not run (no `court.json` or `checks.yaml` in this folder; see known gap 9).
-- *docx BLOCKED items:* none. LibreOffice was installed from the official build, as in the complaint's Engines section.
-
-[Court README](../README.md) | [Complaint README](../complaint/README.md)

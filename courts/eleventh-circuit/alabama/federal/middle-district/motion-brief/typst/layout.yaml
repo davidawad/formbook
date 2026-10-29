@@ -1,0 +1,90 @@
+# U.S. District Court for the Middle District of Alabama (almd): a brief in support of a motion, on the generic FRCP
+# brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with M.D. Ala.'s local rules overlaid here. The shared document
+# model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`).
+# Rules: M.D. Ala. Local Rules (effective December 1, 2010),
+# https://www.almd.uscourts.gov/sites/default/files/forms/ALMD%20Local%20Rules.pdf (verified 2026-10-14; ../README.md
+# quotes them). The base already meets LR 5.6: 8 1/2 x 11 paper, double-spaced except for quoted material, every page
+# numbered consecutively. The local rules set no typeface, size, margin or length for a brief: the size and spacing
+# below are the convention of both exemplars (two filers, usage/SOURCE.md).
+base: /lib/layouts/frcp-motion-brief.yaml
+# 14 pt, as both exemplars set it (no rule sets a size); every text at it, footnotes too.
+size: 14
+# LR 5.6: double-spaced; 32.2 pt, twice the 16.1 pt single line of 14 pt type, the pitch of both exemplars.
+pitch: {body: 32.2, single: 16.1}
+footnote: {size: 14}
+# LR 5.6: quoted material single-spaced; half an inch in on each side, half a single line around and between its
+# paragraphs.
+quote: {left: 36, right: 36, above: 8.05, below: 8.05, gap: 8.05}
+# Headings bold at the body size: a section centered in a line of the body pitch; an argument heading and a point
+# single-spaced at the margin, a single line above, a wrapped line hanging half an inch after the number the sample
+# types ("I.", "A."), as the exemplar sets them.
+heading:
+  - {align: center, bold: true, pitch: body}
+  - {bold: true, hang: 36, above: 16.1}
+  - {bold: true, hang: 36, above: 16.1}
+# FRCP 10(a): the court's name (two lines and the division, as both exemplars print it, bold and centered).
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE MIDDLE DISTRICT OF ALABAMA"
+# FRCP 10(a) in the M.D. Ala. form of the exemplars: the parties at the left (each party's names, its designation half
+# an inch in, "v." between them), a column of ")" as tall as theirs, the case number at the right centered on their
+# height; then the paper's title, bold, centered and underlined, a double line below.
+front:
+  - {text: "{xd.court}", align: center, bold: true, pitch: single}
+  - {text: "{xd.district}", align: center, bold: true, pitch: single}
+  - {text: "{division}", align: center, bold: true, optional: true}
+  - columns:
+      - width: 237.6
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 36}
+            between:
+              - {text: "v.", left: 36}
+      - {width: 10.8, repeat: ")"}
+      - valign: center
+        blocks:
+          - {text: "{case_label|Civil Action No.} {case_number}"}
+    gutter: 4
+    above: 16.1
+  - {text: "{brief_title}", align: center, bold: true, underline: true, left: 36, right: 36, above: 32.2, below: 16.1}
+# FRCP 11(a): the date line at the body pitch right after the last paragraph, then each signer's block (the "/s/"
+# signature, name, bar number, whom they represent) single-spaced in the right half, a single line between blocks;
+# the "OF COUNSEL" block (the firm's address, e-mail and telephone) at the margin below, as both exemplars place it.
+closing:
+  - group:
+      - {text: "{signature.date_line}", pitch: body, indent: 36, optional: true}
+      - columns:
+          - {width: 216, blocks: []}
+          - blocks:
+              - each: signature.blocks
+                blocks:
+                  - {text: "{.}"}
+                gap: 16.1
+        above: 16.1
+      - when: signature.of_counsel
+        blocks:
+          - group:
+              - {text: "{signature.of_counsel}"}
+            above: 16.1
+    above: 0
+# The certificate of service (FRCP 5(b); 5(d)(1)(B) needs none for a paper served through CM/ECF alone, both exemplars
+# print one): the heading, the certificate double-spaced, those served single-spaced, the signer at the right; kept on
+# one page.
+after_tail:
+  - when: service
+    blocks:
+      - group:
+          - {text: "CERTIFICATE OF SERVICE", align: center, bold: true}
+          - {markdown: "{service.text}", pitch: body, indent: 36, above: 16.1}
+          - group:
+              - {text: "{service.served}"}
+            above: 16.1
+          - columns:
+              - {width: 216, blocks: []}
+              - blocks:
+                  - {text: "{service.signer}"}
+                  - {text: "{service.lines}", optional: true}
+            above: 16.1
+        above: 32.2

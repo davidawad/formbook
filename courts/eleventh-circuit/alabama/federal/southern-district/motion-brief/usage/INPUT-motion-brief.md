@@ -3,16 +3,16 @@ case_number: "22-004478-CG-N"
 division: "SOUTHERN DIVISION"
 caption:
   parties:
-    - names: ["ESSENCE JACKSON,"]
+    - names: "ESSENCE JACKSON,"
       designation: "Plaintiff,"
-    - names: ["SHELL CHEMICAL LP,"]
+    - names: "SHELL CHEMICAL LP,"
       designation: "Defendant."
 brief_title: "DEFENDANT’S MEMORANDUM OF LAW IN SUPPORT OF ITS MOTION TO DISMISS OR, IN THE ALTERNATIVE, FOR A MORE DEFINITE STATEMENT"
-date: "May 1, 2023"
 signature:
+  date: "May 1, 2023"
   blocks:
     - ["By: s/ Chelsea J. Bodin", "Pablo Orozco (pro hac vice forthcoming)", "MN Reg. No. 0396811", "Chelsea J. Bodin (pro hac vice pending)", "MN Reg. No. 0400006", "NILAN JOHNSON LEWIS PA", "250 Marquette Avenue South, Suite 800", "Minneapolis, MN 55401", "Telephone: (612) 305-7500", "Fax: (612) 305-7501", "porozco@nilanjohnson.com", "cbodin@nilanjohnson.com", "ATTORNEYS FOR DEFENDANT"]
-certificate:
+service:
   text: "I hereby certify that on May 1, 2023, the foregoing was filed with the Clerk of Court using the CM/ECF system, which will send notification of the filing to all counsel of record."
   signature: ["s/ Chelsea J. Bodin"]
 ---

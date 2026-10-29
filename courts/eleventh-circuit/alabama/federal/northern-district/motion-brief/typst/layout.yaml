@@ -1,0 +1,90 @@
+# U.S. District Court for the Northern District of Alabama (alnd): a memorandum in support of a motion, with a table of
+# contents and a table of authorities, on the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with
+# N.D. Ala.'s practice overlaid here. The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are
+# generated from the merged layout by `fb engines gen`). Rules: N.D. Ala. Local Rules (rev. Dec. 4, 2019),
+# https://www.alnd.uscourts.gov/sites/alnd/files/ALND%20Local%20Rules%20Revised%2012-04-2019.pdf (verified 2026-10-14;
+# ../README.md quotes them): LR 5.5 (electronic filing and signature), LR 5.6 (service by the Notice of Electronic
+# Filing). The local rules set no typeface, size, margin, spacing or length for a brief, so the base's floor stands
+# (12 pt, double spacing, one-inch margins, numbered pages), as the exemplar sets it (usage/SOURCE.md).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, with the division (the sample's), as the exemplar prints it.
+constants:
+  court: "UNITED STATES DISTRICT COURT"
+  district: "NORTHERN DISTRICT OF ALABAMA"
+# The cover unnumbered, the tables numbered i, ii, .., the text from 1 (the exemplar's numbering).
+page_number: {align: center, front: lower-roman}
+# Headings single-spaced and bold, a single line above and below: a section centered in capitals, unnumbered; the
+# argument headings numbered by the template, "I." at the margin in capitals, "A." and "1." each half an inch further
+# in, the label in a half-inch box and the title's later lines hung under it (the exemplar's form).
+heading:
+  - {align: center, bold: true, upper: true, above: 13.8, below: 13.8}
+  - {bold: true, upper: true, number: "I.", label_box: 36, above: 13.8, below: 13.8}
+  - {bold: true, number: "A.", label_box: 36, left: 36, above: 13.8, below: 13.8}
+  - {bold: true, number: "1.", label_box: 36, left: 72, above: 13.8, below: 13.8}
+# FRCP 10(a): the cover page: the court's name and division bold and centered; the parties at the left closed by a
+# rule at their right and foot (each party's names, its designation set in, "v." half an inch in between them),
+# the file number beside them; the paper's title bold and centered below.
+cover:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{division}", align: center, bold: true, optional: true}
+  - columns:
+      - width: 234
+        blocks:
+          - box:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", left: 129.6}
+                between:
+                  - {text: "v.", left: 36}
+            stroke: {right: 0.75, bottom: 0.75}
+            inset: {right: 14, bottom: 6.9}
+      - valign: center
+        blocks:
+          - {text: "{case_label|Civil Action No.} {case_number}", left: 14}
+    above: 24
+  - {text: "{brief_title}", align: center, bold: true, upper: true, left: 36, right: 36, above: 24}
+front: []
+# The tables of the exemplar: the contents (the headings with their numbers and pages), the authorities in the sample's
+# groups, each entry with the pages its `find` marks, "passim" from seven pages.
+contents: {title: "TABLE OF CONTENTS", depth: 4, col: 36, hang: 36, step: 18, above: 6}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  col: 72
+  hang: 25.2
+  above: 6
+  passim: 7
+  group: {bold: true, above: 12, below: 0}
+# FRCP 11(a), LR 5.5: the date line, then each firm's signers side by side (the "/s/" signature, names, address,
+# telephone, e-mail), then the closing lines (whom they represent); kept whole and with the last paragraph.
+closing:
+  - group:
+      - {text: "{signature.date_line}"}
+      - columns:
+          each: signature.firms
+          per_row: 2
+          gap: 21.6
+          blocks:
+            - {text: "{.}"}
+        above: 24
+      - group:
+          - {text: "{signature.lines}"}
+        above: 24
+    above: 24
+# FRCP 5(b), LR 5.6: the certificate of service on a page of its own, its title a section heading (in the contents);
+# the certificate, then the place and date and the "/s/" signature at the right.
+after_tail:
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "{service.title|CERTIFICATE OF SERVICE}", heading: 1}
+      - group:
+          - {markdown: "{service.text}", pitch: body, indent: 36}
+          - columns:
+              - {width: 237.6, blocks: []}
+              - blocks:
+                  - {text: "{service.date_line}"}
+                  - {text: "/s/ {service.signer}", above: 24}
+                  - {text: "{service.signer}"}
+            above: 24

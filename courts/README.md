@@ -319,14 +319,14 @@ Courts under `courts` (347).
 | [United States Bankruptcy Court for the Middle District of Alabama](eleventh-circuit/alabama/federal/bankruptcy-middle-district) | `almb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Alabama](eleventh-circuit/alabama/federal/bankruptcy-northern-district) | `alnb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. Alabama](eleventh-circuit/alabama/federal/bankruptcy-southern-district) | `alsb` | up for review | 1/1 | — | 1/1 | 14 |
-| [United States District Court for the Middle District of Alabama](eleventh-circuit/alabama/federal/middle-district) | `almd` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Northern District of Alabama](eleventh-circuit/alabama/federal/northern-district) | `alnd` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Southern District of Alabama](eleventh-circuit/alabama/federal/southern-district) | `alsd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the Middle District of Alabama](eleventh-circuit/alabama/federal/middle-district) | `almd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [United States District Court for the Northern District of Alabama](eleventh-circuit/alabama/federal/northern-district) | `alnd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [United States District Court for the Southern District of Alabama](eleventh-circuit/alabama/federal/southern-district) | `alsd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, M.D. Florida](eleventh-circuit/florida/federal/bankruptcy-middle-district) | `flmb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Florida](eleventh-circuit/florida/federal/bankruptcy-northern-district) | `flnb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, Southern District Florida](eleventh-circuit/florida/federal/bankruptcy-southern-district) | `flsb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Middle District of Florida](eleventh-circuit/florida/federal/middle-district) | `flmd` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Northern District of Florida](eleventh-circuit/florida/federal/northern-district) | `flnd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the Middle District of Florida](eleventh-circuit/florida/federal/middle-district) | `flmd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [United States District Court for the Northern District of Florida](eleventh-circuit/florida/federal/northern-district) | `flnd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court for the Southern District of Florida](eleventh-circuit/florida/federal/southern-district) | `flsd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, M.D. Georgia](eleventh-circuit/georgia/federal/bankruptcy-middle-district) | `gamb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Georgia](eleventh-circuit/georgia/federal/bankruptcy-northern-district) | `ganb` | up for review | 2/2 | — | 2/2 | 14 |

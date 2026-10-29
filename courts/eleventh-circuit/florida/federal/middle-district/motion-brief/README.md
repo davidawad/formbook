@@ -16,32 +16,29 @@ Folder: `courts/eleventh-circuit/florida/federal/middle-district/motion-brief/`.
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
-| M.D. Fla. Local Rule 1.08(a) | 8½ × 11 paper; 1-inch margins; bottom-center page numbers (none needed on page one); main text at least 13-point, 2.0 double-spaced; indented quotations at least 12-point single-spaced; footnotes at least 11-point single-spaced; permitted typefaces (Book Antiqua, Calisto MT, Century Schoolbook, Georgia, Palatino). | `page-margin`, footer in `flmd-motion-brief()`, `type-size`, `pitch-double`, `show quote`. Typeface: Times New Roman under 1.08(b) (see "Typeface"). |
-| M.D. Fla. Local Rule 1.08(b) | Times New Roman at 14-point main text, 13-point indented quotations, 12-point footnotes. | `font-family = ("Times New Roman", "Liberation Serif")`, `type-size = 14pt` (all text at 14 pt). |
+| M.D. Fla. Local Rule 1.08(a) | 8½ × 11 paper; 1-inch margins; bottom-center page numbers (none needed on page one); main text at least 13-point, 2.0 double-spaced; indented quotations at least 12-point single-spaced; footnotes at least 11-point single-spaced; permitted typefaces (Book Antiqua, Calisto MT, Century Schoolbook, Georgia, Palatino). | `page-margin`, footer in `typst/layout.yaml`, `type-size`, `pitch.body`, `show quote`. Typeface: Times New Roman under 1.08(b) (see "Typeface"). |
+| M.D. Fla. Local Rule 1.08(b) | Times New Roman at 14-point main text, 13-point indented quotations, 12-point footnotes. | `font-family = ("Times New Roman", "Liberation Serif")`, `size: 14` (all text at 14 pt). |
 | M.D. Fla. Local Rule 3.01(b) | A motion includes, in a single document no longer than twenty-five pages, a concise statement of the precise relief requested, the basis, and a legal memorandum. | Not checked by the template (see gap 3). |
 | M.D. Fla. Local Rule 3.01(a) | Page limits exclude the caption, the signature block, any certificate of conferral or service, and any verification or attachment. | Relevant to the 25-page count; not computed. |
 | M.D. Fla. Local Rule 3.01(g) | Duty to confer before filing a motion, except for a Rule 11 sanction, injunctive relief, judgment on the pleadings, summary judgment, or class certification. A Rule 12(b)(6) motion to dismiss is **not** exempt. The certificate goes under the heading "Local Rule 3.01(g) Certificate" at the end of the motion. | Sample body: the certificate precedes the signature block. |
 | M.D. Fla. Local Rule 3.01(d) | A response to a motion to dismiss is due within 21 days after service. | Not in the document; recorded for the clerk's reference. |
 | Fed. R. Civ. P. 7(b)(1) | A request for a court order must be made by motion, stating with particularity the grounds and the relief sought. | Sample lead-in ("move to dismiss ... Defendants state:"). |
-| Fed. R. Civ. P. 10(a) | Caption with court, title, file number, Rule 7(a) designation. | `cover()`. |
-| Fed. R. Civ. P. 11(a) | Paper signed by counsel of record. | `signature-block()`. |
+| Fed. R. Civ. P. 10(a) | Caption with court, title, file number, Rule 7(a) designation. | `typst/layout.yaml`. |
+| Fed. R. Civ. P. 11(a) | Paper signed by counsel of record. | `typst/layout.yaml`. |
 
 Sources: Local Rule 1.08 and 3.01 text from the court's amended local rules effective 2025-11-01, https://www.flmd.uscourts.gov/sites/flmd/files/flmd-amended-local-rules-effective-november-01-2025.pdf (rule page https://www.flmd.uscourts.gov/local-rules/rule-108-form-pleading-motion-or-other-paper), read 2026-10-14. Rules 7, 8, 10 and 12 from https://www.law.cornell.edu/rules/frcp/rule_7 etc., fetched 2026-10-14.
 
 ## Layout
 
 - Court title single-spaced; caption (parties with closing rule; `CASE NO.:` with judge initials on the right); title centered bold; the Rule 12 lead-in paragraph with indent.
-- Body double-spaced (32.2 pt baseline pitch, `pitch-double`), 14-point Times New Roman, 1-inch margins, first-line indent on paragraphs. Body paragraphs are **not** numbered (memoranda are not pleadings under Rule 10(b)).
+- Body double-spaced (32.2 pt baseline pitch, `pitch.body`), 14-point Times New Roman, 1-inch margins, first-line indent on paragraphs. Body paragraphs are **not** numbered (memoranda are not pleadings under Rule 10(b)).
 - Headings: level 1 centered bold (write caps in the sample); level 2 centered bold; level 3 bold, left; level 4 bold italic, left.
 - Signature block (after the 3.01(g) certificate): "Respectfully submitted," firm, each counsel's `s/` line and details, address, "Attorneys for Defendants". Kept as one unbreakable block.
 - Certificate of service: the sample's `# CERTIFICATE OF SERVICE` and everything after it are printed after the signature block as one unbreakable block.
 
 ## Markdown contract (for samples)
 
-- YAML frontmatter, then the body. Frontmatter: `case_number` (with judge initials), `division`, `caption.versus`, `caption.parties`, `brief_title`, `footer_title` (not used by this template), `lead_in`, `signature` (`firm`, `counsel` as a list of line-lists, `address`, `for`).
-- Body: blank-line-separated chunks. `#` heading (level 1 to 4); a list; a `~ ` chunk is an unindented paragraph (certificate lines); any other text is a body paragraph with indent.
-- A backslash at the end of a line is a hard line break inside a `~` chunk (used for "s/Jonathan Kepko" over "Attorney").
-- Not supported: footnotes (the exemplar has two; they are not transcribed), tables, raw typst.
+See "Engines" below: the frontmatter fields are those the layout (`typst/layout.yaml`) reads. Body: markdown (headings `#` to `####`, paragraphs, lists, block quotations, footnotes, `*italics*`), set by the shared document model.
 
 ## Typeface
 
@@ -86,21 +83,13 @@ Every page was rendered with `pdftoppm -r 60`, montaged two per image, and viewe
 
 ## Engines
 
-| Engine | Status |
-|---|---|
-| typst | primary; unchanged by this section |
-| docx | built: `docx/reference.xml`, from which `fb render --engine docx` builds the reference document (the cross-engine recipe, `base="xengine"`, in the typst template's face; the complaint's `make-reference.sh` and `docx/render.sh` are retired), and `docx/flmd-motion-brief.lua`. Output `usage/OUTPUT-motion-brief.docx` and the LibreOffice `usage/OUTPUT-motion-brief.docx.pdf` (15 pages); the BLOCKED item below was recorded before fb-595.68, when no LibreOffice ran here. |
-| latex | not built |
+On the generic federal district brief since fb-595.17.4: `typst/layout.yaml` is `base: /lib/layouts/frcp-motion-brief.yaml` plus this court's overlay, each value with its rule; the typst template only names the face; `latex/` (`template.tex`, `xdoc.lua`) and `docx/` (`reference.xml`, `xdoc.lua`) are generated from the merged layout by `fb engines gen` (do not edit them; change the layout and generate again). The old per-folder typst code and Word filter are removed. docs/EVAL-LOOP.md, "Generated engines", has the layout grammar.
 
-What matches the typst template (by rule): Letter, 1-inch margins; main text 14-point, double-spaced; indented body paragraphs, not numbered; headings levels 1 to 4 (level 1 and 2 centered bold, level 3 bold left, level 4 bold italic left); lettered lists; the caption and cover; the signature block at 3 inches, kept as one block; the Local Rule 3.01(g) certificate before the signature; the certificate of service after it, kept together; page numbers bottom center from page two.
+| engine | output | check.sh | XENG-001..003 |
+|---|---|---|---|
+| typst (reference) | `usage/OUTPUT-motion-brief.typst.pdf`, 15 pages | 12 checks passed, 0 failed | reference |
+| latex | `usage/OUTPUT-motion-brief.latex.pdf` | 15 checks passed, 0 failed | PASS (305/305 lines) |
+| docx | `usage/OUTPUT-motion-brief.docx`, `.docx.pdf` (LibreOffice) | 16 checks passed, 0 failed | PASS (305/305 lines) |
 
-What differs from typst (recorded before fb-595.68):
+Frontmatter: `division`, `case_label` (default "Case No."), `case_number`, `caption.parties` (`names`, `designation`), `brief_title`, `lead_in` (the motion's opening, the first paragraph), `signature` (`firm`, `counsel`: a list of lines per counsel, `address`, `for`), `service` (`text`, `served`, `signer`). The certificate of service moved from the body (its "~ " unindented chunks, a markup of the old template that pandoc reads as a definition list) to `service` in the frontmatter, set after the signature by the layout; the transcription note in the body lost its "~ ". Page one is unnumbered (LR 1.08(a)); the 25-page limit of LR 3.01(a) is checked (`eval.yaml`).
 
-- **Typeface** (since settled: typst and docx both set Times New Roman 14-point now). The typst template then set TeX Gyre Pagella, a visual stand-in for Book Antiqua (LR 1.08(a)). The docx named **Times New Roman 14-point** instead, which LR 1.08(b) also permits. Reason: a clerk's Word must have the named face, and Book Antiqua has no metric-compatible free substitute on this box (`fc-match` falls back to a mono face). This is a choice for David to confirm; if Book Antiqua is required, the docx needs a font that renders with the same metrics before the PDF gates mean anything.
-- **Line spacing and length.** Word's native double (auto 2.0), as in the complaint: the docx page count may differ from the typst render (14 pages); not measured here.
-- **Quotations** are 13-point single-spaced (LR 1.08(b)); the typst template sets no quotation size. Footnotes are not in the markdown contract (as in the typst template).
-- **Numbers.** Lettered items are typed `(a)`, `(b)`; the body paragraphs are unnumbered, as in the typst template.
-
-Checks run on the `.docx` (not a PDF gate): every word of the markdown body is in the docx text in order (2804 of 2804 words, including the certificate of service after the signature; `pandoc -t plain`, with smart-punctuation no-break spaces and ellipses normalized).
-
-BLOCKED (docx tier 1 gates, `docs/DOCX.md`; recorded before fb-595.68): `OUTPUT-flmd-motion-brief-phillipmotiontodismiss.docx.pdf` could not be made (LibreOffice not runnable here, see the complaint README). Gates 0 and 1 and the Gate 2 page review were not run on a docx PDF; pages reviewed: 0. The sample is an excerpt (see gap 2 above), so the 25-page limit (LR 3.01(b)) is not tested by any engine.

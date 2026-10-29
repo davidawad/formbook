@@ -8,8 +8,8 @@ Courts under `courts/eleventh-circuit/florida` (14).
 | [United States Bankruptcy Court, M.D. Florida](federal/bankruptcy-middle-district) | `flmb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. Florida](federal/bankruptcy-northern-district) | `flnb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, Southern District Florida](federal/bankruptcy-southern-district) | `flsb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Middle District of Florida](federal/middle-district) | `flmd` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the Northern District of Florida](federal/northern-district) | `flnd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the Middle District of Florida](federal/middle-district) | `flmd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [United States District Court for the Northern District of Florida](federal/northern-district) | `flnd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States District Court for the Southern District of Florida](federal/southern-district) | `flsd` | up for review | 2/2 | — | 2/2 | 14 |
 | [Florida District Courts of Appeal](state/district-courts-of-appeal) | `fladistctapp` | up for review | 8/8 | — | — | 29 |
 | [Florida Fifth District Court of Appeal](state/fifth-district-court-of-appeal) | `fladistctapp5` | up for review | 8/8 | 8/8 | 8/8 | 29 |

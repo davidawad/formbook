@@ -317,11 +317,9 @@ courts/eleventh-circuit/alabama/federal/middle-district/complaint docx
 courts/eleventh-circuit/alabama/federal/middle-district/complaint typst
 courts/eleventh-circuit/alabama/federal/northern-district/complaint docx
 courts/eleventh-circuit/alabama/federal/northern-district/complaint typst
-courts/eleventh-circuit/alabama/federal/northern-district/motion-brief docx
 courts/eleventh-circuit/alabama/federal/northern-district/motion-brief typst
 courts/eleventh-circuit/alabama/federal/southern-district/complaint docx
 courts/eleventh-circuit/alabama/federal/southern-district/complaint typst
-courts/eleventh-circuit/alabama/federal/southern-district/motion-brief docx
 courts/eleventh-circuit/alabama/federal/southern-district/motion-brief typst
 courts/eleventh-circuit/alabama/state/court-of-civil-appeals/answering-brief typst
 courts/eleventh-circuit/alabama/state/court-of-criminal-appeals/amicus-brief typst
@@ -364,8 +362,6 @@ courts/eleventh-circuit/florida/federal/middle-district/complaint docx
 courts/eleventh-circuit/florida/federal/middle-district/complaint typst
 courts/eleventh-circuit/florida/federal/northern-district/complaint docx
 courts/eleventh-circuit/florida/federal/northern-district/complaint typst
-courts/eleventh-circuit/florida/federal/northern-district/motion-brief docx
-courts/eleventh-circuit/florida/federal/northern-district/motion-brief typst
 courts/eleventh-circuit/florida/federal/southern-district/complaint docx
 courts/eleventh-circuit/florida/federal/southern-district/complaint typst
 courts/eleventh-circuit/florida/federal/southern-district/motion-brief docx
