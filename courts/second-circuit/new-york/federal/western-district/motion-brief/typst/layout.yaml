@@ -1,0 +1,80 @@
+# U.S. District Court for the Western District of New York (nywd): a memorandum of law in support of a motion, on the
+# generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with W.D.N.Y.'s local rules overlaid here. The
+# shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb
+# engines gen`). Rules: W.D.N.Y. Local Rules of Civil Procedure (2025 edition), https://www.nywd.uscourts.gov/sites/
+# nywd/files/2025%20Local%20Rules%20of%20Civil%20Procedure%20FINAL%20-%20v3-1.pdf (../README.md quotes them). The base
+# already meets L. R. Civ. P. 10(a): 12-point type, footnotes included (10(a)(1)), the body double spaced, block
+# quotations and footnotes single (10(a)(2)), one-inch margins (10(a)(4)), pages numbered consecutively (10(a)(5)).
+# The 25-page limit of L. R. Civ. P. 7(a)(2)(C) (the tables not counted) is not machine-checked.
+base: /lib/layouts/frcp-motion-brief.yaml
+constants:
+  district: "WESTERN DISTRICT OF NEW YORK"
+# L. R. Civ. P. 10(a)(5): pages numbered consecutively at the foot, centered: the cover unnumbered, the table of
+# contents i, ii, the body from 1.
+page_number: {align: center, front: lower-roman}
+# Block quotations single spaced (10(a)(2)), half an inch in on each side, a single line above and below.
+quote: {left: 36, right: 36, above: 13.8, below: 13.8}
+# Headings single spaced, a single line above and below, bold: a section centered in capitals, unnumbered; the
+# argument headings numbered by the template, "I." at the margin and "A." half an inch in, each label in a half-inch
+# box with the title's later lines hung under it.
+heading:
+  - {align: center, bold: true, upper: true, above: 13.8, below: 13.8}
+  - {bold: true, number: "I.", label_box: 36, above: 13.8, below: 13.8}
+  - {bold: true, number: "A.", label_box: 36, left: 36, above: 13.8, below: 13.8}
+# FRCP 10(a): the cover (unnumbered): the court's name at the margin in bold (as both exemplars, two filers, set it); a
+# single line below it the caption: the parties between a rule above and below (both exemplars), each party's names,
+# its designation two and a fifth inches in, "v." 1.2 inches in, half a single line apart; at the right the case
+# number, centered on their height (both exemplars); a double line below the paper's title centered in bold capitals;
+# a double line below it the counsel at the right (FRCP 11(a)), each group's firm in bold, then its names and lines,
+# the groups a single line apart.
+cover:
+  - {text: "{xd.court}", bold: true}
+  - {text: "{xd.district}", bold: true}
+  - columns:
+      - width: 244.8
+        blocks:
+          - box:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", left: 158.4, above: 6.9}
+                between:
+                  - {text: "v.", left: 86.4, above: 6.9, below: 6.9}
+            stroke: {top: 0.75, bottom: 0.75}
+            inset: {top: 8, right: 7.2, bottom: 8}
+      - valign: center
+        blocks:
+          - {text: "Case No. {case_number}"}
+    gutter: 21.6
+    above: 13.8
+  - {text: "{title}", align: center, bold: true, upper: true, above: 24}
+  - columns:
+      - {width: 252, blocks: []}
+      - blocks:
+          - each: counsel
+            gap: 13.8
+            blocks:
+              - {text: "{firm}", bold: true}
+              - {text: "{names}"}
+              - {text: "{lines}"}
+    gutter: 0
+    above: 24
+front: []
+# The table of contents (a page of its own, numbered i), double spaced: a row per heading, a level half an inch further
+# in, a level-2 or level-3 row with its label in its half-inch box, the title wrapping before a half-inch page column,
+# a dot leader to the page.
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, step: 36, pitch: body, above: 0}
+# FRCP 11(a): a double line below the body: "Dated:" at the left; in a column at the right the firm in bold, a double
+# line below it "By:" and the signature, then the signer's lines (name, address, telephone, e-mail). Kept whole with
+# the last paragraph.
+closing:
+  - columns:
+      - blocks:
+          - {text: "Dated: {date}"}
+      - width: 230.4
+        blocks:
+          - {text: "{signature.firm}", bold: true}
+          - {text: "By: {signature.by}", above: 24}
+          - {text: "{signature.lines}"}
+    gutter: 0
+    above: 24

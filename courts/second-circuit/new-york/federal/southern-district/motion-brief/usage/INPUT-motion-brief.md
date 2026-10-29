@@ -14,9 +14,6 @@ counsel:
   - "Tel: 212.513.3200"
   - "Fax: 212.385.9010"
   - "Attorneys for Defendants Ashfaque J. Rahman and Mahween Rahman"
-court:
-  - "UNITED STATES DISTRICT COURT"
-  - "SOUTHERN DISTRICT OF NEW YORK"
 case_number: "1:26-cv-06789-VEC"
 file-label: "Case No."
 legends:
@@ -31,7 +28,7 @@ caption:
 title: "Memorandum of Law in Support of Motion to Dismiss the Complaint"
 place: "New York, New York"
 date: "August 28, 2026"
-word_count: "3,546"
+word_count: 3546
 signature:
   firm:
     - "HOLLAND & KNIGHT LLP"
@@ -43,31 +40,31 @@ signature:
     - "michael.frevola@hklaw.com"
     - "Attorneys for Defendants"
 authorities:
-  twombly: {kind: case, name: "Bell Atl. Corp. v. Twombly", cite: "550 U.S. 544 (2007)"}
-  iqbal: {kind: case, name: "Ashcroft v. Iqbal", cite: "556 U.S. 662 (2009)"}
-  arista: {kind: case, name: "Arista Records LLC v. Doe 3", cite: "604 F.3d 110 (2d Cir. 2010)"}
-  bluewhale: {kind: case, name: "Blue Whale Corp. v. Grand China Shipping Dev. Co.", cite: "722 F.3d 488 (2d Cir. 2013)"}
-  lauritzen: {kind: case, name: "Lauritzen v. Larsen", cite: "345 U.S. 571 (1953)"}
-  goldenhorn: {kind: case, name: "Golden Horn Shipping Co. v. Volans Shipping Co.", cite: "No. 14-CV-2168 (JPO), 2017 WL 3535002 (S.D.N.Y. Aug. 16, 2017)"}
-  kirno: {kind: case, name: "Kirno Hill Corp. v. Holt", cite: "618 F.2d 982 (2d Cir. 1980)"}
-  platina: {kind: case, name: "Platina Bulk Carriers Pte Ltd v. Praxis Energy Agents DMCC", cite: "No. 20 Civ. 4892 (NRB), 2024 WL 1194778 (S.D.N.Y. Mar. 20, 2024)"}
-  clipper: {kind: case, name: "Clipper Wonsild Tankers Holding A/S v. Biodiesel Ventures, LLC", cite: "851 F. Supp. 2d 504 (S.D.N.Y. 2012)"}
-  williams: {kind: case, name: "Williams v. McAllister Bros., Inc.", cite: "534 F.2d 19 (2d Cir. 1976)"}
-  gartner: {kind: case, name: "Gartner v. Snyder", cite: "607 F.2d 582 (2d Cir. 1979)"}
-  passalacqua: {kind: case, name: "Wm. Passalacqua Builders, Inc. v. Resnick Developers S., Inc.", cite: "933 F.2d 131 (2d Cir. 1991)"}
-  pbgc: {kind: case, name: "Pension Benefit Guar. Corp. ex rel. St. Vincent Catholic Med. Ctrs. Ret. Plan v. Morgan Stanley Inv. Mgmt. Inc.", cite: "712 F.3d 705 (2d Cir. 2013)"}
-  archawski: {kind: case, name: "Archawski v. Hanioti", cite: "239 F.2d 806 (2d Cir. 1956)"}
-  albaniabeg: {kind: case, name: "AlbaniaBEG Ambient Sh.p.k. v. Enel Sp.A.", cite: "160 A.D.3d 93, 73 N.Y.S.3d 1 (1st Dep't 2018)"}
-  koehler: {kind: case, name: "Koehler v. Bank of Bermuda Ltd.", cite: "12 N.Y.3d 533 (2009)"}
-  mtbe: {kind: case, name: "In re Methyl Tertiary Butyl Ether (\"MTBE\") Prods. Liab. Litig.", cite: "457 F. Supp. 2d 455 (S.D.N.Y. 2006)"}
-  foman: {kind: case, name: "Foman v. Davis", cite: "371 U.S. 178 (1962)"}
+  twombly: {kind: case, name: "*Bell Atl. Corp. v. Twombly*", cite: "550 U.S. 544 (2007)"}
+  iqbal: {kind: case, name: "*Ashcroft v. Iqbal*", cite: "556 U.S. 662 (2009)"}
+  arista: {kind: case, name: "*Arista Records LLC v. Doe 3*", cite: "604 F.3d 110 (2d Cir. 2010)"}
+  bluewhale: {kind: case, name: "*Blue Whale Corp. v. Grand China Shipping Dev. Co.*", cite: "722 F.3d 488 (2d Cir. 2013)"}
+  lauritzen: {kind: case, name: "*Lauritzen v. Larsen*", cite: "345 U.S. 571 (1953)"}
+  goldenhorn: {kind: case, name: "*Golden Horn Shipping Co. v. Volans Shipping Co.*", cite: "No. 14-CV-2168 (JPO), 2017 WL 3535002 (S.D.N.Y. Aug. 16, 2017)"}
+  kirno: {kind: case, name: "*Kirno Hill Corp. v. Holt*", cite: "618 F.2d 982 (2d Cir. 1980)"}
+  platina: {kind: case, name: "*Platina Bulk Carriers Pte Ltd v. Praxis Energy Agents DMCC*", cite: "No. 20 Civ. 4892 (NRB), 2024 WL 1194778 (S.D.N.Y. Mar. 20, 2024)"}
+  clipper: {kind: case, name: "*Clipper Wonsild Tankers Holding A/S v. Biodiesel Ventures, LLC*", cite: "851 F. Supp. 2d 504 (S.D.N.Y. 2012)"}
+  williams: {kind: case, name: "*Williams v. McAllister Bros., Inc.*", cite: "534 F.2d 19 (2d Cir. 1976)"}
+  gartner: {kind: case, name: "*Gartner v. Snyder*", cite: "607 F.2d 582 (2d Cir. 1979)"}
+  passalacqua: {kind: case, name: "*Wm. Passalacqua Builders, Inc. v. Resnick Developers S., Inc.*", cite: "933 F.2d 131 (2d Cir. 1991)"}
+  pbgc: {kind: case, name: "*Pension Benefit Guar. Corp. ex rel. St. Vincent Catholic Med. Ctrs. Ret. Plan v. Morgan Stanley Inv. Mgmt. Inc.*", cite: "712 F.3d 705 (2d Cir. 2013)"}
+  archawski: {kind: case, name: "*Archawski v. Hanioti*", cite: "239 F.2d 806 (2d Cir. 1956)"}
+  albaniabeg: {kind: case, name: "*AlbaniaBEG Ambient Sh.p.k. v. Enel Sp.A.*", cite: "160 A.D.3d 93, 73 N.Y.S.3d 1 (1st Dep't 2018)"}
+  koehler: {kind: case, name: "*Koehler v. Bank of Bermuda Ltd.*", cite: "12 N.Y.3d 533 (2009)"}
+  mtbe: {kind: case, name: "*In re Methyl Tertiary Butyl Ether (\"MTBE\") Prods. Liab. Litig.*", cite: "457 F. Supp. 2d 455 (S.D.N.Y. 2006)"}
+  foman: {kind: case, name: "*Foman v. Davis*", cite: "371 U.S. 178 (1962)"}
   rule12b6: {kind: rule, cite: "Fed. R. Civ. P. 12(b)(6)"}
   rule15a: {kind: rule, cite: "Fed. R. Civ. P. 15(a)"}
   cplr5303: {kind: statute, cite: "N.Y. C.P.L.R. § 5303(a)"}
   reilly: {kind: other, cite: "Richard C. Reilly, Supplemental Practice Commentaries, C5303:3 (2018)"}
 ---
 
-# Preliminary Statement
+# PRELIMINARY STATEMENT
 
 Defendants Ashfaque J. Rahman (“A.J. Rahman”) and Mahween Rahman (together, “Defendants”), by and through their attorneys Holland & Knight LLP, file this Memorandum of Law in Support of the Motion to Dismiss the Complaint filed by Minerva Bunkering Pte Ltd. (“Minerva”) on the grounds stated below.
 
@@ -77,7 +74,7 @@ Minerva’s theory rests on the extraordinary remedy of piercing the corporate v
 
 For these reasons, the Complaint should be dismissed with prejudice.
 
-# Background
+# BACKGROUND
 
 The following facts are recited in the Complaint (except where otherwise identified) and accepted only for use in this motion.
 
@@ -85,11 +82,11 @@ Minerva is a Singapore-registered marine fuel supplier. Compl. ¶ 12. It deliver
 
 Notably, the Complaint contains not one allegation of actions taken by the Defendants that misrepresented anything to Minerva to induce Minerva to act to provide the bunkers at issue. Nevertheless, Minerva now seeks to hold A.J. Rahman and Mahween Rahman, individuals who are not parties to any contract with Minerva and are not named in the English judgment, personally liable for the entire judgment debt on an alter-ego theory. *Id.* ¶¶ 10, 86–87.
 
-# Legal Standard
+# LEGAL STANDARD
 
 To survive a motion to dismiss under [Fed. R. Civ. P. 12(b)(6)](toa:rule12b6), a complaint must allege “enough facts to state a claim to relief that is plausible on its face.” [*Bell Atl. Corp. v. Twombly*, 550 U.S. 544, 570 (2007)](toa:twombly). “A claim has facial plausibility when the plaintiff pleads factual content that allows the court to draw the reasonable inference that the defendant is liable for the misconduct alleged.” [*Ashcroft v. Iqbal*, 556 U.S. 662, 678 (2009)](toa:iqbal). Conclusory allegations and formulaic recitations of the elements of a cause of action are insufficient. *Id.* at 678–79. Allegations made “on information and belief” must still be grounded in sufficient factual context to raise a plausible, not merely conceivable, inference of liability. [*Arista Records LLC v. Doe 3*, 604 F.3d 110, 120 (2d Cir. 2010)](toa:arista). Minerva’s claims, almost all of which are “supported” by either formulaic recitations of the elements of a veil-piercing claim or assertions of “fact” based upon information and belief, fail to satisfy the threshold inquiry set forth by the Supreme Court in *Twombly* and *Iqbal*. Hence, Defendants’ motion should be granted and Minerva’s claims should be dismissed.
 
-# Argument
+# ARGUMENT
 
 ## Count I Fails to State a Claim for Alter-Ego Liability Under Singapore Law.
 
@@ -163,6 +160,6 @@ This count is entirely duplicative of Count I. Where a declaratory judgment clai
 
 Although leave to amend is ordinarily freely given under [Fed. R. Civ. P. 15(a)](toa:rule15a), it may be denied where amendment would be futile. [*Foman v. Davis*, 371 U.S. 178, 182 (1962)](toa:foman). Here, the deficiencies in the Complaint are not merely technical. The allegations regarding Mahween Rahman are so thin as to suggest that no additional facts exist to support her inclusion as a defendant. The core theory of the case, that corporate officers of a multinational shipping group are personally liable for their companies’ debts merely because the enterprise ultimately failed and assets were sold, is legally insufficient regardless of how it is pleaded. Accordingly, leave to amend should be denied, or at minimum held in abeyance pending the Court’s assessment of the legal viability of the claims.
 
-# Conclusion
+# CONCLUSION
 
 For the foregoing reasons, Defendants respectfully request that the Court dismiss the Complaint in its entirety pursuant to [Rule 12](toa:rule12b6) of the Federal Rules of Civil Procedure, with prejudice, and grant such other and further relief as the Court deems just and proper.

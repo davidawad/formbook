@@ -45,15 +45,15 @@ Courts under `courts` (347).
 | [Supreme Court of Rhode Island](first-circuit/rhode-island/state/supreme-court) | `ri` | up for review | 3/3 | 3/3 | 3/3 | 29 |
 | [Court of Appeals for the Second Circuit](second-circuit/court-of-appeals) | `ca2` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court, D. Connecticut](second-circuit/connecticut/federal/bankruptcy-district) | `ctb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the District of Connecticut](second-circuit/connecticut/federal/district) | `ctd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the District of Connecticut](second-circuit/connecticut/federal/district) | `ctd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. New York](second-circuit/new-york/federal/bankruptcy-eastern-district) | `nyeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, N.D. New York](second-circuit/new-york/federal/bankruptcy-northern-district) | `nynb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, S.D. New York](second-circuit/new-york/federal/bankruptcy-southern-district) | `nysb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. New York](second-circuit/new-york/federal/bankruptcy-western-district) | `nywb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, E.D. New York](second-circuit/new-york/federal/eastern-district) | `nyed` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, N.D. New York](second-circuit/new-york/federal/northern-district) | `nynd` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, S.D. New York](second-circuit/new-york/federal/southern-district) | `nysd` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, W.D. New York](second-circuit/new-york/federal/western-district) | `nywd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. New York](second-circuit/new-york/federal/eastern-district) | `nyed` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, N.D. New York](second-circuit/new-york/federal/northern-district) | `nynd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, S.D. New York](second-circuit/new-york/federal/southern-district) | `nysd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, W.D. New York](second-circuit/new-york/federal/western-district) | `nywd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Vermont](second-circuit/vermont/federal/bankruptcy-district) | `vtb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Vermont](second-circuit/vermont/federal/district) | `vtd` | up for review | 2/2 | 1/1 | 1/2 | 14 |
 | [Connecticut Court of Appeals](second-circuit/connecticut/state/court-of-appeals) | `connappct` | up for review | 6/6 | 6/6 | 1/5 | 29 |

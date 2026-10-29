@@ -89,12 +89,22 @@ sh tools/overlay.sh courts/second-circuit/new-york/federal/western-district/moti
 
 `tools/render.sh` writes `OUTPUT-<id>.pdf` and `tools/overlay.sh` reads it and writes `OVERLAY-<id>.pdf/.txt`. This folder keeps the names in the brief, so after the overlay run: `mv usage/OUTPUT-<id>.pdf usage/<id>.pdf`, `mv usage/OVERLAY-<id>.pdf usage/<id>-overlay.pdf`, `mv usage/OVERLAY-<id>.txt usage/<id>-overlay.txt`.
 
+## On the FRCP base (fb-595.17.14, 2026-10-29)
+
+`typst/layout.yaml` names the generic federal district brief (`base: /lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and overlays only what W.D.N.Y. sets itself, each rule cited there; `typst/nywd-motion-brief.typ` names the face and hands the merged layout to the shared document model (`lib/typst/xdoc.typ`). `latex/` and `docx/` are generated from the merged layout by `fb engines gen` (do not edit them; `fb engines gen --check` fails on a stale one). The per-folder typst code and docx filter are gone. The Layout and Markdown contract sections above describe the earlier template where they differ from this list.
+
+- The cover now sets the court's name at the margin and rules the party column above and below, the case number centered on its height: both exemplars (two filers) do (the earlier template centered the name and ruled the column at its right and foot).
+- Argument headings numbered by the template (`I.`, `A.`), as before; the contents set a level half an inch further in, as exemplar 1 does (the earlier template set levels 1 and 2 at the margin).
+- Frontmatter: a `counsel` group names its `firm` (bold on the cover) apart from its `names`; a party's `names` are one line each (the defendants' names now one string). The `::` paragraph prefix and lettered `1.` items of the earlier chunker are gone (no sample used them); a list is a markdown list.
+- Tier 3, ACCEPTED (`eval.yaml`): the designations 2.2 inches in and the case number at its column's left; exemplar 1 sets them further in and at the right edge, exemplar 2 (another filer) as the template does.
+
+Pages reviewed: 14 of 14 on typst, latex and docx after the move, as text layout (`pdftotext -layout`) and word boxes (`-bbox`): this pod's image viewer could not open a PNG, so no page was looked at as a picture. The latex and docx renders break every line where typst does (XENG-003), so their pages carry the same text.
+
 ## Engines
 
-The typst template is the reference; the docx breaks every line and page where it does (Gate 4 CROSS-ENGINE, `params.cross_engine: gate` in `eval.yaml`).
+All three engines on the shared document model; Gate 4 CROSS-ENGINE gates the latex and docx renders against typst (`params.cross_engine: gate` in `eval.yaml`).
 
-DOCX (`docx/`): `reference.xml` (`base="xengine"`: the face is the typst template's through `{font}`, 12 pt, exact 24 pt body lines, 13.8 pt single lines, 1 in margins) and `nywd-motion-brief.lua` (on `lib/docx/xengine.lua`: the cover with the caption table, the table of contents as rows with a dot leader to a 36 pt page column, the headings (I., II., A.) with the label in a half-inch box, the body, block quotations, lettered items and the signature table, each in the typst template's line boxes and spaces; the space before ". . ." bound as typst binds it). The sections and page numbers come from `fb render` (were `docx/render.sh`'s two passes): the filter writes needles for the contents' title and every heading (`$FORMBOOK_NEEDLES`), reads their pages back (`$FORMBOOK_PAGES`), and names fb's footers: the cover unnumbered (`rIdFtrNone`), the contents in lower roman from i, the body from 1 (`$FORMBOOK_FINAL`). No shell script and no committed `reference.docx` (fb-595.68.26). Output: `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice; opened in LibreOffice, not Word).
-
-- `tools/check.sh <dir>`: RESULT: 9 checks passed, 0 failed (DEF-TOC-001, DEF-COVER-001 pass).
-- `tools/check.sh <dir> --engine docx`: RESULT: 13 checks passed, 0 failed; XENG-001..003 PASS (14 pages, 357/357 lines).
-- No latex engine for this folder.
+- `tools/check.sh <dir>`: RESULT: 11 checks passed, 0 failed.
+- `tools/check.sh <dir> --engine latex`: RESULT: 14 checks passed, 0 failed; XENG-001..003 PASS (14 pages, 358/358 lines).
+- `tools/check.sh <dir> --engine docx`: RESULT: 15 checks passed, 0 failed; XENG-001..003 PASS (14 pages, 358/358 lines).
+- DEF-COVER-002 passes on every engine (the differences from exemplar 1 that are one filer's style are accepted in `eval.yaml` with their reasons), so this folder's lines left `data/cover-structure-baseline.txt`.

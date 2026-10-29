@@ -1,0 +1,121 @@
+# U.S. District Court for the District of Connecticut (ctd): a memorandum of law in support of a motion, on the generic
+# FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D. Conn.'s local rules overlaid here. The shared
+# document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines
+# gen`). Rules: D. Conn. Local Rules of Civil Procedure and the Electronic Filing Policies and Procedures (../README.md
+# quotes them, requirement IDs CTD-...). The base already meets L. Civ. R. 10 (margins of at least one inch, CTD-FORM-
+# 004) and the 12-point text of L. Civ. R. 7(a)(5) (CTD-FORM-002). The 40-page limit of L. Civ. R. 7(a)(5) (the tables
+# not counted, CTD-FORM-005) is not machine-checked.
+base: /lib/layouts/frcp-motion-brief.yaml
+constants:
+  district: "DISTRICT OF CONNECTICUT"
+# L. Civ. R. 7(a)(5) (CTD-FORM-001): memoranda double spaced, except headings, footnotes and block quotes: twice the
+# 13.8 pt single line of 12 pt Times.
+pitch: {body: 27.6}
+# Pages numbered at the foot, centered: the cover unnumbered, the tables i, ii, the body from 1.
+page_number: {align: center, front: lower-roman}
+# L. Civ. R. 7(a)(5) (CTD-FORM-002): footnotes in at least 10-point font; single spaced, 4 pt apart, a double line's
+# room above the rule.
+footnote: {size: 10, pitch: 11.5, gap: 4, clearance: 12}
+# Block quotes single spaced (L. Civ. R. 7(a)(5)), half an inch in on each side, a single line above them.
+quote: {left: 36, right: 36, above: 13.8, below: 0}
+# A numbered list's label half an inch in a box of 0.4 inch, the text hung after it.
+list_indent: 28.8
+# Headings single spaced (L. Civ. R. 7(a)(5)), bold, a single line above: a section centered in capitals, unnumbered;
+# the argument headings numbered by the template, "A." at the margin, "1." and "a." half an inch further in each, each
+# label in a half-inch box with the title's later lines hung under it.
+heading:
+  - {align: center, bold: true, upper: true, above: 13.8, below: 0}
+  - {bold: true, number: "A.", label_box: 36, above: 13.8, below: 0}
+  - {bold: true, number: "1.", label_box: 36, left: 36, above: 13.8, below: 0}
+  - {bold: true, number: "a.", label_box: 36, left: 72, above: 13.8, below: 0}
+# FRCP 10(a), L. Civ. R. 10 (CTD-FIRST-001, -002): the cover (unnumbered): the court's name centered in bold; a double
+# line below it the caption: the parties at the left (each party's names, its designation half an inch in, "v." a
+# blank line from each), a column of ":" beside them as high as they are (exemplars 2 and 3, two of the three
+# filers); at the right, centered on their height, the complete docket number with the judge's initials and the date
+# of the paper (L. Civ. R. 10); a double line below the caption the paper's title centered in bold capitals (all three
+# exemplars). L. Civ. R. 7(a)(1) (CTD-FIRST-003): whether oral argument is requested, when the filer says, in the
+# cover's lower margin.
+cover:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 252
+        blocks:
+          - each: caption
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 36}
+            between:
+              - {text: "v.", above: 13.8, below: 13.8}
+      - {width: 36, repeat: ":", align: center}
+      - valign: center
+        blocks:
+          - {text: "Case No. {case_number}"}
+          - {text: "Date: {date}", above: 13.8}
+    gutter: 0
+    above: 27.6
+  - {text: "{brief_title}", align: center, bold: true, upper: true, left: 36, right: 36, above: 27.6}
+  - when: oral_argument
+    blocks:
+      - {fill: 1}
+      - {text: "Oral argument {oral_argument}", bold: true, upper: true}
+front: []
+# The tables (CTD-CONT-003, a convention; L. Civ. R. 7(a)(5) leaves them out of the page count). The contents: a row
+# per heading to level 4, single spaced, a single line apart, a level half an inch further in, the title wrapping
+# before a one-inch page column, a dot leader to the page.
+contents: {title: "TABLE OF CONTENTS", depth: 4, col: 72, step: 36, above: 13.8}
+# The authorities, from the `toa:` links of the body and notes, grouped as the exemplar groups them, each name (a case
+# name in italics, as the sample writes it), a comma and the citation, its later lines hung a third of an inch;
+# "passim" for seven pages or more.
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  page_heading: "Page(s)"
+  passim: 7
+  kinds:
+    - {kind: case, title: "Cases"}
+    - {kind: statute, title: "Statutes"}
+    - {kind: rule, title: "Federal Rules"}
+    - {kind: regulation, title: "Regulations"}
+    - {kind: other, title: "Other Authorities"}
+  col: 72
+  hang: 25.2
+  above: 13.8
+  group: {bold: true, above: 13.8}
+# L. Civ. R. 10, EFPP XI.B (CTD-SIG-001): a blank line below the body "Dated:" at the margin and "Respectfully
+# submitted," at the right; then each signer a blank line apart, 2.8 inches in: "BY: /s/", the typewritten name with
+# the federal bar number, the office address, telephone, fax and e-mail. Kept whole with the last paragraph.
+closing:
+  - columns:
+      - {width: 201.6, blocks: [{text: "Dated: {date}"}]}
+      - blocks: [{text: "Respectfully submitted,"}]
+    gutter: 0
+    above: 27.6
+  - columns:
+      - {width: 201.6, blocks: []}
+      - blocks:
+          - each: signature.signers
+            gap: 27.6
+            blocks:
+              - {text: "BY: /s/ {signer}"}
+              - when: bar
+                blocks: [{text: "{signer}, Fed. Bar No. {bar}"}]
+              - unless: bar
+                blocks: [{text: "{signer}"}]
+              - {text: "{lines}", optional: true}
+    gutter: 0
+    above: 27.6
+# L. Civ. R. 5(c), Fed. R. Civ. P. 5(b)(2)(E) (CTD-CERT-001): the certification of service by counsel, a blank line
+# below the signatures, when the filer gives one: its text, then the signer 2.8 inches in.
+after_tail:
+  - when: certification
+    blocks:
+      - {text: "CERTIFICATION OF SERVICE", align: center, bold: true, above: 27.6, keep: true}
+      - {text: "{certification.text}", pitch: body, indent: 36, above: 13.8}
+      - columns:
+          - {width: 201.6, blocks: []}
+          - blocks:
+              - {text: "/s/ {certification.signer}"}
+              - {text: "{certification.signer}"}
+              - {text: "{certification.lines}"}
+        gutter: 0
+        above: 27.6

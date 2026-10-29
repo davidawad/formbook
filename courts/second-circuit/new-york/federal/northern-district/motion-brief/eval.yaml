@@ -1,4 +1,13 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (fb-595.68.26, on the shared layout model lib/*/xengine*), so a difference fails.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.17.14), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
   cross_engine: gate
+  # L.R. 7.1(b)(1)'s 25 pages count the body (the cover and the table of contents apart), which DEF-LEN-001 (the whole
+  # PDF) cannot: the typst template asserts it (typst/nynd-motion-brief.typ, `leave.pages`).
+  # DEF-COVER-002, tier 3: the three exemplars, three filers (usage/SOURCE.md: Bond, Schoeneck & King; the New York
+  # Attorney General; the U.S. Department of Justice), set "v." at three different indents; the template sets it half
+  # an inch in.
+  cover_structure_accepted:
+    - finding: 'alignment: "v."'
+      reason: "each of the three filers indents \"v.\" differently; one filer's indent is that filer's style"

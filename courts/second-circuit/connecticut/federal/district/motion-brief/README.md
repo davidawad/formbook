@@ -95,10 +95,23 @@ Primary sources, fetched 2026-10-14:
 
 ACCEPTED (tier 3): the exemplar underlines its title and its level 1 headings, puts "PRELIMINARY STATEMENT" etc. in the contents with dot leaders but without labels for the level 1 entries, and has no date in the caption (L. Civ. R. 10 requires one); the template keeps bold headings and the date.
 
+## On the FRCP base (fb-595.17.14, 2026-10-29)
+
+`typst/layout.yaml` names the generic federal district brief (`base: /lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and overlays only what D. Conn. sets itself, each rule cited there; `typst/ctd-motion-brief.typ` names the face and hands the merged layout to the shared document model (`lib/typst/xdoc.typ`). `latex/` and `docx/` are generated from the merged layout by `fb engines gen` (do not edit them; `fb engines gen --check` fails on a stale one). The per-folder typst code and docx filter are gone. The Layout and Markdown contract sections above describe the earlier template where they differ from this list.
+
+- The caption follows the convention of two of the three filers (exemplars 2 and 3): a column of ":" beside the parties, the designations half an inch in, the docket number and the date at the right, and the paper's title centered across the page below the caption, as all three exemplars set it (the earlier template ruled the party column at its right and foot and put the title in the right column).
+- The oral-argument legend of L. Civ. R. 7(a)(1) (`oral_argument`) stands at the foot of the cover when the filer gives it.
+- Frontmatter: `court` is gone (the layout's constants); `signature.signers` lists every signer (`signer`, optional `bar`, `lines`) in place of `signature` plus `others`; the case names in `authorities` are in italics; the numbered list of the preliminary statement is written `1.` (the typst engine of the model numbers a list `1.` whatever the delimiter, so `1)` would set `1.` in typst and `1)` in the other engines).
+- Tier 2, OPEN: the list stands at the margin; the exemplar sets the label half an inch in (the model has no list indent besides the label box: a base feature). The contents have no "Page" column label.
+- Tier 3, ACCEPTED (`eval.yaml`): exemplar 1's ruled caption and far-in designations.
+
+Pages reviewed: 12 of 12 on typst, latex and docx after the move, as text layout (`pdftotext -layout`) and word boxes (`-bbox`): this pod's image viewer could not open a PNG, so no page was looked at as a picture. The latex and docx renders break every line where typst does (XENG-003), so their pages carry the same text.
+
 ## Engines
 
-Both engines run on the shared cross-engine layout model (fb-595.68.25; docs/EVAL-LOOP.md, "Cross-engine gate"): `typst/ctd-motion-brief.typ` on `lib/typst/xengine.typ` (pitches, explicit block spacing, `listing-row` for the contents and authorities), `docx/motion-brief.lua` on `lib/docx/xengine.lua`, with the same numbers in twips. Times New Roman on both (the docx had named EB Garamond): 12 pt text in 27.6 pt line boxes (L. Civ. R. 7(a)(5): double-spaced), headings, quotations, table rows and signature lines in 13.8 pt boxes (single-spaced, as the rule allows), footnotes 10 pt in 11.5 pt boxes 4 pt apart; a blank single line above a heading, a quotation, a table row or group; a blank body line around the signature block and the certification; the page number centred 0.5 in above the bottom edge.
+All three engines on the shared document model; Gate 4 CROSS-ENGINE gates the latex and docx renders against typst (`params.cross_engine: gate` in `eval.yaml`).
 
-**docx** (`docx/`): `docx/reference.xml` (`base="xengine"`, `{font}`, `pandoc-from` CommonMark with smart punctuation and footnotes, as cmarker reads the body) holds the styles; fb render builds the reference document from it. `docx/motion-brief.lua` writes the cover, the tables, the headings, the lists, the quotations, the signature block and the certification, and the sections: the cover unnumbered (fb render's `rIdFtrNone`, or a legend footer when `oral_argument` is set), the tables in lower roman, the body from 1 (`$FORMBOOK_FINAL`, the page-number footer in `$FORMBOOK_FOOTERS`). The tables' page numbers come from needles (`$FORMBOOK_NEEDLES`: the table titles, the body's first words, each heading, each `toa:` citation, in document order), which replace `docx/render.sh` and `pagemap.awk`. No shell script.
-
-`fb diff --engines`: 13 pages each, 0 page ends differ, 261/261 typst lines identical; the contents and authorities pages have the same text and page numbers. `eval.yaml` sets `params.cross_engine: gate`. Not verified in Word (only LibreOffice); Word may paginate a line differently, and the table page numbers are text, not fields.
+- `tools/check.sh <dir>`: RESULT: 11 checks passed, 0 failed.
+- `tools/check.sh <dir> --engine latex`: RESULT: 14 checks passed, 0 failed; XENG-001..003 PASS (12 pages, 259/259 lines).
+- `tools/check.sh <dir> --engine docx`: RESULT: 15 checks passed, 0 failed; XENG-001..003 PASS (12 pages, 259/259 lines).
+- DEF-COVER-002 passes on every engine (the differences from exemplar 1 that are one filer's style are accepted in `eval.yaml` with their reasons), so this folder's lines left `data/cover-structure-baseline.txt`.

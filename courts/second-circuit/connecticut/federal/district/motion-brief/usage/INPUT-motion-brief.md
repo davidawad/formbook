@@ -9,9 +9,6 @@
 # the caption (L.R. 10), and the sample takes it from the filing date. Typographical errors in the filing ("SOLICITION",
 # "Comunity", "Calls") are kept as filed. See ../README.md for the meaning of every field.
 case_number: "3:26-cv-00324-KAD"
-court:
-  - "UNITED STATES DISTRICT COURT"
-  - "DISTRICT OF CONNECTICUT"
 caption:
   - names:
       - "ANTHONY WHITFIELD and ROCHELLE RIBEIRO WHITE, individually and on behalf of all others similarly situated,"
@@ -28,34 +25,34 @@ authorities:
   usc-227: {kind: statute, cite: "47 U.S.C. § 227 (Telephone Consumer Protection Act)"}
   cfr-1601e: {kind: regulation, cite: "47 C.F.R. § 64.1601(e)"}
   cfr-1200: {kind: regulation, cite: "47 C.F.R. § 64.1200(c)(2)"}
-  twombly: {kind: case, name: "Bell Atl. Corp. v. Twombly", cite: "550 U.S. 544 (2007)"}
-  iqbal: {kind: case, name: "Ashcroft v. Iqbal", cite: "556 U.S. 662 (2009)"}
-  lee: {kind: case, name: "Lee v. Yale Univ.", cite: "624 F. Supp. 3d 120 (D. Conn. 2022)"}
-  dane: {kind: case, name: "Dane v. UnitedHealthcare Ins. Co.", cite: "974 F.3d 183 (2d Cir. 2020)"}
-  pbgc: {kind: case, name: "Pension Ben. Guar. Corp. ex rel. St. Vincent Catholic Med. Ctr. Ret. Plan v. Morgan Stanley Inv. Mgmt. Inc.", cite: "712 F.3d 705 (2d Cir. 2013)"}
-  ctech: {kind: case, name: "C-Tech of New Haven, Inc. v. Univ. of Conn. Health Ctr.", cite: "2016 U.S. Dist. LEXIS 84098 (D. Conn. June 29, 2016)"}
-  simon: {kind: case, name: "Simon v. E. Ky. Welfare Rts. Org.", cite: "426 U.S. 26 (1976)"}
-  raines: {kind: case, name: "Raines v. Byrd", cite: "521 U.S. 811 (1997)"}
-  spokeo: {kind: case, name: "Spokeo, Inc. v. Robins", cite: "136 S. Ct. 1540 (2016)"}
-  jones: {kind: case, name: "Jones v. Royal Admin. Services, Inc.", cite: "887 F.3d 443 (9th Cir. 2018)"}
-  greene: {kind: case, name: "Greene v. Select Funding LLC", cite: "No. 2:20-cv-07333-RGK-KS, 2021 LX 64174 (C.D. Cal. Feb. 5, 2021)"}
-  gillam: {kind: case, name: "Gillam v. Reliance First Capital, LLC", cite: "2023 U.S. Dist. LEXIS 29477 (E.D.N.Y. Feb. 22, 2023)"}
-  barton: {kind: case, name: "Barton v. Delfgauw", cite: "2025 LX 373885 (W.D. Wash. Aug. 18, 2025)"}
-  worsham: {kind: case, name: "Worsham v. Travel Options, Inc.", cite: "2016 U.S. Dist. LEXIS 118774 (D. Md. Sept. 2, 2016), aff’d, 678 F. App’x 165 (4th Cir. 2017)"}
-  meyer: {kind: case, name: "Meyer v. Capital All. Grp.", cite: "2017 U.S. Dist. LEXIS 183690 (S.D. Cal. Nov. 6, 2017)"}
-  griffin: {kind: case, name: "Griffin v. Am.-Amicable Life Ins. Co. of Tex.", cite: "No. 6:24-cv-00243-MC, 2024 U.S. Dist. LEXIS 175344 (D. Or. Sep. 27, 2024)"}
-  dobronski: {kind: case, name: "Dobronski v. Tobias & Assocs., Inc.", cite: "No. 23-10331, 2024 U.S. Dist. LEXIS 47309 (E.D. Mich. Mar. 18, 2024)"}
+  twombly: {kind: case, name: "*Bell Atl. Corp. v. Twombly*", cite: "550 U.S. 544 (2007)"}
+  iqbal: {kind: case, name: "*Ashcroft v. Iqbal*", cite: "556 U.S. 662 (2009)"}
+  lee: {kind: case, name: "*Lee v. Yale Univ.*", cite: "624 F. Supp. 3d 120 (D. Conn. 2022)"}
+  dane: {kind: case, name: "*Dane v. UnitedHealthcare Ins. Co.*", cite: "974 F.3d 183 (2d Cir. 2020)"}
+  pbgc: {kind: case, name: "*Pension Ben. Guar. Corp. ex rel. St. Vincent Catholic Med. Ctr. Ret. Plan v. Morgan Stanley Inv. Mgmt. Inc.*", cite: "712 F.3d 705 (2d Cir. 2013)"}
+  ctech: {kind: case, name: "*C-Tech of New Haven, Inc. v. Univ. of Conn. Health Ctr.*", cite: "2016 U.S. Dist. LEXIS 84098 (D. Conn. June 29, 2016)"}
+  simon: {kind: case, name: "*Simon v. E. Ky. Welfare Rts. Org.*", cite: "426 U.S. 26 (1976)"}
+  raines: {kind: case, name: "*Raines v. Byrd*", cite: "521 U.S. 811 (1997)"}
+  spokeo: {kind: case, name: "*Spokeo, Inc. v. Robins*", cite: "136 S. Ct. 1540 (2016)"}
+  jones: {kind: case, name: "*Jones v. Royal Admin. Services, Inc.*", cite: "887 F.3d 443 (9th Cir. 2018)"}
+  greene: {kind: case, name: "*Greene v. Select Funding LLC*", cite: "No. 2:20-cv-07333-RGK-KS, 2021 LX 64174 (C.D. Cal. Feb. 5, 2021)"}
+  gillam: {kind: case, name: "*Gillam v. Reliance First Capital, LLC*", cite: "2023 U.S. Dist. LEXIS 29477 (E.D.N.Y. Feb. 22, 2023)"}
+  barton: {kind: case, name: "*Barton v. Delfgauw*", cite: "2025 LX 373885 (W.D. Wash. Aug. 18, 2025)"}
+  worsham: {kind: case, name: "*Worsham v. Travel Options, Inc.*", cite: "2016 U.S. Dist. LEXIS 118774 (D. Md. Sept. 2, 2016), aff’d, 678 F. App’x 165 (4th Cir. 2017)"}
+  meyer: {kind: case, name: "*Meyer v. Capital All. Grp.*", cite: "2017 U.S. Dist. LEXIS 183690 (S.D. Cal. Nov. 6, 2017)"}
+  griffin: {kind: case, name: "*Griffin v. Am.-Amicable Life Ins. Co. of Tex.*", cite: "No. 6:24-cv-00243-MC, 2024 U.S. Dist. LEXIS 175344 (D. Or. Sep. 27, 2024)"}
+  dobronski: {kind: case, name: "*Dobronski v. Tobias & Assocs., Inc.*", cite: "No. 23-10331, 2024 U.S. Dist. LEXIS 47309 (E.D. Mich. Mar. 18, 2024)"}
 signature:
-  signer: "Keith R. Rudzik"
-  bar: "ct24007"
-  lines:
-    - "Howard, Kohn, Sprague & FitzGerald LLP"
-    - "Post Office Box 261798"
-    - "Hartford, Connecticut 06126-1798"
-    - "Phone: (860) 525-3101"
-    - "Fax: (860) 247-5201"
-    - "E-mail: krr@hksflaw.com"
-  others:
+  signers:
+    - signer: "Keith R. Rudzik"
+      bar: "ct24007"
+      lines:
+        - "Howard, Kohn, Sprague & FitzGerald LLP"
+        - "Post Office Box 261798"
+        - "Hartford, Connecticut 06126-1798"
+        - "Phone: (860) 525-3101"
+        - "Fax: (860) 247-5201"
+        - "E-mail: krr@hksflaw.com"
     - signer: "Joseph Lipari"
       lines:
         - "(pro hac anticipated)"
@@ -86,13 +83,13 @@ Plaintiffs seek statutory damages and injunctive relief for themselves and a put
 
 As set forth in detail below, Plaintiffs’ Complaint must be dismissed in its entirety and with prejudice because:
 
-1) As to the first cause of action, which according to the Complaint only pertains to Whitfield, Whitfield cannot establish that he received more than one call from Defendant after his number had been on the National Do-Not-Call Registry for at least 31 days.
+1. As to the first cause of action, which according to the Complaint only pertains to Whitfield, Whitfield cannot establish that he received more than one call from Defendant after his number had been on the National Do-Not-Call Registry for at least 31 days.
 
-2) As to the second cause of action, there is no private right of action under [47 U.S.C. § 227(c)(5)](toa:usc-227c5) for alleged violations of [47 C.F.R. § 64.1601(e)](toa:cfr-1601e).
+2. As to the second cause of action, there is no private right of action under [47 U.S.C. § 227(c)(5)](toa:usc-227c5) for alleged violations of [47 C.F.R. § 64.1601(e)](toa:cfr-1601e).
 
-3) As to the third cause of action, which according to the Complaint only pertains to Plaintiff White, the Complaint contains no supporting facts that would enable the Court to plausibly infer that the calls were pre-recorded calls. Rather, the Complaint’s allegation that the calls were pre-recorded is entirely conclusory.
+3. As to the third cause of action, which according to the Complaint only pertains to Plaintiff White, the Complaint contains no supporting facts that would enable the Court to plausibly infer that the calls were pre-recorded calls. Rather, the Complaint’s allegation that the calls were pre-recorded is entirely conclusory.
 
-4) Plaintiffs lack standing to pursue injunctive relief. There is no indication in the Complaint that Defendant called Plaintiffs again between October 2025 and the filing of the Complaint on March 4, 2026. Under those circumstances, Plaintiffs cannot demonstrate a substantial risk that they will ever receive another allegedly violative call from Defendant.
+4. Plaintiffs lack standing to pursue injunctive relief. There is no indication in the Complaint that Defendant called Plaintiffs again between October 2025 and the filing of the Complaint on March 4, 2026. Under those circumstances, Plaintiffs cannot demonstrate a substantial risk that they will ever receive another allegedly violative call from Defendant.
 
 # LEGAL STANDARDS
 

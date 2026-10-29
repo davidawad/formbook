@@ -1,4 +1,19 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (fb-595.68.26, on the shared layout model lib/*/xengine*), so a difference fails.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.17.14), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
   cross_engine: gate
+  # DEF-COVER-002, tier 3: the three exemplars, three filers (usage/SOURCE.md: Holland & Knight; Quinn Emanuel; Hecker
+  # Fink), indent the designations and "v." three different ways; exemplar 1 draws no caption rules, exemplars 2 and 3
+  # rule the party column above, at its right and below, as the template does.
+  cover_structure_accepted:
+    - finding: 'alignment: "Plaintiff,"'
+      reason: "the three filers indent the designations differently; exemplar 1's indent is that filer's style"
+    - finding: 'alignment: "Defendants."'
+      reason: "the three filers indent the designations differently; exemplar 1's indent is that filer's style"
+    - finding: 'alignment: "V."'
+      reason: "the three filers place \"v.\" differently; exemplar 1's indent is that filer's style"
+    - finding: 'rules: between "SOUTHERN DISTRICT OF NEW YORK"'
+      reason: "exemplars 2 and 3 (two other filers) rule the party column above; exemplar 1's unruled caption is that filer's style"
+    - finding: 'rules: below "MAHWEEN RAHMAN.'
+      reason: "exemplars 2 and 3 (two other filers) rule the party column below; exemplar 1's unruled caption is that filer's style"

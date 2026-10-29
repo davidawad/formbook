@@ -1,4 +1,17 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (fb-595.68.25, on the shared layout model lib/*/xengine*), so a difference fails.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.17.14), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
   cross_engine: gate
+  # DEF-COVER-002, tier 3: exemplar 1 (Howard, Kohn, Sprague & FitzGerald) rules its caption and sets the designations
+  # far in; exemplars 2 and 3, two other filers (usage/SOURCE.md: the U.S. Attorney; Carlton Fields), set a column of
+  # ":" beside the parties and the designations an inch or half an inch in, as the template does.
+  cover_structure_accepted:
+    - finding: 'alignment: "Plaintiffs,"'
+      reason: "exemplars 2 and 3 (two other filers) indent the designations an inch or half an inch; exemplar 1's indent is that filer's style"
+    - finding: 'alignment: "Defendant."'
+      reason: "exemplars 2 and 3 (two other filers) indent the designations an inch or half an inch; exemplar 1's indent is that filer's style"
+    - finding: 'rules: between "FOR THE DISTRICT OF CONNECTICUT"'
+      reason: "exemplars 2 and 3 (two other filers) set a column of colons beside the parties, no rule; exemplar 1's ruled caption is that filer's style"
+    - finding: 'rules: between "MEDGUARD ALERT, INC.,"'
+      reason: "exemplars 2 and 3 (two other filers) set a column of colons beside the parties, no rule; exemplar 1's ruled caption is that filer's style"

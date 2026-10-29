@@ -4,11 +4,12 @@ caption:
   parties:
     - names: ["CLAIR “BUBBY” KERRICK,"]
       designation: "Plaintiff,"
-    - names: ["TOWN OF GORHAM, ZACHARY EDDINGER,", "FREDERICK LIGHTFOOTE, AND BRANDON AYERS,"]
+    - names: ["TOWN OF GORHAM, ZACHARY EDDINGER, FREDERICK LIGHTFOOTE, AND BRANDON AYERS,"]
       designation: "Defendants."
 title: "DEFENDANTS’ MEMORANDUM OF LAW IN SUPPORT OF THEIR MOTION TO DISMISS"
 counsel:
-  - names: ["ADAMS LECLAIR LLP", "Robert P. Yawman, Esq.", "Ryan Lefkowitz, Esq.", "Attorneys for Defendants"]
+  - firm: "ADAMS LECLAIR LLP"
+    names: ["Robert P. Yawman, Esq.", "Ryan Lefkowitz, Esq.", "Attorneys for Defendants"]
     lines: ["1200 Bausch and Lomb Place", "Rochester, New York 14604", "Tel.: 585-327-4100", "Fax.: 585-327-4200", "E-mail: ryawman@adamsleclair.law", "E-mail: rlefkowitz@adamsleclair.law"]
 date: "March 23, 2026"
 signature:

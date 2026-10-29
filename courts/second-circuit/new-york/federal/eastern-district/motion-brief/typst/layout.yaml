@@ -1,0 +1,116 @@
+# U.S. District Court for the Eastern District of New York (nyed): a memorandum of law in support of a motion, on the
+# generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with the E.D.N.Y. rules overlaid here. The shared
+# document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines
+# gen`). Rules: Joint Local Civil Rules of the S.D.N.Y. and E.D.N.Y. (January 2, 2026), https://www.nysd.uscourts.gov/
+# sites/default/files/local_rules/ (verified 2026-10-14; ../README.md quotes them, requirement IDs NYED-...). The base
+# already meets Local Civil Rule 7.1(b): 12-point type (7.1(b)(1)), one-inch margins (7.1(b)(2)), the body double
+# spaced, headings and block quotations single (7.1(b)(3)).
+base: /lib/layouts/frcp-motion-brief.yaml
+constants:
+  district: "EASTERN DISTRICT OF NEW YORK"
+# Local Civil Rule 7.1(c): a memorandum in support of a motion at most 8,750 words (the caption, tables, signature
+# blocks and certificates excluded, headings and footnotes included), counted from the body; a court's grant of more
+# in the frontmatter's `word_limit` (7.1(c): a page limit set by the court is 350 words a page). Over it the render
+# stops in every engine; the certificate prints the count.
+words: {limit: 8750, limit_field: word_limit}
+# Pages numbered at the foot, centered: the cover unnumbered, the tables i, ii, the body from 1.
+page_number: {align: center, front: lower-roman}
+# Local Civil Rule 7.1(b)(1): footnotes may be 10-point; single lines (7.1(b)(3)), 4 pt apart, a double line's room
+# above the rule.
+footnote: {size: 10, pitch: 11.5, gap: 4, clearance: 12}
+# Block quotations single spaced (7.1(b)(3)), half an inch in on each side, a single line above and below.
+quote: {left: 36, right: 36, above: 13.8, below: 13.8}
+# Local Civil Rule 7.1(a)(2): divided under appropriate headings. Single spaced (7.1(b)(3)), bold, a single line above
+# and below: a section centered in capitals, unnumbered; the argument headings numbered by the template, "I." at the
+# margin, "A." and "1." half an inch further in each, each label in a half-inch box with the title's later lines hung
+# under it.
+heading:
+  - {align: center, bold: true, upper: true, above: 13.8, below: 13.8}
+  - {bold: true, number: "I.", label_box: 36, above: 13.8, below: 13.8}
+  - {bold: true, number: "A.", label_box: 36, left: 36, above: 13.8, below: 13.8}
+  - {bold: true, number: "1.", label_box: 36, left: 72, above: 13.8, below: 13.8}
+# FRCP 10(a): the cover (unnumbered): the court's name centered in bold; a double line below it the caption: the
+# parties between a rule above and below (each party's names, its designation and "v." half an inch in, "v." a blank
+# line from each, as both exemplars, two filers, indent them); at the right, two tenths of an inch off them, the case
+# number and the legend in bold, as the filer writes it (oral argument requested); two double lines below the paper's
+# title centered in bold capitals; the counsel at the foot of the page.
+cover:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 244.8
+        blocks:
+          - box:
+              - each: caption
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", left: 36}
+                between:
+                  - {text: "v.", left: 36, above: 13.8, below: 13.8}
+            stroke: {top: 0.75, bottom: 0.75}
+            inset: {top: 9, bottom: 9}
+      - blocks:
+          - {text: "Case No. {case_number}", left: 14.4, above: 9}
+          - {text: "{legend}", optional: true, bold: true, left: 14.4, above: 13.8}
+    gutter: 0
+    above: 24
+  - {text: "{brief_title}", align: center, bold: true, upper: true, above: 48}
+  - {fill: 1}
+  - {text: "{counsel}"}
+front: []
+# The contents (the rules exclude them from the word count): a row per heading to level 4, single spaced, a single
+# line apart, a level half an inch further in, the title wrapping before a half-inch page column, a dot leader.
+contents: {title: "TABLE OF CONTENTS", depth: 4, col: 36, step: 36, above: 12}
+# Local Civil Rule 7.1(a)(2): the cases and other authorities relied on, from the `toa:` links of the body and notes,
+# grouped as the exemplar groups them, each name (a case name in italics, as the sample writes it), a comma and the
+# citation, its later lines hung a third of an inch, in a three-quarter-inch page column; "passim" for seven pages or
+# more.
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  page_heading: "Page(s)"
+  passim: 7
+  kinds:
+    - {kind: case, title: "Cases"}
+    - {kind: statute, title: "Statutes"}
+    - {kind: rule, title: "Federal Rules of Civil Procedure"}
+    - {kind: other, title: "Other Authorities"}
+  col: 54
+  hang: 25.2
+  above: 12
+  group: {bold: true, above: 24}
+# FRCP 11(a): a double line below the body "Dated:" at the left; in a column at the right "Respectfully submitted,", a
+# double line below it "By: /s/" and the signer, the signer's name and lines. Kept whole with the last paragraph.
+closing:
+  - columns:
+      - blocks:
+          - {text: "Dated: {date}"}
+      - width: 230.4
+        blocks:
+          - {text: "Respectfully submitted,"}
+          - {text: "By: /s/ {signature.signer}", above: 24}
+          - {text: "{signature.signer}"}
+          - {text: "{signature.lines}"}
+    gutter: 0
+    above: 24
+# Local Civil Rule 7.1(c): the certificate by the attorney that the memorandum complies with the word limit, stating
+# the number of words (the count above), a double line below the signature; then, when the frontmatter gives one, the
+# certificate of service on a page of its own, signed again.
+after_tail:
+  - {text: "CERTIFICATE OF COMPLIANCE", align: center, bold: true, above: 24, keep: true}
+  - {text: "I certify that this memorandum of law complies with the word-count limit of Local Civil Rule 7.1(c). Excluding the caption, table of contents, table of authorities, signature block, and certificates, it contains {xd.words} words, as counted by the template. The count must be confirmed against the word-processing program used to prepare the filed document.", pitch: body, indent: 36}
+  - when: service
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, below: 13.8}
+      - {markdown: "{service}", pitch: body, indent: 36}
+      - columns:
+          - blocks:
+              - {text: "Dated: {date}"}
+          - width: 230.4
+            blocks:
+              - {text: "Respectfully submitted,"}
+              - {text: "By: /s/ {signature.signer}", above: 24}
+              - {text: "{signature.signer}"}
+              - {text: "{signature.lines}"}
+        gutter: 0
+        above: 24

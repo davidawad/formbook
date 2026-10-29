@@ -1600,8 +1600,6 @@ courts/second-circuit/connecticut/federal/bankruptcy-district/motion-brief docx
 courts/second-circuit/connecticut/federal/bankruptcy-district/motion-brief typst
 courts/second-circuit/connecticut/federal/district/complaint docx
 courts/second-circuit/connecticut/federal/district/complaint typst
-courts/second-circuit/connecticut/federal/district/motion-brief docx
-courts/second-circuit/connecticut/federal/district/motion-brief typst
 courts/second-circuit/connecticut/state/court-of-appeals/amicus-brief docx
 courts/second-circuit/connecticut/state/court-of-appeals/amicus-brief latex
 courts/second-circuit/connecticut/state/court-of-appeals/amicus-brief typst
@@ -1667,18 +1665,10 @@ courts/second-circuit/new-york/federal/bankruptcy-western-district/motion-brief 
 courts/second-circuit/new-york/federal/bankruptcy-western-district/motion-brief typst
 courts/second-circuit/new-york/federal/eastern-district/complaint docx
 courts/second-circuit/new-york/federal/eastern-district/complaint typst
-courts/second-circuit/new-york/federal/eastern-district/motion-brief docx
-courts/second-circuit/new-york/federal/eastern-district/motion-brief typst
-courts/second-circuit/new-york/federal/northern-district/motion-brief docx
-courts/second-circuit/new-york/federal/northern-district/motion-brief typst
 courts/second-circuit/new-york/federal/southern-district/complaint docx
 courts/second-circuit/new-york/federal/southern-district/complaint typst
-courts/second-circuit/new-york/federal/southern-district/motion-brief docx
-courts/second-circuit/new-york/federal/southern-district/motion-brief typst
 courts/second-circuit/new-york/federal/western-district/complaint docx
 courts/second-circuit/new-york/federal/western-district/complaint typst
-courts/second-circuit/new-york/federal/western-district/motion-brief docx
-courts/second-circuit/new-york/federal/western-district/motion-brief typst
 courts/second-circuit/new-york/state/appellate-terms-of-the-supreme-court/amicus-brief docx
 courts/second-circuit/new-york/state/appellate-terms-of-the-supreme-court/amicus-brief latex
 courts/second-circuit/new-york/state/appellate-terms-of-the-supreme-court/amicus-brief typst

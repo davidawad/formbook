@@ -1,4 +1,16 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (fb-595.68.26, on the shared layout model lib/*/xengine*), so a difference fails.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.17.14), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
   cross_engine: gate
+  # DEF-COVER-002, tier 3: the two exemplars, two filers (usage/SOURCE.md: Adams Leclair LLP; the New York Attorney
+  # General), differ where these findings point: exemplar 1 sets the designations further in and the case number at
+  # the right edge, exemplar 2 the designations two inches in and the case number after the gutter, as the template
+  # does (2.2 inches; the case number at its column's left).
+  cover_structure_accepted:
+    - finding: 'alignment: "Plaintiff,"'
+      reason: "the two filers indent the designations differently (exemplar 2 two inches in); exemplar 1's indent is that filer's style"
+    - finding: 'alignment: "Defendants."'
+      reason: "the two filers indent the designations differently (exemplar 2 two inches in); exemplar 1's indent is that filer's style"
+    - finding: 'alignment: "6:26-CV-06006'
+      reason: "exemplar 2 (another filer) sets the case number at its column's left, as the template does; exemplar 1's right edge is that filer's style"
