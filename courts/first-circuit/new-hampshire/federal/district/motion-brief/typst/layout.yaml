@@ -1,0 +1,41 @@
+# D.N.H. Local Rules effective December 1, 2025, LR 5.1(a): letter paper, 12-point proportional type, one-inch
+# margins, bottom-center page numbers, double spacing except quoted material. LR 5.1(b)-(d) governs caption,
+# signature and certificate. https://www.nhd.uscourts.gov/pdf/2025%20Local%20Rules%20-%20District%20of%20New%20Hampshire.pdf
+base: /lib/layouts/frcp-motion-brief.yaml
+margin: {right: 72.1}  # LR 5.1(a) requires at least one inch; narrows only the width needed for exact engine parity.
+constants:
+  district: "FOR THE DISTRICT OF NEW HAMPSHIRE"
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 223.2
+        blocks:
+          - box:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", above: 13.8, left: 54}
+                between:
+                  - {text: "v.", above: 13.8, below: 13.8}
+            stroke: {right: 0.75, bottom: 0.75}
+            inset: {right: 12, bottom: 10}
+      - valign: center
+        blocks:
+          - {text: "{case_number}", left: 10.8}
+    gutter: 18
+    above: 24
+  - {text: "{title}", align: center, bold: true, underline: true, left: 36, right: 36, above: 24, below: 13.8}
+closing:
+  - {text: "{signature.intro}", above: 24}
+  - each: signature.party
+    blocks: [{text: "{.}"}]
+  - {text: "Dated: {date}", pitch: body, above: 24}
+  - {text: "/s/ {signature.signer}"}
+  - each: signature.blocks.0
+    blocks: [{text: "{.}", above: 13.8}]
+after_tail:
+  - {text: "Certificate of Service", heading: 1, above: 24}
+  - {markdown: "{certificate.text}"}
+  - each: certificate.signer
+    blocks: [{text: "{.}", above: 13.8}]

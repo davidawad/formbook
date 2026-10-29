@@ -6,6 +6,7 @@ caption:
     - names: ["KELLY AYOTTE, IN HER OFFICIAL CAPACITY", "AS THE GOVERNOR OF THE STATE OF", "NEW HAMPSHIRE, et al.,"]
       designation: "Defendants."
 case_number: "Civil No. 26-cv-600-LM-TSM"
+date: "September 21, 2026"
 title: "MOTION TO DISMISS AS TO GOVERNOR AYOTTE, THE EXECUTIVE COUNCIL, AND EXECUTIVE COUNCILORS KENNEY, LIOT HILL, STEPHENS, STEPHEN, AND WHEELER WITH ACCOMPANYING MEMORANDUM OF LAW"
 signature:
   intro: "Respectfully submitted,"
@@ -20,7 +21,6 @@ signature:
     - "By and through their counsel"
     - "JOHN M. FORMELLA"
     - "ATTORNEY GENERAL"
-  date: "September 21, 2026"
   signer: "Mark L. Lucas"
   blocks:
     - ["Mark L. Lucas, Bar #274692", "Assistant Attorney General", "Joshua C. Harrison, Bar #269564", "Senior Assistant Attorney General", "Environmental Protection Bureau", "Office of the Attorney General", "New Hampshire Department of Justice", "1 Granite Place South", "Concord, New Hampshire 03301", "(603) 271-3679", "Mark.L.Lucas@doj.nh.gov", "Joshua.C.Harrison@doj.nh.gov"]
