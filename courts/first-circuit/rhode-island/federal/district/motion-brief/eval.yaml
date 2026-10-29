@@ -2,3 +2,4 @@
 # typst render does (fb-595.68.17, on the shared layout model lib/*/xengine*), so a difference fails.
 params:
   cross_engine: gate
+  cover_structure: report

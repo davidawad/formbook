@@ -1,0 +1,56 @@
+# D.R.I. Local Rules amended through April 1, 2024, LR Cv 5(a)(1)-(5): letter paper, double-spaced text, at least
+# 12-point body type, footnotes at least 10 point, bottom-center page numbers, caption and signature. LR Cv 7(c)
+# requires the motion to state whether oral argument/evidentiary hearing is requested and estimated time.
+# https://www.rid.uscourts.gov/sites/rid/files/documents/Approved%20Dec%202024%20Rules.pdf
+base: /lib/layouts/frcp-motion-brief.yaml
+size: 12
+pitch: {body: 27.6, single: 13.8}
+footnote: {size: 10, pitch: 11.5, gap: 7}
+# LR Cv 5(a)(3) applies double spacing to block quotations too.
+quote: {left: 36, right: 36, pitch: body, above: 0, below: 0}
+constants:
+  # Fed. R. Civ. P. 10(a), LR Cv 5(a)(1): name the court in the caption.
+  district: "FOR THE DISTRICT OF RHODE ISLAND"
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 223.2
+        blocks:
+          - box:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", above: 13.8, left: 90}
+                between:
+                  - {text: "v.", above: 13.8, below: 13.8}
+            stroke: {top: 0.75, right: 0.75, bottom: 0.75}
+            inset: {right: 12, bottom: 10}
+      - valign: center
+        blocks:
+          - {text: "C.A. No. {case_number}", left: 10.8}
+          - when: jury_demand
+            blocks: [{text: "JURY TRIAL DEMANDED", above: 24, bold: true}]
+    gutter: 18
+    above: 24
+  - {text: "{brief_title}", align: center, bold: true, left: 36, right: 36, above: 24, below: 13.8}
+closing:
+  - {text: "{signature.lead}", above: 24, optional: true}
+  - each: signature.party
+    blocks: [{text: "{.}"}]
+  - unless: oral_argument.requested
+    blocks: [{text: "Statement on oral argument. Oral argument and evidentiary hearing are not requested.", above: 24}]
+  - when: oral_argument.requested
+    blocks: [{text: "Statement on oral argument. Oral argument and evidentiary hearing are requested; estimated time: {oral_argument.minutes|not stated} minutes.", above: 24}]
+  - {text: "Dated: {date}", pitch: body, above: 24}
+  - each: signature.signers
+    blocks:
+      - {text: "/s/ {name}"}
+      - {text: "{bar}", optional: true}
+  - each: signature.firm
+    blocks: [{text: "{.}"}]
+after_tail:
+  - {text: "CERTIFICATE OF SERVICE", heading: 1, above: 24}
+  - {markdown: "{certificate_of_service.text}"}
+  - each: signature.signers
+    blocks: [{text: "/s/ {name}", above: 13.8}]
