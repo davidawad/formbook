@@ -109,14 +109,16 @@ fn ellipses_in_a_row_are_not_a_leader() {
     // fb-595.91: quoted passages with elided parts, an elision line its own block after a sentence ending in an
     // ellipsis: the dots of the two blocks meet in the whitespace-free PDF stream as seven or more and are cut to
     // four as if a leader, so the elision block was looked for further on and every block after it failed.
-    let md = "> She contends the order fails. ....\n\n> ...\n\n> She argues the commission erred.\n";
+    let md =
+        "> She contends the order fails. ....\n\n> ...\n\n> She argues the commission erred.\n";
     let typst = [
         "She contends the order fails. \u{2026}.",
         "\u{2026}",
         "She argues the commission erred.",
     ];
     assert_eq!(g0_missing(md, &typst), "0");
-    let md = "> The court ruled with covers. . . . .\n\n> . . . .\n\n> In short, no right exists.\n";
+    let md =
+        "> The court ruled with covers. . . . .\n\n> . . . .\n\n> In short, no right exists.\n";
     let spaced = [
         "The court ruled with covers. . . .",
         "....",
