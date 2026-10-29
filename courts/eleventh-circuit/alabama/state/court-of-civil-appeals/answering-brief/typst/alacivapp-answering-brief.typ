@@ -122,7 +122,11 @@
     block(above: 1.2em, below: 0.8em, sticky: true, strong(group.heading))
     for e in group.entries {
       block(above: 0.9em, below: 0.9em, breakable: false)[
-        #grid(columns: (1fr, auto), column-gutter: 0.5em, inl(e.cite), if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") })
+        // The page column is as wide as its list up to 2 in; a longer list wraps there, right-aligned, and never
+        // runs over the citation.
+        #let pages = if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") }
+        #grid(columns: (1fr, auto), column-gutter: 0.5em, inl(e.cite),
+          context if measure(pages).width > 2in { block(width: 2in, align(right, pages)) } else { pages })
       ]
     }
   }
@@ -199,7 +203,8 @@
   }
 
   // ---- Cover ----
-  page[
+  // The counsel groups stand at the signature indent; on a cover too full for that, they fill two columns.
+  let cover-body(wide) = [
     #set par(leading: single-leading, first-line-indent: 0pt, justify: false)
     #align(center)[
       #if "case_number" in meta [ #text(weight: "bold")[No. #meta.case_number] \ #v(0.3in) ]
@@ -225,11 +230,17 @@
     #v(1fr)
     #{
       set par(leading: single-leading, first-line-indent: 0pt)
-      pad(left: sig-indent, {
-        for g in need(meta, "counsel") { counsel-group(g) }
-      })
+      if wide { grid(columns: (1fr, 1fr), column-gutter: 0.3in, ..need(meta, "counsel").map(counsel-group)) } else {
+        pad(left: sig-indent, {
+          for g in need(meta, "counsel") { counsel-group(g) }
+        })
+      }
     }
   ]
+  page(layout(size => {
+    let fits = measure(block(width: size.width, cover-body(false))).height <= size.height
+    cover-body(not fits)
+  }))
 
   // ---- Table of contents (ARAP 28(a)(1)) ----
   if meta.at("toc", default: true) {

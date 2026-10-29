@@ -122,7 +122,11 @@
     block(above: 1.2em, below: 0.8em, sticky: true, strong(group.heading))
     for e in group.entries {
       block(above: 0.9em, below: 0.9em, breakable: false)[
-        #grid(columns: (1fr, auto), column-gutter: 0.5em, inl(e.cite), if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") })
+        // The page column is as wide as its list up to 2 in; a longer list wraps there, right-aligned, and never
+        // runs over the citation.
+        #let pages = if "find" in e { toa-pages(e.find) } else { e.at("pages", default: "") }
+        #grid(columns: (1fr, auto), column-gutter: 0.5em, inl(e.cite),
+          context if measure(pages).width > 2in { block(width: 2in, align(right, pages)) } else { pages })
       ]
     }
   }
