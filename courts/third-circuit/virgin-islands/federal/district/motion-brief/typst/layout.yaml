@@ -1,0 +1,74 @@
+# District Court of the Virgin Islands (vid): a memorandum of law in support of a motion to dismiss, on the generic
+# FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with the court's local rules overlaid here. The shared
+# document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines
+# gen`, fb-595.17.22). Rules: LRCi 5.1(a) (8 1/2 x 11 paper, double-spaced except quoted material, pages numbered
+# consecutively), LRCi 5.1 current text (at least 12-point type, one-inch margins), LRCi 7.1(c) (a brief of reasons
+# and authorities), https://www.vid.uscourts.gov/sites/vid/files/local_rules/VID_LRCi_042911.pdf (read 2026-10-14;
+# ../README.md quotes them). The base already meets every one of these; LRCi 7.1(d)'s 20 pages is not checked (the
+# sample is 9). Fed. R. Civ. P. 10(a) and 11(a) as the base.
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, as the sibling complaint prints it (../README.md Known gaps 4).
+constants:
+  court: "IN THE DISTRICT COURT OF THE VIRGIN ISLANDS"
+# LRCi 5.1(a): quoted material single-spaced (the base's half inch each side), a space of 12 pt above and below.
+quote: {above: 12, below: 12}
+# Headings at the type size on the body pitch with no space of their own, as filed: a section centered in bold; an
+# argument heading in bold at the margin, its "I." as typed; a sub-heading in bold italic at the margin, its "A." as
+# typed.
+heading:
+  - {align: center, bold: true, pitch: body, above: 0, below: 0}
+  - {bold: true, pitch: body, above: 0, below: 0}
+  - {bold: true, italic: true, pitch: body, above: 0, below: 0}
+# FRCP 10(a): the court's name in bold and the division (frontmatter `division`), centered; a blank single line, the
+# parties at the left in a three-and-a-half-inch column closed by a rule at its right and foot (each party's names,
+# its designation 1.2 in in, "v." centered between the parties; the foot ruled by a box of its own, so each rule is one
+# line as filed, not the corner of a box), the number label and case number 0.3 in into the right column; a blank double
+# line, the paper's title centered in bold on the body pitch, as the exemplar.
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "DIVISION OF {division}", align: center, upper: true}
+  - columns:
+      - width: 252
+        blocks:
+          - box:
+              - box:
+                  - each: caption
+                    blocks:
+                      - {text: "{names}"}
+                      - {text: "{designation}", left: 86.4, above: 6}
+                    between:
+                      - {text: "v.", align: center, above: 7, below: 7}
+                stroke: {bottom: 0.75}
+                inset: {right: 14.4, bottom: 9}
+            stroke: {right: 0.75}
+      - blocks:
+          - {text: "{number_label|Civil Action No.} {case_number}", left: 21.6}
+    gutter: 0
+    above: 13.8
+  - {text: "{title}", align: center, bold: true, pitch: body, above: 24, below: 0}
+# FRCP 11(a): the signature, single-spaced a blank double line below the last paragraph and kept with it: "Dated:" and
+# the date at the margin beside the first line of the firm's lines, which run in a column from 3.4 in; a little below
+# them the "/s/" signature and counsel's lines (name, bar number, e-mail, the party represented).
+closing:
+  - group:
+      - columns:
+          - {width: 244.8, blocks: [{text: "Dated: {signature.date}"}]}
+          - blocks:
+              - each: signature.preamble
+                blocks: [{text: "{.}"}]
+              - {text: "/s/ {signature.signer}", above: 7}
+              - each: signature.lines
+                blocks: [{text: "{.}"}]
+        gutter: 0
+    above: 24
+# Fed. R. Civ. P. 5(d)(1)(B): the certificate of service a blank double line after the signature, as filed: its title
+# centered in bold on the body pitch, the statement double-spaced, a blank double line, the "/s/" line at the right;
+# kept whole.
+after_tail:
+  - when: certificate
+    blocks:
+      - group:
+          - {text: "{certificate.title}", align: center, bold: true, pitch: body}
+          - {markdown: "{certificate.text}", pitch: body, indent: 36}
+          - {text: "/s/ {certificate.signer}", align: right, above: 24}
+        above: 24

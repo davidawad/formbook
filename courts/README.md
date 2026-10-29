@@ -74,7 +74,7 @@ Courts under `courts` (347).
 | [District Court, M.D. Pennsylvania](third-circuit/pennsylvania/federal/middle-district) | `pamd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [District Court, W.D. Pennsylvania](third-circuit/pennsylvania/federal/western-district) | `pawd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Virgin Islands](third-circuit/virgin-islands/federal/bankruptcy-district) | `vib` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, Virgin Islands](third-circuit/virgin-islands/federal/district) | `vid` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, Virgin Islands](third-circuit/virgin-islands/federal/district) | `vid` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Delaware Supreme Court](third-circuit/delaware/state/supreme-court) | `del` | up for review | 5/5 | 1/1 | 1/1 | 29 |
 | [Supreme Court of New Jersey](third-circuit/new-jersey/state/supreme-court) | `nj` | up for review | 5/5 | 5/5 | 5/5 | 29 |
 | [Commonwealth Court of Pennsylvania](third-circuit/pennsylvania/state/commonwealth-court) | `pacommwct` | up for review | 7/7 | 7/7 | 7/7 | 29 |

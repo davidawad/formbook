@@ -291,7 +291,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Virgin Islands](courts/third-circuit/virgin-islands/federal/bankruptcy-district) | `vib` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, Virgin Islands](courts/third-circuit/virgin-islands/federal/district) | `vid` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, Virgin Islands](courts/third-circuit/virgin-islands/federal/district) | `vid` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 
 ## Fourth Circuit
 
@@ -858,7 +858,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | National courts and tribunals | 5 | 0 | 5 | 0 | 0 | 0.0% | 100.0% | 5 | 0 | 5 | 14.0% |
 | First Circuit | 20 | 0 | 19 | 1 | 0 | 0.0% | 95.0% | 19 | 13 | 15 | 19.2% |
 | Second Circuit | 19 | 0 | 19 | 0 | 0 | 0.0% | 100.0% | 19 | 13 | 15 | 18.7% |
-| Third Circuit | 18 | 0 | 18 | 0 | 0 | 0.0% | 100.0% | 18 | 10 | 18 | 18.1% |
+| Third Circuit | 18 | 0 | 18 | 0 | 0 | 0.0% | 100.0% | 18 | 11 | 18 | 18.1% |
 | Fourth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 19 | 21 | 19.1% |
 | Fifth Circuit | 26 | 0 | 26 | 0 | 0 | 0.0% | 100.0% | 26 | 17 | 23 | 18.0% |
 | Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 16 | 23 | 18.6% |
@@ -869,7 +869,7 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 17 | 23 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 4 | 3 | 3 | 17.7% |
 | Fifth Circuit | 1 | 0 | 1 | 0 | 0 | 0.0% | 100.0% | 1 | 0 | 0 | 14.0% |
-| **Total** | 377 | 0 | 354 | 23 | 0 | 0.0% | 93.8% | 353 | 191 | 269 | 19.0% |
+| **Total** | 377 | 0 | 354 | 23 | 0 | 0.0% | 93.8% | 353 | 192 | 269 | 19.0% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
