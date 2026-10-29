@@ -95,15 +95,19 @@ pub fn reference(l: &Value, _face: &str) -> Result<String, String> {
         .unwrap_or("center");
     let from = num(l, "page_number.from", Some(1.0))?;
     let numbered = !pn.is_some_and(Value::is_null);
+    // (a running footer of n lines: its last line box ends n - 1 lines lower, where typst stacks them; lib/docx/xdoc.lua
+    // writes its paragraphs from the sample)
+    let lines = super::gen::footer_lines(l) as f64;
     let foot = tw(
-        (dist * 20.0).round() / 20.0,
+        ((dist - (lines - 1.0) * single_pt) * 20.0).round() / 20.0,
         "the page number's distance from the page foot",
     )?;
     let fld = r#"<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r>"#;
     // the page number alone, or the layout's `page_number.text` ("Page {page} of {pages}") with its fields
     let ptext = pn.and_then(|p| p.get("text")).and_then(Value::as_str);
     let number = match ptext {
-        Some(t) => page_text_runs(t, "NUMPAGES"),
+        Some(t) if !super::gen::is_running(t) => page_text_runs(t, "NUMPAGES"),
+        Some(_) => String::new(),
         None => fld.to_string(),
     };
     let footer_p = format!(

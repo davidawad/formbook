@@ -1,6 +1,6 @@
 //! The generated `latex/template.tex` of a folder on the shared document model (gen.rs): a pandoc template whose
 //! `$body$` lib/latex/xdoc.lua writes. Every size and space in bp (= typst's pt), from the layout.
-use super::gen::{fmt, footer, latex_face, num};
+use super::gen::{fmt, footer, is_running, latex_face, num};
 use serde_yaml::Value;
 
 /// The footnote defaults of the model (lib/typst/xdoc.typ): 7 pt between two notes, `CLEARANCE` above the rule.
@@ -96,7 +96,15 @@ pub fn template(l: &Value, face: &str) -> Result<String, String> {
         }
         None => "\\thepage".to_string(),
     };
+    let running = l
+        .get("page_number")
+        .and_then(|p| p.get("text"))
+        .and_then(Value::as_str)
+        .is_some_and(is_running);
     let number = match align {
+        // a running footer (frontmatter fields, lines at "<br>"): the lines lib/latex/xdoc.lua defines as \xd@foot,
+        // each a box of the text's width, stacked from the number's baseline down
+        _ if running => "\\vtop{\\csname xd@foot\\endcsname}".to_string(),
         "left" => format!("{shown}\\hfil"),
         "right" => format!("\\hfil{shown}"),
         _ => format!("\\hfil{shown}\\hfil"),

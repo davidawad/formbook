@@ -310,12 +310,14 @@ pub fn word_layout(l: &Value) -> Result<Value, String> {
 }
 
 /// The page number's line: its pitch and baseline below the text (typst: footer-descent 30 % of the bottom margin,
-/// the number in a single line box), and Word's footer distance (from the page foot to the bottom of that box).
+/// or the layout's `page_number.descent`, the number in a single line box), and Word's footer distance (from the page
+/// foot to the bottom of that box).
 pub fn footer(l: &Value) -> Result<(f64, f64, f64), String> {
     let mb = num(l, "margin.bottom", None)?;
     let ps = num(l, "pitch.single", None)?;
-    let skip = 0.3 * mb + 0.8 * ps;
-    let dist = 0.7 * mb - ps;
+    let descent = num(l, "page_number.descent", Some(0.3 * mb))?;
+    let skip = descent + 0.8 * ps;
+    let dist = mb - descent - ps;
     Ok((ps, skip, dist))
 }
 
@@ -431,4 +433,36 @@ pub fn main(args: &[String]) -> Res<std::process::ExitCode> {
     } else {
         std::process::ExitCode::SUCCESS
     })
+}
+
+/// Whether a page-number text is a running footer (layout.yaml `page_number.text` that names a frontmatter field
+/// besides `{page}` and `{pages}`, or holds a "<br>"): its lines set by the shared model from the sample
+/// (lib/typst/xdoc.typ footer-lines, lib/pandoc/xdoc.lua footer_lines), not by the generated template.
+pub fn is_running(text: &str) -> bool {
+    if text.contains("<br>") {
+        return true;
+    }
+    let mut rest = text;
+    while let Some(a) = rest.find('{') {
+        let tail = &rest[a + 1..];
+        match tail.find(['{', '}']) {
+            Some(b) if tail.as_bytes()[b] == b'}' => {
+                if !matches!(&tail[..b], "" | "page" | "pages") {
+                    return true;
+                }
+                rest = &tail[b + 1..];
+            }
+            Some(b) => rest = &tail[b..],
+            None => break,
+        }
+    }
+    false
+}
+
+/// The number of lines of the page-number footer: a running footer's lines, else one.
+pub fn footer_lines(l: &Value) -> usize {
+    match l.get("page_number").and_then(|p| p.get("text")).and_then(Value::as_str) {
+        Some(t) if is_running(t) => t.matches("<br>").count() + 1,
+        _ => 1,
+    }
 }

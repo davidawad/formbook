@@ -694,6 +694,29 @@ return function(spec)
         if (spec.page_number and spec.page_number.from or 1) > 1 or hidden then first:insert(raw("\\thispagestyle{empty}")) end
         if cmode then first:insert(raw("\\pagenumbering{" .. TEX_FMT[front] .. "}")) end
         out:extend(first)
+        -- a running footer (page_number.text with frontmatter fields, lines at "<br>"): \xd@foot, the lines the
+        -- generated template's footer stacks, each a line box of the single pitch (lib/typst/xdoc.typ footer-lines)
+        local pt = spec.page_number and spec.page_number.text
+        if xd.is_running(pt) then
+          local p = tonumber(spec.pitch.single)
+          local al = spec.page_number.align or "center"
+          local ls = {}
+          for _, pieces in ipairs(xd.footer_lines(pt, meta)) do
+            local il = pandoc.Inlines({})
+            for _, x in ipairs(pieces) do
+              if x.lit then
+                for sp, w in x.lit:gmatch("(%s*)(%S*)") do
+                  if sp ~= "" then il:insert(pandoc.Space()) end
+                  if w ~= "" then il:insert(pandoc.Str(w)) end
+                end
+              elseif x.field then il:extend(xd.inlines(x.field))
+              else il:insert(pandoc.RawInline("latex", x.key == "page" and "\\thepage{}" or "\\pageref*{xd@lastpage}")) end
+            end
+            ls[#ls + 1] = "\\setbox0\\hbox to\\textwidth{" .. (al ~= "left" and "\\hfil " or "") .. tex(il)
+              .. (al ~= "right" and "\\hfil" or "") .. "}\\ht0=" .. bp(0.8 * p) .. "\\dp0=" .. bp(0.2 * p) .. "\\box0 "
+          end
+          out:insert(raw("\\expandafter\\gdef\\csname xd@foot\\endcsname{" .. table.concat(ls) .. "}"))
+        end
         -- justified text: the body's spaces stretch from here (each block of the layout sets RAGGED in its group)
         if spec.justify then out:insert(raw("\\xd@justtrue\\selectfont")) end
         -- a cover numbered apart is unnumbered on every page it runs to (typst: no page label before the tables)

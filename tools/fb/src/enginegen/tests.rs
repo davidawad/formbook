@@ -209,3 +209,40 @@ fn a_folder_may_measure_its_own_latex_bias() {
     assert!(plain[0].1.contains("right=71.95bp"), "{}", plain[0].1);
     assert!(own[0].1.contains("right=71.9bp") && own[1].1.contains("[\"latex_bias\"] = 0.1,"));
 }
+
+#[test]
+fn a_running_footer_names_frontmatter_fields() {
+    use super::gen::{footer_lines, is_running};
+    // {page} and {pages} alone are the generated footer's; any other field, or a <br>, the model's (fb-595.92)
+    assert!(!is_running("Page {page} of {pages}"));
+    assert!(!is_running("{page}"));
+    assert!(is_running("Page {page} - {footer_title}"));
+    assert!(is_running("{page}<br>Case No. {case_number|____}"));
+    assert!(is_running("{signature.date}"));
+    assert!(!is_running("Page {page") && !is_running("{} {page}"));
+    let l = layout(&format!(
+        "{LAYOUT}page_number: {{align: left, text: \"{{page}}<br>{{footer_title}}<br>{{case_name}}, Case No. {{case_number}}\"}}\n"
+    ));
+    assert_eq!(footer_lines(&l), 3);
+    assert_eq!(footer_lines(&layout(LAYOUT)), 1);
+    let files = super::gen::generate(&l, "Times New Roman").unwrap();
+    // LaTeX: the lines lib/latex/xdoc.lua defines, stacked from the number's baseline (the same footskip)
+    assert!(files[0].1.contains("\\vtop{\\csname xd@foot\\endcsname}"));
+    assert!(files[0].1.contains("footskip=33.56bp"));
+    // Word: the last of three line boxes ends where typst stacks it, two lines below the one-line footer's
+    let xml = &files[2].1;
+    assert!(xml.contains(r#"w:footer="111""#), "{xml}");
+    assert!(!xml.contains("{footer_title}"));
+}
+
+#[test]
+fn a_footer_descent_moves_the_page_number() {
+    // page_number.descent: the footer's top that far below the text (30 % of the bottom margin by default)
+    let l = layout(&format!("{LAYOUT}page_number: {{descent: 6}}\n"));
+    let (ps, skip, dist) = super::gen::footer(&l).unwrap();
+    assert!((skip - (6.0 + 0.8 * ps)).abs() < 1e-9);
+    assert!((dist - (72.0 - 6.0 - ps)).abs() < 1e-9);
+    let files = super::gen::generate(&l, "Times New Roman").unwrap();
+    assert!(files[0].1.contains("footskip=17.96bp"), "{}", files[0].1);
+    assert!(files[2].1.contains(r#"w:footer="1021""#));
+}

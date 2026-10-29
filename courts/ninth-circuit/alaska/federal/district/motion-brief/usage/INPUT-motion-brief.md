@@ -26,6 +26,7 @@ caption:
     designation: "Plaintiffs,"
   - names:
       - "DONALD J. TRUMP, President of the United States, et al.,"
+    versus: true
     designation: "Defendants,"
   - names:
       - "and"
@@ -51,17 +52,17 @@ signature:
     - "Counsel for Defendants"
 date: "Respectfully submitted this 16th day of January 2026."
 authorities:
-  summers: {kind: case, name: "Summers v. Earth Island Inst.", cite: "555 U.S. 488 (2009)"}
-  energizer: {kind: case, name: "Bowen v. Energizer Holdings, Inc.", cite: "118 F.4th 1134 (2024)"}
-  leite: {kind: case, name: "Leite v. Crane Co.", cite: "749 F.3d 1117 (9th Cir. 2014)"}
-  thornhill: {kind: case, name: "Thornhill Pub. Co. v. Gen. Tel. & Elecs. Corp.", cite: "594 F.2d 730 (9th Cir. 1979)"}
-  mccarthy: {kind: case, name: "McCarthy v. United States", cite: "850 F.2d 558 (9th Cir. 1988)"}
-  sanderson: {kind: case, name: "Friends of the Earth v. Sanderson Farms, Inc.", cite: "992 F.3d 939 (9th Cir. 2021)"}
-  jewell: {kind: case, name: "Ctr. for Sustainable Econ. v. Jewell", cite: "779 F.3d 588 (D.C. Cir. 2015)"}
-  valladolid: {kind: case, name: "Pacific Operators Offshore, LLP v. Valladolid", cite: "132 S. Ct. 680 (2012)"}
-  louisiana: {kind: case, name: "United States v. Louisiana", cite: "363 U.S. 1 (1960)"}
-  florida: {kind: case, name: "United States v. Florida", cite: "363 U.S. 121 (1960)"}
-  pointhope: {kind: case, name: "Native Village of Point Hope v. Jewell", cite: "740 F.3d 489 (9th Cir. 2014)"}
+  summers: {kind: case, name: "*Summers v. Earth Island Inst.*", cite: "555 U.S. 488 (2009)"}
+  energizer: {kind: case, name: "*Bowen v. Energizer Holdings, Inc.*", cite: "118 F.4th 1134 (2024)"}
+  leite: {kind: case, name: "*Leite v. Crane Co.*", cite: "749 F.3d 1117 (9th Cir. 2014)"}
+  thornhill: {kind: case, name: "*Thornhill Pub. Co. v. Gen. Tel. & Elecs. Corp.*", cite: "594 F.2d 730 (9th Cir. 1979)"}
+  mccarthy: {kind: case, name: "*McCarthy v. United States*", cite: "850 F.2d 558 (9th Cir. 1988)"}
+  sanderson: {kind: case, name: "*Friends of the Earth v. Sanderson Farms, Inc.*", cite: "992 F.3d 939 (9th Cir. 2021)"}
+  jewell: {kind: case, name: "*Ctr. for Sustainable Econ. v. Jewell*", cite: "779 F.3d 588 (D.C. Cir. 2015)"}
+  valladolid: {kind: case, name: "*Pacific Operators Offshore, LLP v. Valladolid*", cite: "132 S. Ct. 680 (2012)"}
+  louisiana: {kind: case, name: "*United States v. Louisiana*", cite: "363 U.S. 1 (1960)"}
+  florida: {kind: case, name: "*United States v. Florida*", cite: "363 U.S. 121 (1960)"}
+  pointhope: {kind: case, name: "*Native Village of Point Hope v. Jewell*", cite: "740 F.3d 489 (9th Cir. 2014)"}
   ocsla-1331: {kind: statute, cite: "43 U.S.C. § 1331(a)", sort: "43 usc 1331"}
   ocsla-1312: {kind: statute, cite: "43 U.S.C. § 1312", sort: "43 usc 1312"}
   ocsla-1344: {kind: statute, cite: "43 U.S.C. § 1344", sort: "43 usc 1344"}
@@ -71,7 +72,7 @@ authorities:
   cfr-551: {kind: regulation, cite: "30 C.F.R. pt. 551"}
 ---
 
-# Introduction
+# INTRODUCTION
 
 Plaintiffs' Second Amended Complaint ("Complaint") should be dismissed for lack of jurisdiction. In January 2025, just prior to the change in administration, former President Biden issued sweeping memoranda withdrawing large areas of the Arctic, Atlantic and Pacific Oceans, and the Gulf of America from oil and gas leasing. Upon taking office, President Trump decided to reverse those actions, returning those areas to the status they had occupied just two weeks before. Plaintiffs claim that it was unlawful for President Trump to reverse the withdrawals and that only Congress can do so. Plaintiffs are wrong on the merits, but the case should not get to that stage because their Complaint fails on multiple jurisdictional grounds.
 
@@ -81,7 +82,7 @@ Plaintiffs' claims against the President must also be dismissed because they are
 
 Finally, the claims against the Secretary of the Interior and the Secretary of Commerce must be dismissed because the Complaint identifies no final action taken by either cabinet secretary.
 
-# Background
+# BACKGROUND
 
 ## The Outer Continental Shelf Lands Act
 
@@ -101,11 +102,11 @@ The five-year leasing program must address the nation's energy needs for a five-
 
 OCSLA also contains a provision allowing the President to reserve areas of the OCS from disposition by leasing, including for oil and gas development. Specifically, section 12(a) states, "The President of the United States may, from time to time, withdraw from disposition any of the unleased lands of the outer Continental Shelf." [43 U.S.C. § 1341(a)](toa:ocsla-1341). The statute also provides that "[t]he United States reserves and retains the right to designate by and through the Secretary of Defense, with the approval of the President, as areas restricted from exploration and operation that part of the [OCS] needed for national defense . . . ." *Id.* § 1341(d).
 
-# Legal Standard for a Motion to Dismiss
+# LEGAL STANDARD FOR A MOTION TO DISMISS
 
 Pursuant to [Fed. R. Civ. P. 12(b)(1)](toa:frcp-12b1), a complaint, or any claims therein, may be dismissed for lack of subject matter jurisdiction. An attack on the court's jurisdiction may be made either as a facial challenge, in which case the usual pleading standard applies, or as a factual challenge. [*Leite v. Crane Co.*, 749 F.3d 1117, 1121 (9th Cir. 2014)](toa:leite).[^factual] In response to a facial challenge, a plaintiff may rely on factual allegations, which the court will accept "as true and drawing all reasonable inferences in the plaintiff's favor." *Id.* On the other hand, when considering a motion that challenges the existence of jurisdiction in fact, no presumption of truthfulness attaches to the plaintiff's allegations. [*Thornhill Pub. Co. v. Gen. Tel. & Elecs. Corp.*, 594 F.2d 730, 733 (9th Cir. 1979)](toa:thornhill). The Court "is not restricted to the face of the pleadings, but may review any evidence, such as affidavits and testimony, to resolve factual disputes concerning the existence of jurisdiction." [*McCarthy v. United States*, 850 F.2d 558, 560 (9th Cir. 1988)](toa:mccarthy). "When the defendant raises a factual attack, the plaintiff must support her jurisdictional allegations with 'competent proof,' under the same evidentiary standard that governs in the summary judgment context." *Liete*, 749 F.3d at 1121 (citations omitted); *see also* [*Friends of the Earth v. Sanderson Farms, Inc.*, 992 F.3d 939, 944 (9th Cir. 2021)](toa:sanderson). "The plaintiff bears the burden of proving by a preponderance of the evidence that each of the requirements for subject-matter jurisdiction has been met." *Liete*, 749 F.3d at 1121.
 
-# Argument
+# ARGUMENT
 
 ## Plaintiffs Lack Standing and Their Claims Are Not Ripe
 
@@ -117,6 +118,6 @@ Plaintiffs bear the burden of demonstrating that they have standing under Articl
 
 [^factual]: Defendants' motion is brought both as a factual and facial challenge. To the extent the Defendants' challenge Plaintiffs' assertions of imminent harm with factual information in the standing and ripeness arguments in sections I and II of the Argument section, it is a factual challenge. Otherwise, it is a facial challenge.
 
-# Conclusion
+# CONCLUSION
 
 For the foregoing reasons, Plaintiffs' Complaint should be dismissed for lack of jurisdiction.

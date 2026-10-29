@@ -699,7 +699,12 @@ return function(spec)
   -- multi-pass build writes itself ($FORMBOOK_FOOTERS, $FORMBOOK_FINAL; docxpass.rs).
   local function sect_xml(footer, fmt, first, cont)
     local m = spec.margin
-    local foot = tw(math.floor((0.7 * m.bottom - spec.pitch.single) * 20 + 0.5) / 20)
+    -- (a running footer of n lines: the last line's box ends n - 1 lines lower, where typst stacks them)
+    local pt = spec.page_number and spec.page_number.text
+    local nlines = xd.is_running(pt) and select(2, pt:gsub("<br>", "")) + 1 or 1
+    -- (the footer's top `page_number.descent` below the text, 30 % of the bottom margin by default)
+    local descent = spec.page_number and tonumber(spec.page_number.descent) or 0.3 * m.bottom
+    local foot = tw(math.floor((m.bottom - descent - nlines * spec.pitch.single) * 20 + 0.5) / 20)
     return '<w:sectPr><w:footerReference w:type="default" r:id="' .. footer .. '"/>'
       .. (first and '<w:footerReference w:type="first" r:id="rIdXdNone"/>' or "")
       .. '<w:pgSz w:w="' .. tw(PAGE_W) .. '" w:h="' .. tw(PAGE_H) .. '"/><w:pgMar w:top="' .. tw(m.top) .. '" w:right="' .. tw(m.right)
@@ -749,9 +754,25 @@ return function(spec)
     end
     -- the layout's `page_number.text` ("Page {page} of {pages}"): the body's pages (SECTIONPAGES when it is a section
     -- numbered apart from the tables, NUMPAGES otherwise; tools/fb/src/enginegen/word.rs page_text_runs)
-    if pn.text then fld = page_text(pn.text, pn.front and "SECTIONPAGES" or "NUMPAGES") end
+    local pages = pn.front and "SECTIONPAGES" or "NUMPAGES"
+    local page_xml = pn.text and page_text(pn.text, pages) or fld
+    -- a running footer (frontmatter fields, lines at "<br>"): a paragraph per line, a field's value as markdown
+    if xd.is_running(pn.text) then
+      local ps = {}
+      for _, pieces in ipairs(xd.footer_lines(pn.text, xd.meta())) do
+        local xml = {}
+        for _, p in ipairs(pieces) do
+          if p.lit then xml[#xml + 1] = xe.runs(p.lit, {})
+          elseif p.field then xml[#xml + 1] = xe.inl(bind_double_signs(xd.inlines(p.field):walk({ Str = breaks })), {})
+          else xml[#xml + 1] = page_text("{" .. p.key .. "}", pages) end
+        end
+        ps[#ps + 1] = ftr(table.concat(xml))
+      end
+      page_xml = nil
+      fld = table.concat(ps)
+    end
     local f = io.open(os.getenv("FORMBOOK_FOOTERS"), "w")
-    f:write("rIdXdPage\t" .. ftr(fld) .. "\n" .. "rIdXdNone\t" .. ftr("") .. "\n")
+    f:write("rIdXdPage\t" .. (page_xml and ftr(page_xml) or fld) .. "\n" .. "rIdXdNone\t" .. ftr("") .. "\n")
     f:close()
     f = io.open(os.getenv("FORMBOOK_FINAL"), "w")
     f:write(sect_xml("rIdXdPage", pn.front and "decimal" or nil, (pn.from or 1) > 1))
@@ -1027,7 +1048,8 @@ return function(spec)
           f:write(table.concat(sections, "\n") .. "\n" .. table.concat(needles, "\n") .. "\n")
           f:close()
         end
-        if sectioned or measured then write_section() end
+        -- (a running footer names frontmatter fields: the document writes its footer)
+        if sectioned or measured or xd.is_running(spec.page_number and spec.page_number.text) then write_section() end
         return pandoc.Pandoc(out, pandoc.Meta({}))
       end,
     },

@@ -7,7 +7,8 @@
 //
 //   font, size, pitch: {body, single}, margin: {top, bottom, left, right}, paper (letter, legal), justify, indent,
 //   list_indent,
-//   page_number: {align, from}, footnote: {size, pitch, gap, clearance}, quote: {left, right, above, below, gap},
+//   page_number: {align, from, front, cover, text ("{page}", "{pages}", frontmatter fields, "<br>" lines), descent},
+//   footnote: {size, pitch, gap, clearance}, quote: {left, right, above, below, gap},
 //   heading: [level 1, level 2, ...] (each a text style plus above/below; `number`: "I." etc., the label in a box of
 //   `label_box` or the `hang`, `number_prefix`, `label_line`), front: [blocks], closing: [blocks],
 //   before_tables: [blocks], body_before_tables: {count | until | marker} (pages between the cover and the tables),
@@ -87,6 +88,29 @@
   }
   v
 }
+
+/// A running footer (layout.yaml `page_number.text` that names a frontmatter field or holds a "<br>": D. Alaska
+/// L.Civ.R. 7.5(a)(1)(C), D. Or. LR 10-1(e)(1)): its lines, split at "<br>", each a list of pieces: `(lit: text)` as
+/// written, `(key: "page")` or `(key: "pages")`, `(field: value)` a frontmatter value as markdown inlines (a path,
+/// `{a.b|text}` as in a text block; a missing one stops the render). lib/pandoc/xdoc.lua footer_lines alike.
+#let FOOT-FIELD = regex("\\{([^{}]+)\\}")
+#let is-running(t) = t.contains("<br>") or t.matches(FOOT-FIELD).any(m => m.captures.at(0) not in ("page", "pages"))
+#let footer-lines(t, meta) = t.split("<br>").map(line => {
+  let out = ()
+  let at = 0
+  for m in line.matches(FOOT-FIELD) {
+    if m.start > at { out.push((lit: line.slice(at, m.start))) }
+    let p = m.captures.at(0)
+    if p in ("page", "pages") { out.push((key: p)) } else {
+      let v = lookup(meta, p)
+      if v == none { panic("xdoc: missing required metadata field `" + p + "` (page_number.text)") }
+      out.push((field: str(v)))
+    }
+    at = m.end
+  }
+  if at < line.len() { out.push((lit: line.slice(at))) }
+  out
+})
 
 /// Whether a frontmatter value is set: present and not false, "" or an empty list or map.
 #let is-set(v) = v not in (none, false, "", (), (:))
@@ -995,17 +1019,24 @@
   set document(title: str(meta.at("title", default: meta.at("doc_title", default: meta.at("brief_title", default: "")))))
   // The page number centered in a single line box in the bottom margin, where Word's footer sets it.
   set page(paper: PAPER.at(spec.at("paper", default: "letter")), margin: (top: pt(m.top), bottom: pt(m.bottom), left: pt(m.left), right: pt(m.right)),
-    footer-descent: 30%, footer: context {
+    // (`page_number.descent`: the footer's top that far below the text, 30 % of the bottom margin by default)
+    footer-descent: if pn != none and "descent" in pn { pt(pn.descent) } else { 30% }, footer: context {
       let n = counter(page).get().first()
       let fmt = xd-num.get()
       if pn != none and fmt != none and n >= pn.at("from", default: 1) {
         let al = (left: left, center: center, right: right).at(pn.at("align", default: "center"))
         // the number alone, or the layout's `page_number.text` ("Page {page} of {pages}": pages, the last page's count)
         let label = numbering(fmt, n)
-        let shown = if "text" in pn {
-          pn.text.replace("{pages}", str(counter(page).final().first())).replace("{page}", label)
-        } else { label }
-        align(al, text(..edges(pt(spec.pitch.single)), shown))
+        let last = if "text" in pn { str(counter(page).final().first()) }
+        if "text" in pn and is-running(pn.text) {
+          // a running footer: its lines stacked, each a single line box (the first where the number alone is)
+          stack(..footer-lines(pn.text, meta).map(pieces => align(al, text(..edges(pt(spec.pitch.single)),
+            pieces.map(p => if "lit" in p { p.lit } else if "field" in p { md(p.field) }
+              else if p.key == "page" { label } else { last }).join()))))
+        } else {
+          let shown = if "text" in pn { pn.text.replace("{pages}", last).replace("{page}", label) } else { label }
+          align(al, text(..edges(pt(spec.pitch.single)), shown))
+        }
       }
     }, ..cover-fill(spec))
   set text(font: spec.font, size: pt(spec.size), lang: "en", region: "us", fallback: false)

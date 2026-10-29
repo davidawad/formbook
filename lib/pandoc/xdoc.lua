@@ -58,6 +58,46 @@ local function str(v)
   return tostring(v)
 end
 
+-- A running footer (layout.yaml `page_number.text` that names a frontmatter field or holds a "<br>"; lib/typst/xdoc.typ
+-- footer-lines): its lines, split at "<br>", each a list of pieces: `{lit = text}` as written, `{key = "page"}` or
+-- `{key = "pages"}`, `{field = value}` a frontmatter value (markdown inlines; a missing one stops the render).
+function M.is_running(text)
+  if not text then return false end
+  if text:find("<br>", 1, true) then return true end
+  for p in text:gmatch("{([^{}]+)}") do
+    if p ~= "page" and p ~= "pages" then return true end
+  end
+  return false
+end
+
+function M.footer_lines(text, meta)
+  local lines, from = {}, 1
+  while true do
+    local a, b = text:find("<br>", from, true)
+    lines[#lines + 1] = text:sub(from, a and a - 1 or -1)
+    if not a then break end
+    from = b + 1
+  end
+  local out = {}
+  for _, line in ipairs(lines) do
+    local pieces, at = {}, 1
+    for s, p, e in line:gmatch("(){([^{}]+)}()") do
+      if s > at then pieces[#pieces + 1] = { lit = line:sub(at, s - 1) } end
+      if p == "page" or p == "pages" then pieces[#pieces + 1] = { key = p } else
+        local v = M.lookup(meta, p)
+        if v == nil or v == pandoc.json.null then
+          error("xdoc: missing required metadata field `" .. p .. "` (page_number.text)", 0)
+        end
+        pieces[#pieces + 1] = { field = str(v) }
+      end
+      at = e
+    end
+    if at <= #line then pieces[#pieces + 1] = { lit = line:sub(at) } end
+    out[#out + 1] = pieces
+  end
+  return out
+end
+
 -- Whether a frontmatter value is set (lib/typst/xdoc.typ is-set): present and not false, "" or an empty list or map.
 function M.is_set(v)
   return v ~= nil and v ~= pandoc.json.null and v ~= false and v ~= ""

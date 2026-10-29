@@ -6,7 +6,7 @@ Courts under `courts/ninth-circuit/oregon` (4).
 | Court | Alias | Status | Typst | LaTeX | DOCX | % |
 |---|---|---|---|---|---|---:|
 | [United States Bankruptcy Court, D. Oregon](federal/bankruptcy-district) | `orb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. Oregon](federal/district) | `ord` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. Oregon](federal/district) | `ord` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Court of Appeals of Oregon](state/court-of-appeals) | `orctapp` | up for review | 1/2 | — | — | 29 |
 | [Oregon Supreme Court](state/supreme-court) | `or` | up for review | 9/9 | — | — | 29 |
 

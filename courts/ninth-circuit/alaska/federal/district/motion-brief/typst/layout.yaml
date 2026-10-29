@@ -1,0 +1,119 @@
+# U.S. District Court for the District of Alaska (akd): a memorandum in support of a motion, on the generic FRCP brief
+# (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D. Alaska's local rules overlaid here. The shared document model
+# sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`). Rules: D.
+# Alaska Local Civil Rules effective October 15, 2025,
+# https://www.akd.uscourts.gov/sites/akd/files/local_rules/Local_Civil_Rules_10-2025.pdf (../README.md quotes them).
+# The base already meets L.Civ.R. 7.5(a)(1)(B) (one-inch margins) and 7.5(a)(2)(A) (letter paper).
+base: /lib/layouts/frcp-motion-brief.yaml
+# L.Civ.R. 7.5(a)(1)(A), (D): double-spaced, at least 13-point type: 13 pt at 30 pt, the single line 15 pt (headings,
+# counsel, caption, quotations, footnotes, tables, signature, footer).
+size: 13
+pitch: {body: 30, single: 15}
+# Footnotes at the text size, single-spaced, 7 pt apart; the rule 7.5 pt under the text (the space Word keeps above it).
+footnote: {size: 13, gap: 7, clearance: 7.5}
+# L.Civ.R. 7.5(a)(1)(A): quotations single-spaced, half an inch in on each side, a single line around them.
+quote: {left: 36, right: 36, above: 15, below: 15}
+# L.Civ.R. 7.5(a)(1)(C): on every page of a multi-page document the page number and a footer with the case name and
+# number: three single lines, centred (a running footer, fb-595.92): the number, the sample's short title of the paper
+# (`footer_title`), the case name and number. L.Civ.R. 7.4(a)(4): the cover and the tables, outside the page limit,
+# numbered apart in lower-case roman (the cover i, printed: every page carries the footer), the memorandum from 1.
+# L.Civ.R. 7.5(a)(1)(B), margins of at least an inch "including footers": the footer inside the bottom margin, its top
+# 6 pt below the text (`descent`), so its three lines end 21 pt above the page foot (the base's 30 % would set them 5.4
+# pt from it).
+page_number:
+  align: center
+  descent: 6
+  front: lower-roman
+  cover: numbered
+  text: "{page}<br>{footer_title}<br>{case_name}, Case No. {case_number}"
+# Headings single-spaced and bold, a double line above and a single below, kept with what follows: a section centred in
+# capitals, unnumbered; the argument headings numbered by the template, "I." at the margin, "A.", "1." and "a." half
+# an inch further in each, the label in a half-inch box with the title's later lines hung under it.
+heading:
+  - {align: center, bold: true, upper: true, above: 30, below: 15}
+  - {bold: true, number: "I.", label_box: 36, above: 30, below: 15}
+  - {bold: true, number: "A.", label_box: 36, left: 36, above: 30, below: 15}
+  - {bold: true, number: "1.", label_box: 36, left: 72, above: 30, below: 15}
+  - {bold: true, number: "a.", label_box: 36, left: 108, above: 30, below: 15}
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE DISTRICT OF ALASKA"
+# The cover (page i), L.Civ.R. 7.5(b): counsel at the upper left, single-spaced (7.5(b)(1)); the court title centred in
+# bold capitals at least half an inch below it (7.5(b)(2)); the caption, the parties in a column ruled at its right and
+# foot (a box ruled at its right in one ruled at its foot), each party's names and its designation half an inch in a
+# little below (as both filers set it), the parties a single line apart, "v." half an inch in before a party
+# the sample marks `versus` (both filers); at the right the case number and the judge
+# (7.5(b)(3)); the title of the paper centred in bold capitals a double line below (the second filer's place; the
+# first sets it in the right column),
+# the statute relied on in parentheses under it (L.Civ.R. 8.1(a)) and, when requested, "Oral Argument Requested"
+# (L.Civ.R. 7.1(f)).
+cover:
+  - {text: "{counsel}"}
+  - {text: "{xd.court}", align: center, bold: true, above: 57.6}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 244.8
+        blocks:
+          - box:
+              - box:
+                  - each: caption
+                    gap: 15
+                    blocks:
+                      - {text: "{names}"}
+                      - {text: "{designation}", left: 36, above: 6}
+                    between:
+                      - when: next.versus
+                        blocks:
+                          - {text: "v.", left: 36, above: 6}
+                stroke: {right: 0.75}
+                inset: {right: 8, bottom: 8}
+            stroke: {bottom: 0.75}
+      - blocks:
+          - {text: "No. {case_number}"}
+          - {text: "{judge}", optional: true}
+    gutter: 8
+    above: 30
+  - {text: "{title}", align: center, bold: true, upper: true, above: 30}
+  - {text: "({statute})", align: center, optional: true}
+  - when: oral_argument
+    blocks:
+      - {text: "Oral Argument Requested", align: center, bold: true}
+front: []
+# The tables (pages ii ..): the contents to the fourth level, a row per heading half an inch in per level, the page in
+# a half-inch column; the authorities from the body's `toa:` links, grouped, the page lists in
+# an inch, "passim" for seven pages or more, "Page(s)" over them (a case name in italics as the sample writes it, a comma
+# and the citation).
+contents: {title: "TABLE OF CONTENTS", depth: 4, col: 36, hang: 36, step: 36, above: 6}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  page_heading: "Page(s)"
+  passim: 7
+  kinds:
+    - {kind: case, title: "Cases"}
+    - {kind: statute, title: "Statutes"}
+    - {kind: rule, title: "Rules"}
+    - {kind: regulation, title: "Regulations"}
+    - {kind: other, title: "Other Authorities"}
+  col: 72
+  hang: 25.2
+  above: 6
+  group: {bold: true, above: 15}
+# L.Civ.R. 7.5(c): the date line half an inch in; from 2.5 in the preamble, the "/s/" line and the signer's lines (name,
+# bar number, whom they represent), single-spaced, a double line below the last paragraph and kept with it.
+closing:
+  - group:
+      - {text: "{date}", left: 36, optional: true}
+      - {text: "{signature.preamble}", left: 180, above: 15, optional: true}
+      - {text: "/s/ {signature.signer}", left: 180, above: 15}
+      - {text: "{signature.lines}", left: 180, optional: true}
+    above: 30
+# A certificate of service when the sample has one (L.Civ.R. 5.1(c)(4): service other than through CM/ECF), on a page
+# of its own: its text, and the signer under a line at 2.5 in.
+after_tail:
+  - when: certificate
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", heading: 1}
+      - {text: "{certificate.text}", pitch: body, indent: 36, above: 15}
+      - {rule: 0.5, left: 180, above: 60}
+      - {text: "{certificate.signer}", left: 180}
