@@ -706,10 +706,11 @@ return function(spec)
         if (spec.page_number and spec.page_number.from or 1) > 1 or hidden then first:insert(raw("\\thispagestyle{empty}")) end
         if cmode then first:insert(raw("\\pagenumbering{" .. TEX_FMT[front] .. "}")) end
         -- a running footer (page_number.text with frontmatter fields, lines at "<br>"): \xd@foot, the lines the
-        -- generated template's footer stacks, each a line box of the single pitch (lib/typst/xdoc.typ footer-lines)
+        -- generated template's footer stacks, each a line box of the footer's pitch (page_number.pitch, the single pitch
+        -- by default; lib/typst/xdoc.typ footer-lines)
         local pt = spec.page_number and spec.page_number.text
         if xd.is_running(pt) then
-          local p = tonumber(spec.pitch.single)
+          local p = tonumber(spec.page_number.pitch or spec.pitch.single)
           local al = spec.page_number.align or "center"
           local ls = {}
           for _, pieces in ipairs(xd.footer_lines(pt, meta)) do

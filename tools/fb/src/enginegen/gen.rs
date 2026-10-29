@@ -310,11 +310,11 @@ pub fn word_layout(l: &Value) -> Result<Value, String> {
 }
 
 /// The page number's line: its pitch and baseline below the text (typst: footer-descent 30 % of the bottom margin,
-/// or the layout's `page_number.descent`, the number in a single line box), and Word's footer distance (from the page
-/// foot to the bottom of that box).
+/// or the layout's `page_number.descent`, the number in a line box of `page_number.pitch`, the single pitch by
+/// default), and Word's footer distance (from the page foot to the bottom of that box).
 pub fn footer(l: &Value) -> Result<(f64, f64, f64), String> {
     let mb = num(l, "margin.bottom", None)?;
-    let ps = num(l, "pitch.single", None)?;
+    let ps = num(l, "page_number.pitch", Some(num(l, "pitch.single", None)?))?;
     let descent = num(l, "page_number.descent", Some(0.3 * mb))?;
     let skip = descent + 0.8 * ps;
     let dist = mb - descent - ps;

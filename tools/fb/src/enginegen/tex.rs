@@ -164,7 +164,10 @@ pub fn template(l: &Value, face: &str) -> Result<String, String> {
     };
     let size = num(l, "size", None)?;
     let body = num(l, "pitch.body", None)?;
-    let (single, skip, _) = footer(l)?;
+    // (the footer's pitch and type size: page_number.pitch and .size, the single pitch and the type size by default)
+    let (foot, skip, _) = footer(l)?;
+    let fsize = num(l, "page_number.size", Some(size))?;
+    let single = num(l, "pitch.single", None)?;
     let m = |s: &str| num(l, &format!("margin.{s}"), None);
     let indent = num(l, "indent", None)?;
     let list = num(l, "list_indent", Some(indent))?;
@@ -244,7 +247,7 @@ pub fn template(l: &Value, face: &str) -> Result<String, String> {
 \setlength{{\parindent}}{{{indent}bp}}
 {justify}% the page number: centered (layout.yaml page_number) in a single line box
 \def\ps@plain{{\let\@mkboth\@gobbletwo\let\@oddhead\@empty\let\@evenhead\@empty
-  \def\@oddfoot{{\reset@font\xe@lines{{{size}}}{{{single}}}{number}}}\let\@evenfoot\@oddfoot}}
+  \def\@oddfoot{{\reset@font\xe@lines{{{fsize}}}{{{foot}}}{number}}}\let\@evenfoot\@oddfoot}}
 \pagestyle{{{style}}}
 {pleading}% lists: the number or bullet in a {list} bp box at the margin, the text hanging after it
 \providecommand{{\tightlist}}{{\setlength{{\itemsep}}{{0pt}}\setlength{{\parskip}}{{0pt}}}}
@@ -275,7 +278,8 @@ $body$
         skip = fmt(skip),
         size = fmt(size),
         body = fmt(body),
-        single = fmt(single),
+        fsize = fmt(fsize),
+        foot = fmt(foot),
         indent = fmt(indent),
         list = fmt(list),
         nsize = fmt(nsize),

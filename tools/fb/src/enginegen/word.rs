@@ -54,7 +54,7 @@ pub fn reference(l: &Value, _face: &str) -> Result<String, String> {
     } else {
         ""
     };
-    let single = tw(single_pt, "pitch.single")?;
+    let single = tw(single_pt, "page_number.pitch")?;
     let indent = tw(num(l, "indent", None)?, "indent")?;
     let list = tw(
         num(l, "list_indent", Some(num(l, "indent", None)?))?,
@@ -111,6 +111,16 @@ pub fn reference(l: &Value, _face: &str) -> Result<String, String> {
         Some(t) if !super::gen::is_running(t) => page_text_runs(t, "NUMPAGES"),
         Some(_) => String::new(),
         None => fld.to_string(),
+    };
+    // the footer's type size (layout.yaml page_number.size, fb-595.96): on each of its runs when it is not the text's
+    let fhalf = (num(l, "page_number.size", Some(size))? * 2.0).round() as i64;
+    let number = if fhalf == half {
+        number
+    } else {
+        number.replace(
+            "<w:r>",
+            &format!(r#"<w:r><w:rPr><w:sz w:val="{fhalf}"/><w:szCs w:val="{fhalf}"/></w:rPr>"#),
+        )
     };
     let footer_p = format!(
         r#"<w:p><w:pPr>{}<w:jc w:val="{jc}"/></w:pPr>{}</w:p>"#,

@@ -3325,3 +3325,77 @@ fn a_list_in_a_quotation_runs_to_the_quotation_s_right_indent_in_typst() {
         .fold(0.0, f64::max);
     assert!(right > 459.0 && right <= 468.0, "{right}");
 }
+
+#[test]
+fn a_footer_of_its_own_size_and_pitch_in_every_engine() {
+    // (fb-595.96) page_number.size and .pitch: a 9 pt footer in 11 pt line boxes under 12 pt text
+    let l = layout("page_number: {align: center, size: 9, pitch: 11}\n");
+    let Some(f) = fx(
+        "footer-size",
+        &l,
+        "---\nfooter_title: A Motion\n---\nBody.\n",
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
+        return;
+    };
+    f.typst_pages().unwrap();
+    let m = crate::measure::measure(&f.dir.join("out.pdf"), &[]).unwrap();
+    let num = m.pages[0].lines.iter().find(|ln| ln.text == "1").unwrap();
+    assert_eq!(num.size, 9.0, "{num:?}");
+    // LaTeX: the footer's line box and size
+    let tpl = std::fs::read_to_string(f.dir.join("latex/template.tex")).unwrap();
+    assert!(
+        tpl.contains("\\def\\@oddfoot{\\reset@font\\xe@lines{9}{11}"),
+        "{tpl}"
+    );
+    // Word: the reference's footer in exact 11 pt lines, its runs at 9 pt (18 half points)
+    let refx = std::fs::read_to_string(f.dir.join("docx/reference.xml")).unwrap();
+    let foot = &refx[refx.find("<footer id=\"rIdFooter1\">").unwrap()..];
+    assert!(
+        foot.contains(r#"w:line="220" w:lineRule="exact""#)
+            && foot.contains(r#"<w:sz w:val="18"/>"#),
+        "{foot}"
+    );
+    // a running footer: the filter's lines at that size and pitch, LaTeX's \xd@foot boxes too
+    let l = layout(
+        "page_number: {align: center, size: 9, pitch: 11, text: \"{page}<br>{footer_title}\"}\n",
+    );
+    let Some(g) = fx(
+        "footer-size-running",
+        &l,
+        "---\nfooter_title: A Motion\n---\nBody.\n",
+        &["typst", "pandoc", "pdftotext"],
+    ) else {
+        return;
+    };
+    let pages = g.typst_pages().unwrap();
+    assert!(pages[0].contains("A Motion"));
+    let m = crate::measure::measure(&g.dir.join("out.pdf"), &[]).unwrap();
+    let t = m.pages[0]
+        .lines
+        .iter()
+        .find(|ln| ln.text == "A Motion")
+        .unwrap();
+    let n = m.pages[0].lines.iter().find(|ln| ln.text == "1").unwrap();
+    assert!(
+        t.size == 9.0 && (t.baseline - n.baseline - 11.0).abs() < 0.05,
+        "{t:?} {n:?}"
+    );
+    assert!(g.latex().unwrap().contains("\\ht0=8.8bp\\dp0=2.2bp"));
+    g.docx().unwrap();
+    let ftr = g.written("footers.tsv").unwrap();
+    assert!(
+        ftr.contains(r#"w:line="220" w:lineRule="exact""#)
+            && ftr.matches(r#"<w:sz w:val="18"/>"#).count() >= 4,
+        "{ftr}"
+    );
+    // the default footer: unchanged (the type size, the single pitch, no run size)
+    let d: serde_yaml::Value = serde_yaml::from_str(&layout("")).unwrap();
+    let files = gen::generate(&d, "Times New Roman").unwrap();
+    let r = &files
+        .iter()
+        .find(|(p, _)| p == "docx/reference.xml")
+        .unwrap()
+        .1;
+    assert!(!r[r.find("<footer id=").unwrap()..].contains("<w:sz "));
+}

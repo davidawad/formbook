@@ -754,6 +754,13 @@
   }
 }
 
+/// The footer's type: `page_number.size` (the type size by default) in line boxes of `page_number.pitch` (the single
+/// pitch by default; fb-595.96: a footer smaller than the text under pleading paper).
+#let foot-text(spec, pn) = {
+  let pn = if pn == none { (:) } else { pn }
+  (size: pt(pn.at("size", default: spec.size)), ..edges(pt(pn.at("pitch", default: spec.pitch.single))))
+}
+
 /// The label of the page at a location.
 #let page-label(loc) = {
   let fmt = xd-num.at(loc)
@@ -1095,12 +1102,12 @@
         let last = if "text" in pn { str(counter(page).final().first()) }
         if "text" in pn and is-running(pn.text) {
           // a running footer: its lines stacked, each a single line box (the first where the number alone is)
-          stack(..footer-lines(pn.text, meta).map(pieces => align(al, text(..edges(pt(spec.pitch.single)),
+          stack(..footer-lines(pn.text, meta).map(pieces => align(al, text(..foot-text(spec, pn),
             pieces.map(p => if "lit" in p { p.lit } else if "field" in p { md(p.field) }
               else if p.key == "page" { label } else { last }).join()))))
         } else {
           let shown = if "text" in pn { pn.text.replace("{pages}", last).replace("{page}", label) } else { label }
-          align(al, text(..edges(pt(spec.pitch.single)), shown))
+          align(al, text(..foot-text(spec, pn), shown))
         }
       }
     }, ..{

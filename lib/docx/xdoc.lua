@@ -777,7 +777,8 @@ return function(spec)
     local nlines = xd.is_running(pt) and select(2, pt:gsub("<br>", "")) + 1 or 1
     -- (the footer's top `page_number.descent` below the text, 30 % of the bottom margin by default)
     local descent = spec.page_number and tonumber(spec.page_number.descent) or 0.3 * m.bottom
-    local foot = tw(math.floor((m.bottom - descent - nlines * spec.pitch.single) * 20 + 0.5) / 20)
+    local fp = spec.page_number and tonumber(spec.page_number.pitch) or spec.pitch.single
+    local foot = tw(math.floor((m.bottom - descent - nlines * fp) * 20 + 0.5) / 20)
     -- (pleading paper: the header that draws it on every page, the first page's too)
     local hdr = spec.pleading and ('<w:headerReference w:type="default" r:id="' .. PLEADING_ID .. '"/>'
       .. (first and '<w:headerReference w:type="first" r:id="' .. PLEADING_ID .. '"/>' or "")) or ""
@@ -801,28 +802,33 @@ return function(spec)
 
 
   -- Word runs of a page-number text: its text as runs, {page} the PAGE field, {pages} the field `pages` names.
-  local function page_text(text, pages)
+  -- (`o`: the runs' options, the footer's size: layout.yaml page_number.size)
+  local function page_text(text, pages, o)
+    o = o or {}
+    local sz = o.sz and ('<w:rPr><w:sz w:val="' .. o.sz .. '"/><w:szCs w:val="' .. o.sz .. '"/></w:rPr>') or ""
     local function field(name)
-      return '<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> ' .. name
+      return (('<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> ' .. name
         .. ' </w:instrText></w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r>'
-        .. '<w:r><w:fldChar w:fldCharType="end"/></w:r>'
+        .. '<w:r><w:fldChar w:fldCharType="end"/></w:r>'):gsub("<w:r>", "<w:r>" .. sz))
     end
     local out, rest = {}, text
     while #rest > 0 do
       local a = rest:find("{", 1, true)
       local pre = a and rest:sub(1, a - 1) or rest
-      if pre ~= "" then out[#out + 1] = xe.runs(pre, {}) end
+      if pre ~= "" then out[#out + 1] = xe.runs(pre, o) end
       if not a then break end
       rest = rest:sub(a)
       if rest:sub(1, 7) == "{pages}" then out[#out + 1] = field(pages); rest = rest:sub(8)
       elseif rest:sub(1, 6) == "{page}" then out[#out + 1] = field("PAGE"); rest = rest:sub(7)
-      else out[#out + 1] = xe.runs("{", {}); rest = rest:sub(2) end
+      else out[#out + 1] = xe.runs("{", o); rest = rest:sub(2) end
     end
     return table.concat(out)
   end
   local function write_section()
     local pn = spec.page_number or {}
-    local single = tw(spec.pitch.single)
+    -- (the footer's line boxes and type: page_number.pitch and .size, the single pitch and the type size by default)
+    local single = tw(pn.pitch or spec.pitch.single)
+    local fo = (pn.size and pn.size ~= spec.size) and { sz = math.floor(pn.size * 2 + 0.5) } or {}
     local fld = '<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve"> PAGE </w:instrText>'
       .. '</w:r><w:r><w:fldChar w:fldCharType="separate"/></w:r><w:r><w:t>1</w:t></w:r><w:r><w:fldChar w:fldCharType="end"/></w:r>'
     local function ftr(runs_xml)
@@ -831,16 +837,17 @@ return function(spec)
     -- the layout's `page_number.text` ("Page {page} of {pages}"): the body's pages (SECTIONPAGES when it is a section
     -- numbered apart from the tables, NUMPAGES otherwise; tools/fb/src/enginegen/word.rs page_text_runs)
     local pages = pn.front and "SECTIONPAGES" or "NUMPAGES"
-    local page_xml = pn.text and page_text(pn.text, pages) or fld
+    if fo.sz then fld = page_text("{page}", pages, fo) end
+    local page_xml = pn.text and page_text(pn.text, pages, fo) or fld
     -- a running footer (frontmatter fields, lines at "<br>"): a paragraph per line, a field's value as markdown
     if xd.is_running(pn.text) then
       local ps = {}
       for _, pieces in ipairs(xd.footer_lines(pn.text, xd.meta())) do
         local xml = {}
         for _, p in ipairs(pieces) do
-          if p.lit then xml[#xml + 1] = xe.runs(p.lit, {})
-          elseif p.field then xml[#xml + 1] = xe.inl(bind_double_signs(xd.inlines(p.field):walk({ Str = breaks })), {})
-          else xml[#xml + 1] = page_text("{" .. p.key .. "}", pages) end
+          if p.lit then xml[#xml + 1] = xe.runs(p.lit, fo)
+          elseif p.field then xml[#xml + 1] = xe.inl(bind_double_signs(xd.inlines(p.field):walk({ Str = breaks })), fo)
+          else xml[#xml + 1] = page_text("{" .. p.key .. "}", pages, fo) end
         end
         ps[#ps + 1] = ftr(table.concat(xml))
       end
