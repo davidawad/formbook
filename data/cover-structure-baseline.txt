@@ -19,8 +19,6 @@ courts/dc-circuit/district-of-columbia/federal/bankruptcy-district/motion-brief 
 courts/dc-circuit/district-of-columbia/federal/bankruptcy-district/motion-brief typst
 courts/dc-circuit/district-of-columbia/federal/district/complaint docx
 courts/dc-circuit/district-of-columbia/federal/district/complaint typst
-courts/dc-circuit/district-of-columbia/federal/district/motion-brief docx
-courts/dc-circuit/district-of-columbia/federal/district/motion-brief typst
 courts/dc-circuit/district-of-columbia/state/court-of-appeals/amicus-brief docx
 courts/dc-circuit/district-of-columbia/state/court-of-appeals/amicus-brief latex
 courts/dc-circuit/district-of-columbia/state/court-of-appeals/amicus-brief typst

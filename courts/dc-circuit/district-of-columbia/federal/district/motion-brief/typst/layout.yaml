@@ -1,0 +1,71 @@
+# U.S. District Court for the District of Columbia (dcd): a memorandum of points and authorities supporting a motion
+# (LCvR 7(a)), on the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D.D.C.'s local rules
+# overlaid here. The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged
+# layout by `fb engines gen`).
+# Rules: D.D.C. Local Civil Rules (April 2017), https://www.dcd.uscourts.gov/sites/dcd/files/LocalRulesApril2017.pdf
+# (../README.md quotes them). The base already meets LCvR 5.1(d): 8 1/2 by 11 inch paper, 12-point type, footnotes
+# included; the base's one-inch margins are a convention here (LCvR 5.1 names none). The 45-page limit of LCvR 7(e) is
+# checked on the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# LCvR 5.1(d): "double-spaced": Word's double line in this face (2 x 13.8 pt), as both exemplars (two filers) set it.
+pitch: {body: 27.6}
+# LCvR 5.1(d) excepts no quoted matter from double spacing: block quotations at the body pitch, indented half an inch
+# each side, no space of their own.
+quote: {pitch: body, below: 0}
+# FRCP 10(a): the court's name, second line.
+constants:
+  district: "FOR THE DISTRICT OF COLUMBIA"
+# The caption and the paper's title on a cover page of their own, the table of contents (when the sample asks for one,
+# `toc: true`) on pages numbered i, ii .., the body from 1: both exemplars (Estrada, Saul Ewing LLP; Esrati, FEC Office
+# of General Counsel: usage/SOURCE.md) set the caption alone on page 1 before their tables. No rule requires the
+# contents (LCvR 7(a) names only a table of cases). The party block ruled above, at its right and below, each
+# designation indented 1.5 in under its names; the title bold and centered, not underlined (both exemplars).
+page_number: {align: center, front: lower-roman}
+contents: {title: "TABLE OF CONTENTS", when: toc, depth: 3, col: 36, step: 18, above: 12}
+front: ~
+cover:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 223.2
+        blocks:
+          # (each side a box of its own: one rule per side in every engine, typst drawing a box's sides as one outline)
+          - box:
+              - box:
+                  - box:
+                      - each: caption.parties
+                        blocks:
+                          - {text: "{names}"}
+                          - {text: "{designation}", left: 108, above: 13.8}
+                        between:
+                          - {text: "v.", above: 13.8, below: 13.8}
+                    stroke: {right: 0.75}
+                    inset: {top: 10, right: 12, bottom: 10}
+                stroke: {bottom: 0.75}
+            stroke: {top: 0.75}
+      - valign: center
+        blocks:
+          # LCvR 5.1(d): the case number, followed by the assigned judge's initials (in the sample's case_number)
+          - {text: "{case_label|Civil Action No.} {case_number|____________}", left: 10.8}
+    gutter: 18
+    above: 27.6
+  - {text: "{brief_title}", align: center, bold: true, left: 36, right: 36, above: 27.6}
+# FRCP 11(a), LCvR 5.1(c)(1): the signature with each signer's name, bar number, address, telephone and e-mail. Both
+# exemplars close "Respectfully submitted," over the signers, the date at the left: the date line in a column of its
+# own, the closing, firm, signature line, the /s/ signature and each signer's lines at the right.
+closing:
+  - columns:
+      - width: 201.6
+        blocks:
+          - {text: "{signature.date_line}", optional: true}
+      - blocks:
+          - {text: "Respectfully submitted,"}
+          - {text: "{signature.firm}", optional: true, bold: true, above: 13.8}
+          - {text: "__________________________________", above: 13.8}
+          - {text: "{signature.signature}", optional: true}
+          - each: signature.blocks
+            blocks:
+              - {text: "{.}", above: 13.8}
+          - {text: "{signature.counsel_for}", optional: true, above: 13.8}
+    gutter: 14.4
+    above: 27.6

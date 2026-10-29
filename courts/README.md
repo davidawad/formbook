@@ -349,7 +349,7 @@ Courts under `courts` (347).
 | [Georgia Supreme Court](eleventh-circuit/georgia/state/supreme-court) | `ga` | up for review | 8/8 | 6/6 | 8/8 | 29 |
 | [Court of Appeals for the D.C. Circuit](dc-circuit/court-of-appeals) | `cadc` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court, District of Columbia](dc-circuit/district-of-columbia/federal/bankruptcy-district) | `dcb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, District of Columbia](dc-circuit/district-of-columbia/federal/district) | `dcd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, District of Columbia](dc-circuit/district-of-columbia/federal/district) | `dcd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [District of Columbia Court of Appeals](dc-circuit/district-of-columbia/state/court-of-appeals) | `dc` | up for review | 7/7 | 7/7 | 7/7 | 29 |
 | [District Courts of Travis County, Texas (Austin)](fifth-circuit/texas/state/district-court-travis) | `txdistrict-travis` | up for review | 6/6 | — | — | 14 |
 
