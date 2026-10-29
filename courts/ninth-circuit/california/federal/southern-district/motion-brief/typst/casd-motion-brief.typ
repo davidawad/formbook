@@ -24,7 +24,7 @@
 #let page-w = 8.5in                      // CivLR 5.1: letter size
 #let page-h = 11in
 #let body-leading = 14.9pt               // leading that gives a 24 pt pitch at 14 pt EB Garamond (measured: natural line box 9.1 pt; README.md)
-#let single-leading = 3.5pt              // counsel block, captions, tables of contents and authorities: about 12.6 pt pitch at 14 pt
+#let single-leading = 7pt                // counsel block, captions, tables of contents and authorities: a 16.1 pt (1.15 em) pitch at 14 pt, on the 9.1 pt natural line box
 #let top-margin = 72pt                   // numbered line 1 sits on the top margin
 #let bottom-margin = page-h - top-margin - lines-per-page * line-pitch   // 72 pt: holds the footer block placed below line 28
 #let left-margin = 1.5in                 // room for the line numbers and the rules
