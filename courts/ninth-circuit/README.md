@@ -8,7 +8,7 @@ Courts under `courts/ninth-circuit` (61).
 | [United States Bankruptcy Appellate Panel of The Ninth Circuit](bankruptcy-appellate-panel) | `bap9` | up for review | 3/3 | — | 3/3 | 14 |
 | [Court of Appeals for the Ninth Circuit](court-of-appeals) | `ca9` | up for review | 4/4 | 3/3 | 4/4 | 100 |
 | [United States Bankruptcy Court, D. Alaska](alaska/federal/bankruptcy-district) | `akb` | up for review | 2/2 | 1/1 | 2/2 | 14 |
-| [United States District Court for the District of Alaska](alaska/federal/district) | `akd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the District of Alaska](alaska/federal/district) | `akd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Arizona](arizona/federal/bankruptcy-district) | `arb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the District of Arizona](arizona/federal/district) | `azd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, C.D. California](california/federal/bankruptcy-central-district) | `cacb` | up for review | 2/2 | — | 2/2 | 14 |
@@ -32,7 +32,7 @@ Courts under `courts/ninth-circuit` (61).
 | [United States Bankruptcy Court, Northern Mariana Islands](northern-mariana-islands/federal/bankruptcy-district) | `nmib` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, Northern Mariana Islands](northern-mariana-islands/federal/district) | `nmid` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Oregon](oregon/federal/bankruptcy-district) | `orb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. Oregon](oregon/federal/district) | `ord` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. Oregon](oregon/federal/district) | `ord` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. Washington](washington/federal/bankruptcy-eastern-district) | `waeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Washington](washington/federal/bankruptcy-western-district) | `wawb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, E.D. Washington](washington/federal/eastern-district) | `waed` | up for review | 2/2 | — | 2/2 | 14 |
