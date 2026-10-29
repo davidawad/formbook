@@ -889,9 +889,10 @@ local CONTAINERS = { Emph = true, Strong = true, Underline = true, Strikeout = t
   Link = true, Quoted = true, Superscript = true, Subscript = true }
 
 -- Every occurrence of an authority's `find` text in the blocks, marked right after the text element it ends in (typst
--- marks the end of the word the match ends in): `mark(k, note, after, find, before)` gives the inline to insert (`note`:
+-- marks the end of the word the match ends in): `mark(k, note, after, find, before, upto)` gives the inline to insert (`note`:
 -- inside a footnote; `after`: the text of the run from the end of the match on; `before`: when fewer than 16 letters
--- and digits follow in the run, up to 40 characters of the run before the match, else ""). Matches are found within one run of words and spaces (typst
+-- and digits follow in the run, up to 40 characters of the run before the match, else ""; `upto`: a keyed
+-- authority's first word, where its mark is, else nil: the find's end). Matches are found within one run of words and spaces (typst
 -- matches text the same way: not across italics), and come out in document order (a footnote's where its mark is).
 function M.mark(blocks, entries, mark, keyed)
   local mark_blocks
@@ -979,8 +980,9 @@ function M.mark(blocks, entries, mark, keyed)
         local after = pandoc.Inlines({})
         for j = li + 1, #list do if list[j].t ~= "Note" then after:insert(list[j]) end end
         local tail = pandoc.utils.stringify(after):sub(1, 64)
-        -- (the find: the whole citation, the fallback a needle that runs over a page end)
-        local inl = after_first_word(content, mark(e.k, note, tail, rest))
+        -- (the find: the whole citation, the fallback a needle that runs over a page end; its mark after the first
+        -- word, `first`: a citation over a page end counts on its first word's page, as typst sets it)
+        local inl = after_first_word(content, mark(e.k, note, tail, rest, nil, first))
         out:extend(inl)
       else
         flush()

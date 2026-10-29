@@ -299,10 +299,11 @@ return function(spec)
   local measured = false -- a fill wrote position needles: the passes run, as for the tables
   local NEEDLE = 48 -- reduced characters of a needle: the text and what follows it
 
-  -- (`len`: the reduced characters kept, NEEDLE unless given)
-  local function needle(id, kind, text, fallback, len)
+  -- (`len`: the reduced characters kept, NEEDLE unless given; `upto`: an authority's fallback up to its mark, when the
+  -- mark is not at its end, a keyed authority's first word)
+  local function needle(id, kind, text, fallback, len, upto)
     needles[#needles + 1] = id .. "\t" .. kind .. "\t" .. xd.norm(text):sub(1, len or NEEDLE) .. "\t"
-      .. xd.norm(fallback or "")
+      .. xd.norm(fallback or "") .. (upto and ("\t" .. xd.norm(upto)) or "")
   end
 
   local function read_pages()
@@ -554,7 +555,7 @@ return function(spec)
         occ[k] = (occ[k] or 0) + 1
         local e = sp.attributes["xd-find"]
         needle("a" .. k .. "." .. occ[k], sp.attributes["xd-n"],
-          (sp.attributes["xd-before"] or "") .. e .. sp.attributes["xd-after"], e)
+          (sp.attributes["xd-before"] or "") .. e .. sp.attributes["xd-after"], e, nil, sp.attributes["xd-upto"])
       end
     end })
   end
@@ -867,9 +868,9 @@ return function(spec)
         local entries = xd.authority_entries(meta)
         local _, keyed = xd.keyed(spec, meta)
         local blocks = xd.mark(xd.attach_notes(xd.commonmark_lists(doc.blocks)):walk({ Inlines = bind_double_signs }), entries,
-          function(k, note, after, find, before)
+          function(k, note, after, find, before, upto)
             return pandoc.Span({}, { ["xd-k"] = tostring(k), ["xd-n"] = note and "N" or "B", ["xd-after"] = after,
-              ["xd-find"] = find, ["xd-before"] = before or "" })
+              ["xd-find"] = find, ["xd-before"] = before or "", ["xd-upto"] = upto })
           end, keyed)
         xd.check(spec, doc.blocks)
         xd.switch_contents(spec, meta)

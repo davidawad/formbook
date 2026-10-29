@@ -14,8 +14,10 @@
 //! a page break with footnotes between, it is found by its halves: a body needle's head on a page and its tail where
 //! the next page starts (the longest head first), also when its whole text comes again later (the halves, when they
 //! come first, win); failing both, FALLBACK (the text alone) is tried. An authority's needle (id `a..`) that runs over
-//! a page end is on the page its FALLBACK (the find) ends on (typst marks a citation before its last character); its
-//! find, not the words before the find in NEEDLE, is searched from where the body has reached.
+//! a page end is on the page its FALLBACK (the find) ends on (typst marks a citation before its last character), or,
+//! when the line has a fifth field UPTO (a keyed authority: typst marks it after its first word), where the find's
+//! first UPTO-length characters end; its find, not the words before the find in NEEDLE, is searched from where the
+//! body has reached.
 //!
 //! A position needle (kind `T` or `Y`, lib/docx/xdoc.lua's fills) asks where a line is, not its page: NEEDLE is found in
 //! the words of the PDF's lines (`pdftotext -bbox-layout`, bbox_lines), on the page the body has reached or a later
@@ -140,6 +142,9 @@ struct Needle {
     place: Place,
     needle: String,
     fallback: String,
+    /// the reduced characters of the fallback up to the authority's mark: its whole length unless the needle line's
+    /// fifth field gives the text before the mark (a keyed authority's first word)
+    upto: usize,
 }
 
 struct Section {
@@ -324,6 +329,11 @@ pub fn lookup_all(
                 },
                 needle: at(2),
                 fallback: at(3),
+                upto: if at(4).is_empty() {
+                    at(3).len()
+                } else {
+                    at(4).len().min(at(3).len())
+                },
             });
         }
     }
@@ -350,7 +360,7 @@ pub fn lookup_all(
     // citation before its last character, so one that runs over a page end is on the next page. Only a head that starts
     // before `until`, of `min_head` characters or more (a split before a whole match, below)
     let split =
-        |s: &str, text: &str, from: usize, until: usize, min_head: usize| -> Option<usize> {
+        |s: &str, text: &str, upto: usize, from: usize, until: usize, min_head: usize| -> Option<usize> {
             for q in page_at(from)..starts.len() {
                 let (b, a) = (starts[q], starts[q - 1].max(from));
                 if a >= until {
@@ -364,7 +374,7 @@ pub fn lookup_all(
                     if all[b..].starts_with(tail) {
                         if let Some(i) = all[a..b].find(head).filter(|i| a + i < until) {
                             let ends_in_tail = !text.is_empty()
-                                && s.find(text).is_some_and(|t| t + text.len() > k);
+                                && s.find(text).is_some_and(|t| t + upto > k);
                             return Some(if ends_in_tail { b } else { a + i });
                         }
                     }
@@ -445,8 +455,8 @@ pub fn lookup_all(
             // later (the same words again, "protest-filing requirements in section 163-182.9") is the one split
             // before it, when that split's head is MIN_TAIL characters or more
             match find(&n.needle, from) {
-                Some(p) => split(&n.needle, find_text, from, p, MIN_TAIL).or(Some(p)),
-                None => split(&n.needle, find_text, from, usize::MAX, 1),
+                Some(p) => split(&n.needle, find_text, n.upto, from, p, MIN_TAIL).or(Some(p)),
+                None => split(&n.needle, find_text, n.upto, from, usize::MAX, 1),
             }
             .or_else(|| find(&n.fallback, from))
         } else {
@@ -500,15 +510,15 @@ pub fn lookup_all(
             }
         }
         // an authority's mark is where its find ends (its fallback, the find alone), as LaTeX writes it and typst sets it:
-        // a citation over a page end counts on the later page
+        // a citation over a page end counts on the later page; a keyed one's where its first word ends (upto)
         // (the find inside the needle: the words before it come first when few follow it, lib/pandoc/xdoc.lua mark)
         let end = |p: usize| {
             if !n.id.0.starts_with('a') || n.fallback.is_empty() {
                 p
             } else if all[p..].starts_with(&n.needle) {
-                p + n.needle.find(&n.fallback).unwrap_or(0) + n.fallback.len() - 1
+                p + n.needle.find(&n.fallback).unwrap_or(0) + n.upto.max(1) - 1
             } else if all[p..].starts_with(&n.fallback) {
-                p + n.fallback.len() - 1
+                p + n.upto.max(1) - 1
             } else {
                 p
             }
@@ -606,6 +616,12 @@ mod tests {
         // an authority's citation that ends on page 2 is on page 2 (typst marks it before its last character)
         let cite = "a1.1\tB\t18usc2710onlyaperson\t18usc2710\n";
         assert_eq!(lookup(cite, &p).unwrap(), "a1.1\t2\t-\n");
+        // a keyed authority's (fifth field: its first word, where typst marks it) is on the page that word ends on
+        let keyed = "a1.1\tB\t18usc2710onlyaperson\t18usc2710\t18\n";
+        assert_eq!(lookup(keyed, &p).unwrap(), "a1.1\t1\t-\n");
+        // found whole on one page, the same
+        let keyed = "a1.1\tB\tmore18usc2710here\tmore18usc2710\tmore\n";
+        assert_eq!(lookup(keyed, &p).unwrap(), "a1.1\t2\t-\n");
     }
 
     #[test]
