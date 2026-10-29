@@ -36,7 +36,7 @@ Courts under `courts/ninth-circuit` (61).
 | [United States Bankruptcy Court, E.D. Washington](washington/federal/bankruptcy-eastern-district) | `waeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Washington](washington/federal/bankruptcy-western-district) | `wawb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, E.D. Washington](washington/federal/eastern-district) | `waed` | up for review | 2/2 | 1/1 | 2/2 | 14 |
-| [District Court, W.D. Washington](washington/federal/western-district) | `wawd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, W.D. Washington](washington/federal/western-district) | `wawd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Alaska Court of Appeals](alaska/state/court-of-appeals) | `alaskactapp` | up for review | 1/1 | 1/1 | 1/1 | 14 |
 | [Alaska Supreme Court](alaska/state/supreme-court) | `alaska` | up for review | 6/6 | 6/6 | 3/4 | 29 |
 | [High Court of American Samoa](american-samoa/state/high-court) | `amsamoa` | in progress | — | — | — | 14 |

@@ -1,4 +1,21 @@
-# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-# typst render does (fb-595.68.24, on the shared layout model lib/*/xengine*), so a difference fails.
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.98), so they
+# break every line and page where the typst render does, and a difference fails.
 params:
   cross_engine: gate
+  # pleading paper (LCR 10(e)(5): line numbers in the left margin): the numbered lines a page; the checks read the
+  # margin numbers 1..27 as page furniture, not body text
+  pleading_lines: 27
+  # DEF-COVER-002 against FILED-EXAMPLE-motion-brief.pdf (Manatt, Phelps & Phillips; the only exemplar): one filer's
+  # caption. LCR 10(e)(2) and FRCP 10(a) ask for the court's name, the parties, the case number and the title, and set
+  # no indent or rule; ours rules the parties' column at its right and foot (the base's caption) and sets each party's
+  # designation 2 in in.
+  cover_structure_accepted:
+    - finding: 'alignment: "Defendants." is indented'
+      reason: "the designation 2 in into the 3.1 in party column (read as centred there); the exemplar's deeper indent is its filer's, no rule sets one"
+    - finding: 'rules: between "CLASS ACTION COMPLAINT"'
+      reason: "the exemplar rules its caption's right column under the title; ours rules the parties' column at its foot (FRCP 10(a) caption, the base's), as LCR 10(e)(2) leaves open"
+    - finding: 'rules: between "NOTED FOR MOTION CALENDAR:"'
+      reason: "the foot rule of our parties' column, which ends beside the caption notes; the exemplar's column ends higher"
+    - finding: 'rules: between "Date Removed: August 31, 2026"'
+      reason: "the exemplar rules its footer; LCR 10(e)(3) asks for the bottom notation's text, not a rule"

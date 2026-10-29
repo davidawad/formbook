@@ -1533,8 +1533,6 @@ courts/ninth-circuit/washington/federal/eastern-district/complaint docx
 courts/ninth-circuit/washington/federal/eastern-district/complaint typst
 courts/ninth-circuit/washington/federal/eastern-district/motion-brief docx
 courts/ninth-circuit/washington/federal/eastern-district/motion-brief typst
-courts/ninth-circuit/washington/federal/western-district/motion-brief docx
-courts/ninth-circuit/washington/federal/western-district/motion-brief typst
 courts/ninth-circuit/washington/state/court-of-appeals/answering-brief docx
 courts/ninth-circuit/washington/state/court-of-appeals/answering-brief latex
 courts/ninth-circuit/washington/state/court-of-appeals/answering-brief typst

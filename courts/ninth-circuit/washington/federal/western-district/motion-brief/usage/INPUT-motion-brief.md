@@ -15,14 +15,14 @@ caption_notes:
   - "Action Filed: July 24, 2026"
   - "Date Removed: August 31, 2026"
 footer_title: "DEFENDANT’S MOTION TO DISMISS"
-page_breaks:
-  - "TABLE OF CONTENTS"
-  - "INTRODUCTION"
-word_count: "8,390"
+word_certificate: |
+  The undersigned certifies that this memorandum contains 8,390 words, excluding captions, tables of contents, tables of authorities, signature blocks, required marginal text (e.g., title information and page numbers), or certificates of service, in compliance with the applicable Local Civil Rules, specifically LCR 7(d)(4) and LCR 7(e)(6).
+
+  The undersigned further certifies that, per the Court’s procedures, counsel for the parties met and conferred on September 29, 2026 via telephone and on October 1 and October 2, 2026 via email prior to filing this motion and were unable to reach an agreement. Therefore, the motion is opposed.
 signature:
   date: "DATED: October 8, 2026"
   signers:
-    - "s/ A. Paul Heeringa"
+    - "By: s/ A. Paul Heeringa"
     - "John W. McGuinness (pro hac vice forthcoming)"
     - "A. Paul Heeringa (admitted pro hac vice)"
     - "MANATT, PHELPS & PHILLIPS, LLP"
@@ -39,28 +39,9 @@ signature:
     - "Email: rmaddalena@mhlseattle.com"
   role: "Attorneys for Defendant"
 certificate_of_service:
-  date: "October 8, 2026"
-  signer: "s/ A. Paul Heeringa"
+  text: "I certify that on, October 8, 2026, a true and correct copy of the foregoing document was electronically filed with the Court’s ECF system to be sent via the electronic notification system to all counsel of record in the above-captioned matter."
+  signer: "By: s/ A. Paul Heeringa"
 ---
-# TABLE OF CONTENTS
-
-| | Page |
-|---|---|
-| INTRODUCTION | 1 |
-| RELEVANT ALLEGATIONS | 3 |
-| APPLICABLE LEGAL STANDARDS | 4 |
-| ARGUMENT | 5 |
-| I. The Complaint Is An Improper “Shotgun Pleading” That Violates Rules 8 And 10. | 6 |
-| II. The Entire Complaint Should Also Be Dismissed Under Rule 12(b)(6) Because Plaintiff Fails To Plausibly Allege A Theory Of Liability Against 4 Pillar. | 7 |
-| III. The Entire Complaint Should Also Be Dismissed Under Rule 12(b)(6) Because Plaintiff Fails To Plead Sufficient Facts Supporting Essential Elements Of All His Claims. | 12 |
-| A. Plaintiff Does Not Plausibly Allege Receipt of a “Telephone Solicitation” or “Telemarketing” Call As Defined by the TCPA (Counts 1, 2, and 3) | 12 |
-| B. Plaintiff Does Not Plausibly Allege That He Qualifies as a “Residential” Subscriber Within the Meaning of the TCPA (Counts 1, 2, and 3) | 13 |
-| C. Plaintiff Does Not Adequately Allege That He Registered Each of the Subject Cell Phone Numbers on the National DNC Registry (Count 1) | 14 |
-| D. Plaintiff Does Not Plausibly Allege That 4 Pillar Lacked Internal DNC Procedures Before Initiating the Subject Communications (Counts 2 and 3) | 15 |
-| E. Plaintiff’s State Law Claims Are Similarly Ill-Pled (Counts 5, 6, 7, and 8) | 16 |
-| IV. Plaintiff’s Complaint Is Also Riddled With Legal Defects That Mandate Dismissal | 18 |
-| CONCLUSION | 20 |
-
 # INTRODUCTION
 
 While it is long on conclusions and legal citations, Plaintiff’s nine-count putative class action Complaint (see Dkt. 1-1) is woefully short on actual plausible facts meeting the bedrock Iqbal/Twombly federal pleading standard. In it, Plaintiff Mark Hoffman (“Plaintiff”) alleges, in a wholly conclusory and inconsistent fashion, that either 4 Pillar Consulting LLC (“4 Pillar”) and/or unidentified “Doe” defendants—parties which the Complaint improperly conflates and refers to collectively throughout as “Defendants”—violated certain “Do Not Call” (“DNC”) provisions of the federal Telephone Consumer Protection Act (i.e., 47 U.S.C. § 227, et seq., the “TCPA”) and various Washington analog statutes. These claims rest squarely on ill-described phone calls and text messages that Plaintiff concludes were initiated either by 4 Pillar and/or by countless “unknown” third party “agents” to three different supposedly “residential” cell phone numbers he purportedly owns, without his consent. See, e.g., Dkt. 1-1, ¶¶ 14, 15, 17, 25, 30. And based on these poorly-pled allegations, Plaintiff seeks to represent six overlapping and redundant putative classes. Id., ¶ 37. As demonstrated herein, however, Plaintiff’s Complaint fails to properly plead a plausible claim for relief under federal pleading standards, and thus it is ripe for dismissal in its entirety, on at least the following grounds:
@@ -93,7 +74,7 @@ It is axiomatic that “‘[d]ismissal under Rule 12(b)(6) is proper when the co
 
 While the TCPA (along with its state counterparts) represents an important remedial statute designed to protect consumers from harassing telemarketers, its remedial purpose does not afford TCPA plaintiffs special pleading deference. This is for good reason, as even the FCC has noted that the TCPA unwittingly spawned a cottage industry of class action litigation, “has strayed far from its original purpose” as a remedial statute, and has “become the poster child for lawsuit abuse” in this country ever since its enactment in 1991. In re Rules & Regs. Implementing the TCPA, 30 FCC Rcd. 7961, 8073 (2015). It is against this backdrop, therefore, that federal judges have widely recognized that they must dutifully fulfil their critical “gatekeeping” function under the Federal Rules of Civil Procedure in TCPA cases (particularly in putative TCPA class actions like this one) to ensure that claims have sufficient plausible factual support before subjecting defendants to the high cost of discovery and trial. Consequently, federal district courts across the country (including courts in this Circuit in particular) have not hesitated to dismiss TCPA complaints lacking in such requisite facts at the pleadings stage, while still honoring the statute’s intended remedial purpose. Plaintiff’s similarly-defective Complaint in this case should suffer the same fate for at least the reasons discussed below.
 
-## I. The Complaint Is An Improper “Shotgun Pleading” That Violates Rules 8 And 10.
+## The Complaint Is An Improper “Shotgun Pleading” That Violates Rules 8 And 10.
 
 As an initial overarching pleading defect, Plaintiff’s entire Complaint should be rejected on its face simply because it violates Rules 8 and 10. Federal pleadings must include “short and plain” statements of the pled claims set forth in “numbered paragraphs, each limited as far as practicable to a single set of circumstances” and, “[i]f doing so would promote clarity, each claim founded on a separate transaction or occurrence … must be stated in a separate count.” Fed. R. Civ. P. 8(a), 10(b). Allegations must be “simple, concise, and direct” and not mere labels, legal conclusions, or formulaic recitations of elements. Fed. R. Civ. P. 8(d)(1); Twombly, 550 U.S. at 555-57; Iqbal, 556 U.S. at 681.
 
@@ -101,7 +82,7 @@ But complaints blurring the lines between the facts and claims to which they app
 
 In this case, the Complaint repeatedly lumps together the “Defendants,” a term which is expressly defined to include 4 Pillar and countless “unknown agents,” without properly identifying or distinguishing between what each party or non-party did to violate the law. See, e.g., Dkt 1-1, ¶¶ 14, 15, 17, 25, 30, 33, 34, 37, 40, 41, 43, 49-53, 55-59, 61, 72, 74, 76, 78, 88-90, 92, 97-102, 105-108, 113-114, 116, 120, 121, 127-129, 131, 137-138. As such, the entire Complaint should be dismissed on this basis alone. See, e.g., Barton, 2025 WL 2880136, at \*4 (“‘A complaint that alleges ‘everyone did everything’ and prevents defendants from understanding the nature of the claims asserted against each of them cannot survive a motion to dismiss.’”) (quoting Watt v. HAL Antillen N.V., 2024 WL 4436966, at \*2 (W.D. Wash. Oct. 7, 2024)); Charman, 2024 WL 2000640, at \*4 (ruling similarly).
 
-## II. The Entire Complaint Should Also Be Dismissed Under Rule 12(b)(6) Because Plaintiff Fails To Plausibly Allege A Theory Of Liability Against 4 Pillar.
+## The Entire Complaint Should Also Be Dismissed Under Rule 12(b)(6) Because Plaintiff Fails To Plausibly Allege A Theory Of Liability Against 4 Pillar.
 
 The actual caller’s “identity is a necessary element of all” TCPA claims, no matter the provision invoked. Gulden v. Consol. World Travel Inc., 2017 WL 3841491, at \*3 (D. Ariz. Feb. 15, 2017) (emphasis added). Along these lines, as noted above, it is well-settled that, to successfully plead any TCPA claim and avoid dismissal under Rule 12(b)(6), all plaintiffs must first “identify” the caller by adequately alleging a theory of liability under the TCPA. Here, Plaintiff failed to do so.
 

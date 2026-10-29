@@ -1,0 +1,101 @@
+# U.S. District Court for the Western District of Washington (wawd): a motion with its memorandum in one document (a
+# Rule 12(b) motion to dismiss), on the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with
+# W.D. Wash.'s local rules overlaid here, on pleading paper (fb-595.96). The shared document model sets it
+# (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`). Rules: W.D. Wash.
+# Local Civil Rules (2026), LCR 7(b)(4), 7(e)(6), 10(d), 10(e) (../rules.md, ../README.md). The base already sets
+# 12-point type (LCR 10(e)(1): 12 point or larger).
+base: /lib/layouts/frcp-motion-brief.yaml
+# LCR 10(e)(1) (WAWD-FORM-003): text double-spaced or exactly 24 points apart, a numbered line; the caption, the
+# contents, the signature and the footer single-spaced at exactly 12 points, half a numbered line.
+pitch: {body: 24, single: 12}
+# LCR 10(d), 10(e)(1) (WAWD-FORM-001, -002): letter paper, one-inch margins; 27 numbered lines of 24 pt fill the 648 pt
+# between the top and bottom margins; a 1.5 in left margin holds the numbers and the rules (LCR 10(e)(5): the numbers
+# at least half an inch left of the text).
+margin: {top: 72, bottom: 72, left: 108, right: 72}
+# LCR 10(e)(5) (WAWD-FORM-004): pleading paper: the numbers 1 to 27 right-aligned on 1 in (half an inch left of the
+# text), one a numbered line from the top margin; a double rule at the text's left (1.3 in and 1.34 in from the page's
+# left edge) and a single one 0.1 in right of the text
+pleading: {lines: 27, rules: [93.6, 96.5, 547.2]}
+# LCR 10(e)(3) (WAWD-FORM-005): the bottom notation at the left of every page: the paper's abbreviated title (the
+# sample's `footer_title`), then the case number with the page number, 10 pt in 12 pt lines, the last 15.4 pt above
+# the page's foot (anchored there and growing upward), on every page: the cover i, the contents ii, the motion from 1.
+# (The rule's firm block at the right is not set: the filing omits it, as the rule allows; README, gaps.)
+page_number: {align: left, front: lower-roman, cover: numbered, size: 10, pitch: 12, foot: 15.4, text: "{footer_title}<br>(Case No. {case_number}) – {page}"}
+constants:
+  district: "WESTERN DISTRICT OF WASHINGTON"
+# LCR 10(e)(1)-(2), 7(b)(4) (WAWD-FORM-002, WAWD-COVER-001, WAWD-CONT-003): the first page: the judge's name on line 1
+# at the right, then no less than three inches above the court title (lines 1 to 6 of the numbered paper), the court's
+# title in bold capitals centred on lines 7 to 9 (the division from the sample's `location`); the caption a line below:
+# the parties at the left in a 3.1 in column ruled at its right and foot, each designation 2 in in, "v." 1 in in
+# between them; at the right, after a quarter-inch gutter, the case number, the paper's title in bold below it and
+# the caption's notes in bold (the noting date, "ORAL ARGUMENT REQUESTED", the dates of the action, in the order
+# given), half a numbered line apart. A single-spaced block starts 9.6 pt into a numbered line (33.6 = 24 + 9.6 after
+# a line of the body pitch), so its first baseline (0.8 of 12 pt down) is the number's (0.8 of 24 pt down) and every
+# single line stands on a number or halfway between two; the contents, the signature and the service's signer alike.
+cover:
+  - {text: "{judge|}", align: right, bold: true, pitch: body}
+  - {text: "{xd.court}", align: center, bold: true, pitch: body, above: 120}
+  - {text: "{xd.district}", align: center, bold: true, pitch: body}
+  - {text: "{location}", align: center, bold: true, upper: true, pitch: body}
+  - columns:
+      - width: 223.2
+        blocks:
+          - box:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", left: 144}
+                between:
+                  - {text: "v.", left: 72}
+            stroke: {right: 0.75, bottom: 0.75}
+            inset: {right: 10, bottom: 8}
+      - blocks:
+          - {text: "Case No. {case_number}", left: 7.2}
+          - {text: "{brief_title}", bold: true, left: 7.2, above: 12}
+          - each: caption_notes
+            blocks:
+              - {text: "{.}", bold: true, left: 7.2, above: 12}
+    gutter: 18
+    above: 33.6
+front: []
+# The table of contents on a page of its own after the cover: its title as a section heading, "Page" at the right, a
+# row per heading to the third level, single-spaced, half a numbered line between rows; a numbered heading's label in
+# its half-inch box, each level half an inch further in, the page in a half-inch column.
+contents: {title: "Table of Contents", page_heading: "Page", page_style: {above: 9.6}, depth: 3, col: 36, step: 36, above: 12}
+# Headings on the numbered lines (24 pt, no space of their own), kept with what follows: a section centred in bold
+# capitals; the argument's sections numbered I., II. by the layout, bold, the label in a half-inch box and the title
+# hanging after it; their sub-sections A., B. bold italic, half an inch further in.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body, above: 0, below: 0}
+  - {bold: true, number: "I.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, italic: true, left: 36, number: "A.", label_box: 36, pitch: body, above: 0, below: 0}
+# LCR 7(e)(6) (WAWD-CONT-004): the word-count certification (the sample's `word_certificate`, as filed), double-spaced,
+# then the signature block (LCR 10(e)(4), FRCP 11(a)): the date at the margin; at 3.2 in "Respectfully submitted,", the
+# firm and the signers half a numbered line apart; a numbered line below, the other counsel and whom they represent at
+# the margin. One block, never split; not kept with the body's last paragraph (keep_with_closing off): the old
+# template did not, and Word's needle for the last heading (lib/docx/xdoc.lua heading_needle) then loses the words
+# after it and finds "conclusion" on an earlier page (README, gaps).
+keep_with_closing: false
+closing:
+  - group:
+      - {markdown: "{word_certificate}", pitch: body, indent: 36, optional: true}
+      - columns:
+          - {width: 216, blocks: [{text: "{signature.date}"}]}
+          - blocks:
+              - {text: "Respectfully submitted,"}
+              - {text: "{signature.firm}", above: 12, optional: true}
+              - {text: "{signature.signers}", above: 12}
+        gutter: 14.4
+        above: 33.6
+      - {text: "{signature.additional}", above: 24, optional: true}
+      - {text: "{signature.role}", optional: true}
+    above: 0
+# FRCP 5(b), (d): the certificate of service on a page of its own after the signature, from the sample's
+# `certificate_of_service` (its text double-spaced, the signer at 3.2 in), not listed in the contents.
+after_tail:
+  - when: certificate_of_service
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, pitch: body}
+      - {markdown: "{certificate_of_service.text}", pitch: body, indent: 36}
+      - {text: "{certificate_of_service.signer}", left: 230.4, above: 9.6}
