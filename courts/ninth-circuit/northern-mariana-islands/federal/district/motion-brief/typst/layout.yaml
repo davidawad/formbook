@@ -1,0 +1,105 @@
+# U.S. District Court for the Northern Mariana Islands (nmid): a memorandum in support of a motion to dismiss, on the
+# generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D.N.M.I.'s local rules overlaid here, on
+# pleading paper (fb-595.96). The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated
+# from the merged layout by `fb engines gen`). Rules: D.N.M.I. LR 5.2, 7.1.d (../README.md quotes them). The base
+# already sets 12-point type (LR 5.2.a: 12-point or larger, a serif font).
+base: /lib/layouts/frcp-motion-brief.yaml
+# LR 5.2.a: double-spaced text, except block quotations, footnotes and headings; single lines of 12 pt, half a
+# numbered line.
+pitch: {body: 24, single: 12}
+footnote: {size: 12, pitch: single, gap: 0, clearance: 12}
+# LR 5.2.a: margins of at least 1.5 in at the top, 1 in at the bottom, 0.5 in at the right and 1 in at the left: 25
+# numbered lines of 24 pt from the 1.5 in top margin leave 84 pt at the foot for the footer.
+margin: {top: 108, bottom: 84, left: 72, right: 36}
+# LR 5.2.a: numbering down the left margin: 1 to 25, right-aligned 0.3 in left of the text, one a numbered line from
+# the top margin; a double rule just left of the text (0.88 in and 0.92 in from the page's left edge) and a single one
+# just right of it.
+pleading: {lines: 25, numbers: 50.4, rules: [63.35, 66.25, 581.75]}
+# LR 5.2.a: pages numbered: the page number centred, then the paper's title (the sample's `footer_title`, in capitals
+# as the exemplar prints it) at the left and the case number at the right of one line, 10 pt in 12 pt lines, the last
+# 0.4 in above the page's foot. The pages numbered as one from the first.
+page_number: {align: center, size: 10, pitch: 12, foot: 28.8, text: "{page}<br>{footer_title}<tab>CASE NO. {case_number}"}
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE NORTHERN MARIANA ISLANDS"
+# The first page, on its own: LR 5.2.c: counsel, the bar number and the party represented at the upper left, single-
+# spaced, in a 4.2 in box at least seven numbered lines high (LR 5.2.a: the upper right three inches blank); LR
+# 5.2.d.1: the court's title, two lines, single-spaced, centred, a numbered line below; LR 5.2.d.2-3: the parties at
+# the left (each party's names and designation, `versus` between them), ruled at their right and foot, and at the right
+# the case number, the paper's title in bold (in capitals as filed) and the hearing (LR 5.2: the hearing date and time on page one); then the
+# memorandum's opening paragraph (`lead_in`).
+cover:
+  - box:
+      - {text: "{counsel}"}
+    width: 302.4
+    min_height: 168
+  - {text: "{xd.court}", align: center, bold: true, above: 24}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 244.8
+        blocks:
+          - box:
+              - each: caption
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", left: 72}
+                between:
+                  - {text: "{versus|v.}", left: 36, above: 12, below: 12}
+            stroke: {right: 0.75, bottom: 0.75}
+            inset: {right: 10, bottom: 12}
+      - blocks:
+          - {text: "CIVIL CASE NO. {case_number}", left: 7.2}
+          - {text: "{brief_title}", bold: true, left: 7.2, above: 12}
+          - {text: "Hearing Date: {hearing.date|}", left: 7.2, above: 12}
+          - {text: "Hearing Time: {hearing.time|}", left: 7.2}
+          - {text: "Judge: {hearing.judge|}", left: 7.2}
+    gutter: 18
+    above: 24
+  - {text: "{lead_in}", pitch: body, indent: 36, above: 24, optional: true}
+front: []
+# LR 7.1.d: a table of contents and a table of authorities for a memorandum over ten pages, at the body pitch: the
+# contents to the fourth level, the label in its box, each level half an inch further in, "Page" over the half-inch
+# page column; the authorities from the sample's keyed `authorities` (`toa:` links), grouped (cases in italics, a comma
+# before the citation), "passim" for seven or more pages.
+contents: {title: "Table of Contents", page_heading: "Page", style: {align: center, upper: true}, pitch: body, depth: 4, col: 36, step: 36}
+authorities:
+  title: "Table of Authorities"
+  style: {align: center, upper: true}
+  pitch: body
+  col: 36
+  hang: 25.2
+  passim: 7
+  page_heading: "Page(s)"
+  group: {bold: true, pitch: body}
+  kinds:
+    - {kind: case, title: "Cases", italic: true, separator: ", "}
+    - {kind: constitution, title: "Constitutional Provisions"}
+    - {kind: statute, title: "Statutes"}
+    - {kind: rule, title: "Rules"}
+    - {kind: regulation, title: "Regulations"}
+    - {kind: other, title: "Other Authorities"}
+# Headings on the numbered lines (LR 5.2.a lets them be single-spaced; these are short), bold, kept with what follows:
+# numbered I., 1., a., (1) by the layout, the label in a half-inch box and the title hanging after it, each level half
+# an inch further in.
+heading:
+  - {bold: true, number: "I.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, left: 36, number: "1.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, left: 72, number: "a.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, left: 108, number: "(1)", label_box: 36, pitch: body, above: 0, below: 0}
+# A numbered list half an inch in, the number in a 0.4 in box, the text hanging after it.
+list: {left: 36}
+list_indent: 28.8
+# FRCP 11(a): "Date:" at the left; at 2.8 in "Respectfully submitted,", the office a single line below, "/s/" and the
+# signer a single line below that, the signer's lines; kept with the body's last paragraph (the base's
+# keep_with_closing).
+closing:
+  - columns:
+      - {width: 187.2, blocks: [{text: "Date: {date}"}]}
+      - blocks:
+          - {text: "Respectfully submitted,"}
+          - {text: "{signature.preamble}", above: 12, optional: true}
+          - {text: "/s/ {signature.signer}", above: 12}
+          - {text: "{signature.signer}"}
+          - {text: "{signature.lines}", optional: true}
+    gutter: 14.4
+    above: 0

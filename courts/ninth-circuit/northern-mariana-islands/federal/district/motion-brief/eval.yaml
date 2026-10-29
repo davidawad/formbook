@@ -4,6 +4,17 @@ params:
   margin_bottom_pt: 72
   margin_left_pt: 72
   margin_right_pt: 36
-  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
-  # typst render does (fb-595.68.24, on the shared layout model lib/*/xengine*), so a difference fails.
+  # Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+  # merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.96), so they
+  # break every line and page where the typst render does, and a difference fails.
   cross_engine: gate
+  # pleading paper (LR 5.2.a: numbering down the left margin): the numbered lines a page; the checks read the margin
+  # numbers 1..25 as page furniture, not body text
+  pleading_lines: 25
+  # DEF-COVER-002 against FILED-EXAMPLE-motion-brief.pdf (CNMI Office of the Attorney General): the caption's first row,
+  # the party's name at the left and the case number at the right, reads as one line centred in the exemplar (its
+  # columns are nearly symmetric about the page's centre) and as a left-aligned one in ours (the party column 3.4 in,
+  # the case column after it). Both set the parties left of centre and the number right of it (LR 5.2.d.2-3).
+  cover_structure_accepted:
+    - finding: 'alignment: "IMPERIAL PACIFIC INTERNATIONAL CIVIL CASE NO. 1:..."'
+      reason: "the caption's two columns read as one line: the parties left of centre, the case number right of it, as LR 5.2.d.2-3 ask"

@@ -15,8 +15,8 @@ caption:
   - names: ["COMMONWEALTH OF THE NORTHERN MARIANA ISLANDS, the COMMONWEALTH CASINO COMMISSION, ARNOLD PALACIOS, GOVERNOR OF CNMI, in his official and personal capacities, et. al.,"]
     designation: "Defendants."
 versus: "vs."
-brief_title: "Memorandum in Support of Its Motion to Dismiss Plaintiff’s Second Amended Complaint Pursuant to Federal Rule of Civil Procedure 12(b)(1) and (6)"
-footer_title: "Memorandum in Support of Motion to Dismiss"
+brief_title: "MEMORANDUM IN SUPPORT OF ITS MOTION TO DISMISS PLAINTIFF’S SECOND AMENDED COMPLAINT PURSUANT TO FEDERAL RULE OF CIVIL PROCEDURE 12(b)(1) and (6)"
+footer_title: "MEMORANDUM IN SUPPORT OF MOTION TO DISMISS"
 counsel:
   - "OFFICE OF THE ATTORNEY GENERAL"
   - "EDWARD MANIBUSAN"
@@ -55,9 +55,9 @@ authorities:
   bvi: {kind: other, name: "BVI Business Companies Act", cite: "§§ 213(1)(a)(i), 215(1)"}
 ---
 
-## Background
+# Background
 
-### The 2020 Enforcement Actions
+## The 2020 Enforcement Actions
 
 In 2020, the CCC initiated five enforcement actions against Plaintiff:
 
@@ -69,17 +69,17 @@ In 2020, the CCC initiated five enforcement actions against Plaintiff:
 
 See ECF No. 56 at 8-11; See also ECF No. 56-3. Enforcement Actions 2020-001 and 2020-002 were consolidated into Enforcement Action 2020-001. See ECF 56-3 (noting consolidation). Enforcement Actions 2020-003, 2020-004, and 2020-005 were consolidated into Enforcement Action 2020-003. ECF 56-3 (noting consolidation).
 
-### The 2021 Evidentiary Hearings
+## The 2021 Evidentiary Hearings
 
 On February 25, 2021, the CCC conducted evidentiary hearings on Enforcement Action 2020-001 (consolidated). As to Enforcement Action 2020-001, Plaintiff argued that Amendment No. 9 to the Casino License Agreement extended the payment dates to 2025. As to Enforcement Action 002, Plaintiff raise force majeure as a defense. ECF No. 56-3.
 
 “On March 2, 2021, CCC conducted an evidentiary hearing for Complaints 003, 004, and 005. IPI did not dispute the violations and did not raise any affirmative defense.” ECF No. 56-3; see also [*Commonwealth Casino Comm’n v. Imperial Pac. Int’l*, 2023 MP 8 ¶ 8](toa:ccc).
 
-### Commission Order No. 2021-002
+## Commission Order No. 2021-002
 
 On April 22, 2021, the CCC issued Order No: 2021-002. ECF No. 56-3. “The Order suspended IPI’s \[Plaintiff’s\] gaming license, ordering IPI \[Plaintiff\] to pay a total of $18.65 million that it found was due under the Casino License Agreement’s (“CLA”) Annual License Fee and Annual Regulatory Fee, and imposing a total of $6.6 million in penalties against IPI \[Plaintiff\].” ECF No. 23 at 7. There are two signatories to the Order: CCC Chairman Edward C. Deleon Guerrero and Defendant Demapan. ECF No. 56-3 at 10. The Chairman is a signatory as to Enforcement Action 2020-003 (consolidated). *Id.* Defendant Demapan is a signatory as to Enforcement Action 2020-001 (consolidated). *Id.*
 
-### The NMI Court Proceedings
+## The NMI Court Proceedings
 
 On November 5, 2021, Plaintiff appealed the Commission Order No. 2021-002 to the Commonwealth of the Northern Mariana Islands Superior Court. ECF No. 56-3 ¶ 44. Plaintiff alleged the Order was “arbitrary, capricious, an abuse of discretion and otherwise not in accordance with law and unwarranted by the facts.” *Id.*; See also ECF No. 3-3 (“IPI appealed CCC’s order to the Superior Court, arguing that COVID-19 and other factors like Super Typhoon Yutu and changes in federal immigration law constituted force majeure events that excused all its performance obligations.” Additionally, IPI claimed that CCC violated its due process rights by discussing IPI’s parent company’s annual report at the April 2021 meeting. IPI asserted that CCC improperly considered evidence outside the record, leading it to decide against IPI’s force majeure defense.”). The Superior Court affirmed the Order, finding no due process violation and holding that it “was not arbitrary or capricious.” ECF No. 3-3 at 5. The court did not “decide the question of force majeure.” ECF No. 3-3 at 5. Instead, the court held that while Plaintiff raised the force majeure defense for Enforcement Actions 001 and 002, it did not raise the defense “or any other defense” as to Enforcement Actions 003, 004, and 005. ECF No. 3-3 at 5. The court thus reasoned that the CCC “had properly suspended” Plaintiff’s license. ECF No. 3-3 at 5. The court further found no due process violation and held that CCC’s order was not arbitrary or capricious.” ECF No. 3-3 at 5. On April 11, 2022, Plaintiff appealed the Superior Court’s order to the NMI Supreme Court. ECF No. 56 ¶ 47.
 
@@ -87,37 +87,37 @@ On appeal, Plaintiff argued that the lower court erred by “failing to address 
 
 Notably, the NMI Supreme Court found that IPI did not raise the defense of force majeure for Complaints 003-005 and conceded the violations. The Court further found that IPI’s change in tactics on appeal was barred by numerous procedural rules and hurdles such as failure to raise the issue before the agency and judicial estoppel. [*CCC v. IPI*, 2023 MP 8 ¶¶ 56-62](toa:ccc).
 
-### Recent Developments
+## Recent Developments
 
 The CCC conducted a revocation hearing, and Plaintiff filed its Original Complaint in this action and in 1:24-cv-0002 alleging various deficiencies and allegations. This is Plaintiff’s Second Amendment to their original Complaint. Procedurally, this mooted the all prior Motions to Dismiss that was directed at the prior Complaints. See [*Ramirez v. County of San Bernadino*, 806 F.3d 1002, 1008 (9th Cir. 2015)](toa:ramirez) (“Because Defendants’ motion to dismiss targeted Plaintiff’s First Amended Complaint, which was no longer in effect, we conclude the motion to dismiss should have been deemed moot…” Thus, Defendant, the Commonwealth now files this Motion to Dismiss that is directed towards the Second Amended Complaint.
 
-## Facts
+# Facts
 
 The Commonwealth raises no facts in this motion to dismiss because for purposes of res judicata, a motion to dismiss is only appropriate if the defense raises no disputed issues of fact. See [*Scott v. Kuhlmann*, 746 F.2d 1377, 1378 (9th Cir. 1984)](toa:scott). However, while the Commonwealth raises no disputed facts here, it reserves its right in any future proceedings in this case to contest the issues of fact as raised by Plaintiff.
 
-## Legal Standard
+# Legal Standard
 
-### Party Standard
+## Party Standard
 
 [Federal Rule of Civil Procedure 17(b)(2)](toa:fre17) reads, “\[c\]apacity to sue…is determined as follows… (2) for a corporation, by the law under which it was organized.” If a company lacks the capacity to sue, it is axiomatic that it cannot bring a suit.
 
-### Pleading Standard
+## Pleading Standard
 
 Under [Federal Rule of Civil Procedure 8(a)(2)](toa:fre8), the plaintiff must provide “a short and plain statement of the claim showing that the pleader is entitled to relief.” While “detailed factual allegations” are not required under the rule, it “demands more than an unadorned, the-defendant-unlawfully-harmed-me accusation.” [*Ashcroft v. Iqbal*, 556 U.S. 662, 677–78 (2009)](toa:iqbal) (citing [*Bell Atlantic Corp. v. Twombly*, 550 U.S. 544, 555 (2007)](toa:twombly)). The factual allegations must be sufficient “to raise a right to relief above the speculative level.” [*Bell Atl. Corp. v. Twombly*, 550 U.S. 544, 555 (2007)](toa:twombly). It is insufficient for a pleading to offer “labels and conclusions” or “a formulaic recitation of the elements of a cause of action.” [*Ashcroft v. Iqbal*, 556 U.S. 662, 678 (2009)](toa:iqbal) (citing [*Bell Atlantic Corp. v. Twombly*, 550 U.S. 544, 555 (2007)](toa:twombly)). The same goes for “naked assertion\[s\]” devoid of “further factual enhancement.” *Id.*, at 557.
 
 A complaint must state a “plausible claim for relief” to “survive\[\] a motion to dismiss.” [*Ashcroft v. Iqbal*, 556 U.S. 662, 678 (2009)](toa:iqbal). “A claim has facial plausibility when the plaintiff pleads factual content that allows the court to draw the reasonable inference that the defendant is liable for the misconduct alleged.” *Id.* “The plausibility standard is not akin to a ‘probability requirement,’ but it asks for more than a sheer possibility that a defendant has acted unlawfully.” *Id.* The “tenet that a court must accept as true all of the allegations contained in a complaint is inapplicable to legal conclusions.” *Id.* at 678. “While legal conclusions can provide the framework of a complaint, they must be supported by factual allegations.” *Id.* at 679.
 
-### Subject Matter Jurisdiction Standard
+## Subject Matter Jurisdiction Standard
 
 [Federal Rule of Civil Procedure 12(b)(1)](toa:fre12b1) provides for the dismissal of an action for “lack of subject matter jurisdiction.” Although sovereign immunity is only quasi-jurisdictional in nature, Rule 12(b)(1) is still a proper vehicle for invoking sovereign immunity from suit. [*Pistor v. Garcia*, 791 F.3d 1104, 1111 (9th Cir. 2015)](toa:pistor) (citation omitted).
 
-### Failure to State a Claim Standard for Res Judicata
+## Failure to State a Claim Standard for Res Judicata
 
 Dismissal under [Federal Rule of Civil Procedure 12(b)(6)](toa:fre12b6) on the basis of res judicata is appropriate when “the defense raises no disputed issues of fact.” See [*Scott v. Kuhlmann*, 746 F.2d 1377, 1378 (9th Cir. 1984)](toa:scott). (“The defendants raised res judicata in their motion to dismiss under Rule 12(b)(6), rather than in a responsive pleading. Ordinarily affirmative defenses may not be raised by motion to dismiss…but this is not true when, as here, the defense raises no disputed issues of fact.”).
 
-## Argument
+# Argument
 
-### Plaintiff, Best Sunshine International Ltd, is No Longer an Entity and Lacks Capacity to Sue.
+## Plaintiff, Best Sunshine International Ltd, is No Longer an Entity and Lacks Capacity to Sue.
 
 One of the Plaintiffs that is alleged to bring the SAC is Best Sunshine International Ltd. (BVI) (“Best Sunshine”). Best Sunshine is alleged to be “a corporation organized under the laws of the British Virgin Islands, with its principal place of business at P.O. Box 95, Offshore Incorporation Centre, Road Town, Tortola, British Virgin Islands.” SAC ¶ 5 (ECF 56). Further, Best Sunshine is the sole member of Plaintiff IPI. SAC ¶ 4 (ECF 56). Best Sunshine, however, has been dissolved since April 7, 2023, and cannot be a party to this proceeding. See Exhibit 1 (Dissolution of Best Sunshine from BVI Registrar of Corporations).[^1]
 
@@ -131,6 +131,6 @@ As a dissolved corporation, “the company and the directors, members and any li
 
 [^2]: The Original Complaint was filed on February 23, 2024; the SAC was filed on July 23, 2024.
 
-## Conclusion
+# Conclusion
 
 For the foregoing reasons, Defendants respectfully moves to dismiss this suit pursuant to [Federal Rule of Civil Procedure 17(b)(2)](toa:fre17) and 12(b)(1) and (6).
