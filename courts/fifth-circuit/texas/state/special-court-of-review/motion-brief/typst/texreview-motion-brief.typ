@@ -17,7 +17,7 @@
 #let type-size = 14pt              // TRAP 9.4(e): conventional typeface no smaller than 14-point (TEXREVIEW-FORM-005; applied per rules.md scope note)
 #let footnote-size = 12pt          // TRAP 9.4(e): footnotes no smaller than 12-point (TEXREVIEW-FORM-005)
 #let body-leading = 0.9em          // double-spaced text: natural line (about 1.1 em) + 0.9 em = about 24 pt pitch
-#let single-leading = 0.2em        // single-spaced text: footnotes, block quotations, headings, cover, counsel
+#let single-leading = 0.46em       // single-spaced text: footnotes, block quotations, headings, cover, counsel (0.46 em on the cap-height line: a 1.15 em pitch)
 #let page-margin = 1in             // TRAP 9.4(c), applied by convention: at least 1 inch on all sides
 #let para-indent = 0.5in
 #let short-line = 50               // paragraphs shorter than this (characters) are set flush left
