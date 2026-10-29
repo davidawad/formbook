@@ -1,0 +1,81 @@
+# United States District Court of Guam (gud): a memorandum in support of a motion, on the generic FRCP brief
+# (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with the court's local rules overlaid here. The shared document
+# model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`).
+# Rules: General Rules of the District Court of Guam (GNLR 5.1; ../rules.md and ../README.md quote them, with the
+# date verified). GNLR 5.1 sets no margin or type size: the base's letter paper, one-inch margins and 12-point type
+# stand, as the exemplar sets them; GNLR 5.1(a): pages numbered consecutively at the bottom (the base, centered).
+base: /lib/layouts/frcp-motion-brief.yaml
+# GNLR 5.1(a): double-spaced text, 24 pt (2 x the type size); quotations single-spaced, half an inch in on each side.
+quote: {left: 36, right: 36, above: 0, below: 24}
+# Headings bold on the body pitch, a double line above them, kept with what follows: a section centered in capitals, a
+# point at the margin (the filer types the numbers).
+heading:
+  - {align: center, bold: true, upper: true, pitch: body, above: 24}
+  - {bold: true, pitch: body, above: 24}
+# FRCP 10(a), GNLR 5.1(b): the court's name, one line (the court is the District Court of Guam).
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT OF GUAM"
+# GNLR 5.1(c)(1): counsel at the upper left, 3.25 inches wide (right of centre is the clerk's filing stamp); GNLR
+# 5.1(b): the court title "not less than 3 inches from the top": beside the counsel an empty column 130.2 pt high (3 in
+# from the top, less the one-inch margin and the single line above the title), so the title starts at three inches,
+# or a single line below a longer counsel block. GNLR 5.1(c)(2)-(3), FRCP 10(a): a double line below the title, the
+# parties at the left, in a column ruled at its right and foot as the exemplar (a box ruled at its right in one ruled
+# at its foot; each party's names, its designation an inch in, "v." half an inch in a line from each), at the
+# right the file number, the civil designation and any case notes, a double line below them the title of the paper in
+# bold (it names the memorandum) and a line below it any subtitle; the body a double line below.
+front:
+  - columns:
+      - width: 234
+        blocks:
+          - {text: "{counsel}"}
+      - blocks:
+          - {box: [], height: 130.2}
+  - {text: "{xd.court}", align: center, bold: true, above: 13.8}
+  - columns:
+      - width: 234
+        blocks:
+          - box:
+              - box:
+                  - each: caption.parties
+                    blocks:
+                      - {text: "{names}"}
+                      - {text: "{designation}", left: 72}
+                    between:
+                      - {text: "v.", left: 36, above: 13.8, below: 13.8}
+                stroke: {right: 0.75}
+                inset: {right: 10, bottom: 8}
+            stroke: {bottom: 0.75}
+      - blocks:
+          - {text: "{case_number}"}
+          - {text: "{designation}"}
+          - {text: "{case_notes}", optional: true}
+          - {text: "{brief_title}", bold: true, above: 24}
+          - {text: "{brief_subtitle}", optional: true, above: 13.8}
+    gutter: 18
+    above: 24
+    below: 24
+# GNLR 5.1(d), FRCP 11(a): a double line above "Respectfully submitted this <date>.", a double line below it, three
+# inches in, the firm, a line below "/s/" and the signer, then the signer's lines (the name typed below the signature);
+# kept whole and with the last paragraph.
+closing:
+  - &signature
+    group:
+      - {text: "Respectfully submitted this {date}."}
+      - {text: "{signature.firm}", left: 216, above: 24}
+      - {text: "/s/ {signature.signer}", left: 216, above: 13.8}
+      - {text: "{signature.lines}", left: 216}
+    above: 24
+# FRCP 5(b), (d)(1)(B): the certificate of service, when the sample has one (its CERTIFICATE OF SERVICE section), on a
+# page of its own: its text double-spaced, then each person served (`service.served`, the lines of an address) a single
+# line apart, single-spaced, and the signature again, as the exemplar (`service: {served: [..]}`; without `service`,
+# no second signature).
+tail: {at: "CERTIFICATE", break: true, pitch: body, indent: 36}
+after_tail:
+  - when: service
+    blocks:
+      - when: service.served
+        blocks:
+          - each: service.served
+            blocks:
+              - {text: "{.}", above: 13.8}
+      - *signature

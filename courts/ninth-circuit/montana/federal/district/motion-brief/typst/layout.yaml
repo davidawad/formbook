@@ -1,0 +1,129 @@
+# U.S. District Court for the District of Montana (mtd): a brief in support of a motion (D. Mont. L.R. 7.1(d)(1)(A):
+# filed separately from the motion), on the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D.
+# Mont.'s local rules overlaid here. The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are
+# generated from the merged layout by `fb engines gen`). Rules: D. Mont. Local Rules of Procedure effective December 1,
+# 2025, https://www.mtd.uscourts.gov/sites/mtd/files/LocalRules_12012025.pdf (verified 2026-10-17; ../rules.md
+# MTD-FORM-001..003, MTD-CONT-001, MTD-CERT-001, MTD-LEN-001, MTD-CONT-005; ../README.md quotes them). The base already
+# meets L.R. 1.5(a)(1) (letter paper, one-inch margins) and 1.5(a)(3) (pages numbered consecutively at the bottom).
+base: /lib/layouts/frcp-motion-brief.yaml
+# L.R. 1.5(a)(2) (MTD-FORM-002): typewritten in 14-point type, footnotes included; double-spaced except quoted material
+# and footnotes: 32 pt line boxes, the single line 16 pt.
+size: 14
+pitch: {body: 32, single: 16}
+footnote: {size: 14, gap: 7}
+# Quotations single-spaced (L.R. 1.5(a)(2)), half an inch in on each side, a single line around them.
+quote: {left: 36, right: 36, above: 16, below: 16}
+# The cover unnumbered, the tables in lower-case roman from i, the brief from 1 (L.R. 1.5(a)(3); as filed).
+page_number: {align: center, front: lower-roman}
+# Headings single-spaced and bold, a single line above and below, kept with what follows: a section centered in
+# capitals, unnumbered; the argument headings numbered by the template, "I." at the margin, "A.", "1." and "a." half an
+# inch further in each, the label in a half-inch box with the title's later lines hung under it.
+heading:
+  - {align: center, bold: true, upper: true, above: 16, below: 16}
+  - {bold: true, number: "I.", label_box: 36, above: 16, below: 16}
+  - {bold: true, number: "A.", label_box: 36, left: 36, above: 16, below: 16}
+  - {bold: true, number: "1.", label_box: 36, left: 72, above: 16, below: 16}
+  - {bold: true, number: "a.", label_box: 36, left: 108, above: 16, below: 16}
+# L.R. 7.1(d)(2)(A) (MTD-LEN-001): a brief in support of a motion at most 6,500 words; over it the render stops. The
+# count the certificate prints (L.R. 7.1(d)(2)(E)), or the sample's `word_count` when the filer states it.
+words: {limit: 6500, given: word_count}
+# FRCP 10(a), L.R. 1.5(a)(4) and Appendix C, Form A (MTD-CONT-001): the court's name, then the division.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE DISTRICT OF MONTANA"
+# Appendix C, Form A: counsel at the upper left, its groups in two columns (the first half of them at the left, or the
+# number the sample gives as `counsel_split`; one column, as filed, runs the cover onto a second page) and whom they
+# represent in italics below; a double line below, the court's name and the division bold and centered;
+# the caption: the parties in a column ruled at its right and foot (a box ruled at its right in one ruled at its foot;
+# each party's names, its designation 1.4 in in a line below, "v." a line from each), at the right the case number
+# and, a double line below, the title of the paper in bold capitals. The cover page, before the tables.
+cover:
+  - columns:
+      each: counsel
+      split: counsel_split
+      gap: 16
+      blocks:
+        - {text: "{.}"}
+    gutter: 21.6
+  - {text: "{counsel_role}", italic: true, above: 16}
+  - {text: "{xd.court}", align: center, bold: true, above: 32}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{division}", align: center, bold: true, upper: true}
+  - columns:
+      - width: 244.8
+        blocks:
+          - box:
+              - box:
+                  - each: caption
+                    blocks:
+                      - {text: "{names}"}
+                      - {text: "{designation}", left: 100.8, above: 16}
+                    between:
+                      - {text: "v.", above: 16, below: 16}
+                stroke: {right: 0.75}
+                inset: {right: 14.4, bottom: 16}
+            stroke: {bottom: 0.75}
+      - blocks:
+          - {text: "Case No. {case_number}", left: 14.4}
+          - {text: "{brief_title}", bold: true, upper: true, left: 14.4, above: 32}
+    above: 16
+front: []
+# L.R. 7.1(d)(2)(C) (MTD-CONT-005): a brief of 4,000 words or more has a table of contents and a table of authorities
+# (the exemplar's order, after the cover): the headings to the third level with their pages, half an inch in per level.
+contents: {title: "TABLE OF CONTENTS", depth: 3, col: 36, hang: 36, step: 36, above: 8}
+# The table of authorities, from the `toa:` links of the body and notes, grouped as the exemplar groups them: each
+# name (a case name in italics, as the sample writes it), a comma and the citation, "passim" for seven pages or more.
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  page_heading: "Page(s)"
+  passim: 7
+  kinds:
+    - {kind: case, title: "Cases"}
+    - {kind: constitution, title: "Constitutional Provisions"}
+    - {kind: statute, title: "Statutes"}
+    - {kind: rule, title: "Rules"}
+    - {kind: regulation, title: "Regulations"}
+    - {kind: other, title: "Other Authorities"}
+  col: 72
+  hang: 25.2
+  above: 8
+  group: {bold: true, above: 16}
+# L.R. 1.5(b), 11.1 (MTD-CERT-001), FRCP 11(a): "DATED:" at the left; in the signature column the signer's office, a
+# double line below the "/s/" signature, the typed name below it and the signer's lines; kept whole and with the last
+# paragraph.
+closing:
+  - group:
+      - columns:
+          - {width: 244.8, blocks: [{text: "DATED: {date}"}]}
+          - blocks:
+              - {text: "{signature.preamble}", optional: true}
+              - {text: "/s/ {signature.signer}", above: 32}
+              - {text: "{signature.signer}"}
+              - {text: "{signature.lines}", optional: true}
+    above: 32
+# L.R. 7.1(d)(2)(E): the certificate of compliance on a page of its own: the typeface, its size, the spacing and the
+# word count, signed; then the certificate of service (FRCP 5(b), (d)(1)(B)) unless the sample has `certificate_service:
+# false`, dated and signed.
+after_tail:
+  - {break: true}
+  - {text: "CERTIFICATE OF COMPLIANCE", heading: 1}
+  - {text: "Pursuant to Local Rule 7.1(d)(2)(E), I certify that this brief is printed with a proportionately spaced Times New Roman typeface of 14 points; is double-spaced except for footnotes and for quoted and indented material; and the word count is {xd.words} words, excluding caption, certificate of compliance, table of contents and authorities, exhibit index, and certificate of service.", pitch: body, indent: 36}
+  - group:
+      - columns:
+          - {width: 244.8, blocks: []}
+          - blocks:
+              - {text: "/s/ {signature.signer}"}
+              - {text: "{signature.signer}"}
+    above: 32
+  - when: certificate_service
+    default: true
+    blocks:
+      - {text: "CERTIFICATE OF SERVICE", heading: 1, above: 32}
+      - {text: "I hereby certify that on this date, an accurate copy of the foregoing document was served electronically through the Court's CM/ECF system on registered counsel.", pitch: body, indent: 36}
+      - group:
+          - columns:
+              - {width: 244.8, blocks: [{text: "Dated: {date}"}]}
+              - blocks:
+                  - {text: "/s/ {signature.signer}"}
+                  - {text: "{signature.signer}"}
+        above: 32

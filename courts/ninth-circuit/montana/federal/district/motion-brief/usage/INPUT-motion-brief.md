@@ -17,19 +17,19 @@ signature:
   signer: "Peter M. Torstensen, Jr."
   lines: ["*Deputy Solicitor General*", "215 North Sanders", "P.O. Box 201401", "Helena, MT 59620-1401", "christian.corrigan@mt.gov", "peter.torstensen@mt.gov"]
 authorities:
-  miller: {kind: case, name: "Miller v. California", cite: "413 U.S. 15 (1973)"}
-  reno: {kind: case, name: "Reno v. ACLU", cite: "521 U.S. 844 (1997)"}
-  ashcroft-aclu: {kind: case, name: "Ashcroft v. ACLU", cite: "542 U.S. 656 (2004)", sort: "Ashcroft v. ACLU"}
-  brown: {kind: case, name: "Brown v. Ent. Merchants Ass'n", cite: "564 U.S. 786 (2011)"}
-  ginsberg: {kind: case, name: "Ginsberg v. State of New York", cite: "390 U.S. 629 (1968)"}
-  erznoznik: {kind: case, name: "Erznoznik v. City of Jacksonville", cite: "422 U.S. 205 (1975)"}
-  sable: {kind: case, name: "Sable Commc'ns of Cal., Inc. v. FCC", cite: "492 U.S. 115 (1986)"}
-  twombly: {kind: case, name: "Bell Atl. Corp. v. Twombly", cite: "550 U.S. 544 (2007)"}
-  iqbal: {kind: case, name: "Ashcroft v. Iqbal", cite: "556 U.S. 662 (2009)"}
-  benavidez: {kind: case, name: "Benavidez v. Cnty. of San Diego", cite: "993 F.3d 1134 (9th Cir. 2021)"}
-  hansen: {kind: case, name: "United States v. Hansen", cite: "599 U.S. 762 (2023)"}
-  williams: {kind: case, name: "United States v. Williams", cite: "553 U.S. 285 (2008)"}
-  salerno: {kind: case, name: "United States v. Salerno", cite: "481 U.S. 739 (1987)"}
+  miller: {kind: case, name: "*Miller v. California*", cite: "413 U.S. 15 (1973)"}
+  reno: {kind: case, name: "*Reno v. ACLU*", cite: "521 U.S. 844 (1997)"}
+  ashcroft-aclu: {kind: case, name: "*Ashcroft v. ACLU*", cite: "542 U.S. 656 (2004)"}
+  brown: {kind: case, name: "*Brown v. Ent. Merchants Ass'n*", cite: "564 U.S. 786 (2011)"}
+  ginsberg: {kind: case, name: "*Ginsberg v. State of New York*", cite: "390 U.S. 629 (1968)"}
+  erznoznik: {kind: case, name: "*Erznoznik v. City of Jacksonville*", cite: "422 U.S. 205 (1975)"}
+  sable: {kind: case, name: "*Sable Commc'ns of Cal., Inc. v. FCC*", cite: "492 U.S. 115 (1986)"}
+  twombly: {kind: case, name: "*Bell Atl. Corp. v. Twombly*", cite: "550 U.S. 544 (2007)"}
+  iqbal: {kind: case, name: "*Ashcroft v. Iqbal*", cite: "556 U.S. 662 (2009)"}
+  benavidez: {kind: case, name: "*Benavidez v. Cnty. of San Diego*", cite: "993 F.3d 1134 (9th Cir. 2021)"}
+  hansen: {kind: case, name: "*United States v. Hansen*", cite: "599 U.S. 762 (2023)"}
+  williams: {kind: case, name: "*United States v. Williams*", cite: "553 U.S. 285 (2008)"}
+  salerno: {kind: case, name: "*United States v. Salerno*", cite: "481 U.S. 739 (1987)"}
   mca-45-8-206: {kind: statute, cite: "Mont. Code Ann. § 45-8-206"}
 ---
 

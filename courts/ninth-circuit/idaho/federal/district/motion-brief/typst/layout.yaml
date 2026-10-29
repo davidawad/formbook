@@ -1,0 +1,93 @@
+# U.S. District Court for the District of Idaho (idd): a memorandum in support of a motion (Dist. Idaho Loc. Civ. R.
+# 7.1(b)(1): a separate brief), on the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D.
+# Idaho's local rules overlaid here. The shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are
+# generated from the merged layout by `fb engines gen`). Rules: Dist. Idaho Local Civil Rules, revised and adopted
+# August 17, 2026, https://idd.uscourts.gov/district/forms_fees_rules/Civil_Rules.cfm?lni=214 (fetched 2026-10-14;
+# ../rules.md IDD-FORM-001..003, IDD-CONT-003; ../README.md quotes them). The base already meets LR 5.2(a): 8 1/2 x 11
+# paper, margins of at least one inch, 12-point type for all text, footnotes included, footnotes single-spaced, each
+# page numbered consecutively (at the bottom center, as the primary exemplar). The 20-page limit of LR 7.1(a)(2) is
+# checked on the render (../eval.yaml params.page_limit).
+base: /lib/layouts/frcp-motion-brief.yaml
+# Word only: the right margin one twip (0.05 pt) wider (docs/EVAL-LOOP.md, `docx_bias`): typst overflows a line of p2
+# ("... management and") by 0.02 pt and moves its last word on; LibreOffice, up to 0.15 pt narrower, fits it otherwise.
+docx_bias: 0.05
+# LR 5.2(a) (IDD-FORM-001): double-spaced; 27.6 pt, twice the 13.8 pt single line of 12 pt Times New Roman, as the
+# exemplars of two filers set it.
+pitch: {body: 27.6}
+quote: {left: 36, right: 36, above: 0, below: 27.6}
+# Footnotes at the 12-point floor (LR 5.2(a)), single-spaced; a paragraph or list that calls one keeps its widow and
+# orphan control, so a bullet item never leaves its first line alone at the foot of a page.
+footnote: {size: 12, gap: 7, widows: true}
+# Headings on the body pitch, kept with the text after them: a section centered in bold capitals, a sub-heading
+# centered in bold, an argument heading in bold with its later lines hung half an inch (the filer types the numbers).
+heading:
+  - {align: center, bold: true, upper: true, pitch: body}
+  - {align: center, bold: true, pitch: body}
+  - {bold: true, hang: 36, pitch: body}
+# FRCP 10(a), LR 5.2(b)(1): the court's name, as the primary exemplar sets it.
+constants:
+  court: "UNITED STATES DISTRICT COURT"
+  district: "DISTRICT OF IDAHO"
+# LR 5.2(b) (IDD-FORM-002, -003): counsel in the upper left (name, bar number, address, telephone, e-mail and the
+# party represented; an empty line between groups); the caption "commencing four inches below the top of the first
+# page, (except where additional space is required for identification)": beside the counsel an empty column three
+# inches high (four inches from the top, less the one-inch margin), so the court's name starts at four inches, or 12
+# pt below a longer counsel block. Then the court's name bold and centered; the title of the action in a column ruled
+# at its right and foot (a box ruled at its right in one ruled at its foot; each party's names, its designation a line below, "v." between them); at the right the
+# CM/ECF file number (LR 5.2(b)(3)), the title of the paper in bold (LR 5.2(b)(5)) and, for a paper in support of a
+# motion, that motion's docket number in brackets (LR 7.1(a)(3)).
+front:
+  - columns:
+      - blocks:
+          - {text: "{counsel}"}
+          - {rule: 0, above: 12}
+      - {width: 7.2, blocks: [{box: [], height: 216}]}
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 234
+        blocks:
+          - box:
+              - box:
+                  - each: caption.parties
+                    blocks:
+                      - {text: "{names}"}
+                      - {text: "{designation}"}
+                    between:
+                      - {text: "v."}
+                stroke: {right: 0.75}
+                inset: {right: 10, bottom: 8}
+            stroke: {bottom: 0.75}
+      - blocks:
+          - {text: "Case No. {case_number}", left: 25.2}
+          - {text: "{brief_title}", bold: true, left: 25.2, above: 13.8}
+          - {text: "[{motion_docket}]", bold: true, optional: true, left: 25.2, above: 13.8}
+    above: 13.8
+    below: 13.8
+# FRCP 11(a): "Dated:" at the left beside the signature column: "Respectfully submitted,", the firm a line below, the
+# "/s/" signature a line below that and the signers' lines; kept whole and with the last paragraph.
+closing:
+  - group:
+      - columns:
+          - {width: 223.2, blocks: [{text: "Dated: {date}"}]}
+          - blocks:
+              - {text: "Respectfully submitted,"}
+              - {text: "{signature.firm}", above: 13.8}
+              - {text: "/s/ {signature.signer}", above: 13.8}
+              - {text: "{signature.lines}"}
+    above: 13.8
+# FRCP 5(b), (d)(1)(B): the certificate of service, when the sample gives one, on its own page (the primary exemplar):
+# its title, its text double-spaced, and the filer's "/s/" signature in the signature column.
+after_tail:
+  - when: certificate
+    blocks:
+      - {break: true}
+      - {text: "CERTIFICATE OF SERVICE", heading: 1}
+      - {text: "{certificate.text}", pitch: body, indent: 36}
+      - group:
+          - columns:
+              - {width: 223.2, blocks: []}
+              - blocks:
+                  - {text: "/s/ {certificate.signer}"}
+                  - {text: "{certificate.lines}"}
+        above: 13.8

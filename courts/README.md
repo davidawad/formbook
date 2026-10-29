@@ -238,13 +238,13 @@ Courts under `courts` (347).
 | [United States District Court for the Northern District of California](ninth-circuit/california/federal/northern-district) | `cand` | up for review | 5/5 | — | 4/4 | 14 |
 | [United States District Court for the Southern District of California](ninth-circuit/california/federal/southern-district) | `casd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Guam](ninth-circuit/guam/federal/bankruptcy-district) | `gub` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. Guam](ninth-circuit/guam/federal/district) | `gud` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. Guam](ninth-circuit/guam/federal/district) | `gud` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Hawaii](ninth-circuit/hawaii/federal/bankruptcy-district) | `hib` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States District Court for the District of Hawaii](ninth-circuit/hawaii/federal/district) | `hid` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Idaho](ninth-circuit/idaho/federal/bankruptcy-district) | `idb` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court for the District of Idaho](ninth-circuit/idaho/federal/district) | `idd` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court for the District of Idaho](ninth-circuit/idaho/federal/district) | `idd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Montana](ninth-circuit/montana/federal/bankruptcy-district) | `mtb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. Montana](ninth-circuit/montana/federal/district) | `mtd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. Montana](ninth-circuit/montana/federal/district) | `mtd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Nevada](ninth-circuit/nevada/federal/bankruptcy-district) | `nvb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, D. Nevada](ninth-circuit/nevada/federal/district) | `nvd` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, Northern Mariana Islands](ninth-circuit/northern-mariana-islands/federal/bankruptcy-district) | `nmib` | up for review | 2/2 | — | 2/2 | 14 |

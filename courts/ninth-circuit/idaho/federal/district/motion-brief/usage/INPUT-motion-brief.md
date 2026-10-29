@@ -19,9 +19,6 @@ counsel:
   - "laura@first-fourteenth.com"
   - "Attorneys for Defendant Western Association of Fish and Wildlife Agencies"
 caption:
-  court:
-    - "UNITED STATES DISTRICT COURT"
-    - "DISTRICT OF IDAHO"
   parties:
     - names:
         - "United States of America ex rel. The Tarbel Group, LLC"
@@ -30,7 +27,6 @@ caption:
         - "Western Association of Fish and Wildlife Agencies and Unknown John or Jane Does,"
       designation: "Defendants."
 brief_title: "DEFENDANT’S MEMORANDUM IN SUPPORT OF MOTION TO DISMISS"
-footer_title: "DEFENDANT’S MEMORANDUM IN SUPPORT OF MOTION TO DISMISS"
 date: "June 9, 2026"
 signature:
   firm:

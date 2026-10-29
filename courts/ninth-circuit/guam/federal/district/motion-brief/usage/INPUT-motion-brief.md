@@ -4,10 +4,7 @@ designation: "CIVIL"
 case_notes:
   - "Removed from the Superior Court of Guam"
   - "Case No. CV0190-25"
-court_title:
-  - "IN THE UNITED STATES DISTRICT COURT OF GUAM"
 caption:
-  between: "v."
   parties:
     - names:
         - "LOURDES A. LEON GUERRERO,"
@@ -38,6 +35,25 @@ signature:
   lines:
     - "LESLIE A. TRAVIS"
     - "Attorneys for Plaintiff Lourdes A. Leon Guerrero, Governor of Guam"
+service:
+  served:
+    - |-
+      Douglas B. Moylan
+      Attorney General of Guam
+      Office of the Attorney General of Guam
+      134 W. Soledad Avenue, Ste. 802 Bank of Hawaii Building
+      Hagåtña, Guam 96910
+      (671) 475-2710
+      dbmoylan@oagguam.org
+    - |-
+      William Lyle Stamps
+      Assistant Attorney General
+      Office of the Attorney General of Guam
+      Civil Division
+      134 W. Soledad Avenue, Ste. 302
+      Hagåtña, Guam 96910
+      (671) 475-2710
+      wstamps@oagguam.org
 ---
 
 # I. INTRODUCTION
@@ -136,29 +152,6 @@ Accordingly, the Court should dismiss AG Moylan's Counterclaim pursuant to the *
 
 For the foregoing reasons, the Court should dismiss AG Moylan's counterclaim and sanction AG Moylan appropriately for bringing a counterclaim that seeks to chill Governor Leon Guerrero's petitioning rights.
 
-<!-- signature -->
-
 # CERTIFICATE OF SERVICE
 
 I certify that I have served opposing counsel by electronically filing the foregoing document with the Clerk of Court for the United States District Court of Guam using the CM/ECF system.
-
-<!-- single -->
-Douglas B. Moylan
-Attorney General of Guam
-Office of the Attorney General of Guam
-134 W. Soledad Avenue, Ste. 802 Bank of Hawaii Building
-Hagåtña, Guam 96910
-(671) 475-2710
-dbmoylan@oagguam.org
-
-<!-- single -->
-William Lyle Stamps
-Assistant Attorney General
-Office of the Attorney General of Guam
-Civil Division
-134 W. Soledad Avenue, Ste. 302
-Hagåtña, Guam 96910
-(671) 475-2710
-wstamps@oagguam.org
-
-<!-- signature -->
