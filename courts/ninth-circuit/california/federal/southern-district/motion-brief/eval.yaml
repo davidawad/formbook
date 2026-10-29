@@ -1,0 +1,14 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the latex and docx engines are generated from the
+# merged layout (typst/layout.yaml over lib/layouts/frcp-motion-brief.yaml; `fb engines gen`, fb-595.96), so they
+# break every line and page where the typst render does, and a difference fails.
+params:
+  cross_engine: gate
+  # pleading paper (CivLR 5.1: line-numbered in the left margin): the numbered lines a page; the checks read the
+  # margin numbers 1..27 as page furniture, not body text
+  pleading_lines: 27
+  # DEF-COVER-002 against FILED-EXAMPLE-motion-brief.pdf (Willkie Farr & Gallagher, one filer): its hearing block sets
+  # each value at a tab 366 pt in ("Date:" and "October 5, 2026" apart), its caption runs to line 22 and its footer is
+  # ruled; ours sets "Date: October 5, 2026" as one line and the caption's rule ends the shorter party column. No
+  # S.D. Cal. rule sets any of these (one filer's layout, tier 3); typst and docx report them through
+  # data/cover-structure-baseline.txt, the new latex engine alike.
+  cover_structure: report

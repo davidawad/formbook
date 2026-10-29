@@ -1,0 +1,99 @@
+# U.S. District Court for the Southern District of California (casd): a memorandum of points and authorities in
+# support of a motion, on the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with S.D. Cal.'s local
+# rules overlaid here, on pleading paper (fb-595.96). The shared document model sets it (lib/typst/xdoc.typ; latex/ and
+# docx/ are generated from the merged layout by `fb engines gen`). Rules: S.D. Cal. Civil L.R. 5.1 (a secondary
+# excerpt: ../README.md), Fed. R. Civ. P. 10(a).
+base: /lib/layouts/frcp-motion-brief.yaml
+# CivLR 5.1: a proportional font such as Times New Roman at 14 point, no smaller type for text, footnotes or
+# quotations; double-spaced (24 pt lines), not more than 28 lines a page; counsel, caption and tables single-spaced
+# (16.1 pt lines, 1.15 x the type size).
+size: 14
+pitch: {body: 24, single: 16.1}
+footnote: {size: 14, pitch: single, gap: 7}
+quote: {left: 36, right: 36, above: 0, below: 24}
+# CivLR 5.1: letter paper; 27 numbered lines of 24 pt from the one-inch top margin leave 72 pt at the foot for the
+# footer; the 1.5 in left margin holds the numbers and the rules.
+margin: {top: 72, bottom: 72, left: 108, right: 72}
+# CivLR 5.1: line numbers in the left margin: 1 to 27 right-aligned on 1 in, one a numbered line from the top margin; a
+# double rule at the text's left (1.3 in and 1.34 in from the page's left edge) and a single one 0.1 in right of the text
+pleading: {lines: 27, rules: [93.6, 96.5, 547.2]}
+# The footer below the last numbered line (the complaint's, ../complaint): the page number, the paper's short title
+# (the sample's `footer_title`, in capitals as filed; a title of two lines wraps) and the case number, 10 pt in 11.5
+# pt lines, the last 12 pt above the page's foot. The cover unnumbered, the tables from i, the memorandum from 1.
+page_number: {align: center, front: lower-roman, size: 10, pitch: 11.5, foot: 12, text: "{page}<br>{footer_title}<br>No. {case_number}"}
+# Fed. R. Civ. P. 10(a): the cover: counsel single-spaced at the upper left and the party represented in italics; the
+# court's name (bold capitals, centered); the caption: the parties at the left (each party's designation 1.8 in in, "v."
+# centered between them), ruled at their right and foot; at the right the case number, the paper's title in bold
+# capitals and the hearing (the judge under the case number, then the date, time and courtroom, as the exemplar
+# sets them).
+cover:
+  - {text: "{counsel}"}
+  - {text: "{counsel_role}", italic: true}
+  - {text: "{court}", align: center, bold: true, upper: true, above: 12}
+  - columns:
+      - blocks:
+          - box:
+              - each: caption
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", left: 129.6}
+                between:
+                  - {text: "v.", align: center, above: 16.1, below: 16.1}
+            stroke: {right: 0.75, bottom: 0.75}
+            inset: {right: 16.8, bottom: 8}
+      - blocks:
+          - {text: "Case No. {case_number}", left: 16.8, above: 4.2}
+          - {text: "Judge: {hearing.judge}", left: 16.8, above: 12, optional: true}
+          - {text: "{brief_title}", bold: true, upper: true, left: 16.8, above: 12}
+          - {text: "Date: {hearing.date}", left: 16.8, above: 12, optional: true}
+          - {text: "Time: {hearing.time}", left: 16.8, optional: true}
+          - {text: "Courtroom: {hearing.place}", left: 16.8, optional: true}
+    above: 12
+front: []
+# The tables (the exemplar's, 30 pages long; CivLR 7.1 not verified): the contents to the fourth level, a numbered
+# heading's label in its box, each level half an inch further in, the page in a 36 pt column; the authorities from the
+# sample's keyed `authorities` (`toa:` links), grouped (cases in italics, a comma before the citation), "passim" for
+# seven or more, "Page(s)" over the first group.
+contents: {title: "Table of Contents", depth: 4, col: 36, step: 36, above: 6}
+authorities:
+  title: "Table of Authorities"
+  col: 72
+  hang: 25.2
+  above: 6
+  passim: 7
+  page_heading: "Page(s)"
+  group: {bold: true, above: 12}
+  kinds:
+    - {kind: case, title: "Cases", italic: true, separator: ", "}
+    - {kind: statute, title: "Federal Statutes"}
+    - {kind: rule, title: "Federal Rules"}
+    - {kind: regulation, title: "Federal Regulations"}
+    - {kind: other, title: "Other Authorities"}
+# Headings on the numbered lines, kept with what follows: a section centered in bold capitals; the argument's headings
+# numbered I., A., 1., a. by the layout, bold, the label in a half-inch box and the title hanging after it, each level
+# half an inch further in.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body, above: 0, below: 0}
+  - {bold: true, number: "I.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, left: 36, number: "A.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, left: 72, number: "1.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, left: 108, number: "a.", label_box: 36, pitch: body, above: 0, below: 0}
+# FRCP 11(a): the date at the margin; at the right (3.2 in) "Respectfully submitted,", the firm a numbered line below,
+# "/s/" and the signer a numbered line below that, the signer's lines; kept with the body's last paragraph (the base's
+# keep_with_closing).
+closing:
+  - columns:
+      - blocks:
+          - {text: "Dated: {date}"}
+      - width: 230.4
+        blocks:
+          - {text: "Respectfully submitted,"}
+          - {text: "{signature.preamble}", above: 24, optional: true}
+          - {text: "/s/ {signature.signer}", above: 24}
+          - {text: "{signature.signer}"}
+          - {text: "{signature.lines}", optional: true}
+    above: 24
+# Word sets a line of p. 5 ("... The IDSA account is only available") 0.06 pt inside the measure that typst overflows
+# (LibreOffice rounds each run, the italic "Id." among them, to its layout units): Word's right margin 0.1 pt wider
+# (gen.rs docx_bias), measured for this folder.
+docx_bias: 0.1

@@ -33,11 +33,11 @@ caption:
       - "CETERA FINANCIAL GROUP, INC. and CETERA INVESTMENT SERVICES LLC,"
     designation: "Defendants."
 brief_title: "Memorandum of Points and Authorities in Support of Defendants’ Motion to Dismiss Complaint"
-footer_title: "Memorandum of Points and Authorities I/S/O Motion to Dismiss"
+footer_title: "MEMORANDUM OF POINTS AND AUTHORITIES I/S/O MOTION TO DISMISS"
 hearing:
   date: "October 5, 2026"
   time: "*Under Submission*"
-  place: "Courtroom 3B"
+  place: "3B"
   judge: "Hon. Robert S. Huie"
 authorities:
   iqbal: {kind: case, name: "Ashcroft v. Iqbal", cite: "556 U.S. 662 (2009)"}
@@ -48,9 +48,9 @@ authorities:
   futo: {kind: case, name: "Futo v. U.S. Bancorp", cite: "826 F. Supp. 3d 1016 (D. Minn. 2026)"}
   servicemaster: {kind: case, name: "ServiceMaster of St. Cloud v. GAB Bus. Servs., Inc.", cite: "544 N.W.2d 302 (Minn. 1996)"}
   capella: {kind: case, name: "Wright v. Capella Univ., Inc.", cite: "378 F. Supp. 3d 760 (D. Minn. 2019)"}
-  frcp8: {kind: rule, name: "Fed. R. Civ. P. 8", cite: ""}
-  frcp12b6: {kind: rule, name: "Fed. R. Civ. P. 12(b)(6)", cite: ""}
-  frcp12e: {kind: rule, name: "Fed. R. Civ. P. 12(e)", cite: ""}
+  frcp8: {kind: rule, cite: "Fed. R. Civ. P. 8"}
+  frcp12b6: {kind: rule, cite: "Fed. R. Civ. P. 12(b)(6)"}
+  frcp12e: {kind: rule, cite: "Fed. R. Civ. P. 12(e)"}
 signature:
   preamble:
     - "WILLKIE FARR & GALLAGHER LLP"

@@ -7,17 +7,17 @@ Folder: `courts/ninth-circuit/california/federal/southern-district/motion-brief/
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (a portion of the 42-page attachment: cover, TOC, TOA, introduction, factual background, standard of review, arguments I, II and III, conclusion, signature) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 8 pages, typst 0.15.0, vendored EB Garamond only, no warnings (the earlier EB Garamond render, before fb-595.68; the committed render is Times New Roman, 9 pages) |
-| overlay | ok: `usage/OVERLAY-sager-motion-brief.pdf` and `OVERLAY-sager-motion-brief.txt` |
-| pages reviewed | 8 of 8 (every page rendered at 60 dpi and viewed; the cover was re-checked after the last change; all 8 re-viewed on 2026-10-15 in the typeface pass, no template change; all on the earlier EB Garamond render) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, `.latex.pdf` and `.docx.pdf`, 9 pages each (typst 0.15.0, pdfLaTeX, LibreOffice), vendored fonts only, no warnings (2026-10-29, on the shared document model, fb-595.96) |
+| overlay | `just overlay <this folder>` writes `.overlay/<doc path>/OVERLAY-motion-brief.pdf` (not committed) |
+| pages reviewed | 9 of 9 on each engine rendered to PNG at 60 dpi (27 images, `.overlay/`); read by their text layout and line geometry (2026-10-29: the image viewer of the agent pod could not open them; see Gate 2) |
 
 ## Governing rules
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
-| S.D. Cal. Civil L.R. 5.1 | Papers typed double-spaced on one side, line-numbered in the left margin, not more than 28 lines per page, letter size. | `lines-per-page = 28`, `line-pitch = 24pt`, `page-w = 8.5in`, `pleading-background()`. |
-| S.D. Cal. Civil L.R. 5.1 | Proportional font such as Times New Roman at 14-point; no smaller type for text, footnotes or quotations. | `type-size = 14pt` for body, headings, caption and counsel. Footer 10 pt (gap 3). |
-| S.D. Cal. Civil L.R. 5.1 (typeface) | No face is required. "Such as Times New Roman" is an example, not a requirement, so the court-named-face substitution does not apply. | Face required: none. Font: **Times New Roman** (the house standard, docs/FONTS.md rule 6; Liberation Serif fallback; `font-family` in `casd-motion-brief.typ`). |
+| S.D. Cal. Civil L.R. 5.1 | Papers typed double-spaced on one side, line-numbered in the left margin, not more than 28 lines per page, letter size. | layout.yaml `pleading.lines: 27`, `pitch.body: 24`, letter paper (the shared model draws the numbers and rules, fb-595.96). |
+| S.D. Cal. Civil L.R. 5.1 | Proportional font such as Times New Roman at 14-point; no smaller type for text, footnotes or quotations. | layout.yaml `size: 14`, `footnote.size: 14` for every text; footer 10 pt (gap 3). |
+| S.D. Cal. Civil L.R. 5.1 (typeface) | No face is required. "Such as Times New Roman" is an example, not a requirement, so the court-named-face substitution does not apply. | Face required: none. Font: **Times New Roman** (the house standard, docs/FONTS.md rule 6; Liberation Serif fallback; `font-family` in `typst/casd-motion-brief.typ`). |
 | S.D. Cal. Civil L.R. 7.1 | Memorandum length and form for motions. | **Not verified** (see below). The template enforces no page limit. |
 | Fed. R. Civ. P. 10(a) | Caption with the court's name, a title, a file number and a Rule 7(a) designation. | `court`, `caption`, `case_number` on the cover. |
 | Fed. R. Civ. P. 12(b)(6), 8 | Rule text used by the memorandum; not a formatting rule. | Body text only. |
@@ -28,20 +28,22 @@ S.D. Cal. Civil L.R. 5.1: **not verified against the court's primary text.** The
 
 Not produced by this template, and not checked: a table of authorities listing every authority (only the linked ones, gap 6); the notice of motion (a separate filing that the exemplar's cover refers to as "Filed concurrently"); a proposed order; the statement of word or page count, if required.
 
+
 ## Layout
 
-- Pleading paper as the complaint (`../complaint/`): numbered lines 1 to 28, double rule at the text's left edge and a single rule at its right, footer below line 28.
-- Top margin 72 pt, so line 1 sits on the top margin and line 28 ends at 10.33 inches. The footer (page number, title, case number) sits in the bottom margin.
-- Line pitch 24 pt. Body leading `14.9pt` gives that pitch with the cap-height / baseline text edges (measured on the earlier 14 pt EB Garamond render, before fb-595.68: 24.00 pt on every body line; counsel and caption single-spaced at 12.6 pt).
-- Paragraphs have paragraph spacing equal to the leading (`pleading-par`), so a paragraph of n lines is n × 24 pt less 14.9 pt, and the spacing restores the grid. A heading block has `above: body-leading` and is sized to whole lines (`on-grid`), so the text after it stays on the grid.
-- Front matter: cover (no number), table of contents (roman `i`), table of authorities (roman `ii`), body (arabic from 1). The page number is drawn once, by the pleading footer (`footer-block`); the default page-number footer is turned off (`footer: none`).
-- Headings: level 1 centered caps (INTRODUCTION, CONCLUSION); level 2 `I.`, `II.` with a hanging indent; level 3 `A.`, `B.` (not used in the sample). The table of contents is built from the heading elements; the table of authorities from `toa:` links in the body.
+The folder is on the generic federal district brief (`lib/layouts/frcp-motion-brief.yaml`) with S.D. Cal.'s rules overlaid in `typst/layout.yaml`, set by the shared document model (`lib/typst/xdoc.typ`; `latex/` and `docx/` generated by `fb engines gen`, fb-595.96).
+
+- Pleading paper (layout.yaml `pleading`): the numbers 1 to 27 down the left margin, right-aligned on 1 in, one per 24 pt numbered line from the one-inch top margin; a double rule at 1.3 in and 1.34 in from the page's left edge and a single rule at 7.6 in. Page furniture: `eval.yaml` params.pleading_lines: 27 drops the numbers from the text the checks read.
+- Footer (`page_number`): the page number, the paper's title in capitals (`footer_title`; a title of two lines wraps) and "No." with the case number, 10 pt in 11.5 pt lines, the last 12 pt above the page's foot.
+- Front matter: cover (no number), table of contents (i), table of authorities (ii), body (arabic from 1).
+- Cover: counsel single-spaced (16.1 pt lines at 14 pt), the role in italics, the court's name in bold capitals, the caption (parties at left, designation 1.8 in in, "v." centered, ruled at the right and foot; at the right the case number, "Judge:", the title in bold capitals, the hearing's date, time and courtroom).
+- Headings on the numbered lines: level 1 centered caps; levels 2 to 5 numbered I., A., 1., a. by the layout, bold, the label in a half-inch box.
+- Signature, kept with the last paragraph: "Dated:" at the margin; at 3.2 in "Respectfully submitted,", the firm, "/s/" and the signer, the signer's lines.
 
 ## Markdown contract (for samples)
 
-- YAML frontmatter, then the body. Fields: `case_number`, `court` (list of lines, centered over the caption), `counsel` (lines, single-spaced at the upper left), `counsel_role` (italic line under the counsel), `caption` (list of `{names, designation}`), `brief_title`, `footer_title`, `hearing` (`date`, `time`, `place`, `judge`; each optional except the template prints whichever are present), `authorities` (map of key to `{kind, name, cite}`; kinds `case`, `rule`, `statute`, `regulation`, `other`), `signature` (`preamble` lines, `signer`, `lines`), `date`.
-- Body: `#` centered caps heading, `##` numbered heading (`I.`), `###` lettered heading (`A.`), paragraphs, italic with `*...*`. Authorities: `[*Name*](toa:key)` marks the first citation for the TOA; a `toa:` key with no entry in `authorities:` fails the render.
-- Not supported in the sample: footnotes (omitted; the cand footnote rules were not tested here), tables.
+- YAML frontmatter, then the body. Fields: `case_number`, `court` (list of lines, centered over the caption), `counsel` (lines), `counsel_role` (italic line under the counsel), `caption` (list of `{names, designation}`), `brief_title`, `footer_title` (in capitals, as filed), `hearing` (`date`, `time`, `place` (the courtroom), `judge`), `authorities` (keyed: `{kind, name, cite}`; a citation alone, a rule, has no `name`), `signature` (`preamble`, `signer`, `lines`), `date`.
+- Body: `#` centered caps heading, `##` numbered heading (`I.`), `###` (`A.`), paragraphs, italic with `*...*`. Authorities: `[*Name*](toa:key)` marks a citation for the TOA.
 
 ## Known gaps and open choices
 
@@ -51,48 +53,30 @@ Not produced by this template, and not checked: a table of authorities listing e
 4. **Length.** The sample was 8 pages on the earlier EB Garamond render (the committed Times New Roman render is 9): cover, two front-matter pages, five body pages. The brief's target was 8 to 14 pages; the filed memorandum is 42 pages and the transcription covers its introduction, factual background, standard of review, three argument sections and the conclusion. Transcribing more body text would bring the sample into the target range. The template handles longer bodies (the TOC and TOA are generated).
 5. **Cover contents.** The cover follows the exemplar: counsel at the upper left, court title, caption, title, hearing block. The exemplar's "[Filed concurrently with ...]" line and the chambers note on oral argument are omitted from the sample's hearing block (the "Time" entry is "Under Submission").
 6. **Table of authorities is partial.** It lists only the authorities the sample links with `toa:` keys. The filed TOA lists every authority; the sample's authorities are the ones it cites with a link (about ten). Cites in the sample that are not linked (for example Gilead, Barzen, Graff) do not appear in the TOA.
-7. **TOA wrap.** A long TOA entry (ServiceMaster) wraps its page number onto a second line. Cosmetic; the entry is in the TOA but the layout could use a grid like the TOC.
+7. **TOA page column.** An entry whose page list is wider than the 72 pt column (the model widens the column to the list) loses its dot leader ("Futo ... 1, 4"); the entry and its pages are right. Cosmetic (tier 2).
 8. **Signature block.** The template prints "Respectfully submitted," and the firm name (from `signature.preamble`); the exemplar has the date, the firm and the "By: /s/" line without "Respectfully submitted". Convention, not a rule; logged.
-9. **Heading placement.** The grid rule adds `body-leading` of space above each heading, so a heading at the top of a page is 15 pt below the grid line; accepted.
-10. **Overlay names.** `tools/overlay.sh` reads `usage/OUTPUT-<id>.pdf` and writes `OVERLAY-<id>.pdf` and `.txt`; these are the names the tools use, not `<id>.pdf` and `<id>-overlay.pdf`.
-11. **Overlay pairing.** Pages are paired by shared words (on the earlier 8-page EB Garamond render): sample p.1 (cover) with filed p.1; p.2 (TOC) with filed p.2; p.3 (TOA) with filed p.5 (the TOA page); p.4 and p.5 (body) with filed pp.12 and 13; p.6 with filed p.15; p.7 and p.8 (unjust enrichment and conclusion) with filed pp.40 and 41. The pairings are a diagnostic, not a score.
-12. **Check scripts not run.** `tools/check.sh` and `tools/check-selftest.sh` expect a court directory with `court.json` and `rules.md`, and this doc-type folder does not have that shape. The gates were not run; render and overlay were run, and the review below is the Gate 2 equivalent for this doc type.
+9. **Headings on the numbered lines.** Headings are set at the body pitch (24 pt), so a heading of two lines takes two numbered lines; the old template set them single-spaced and padded the block to whole lines.
+10. **Checks.** `tools/check.sh` runs on this folder on all three engines (`eval.yaml`, new: the cross-engine gate, pleading_lines 27); DEF-COVER-002 is reported, not counted (`cover_structure: report`: the exemplar's tabbed hearing block and ruled footer, one filer's layout).
 
-## Review of the rendered pages (the 8-page EB Garamond render, before fb-595.68; the committed render is 9 pages)
+## Gate 2 review (2026-10-29)
 
-- Page 1 (cover): counsel block lines 1 to 12 (single-spaced, the role line in italics), court title, caption with the party column closed by a rule, the title in bold caps at the right, the hearing block (date, time, place, judge). Footer: title and case number. The caption fits on page 1 (an earlier version spilled two lines onto page 2; the cover spacing was reduced). Pass.
-- Page 2 (table of contents, roman `i`): TOC entries with dot leaders and page numbers that match the body (INTRODUCTION 1, FACTUAL BACKGROUND 1, STANDARD OF REVIEW 2, ARGUMENT 3, I. 3, II. 3, III. 4, CONCLUSION 5). Pass.
-- Page 3 (table of authorities, roman `ii`): cases and federal rules, page numbers from the body. The ServiceMaster entry wraps its page number (gap 7). Pass with the noted gap.
-- Page 4 (body 1): INTRODUCTION heading, ¶¶ of the introduction, FACTUAL BACKGROUND heading after the introduction (no overlap), paragraphs on the numbered lines. Pass.
-- Page 5 (body 2): cash sweep background, STANDARD OF REVIEW heading, the Iqbal and Twombly quotations. Pass.
-- Page 6 (body 3): ARGUMENT heading, the I. heading (three lines, two rows), its paragraph, the II. heading and its paragraph. Pass.
-- Page 7 (body 4): III. heading (two lines), the unjust enrichment paragraphs, quotations, the Wright citation starting at the foot. Pass.
-- Page 8 (body 5): the end of the Wright paragraph, CONCLUSION heading, the conclusion, the date, the firm line, "/s/" signature block with the signer and attorney lines. Pass.
+After the move onto the shared model (fb-595.96): every page of the three renders (9 typst, 9 latex, 9 docx: 27 pages) rasterized at 60 dpi with pdftoppm into `.overlay/`. The agent's image viewer could not open the PNGs in its pod, so each page was read by its text layout (`pdftotext -layout`) and its line geometry (`fb measure`); a look at the images themselves is left to the reviewer (PR). The three engines break every line and page alike (XENG-001..003 PASS).
 
-Gate 2 rows for these pages are recorded here, not in `reviews/` (this doc type has no `reviews/` folder).
+| Page | What it is | Finding (all three engines) | Status |
+|---|---|---|---|
+| 1 | Cover: counsel (lines 1-9), court title, caption, case number, judge, title, hearing | Structure as filed; the exemplar's hearing block is tabbed (accepted, gap 10). The case number wraps at its last hyphen in the 3.1 in right column. | ACCEPTED (tier 3) |
+| 2 | i: table of contents | OK: labels in their boxes, leaders, pages. | OK |
+| 3 | ii: table of authorities | OK; one entry without a leader (gap 7). | OPEN (tier 2) |
+| 4-8 | 1-5: introduction, factual background, standard of review, argument I-III | OK: headings numbered by the layout, on the numbered lines. | OK |
+| 9 | 6: conclusion, "Dated:", signature at 3.2 in | OK. | OK |
+| all | Footer: number, title in capitals, case number, 10 pt | OK. | OK |
+
+Reviewed pages: 9 of 9 on each engine (27).
 
 ## Engines
 
-### docx
+All three engines are generated from one layout (docs/EVAL-LOOP.md, "Generated engines"; fb-595.96): `typst/layout.yaml` over `lib/layouts/frcp-motion-brief.yaml`; `typst/casd-motion-brief.typ` names the face (Times New Roman 14 pt) and hands the layout to `lib/typst/xdoc.typ`; `fb engines gen` writes `latex/template.tex`, `latex/xdoc.lua`, `docx/reference.xml` and `docx/xdoc.lua` (`docx/casd.lua` is gone; the LaTeX engine is new; Word's line numbers are the model's fixed grid of 27, no longer `w:lnNumType`). `docx_bias: 0.1`: Word set one line of page 5 0.06 pt inside the measure typst overflows. `eval.yaml` gates the cross-engine check (`params.cross_engine: gate`).
 
-`docx/reference.xml` holds the Word styles and the page setup; fb render builds `reference.docx` from it and pandoc's default reference (`tools/fb/src/docxref.rs`). `docx/casd.lua` is the filter. Sample: `usage/OUTPUT-motion-brief.docx` and its LibreOffice PDF `usage/OUTPUT-motion-brief.docx.pdf` (9 pages, as typst).
+`sh tools/check.sh <dir>`: typst 10 passed, 0 failed; `--engine latex`: 13 passed, 0 failed; `--engine docx`: 14 passed, 0 failed; XENG-001..003 PASS on both. Not verified in Word (LibreOffice only).
 
-As the typst template (fb-595.63, 2026-10-21):
-
-- Times New Roman 14 pt in every style (the typst face), black text.
-- 24 pt exact line spacing on body, heading, list and block text; no space before or after; paragraphs run on without gaps. First-line indent 0.5 in on body paragraphs.
-- Headings: level 1 centered bold; level 2 (`I.`) bold with a 0.5 in hanging indent; level 3 (`A.`) bold italic with a hanging indent at 1 in. The labels are typed text (`I.` plus a tab), written by the filter.
-- US Letter; top, right and bottom 1 in, left 1.5 in: 27 lines of 24 pt, as typst's `lines-per-page` (CivLR 5.1 allows 28). The right margin was 0.75 in and the bottom 48 pt (28 lines), so the last line and long lines ran into the 1 in margins (DEF-FORM-002, DEF-CONT-001).
-- Word line numbering (`w:lnNumType`, restart each page), ending 1 in from the page edge as typst's numbers do, and a double rule at the left and a single rule at the right of the text (`w:pgBorders`).
-- Three sections: the cover (footer without a page number), the contents and authorities (i, ii), the memorandum (1, 2 ...). The footer (10 pt, centered below the last line): the page number, the paper's title in capitals and the case number, written by the filter from the sample (`FORMBOOK_FOOTERS`).
-- The cover: counsel, the court in bold capitals, then the caption table: the parties at the left, closed by a rule at its right and bottom, and the case number, the title in bold capitals and the noticed hearing (Date, Time, Place, judge) at the right.
-- The table of contents (levels 1 to 4, with labels) and the table of authorities (Cases, Federal Statutes, Federal Rules, Federal Regulations, Other Authorities, as typst) carry dot leaders and page numbers (`passim` from 7 pages), from fb render's multi-pass docx engine (`tools/fb/src/docxpass.rs`, as ca9; the pleading line numbers in the text flow are left out when the pages are searched, `tools/fb/src/docxpages.rs`).
-- The closing paragraph is kept with the signature block ("Dated:", "Respectfully submitted," the firm, "By: /s/" and the signer).
-
-What differs from the typst template:
-
-- Word numbers text lines (`lnNumType`), not a fixed grid on every page: lines inside the caption table and single-spaced lines (counsel, tables) are numbered one by one or not at all. Word does not number lines in a table (docs/DOCX.md).
-- Word may paginate slightly differently from the LibreOffice PDF the page numbers come from.
-- Footnote Text is single spaced (a convention, not verified); no footnotes in the sample.
-
-`sh tools/check.sh courts/ninth-circuit/california/federal/southern-district/motion-brief --engine docx`: RESULT 8 checks passed, 0 failed. Every page of the 9-page `.docx.pdf` was viewed. Word fidelity (repair prompt, line-number placement, border offsets) is not checked in Word.
+[Parent: california/federal/southern-district](../README.md)
