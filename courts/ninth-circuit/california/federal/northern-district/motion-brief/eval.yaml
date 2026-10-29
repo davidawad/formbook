@@ -9,3 +9,15 @@ params:
   # pleading paper: the numbered lines a page (Civil L.R. 3-4(c)(1)); the checks read the margin numbers 1..28 as page
   # furniture, not body text
   pleading_lines: 28
+  # DEF-COVER-002 against FILED-EXAMPLE-motion-brief.pdf (U.S. Attorney's Office, N.D. Cal.): the exemplar is on a 1 in
+  # left margin and sets the caption's title in a right column that runs past its own 1 in right margin (to x 556), so
+  # its title takes four lines; on the 1.5 in pleading page (Civil L.R. 3-4(c)(1)) the column is 201.6 pt and the
+  # title takes six. The exemplar's page-1 footer line then pairs with our re-wrapped title line, and the caption's
+  # bottom rule is counted against that pairing. fb-595.88.
+  cover_structure_accepted:
+    - finding: 'alignment: "DISMISS FOR FAILURE TO STATE A CLAIM"'
+      reason: "the title wraps in the 1.5 in pleading page's narrower right column; the exemplar's title overruns its 1 in right margin"
+    - finding: 'rules: between ") Hon. Laurel Beeler" and "DISMISS FOR FAILURE TO STATE A CLAIM"'
+      reason: "the exemplar's footer line paired with our re-wrapped title line; the caption's bottom rule is in both"
+    - finding: 'rules: below "DISMISS FOR FAILURE TO STATE A CLAIM"'
+      reason: "the same pairing: the caption's bottom rule, below our title line and above the exemplar's footer line"
