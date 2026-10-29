@@ -1,0 +1,76 @@
+# U.S. District Court for the District of North Dakota (ndd): a memorandum in support of a motion (to dismiss), on the
+# generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D.N.D.'s local rules overlaid here. The
+# shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb
+# engines gen`). Rules: D.N.D. Civil Rules, effective October 6, 2025, https://www.ndd.uscourts.gov/lci/local_rules.pdf
+# (read 2026-10-14; ../README.md quotes them). The base already meets Civil Rule 5.1(B)(1) (standard paper, pages
+# numbered at the bottom) and 5.1(B)(2) (one side, one-inch margins, 12-point type). The 40-page limit of Civil Rule
+# 7.1(A)(1)(a) is not machine-checked.
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a), Civil Rule 5.1(B)(3) (the venue on every paper): the court's name.
+constants:
+  court: "UNITED STATES DISTRICT COURT"
+  district: "DISTRICT OF NORTH DAKOTA"
+# Civil Rule 5.1(B)(2): double spaced, Word's double in this face (2 x the 13.8 pt single line, as the exemplar).
+pitch: {body: 27.6}
+# Civil Rule 5.1(B)(2): quoted material may be single spaced: an inch in on each side, a single line below.
+quote: {left: 72, right: 72, above: 0, below: 13.8}
+# Civil Rule 5.1(B)(2): headings double spaced (only the case title and quotations may be single spaced), kept with
+# what follows: a section in bold capitals numbered by the template, "I." at the margin and the title half an inch in
+# (its later lines under the title), as the exemplar sets it; a lettered heading bold and a numbered one bold italic,
+# their later lines hung half an inch (the filer types those numbers, as the exemplar).
+heading:
+  - {bold: true, upper: true, number: "I.", label_box: 36, pitch: body}
+  - {bold: true, hang: 36, pitch: body}
+  - {bold: true, italic: true, hang: 36, pitch: body}
+# FRCP 10(a), Civil Rule 3.1(A) (the division designated in the caption: a sample without one stops the render),
+# 5.1(B)(3): the court's name and the division centered in bold; the case title at the left (each party's names, its
+# designation when it has one: an "In re" caption has none; "v." between the parties), the case number at the right,
+# centered on their height (a blank when the filer has none); the paper's title centered in bold capitals under the
+# caption, single spaced (Civil Rule 5.1(B)(2)), a rule between them, as the exemplar sets them; the filer's lead-in at
+# the body pitch.
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{division}", align: center, bold: true, upper: true}
+  - columns:
+      - width: 244.8
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", optional: true}
+            between:
+              - {text: "v."}
+      - valign: center
+        blocks:
+          - {text: "Case No. {case_number|____________}", left: 14.4}
+    above: 13.8
+  - {rule: 0.75, above: 13.8}
+  - {text: "{title}", align: center, bold: true, upper: true, left: 36, right: 36, above: 27.6, below: 13.8}
+  - when: lead_in
+    blocks:
+      - {markdown: "{lead_in}", pitch: body, indent: 36}
+# FRCP 11(a): the date at the margin when the filer gives one; then three and a quarter inches in the filer's closing,
+# the firm, "/s/" and the signer with the signer's lines, a double line between the groups; single spaced, kept whole
+# with the body's last paragraph, a double line above it.
+closing:
+  - group:
+      - {text: "Dated: {date}", optional: true, below: 27.6}
+      - {text: "{closing}", left: 234, optional: true, below: 27.6}
+      - {text: "{signature.firm}", left: 234}
+      - {text: "/s/ {signature.signer}", left: 234, above: 27.6}
+      - {text: "{signature.lines}", left: 234}
+    above: 27.6
+# FRCP 5(d)(1)(B): the certificate of service the filer gives: its heading centered in bold capitals, the text at the
+# body pitch, the service list half an inch in (a blank line between its addresses), the signer's "/s/" block at the
+# signature's indent, a double line between the groups; never split.
+after_tail:
+  - when: certificate
+    blocks:
+      - group:
+          - {text: "{certificate.heading}", align: center, bold: true, upper: true}
+          - {text: "{certificate.text}", pitch: body, indent: 36, above: 27.6}
+          - {text: "{certificate.served}", left: 36}
+          - {text: "/s/ {certificate.signer}", left: 234, above: 27.6}
+          - {text: "{certificate.signer_lines}", left: 234}
+        above: 27.6

@@ -7,7 +7,6 @@ caption:
     - names: ["JOHN PEDEN, in his individual and official capacities; MARK MONTGOMERY, in his individual and official capacities; and THE CITY OF COZAD, a Nebraska Political Subdivision,"]
       designation: "Defendant."
 brief_title: "BRIEF IN SUPPORT OF DEFENDANT PEDEN’S PARTIAL MOTION TO DISMISS"
-footer_title: "BRIEF IN SUPPORT OF PARTIAL MOTION TO DISMISS"
 lead_in: "COME NOW Defendant, John Peden, in his individual and official capacities, offers this Brief in support of his Partial Motion to Dismiss claims made against him by the Plaintiff, Veronica Sandoval."
 date: "May 20, 2026"
 signature:
@@ -22,9 +21,8 @@ signature:
     - "Telephone: (402) 475-1075"
     - "Fax: (402) 475-9515"
     - "Email: jsmith@baylorevnen.com"
-compliance:
-  word_count: "4,679"
-  software: "Microsoft Word 2016"
+word_count: 4679
+word_software: "Microsoft Word 2016"
 service:
   date: "May 20, 2026"
   text: "I hereby certify that on May 20, 2026, I electronically filed the foregoing Brief with the Clerk of the Court using the CM/ECF system, as well as by electronic mail to the following:"

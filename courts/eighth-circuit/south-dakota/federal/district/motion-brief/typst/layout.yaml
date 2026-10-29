@@ -1,0 +1,81 @@
+# U.S. District Court for the District of South Dakota (sdd): a brief in support of a motion (to dismiss), on the
+# generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D.S.D.'s local rules overlaid here. The shared
+# document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines
+# gen`). Rules: D.S.D. Civil Local Rules (read 2026-10-14; ../README.md quotes them). The base already meets LR 83.4:
+# 8 1/2 x 11 inch paper, margins of at least one inch, 12-point type, footnotes included and single spaced. The 25-page
+# or 12,000-word limit of LR 7.1(B)(1) is not machine-checked.
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a), LR 10.1(A): the court's name, as the court's own captions set it.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE DISTRICT OF SOUTH DAKOTA"
+# LR 83.4: the text double spaced, Word's double in this face (2 x the 13.8 pt single line).
+pitch: {body: 27.6}
+# LR 83.4: quotations of more than two lines indented and single spaced: half an inch in on each side, a single line
+# around them.
+quote: {left: 36, right: 36, above: 13.8, below: 13.8}
+# LR 83.4: headings single spaced, a line of 12 pt above and below, kept with what follows: a section centered in bold
+# capitals, an argument heading bold, a point bold italic (the filer types the numbers, as the exemplar).
+heading:
+  - {align: center, bold: true, upper: true, above: 12, below: 12}
+  - {bold: true, above: 12, below: 12}
+  - {bold: true, italic: true, above: 12, below: 12}
+# FRCP 10(a), LR 10.1(A): the caption, the title of the document and the party filing it: the court's name and the
+# division centered in bold; the parties at the left (each party's names, its designation a line below, "v." a line
+# from each), closed by a column of ")" as high as they are (the exemplar's caption); at the right the case number and
+# the paper's title in bold, a blank double line around the caption.
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - {text: "{division}", align: center, bold: true, upper: true, optional: true}
+  - columns:
+      - width: 234
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 36, above: 13.8}
+            between:
+              - {text: "v.", above: 13.8, below: 13.8}
+      - {width: 21.6, repeat: ")"}
+      - blocks:
+          - {text: "Case No. {case_number}", left: 10.8}
+          - {text: "{brief_title}", bold: true, left: 10.8, above: 27.6}
+    above: 27.6
+    below: 27.6
+# LR 10.1(B), LR 5.1(A)(4), FRCP 11(a): "Dated:" at the left; at the right the firm, "By: /s/" and the signer, the
+# typed name and the signer's address, telephone and e-mail beneath it; kept whole, a blank double line above it.
+closing:
+  - group:
+      - columns:
+          - {width: 187.2, blocks: [{text: "Dated: {date}"}]}
+          - blocks:
+              - {text: "{signature.firm}", optional: true}
+              - {text: "By: /s/ {signature.signer}", above: 13.8}
+              - {text: "{signature.signer}"}
+              - {text: "{signature.lines}", optional: true}
+        gutter: 14.4
+    above: 27.6
+# LR 5.1(A)(3): the certificate of service, on its own page: its heading as a section's, the filer's sentence naming
+# the manner of service at the body pitch, the persons served (each a block of single lines, 12 pt apart, never
+# split), the signer at the signature's column.
+after_tail:
+  - when: certificate_of_service
+    blocks:
+      - {break: true}
+      - {text: "Certificate of Service", heading: 1}
+      - {text: "{certificate_of_service.text}", pitch: body, indent: 36}
+      - each: certificate_of_service.recipients
+        blocks:
+          - group:
+              - {text: "{.}"}
+        above: 12
+        gap: 12
+      - group:
+          - columns:
+              - {width: 187.2, blocks: []}
+              - blocks:
+                  - {text: "By: /s/ {certificate_of_service.signer}"}
+                  - {text: "{certificate_of_service.signer}"}
+            gutter: 14.4
+        above: 12

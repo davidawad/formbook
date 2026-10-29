@@ -19,14 +19,14 @@ Courts under `courts/eighth-circuit` (38).
 | [District Court, D. Minnesota](minnesota/federal/district) | `mnd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. Missouri](missouri/federal/bankruptcy-eastern-district) | `moeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Missouri](missouri/federal/bankruptcy-western-district) | `mowb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, E.D. Missouri](missouri/federal/eastern-district) | `moed` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, W.D. Missouri](missouri/federal/western-district) | `mowd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. Missouri](missouri/federal/eastern-district) | `moed` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, W.D. Missouri](missouri/federal/western-district) | `mowd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. Nebraska](nebraska/federal/bankruptcy-district) | `nebraskab` | up for review | 2/2 | — | 2/2 | 14 |
-| [United States District Court, Nebraska](nebraska/federal/district) | `ned` | up for review | 2/2 | — | 2/2 | 14 |
+| [United States District Court, Nebraska](nebraska/federal/district) | `ned` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. North Dakota](north-dakota/federal/bankruptcy-district) | `ndb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. North Dakota](north-dakota/federal/district) | `ndd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. North Dakota](north-dakota/federal/district) | `ndd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. South Dakota](south-dakota/federal/bankruptcy-district) | `sdb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. South Dakota](south-dakota/federal/district) | `sdd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. South Dakota](south-dakota/federal/district) | `sdd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [Arkansas Court of Appeals](arkansas/state/court-of-appeals) | `arkctapp` | up for review | 6/6 | 4/4 | 4/4 | 29 |
 | [Arkansas Supreme Court](arkansas/state/supreme-court) | `ark` | up for review | 9/9 | 8/8 | 8/8 | 29 |
 | [Court of Appeals of Iowa](iowa/state/court-of-appeals) | `iowactapp` | up for review | 4/4 | 4/4 | 4/4 | 29 |

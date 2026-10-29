@@ -1,0 +1,87 @@
+# U.S. District Court for the Eastern District of Missouri (moed): a memorandum in support of a motion (to dismiss), on
+# the generic FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with E.D. Mo.'s local rules overlaid here. The
+# shared document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by
+# `fb engines gen`). Rules: E.D. Mo. Local Rules (read 2026-10-14; ../README.md quotes them). The base already meets
+# L.R. 2.01(A)(1) on the page and type (8 1/2 by 11 inch pages, 12-point type); L.R. 2.01 sets no margin, so the base's
+# one inch stands. The 15-page limit of L.R. 4.01(D) (tables, signature page and attachments not counted) is not
+# machine-checked.
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, as the court's own captions set it.
+constants:
+  court: "UNITED STATES DISTRICT COURT"
+  district: "FOR THE EASTERN DISTRICT OF MISSOURI"
+# L.R. 2.01(A)(1): double spaced, Word's double in this face (2 x the 13.8 pt single line).
+pitch: {body: 27.6}
+# A note the filer sets apart (`>`: an omission marker, a transcribed footnote): single spaced at the margin, a single
+# line around it.
+quote: {left: 0, right: 0, above: 13.8, below: 13.8}
+# Headings bold on the body pitch, kept with what follows: a section centered, an argument heading at the margin, a
+# point at the paragraph indent (the filer types the numbers, as the exemplar).
+heading:
+  - {align: center, bold: true, pitch: body}
+  - {bold: true, pitch: body}
+  - {bold: true, left: 36, pitch: body}
+# L.R. 2.01(A)(2): a blank area of at least 2 by 2 inches in the upper left and upper right corners of the first page:
+# the court's name and the division, centered in bold, fill a band from the top margin to the two-inch line, so the
+# caption starts below the corners. FRCP 10(a): the parties at the left (each party's names, its designation half an
+# inch in a line below, "v." a line from each), closed by a column of ")" as high as they are (the exemplar's caption);
+# the case number at the right, centered on their height (a blank for the clerk when the filer has none), the filer's
+# legends in bold a line below it; the paper's title centered in bold (FRCP 7(b)(2)), a blank double line above it;
+# the filer's lead-in at the body pitch.
+front:
+  - box:
+      - {text: "{xd.court}", align: center, bold: true}
+      - {text: "{xd.district}", align: center, bold: true}
+      - {text: "{division}", align: center, bold: true, optional: true}
+    height: 72
+  - columns:
+      - width: 237.6
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 36, above: 13.8}
+            between:
+              - {text: "v.", above: 13.8, below: 13.8}
+      - {width: 21.6, repeat: ")"}
+      - valign: center
+        blocks:
+          - {text: "Case No. {case_number|______________}", left: 14.4}
+          - each: legends
+            blocks:
+              - {text: "{.}", bold: true, left: 14.4}
+            above: 13.8
+  - {text: "{title}", align: center, bold: true, above: 27.6, below: 13.8}
+  - when: lead_in
+    blocks:
+      - {markdown: "{lead_in}", pitch: body, indent: 36}
+# L.R. 2.01(A)(1), FRCP 11(a): the date at the margin when the filer gives one; then, three and a quarter inches in,
+# "Respectfully submitted," and each firm in bold with its signer and the lines L.R. 2.01(A)(1) puts under a
+# signature (name, address, telephone, e-mail, bar number), whom they represent in italics; single spaced, never split,
+# a blank double line around it.
+closing:
+  - group:
+      - when: date
+        blocks:
+          - {text: "DATED: {date}", below: 27.6}
+      - {text: "Respectfully submitted,", left: 234}
+      - each: signature
+        blocks:
+          - {text: "{firm}", bold: true, left: 234}
+          - {text: "{signer}", left: 234, optional: true}
+          - {text: "{lines}", left: 234}
+        above: 13.8
+        gap: 13.8
+      - {text: "{attorneys_for}", italic: true, left: 234, optional: true, above: 13.8}
+    above: 27.6
+    below: 27.6
+# FRCP 5(d)(1)(B): the certificate of service the filer gives follows the signature, as in the exemplar: its heading
+# centered in bold on the body pitch, the text at the body pitch, the signer's "/s/" line at the signature's indent;
+# never split.
+after_tail:
+  - when: service
+    blocks:
+      - group:
+          - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, pitch: body}
+          - {markdown: "{service.text}", pitch: body, indent: 36}
+          - {text: "{service.signer}", left: 234, above: 13.8}

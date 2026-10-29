@@ -22,6 +22,9 @@ signature:
       - "jhowell@hamiltonweber.com"
       - "tkirksey@hamiltonweber.com"
 attorneys_for: "Attorneys for Defendants"
+service:
+  text: "The undersigned certifies that a true and correct copy of the foregoing document was served this 2nd day of March 2026, by the Court’s electronic filing system, to: Zachary R. McMichael, #68251MO, Capes, Sokol, Goodman & Sarachan, P.C., 8182 Maryland Ave., 15th Floor, St. Louis, MO 63105, 314-505-5464, mcmichael@capessokol.com, Attorney for Plaintiff."
+  signer: "/s/ Jared D. Howell"
 ---
 
 # NATURE OF THE CASE
@@ -106,8 +109,3 @@ Federal question jurisdiction exists only for claims “arising under” federal
 
 For the foregoing reasons, the City of Cottleville, Missouri respectfully requests the Court dismiss Plaintiff’s Complaint with prejudice for failure to state a claim (or in the alternative dismiss for lack of subject matter jurisdiction and decline to exercise supplemental jurisdiction), and grant such further or additional relief as the Court deems just and proper.
 
-# CERTIFICATE OF SERVICE
-
-The undersigned certifies that a true and correct copy of the foregoing document was served this 2nd day of March 2026, by the Court’s electronic filing system, to: Zachary R. McMichael, #68251MO, Capes, Sokol, Goodman & Sarachan, P.C., 8182 Maryland Ave., 15th Floor, St. Louis, MO 63105, 314-505-5464, mcmichael@capessokol.com, Attorney for Plaintiff.
-
-/s/ Jared D. Howell

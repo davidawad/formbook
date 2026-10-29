@@ -29,39 +29,39 @@ service:
   recipients: "Plaintiff"
   signer: "/s/ Michael D. Cerulo"
 authorities:
-  spokeo: {kind: case, name: "Spokeo, Inc. v. Robins", cite: "136 S. Ct. 1540 (2016)"}
-  colombo: {kind: case, name: "Colombo v. Buford", cite: "935 S.W.2d 690 (Mo. Ct. App. 1996)"}
-  bartis: {kind: case, name: "Bartis v. City of Bridgeton", cite: "No. 406-CV-1574 JCH, 2007 WL 1486024 (E.D. Mo. May 18, 2007)"}
-  peck: {kind: case, name: "Peck v. United States", cite: "470 F. Supp. 1003 (S.D.N.Y. 1979)"}
+  spokeo: {kind: case, name: "*Spokeo, Inc. v. Robins*", cite: "136 S. Ct. 1540 (2016)"}
+  colombo: {kind: case, name: "*Colombo v. Buford*", cite: "935 S.W.2d 690 (Mo. Ct. App. 1996)"}
+  bartis: {kind: case, name: "*Bartis v. City of Bridgeton*", cite: "No. 406-CV-1574 JCH, 2007 WL 1486024 (E.D. Mo. May 18, 2007)"}
+  peck: {kind: case, name: "*Peck v. United States*", cite: "470 F. Supp. 1003 (S.D.N.Y. 1979)"}
   usc1983: {kind: statute, cite: "42 U.S.C. § 1983"}
   usc1985: {kind: statute, cite: "42 U.S.C. § 1985"}
   usc1986: {kind: statute, cite: "42 U.S.C. § 1986"}
   mo610027: {kind: statute, cite: "Mo. Rev. Stat. § 610.027"}
-  wright: {kind: case, name: "Wright v. Smith", cite: "21 F.3d 496 (2d Cir. 1994)"}
-  moffitt: {kind: case, name: "Moffitt v. Town of Brookfield", cite: "950 F.2d 880 (2d Cir. 1991)"}
-  mckeon: {kind: case, name: "McKeon v. Daley", cite: "101 F. Supp. 2d 79 (N.D.N.Y. 2000)"}
-  oneal: {kind: case, name: "O’Neal v. Stifel, Nicolaus & Co.", cite: "996 S.W.2d 700 (Mo. Ct. App. 1999)"}
-  gilmore: {kind: case, name: "Gilmore v. Amityville Union Free School District", cite: "305 F. Supp. 2d 271 (E.D.N.Y. 2004)"}
-  monell: {kind: case, name: "Monell v. Department of Social Services of City of New York", cite: "436 U.S. 658 (1978)"}
-  dimaggio: {kind: case, name: "Di Maggio v. O’Brien", cite: "497 F. Supp. 870 (E.D. Pa. 1980)"}
-  connick: {kind: case, name: "Connick v. Thompson", cite: "563 U.S. 51 (2011)"}
+  wright: {kind: case, name: "*Wright v. Smith*", cite: "21 F.3d 496 (2d Cir. 1994)"}
+  moffitt: {kind: case, name: "*Moffitt v. Town of Brookfield*", cite: "950 F.2d 880 (2d Cir. 1991)"}
+  mckeon: {kind: case, name: "*McKeon v. Daley*", cite: "101 F. Supp. 2d 79 (N.D.N.Y. 2000)"}
+  oneal: {kind: case, name: "*O’Neal v. Stifel, Nicolaus & Co.*", cite: "996 S.W.2d 700 (Mo. Ct. App. 1999)"}
+  gilmore: {kind: case, name: "*Gilmore v. Amityville Union Free School District*", cite: "305 F. Supp. 2d 271 (E.D.N.Y. 2004)"}
+  monell: {kind: case, name: "*Monell v. Department of Social Services of City of New York*", cite: "436 U.S. 658 (1978)"}
+  dimaggio: {kind: case, name: "*Di Maggio v. O’Brien*", cite: "497 F. Supp. 870 (E.D. Pa. 1980)"}
+  connick: {kind: case, name: "*Connick v. Thompson*", cite: "563 U.S. 51 (2011)"}
 ---
 
 COME NOW Defendants Laclede County, Missouri, Linda Cansler, Amy Folsom, and LaRita Pope (“Defendants”), by and through the undersigned counsel, and for their Suggestions in Support of their Motion to Dismiss Plaintiff’s Amended Complaint [Doc. 18], state the following:
 
 # I. Plaintiff’s 42 U.S.C. § 1983, § 1985, § 1986 Claims (Counts I, II, VI, VII, X, Count XII) Should be Dismissed for Failure to State a Claim
 
-Plaintiff asserts duplicative counts under [42 U.S.C. § 1983](toa:usc1983), [§ 1985](toa:usc1985), [§ 1986](toa:usc1986), seeking recovery for an interaction alleged to have occurred between Plaintiff, Ms. Cansler, and an unidentified poll worker Plaintiff suspects, but is not certain, is LaRita Pope. Counts I, II, VI, VII, X and XII of Plaintiff’s Amended Complaint should be dismissed as to all Defendants.
+Plaintiff asserts duplicative counts under [42 U.S.C. § 1983](toa:usc1983), [§ 1985](toa:usc1985), [§ 1986](toa:usc1986), seeking recovery for an interaction alleged to have occurred between Plaintiff, Ms. Cansler, and an unidentified poll worker Plaintiff suspects, but is not certain, is LaRita Pope. Counts I, II, VI, VII, X and XII of Plaintiff’s Amended Complaint should be dismissed as to all Defendants.
 
 ## A. Plaintiff’s Claims Must Be Dismissed as to All Defendants Because Plaintiff Lacks Standing to Sue
 
 A plaintiff must establish standing to bring suit. The Supreme Court requires a constitutional minimum of three elements: (1) an injury in fact, (2) that is fairly traceable to the challenged conduct of a defendant, and (3) that is likely to be redressed by a judicial decision. [*Spokeo, Inc. v. Robins*, 136 S.Ct. 1540, 1547 (2016)](toa:spokeo). “To establish injury in fact, a plaintiff must show that he or she suffered an invasion of a legally protected interest that is concrete and particularized and actual or imminent, not conjectural or hypothetical.” [*Id.* at 1548](toa:spokeo).
 
-Plaintiff’s fails to allege that Plaintiff was unable to vote, or that he was prevented from casting his vote by any of the Defendants. According to the Amended Complaint, Plaintiff appeared at the polling place, obtained a ballot, and engaged in an interaction with polling workers. The Complaint contains no further allegation that Plaintiff was prohibited from casting his ballot in the election or was denied any legally protected right by the Defendants. Here, Plaintiff does not plead he sustained an injury in fact. Because he alleges no violation of a legally protected interest, he lacks standing to bring a claim under [42 U.S.C. § 1983](toa:usc1983), [§ 1985](toa:usc1985), or [§ 1986](toa:usc1986).
+Plaintiff’s fails to allege that Plaintiff was unable to vote, or that he was prevented from casting his vote by any of the Defendants. According to the Amended Complaint, Plaintiff appeared at the polling place, obtained a ballot, and engaged in an interaction with polling workers. The Complaint contains no further allegation that Plaintiff was prohibited from casting his ballot in the election or was denied any legally protected right by the Defendants. Here, Plaintiff does not plead he sustained an injury in fact. Because he alleges no violation of a legally protected interest, he lacks standing to bring a claim under [42 U.S.C. § 1983](toa:usc1983), [§ 1985](toa:usc1985), or [§ 1986](toa:usc1986).
 
 ## B. Plaintiff’s Claims Must Be Dismissed as to Amy Folsom and LaRita Pope
 
-Plaintiff’s Amended Complaint asserts claims made under [42 U.S.C. § 1983](toa:usc1983) and [§ 1985](toa:usc1985) against Amy Folsom and LaRita Pope. In his Amended Complaint, Plaintiff alleges that Ms. Folsom was the “Prosecuting Attorney for Laclede County” See Plaintiff’s Amended Complaint, ¶ 19. Plaintiff concedes that he does not know if he had any interaction with LaRita Pope, who may be two other unnamed individuals. See Plaintiff’s Amended Complaint, ¶ 38.
+Plaintiff’s Amended Complaint asserts claims made under [42 U.S.C. § 1983](toa:usc1983) and [§ 1985](toa:usc1985) against Amy Folsom and LaRita Pope. In his Amended Complaint, Plaintiff alleges that Ms. Folsom was the “Prosecuting Attorney for Laclede County” See Plaintiff’s Amended Complaint, ¶ 19. Plaintiff concedes that he does not know if he had any interaction with LaRita Pope, who may be two other unnamed individuals. See Plaintiff’s Amended Complaint, ¶ 38.
 
 The mechanism for holding individual government officials liable for the violation of a person’s rights is [42 U.S.C. §1983](toa:usc1983). To sustain a claim for money damages against an individual under §1983, a pleading must allege personal involvement in the alleged constitutional deprivation. [*Wright v. Smith*, 21 F.3d 496 (2d Cir. 1994)](toa:wright); [*Moffitt v. Town of Brookfield*, 950 F.2d 880, 885 (2nd Cir. 1991)](toa:moffitt). This burden can be met one of four ways: “(1) direct participation in the infraction; (2) failure to remedy a wrong after learning of the violation; (3) creating or allowing a policy to continue under which the violation occurred; or (4) gross negligence in supervision of subordinates who caused the violation.” [*McKeon v. Daley*, 101 F.Supp.2d 79, 91 (N.D.N.Y. 2000)](toa:mckeon).
 

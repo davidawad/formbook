@@ -1,0 +1,87 @@
+# U.S. District Court for the District of Nebraska (ned): a brief in support of a motion (to dismiss), on the generic
+# FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D. Neb.'s local rules overlaid here. The shared
+# document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines
+# gen`). Rules: NECivR (read 2026-10-14; ../README.md quotes them with their URLs). NECivR 10.1(b)(1) sets 8 1/2 by 11
+# inch paper; NECivR sets no margin, type size or spacing, so the base's one inch and 12 pt stand.
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, as the court's own captions set it.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE DISTRICT OF NEBRASKA"
+# Double spaced on Word's double in this face (2 x the 13.8 pt single line), as the exemplar.
+pitch: {body: 27.6}
+# Pages numbered at the foot from page 2, as the exemplar numbers them.
+page_number: {align: center, from: 2}
+# Block quotations single spaced, half an inch in on each side, a single line around them and between their
+# paragraphs.
+quote: {left: 36, right: 36, above: 13.8, below: 13.8, gap: 13.8}
+# Headings, kept with what follows: a section centered in bold capitals on the body pitch; an argument heading bold
+# and a point bold italic, single spaced, a single line above, their later lines hung half an inch (the filer types the
+# numbers, as the exemplar).
+heading:
+  - {align: center, bold: true, upper: true, pitch: body}
+  - {bold: true, hang: 36, above: 13.8}
+  - {bold: true, italic: true, hang: 36, above: 13.8}
+# NECivR 7.1(d)(1)(A): a supporting brief of 13,000 words at most, the caption and headings included; the count the
+# filer certifies (NECivR 7.1(d)(3)), the sample's `word_count`, over the limit stops the render.
+words: {limit: 13000, given: word_count}
+# FRCP 10(a), NECivR 10.1(a)(3): the court's name in bold; the parties at the left (each party's names, its
+# designation an inch and a half in, "v." a line from each), closed by a column of ")" as high as they are (the
+# exemplar's caption); at the right the case number and, a line below, the paper's description in bold; the filer's
+# lead-in at the body pitch.
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 234
+        blocks:
+          - each: caption.parties
+            blocks:
+              - {text: "{names}"}
+              - {text: "{designation}", left: 108, above: 13.8}
+            between:
+              - {text: "v.", above: 13.8, below: 13.8}
+      - {width: 21.6, repeat: ")"}
+      - blocks:
+          - {text: "Case No. {case_number}", left: 7.2}
+          - {text: "{brief_title}", bold: true, left: 7.2, above: 13.8}
+    above: 27.6
+    below: 13.8
+  - when: lead_in
+    blocks:
+      - {markdown: "{lead_in}", pitch: body, indent: 36}
+# NECivR 11.1(a)(1)(A): the electronic signature "s/" and the attorney's name, then the bar number, whom the attorney
+# represents, the firm and its address, telephone, fax and e-mail, at the right half of the page; single spaced, a
+# single line above it, kept whole with the body's last paragraph.
+closing:
+  - group:
+      - {text: "s/ {signature.signer}", left: 234}
+      - {text: "Bar Number: {signature.bar_number}", left: 234}
+      - {text: "Attorney for {signature.attorney_for}", left: 234}
+      - {text: "{signature.firm}", left: 234}
+    above: 13.8
+# NECivR 7.1(d)(3): the certificate of compliance: the word count and the name and version of the software that
+# counted it, with the signer's short signature; then, when the filer gives one, the certificate of service (FRCP
+# 5(d)(1)(B) requires none for CM/ECF service; the exemplar files one): the filer's sentence, each recipient's lines
+# half an inch in, the short signature. Each certificate's heading centered in bold capitals on the body pitch, a
+# single line above it; a certificate never split.
+after_tail:
+  - group:
+      - {text: "CERTIFICATE OF COMPLIANCE", align: center, bold: true, pitch: body}
+      - {text: "I hereby certify that this Brief complies with NECivR 7.1(d)(1). It contains {xd.words} words, including the caption, headings, footnotes, and quotations, as calculated by the word-count function of {word_software}.", pitch: body, indent: 36}
+      - {text: "s/ {signature.signer}", left: 234, above: 13.8}
+      - {text: "{signature.signer}, #{signature.bar_number}", left: 234}
+    above: 13.8
+  - when: service
+    blocks:
+      - group:
+          - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, pitch: body}
+          - {markdown: "{service.text}", pitch: body, indent: 36}
+          - each: service.recipients
+            blocks:
+              - {text: "{.}", left: 36}
+            above: 13.8
+            gap: 13.8
+          - {text: "s/ {signature.signer}", left: 234, above: 13.8}
+          - {text: "{signature.signer}, #{signature.bar_number}", left: 234}
+        above: 13.8
