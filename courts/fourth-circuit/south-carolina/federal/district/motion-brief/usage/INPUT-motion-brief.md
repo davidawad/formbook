@@ -1,27 +1,20 @@
 ---
-word:
-  justify: true
-  shrink: 0.76
-court:
-  - IN THE UNITED STATES DISTRICT COURT
-  - FOR THE DISTRICT OF SOUTH CAROLINA
-  - CHARLESTON DIVISION
+division: "Charleston"
 case_number: "2:25-cv-08752-DCN"
-parties:
-  - {text: "UNITED STATES OF AMERICA, ex rel.,", indent: 0}
-  - {text: "JOHN COBB,", indent: 1}
-  - {text: "Plaintiff-Relator,", indent: 2}
-  - {text: "v.", indent: 1}
-  - {text: "CHARLESTON COUNTY SCHOOL DISTRICT,", indent: 0}
-  - {text: "Defendant.", indent: 2}
-doc_title: "Defendant’s Memorandum in Support of Motion to Dismiss Amended Complaint"
+caption:
+  parties:
+    - names: ["UNITED STATES OF AMERICA, ex rel.,"]
+      relator: "JOHN COBB,"
+      designation: "Plaintiff-Relator,"
+    - names: ["CHARLESTON COUNTY SCHOOL DISTRICT,"]
+      designation: "Defendant."
+brief_title: "Defendant’s Memorandum in Support of Motion to Dismiss Amended Complaint"
 signature:
   location: "Charleston, SC"
   dated: "August 10, 2026"
+  firm_name: "SAXTON AND STUMP"
+  by: "Elizabeth Palmer"
   signers:
-    - "SAXTON AND STUMP"
-    - ""
-    - "By: /s/ Elizabeth Palmer"
     - "Alice F. Paylor, District Court ID #4017"
     - "Isabelle S. Young, District Court ID #14209"
     - "Elizabeth Palmer, District Court ID # 9716"

@@ -1,0 +1,77 @@
+# U.S. District Court for the District of Maryland (mdd): a memorandum in support of a motion, on the generic FRCP
+# brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with D. Md.'s local rules overlaid here. The shared document
+# model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`). Rules:
+# D. Md. Local Rules, effective December 1, 2025, https://www.mdd.uscourts.gov/sites/mdd/files/LocalRules.pdf
+# (verified 2026-10-14; ../README.md quotes them). The base already meets L.R. 102.2.b's 8 1/2 x 11 paper, one-inch
+# margins and 12-point text. The page limits of L.R. 105.3 and 105.4 are checked on the render (../eval.yaml).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, two lines.
+constants:
+  court: "IN THE UNITED STATES DISTRICT COURT"
+  district: "FOR THE DISTRICT OF MARYLAND"
+# L.R. 102.2.b: double-spaced; 27.6 pt, twice the 13.8 pt single line (Times New Roman 12 pt, double in Word).
+pitch: {body: 27.6}
+# L.R. 102.2.b: "Pages shall be numbered at the bottom of every page after the first page".
+page_number: {align: center, from: 2}
+# L.R. 102.2.b: footnotes at least 10 point, single-spaced (1.15 x 10 pt).
+footnote: {size: 10, pitch: 11.5, gap: 7}
+# Block quotations single-spaced (L.R. 102.2.b), half an inch in on each side, a double line after them.
+quote: {below: 27.6}
+# Headings on the body pitch, kept with the text after them: a section centered in bold capitals, an argument heading
+# bold with its later lines hung half an inch, a sub-heading bold italic.
+heading:
+  - {align: center, bold: true, upper: true, pitch: body, above: 19.75, below: 0}
+  - {bold: true, hang: 36, pitch: body, above: 19.75, below: 0}
+  - {bold: true, italic: true, pitch: body, above: 19.75, below: 0}
+# L.R. 102.2.a: the caption of every paper after the complaint is a short title, the first plaintiff and the first
+# defendant only, and the civil action number (the typst template refuses more parties). The parties at the left
+# (each party's names, its designation an inch in, "v." half an inch in between them), ruled at their right; the case number
+# beside them at the top; then the paper's title centered in bold, as the sample types it.
+front:
+  - {text: "{xd.court}", align: center}
+  - {text: "{xd.district}", align: center}
+  - columns:
+      - width: 244.8
+        blocks:
+          - box:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", left: 72, above: 13.8}
+                between:
+                  - {text: "v.", left: 36, above: 13.8, below: 13.8}
+            stroke: {right: 0.75}
+            inset: {right: 14.4, bottom: 13.8}
+      - blocks:
+          - {text: "Case No. {case_number}", left: 14.4, above: 3.6}
+    above: 27.6
+  - {text: "{brief_title}", align: center, bold: true, above: 27.6, below: 13.8}
+# L.R. 102.1.a, 102.1.b.i: signed by counsel, who states at the bottom their name, bar number, address, telephone,
+# fax and e-mail (the typst template refuses a missing one; "None" is a value); the date at the left when the sample
+# gives one. L.R. 102.1.c: a certificate of service when the sample gives one (the notice of electronic filing is one
+# for a paper filed by CM/ECF). Each kept whole, the signature with the body's last paragraph.
+closing:
+  - group:
+      - columns:
+          - width: 244.8
+            blocks:
+              - {text: "Dated: {date}", optional: true}
+          - blocks:
+              - {text: "/s/ {signature.name}"}
+              - {text: "{signature.name}"}
+              - {text: "{signature.bar}"}
+              - {text: "{signature.firm}"}
+              - {text: "{signature.address}"}
+              - {text: "Telephone: {signature.phone}"}
+              - {text: "Facsimile: {signature.fax}"}
+              - {text: "{signature.email}"}
+              - {text: "{signature.role}"}
+    above: 27.6
+  - when: certificate
+    blocks:
+      - group:
+          - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, pitch: body}
+          - {text: "{certificate.text}", pitch: body, indent: 36}
+          - {text: "/s/ _______________________", above: 27.6}
+          - {text: "{certificate.signer}"}
+        above: 19.75

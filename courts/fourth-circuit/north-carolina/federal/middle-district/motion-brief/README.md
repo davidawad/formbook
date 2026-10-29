@@ -7,9 +7,9 @@ Folder: `courts/fourth-circuit/north-carolina/federal/middle-district/motion-bri
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (one filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (a portion: cover, Introduction, Background, Standards of Review, the start of Argument A.1, Conclusion, signature, certificates; see gap 4) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, Times New Roman only (`pdffonts`), no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, `.latex.pdf`, `.docx` and `.docx.pdf`, 10 pages each, vendored faces only, no warnings, on the shared document model: the generic FRCP brief `lib/layouts/frcp-motion-brief.yaml` with the local rules overlaid in `typst/layout.yaml` (fb-595.17.9) |
 | overlay | ok: `usage/OVERLAY-braham-labcorp-brief.pdf` and `OVERLAY-braham-labcorp-brief.txt` |
-| pages reviewed | 10 of 10 on the earlier EB Garamond render, before fb-595.68 (every page rendered at 60 dpi and viewed; see the table below) |
+| pages reviewed | 10 of 10 on typst, latex and docx after the move onto the FRCP base (2026-10-29: every page's text layout and the checks' geometry; see "Gate 2 review on the FRCP base") |
 | tier 2 | one exemplar only, so tier 2 is not judged against two or three filers (see gaps) |
 
 ## Governing rules
@@ -18,16 +18,16 @@ Primary source: M.D.N.C. Local Civil Rules, effective June 1, 2026 (adopted by t
 
 | ID | Rule | Requirement | Where it lives |
 |---|---|---|---|
-| NCMD-FORM-001 | LR 7.1(a) | Letter-size paper; single-sided; unfolded and bound at the top; numbered at the bottom; no manuscript cover. | `page` settings (paper, numbered footer) |
-| NCMD-FORM-002 | LR 7.1(a) | "fixed-pitch type size no smaller than ten characters per inch or in a proportional font size no smaller than 13 point." Proportional font, so 13 pt, footnotes included. | `type-size = 13pt`, `font-family` |
-| NCMD-FORM-003 | LR 7.1(a) | "Typewritten ... documents shall be double spaced." and "no more than 27 lines of regularly spaced text on a page." | `pitch-body = 23pt` (see gap 2) |
-| NCMD-FORM-004 | LR 7.1(a) | Margins: top "not less than one and one-quarter inches"; bottom, left and right "not less than one inch." | `top-margin = 1.25in`, `bottom-margin`, `side-margin` |
-| NCMD-FORM-005 | LR 7.1(a) | Pages "numbered at the bottom." | `running-footer` (centred page number) |
+| NCMD-FORM-001 | LR 7.1(a) | Letter-size paper; single-sided; unfolded and bound at the top; numbered at the bottom; no manuscript cover. | the base's letter page; `page_number` (centered, the tables lower roman, the body from 1) |
+| NCMD-FORM-002 | LR 7.1(a) | "fixed-pitch type size no smaller than ten characters per inch or in a proportional font size no smaller than 13 point." Proportional font, so 13 pt, footnotes included. | `size: 13` in `typst/layout.yaml` (footnotes too), `font-family` |
+| NCMD-FORM-003 | LR 7.1(a) | "Typewritten ... documents shall be double spaced." and "no more than 27 lines of regularly spaced text on a page." | `pitch.body: 23` (see gap 2) |
+| NCMD-FORM-004 | LR 7.1(a) | Margins: top "not less than one and one-quarter inches"; bottom, left and right "not less than one inch." | `margin.top: 90`; the base's one inch elsewhere |
+| NCMD-FORM-005 | LR 7.1(a) | Pages "numbered at the bottom." | the base's centered page number |
 | NCMD-FIRST-001 | LR 7.1(b) | Signing party or attorney states telephone number, mailing address and e-mail address; an attorney admitted to this Court states the state bar number. | `signatures` block: the template refuses to build without `signer`, `address`, `phone`, `email`, `role`; `bar_number` is required by convention for admitted counsel and may be omitted otherwise |
 | NCMD-FIRST-002 | LR 7.3(c)(1) | Motions are decided "on the pleadings ... motion papers and briefs, without hearing or oral argument, unless otherwise ordered." | No hearing date or time on the cover (CAND-style hearing block is not used) |
 | NCMD-CONT-001 | LR 7.2(a) | An opening brief contains a statement of the nature of the matter, a concise statement of facts (each supported by a reference to the record), the questions presented, and the argument, which refers to all statutes, rules and authorities relied upon. | Author content, not checked by the template. The sample transcribes the exemplar's sections. |
 | NCMD-CONT-002 | LR 7.3(a) | "Each motion shall be set out in a separate document" and the motion "shall be accompanied by a brief." | Scope of this template: the brief only; the notice of motion is a separate document. |
-| NCMD-CONT-003 | LR 7.3(d)(1) | Briefs prepared on a computer "shall not exceed 6,250 words"; the word count "shall include the body of the brief, headings and footnotes" and excludes the caption, signature lines, certificate of service and cover or index; "Each brief shall include a certificate of word count, signed by counsel ... which includes a certification that the brief complies with this rule." | `certificates()`: "Certificate of Word Count" is generated with the 6,250-word statement and the signer. The template does **not** count words (gap 1). |
+| NCMD-CONT-003 | LR 7.3(d)(1) | Briefs prepared on a computer "shall not exceed 6,250 words"; the word count "shall include the body of the brief, headings and footnotes" and excludes the caption, signature lines, certificate of service and cover or index; "Each brief shall include a certificate of word count, signed by counsel ... which includes a certification that the brief complies with this rule." | `after_tail`: the certificate of word count with the 6,250-word statement and the signer; `words.limit` 6,250 stops the render over it (gap 1). |
 | NCMD-CONT-004 | LR 7.3(d)(3) | No incorporation by reference of other briefs. | Author content. |
 
 Not used, and why: LR 7.3(b) (contents of the motion, not the brief), LR 7.3(e) (supporting documents), LR 7.3(d)(2) (typewritten briefs, 20-page limit; the template is computer-prepared). The table of contents and table of authorities are produced by the template as in the exemplar; the rule does not call for them.
@@ -35,19 +35,19 @@ Not used, and why: LR 7.3(b) (contents of the motion, not the brief), LR 7.3(e) 
 ## Layout
 
 - Letter paper, 1.25 in top margin, 1 in bottom, left and right margins.
-- Body is 13 pt Times New Roman on a 23 pt line pitch (`pitch-body`): 27 lines of text fit in the 630 pt text height (621 pt used). (On the earlier EB Garamond render, `pdftotext -bbox` measured 23.00 pt on every body line.)
-- Cover page (unnumbered): court title, caption (parties left, closed by a right and bottom rule; case number and the title in bold right). No counsel block at the top of page 1: the exemplar has none; the counsel information is in the signature block.
+- Body is 13 pt Times New Roman on a 23 pt line pitch (`pitch.body`): 27 lines of text fit in the 630 pt text height (621 pt used). (On the earlier EB Garamond render, `pdftotext -bbox` measured 23.00 pt on every body line.)
+- Cover page (unnumbered): court title, caption (parties left, closed by a right rule and a rule at their foot; the case number at the right, centered on their height), then the title centered in bold below it, as the exemplar. No counsel block at the top of page 1: the exemplar has none; the counsel information is in the signature block.
 - Table of contents (roman i) and table of authorities (roman ii, ...), both generated from the body's headings and `toa:` links; the body starts at page 1 in arabic numerals.
 - Headings: level 2 roman (I., II.), level 3 letter (A.), level 4 number (1.), numbered by the template; level 1 centred caps for the TOC/TOA titles only.
 - Signature block: "Dated" at left, "Respectfully submitted," at right, one block per signer (`/s/`, name, bar number if any, address, phone, e-mail, role in italics).
-- The last section (the conclusion) is kept with the signature block, so a sign-off never stands alone on a page.
+- The last paragraph of the body (the conclusion's) is kept with the signature block, so a sign-off never stands alone on a page.
 - Certificate of Word Count (LR 7.3(d)(1)) and Certificate of Service follow the signature. Neither is a numbered page.
 
 ## Markdown contract (for samples)
 
 - YAML frontmatter, then the body. Body: `#` for level 1 (not used in the body), `##`, `###`, `####` for headings, blank-line-separated paragraphs. Italics with `*...*`; footnotes `[^id]` with the definition on its own line.
 - Authority links: `[text](toa:KEY)`; each KEY must appear under `authorities:` in the frontmatter (kind `case`, `statute`, `rule`, `regulation`, or `other`; `name` for cases; `cite`). A link's page is recorded in the table of authorities.
-- Frontmatter fields: `case_number`; `court` (list of lines); `caption` (list of `{names, designation}`); `brief_title` (written in capitals as in the filing; the template does not change case, so rule citations keep their case); `date` (the "Dated:" line); `certificate_date` (the "This the ... day of ..." line of the certificate of word count); `service_date`; `signatures` (list of `{firm, signer, bar_number, address (list), phone, email, role}`); `authorities`.
+- Frontmatter fields: `case_number`; `caption.parties` (list of `{names, designation}`); `brief_title` (written in capitals as in the filing; the template does not change case, so rule citations keep their case); `date` (the "Dated:" line); `certificate_date` (the "This the ... day of ..." line of the certificate of word count); `service_date`; `signatures` (list of `{firm, signer, bar_number, address (list), phone, email, role}`); `authorities` (a case's `name` in `*...*`, set in italics with a comma before the citation).
 - Escape literal asterisks used for Westlaw star pagination (`at \*3`).
 
 ## Render and overlay
@@ -80,7 +80,7 @@ Reviewed pages: 10 of 10. The cover (page 1), the argument page (5) and the sign
 
 ## Known gaps and open choices
 
-1. **Word count is not checked.** LR 7.3(d)(1) caps the brief at 6,250 words, counting the body, headings and footnotes. The template cannot count words; it prints the certificate text. The author must count (the filer may rely on word-processor word count) before signing. The sample is a portion and well under the cap; the exemplar is 33 pages including its front matter.
+1. **Word count.** LR 7.3(d)(1) caps the brief at 6,250 words, counting the body, headings and footnotes: the layout's `words.limit` counts the body before the certificates, its headings and its called footnotes as a word processor does and stops the render over 6,250 in every engine (tested on a copy with a limit of 100: typst, latex and docx each stop). The certificate prints the rule's statement.
 2. **"Double spaced" versus 27 lines.** The same question as the complaint: LR 7.1(a) requires double spacing and no more than 27 lines per page. A true double space at 13 pt gives about 18 lines per page; the template uses the 27-line cap at 23 pt. This is the reading the render follows. Whether the court reads "double spaced" as a fixed ratio is a question for David.
 3. **Font (typeface: none required; Times New Roman).** LR 7.1(a) sets a size floor for a proportional font (13 pt) and names no face. The quoted rule text names no face, so the template is Times New Roman at 13 pt, the house standard (`docs/FONTS.md` rule 6, David 2026-10-17); EB Garamond before 2026-10-17 (the docx until fb-595.68.19). The exemplar is Times New Roman with Century Schoolbook headings, which the rule does not require.
 4. **Sample is a portion.** The sample transcribes the cover, the first sections of the memorandum (Introduction, Background, Standards of Review), the first sub-heading of Argument A and its first paragraph, the conclusion, the signature blocks and both certificates. Argument A.1 onward and B to D are not transcribed, so the table of authorities lists only the authorities linked in the portion (10 entries). It is not a full table of authorities.
@@ -89,14 +89,30 @@ Reviewed pages: 10 of 10. The cover (page 1), the argument page (5) and the sign
 7. **Local rules of the judge.** Individual judges' practice standards may add requirements not in the Local Civil Rules; not reflected.
 8. **Motion and proposed order.** The notice of motion (LR 7.3(a), a separate document) and any proposed order are not generated; the proposed-order requirement was not checked in this run.
 9. **Tier 2.** One exemplar only; EVAL-LOOP asks for two or three filers.
-10. **Gate scripts.** `tools/check.sh` and `tools/check-selftest.sh` expect a court folder with `court.json` and `rules.md`; this doc-type folder has neither, and the brief forbids editing `tools/`. The gates were not run; render and overlay were run and the review above is the Gate 2 equivalent for this doc type.
+10. **Gate scripts.** `tools/check.sh` runs on this folder for typst, latex and docx (see Engines).
+11. **Tables' "Page" column heads.** The exemplar heads the page column of each table "Page" / "Page(s)"; the FRCP base sets no column head (tier 3).
+
+## Gate 2 review on the FRCP base (2026-10-29, typst, latex and docx)
+
+Every page of the three renders was reviewed as text layout (`pdftotext -layout`, page by page) with the checks' geometry (DEF-COVER-002 against the exemplar's page 1, XENG-001..003: every typst line identical in latex and docx); the pod that did the move could not open images, so a visual look at the pages is left to the PM.
+
+| Page | What it is | Finding |
+|---|---|---|
+| 1 | Cover: court, caption ruled at its right and foot, case number, the title centered below | OK; DEF-COVER-002 passes; no page number |
+| 2 (i) | TABLE OF CONTENTS: I. to V., A., 1. with their pages | OK; the pages match the body |
+| 3 (ii) | TABLE OF AUTHORITIES: Cases (italic names), Federal Rules | OK; the pages match the body |
+| 4-8 (1-5) | Introduction, Background, Standards of Review, Argument, A., 1. | OK; 27 lines a page at most |
+| 9 (6) | V. Conclusion, "Dated:" and both signers, the certificate of word count | OK |
+| 10 (7) | CERTIFICATE OF SERVICE | OK |
+
+OPEN (tier 3): the tables have no "Page" column heads (gap 11).
 
 ## Engines
 
-Both engines are 10 pages; the docx passes XENG-001..003 (222/222 lines) and `tools/check.sh --engine docx` (`usage/.check-docx.txt`: PASS; fb-595.68.19). The page review below was on the earlier EB Garamond renders of `usage/OUTPUT-motion-brief.docx.pdf` (10 pages, LibreOffice) against `usage/OUTPUT-motion-brief.typst.pdf` (typst, 10 pages). Every page of the docx PDF was rendered at 60 dpi and viewed: pages 1 to 10 (cover, table of contents, table of authorities, body pages 1 to 6, certificates). The `.docx` passes `unzip -tq`.
+On the shared document model (docs/EVAL-LOOP.md, "Generated engines"; fb-595.17.9): `typst/layout.yaml` names the generic FRCP brief (`base: /lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and overlays what M.D.N.C. sets itself, each with its rule: 13 pt type, the 23 pt pitch (27 lines) and the 1 1/4 in top margin (LR 7.1(a)), the 6,250-word limit (LR 7.3(d)(1), `words.limit`), the unnumbered cover, the tables in lower roman and the body from 1, the contents and the keyed table of authorities, the headings I., A., 1., a., the signature blocks (LR 7.1(b)) and the two certificates. `typst/ncmd-motion-brief.typ` names the face and asserts the required fields. `latex/` and `docx/` are generated from the merged layout by `fb engines gen` (do not edit them); the per-folder typst code and the docx filter are removed.
 
-- **docx** (`docx/reference.xml`, `docx/ncmd-motion-brief.lua`; `fb render --engine docx` builds the reference document from `reference.xml` on the shared cross-engine recipe in the typst face and runs pandoc with the filter in passes; the filter writes the cover without a page number, the tables in lower roman and the body from 1, with the page numbers of the tables from fb render's needles. `docx/make-reference.sh`, `docx/render.sh` and `docx/reference.docx` were retired into fb render in fb-595.68.19). Output: `usage/OUTPUT-motion-brief.docx` and `.docx.pdf`. Not opened in Word.
-  - *Matches typst* (on the earlier docx; the face is now Times New Roman 13 pt on both, Regular, Bold and Italic embedded): letter paper and margins as in typst; body on a 23.0 pt pitch; the cover with the caption; a table of contents and a table of authorities with dot leaders and page numbers; front matter in lower roman (i, ii) and the body in arabic from 1; the heading labels I., A., 1.; case names italic in the authorities; the signature blocks for both signers; the certificate of word count and the certificate of service; page count 10, the same as typst.
-  - *Page numbers:* checked against the body. The table of contents and authorities gave the same page for every heading and authority as the text search of the rendered PDF.
-  - *Differs:* the table of contents and table of authorities are paragraphs with page numbers computed from the LibreOffice layout (fb render's needles), not TOC or TA fields. Word may paginate differently, and the numbers would then need regenerating. On the earlier docx, one citation form (the full cite of *Twombly*) was not found on any page (the authority was still listed on page 5 from its short cite), and the caption table and the spacing of the certificates differed slightly from typst; not re-checked here.
-  - *BLOCKED:* none. `tools/check.sh` gates the docx on `eval.yaml` (`usage/.check-docx.txt`: PASS).
+| Engine | Status |
+|---|---|
+| typst | reference; `sh tools/check.sh <dir>` exits 0 |
+| latex | generated; `--engine latex` exits 0, XENG-001..003 pass |
+| docx | generated; `--engine docx` exits 0, XENG-001..003 pass; `.docx.pdf` by LibreOffice. BLOCKED: none |

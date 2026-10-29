@@ -82,15 +82,15 @@ Courts under `courts` (347).
 | [Supreme Court of Pennsylvania](third-circuit/pennsylvania/state/supreme-court) | `pa` | up for review | 9/9 | 9/9 | 9/9 | 29 |
 | [Court of Appeals for the Fourth Circuit](fourth-circuit/court-of-appeals) | `ca4` | up for review | 3/3 | 3/3 | 3/3 | 14 |
 | [United States Bankruptcy Court, D. Maryland](fourth-circuit/maryland/federal/bankruptcy-district) | `mdb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. Maryland](fourth-circuit/maryland/federal/district) | `mdd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. Maryland](fourth-circuit/maryland/federal/district) | `mdd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. North Carolina](fourth-circuit/north-carolina/federal/bankruptcy-eastern-district) | `nceb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, M.D. North Carolina](fourth-circuit/north-carolina/federal/bankruptcy-middle-district) | `ncmb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. North Carolina](fourth-circuit/north-carolina/federal/bankruptcy-western-district) | `ncwb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, E.D. North Carolina](fourth-circuit/north-carolina/federal/eastern-district) | `nced` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, M.D. North Carolina](fourth-circuit/north-carolina/federal/middle-district) | `ncmd` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, W.D. North Carolina](fourth-circuit/north-carolina/federal/western-district) | `ncwd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, E.D. North Carolina](fourth-circuit/north-carolina/federal/eastern-district) | `nced` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, M.D. North Carolina](fourth-circuit/north-carolina/federal/middle-district) | `ncmd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
+| [District Court, W.D. North Carolina](fourth-circuit/north-carolina/federal/western-district) | `ncwd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, D. South Carolina](fourth-circuit/south-carolina/federal/bankruptcy-district) | `scb` | up for review | 2/2 | — | 2/2 | 14 |
-| [District Court, D. South Carolina](fourth-circuit/south-carolina/federal/district) | `scd` | up for review | 2/2 | — | 2/2 | 14 |
+| [District Court, D. South Carolina](fourth-circuit/south-carolina/federal/district) | `scd` | up for review | 2/2 | 1/1 | 2/2 | 14 |
 | [United States Bankruptcy Court, E.D. Virginia](fourth-circuit/virginia/federal/bankruptcy-eastern-district) | `vaeb` | up for review | 2/2 | — | 2/2 | 14 |
 | [United States Bankruptcy Court, W.D. Virginia](fourth-circuit/virginia/federal/bankruptcy-western-district) | `vawb` | up for review | 2/2 | — | 2/2 | 14 |
 | [District Court, E.D. Virginia](fourth-circuit/virginia/federal/eastern-district) | `vaed` | up for review | 2/2 | — | 2/2 | 14 |

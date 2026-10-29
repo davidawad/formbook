@@ -6,23 +6,23 @@ Doc type **motion-brief**: the memorandum in support of a Rule 12(b) motion to d
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (1 filer: defendant's counsel; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md` (the full 7-page memorandum transcribed: caption, cover title, Introduction, Legal Standard, Argument with block quotation, Conclusion, footnote 1, signature block) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 7 pages, typst 0.15.0, Times New Roman only (embedded per `pdffonts`), no warnings |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, `.latex.pdf`, `.docx` and `.docx.pdf`, 7 pages each, vendored faces only, no warnings, on the shared document model: the generic FRCP brief `lib/layouts/frcp-motion-brief.yaml` with the local rules overlaid in `typst/layout.yaml` (fb-595.17.9) |
 | overlay | ok: `usage/OVERLAY-cobb-motion-brief.pdf` and `usage/OVERLAY-cobb-motion-brief.txt` |
-| pages reviewed | 6 of 6 on the earlier 6-page Liberation Serif render, before fb-595.68 (every page rendered at 60 dpi and viewed) |
+| pages reviewed | 7 of 7 on typst, latex and docx after the move onto the FRCP base (2026-10-29: every page's text layout and the checks' geometry; see "Gate 2 review on the FRCP base") |
 | tier-1 font (L.R. 1.05(B)) | Met: **Times New Roman** (one of the three faces the rule names), set in the face itself (the pinned files of `docs/FONTS.md` rule 1; Liberation Serif only as fallback) on typst and docx (see Known gaps) |
 
 ## Governing rules
 
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
-| D.S.C. Local Civ. Rule 1.05(A) | Minimum one-inch margins on all sides. | `margin` in `typst/scd-motion-brief.typ` |
+| D.S.C. Local Civ. Rule 1.05(A) | Minimum one-inch margins on all sides. | the base's one-inch margins |
 | D.S.C. Local Civ. Rule 1.05(B) | Times New Roman, Arial or Courier New. | `font-family` = `("Times New Roman", "Liberation Serif")` |
-| D.S.C. Local Civ. Rule 1.05(C) | Minimum 12-point type for caption, text and footnotes. | `type-size` (footnotes are set in the same size, 12 pt, since fb-595.68.19) |
+| D.S.C. Local Civ. Rule 1.05(C) | Minimum 12-point type for caption, text and footnotes. | the base's 12 pt, footnotes too (`footnote.size` 12) |
 | D.S.C. Local Civ. Rule 1.05(D) | Only page numbers and document identification may be in margins or smaller than 12 pt. | page number only, centered at the foot |
-| D.S.C. Local Civ. Rule 1.05(E) | Double space text, except indented quotations and footnotes. | `pitch-body` (27.6 pt, Word's double of 12 pt Times); block quotation single-spaced (13.8 pt lines) and indented |
+| D.S.C. Local Civ. Rule 1.05(E) | Double space text, except indented quotations and footnotes. | `pitch.body` 27.6 (Word's double of 12 pt Times); `quote` single-spaced (13.8 pt lines) and indented half an inch |
 | D.S.C. Local Civ. Rule 7.05(A) | A memorandum contains a concise summary of the case, a statement of facts with record references, the argument with citations, and any special content the rule for the motion requires. | Sample content (the exemplar's order: Introduction, Legal Standard, Argument, Conclusion); the template does not enforce it |
-| D.S.C. Local Civ. Rule 7.05(B)(1) | An initial brief may not exceed 35 double-spaced pages, unless the court grants an exception. | Not enforced by the template. This sample is 7 pages. |
-| FRCP 7(b), 10(a), 11(a) | A motion and its grounds are stated in writing; caption; attorney signature. | `caption`, `signature` (signers and firm lines from frontmatter) |
+| D.S.C. Local Civ. Rule 7.05(B)(1) | An initial brief may not exceed 35 double-spaced pages, unless the court grants an exception. | `eval.yaml` `params.page_limit` 35 (DEF-LEN-001, every engine). This sample is 7 pages. |
+| FRCP 7(b), 10(a), 11(a) | A motion and its grounds are stated in writing; caption; attorney signature. | `typst/layout.yaml` `front` (caption) and `closing` (signers and firm lines from frontmatter) |
 | FRCP 12(b)(6) | The motion (and so the memorandum) asserts failure to state a claim. | Sample content only |
 
 Sources: D.S.C. Local Civil Rules (February 22, 2023), https://www.scd.uscourts.gov/Rules/Civil%20Rules%20-%20Current.pdf, fetched 2026-10-14; Local Civ. Rules 1.05, 7.05 read from that PDF with pdftotext. The same text appears in the May 15, 2017 edition at https://www.scd.uscourts.gov/Rules/2017/Civil%20Rules%20-%20May%2015,%202017.pdf. The FRCP text is cited from the rule as known and was not re-fetched in this session; verify the pin cites before relying on them.
@@ -30,8 +30,8 @@ Sources: D.S.C. Local Civil Rules (February 22, 2023), https://www.scd.uscourts.
 ## Template and sample contract
 
 - `typst/main.typ` reads the sample named by `--input sample=` and calls `scd-motion-brief(meta, body)`.
-- `typst/scd-motion-brief.typ` holds all rule parameters at the top, the caption, the signature block and the heading styles. Nothing case-specific and no coordinates measured off the exemplar.
-- Frontmatter: `court`, `case_number`, `parties` (each `{text, indent}`), `doc_title`, `signature` (`location`, `dated`, `signers`, `firm`). Body: markdown. `##` is a section heading (centered, bold capitals: INTRODUCTION, LEGAL STANDARD, ARGUMENT, CONCLUSION); `###` is a subsection (left, bold, as in the exemplar); footnotes use `[^1]` with the definition at the end of the sample.
+- `typst/layout.yaml` holds every rule number and block (over the FRCP base); `typst/scd-motion-brief.typ` names the face and asserts the required fields. Nothing case-specific and no coordinates measured off the exemplar.
+- Frontmatter: `division`, `case_number`, `caption.parties` (each `{names, relator (optional), designation}`), `brief_title`, `signature` (`location`, `dated`, `firm_name`, `by`, `signers`, `firm`). Body: markdown. `##` is a section heading (centered, bold capitals: INTRODUCTION, LEGAL STANDARD, ARGUMENT, CONCLUSION); `###` is a subsection (left, bold, as in the exemplar); footnotes use `[^1]` with the definition at the end of the sample.
 
 Render and overlay (from the repo root; the doc-type folder is the court dir):
 
@@ -68,35 +68,31 @@ Open findings: none for layout. The exemplar's own typographical quirks are repr
 
 1. **Font (L.R. 1.05(B)): resolved.** The rule names Times New Roman, Arial or Courier New. This template sets Times New Roman itself (the pinned files of `docs/FONTS.md` rule 1), with `Liberation Serif` (SIL OFL 1.1, vendored in `fonts/liberation-serif/`) only as fallback; it used Liberation Serif as the substitute before. Arial and Courier New were not chosen. The page count was unchanged by the EB Garamond to Liberation Serif switch (6 pages); the render is 7 pages since fb-595.68.19 (27.6 pt double pitch). The render uses `--ignore-system-fonts`, so no system font can stand in for it.
 2. **One exemplar, one filer.** Tier 2 is judged against one filed memorandum (defendant's counsel, Saxton & Stump, Charleston Division), not the 2 or 3 the eval loop asks for.
-3. **Page limit not enforced.** L.R. 7.05(B)(1) caps an initial brief at 35 double-spaced pages; the template does not count pages. The sample is far under the cap.
-4. **Checked by the court tools.** `tools/check.sh` gates both engines on `eval.yaml` (`usage/.check-typst.txt`, `usage/.check-docx.txt`: PASS). The render has no typst warnings (`tools/render.sh` fails on warnings).
+3. **Page limit.** L.R. 7.05(B)(1) caps an initial brief at 35 double-spaced pages: `eval.yaml` `params.page_limit` (DEF-LEN-001, every engine). The sample is far under the cap.
+4. **Checked by the court tools.** `tools/check.sh` gates typst, latex and docx on `eval.yaml` (see Engines). The render has no typst warnings (`tools/render.sh` fails on warnings).
 5. **Exemplar motion not transcribed.** The filing is the memorandum (ECF 24-1); the motion (ECF 24) is a separate document and is not in this folder.
 
 ## Exemplar search (for the record)
 
 CourtListener search API, `court=scd`, `type=rd`, query `"MOTION to Dismiss" "12(b)(6)"`, then `"Memorandum in Support" "Motion to Dismiss"`, filed after 2024-06-01, `is_available=true`. Candidates downloaded: Cobb v. Charleston County School District, memorandum (ECF 24-1, 7 pp., selected: standalone Rule 12(b)(6) memorandum, text-based PDF); Williams/Freedom Mortgage and Musgrave v. Mace turned up only as orders and were not used; SLWP, LLC v. MGoBlue (ECF 11-1, 37 pp., not used: longer than the 8 to 14 page target).
 
+## Gate 2 review on the FRCP base (2026-10-29, typst, latex and docx)
+
+Every page of the three renders was reviewed as text layout (`pdftotext -layout`, page by page) with the checks' geometry (DEF-COVER-002 against the exemplar's page 1, XENG-001..003: 166 of 166 lines identical in latex and docx); the pod that did the move could not open images, so a visual look at the pages is left to the PM.
+
+| Page | What it is | Finding |
+|---|---|---|
+| 1 | Court and division, caption (the relator half an inch in, designations an inch in), the case number and the title at the right, the rule under the parties, the opening, INTRODUCTION (footnote 1, 12 pt) | OK; DEF-COVER-002 passes |
+| 2-3 | LEGAL STANDARD, I. and II. (the block quotation single-spaced and indented) | OK |
+| 4-6 | ARGUMENT, I. and its discussion | OK |
+| 7 | CONCLUSION, place and date at the left, the signers and the firm at the right | OK |
+
 ## Engines
 
-typst (`typst/`) is the reference. The docx engine (`docx/`) was built to its form; since fb-595.68.19 both are on the shared cross-engine layout model and XENG-001..003 pass (166/166 lines). The page comparison below was made on the earlier Liberation Serif renders.
+On the shared document model (docs/EVAL-LOOP.md, "Generated engines"; fb-595.17.9): `typst/layout.yaml` names the generic FRCP brief (`base: /lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and overlays what D.S.C. sets itself, each with its rule: the 27.6 pt double pitch and the single-spaced indented quotations and footnotes (L.R. 1.05(E)), 12 pt footnotes (1.05(C)), the court's name with the division, the caption and the signature block. `typst/scd-motion-brief.typ` names the face (L.R. 1.05(B)) and asserts the required fields. `latex/` and `docx/` are generated from the merged layout by `fb engines gen` (do not edit them); the per-folder typst code and the docx filter are removed. The page limit is `eval.yaml` `params.page_limit` (DEF-LEN-001, every engine).
 
-| Engine | Output (`usage/`) | Status |
-|---|---|---|
-| typst | `OUTPUT-motion-brief.typst.pdf` (7 pp.) | reference |
-| docx | `OUTPUT-motion-brief.docx` and `OUTPUT-motion-brief.docx.pdf` (7 pp.) | ok: LibreOffice converts it without error; on the earlier render all 7 pages of the `.docx.pdf` were viewed at 60 dpi, set beside the typst pages 1 to 6 |
-
-```sh
-sh tools/render.sh --engine docx courts/fourth-circuit/south-carolina/federal/district/motion-brief usage/INPUT-motion-brief.md
-```
-
-- *Build:* `fb render --engine docx` builds the reference document from `docx/reference.xml` (the shared cross-engine recipe in the typst face, Times New Roman 12 pt: US Letter, 1-inch margins, the centered page number in a 13.8 pt line; `docx/make-reference.sh` and `docx/reference.docx` were retired into fb render in fb-595.68.19), then runs pandoc with `docx/scd-motion-brief.lua`, which writes the court heading, caption table, document title and signature table (location and date; the signing attorneys; the firm) from the frontmatter. Footnotes and the block quotation are pandoc's, styled in the reference.
-- *Font:* declared as Times New Roman (`{font}`, the typst template's face); `pdffonts` on `usage/OUTPUT-motion-brief.docx.pdf` shows only Times New Roman.
-- *Matches typst:* 12 pt type, footnotes 12 pt; 1-inch margins; page number centered at the foot; the court heading; the caption; the title; headings (levels 1 and 2 bold, centered, capitals; level 3 bold, flush left); half-inch first-line indent; footnote numbering and placement; the signature block.
-- *Differs* (on the earlier Liberation Serif renders, recorded then; fb-595.68.19 set typst to the 27.6 pt pitch, 13.8 pt single lines and 12 pt footnotes, and both engines are 7 pages now):
-  - Body pitch: Word's double (27.6 pt) against typst's 27.06 pt. The memorandum runs to 7 pages against typst's 6. The conclusion and the signature block move together to page 7 (page 6 of the docx ends after the last argument paragraph); typst keeps them on page 6.
-  - The block quotation is single-spaced and indented a half inch on both sides. Typst sets it double-spaced. L.R. 1.05(E) allows indented quotations to be single-spaced, so the docx follows the rule text; the typst form is not wrong, but the two differ here.
-  - The title is centered on two lines. Typst's title wraps with its first line running to the full measure.
-  - Signature block lines are Word's 13.8 pt single; typst's are tighter.
-  - **Typst footnotes are below the rule minimum.** Measured on `OUTPUT-motion-brief.typst.pdf`, footnote text is about 9 pt tall (glyph box 9.3 pt), against 13.3 pt for the 12-pt docx footnote. L.R. 1.05(C) sets 12 pt for footnotes. The typst template needs its footnote size fixed; it was not changed here.
-- *Not verified:* opening in Microsoft Word (no Word on this box). The `.docx` is a valid zip with well-formed XML parts, and LibreOffice converts it without a conversion error.
-- *BLOCKED:* none. `tools/check.sh --engine docx` passes on `eval.yaml` (`usage/.check-docx.txt`: PASS).
+| Engine | Status |
+|---|---|
+| typst | reference; `sh tools/check.sh <dir>` exits 0 |
+| latex | generated; `--engine latex` exits 0, XENG-001..003 pass |
+| docx | generated; `--engine docx` exits 0, XENG-001..003 pass; `.docx.pdf` by LibreOffice. BLOCKED: none |

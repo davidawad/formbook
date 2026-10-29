@@ -4,26 +4,15 @@
 # standard of review, the first point of the argument, the conclusion, the signature block and the certificate of
 # service. The exemplar's footnote 1 is kept; its other footnotes and the exhibit citations are abbreviated. Case
 # names are italic here (the text layer of the exemplar carries no italic markup). Headings are written without
-# their letters or numerals: the template numbers them. See ../README.md for the meaning of every field.
+# their letters or numerals: the template numbers them (I., A.). See ../README.md for the meaning of every field.
 case_number: "5:26-CV-320-D-RN"
 division: "Southern"
 caption:
-  lines:
-    - "PAMELA DENISE JOHNSON,"
-    - {t: "Plaintiff", i: 2}
-    - ""
-    - "v."
-    - ""
-    - "CONSUMER PORTFOLIO SERVICES, INC.;"
-    - "PLATINUM PRE-OWNED, LLC;"
-    - "PRANCER CAPITAL CORP.;"
-    - "AMERICAN RECOVERY"
-    - "SERVICES; ERIE INSURANCE"
-    - "COMPANY; NC RECOVERY"
-    - "SERVICES, INC.; AMERICAN"
-    - "RECOVERY SERVICES, INC.,"
-    - ""
-    - {t: "Defendants.", i: 2}
+  parties:
+    - names: ["PAMELA DENISE JOHNSON,"]
+      designation: "Plaintiff"
+    - names: ["CONSUMER PORTFOLIO SERVICES, INC.; PLATINUM PRE-OWNED, LLC; PRANCER CAPITAL CORP.; AMERICAN RECOVERY SERVICES; ERIE INSURANCE COMPANY; NC RECOVERY SERVICES, INC.; AMERICAN RECOVERY SERVICES, INC.,"]
+      designation: "Defendants."
 brief_title: "DEFENDANT PLATINUM PRE-OWNED, LLC'S MEMORANDUM OF LAW IN SUPPORT OF ITS MOTION TO DISMISS"
 date: "21st day of August, 2026"
 signature:

@@ -10,22 +10,12 @@ case_number: "5:26-CV-6"
 division: "STATESVILLE DIVISION"
 caption:
   parties:
-    - lines: ["JEFFREY NOBLE,"]
+    - names: ["JEFFREY NOBLE,"]
       designation: "Plaintiff,"
-    - lines:
-        - "TOWN OF MOORESVILLE, NORTH"
-        - "CAROLINA; CHRISTOPHER QUINN,"
-        - "in his official and individual"
-        - "capacities; TRACEY JEROME, in her"
-        - "official capacity; CHRIS CARNEY,"
-        - "in his individual capacity,"
+    - names: ["TOWN OF MOORESVILLE, NORTH CAROLINA; CHRISTOPHER QUINN, in his official and individual capacities; TRACEY JEROME, in her official capacity; CHRIS CARNEY, in his individual capacity,"]
       designation: "Defendants."
-title:
-  - "MEMORANDUM OF LAW IN SUPPORT OF"
-  - "DEFENDANTS’ MOTION TO DISMISS"
-  - "PLAINTIFF’S COMPLAINT"
-  - "Fed. R. Civ. P. 12(b)(1), 12(b)(2), 12(b)(6)"
-service_title: "MEMORANDUM OF LAW IN SUPPORT OF DEFENDANTS’ MOTION TO DISMISS PLAINTIFF’S COMPLAINT"
+brief_title: "MEMORANDUM OF LAW IN SUPPORT OF DEFENDANTS’ MOTION TO DISMISS PLAINTIFF’S COMPLAINT"
+brief_rules: "Fed. R. Civ. P. 12(b)(1), 12(b)(2), 12(b)(6)"
 ai_title: "Defendants’ Memorandum of Law in Support of Defendants’ Motion to Dismiss"
 ai_certification: true
 signature:

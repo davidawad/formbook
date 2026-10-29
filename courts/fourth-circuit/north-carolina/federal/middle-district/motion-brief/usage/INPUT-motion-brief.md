@@ -4,10 +4,8 @@
 # certificates. The table of authorities lists only the authorities linked in this portion (see ../README.md).
 # See ../README.md, "Markdown contract", for the meaning of every field.
 case_number: "1:26-cv-00455-TDS-JGM"
-court:
-  - "UNITED STATES DISTRICT COURT"
-  - "MIDDLE DISTRICT OF NORTH CAROLINA"
 caption:
+  parties:
   - names:
       - "DENISE BRAHAM, KARLA PUCKETT, DEVONNA HOBBIE, and KIMBERLY LAWTON, individually and as representatives of a class of participants and beneficiaries on behalf of the LABORATORY CORPORATION OF AMERICA HOLDINGS GROUP BENEFITS PLAN,"
     designation: "Plaintiffs,"
@@ -33,14 +31,14 @@ signatures:
     email: "krobinson@brookspierce.com"
     role: "Counsel for Defendant Laboratory Corporation of America Holdings"
 authorities:
-  thole: {kind: case, name: "Thole v. U.S. Bank N.A.", cite: "590 U.S. 538 (2020)"}
-  spokeo: {kind: case, name: "Spokeo, Inc. v. Robins", cite: "578 U.S. 330 (2016)"}
-  beck: {kind: case, name: "Beck v. McDonald", cite: "848 F.3d 262 (4th Cir. 2017)"}
-  twombly: {kind: case, name: "Bell Atl. Corp. v. Twombly", cite: "550 U.S. 544 (2007)"}
-  iqbal: {kind: case, name: "Ashcroft v. Iqbal", cite: "556 U.S. 662 (2009)"}
-  big-lots: {kind: case, name: "Nat’l All. for Accessibility, Inc. v. Big Lots Stores, Inc.", cite: "No. 1:11–cv–941, 2012 WL 1440226 (M.D.N.C. Apr. 26, 2012)"}
-  advanced: {kind: case, name: "Advanced Salon Visions, Inc. v. Lincoln Benefit Life Co.", cite: "No. 08-cv-2346, 2010 WL 3341803 (S.D. Cal. Aug. 25, 2010)"}
-  mahoney: {kind: case, name: "Mahoney v. J.J. Weiser & Co., Inc.", cite: "564 F. Supp. 2d 248 (S.D.N.Y. 2008)"}
+  thole: {kind: case, name: "*Thole v. U.S. Bank N.A.*", cite: "590 U.S. 538 (2020)"}
+  spokeo: {kind: case, name: "*Spokeo, Inc. v. Robins*", cite: "578 U.S. 330 (2016)"}
+  beck: {kind: case, name: "*Beck v. McDonald*", cite: "848 F.3d 262 (4th Cir. 2017)"}
+  twombly: {kind: case, name: "*Bell Atl. Corp. v. Twombly*", cite: "550 U.S. 544 (2007)"}
+  iqbal: {kind: case, name: "*Ashcroft v. Iqbal*", cite: "556 U.S. 662 (2009)"}
+  big-lots: {kind: case, name: "*Nat’l All. for Accessibility, Inc. v. Big Lots Stores, Inc.*", cite: "No. 1:11–cv–941, 2012 WL 1440226 (M.D.N.C. Apr. 26, 2012)"}
+  advanced: {kind: case, name: "*Advanced Salon Visions, Inc. v. Lincoln Benefit Life Co.*", cite: "No. 08-cv-2346, 2010 WL 3341803 (S.D. Cal. Aug. 25, 2010)"}
+  mahoney: {kind: case, name: "*Mahoney v. J.J. Weiser & Co., Inc.*", cite: "564 F. Supp. 2d 248 (S.D.N.Y. 2008)"}
   rule12b1: {kind: rule, cite: "Fed. R. Civ. P. 12(b)(1)"}
   rule12b6: {kind: rule, cite: "Fed. R. Civ. P. 12(b)(6)"}
 ---

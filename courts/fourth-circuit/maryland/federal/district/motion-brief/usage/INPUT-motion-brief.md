@@ -7,9 +7,6 @@
 # has no fax line; the sample states "None" in its place because LR-102.1.b.i asks for a fax number. The filed
 # caption shows no date; the certificate carries the filed date. See ../README.md for every field.
 case_number: "1:26-cv-02698-MJM"
-court:
-  - "IN THE UNITED STATES DISTRICT COURT"
-  - "FOR THE DISTRICT OF MARYLAND"
 caption:
   parties:
     - names:
@@ -19,7 +16,6 @@ caption:
         - "SOMERSET COUNTY BOARD OF EDUCATION, ET. AL."
       designation: "Defendants"
 brief_title: "MEMORANDUM OF LAW IN SUPPORT OF DEFENDANT’S RULE 12(b) MOTION TO DISMISS PLAINTIFF’S AMENDED COMPLAINT"
-toc: false
 signature:
   name: "Marc D. Schifanelli, Esq."
   bar: "Federal Bar No.: 27753"

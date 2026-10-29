@@ -1,0 +1,120 @@
+# U.S. District Court for the Middle District of North Carolina (ncmd): a brief in support of a motion, on the generic
+# FRCP brief (lib/layouts/frcp-motion-brief.yaml, fb-595.17) with M.D.N.C.'s local rules overlaid here. The shared
+# document model sets it (lib/typst/xdoc.typ; latex/ and docx/ are generated from the merged layout by `fb engines gen`).
+# Rules: M.D.N.C. Local Civil Rules, effective June 1, 2026,
+# https://www.ncmd.uscourts.gov/sites/ncmd/files/mdnc%20local%20civil%20rules%2020260601.pdf (fetched 2026-10-14;
+# ../README.md quotes them, NCMD-* IDs).
+# LR 7.1(a): letter paper, numbered at the bottom (the base).
+base: /lib/layouts/frcp-motion-brief.yaml
+# FRCP 10(a): the court's name, two lines.
+constants:
+  court: "UNITED STATES DISTRICT COURT"
+  district: "MIDDLE DISTRICT OF NORTH CAROLINA"
+# NCMD-FORM-002, LR 7.1(a): a proportional font "no smaller than 13 point", footnotes included.
+size: 13
+# NCMD-FORM-003, LR 7.1(a): double spaced, "no more than 27 lines of regularly spaced text on a page": 27 x 23 pt is
+# 621 pt, inside the 630 pt text height (../README.md, gap 2); single lines 15 pt (1.15 x 13 pt).
+pitch: {body: 23, single: 15}
+# NCMD-FORM-004, LR 7.1(a): top margin not less than 1 1/4 inches; the others one inch (the base).
+margin: {top: 90}
+# NCMD-FORM-005: numbered at the bottom: the cover unnumbered, the tables i, ii, the brief from 1.
+page_number: {align: center, front: lower-roman}
+footnote: {size: 13, gap: 4}
+quote: {below: 23}
+# NCMD-CONT-003, LR 7.3(d)(1): a brief prepared on a computer is at most 6,250 words, counting the body, headings and
+# footnotes (the caption, signature lines, certificates and tables not): the render stops over it, in every engine.
+words: {limit: 6250}
+# Headings on the body pitch, kept with the block after them: a section centered in bold capitals; a point "I." in
+# bold, a sub-point "A." half an inch in, then "1." and "a.", each label in a half-inch box with the title hung after
+# it (the sample writes the title alone).
+heading:
+  - {align: center, bold: true, upper: true, pitch: body, above: 0, below: 0}
+  - {bold: true, number: "I.", label_box: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, number: "A.", label_box: 36, left: 36, pitch: body, above: 0, below: 0}
+  - {bold: true, number: "1.", label_box: 36, left: 72, pitch: body, above: 0, below: 0}
+  - {bold: true, number: "a.", label_box: 36, left: 108, pitch: body, above: 0, below: 0}
+# FRCP 10(a), 7(b)(2) (no manuscript cover, LR 7.1(a): the caption page is the brief's own): the court's name in bold
+# capitals; the parties at the left, each party's names and its designation further in, "v." centered a line from
+# each, ruled at their right and foot; the case number at the right, centered on their height; then the brief's
+# title centered in bold.
+cover:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 234
+        blocks:
+          - box:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", left: 129.6}
+                between:
+                  - {text: "v.", align: center, above: 15, below: 15}
+            stroke: {right: 0.75}
+            inset: {right: 14.4, bottom: 15}
+      - valign: center
+        blocks:
+          - {text: "{case_number}", left: 14.4}
+    above: 23
+  - columns:
+      - {width: 234, blocks: [{rule: 0.75}]}
+      - {blocks: []}
+  - {text: "{brief_title}", align: center, bold: true, above: 23}
+front: []
+# The tables of the exemplar (the rule does not call for them): the contents, a row per heading, each level half an
+# inch further in; the authorities by kind, from the frontmatter's keyed `authorities` and the `toa:` links of the
+# body, seven pages or more "passim".
+contents: {title: "TABLE OF CONTENTS", depth: 4, col: 36, hang: 36, step: 36, above: 15}
+authorities:
+  title: "TABLE OF AUTHORITIES"
+  col: 36
+  hang: 25.2
+  above: 15
+  passim: 7
+  group: {bold: true, above: 15, below: 0}
+  kinds:
+    - {kind: case, title: "Cases"}
+    - {kind: statute, title: "Federal Statutes"}
+    - {kind: rule, title: "Federal Rules"}
+    - {kind: regulation, title: "Federal Regulations"}
+    - {kind: other, title: "Other Authorities"}
+# NCMD-FIRST-001, LR 7.1(b): each signer's telephone number, mailing address and e-mail address, an admitted
+# attorney's state bar number (the typst template refuses a missing field); the date at the left, "Respectfully
+# submitted," and the signers a line apart in the column at the right. Kept whole, with the body's last paragraph.
+closing:
+  - group:
+      - columns:
+          - width: 237.6
+            blocks:
+              - {text: "Dated: {date}"}
+          - blocks:
+              - {text: "Respectfully submitted,"}
+              - each: signatures
+                blocks:
+                  - {text: "{firm}", optional: true}
+                  - {text: "/s/ {signer}"}
+                  - {text: "{signer}"}
+                  - {text: "{bar_number}", optional: true}
+                  - {text: "{address}"}
+                  - {text: "{phone}"}
+                  - {text: "{email}"}
+                  - {text: "{role}", italic: true}
+                gap: 15
+                above: 15
+    above: 23
+# NCMD-CONT-003, LR 7.3(d)(1): the certificate of word count, signed by counsel; Fed. R. Civ. P. 5: the certificate of
+# service by CM/ECF. Each kept whole, signed by the first signer.
+after_tail:
+  - group:
+      - {text: "CERTIFICATE OF WORD COUNT", align: center, bold: true, pitch: body}
+      - {text: "I hereby certify that this brief complies with Local Rule 7.3(d)(1) in that it does not exceed 6,250 words in length, including the body of the brief, headings, and footnotes.", pitch: body, indent: 36}
+      - {text: "This the {certificate_date}.", pitch: body, indent: 36}
+      - {text: "/s/ {signatures.0.signer}", left: 237.6, above: 15}
+      - {text: "{signatures.0.signer}", left: 237.6}
+    above: 23
+  - group:
+      - {text: "CERTIFICATE OF SERVICE", align: center, bold: true, pitch: body}
+      - {text: "I certify that, on {service_date}, a copy of the foregoing document was filed with the Clerk of the Court using the CM/ECF System, which will send notification of the filing to the parties and counsel of record who are registered with that system.", pitch: body, indent: 36}
+      - {text: "/s/ {signatures.0.signer}", left: 237.6, above: 15}
+      - {text: "{signatures.0.signer}", left: 237.6}
+    above: 23

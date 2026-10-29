@@ -8,10 +8,10 @@ Folder: `courts/fourth-circuit/north-carolina/federal/western-district/motion-br
 |---|---|
 | exemplar | yes: `usage/FILED-EXAMPLE-motion-brief.pdf` (25 pages, one filer; see `usage/SOURCE.md`) |
 | sample md | `usage/INPUT-motion-brief.md`: a portion of the memorandum (caption, opening, statement of the case, part of the facts, standard of review, arguments I to IV in part, conclusion, signature, AI certification, certificate of service) |
-| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, 10 pages, typst 0.15.0, Times New Roman only (`pdffonts`), no warnings (`tools/render.sh`) |
+| render | ok: `usage/OUTPUT-motion-brief.typst.pdf`, `.latex.pdf`, `.docx` and `.docx.pdf`, 10 pages each, vendored faces only, no warnings, on the shared document model: the generic FRCP brief `lib/layouts/frcp-motion-brief.yaml` with the local rules overlaid in `typst/layout.yaml` (fb-595.17.9) |
 | overlay | ok: `usage/OVERLAY-noble-motion-brief.pdf` and `usage/OVERLAY-noble-motion-brief.txt` (`tools/overlay.sh`) |
 | typeface | face required: none named (LCvR 7.1(d) sets a 12-point minimum only; a judge's standing order may set a face). Template face: **Times New Roman** 12 pt, the house standard where no face is named (`docs/FONTS.md` rule 6; Liberation Serif as fallback), on typst and docx; EB Garamond before 2026-10-17 (the docx until fb-595.68.19). |
-| pages reviewed | 9 of 9 on the earlier EB Garamond render, before fb-595.68 (every page rendered at 60 dpi and viewed; re-checked 2026-10-14 with the font pass) |
+| pages reviewed | 10 of 10 on typst, latex and docx after the move onto the FRCP base (2026-10-29: every page's text layout and the checks' geometry; see "Gate 2 review on the FRCP base") |
 
 File names follow the tools' defaults (`INPUT-<id>.md`, `OUTPUT-<id>.pdf`, `OVERLAY-<id>.pdf/.txt`) rather than the
 `<id>.md` / `<id>-overlay.pdf` names in the task brief, because `tools/render.sh` and `tools/overlay.sh` read and write
@@ -22,11 +22,11 @@ those names. The overlay is a diagnostic, not a score.
 | Rule | Requirement | Where it is in the template |
 |---|---|---|
 | LCvR 7.1(c) (W.D.N.C. Local Civil Rules, as revised effective 2022-12-01; https://www.ncwd.uscourts.gov/sites/default/files/local_rules/Revised%20Local%20Rules%20120122.pdf, printed p. 13; fetched and read 2026-10-14) | A brief is filed with the motion, contemporaneously. Factual contentions are supported by citation to the exhibit number and page. | Content; the template does not check citations. |
-| LCvR 7.1(d) (same PDF, printed p. 14) | Absent a judge's Standing Civil Order or Case Management Order: the page limit for any brief is 25 pages; font at least 12 point; lines double-spaced; one-inch margins; each page numbered. | `type-size = 12pt`, `margin = 1in`, `body-leading` (double spacing), `page-number()` in the footer. The 25-page limit is not counted by the template (see Known gaps). |
+| LCvR 7.1(d) (same PDF, printed p. 14) | Absent a judge's Standing Civil Order or Case Management Order: the page limit for any brief is 25 pages; font at least 12 point; lines double-spaced; one-inch margins; each page numbered. | the base's 12 pt, one-inch margins and page numbers; `pitch.body` 27.6 (double spacing); the 25-page limit is `eval.yaml` `params.page_limit` (see Known gaps). |
 | LCvR 7.1(j) (same PDF, printed p. 15) | Notice of supplemental authority: at most two pages, no argument. | Not produced (a separate filing). |
-| Fed. R. Civ. P. 10(a) (https://www.law.cornell.edu/rules/frcp/rule_10, fetched 2026-10-14) | Caption with the court's name, a title, a file number and a Rule 7(a) designation. | `court-title`, `caption`. |
-| Fed. R. Civ. P. 11(a) (https://www.law.cornell.edu/rules/frcp/rule_11, fetched 2026-10-14) | Every paper is signed by an attorney of record, who states the address, e-mail address and telephone number. | `signature-block()`: date line, then each firm's "By: /s/" block with the lines the sample gives. |
-| Standing Order of June 18, 2024, *In re: Use of Artificial Intelligence*, No. 3:24-mc-104 (W.D.N.C.) | A certification that no artificial intelligence was used in the research (except AI built into Westlaw, Lexis, FastCase, Bloomberg, Google and Google Scholar) and that every citation was checked. | `ai-certification(meta)`, printed when the sample sets `ai_certification: true`. **Wording taken from the exemplar, not from the order** (see Known gaps). |
+| Fed. R. Civ. P. 10(a) (https://www.law.cornell.edu/rules/frcp/rule_10, fetched 2026-10-14) | Caption with the court's name, a title, a file number and a Rule 7(a) designation. | `typst/layout.yaml` `front`. |
+| Fed. R. Civ. P. 11(a) (https://www.law.cornell.edu/rules/frcp/rule_11, fetched 2026-10-14) | Every paper is signed by an attorney of record, who states the address, e-mail address and telephone number. | `closing`: date line, then each firm's "By: /s/" block with the lines the sample gives. |
+| Standing Order of June 18, 2024, *In re: Use of Artificial Intelligence*, No. 3:24-mc-104 (W.D.N.C.) | A certification that no artificial intelligence was used in the research (except AI built into Westlaw, Lexis, FastCase, Bloomberg, Google and Google Scholar) and that every citation was checked. | `after_tail`, printed when the sample sets `ai_certification: true`. **Wording taken from the exemplar, not from the order** (see Known gaps). |
 
 Primary sources for LCvR 7.1 and the Rules: as listed. The standing order's text was not fetched: the only source
 seen was a PACER docket listing for 3:24-mc-104, and secondary summaries (Ropes & Gray's AI court-order tracker, and
@@ -37,9 +37,10 @@ certification's two parts. They do not quote the order.
 
 - US Letter, one-inch margins on all four sides, 12 pt Times New Roman (no face is named by the rules; the house standard, `docs/FONTS.md` rule 6).
 - First page: the court title (UNITED STATES DISTRICT COURT / FOR THE WESTERN DISTRICT OF NORTH CAROLINA / the division),
-  then a caption: the party column with one line per row, a ")" column the same height, and the right column with
-  "Civil Action No." and the title lines.
-- Double spacing is a 27.6 pt pitch (`pitch-body`, twice the 13.8 pt single line), the same as the filed exemplar
+  "Civil Action No." centered under it, then a caption: the party column (each designation and "v." an inch in), a ")"
+  column as tall as it, the title centered in bold at the right with the rules it moves under, and a rule under the
+  parties and their ")" (the exemplar's).
+- Double spacing is a 27.6 pt pitch (`pitch.body`, twice the 13.8 pt single line), the same as the filed exemplar
   (`pdftotext -bbox` on the earlier EB Garamond render: baselines 27.6 pt apart in both).
 - Body paragraphs: unnumbered (a brief is not a pleading), first-line indent 0.5 in.
 - Headings: level 1 centered bold caps (the sections: STATEMENT OF THE CASE, ARGUMENT, CONCLUSION); level 2 bold, left
@@ -50,19 +51,18 @@ certification's two parts. They do not quote the order.
 - AI certification (when the sample asks): a centered heading, the standing order's introduction, the two numbered
   statements, the date and a signature block. Printed after the first signature block, as in the exemplar.
 - Certificate of service (when the sample has `service`): a centered heading, the CM/ECF sentence with the filing's
-  title in caps (`service_title`), each counsel served as a block, the date and the signature block.
+  title (`brief_title`), each counsel served as a block, the date and the signature block.
 
 ## Markdown contract (for samples)
 
 - YAML frontmatter, then the body. Frontmatter: `case_number`, `division`, `caption.parties` (list of
-  `{lines: [...], designation}`; "v." is inserted between the parties; each entry in `lines` is one printed line and must
-  not wrap in the 2.9 in party column), `title` (list of bold lines), `service_title` (the filing's title in caps, for
-  the certificate of service), `ai_title` (the filing's title in sentence case, for the AI certification),
+  `{names: [...], designation}`; "v." is inserted between the parties; the names wrap in the 2.9 in party column),
+  `brief_title` (the title, bold, also in the certificate of service), `brief_rules` (optional: the rules it moves under), `ai_title` (the filing's title in sentence case, for the AI certification),
   `ai_certification` (true or absent), `signature` (`date_line` and `blocks` of `{firm, by, lines}`), and `service`
   (`counsel`: a list of counsel blocks, each a list of lines).
 - Body chunks separated by blank lines: `#` heading (level 1), `##` (level 2), `###` (level 3); a `1.` list; a `>`
   chunk (no first-line indent); or a plain paragraph (first-line indented).
-- Not supported: footnotes, tables, raw typst. Italics (`*...*`) and `_..._` work through the markdown renderer.
+- Footnotes `[^n]` with a `[^n]:` definition. Not supported: tables, raw typst. Italics (`*...*`) and `_..._` work through the markdown renderer.
 - The template's own certification wording (the AI certification) and section headings are case-neutral; the
   case-specific words are only in the sample.
 
@@ -84,13 +84,13 @@ do not measure quality.
    wording in the template is the exemplar's, and the sample sets `ai_certification: true`. Whether every filing needs
    it, or only briefs, and whether the carve-out list is complete, are **open questions for David**; the template does
    not decide them. The complaint template does not print it.
-3. **Page limit.** LCvR 7.1(d) sets 25 pages for "any brief" and does not say which pages count. The template does not
-   count pages; the filed exemplar is 25 pages including the signature and the certificate of service. Per-judge
+3. **Page limit.** LCvR 7.1(d) sets 25 pages for "any brief" and does not say which pages count. `eval.yaml`
+   `params.page_limit` 25 counts every page (DEF-LEN-001, every engine; the conservative reading); the filed exemplar is 25 pages including the signature and the certificate of service. Per-judge
    standing orders can change the limit.
 4. **Font.** Same as the complaint: no face is named (LCvR 7.1(d)), so the template is Times New Roman 12 pt, the house
    standard (`docs/FONTS.md` rule 6, David 2026-10-17), the exemplar's face too; EB Garamond before 2026-10-17 (the docx until fb-595.68.19).
-5. **Footnotes.** The exemplar has footnote 1 (exhibits). The markdown contract has no footnotes, so the sample omits
-   it and the template cannot print one.
+5. **Footnotes.** The exemplar has footnote 1 (exhibits); the sample omits it. The FRCP base sets footnotes (12 pt,
+   single-spaced), so a sample may carry them.
 6. **Argument headings.** The filed text layer puts the roman numeral ("I.") on its own line above the heading text. The
    template sets the numeral and the text on one bold left line, as the sample is transcribed; the exemplar's layout of
    those headings was not checked on the page.
@@ -120,11 +120,24 @@ Each page was rendered at 60 dpi and viewed, before fb-595.68; the current rende
 
 Gate 2 rows for these pages are recorded here (this doc type has no `reviews/` folder).
 
+## Gate 2 review on the FRCP base (2026-10-29, typst, latex and docx)
+
+Every page of the three renders was reviewed as text layout (`pdftotext -layout`, page by page) with the checks' geometry (DEF-COVER-002 against the exemplar's page 1, XENG-001..003: every typst line identical in latex and docx); the pod that did the move could not open images, so a visual look at the pages is left to the PM.
+
+| Page | What it is | Finding |
+|---|---|---|
+| 1 | Court, division, Civil Action No., caption with ")" column and the title beside it, the rule under it, the opening | OK; DEF-COVER-002 passes |
+| 2-7 | Statement of the case, facts (I., II.), standard of review, ARGUMENT I. to IV. | OK; page 7 ends short: CONCLUSION moves with the signature block |
+| 8 | CONCLUSION, date line, the firm block in the right half, the AI certification (introduction, statement 1) | OK |
+| 9 | AI statement 2 kept with its signature, CERTIFICATE OF SERVICE (start) | OK |
+| 10 | The counsel served, the date line, the signature block | OK |
+
 ## Engines
 
-**docx** (`docx/reference.xml`, from which `fb render --engine docx` builds the reference document on the shared cross-engine recipe in the typst face; `docx/motion-brief.lua` builds the caption, the signature blocks, the AI certification and the certificate of service; `docx/make-reference.sh` and `docx/reference.docx` were retired into fb render in fb-595.68.19). Output: `usage/OUTPUT-motion-brief.docx` and `usage/OUTPUT-motion-brief.docx.pdf` (LibreOffice, 10 pages, the same page count as typst). XENG-001..003 pass and `tools/check.sh --engine docx` passes on `eval.yaml` (`usage/.check-docx.txt`: PASS). Not opened in Word; `unzip -tq` and `xmllint` pass on every XML part, and LibreOffice converted it without error.
+On the shared document model (docs/EVAL-LOOP.md, "Generated engines"; fb-595.17.9): `typst/layout.yaml` names the generic FRCP brief (`base: /lib/layouts/frcp-motion-brief.yaml`, fb-595.17) and overlays what W.D.N.C. sets itself, each with its rule: the court's name and division, the caption with its ")" column, the 27.6 pt double pitch (LCvR 7.1(d)), the signature (Fed. R. Civ. P. 11(a)), the AI certification of the June 18, 2024 standing order and the certificate of service. `typst/ncwd-motion-brief.typ` names the face and asserts the signature fields. `latex/` and `docx/` are generated from the merged layout by `fb engines gen` (do not edit them); the per-folder typst code and the docx filter are removed. The page limit is `eval.yaml` `params.page_limit` (DEF-LEN-001, every engine).
 
-- *Matches typst* (checked by eye on the earlier 9-page EB Garamond docx; the face is now Times New Roman 12 pt on both, Regular, Bold and Italic embedded): US Letter with one-inch margins; double-spaced body at the 27.6 pt pitch and single lines at 13.8 pt; the court title with the division; the caption with the ")" column at 3.0 in and the right column at 3.5 in, with "Civil Action No. 5:26-CV-6", the bold title lines wrapping as in typst; the first paragraph 24 pt below the caption; unnumbered body paragraphs with a half-inch first-line indent; the centered section headings and left argument headings (I., II., ... with the bold and bold italic levels); the date line and the firm blocks at 3.0 in, with "By: /s/" for the signer; the AI certification with the standing order's wording; the certificate of service with each counsel block; a centered page number on every page.
-- *Differs (tier 2; on that earlier docx, not re-checked here):* line breaks differ from typst's in places, so the page breaks fall at other lines: the heading "II." moves from page 4 (typst) to page 5 (docx), and the certificate of service starts at the foot of page 8 in both but breaks differently across pages 8 and 9. Section headings are 17 pt and argument headings 14.5 pt to approximate typst's default heading sizes; the space around a heading is within a few points of typst's. Typst sets the AI certification heading on two lines; the docx sets it on one.
-- *Pages reviewed:* docx pages 1 to 9 of the earlier EB Garamond `OUTPUT-motion-brief.docx.pdf` (all 9), and typst pages 1 to 9 of the typst render (all 9), at 60 dpi.
-- *BLOCKED:* none. The memorandum has no footnotes, table of contents or table of authorities in the template, so no field or footnote is needed.
+| Engine | Status |
+|---|---|
+| typst | reference; `sh tools/check.sh <dir>` exits 0 |
+| latex | generated; `--engine latex` exits 0, XENG-001..003 pass |
+| docx | generated; `--engine docx` exits 0, XENG-001..003 pass; `.docx.pdf` by LibreOffice. BLOCKED: none |
