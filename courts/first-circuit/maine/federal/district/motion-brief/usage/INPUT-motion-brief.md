@@ -6,21 +6,13 @@ caption:
       designation: "Plaintiffs"
     - names: ["XAVIER BOTANA, then- Superintendent of Portland Schools,", "and", "PORTLAND PUBLIC SCHOOLS,"]
       designation: "Defendants."
-title: "Defendants' Motion to Dismiss the Complaint with Incorporated Memorandum of Law"
-date: "July 7, 2026"
+brief_title: "Defendants' Motion to Dismiss the Complaint with Incorporated Memorandum of Law"
 signature:
-  signer: "Melissa A. Hewey"
-  lines:
-    - "Melissa A. Hewey"
-    - "Susan M. Weidner"
-    - "Attorneys for Defendants"
-    - "Drummond Woodsum"
-    - "84 Marginal Way, Suite 600"
-    - "Portland, ME 04101-2480"
-    - "Telephone (207) 772-1941"
-    - "Facsimile (207) 772-3627"
-    - "mhewey@dwmlaw.com"
-    - "sweidner@dwmlaw.com"
+  date_line: "Dated: July 7, 2026"
+  firm: ""
+  blocks:
+    - ["Melissa A. Hewey", "Susan M. Weidner", "Attorneys for Defendants", "Drummond Woodsum", "84 Marginal Way, Suite 600", "Portland, ME 04101-2480", "Telephone (207) 772-1941", "Facsimile (207) 772-3627", "mhewey@dwmlaw.com", "sweidner@dwmlaw.com"]
+  counsel_for: ""
 ---
 
 Pursuant to Federal Rule of Civil Procedure 12(b)(6), Defendants hereby move to dismiss Plaintiff's Complaint (ECF No. 1-4) for failure to state a claim upon which relief can be granted.

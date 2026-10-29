@@ -2,3 +2,4 @@
 # typst render does (fb-595.68.16, on the shared layout model lib/*/xengine*), so a difference fails.
 params:
   cross_engine: gate
+  page_limit: 20

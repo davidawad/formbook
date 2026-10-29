@@ -1,0 +1,31 @@
+# District of Maine Local Rules, effective April 1, 2025, LR 10(b)(1)-(5): 12-point type, double spacing,
+# letter paper, bottom page numbers and one-inch margins. https://www.med.uscourts.gov/sites/med/files/LocalRules.pdf
+# LR 10(b)(2) permits block quotations, headings and footnotes to be single-spaced.
+base: /lib/layouts/frcp-motion-brief.yaml
+pitch: {body: 27.6}
+footnote: {size: 11}
+constants:
+  district: "DISTRICT OF MAINE"
+# LR 10(a) caption convention: party designations are indented beneath the names. The title is set in capitals as
+# in the filed Maine motion briefs; the rule requires the title below the caption, not a particular case style.
+front:
+  - {text: "{xd.court}", align: center, bold: true}
+  - {text: "{xd.district}", align: center, bold: true}
+  - columns:
+      - width: 223.2
+        blocks:
+          - box:
+              - each: caption.parties
+                blocks:
+                  - {text: "{names}"}
+                  - {text: "{designation}", above: 13.8, left: 108}
+                between:
+                  - {text: "v.", above: 13.8, below: 13.8}
+            stroke: {right: 0.75, bottom: 0.75}
+            inset: {right: 12, bottom: 10}
+      - valign: center
+        blocks:
+          - {text: "{case_label|Civil Action No.} {case_number}", left: 10.8}
+    gutter: 18
+    above: 24
+  - {text: "{brief_title}", align: center, bold: true, upper: true, underline: true, left: 36, right: 36, above: 24, below: 13.8}
