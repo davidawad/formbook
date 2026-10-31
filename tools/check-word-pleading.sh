@@ -6,24 +6,27 @@ ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 COURT="$ROOT/courts/ninth-circuit/california/federal/northern-district"
 types=(answer complaint motion-brief proposed-order)
 
-if [[ "$(uname -s)" != Darwin ]] || ! command -v osascript >/dev/null 2>&1; then
+if [[ "$(uname -s)" != Darwin ]] || ! command -v osascript > /dev/null 2>&1; then
   printf 'FAIL: check-word-pleading.sh requires macOS and osascript (Microsoft Word is required for export).\n' >&2
   exit 2
 fi
-if ! /usr/bin/osascript -e 'id of application "Microsoft Word"' >/dev/null 2>&1; then
+if ! /usr/bin/osascript -e 'id of application "Microsoft Word"' > /dev/null 2>&1; then
   printf 'FAIL: Microsoft Word is not installed or is not available to AppleScript.\n' >&2
   exit 2
 fi
 bash "$ROOT/tools/check-vml-textbox.sh"
 for tool in pdftotext awk; do
-  command -v "$tool" >/dev/null 2>&1 || { printf 'FAIL: missing required tool: %s\n' "$tool" >&2; exit 2; }
+  command -v "$tool" > /dev/null 2>&1 || {
+    printf 'FAIL: missing required tool: %s\n' "$tool" >&2
+    exit 2
+  }
 done
 
 TMP=$(mktemp -d "${TMPDIR:-/tmp}/word-pleading.XXXXXX")
 WOUT=$(mktemp -d "$HOME/Library/Containers/com.microsoft.Word/Data/tmp/formbook-word.XXXXXX")
 trap 'rm -rf "$TMP" "$WOUT"' EXIT
 APPLESCRIPT="$TMP/export.applescript"
-cat >"$APPLESCRIPT" <<'APPLESCRIPT'
+cat > "$APPLESCRIPT" << 'APPLESCRIPT'
 on run argv
   set docxPath to item 1 of argv
   set pdfPath to item 2 of argv
@@ -41,13 +44,15 @@ end run
 APPLESCRIPT
 
 # TSV line records have level=5; x<72 pt is the line-number gutter, while footer lines
-# start at or below the declared bottom margin. Nearby glyph tops on one row collapse to one text line.
+# start at or below the declared bottom margin. Lines are compared by glyph bottom (top + height): Word and
+# Typst embed the same face with different ascent metrics, so glyph tops differ by ~2.4 pt on identical layouts.
+# Nearby glyph bottoms on one row collapse to one text line.
 baselines() {
   local pdf=$1 bottom=$2 target=$3
   local tsv="$target.tsv"
   pdftotext -f 1 -l 1 -tsv "$pdf" "$tsv"
   awk -F '\t' -v bottom="$bottom" '
-    $1 == 5 && $2 == 1 && $7 + 0 >= 72 && $8 + 0 < bottom { y[++n] = $8 + 0 }
+    $1 == 5 && $2 == 1 && $7 + 0 >= 72 && $8 + 0 < bottom { y[++n] = $8 + $10 }
     END {
       for (i = 1; i <= n; i++) for (j = i + 1; j <= n; j++)
         if (y[j] < y[i]) { t = y[i]; y[i] = y[j]; y[j] = t }
@@ -57,7 +62,7 @@ baselines() {
         lines++
       }
     }
-  ' "$tsv" >"$target"
+  ' "$tsv" > "$target"
 }
 
 check_numbers() {
@@ -112,7 +117,10 @@ compare_baselines() {
 count=0 fails=0
 for type in "${types[@]}"; do
   dir="$COURT/$type"
-  [[ -d "$dir" ]] || { printf 'FAIL: missing pleading folder %s\n' "$dir" >&2; exit 1; }
+  [[ -d "$dir" ]] || {
+    printf 'FAIL: missing pleading folder %s\n' "$dir" >&2
+    exit 1
+  }
   expected=$(awk '/^[[:space:]]*pleading_lines:/ { print $2; exit }' "$dir/eval.yaml")
   if [[ ! "$expected" =~ ^[0-9]+$ ]]; then
     printf 'FAIL %s: eval.yaml does not declare params.pleading_lines\n' "$type" >&2
@@ -139,16 +147,28 @@ for type in "${types[@]}"; do
     word_docx="$WOUT/${type}-$(basename "$docx")"
     cp "$docx" "$word_docx"
     /usr/bin/osascript "$APPLESCRIPT" "$word_docx" "$word_pdf"
-    [[ -s "$word_pdf" ]] || { printf 'FAIL %s: Word did not export a PDF\n' "$context" >&2; exit 1; }
+    [[ -s "$word_pdf" ]] || {
+      printf 'FAIL %s: Word did not export a PDF\n' "$context" >&2
+      exit 1
+    }
     word_lines="$TMP/word-lines"
     typst_lines="$TMP/typst-lines"
     baselines "$word_pdf" "$bottom_edge" "$word_lines"
     baselines "$typst" "$bottom_edge" "$typst_lines"
-    check_numbers "$word_pdf" "$expected" "$bottom_edge" "$context Word" || { fails=$((fails + 1)); continue; }
-    compare_baselines "$word_lines" "$typst_lines" "$context" || { fails=$((fails + 1)); continue; }
+    check_numbers "$word_pdf" "$expected" "$bottom_edge" "$context Word" || {
+      fails=$((fails + 1))
+      continue
+    }
+    compare_baselines "$word_lines" "$typst_lines" "$context" || {
+      fails=$((fails + 1))
+      continue
+    }
     count=$((count + 1))
     printf 'PASS %s (Word page-1 numbers, line count/offset, bottom fit)\n' "$context"
   done
 done
-((fails == 0)) || { printf 'WORD PLEADING GATE FAILED (%d of %d DOCX outputs)\n' "$fails" "$((count + fails))" >&2; exit 1; }
+((fails == 0)) || {
+  printf 'WORD PLEADING GATE FAILED (%d of %d DOCX outputs)\n' "$fails" "$((count + fails))" >&2
+  exit 1
+}
 printf 'WORD PLEADING GATE OK (%d DOCX outputs)\n' "$count"
