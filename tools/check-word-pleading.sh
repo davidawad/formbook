@@ -20,14 +20,20 @@ for tool in pdftotext awk; do
 done
 
 TMP=$(mktemp -d "${TMPDIR:-/tmp}/word-pleading.XXXXXX")
-trap 'rm -rf "$TMP"' EXIT
+WOUT=$(mktemp -d "$HOME/Library/Containers/com.microsoft.Word/Data/tmp/formbook-word.XXXXXX")
+trap 'rm -rf "$TMP" "$WOUT"' EXIT
 APPLESCRIPT="$TMP/export.applescript"
 cat >"$APPLESCRIPT" <<'APPLESCRIPT'
 on run argv
   set docxPath to item 1 of argv
   set pdfPath to item 2 of argv
   tell application "Microsoft Word"
-    set doc to open POSIX file docxPath
+    open POSIX file docxPath
+    repeat 100 times
+      if (count of documents) > 0 then exit repeat
+      delay 0.2
+    end repeat
+    set doc to active document
     save as doc file name pdfPath file format format PDF
     close doc saving no
   end tell
@@ -37,7 +43,8 @@ APPLESCRIPT
 # TSV line records have level=5; x<72 pt is the line-number gutter, while footer lines
 # start at or below the declared bottom margin. Nearby glyph tops on one row collapse to one text line.
 baselines() {
-  local pdf=$1 bottom=$2 target=$3 tsv="$target.tsv"
+  local pdf=$1 bottom=$2 target=$3
+  local tsv="$target.tsv"
   pdftotext -f 1 -l 1 -tsv "$pdf" "$tsv"
   awk -F '\t' -v bottom="$bottom" '
     $1 == 5 && $2 == 1 && $7 + 0 >= 72 && $8 + 0 < bottom { y[++n] = $8 + 0 }
@@ -102,7 +109,7 @@ compare_baselines() {
   ' "$word" "$typst"
 }
 
-count=0
+count=0 fails=0
 for type in "${types[@]}"; do
   dir="$COURT/$type"
   [[ -d "$dir" ]] || { printf 'FAIL: missing pleading folder %s\n' "$dir" >&2; exit 1; }
@@ -127,18 +134,21 @@ for type in "${types[@]}"; do
       printf 'FAIL %s: missing paired Typst output for %s\n' "$type" "$(basename "$docx")" >&2
       exit 1
     fi
-    word_pdf="$TMP/${type}-$(basename "$stem").pdf"
+    word_pdf="$WOUT/${type}-$(basename "$stem").pdf"
     context="$type/$(basename "$stem")"
-    /usr/bin/osascript "$APPLESCRIPT" "$docx" "$word_pdf"
+    word_docx="$WOUT/${type}-$(basename "$docx")"
+    cp "$docx" "$word_docx"
+    /usr/bin/osascript "$APPLESCRIPT" "$word_docx" "$word_pdf"
     [[ -s "$word_pdf" ]] || { printf 'FAIL %s: Word did not export a PDF\n' "$context" >&2; exit 1; }
     word_lines="$TMP/word-lines"
     typst_lines="$TMP/typst-lines"
     baselines "$word_pdf" "$bottom_edge" "$word_lines"
     baselines "$typst" "$bottom_edge" "$typst_lines"
-    check_numbers "$word_pdf" "$expected" "$bottom_edge" "$context Word"
-    compare_baselines "$word_lines" "$typst_lines" "$context"
+    check_numbers "$word_pdf" "$expected" "$bottom_edge" "$context Word" || { fails=$((fails + 1)); continue; }
+    compare_baselines "$word_lines" "$typst_lines" "$context" || { fails=$((fails + 1)); continue; }
     count=$((count + 1))
     printf 'PASS %s (Word page-1 numbers, line count/offset, bottom fit)\n' "$context"
   done
 done
+((fails == 0)) || { printf 'WORD PLEADING GATE FAILED (%d of %d DOCX outputs)\n' "$fails" "$((count + fails))" >&2; exit 1; }
 printf 'WORD PLEADING GATE OK (%d DOCX outputs)\n' "$count"
