@@ -137,6 +137,7 @@ local PAGE_FIELD = '<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrTe
   '<w:r><w:fldChar w:fldCharType="end"/></w:r>'
 
 local VML = 'xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"'
+local VML_TEXTBOX_TYPE = '<v:shapetype id="_x0000_t202" coordsize="21600,21600" o:spt="202" path="m,l,21600r21600,l21600,xe"/>'
 -- LibreOffice keeps a VML text box's inset whatever its `inset` says: the box moves by the difference, so that its
 -- lines are typst's (the numbers end at number-col, each on its body line's baseline; measured in the PDF).
 local BOX_DX, BOX_DY = 4, -4.25
@@ -160,8 +161,8 @@ local function furniture()
       ";z-index:-251658" .. (700 + id) .. '"/></w:pict></w:r>'
   end
   return '<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/></w:pPr><w:r><w:pict ' ..
-    VML .. '>' ..
-    '<v:shape id="CandLineNumbers" filled="f" stroked="f" style="' .. PAGE_POS .. ';margin-left:' .. BOX_DX .. 'pt;margin-top:' ..
+    VML .. '>' .. VML_TEXTBOX_TYPE ..
+    '<v:shape id="CandLineNumbers" type="#_x0000_t202" filled="f" stroked="f" style="' .. PAGE_POS .. ';margin-left:' .. BOX_DX .. 'pt;margin-top:' ..
     (TOP / 20 + BOX_DY) .. 'pt;width:' .. (NUMBER_COL / 20) .. 'pt;height:' .. (LINES * BODY / 20 + BOX_PAD) .. 'pt;z-index:-251658752">' ..
     '<v:textbox inset="0pt,0pt,0pt,0pt"><w:txbxContent>' .. table.concat(nums) .. '</w:txbxContent></v:textbox></v:shape>' ..
     '</w:pict></w:r>' .. rule(LEFT / 1440 - 0.2, 1) .. rule(LEFT / 1440 - 0.16, 2) .. rule(8.5 - RIGHT / 1440 + 0.1, 3) ..
