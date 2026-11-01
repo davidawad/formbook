@@ -65,6 +65,19 @@ fn pleading_lines(lines: &[&str]) -> usize {
 /// The normalized text of each page of `pdftotext` output (pages split at form feeds), without its page-number line
 /// and its pleading line numbers.
 pub fn page_texts(text: &str) -> Vec<String> {
+    texts(text, false)
+}
+
+/// `page_texts` of `pdftotext -raw` output (the PDF's content order, docxpass.rs lookup_or_raw): LibreOffice writes a
+/// page's footer before its body, so the page-number line is the page's first, not its last (fb-tfj22: left in, the
+/// label starts the page's text and a needle over the page end before it is found in neither half). The raw text is
+/// the one that holds a justified paragraph in order when the wide spaces of its lines make pdftotext's reading order
+/// read them as a table's columns.
+pub fn raw_page_texts(text: &str) -> Vec<String> {
+    texts(text, true)
+}
+
+fn texts(text: &str, raw: bool) -> Vec<String> {
     let mut pages: Vec<&str> = text.split('\u{c}').collect();
     if pages.last().is_some_and(|p| p.trim().is_empty()) {
         pages.pop();
@@ -78,6 +91,8 @@ pub fn page_texts(text: &str) -> Vec<String> {
             }
             if lines.last().is_some_and(|l| is_page_label(l)) {
                 lines.pop();
+            } else if raw && lines.first().is_some_and(|l| is_page_label(l)) {
+                lines.remove(0);
             }
             let n = pleading_lines(&lines);
             lines.retain(|l| !l.trim().parse::<usize>().is_ok_and(|v| v >= 1 && v <= n));
@@ -587,6 +602,14 @@ mod tests {
         assert_eq!(p.len(), 5);
         assert_eq!(p[1], "tableofcontentspage");
         assert_eq!(p[4], "addendumtableofcontents");
+    }
+
+    #[test]
+    fn drops_a_raw_page_s_label_where_the_content_order_puts_it() {
+        // pdftotext -raw: LibreOffice's footer first; the reading order: last (a first line of digits is text there)
+        let raw = "Add-3\nStatute 5\n\u{c}4\nSee Doe.\n\u{c}iii\nCONTENTS\nii\n\u{c}";
+        assert_eq!(raw_page_texts(raw), ["statute5", "seedoe", "iiicontents"]);
+        assert_eq!(page_texts("4\nSee Doe.\n\u{c}"), ["4seedoe"]);
     }
 
     #[test]

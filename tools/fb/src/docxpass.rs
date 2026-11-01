@@ -280,7 +280,7 @@ fn pages_of(docx: &Path, n: usize, work: &Path) -> Res<String> {
         if !o.status.success() {
             return Err(fail(1, "fb render: pdftotext -raw failed"));
         }
-        Ok(crate::docxpages::page_texts(&String::from_utf8_lossy(
+        Ok(crate::docxpages::raw_page_texts(&String::from_utf8_lossy(
             &o.stdout,
         )))
     })
@@ -372,6 +372,33 @@ mod tests {
         assert_eq!(got, "h1\t2\t-\n");
         // in neither: the reading order's error
         assert!(lookup_or_raw(needles, &flow, &[], &none, || Ok(flow.clone())).is_err());
+    }
+
+    #[test]
+    fn a_justified_paragraph_read_as_columns_is_found_in_the_content_order_over_a_page_end() {
+        // (fb-tfj22) a justified paragraph's lines with the same wide spaces: pdftotext's reading order reads them as
+        // two columns (q, s before p, r); its content order holds them in order, the page's footer ("Add-3") first
+        let flow = crate::docxpages::page_texts(
+            "Statute 5\nRegulations\nqqqq05\nssss05\n\npppp05\nrrrr05\n\nAdd-3\n\u{c}\
+             tttt05 end.\nStatute 6\nThe text.\n\nAdd-4\n\u{c}",
+        );
+        let raw = "Add-3\nStatute 5\nRegulations pppp05\nqqqq05 rrrr05\nssss05\n\u{c}\
+                   Add-4\ntttt05 end.\nStatute 6\nThe text.\n\u{c}";
+        let needles = "A:1\tB\tstatute5regulations\tstatute5\n\
+            p1\tB\tregulationspppp05qqqq05rrrr05ssss05tttt05end\tregulationspppp05qqqq05rrrr05ssss05tttt05end\n\
+            A:2\tB\tstatute6thetext\tstatute6\n";
+        let none = std::collections::HashMap::new();
+        let got = lookup_or_raw(needles, &flow, &[], &none, || {
+            Ok(crate::docxpages::raw_page_texts(raw))
+        })
+        .unwrap();
+        assert_eq!(got, "A:1\t1\t-\np1\t1\t-\nA:2\t2\t-\n");
+        // the raw text read as the reading order's (its footer kept): the needle over the page end is not found
+        let err = lookup_or_raw(needles, &flow, &[], &none, || {
+            Ok(crate::docxpages::page_texts(raw))
+        })
+        .unwrap_err();
+        assert!(format!("{err:?}").contains("p1"), "{err:?}");
     }
 
     #[test]
