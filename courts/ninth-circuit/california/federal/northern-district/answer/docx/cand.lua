@@ -24,9 +24,36 @@ local NUMBER_COL = 1440                       -- typst number-col: the line numb
 local FOOTER_SZ = 20                          -- typst footer-size 10 pt
 local FOOTER_TOP, FOOTER_GAP = 120, 80        -- typst footer-top 6 pt, footer-gap 4 pt
 local CAP_LEFT, CAP_INSET, CAP_PAD = 4608, 200, 160 -- typst caption-left 3.2 in, caption-inset 10 pt, caption-pad 8 pt
+local CAP_END = 172                          -- the party box below its last line: padding, rule and a 1 pt paragraph
 local CAP_GUTTER = 432                        -- typst caption-gutter 0.3 in
 local SIG_LEFT = 4032                         -- typst signature-left 2.8 in
 local COUNSEL_LINES = 7                       -- typst counsel-lines: the court title on line 8
+
+-- Advance widths (1000 units to the em) of Times New Roman for U+0020..U+007E (its metric twin, Liberation Serif,
+-- measured with typst), to estimate where the caption's text wraps: Word and typst wrap it, the filter cannot ask
+-- either. Bold runs are taken 5% wider.
+local ADV = { 250,333,408,500,500,833,778,180,333,333,500,564,250,333,250,278,500,500,500,500,500,500,500,500,500,500,
+  278,278,564,564,564,444,921,722,667,667,722,611,556,722,722,333,389,722,611,889,722,722,556,722,667,556,611,722,
+  722,944,722,722,611,333,278,333,469,500,333,444,500,444,500,444,333,500,500,278,278,500,278,778,500,500,500,500,
+  333,389,278,500,500,722,500,500,444,480,200,480,541 }
+local TYPE_PT = 12
+
+-- The lines a paragraph of `text` takes in a column `avail` twips wide (greedy wrap at spaces, as both engines do).
+local function wrapped_lines(text, avail, bold)
+  local scale = TYPE_PT * (bold and 1.05 or 1) * 20 / 1000
+  local function width(w)
+    local n = 0
+    for _, c in utf8.codes(w) do n = n + (ADV[c - 31] or 444) end
+    return n * scale
+  end
+  local lines, cur, space = 1, 0, 250 * scale
+  for w in text:gmatch("%S+") do
+    local ww = width(w)
+    if cur > 0 and cur + space + ww > avail then lines, cur = lines + 1, ww
+    else cur = cur > 0 and cur + space + ww or ww end
+  end
+  return lines
+end
 
 local function plain(m)
   if m == nil then return "" end
@@ -158,6 +185,19 @@ local function cover(meta, out)
     for _, n in ipairs(party.names) do left[#left + 1] = p(xe.inl(n)) end
     left[#left + 1] = p(xe.inl(party.designation))
   end
+  local left_lines = 0
+  for k, party in ipairs(parties) do
+    if k > 1 then left_lines = left_lines + 1 end
+    for _, n in ipairs(party.names) do left_lines = left_lines + wrapped_lines(plain(n), CAP_LEFT - CAP_INSET) end
+    left_lines = left_lines + wrapped_lines(plain(party.designation), CAP_LEFT - CAP_INSET)
+  end
+  local right_w = TEXTW - CAP_LEFT - CAP_GUTTER
+  local right_lines = wrapped_lines("Case No. " .. plain(meta.case_number), right_w)
+  local function gap(text, bold, first_gap) right_lines = right_lines + (first_gap and 1 or 0) + wrapped_lines(plain(text), right_w, bold) end
+  gap(meta.brief_title, true, true)
+  for i, l in ipairs(meta.caption_lines or {}) do gap(l, false, i == 1) end
+  if meta.legend then gap(pandoc.text.upper(plain(meta.legend)), true, true) end
+  if meta.jury_demand then gap("DEMAND FOR JURY TRIAL", true, true) end
   local right = { p(xe.runs("Case No. ") .. xe.inl(meta.case_number)) }
   local function bold(x) right[#right + 1] = p(x, { before = SINGLE }) end
   bold(xe.inl(meta.brief_title, { b = true }))
@@ -175,6 +215,9 @@ local function cover(meta, out)
     { body = { box, p("", { line = 20 }) } },
     { pr = '<w:tcMar><w:left w:w="' .. CAP_GUTTER .. '" w:type="dxa"/></w:tcMar>', body = right },
   })
+  -- the caption's height in twips, from the top of the table: the taller column (a line of a party column is
+  -- SINGLE; CAP_END is its rule, its padding and the 1 pt paragraph below the box, measured in Word and LibreOffice)
+  return math.max(right_lines * SINGLE, left_lines * SINGLE + CAP_END)
 end
 
 -- ---------------------------------------------------------------------------
@@ -270,9 +313,12 @@ function Pandoc(doc)
   write_file("FORMBOOK_FINAL", sect_pr())
   doc.blocks = doc.blocks:walk({ Str = breaks }):walk({ Inlines = bind_double_signs })
   local out = {}
-  cover(meta, out)
-  -- an answer's body starts on the first page, one numbered line below the caption (typst v(pitch))
-  out[#out + 1] = p("", { line = BODY })
+  local caption_h = cover(meta, out)
+  -- an answer's body starts on the first page on the numbered line after the one below the caption, as typst
+  -- snaps it (v(pitch * 2 - past), past the caption's end beyond the last numbered line's top): the caption starts
+  -- DROP below a numbered line, so it ends (DROP + its height) past one
+  -- half a point short (10 twips): a line that ends exactly on the bottom margin must still fit the page
+  out[#out + 1] = p("", { line = 2 * BODY - (DROP + caption_h) % BODY - 10 })
   local brk = false
   if meta.lead_in then
     out[#out + 1] = p(xe.inl(meta.lead_in), { line = BODY, first = INDENT })
