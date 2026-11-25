@@ -12,7 +12,7 @@ Courts under `courts/ninth-circuit/california/state` (11).
 | [California Court of Appeal, Sixth Appellate District](court-of-appeal-sixth-district) | `calctapp6d` | up for review | 7/7 | 2/2 | 0/2 | 29 |
 | [California Court of Appeal, Third Appellate District](court-of-appeal-third-district) | `calctapp3d` | up for review | 2/2 | 2/2 | 0/1 | 29 |
 | [California Courts of Appeal](courts-of-appeal) | `calctapp` | up for review | 5/5 | 1/1 | 3/4 | 29 |
-| [California Superior Court](superior-court) | `calsuperct` | up for review | 2/2 | — | 2/2 | 14 |
+| [California Superior Court](superior-court) | `calsuperct` | in progress | 2/3 | — | 2/3 | 14 |
 | [California Superior Court, San Diego County](superior-court/san-diego-county) | `calsuperct-sandiego` | up for review | 2/2 | — | 2/2 | 14 |
 | [California Superior Court, Appellate Division](superior-court-appellate-division) | `calappdeptsuper` | in progress | — | — | — | 14 |
 | [California Supreme Court](supreme-court) | `cal` | up for review | 5/5 | — | 2/2 | 29 |

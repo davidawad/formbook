@@ -616,7 +616,7 @@ Every court template follows the same eval loop, defined in [docs/EVAL-LOOP.md](
 | [California Court of Appeal, Sixth Appellate District](courts/ninth-circuit/california/state/court-of-appeal-sixth-district) | `calctapp6d` | up for review | 7/7 | 2/2 | 0/2 | 29 |
 | [California Court of Appeal, Third Appellate District](courts/ninth-circuit/california/state/court-of-appeal-third-district) | `calctapp3d` | up for review | 2/2 | 2/2 | 0/1 | 29 |
 | [California Courts of Appeal](courts/ninth-circuit/california/state/courts-of-appeal) | `calctapp` | up for review | 5/5 | 1/1 | 3/4 | 29 |
-| [California Superior Court](courts/ninth-circuit/california/state/superior-court) | `calsuperct` | up for review | 2/2 | — | 2/2 | 14 |
+| [California Superior Court](courts/ninth-circuit/california/state/superior-court) | `calsuperct` | in progress | 2/3 | — | 2/3 | 14 |
 | [California Superior Court, San Diego County](courts/ninth-circuit/california/state/superior-court/san-diego-county) | `calsuperct-sandiego` | up for review | 2/2 | — | 2/2 | 14 |
 | [California Superior Court, Appellate Division](courts/ninth-circuit/california/state/superior-court-appellate-division) | `calappdeptsuper` | in progress | — | — | — | 14 |
 | [California Supreme Court](courts/ninth-circuit/california/state/supreme-court) | `cal` | up for review | 5/5 | — | 2/2 | 29 |
@@ -864,12 +864,12 @@ Regenerate with `tools/tracker.sh` (the manifest and completion logic are the Ru
 | Sixth Circuit | 29 | 0 | 29 | 0 | 0 | 0.0% | 100.0% | 29 | 18 | 23 | 18.6% |
 | Seventh Circuit | 21 | 0 | 21 | 0 | 0 | 0.0% | 100.0% | 21 | 11 | 15 | 18.2% |
 | Eighth Circuit | 38 | 0 | 38 | 0 | 0 | 0.0% | 100.0% | 38 | 27 | 32 | 20.3% |
-| Ninth Circuit | 61 | 0 | 59 | 2 | 0 | 0.0% | 96.7% | 58 | 37 | 43 | 21.0% |
+| Ninth Circuit | 61 | 0 | 58 | 3 | 0 | 0.0% | 95.0% | 57 | 37 | 42 | 21.0% |
 | Tenth Circuit | 31 | 0 | 31 | 0 | 0 | 0.0% | 100.0% | 31 | 20 | 23 | 19.3% |
 | Eleventh Circuit | 32 | 0 | 32 | 0 | 0 | 0.0% | 100.0% | 32 | 18 | 23 | 20.0% |
 | D.C. Circuit | 4 | 0 | 4 | 0 | 0 | 0.0% | 100.0% | 4 | 3 | 4 | 17.7% |
 | Fifth Circuit | 1 | 0 | 1 | 0 | 0 | 0.0% | 100.0% | 1 | 0 | 0 | 14.0% |
-| **Total** | 377 | 0 | 354 | 23 | 0 | 0.0% | 93.8% | 353 | 213 | 275 | 19.0% |
+| **Total** | 377 | 0 | 353 | 24 | 0 | 0.0% | 93.6% | 352 | 213 | 274 | 19.0% |
 
 Typst per doc type (a doc type is complete with template, sample, render and exemplar; it is up for review when its typst eval passes; per-doc-type rows in STATUS.md):
 
@@ -889,10 +889,10 @@ Typst per doc type (a doc type is complete with template, sample, render and exe
 | Sixth Circuit | 100 | 100 | 100 | 100 | 96 | 96 | 96.0% | 100 |
 | Seventh Circuit | 65 | 65 | 65 | 65 | 65 | 65 | 100.0% | 65 |
 | Eighth Circuit | 134 | 134 | 134 | 134 | 133 | 133 | 99.2% | 134 |
-| Ninth Circuit | 216 | 216 | 215 | 215 | 212 | 212 | 98.1% | 215 |
+| Ninth Circuit | 217 | 217 | 216 | 216 | 212 | 212 | 97.6% | 215 |
 | Tenth Circuit | 107 | 107 | 107 | 107 | 104 | 104 | 97.1% | 107 |
 | Eleventh Circuit | 130 | 130 | 130 | 130 | 129 | 129 | 99.2% | 130 |
 | D.C. Circuit | 14 | 14 | 14 | 14 | 14 | 14 | 100.0% | 14 |
 | Fifth Circuit | 6 | 6 | 6 | 6 | 6 | 6 | 100.0% | 6 |
-| **Total** | 1201 | 1201 | 1200 | 1200 | 1185 | 1185 | 98.6% | 1200 |
+| **Total** | 1202 | 1202 | 1201 | 1201 | 1185 | 1185 | 98.5% | 1200 |
 <!-- tracker:end -->
