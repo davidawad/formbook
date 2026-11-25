@@ -333,7 +333,7 @@ local function chunks_of(body)
 end
 
 local SRC = assert(read_file(PANDOC_STATE.input_files[1])):gsub("\r", "")
-local BODY_SRC = SRC:gsub("^%-%-%-\n.-\n%-%-%-[ \t]*\n", "", 1)
+local BODY_SRC = SRC:gsub("^%-%-%-\n.-\n%-%-%-[ \t]*\n", "", 1):gsub("<!%-%-(.-)%-%->", "")
 local NOTES = {}
 for id, text in ("\n" .. BODY_SRC):gmatch("\n%[%^([^%]]+)%]:[ \t]*([^\n]*)") do NOTES[id] = text end
 
@@ -586,6 +586,10 @@ function Pandoc(doc)
   load_pages()
   local notice, memo = split_body()
   local out = {}
+  -- This is the first body needle: citation links and headings in the notice must not move the search cursor past
+  -- the attorney block before its page is resolved.
+  local attorneys = list(RAW.attorney)
+  needle("S:1", tostring(attorneys[1] or ""), tostring(attorneys[2] or ""))
   local at = attorney(out)
   local pad = caption(out, at)
   out[#out + 1] = p("", { line = pad })
@@ -604,8 +608,6 @@ function Pandoc(doc)
   local mine = {}
   for i = memo_needles_at + 1, #needles do mine[#mine + 1] = needles[i] end
   for i = #needles, memo_needles_at + 1, -1 do needles[i] = nil end
-  local attorneys = list(RAW.attorney)
-  needle("S:1", tostring(attorneys[1] or ""), tostring(attorneys[2] or ""))
   needle("T:toa", toa_needle(), "")
   needle("T:memo", MEMO, memo_first:match("^#+[ \t]+(.*)$") or stringify(md(memo_first)):sub(1, 30))
   for _, n in ipairs(mine) do needles[#needles + 1] = n end

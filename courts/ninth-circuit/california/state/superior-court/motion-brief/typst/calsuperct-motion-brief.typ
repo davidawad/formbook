@@ -450,12 +450,17 @@
   (parts.at(0), parts.at(1))
 }
 
+// Drafting markers (for example, a proposed-order section included in a combined source) are comments, not filing
+// text. cmarker may retain HTML comments as raw blocks, so remove them before parsing the body.
+#let drop-comments(body) = body.replace(regex("(?s)<!--.*?-->"), "")
+
 #let calsuperct-motion-brief(meta, body) = {
   for k in ("footer_title", "attorney", "court", "caption", "signature") { let _ = need(meta, k) }
   let notes = (:)
   for m in body.matches(regex("(?m)^\\[\\^([^\\]]+)\\]:[ \\t]*(.*)$")) {
     notes.insert(m.captures.at(0), m.captures.at(1))
   }
+  let body = drop-comments(body)
   let (notice, memo) = split-body(body)
   let authorities = meta.at("authorities", default: (:))
 

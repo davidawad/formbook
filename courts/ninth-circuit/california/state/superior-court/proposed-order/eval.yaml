@@ -1,0 +1,5 @@
+# Pleading paper: 28 numbered lines of 24 pt from 1 in below the top, leaving 48 pt for the footer.
+params:
+  margin_bottom_pt: 48
+  cross_engine: gate
+  pleading_lines: 28
