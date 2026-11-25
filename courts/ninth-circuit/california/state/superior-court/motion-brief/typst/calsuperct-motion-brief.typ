@@ -316,9 +316,9 @@
   if note {
     set text(costs: (widow: 0%, orphan: 0%))
     note-guard()
-    par(first-line-indent: (amount: para-indent, all: true), c)
+    par(first-line-indent: (amount: para-indent, all: true), justify: true, c)
   } else {
-    block(width: 100%, par(first-line-indent: (amount: para-indent, all: true), c))
+    block(width: 100%, par(first-line-indent: (amount: para-indent, all: true), justify: true, c))
   }
 }
 

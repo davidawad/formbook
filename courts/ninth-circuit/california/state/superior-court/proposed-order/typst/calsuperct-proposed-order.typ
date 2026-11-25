@@ -460,7 +460,6 @@
     notes.insert(m.captures.at(0), m.captures.at(1))
   }
   let body = drop-comments(body)
-  let body = drop-comments(body)
 
   set page(
     width: page-w,

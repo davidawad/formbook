@@ -411,7 +411,7 @@ local function bodypar(inl, keep)
     local c = unlink(inl):walk({ Inlines = function(l) return xe.inlines(l) end })
     return pandoc.Div({ pandoc.Para(c) }, { ["custom-style"] = "Body Text Note" })
   end
-  return xe.raw(p(xe.inl(inl), { line = BODY, first = INDENT, keep = keep }))
+  return xe.raw(p(xe.inl(inl), { line = BODY, first = INDENT, keep = keep, jc = "both" }))
 end
 
 -- Chunks as Word paragraphs; the last one kept with the signature block after it; `heads` collects the headings
