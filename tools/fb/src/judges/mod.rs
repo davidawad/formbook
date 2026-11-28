@@ -520,7 +520,8 @@ fn sync(args: &[String]) -> Res<ExitCode> {
     let court = court_dir(&root, alias)?;
     let cache = root.join("out/judges-cache");
     // a court replaces an order at the same URL: every sync reads the documents afresh unless told otherwise
-    if !args.iter().any(|a| a == "--cached") && cache.exists() {
+    let verifying = !args.iter().any(|a| a == "--no-verify");
+    if verifying && !args.iter().any(|a| a == "--cached") && cache.exists() {
         std::fs::remove_dir_all(&cache)
             .map_err(|e| fail(2, format!("fb judges sync: {}: {e}", cache.display())))?;
     }
@@ -578,7 +579,7 @@ fn sync(args: &[String]) -> Res<ExitCode> {
         let mut docs = Docs {
             cache: cache.clone(),
             hosts: &src.primary_hosts,
-            on: !args.iter().any(|a| a == "--no-verify"),
+            on: verifying,
             loaded: BTreeMap::new(),
         };
         let p = profile_of(j, alias, &src, court_slug, &mut docs);
