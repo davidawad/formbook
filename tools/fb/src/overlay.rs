@@ -33,7 +33,7 @@ fn score(a: &BTreeSet<String>, b: &BTreeSet<String>) -> u32 {
 }
 
 /// The reference page (1-based, 0 = none) with the highest score; the first wins ties.
-fn best_page(ours: &BTreeSet<String>, refs: &[BTreeSet<String>]) -> (u32, usize) {
+pub(crate) fn best_page(ours: &BTreeSet<String>, refs: &[BTreeSet<String>]) -> (u32, usize) {
     refs.iter().enumerate().fold((0, 0), |(best, at), (j, r)| {
         let s = score(ours, r);
         if s > best {
@@ -63,7 +63,7 @@ fn page_words(pdf: &Path, page: usize) -> Res<BTreeSet<String>> {
     Ok(word_set(&String::from_utf8_lossy(&o.stdout)))
 }
 
-fn all_words(pdf: &Path) -> Res<Vec<BTreeSet<String>>> {
+pub(crate) fn all_words(pdf: &Path) -> Res<Vec<BTreeSet<String>>> {
     (1..=pdf_pages(pdf) as usize)
         .map(|n| page_words(pdf, n))
         .collect()

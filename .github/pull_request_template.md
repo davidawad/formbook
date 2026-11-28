@@ -10,6 +10,10 @@ Paste the output of `just contribute verify <id>` (the RESULT line must be PASS)
 
 For each exemplar: filer, case, docket number, source URL (also in `usage/SOURCE.md`).
 
+## Previews
+
+The `pr-preview` workflow comments page images of every committed `OUTPUT-<id>.typst.pdf` this PR changes: before | after | red = before only, green = after only | the FILED-EXAMPLE page. Locally: `just preview` (writes `.overlay/preview/`). Nothing to paste here.
+
 ## Open tier-2 findings and BLOCKED items
 
 By page, from your overlay review. Write "none" if none.
