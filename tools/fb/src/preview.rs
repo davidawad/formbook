@@ -81,7 +81,7 @@ fn output_of(path: &str, engine: &str) -> Option<(String, String)> {
     (path.starts_with("courts/") && !id.is_empty()).then(|| (doc.to_string(), id.to_string()))
 }
 
-fn git(root: &Path, args: &[&str]) -> Res<Vec<u8>> {
+pub(crate) fn git(root: &Path, args: &[&str]) -> Res<Vec<u8>> {
     let o = capture(Command::new("git").arg("-C").arg(root).args(args))?;
     o.status.success().then_some(o.stdout).ok_or_else(|| {
         fail(
@@ -365,7 +365,7 @@ fn preview_one(
 }
 
 /// Doc folders whose template sources (`<doc>/typst|latex|docx/...`) the diff touches.
-fn template_docs(changed: &str) -> BTreeSet<String> {
+pub(crate) fn template_docs(changed: &str) -> BTreeSet<String> {
     changed
         .lines()
         .filter(|p| p.starts_with("courts/"))
@@ -378,7 +378,7 @@ fn template_docs(changed: &str) -> BTreeSet<String> {
 }
 
 /// The court a doc folder belongs to, by the longest `path` prefix in data/index.json, else the folder itself.
-fn court_of(index: &Value, doc: &str) -> String {
+pub(crate) fn court_of(index: &Value, doc: &str) -> String {
     index["courts"]
         .as_object()
         .into_iter()
