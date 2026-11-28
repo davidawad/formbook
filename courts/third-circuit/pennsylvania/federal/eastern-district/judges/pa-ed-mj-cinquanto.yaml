@@ -13,6 +13,20 @@ source:
   last_verified: 2026-09-04
   court_page: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/cgcpol.pdf
 facts:
+- id: pages.memorandum
+  value: 30
+  quote: Memoranda must not exceed 30 pages in length (excluding table of contents and appendices), must be double spaced, and must use 12-point font.
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/cgcpol.pdf#page=6
+  verified: true
+  pdf_sha256: 4b69e589015de313d2f92ee34e0c2d0a7b946decd0749ac8340ba04a1dc15016
+- id: pages.reply
+  value: 15
+  quote: Any reply brief is limited to the issues raised in the response, may not raise theories or issues not discussed in the original motion, and shall not exceed fifteen pages absent leave of Court.
+  field: page_limits_replies
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/cgcpol.pdf#page=16
+  verified: true
+  pdf_sha256: 4b69e589015de313d2f92ee34e0c2d0a7b946decd0749ac8340ba04a1dc15016
 - id: body.exact_pt
   value: 12
   quote: Memoranda must not exceed 30 pages in length (excluding table of contents and appendices), must be double spaced, and must use 12-point font.
@@ -34,6 +48,3 @@ checklist:
   field: continuances_calendar_conflicts
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/cgcpol.pdf#page=1
   text: Parties are expected to adhere to all deadlines that the Court has implemented by scheduling order or that are otherwise established by rule or statute absent a compelling reason to justify a change. If a party believes a compelling reason exists for an extension or a continuance, Counsel shall request a new deadline or date in advance of the originally scheduled date via email (to Chambers_of_Magistrate_Judge_ Goldner_Cinquanto@paed.uscourts.gov). The request shall describe the basis for the request in detail, state whether all other parties agree or disagree with the request, and identify a suggested new deadline(s) or date(s).
-review:
-- 'pages.memorandum (two values): Any reply brief is limited to the issues raised in the response, may not raise theories or issues not discussed in the original motion, and shall not exceed fifteen pages absent leave of Court.'
-- 'pages.memorandum (two values): Memoranda must not exceed 30 pages in length (excluding table of contents and appendices), must be double spaced, and must use 12-point font.'

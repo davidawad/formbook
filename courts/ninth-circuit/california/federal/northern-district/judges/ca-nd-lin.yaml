@@ -13,7 +13,7 @@ source:
   last_verified: 2026-09-04
   court_page: https://cand.uscourts.gov/judges/rfl/lin-rita-f
 facts:
-- id: pages.opposition
+- id: pages.memorandum
   value: 15
   quote: For all other motions, the briefs in support of and in opposition to the motions may not exceed 15 pages, and reply briefs may not exceed 10 pages.
   field: page_limits_motions
@@ -54,3 +54,5 @@ checklist:
   url: https://cand.uscourts.gov/sites/default/files/standing-orders/RFL-CivilStandingOrder-9-2-2026.pdf
   text: Counsel is responsible for providing the Court with complete and accurate representations of the record, procedural history, and cited legal authorities. Use of generative artificial intelligence tools is not prohibited, but counsel must personally confirm for themselves the accuracy of any research conducted by these means, and counsel alone bears ethical responsibility for all statements made in filings. These obligations also apply to self-represented litigants.
   unverified_sentences: 1
+review:
+- (of one kind of motion) For summary judgment motions, class certification motions, motions for approval of class settlements, and claim construction, the briefs in support of and in opposition to the motions cannot exceed 25 pages, and reply briefs cannot exceed 15 pages.

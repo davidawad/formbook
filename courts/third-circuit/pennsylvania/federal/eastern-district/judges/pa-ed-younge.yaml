@@ -12,7 +12,14 @@ source:
   feed: https://lawsnap.com/data/pa-ed-judges.json
   last_verified: 2026-09-04
   court_page: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/youpol.pdf
-facts: []
+facts:
+- id: pages.reply
+  value: 10
+  quote: Reply briefs and sur-reply briefs, addressing only issues raised in the brief in opposition and not repeating arguments in briefs that were previously filed by the movant, may be filed within seven days of service of the opponent's brief in opposition/reply and shall be limited to ten pages.
+  field: page_limits_replies
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/youpol.pdf#page=11
+  verified: true
+  pdf_sha256: 7f82ea1f30fe4855417b1d976e9c1fdbbfa1dd72219803842111f01abea53e20
 checklist:
 - topic: Oral argument
   field: oral_argument_default
@@ -35,5 +42,3 @@ checklist:
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/youpol.pdf#page=11
   text: However, the Court will consider motions for extension of discovery deadlines upon showing of good cause.
   unverified_sentences: 1
-review:
-- Reply briefs and sur-reply briefs, addressing only issues raised in the brief in opposition and not repeating arguments in briefs that were previously filed by the movant, may be filed within seven days of service of the opponent's brief in opposition/reply and shall be limited to ten pages.

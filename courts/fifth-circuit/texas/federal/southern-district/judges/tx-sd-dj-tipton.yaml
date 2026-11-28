@@ -13,13 +13,20 @@ source:
   last_verified: 2026-09-04
   court_page: https://www.txs.uscourts.gov/page/united-states-district-judge-drew-b-tipton
 facts:
-- id: footnote.min_pt
+- id: body.min_pt
   value: 12
   quote: Use American letter-size paper, a minimum 12-point font, and a minimum of 1-inch margins with 1/2-inch margins for footnotes, page numbers and any headers or footers.
   field: font_formatting
   url: https://www.txs.uscourts.gov/sites/txs/files/dbt_procedures.pdf
   verified: false
 - id: pages.memorandum
+  value: 25
+  quote: Limit any motion or response to twenty-five pages.
+  field: page_limits_motions
+  url: https://www.txs.uscourts.gov/sites/txs/files/dbt_procedures.pdf#page=13
+  verified: true
+  pdf_sha256: 9d974df47d50ab0dc56b1db4252c9faf52fb64b8052cf3e7328cf94c5d460ccc
+- id: pages.opposition
   value: 25
   quote: Limit any motion or response to twenty-five pages.
   field: page_limits_motions

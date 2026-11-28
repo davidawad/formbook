@@ -13,9 +13,9 @@ source:
   last_verified: 2026-10-25
   court_page: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/slopol2.pdf
 facts:
-- id: pages.opposition
+- id: pages.reply
   value: 10
-  quote: opponent’s brief in opposition and shall be limited to ten pages.
+  quote: Reply briefs, addressing only issues raised in the brief in opposition and not repeating arguments in the initial brief, may be filed within seven days of service of the opponent’s brief in opposition and shall be limited to ten pages.
   field: page_limits_replies
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/slopol2.pdf#page=5
   verified: true
@@ -28,12 +28,12 @@ checklist:
 - topic: Chambers copies
   field: chambers_copies_details
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/slopol2.pdf#page=2
-  text: counsel shall send to Chambers two (2) courtesy copies of any motions (and related briefs) filed with the Clerk of the Court. addition, in the unusual case where counsel does not file using ECF or counsel is requested to do so, two (2) courtesy copies of all pleadings and motion papers shall be delivered to Chambers, Room 5614, United States Courthouse, 601 Market Street,
+  text: counsel shall send to Chambers two (2) courtesy copies of any motions (and related briefs) filed with the Clerk of the Court. In addition, in the unusual case where counsel does not file using ECF or counsel is requested to do so, two (2) courtesy copies of all pleadings and motion papers shall be delivered to Chambers, Room 5614, United States Courthouse, 601 Market Street,
 - topic: Filing under seal
   field: under_seal_requirements
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/slopol2.pdf#page=4
-  text: 'Judge Slomsky will consider entry of stipulated confidentiality or sealing orders if the proposed order includes a detailed statement demonstrating that good cause exists for the See Pansy v. Borough of Stroudsberg, 23 F.3d 772, 786 (3rd Cir. 1994). orders must contain the following language (or language substantially similar): The Court retains the right to allow disclosure of any subject covered by this stipulation or to modify this stipulation at any time in the interest'
+  text: 'Judge Slomsky will consider entry of stipulated confidentiality or sealing orders if the proposed order includes a detailed statement demonstrating that good cause exists for the order. See Pansy v. Borough of Stroudsberg, 23 F.3d 772, 786 (3rd Cir. 1994). All such orders must contain the following language (or language substantially similar): The Court retains the right to allow disclosure of any subject covered by this stipulation or to modify this stipulation at any time in the interest of justice.'
 - topic: Continuances
   field: continuances_calendar_conflicts
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/slopol2.pdf#page=1
-  text: 'Correspondence regarding the following is permitted, provided the letter states that counsel agrees or disagrees with the request: When counsel are specifically requested by the Court to communicate some information to the Court by letter; When there is an uncontested request for a continuance of the Rule 16 Scheduling Order deadlines not affecting the dates for filing a summary judgment motion and trial; When the participation of counsel in the case is expected to be affected by an unanticipated personal matter concerning counsel, a party, a witness or counsel''s immediate family, such as medical problems, vacation plans or other personal problems; or, To confirm or advise the Court that a case has been settled, dismissed or otherwise finally disposed. Counsel should not send copies of correspondence among and between counsel'
+  text: 'Correspondence regarding the following is permitted, provided the letter states that counsel agrees or disagrees with the request: When counsel are specifically requested by the Court to communicate some information to the Court by letter; When there is an uncontested request for a continuance of the Rule 16 Scheduling Order deadlines not affecting the dates for filing a summary judgment motion and trial; When the participation of counsel in the case is expected to be affected by an unanticipated personal matter concerning counsel, a party, a witness or counsel''s immediate family, such as medical problems, vacation plans or other personal problems; or, To confirm or advise the Court that a case has been settled, dismissed or otherwise finally disposed. Counsel should not send copies of correspondence among and between counsel to the Court.'

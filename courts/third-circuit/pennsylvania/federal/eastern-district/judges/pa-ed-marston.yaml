@@ -12,7 +12,21 @@ source:
   feed: https://lawsnap.com/data/pa-ed-judges.json
   last_verified: 2026-09-04
   court_page: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/marpol.pdf
-facts: []
+facts:
+- id: pages.memorandum
+  value: 25
+  quote: Opening briefs in support of and in opposition to a motion shall not exceed twenty-five (25) double-spaced pages.
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/marpol.pdf#page=14
+  verified: true
+  pdf_sha256: 479dfdd2a069475e57b1d4504cdc3b98f3af0b5b430adc7e4082265792b39331
+- id: pages.reply
+  value: 10
+  quote: Replies and sur-replies must be limited to ten (10) and seven (7) pages, respectively.
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/marpol.pdf#page=14
+  verified: true
+  pdf_sha256: 479dfdd2a069475e57b1d4504cdc3b98f3af0b5b430adc7e4082265792b39331
 checklist:
 - topic: Oral argument
   field: oral_argument_default
@@ -34,6 +48,3 @@ checklist:
   field: continuances_calendar_conflicts
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/marpol.pdf#page=10
   text: Parties are expected to adhere to all dates contained in the Scheduling Order and set by the Federal Rules unless there is a compelling reason to justify a change. Counsel should advise the Court immediately of any compelling reason justifying an extension or continuance of any scheduled date. Such a request may be made by letter, describing in detail the basis for the request, noting the agreement or disagreement of all other counsel and setting forth the period of delay requested. A request for an extension or continuance of the date on which the case is listed for trial or the deadline for filing dispositive motions will rarely be granted and will only be considered in extraordinary circumstances. Any such request for an extension or continuance must be made at least seven (7) days before the applicable deadline or include a showing of good cause as to why the party making the request could not comply with that requirement.
-review:
-- Opening briefs in support of and in opposition to a motion shall not exceed twenty-five (25) double-spaced pages.
-- Replies and sur-replies must be limited to ten (10) and seven (7) pages, respectively.

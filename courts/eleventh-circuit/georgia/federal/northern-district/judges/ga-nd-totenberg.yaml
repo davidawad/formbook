@@ -25,8 +25,7 @@ checklist:
 - topic: Proposed orders
   field: proposed_orders
   url: https://www.gand.uscourts.gov/sites/gand/files/AT_Case_Guidelines202512.pdf#page=11
-  text: 'For any type of consent motion filed with the Court, the parties must attach a proposed order as an exhibit to the motion. With respect to the following types of motions only, the moving party must send a copy of the proposed order in Word format to the Courtroom Deputy Clerk at keri gardner@gand.uscourts.gov:'
-  unverified_sentences: 2
+  text: 'For any type of consent motion filed with the Court, the parties must attach a proposed order as an exhibit to the motion. With respect to the following types of motions only, the moving party must send a copy of the proposed order in Word format to the Courtroom Deputy Clerk at keri gardner@gand.uscourts.gov: Orders Approving Settlement'
 - topic: Chambers copies
   field: chambers_copies_details
   url: https://www.gand.uscourts.gov/sites/gand/files/AT_Case_Guidelines202512.pdf#page=6

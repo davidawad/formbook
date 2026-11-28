@@ -13,7 +13,19 @@ source:
   last_verified: 2026-09-04
   court_page: https://www.txs.uscourts.gov/page/united-states-district-judge-nicholas-j-ganjei
 facts:
+- id: body.min_pt
+  value: 13
+  quote: Acceptable fonts are Times New Roman size 13 or larger, Book Antiqua size 12 or larger, and Century Schoolbook size 12 or larger.
+  field: font_formatting
+  url: https://www.txs.uscourts.gov/sites/txs/files/Ganjei_Court_Procedures_April_2026.pdf
+  verified: false
 - id: words.memorandum
+  value: 5000
+  quote: Limit any motion or response to 5,000 words (approximately twenty-five pages).
+  field: page_limits_motions
+  url: https://www.txs.uscourts.gov/sites/txs/files/Ganjei_Court_Procedures_April_2026.pdf#page=15
+  verified: false
+- id: words.opposition
   value: 5000
   quote: Limit any motion or response to 5,000 words (approximately twenty-five pages).
   field: page_limits_motions
@@ -22,6 +34,12 @@ facts:
 - id: words.reply
   value: 2000
   quote: Limit any reply to 2,000 words (approximately ten pages).
+  field: page_limits_motions
+  url: https://www.txs.uscourts.gov/sites/txs/files/Ganjei_Court_Procedures_April_2026.pdf#page=15
+  verified: false
+- id: certificate.required
+  value: true
+  quote: Provide a certificate of word count following the signature block.
   field: page_limits_motions
   url: https://www.txs.uscourts.gov/sites/txs/files/Ganjei_Court_Procedures_April_2026.pdf#page=15
   verified: false

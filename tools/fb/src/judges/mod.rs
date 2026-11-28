@@ -384,6 +384,19 @@ fn profile_of(j: &Json, alias: &str, src: &Sources, court_slug: &str, docs: &mut
         for k in fields {
             let Some(t) = field(j, k) else { continue };
             let (found, rev) = read(t);
+            // an id this field itself gave two values for is no fact, whatever another field said
+            for r in &rev {
+                let Some((id, _)) = r.split_once(" (two values): ") else {
+                    continue;
+                };
+                if let Some(i) = facts.iter().position(|o| o.id == id) {
+                    let old = facts.remove(i);
+                    review.push(format!("{} (two values): {}", old.id, old.quote));
+                }
+                if !dropped.iter().any(|d| d == id) {
+                    dropped.push(id.to_string());
+                }
+            }
             review.extend(rev);
             for f in found {
                 if dropped.contains(&f.id) {
@@ -401,11 +414,21 @@ fn profile_of(j: &Json, alias: &str, src: &Sources, court_slug: &str, docs: &mut
                     }
                     None => {
                         let urls = candidates(j, k, &listed);
-                        let hit = docs.find(&urls, &f.quote, Match::Fact);
+                        let mut quote = f.quote;
+                        let mut hit = docs.find(&urls, &quote, Match::Fact);
+                        // the feed's label before the sentence ("Reply and Surreply Briefs: Reply briefs, ...") is not always
+                        // the document's: the sentence without it, then, and the quote is what was found
+                        let bare = extract::without_labels(&quote).to_string();
+                        if hit.is_none() && bare != quote {
+                            hit = docs.find(&urls, &bare, Match::Fact);
+                            if hit.is_some() {
+                                quote = bare;
+                            }
+                        }
                         facts.push(Fact {
                             id: f.id,
                             value: f.value,
-                            quote: f.quote,
+                            quote,
                             field: k.to_string(),
                             url: hit
                                 .as_ref()
@@ -933,6 +956,15 @@ mod tests {
         let p = profile_of(&j, "cacd", &src(), "ca-cd", &mut docs);
         let ids: Vec<&str> = p.facts.iter().map(|f| f.id.as_str()).collect();
         assert_eq!(ids, ["words.memorandum"]);
+        // pa-ed-rufe: a field that gives two values itself drops the id another field gave
+        let j2 = json!({
+            "slug": "doe-jane", "fullName": "Jane Doe",
+            "page_limits_motions": "Memoranda in support of such motions and responses shall not exceed 15 double-spaced pages.",
+            "page_limits_oppositions": "The non-moving party\u{2019}s Response memorandum shall not exceed 25 double-spaced pages.\n\nMemoranda in support of such motions and responses shall not exceed 15 double-spaced pages."
+        });
+        let p2 = profile_of(&j2, "paed", &src(), "pa-ed", &mut docs);
+        let ids: Vec<&str> = p2.facts.iter().map(|f| f.id.as_str()).collect();
+        assert_eq!(ids, ["pages.memorandum"]);
         assert_eq!(
             p.review
                 .iter()
@@ -993,6 +1025,41 @@ mod tests {
         );
         let yaml = serde_yaml::to_string(&p).unwrap();
         assert_eq!(yaml.matches("matched:").count(), 1);
+    }
+
+    #[test]
+    fn a_label_the_document_does_not_have_is_left_out_of_the_quote() {
+        let cache =
+            std::env::temp_dir().join(format!("fb-judges-label-test-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&cache);
+        std::fs::create_dir_all(&cache).unwrap();
+        let url = "https://www.paed.uscourts.gov/a.html";
+        let name = format!("{}.pdf", &verify::sha256(url.as_bytes())[..24]);
+        // pa-ed-schmehl's order has the heading without a colon; pa-ed-sanchez's has the sentence under a label
+        std::fs::write(cache.join(name), "<html><body><p>D. Reply and Surreply Briefs</p><p>Reply briefs, addressing only issues raised in the brief in opposition, shall be limited to ten pages.</p><p>5. Page Limits &amp; Formatting: Any motion and its supporting memorandum of law shall not total more than 15 pages.</p></body></html>").unwrap();
+        let j = json!({
+            "slug": "doe-jane", "fullName": "Jane Doe",
+            "page_limits_replies": "Reply and Surreply Briefs: Reply briefs, addressing only issues raised in the brief in opposition, shall be limited to ten pages.",
+            "page_limits_motions": "Any motion and its supporting memorandum of law shall not total more than 15 pages.",
+            "citations": {
+                "page_limits_replies": {"url": url},
+                "page_limits_motions": {"url": url}
+            }
+        });
+        let hosts = vec!["uscourts.gov".to_string()];
+        let mut docs = Docs {
+            cache: cache.clone(),
+            hosts: &hosts,
+            on: true,
+            loaded: BTreeMap::new(),
+        };
+        let p = profile_of(&j, "paed", &src(), "pa-ed", &mut docs);
+        let _ = std::fs::remove_dir_all(&cache);
+        let reply = p.fact("pages.reply").unwrap();
+        assert!(reply.verified);
+        assert!(reply.quote.starts_with("Reply briefs, addressing"));
+        // under the document's own label: not verified
+        assert!(!p.fact("pages.memorandum").unwrap().verified);
     }
 
     #[test]

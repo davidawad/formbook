@@ -34,6 +34,31 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/file/d722706b-9e07-4f2d-d1c5-08de5387c55f#page=11
   verified: true
   pdf_sha256: 5b8c26cfedc8ae634b0fe0fcad858440dd7e8d260ef5909a710921db39049b54
+- id: words.memorandum
+  value: 7000
+  quote: Unless otherwise expressly permitted, no supporting or opposing memorandum shall exceed 7,000 words (or 25 pages, double spaced, if handwritten), and no reply memorandum shall exceed 4,000 words (or 15 pages, double spaced, if handwritten) — excluding only indices and exhibits.
+  field: page_limits_motions
+  url: https://apps.cacd.uscourts.gov/JpsApi/file/d722706b-9e07-4f2d-d1c5-08de5387c55f#page=10
+  verified: false
+- id: words.opposition
+  value: 7000
+  quote: Unless otherwise expressly permitted, no supporting or opposing memorandum shall exceed 7,000 words (or 25 pages, double spaced, if handwritten), and no reply memorandum shall exceed 4,000 words (or 15 pages, double spaced, if handwritten) — excluding only indices and exhibits.
+  field: page_limits_motions
+  url: https://apps.cacd.uscourts.gov/JpsApi/file/d722706b-9e07-4f2d-d1c5-08de5387c55f#page=10
+  verified: false
+- id: words.reply
+  value: 4000
+  quote: Unless otherwise expressly permitted, no supporting or opposing memorandum shall exceed 7,000 words (or 25 pages, double spaced, if handwritten), and no reply memorandum shall exceed 4,000 words (or 15 pages, double spaced, if handwritten) — excluding only indices and exhibits.
+  field: page_limits_motions
+  url: https://apps.cacd.uscourts.gov/JpsApi/file/d722706b-9e07-4f2d-d1c5-08de5387c55f#page=10
+  verified: false
+- id: certificate.required
+  value: true
+  quote: Counsel shall certify compliance with the word count pursuant to Local Rule 11-6.2.
+  field: page_limits_motions
+  url: https://apps.cacd.uscourts.gov/JpsApi/file/d722706b-9e07-4f2d-d1c5-08de5387c55f#page=10
+  verified: true
+  pdf_sha256: 5b8c26cfedc8ae634b0fe0fcad858440dd7e8d260ef5909a710921db39049b54
 checklist:
 - topic: Motion hearing days
   field: motion_hearing_days
@@ -100,5 +125,3 @@ checklist:
   url: https://apps.cacd.uscourts.gov/JpsApi/file/d722706b-9e07-4f2d-d1c5-08de5387c55f#page=3
   text: Counsel must advise the Court immediately if (1) the case or any pending matter has been resolved or (2) a motion is pending and the parties are engaged in serious negotiations that appear likely to resolve the case or the pending motion (as discussed in more detail in § 8(f), infra). Failure to provide timely notice of settlement may result in sanctions. The filing of a settlement notice does not excuse counsel from appearing at any scheduled hearing or conference that has not been vacated. [...] Counsel must notify the Court at least two weeks before the scheduled hearing if the parties are conducting settlement discussions that may render the motion moot and must notify the Court immediately if a settlement is reached.
   unverified_sentences: 3
-review:
-- Footnotes shall be separated by 12-point spacing.

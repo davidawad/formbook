@@ -12,7 +12,14 @@ source:
   feed: https://lawsnap.com/data/pa-ed-judges.json
   last_verified: 2026-10-25
   court_page: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/rufpol.pdf
-facts: []
+facts:
+- id: pages.memorandum
+  value: 15
+  quote: Memoranda in support of such motions and responses shall not exceed 15 double-spaced pages.
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/rufpol.pdf#page=5
+  verified: true
+  pdf_sha256: 8342e94f9aae507519da3593b7e0f5b8d3f89a38a2cee478ecc90aa046e3c034
 checklist:
 - topic: Oral argument
   field: oral_argument_default
@@ -35,12 +42,11 @@ checklist:
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/rufpol.pdf#page=6
   text: Any request for a continuance must be filed no later than 14 days in advance of the scheduled trial date. Requests for a continuance must be filed as motions stating the reasons for the request. Any such motion must be accompanied by a proposed form of Order which, if approved by the Court, would grant the relief sought by the motion. The proposed form of Order must be consistent with the requirements of the Speedy Trial Act, 18 U.S.C. § 3161(h)(7), and include a proposed finding that explains in reasonable detail why the ends of justice served by granting the requested continuance outweigh the best interest of the public and the defendant in a speedy trial. Requests by letter are not permitted.
 review:
-- Any Reply or Sur-Reply shall not exceed 10 pages, and may be filed without leave of Court.
+- (of one kind of motion) Under the alternative method, Motions for Summary Judgment under Rule 56 shall not exceed five double-spaced pages.
+- (of one kind of motion) Under the traditional method, a moving party’s Memorandum of Law in support of its Motion for Summary Judgment shall not exceed 25 double-spaced pages.
 - Any Sur-Reply memoranda shall not exceed 10 double-spaced pages.
-- Likewise, the moving party’s Reply memorandum shall not exceed 25 double-spaced pages.
-- Memoranda in support of such motions and responses shall not exceed 15 double-spaced pages.
-- Reply and Sur-Reply memoranda may be filed without leave of Court and shall not exceed 10 double-spaced pages.
-- The Response shall not exceed twenty-five double-spaced pages.
-- The non-moving party’s Response memorandum shall not exceed 25 double-spaced pages.
-- Under the alternative method, Motions for Summary Judgment under Rule 56 shall not exceed five double-spaced pages.
-- Under the traditional method, a moving party’s Memorandum of Law in support of its Motion for Summary Judgment shall not exceed 25 double-spaced pages.
+- 'pages.opposition (two values): Memoranda in support of such motions and responses shall not exceed 15 double-spaced pages.'
+- 'pages.opposition (two values): The non-moving party’s Response memorandum shall not exceed 25 double-spaced pages.'
+- 'pages.reply (two values): Any Reply or Sur-Reply shall not exceed 10 pages, and may be filed without leave of Court.'
+- 'pages.reply (two values): Likewise, the moving party’s Reply memorandum shall not exceed 25 double-spaced pages.'
+- 'pages.reply (two values): Reply and Sur-Reply memoranda may be filed without leave of Court and shall not exceed 10 double-spaced pages.'

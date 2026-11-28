@@ -27,6 +27,13 @@ facts:
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/amppol.pdf#page=8
   verified: true
   pdf_sha256: 784ee54f0ebfabb7bf2a2ac8fd8cf8ebe73e1bc5d344375955d88aa62e076ad7
+- id: body.exact_pt
+  value: 12
+  quote: 'Briefs and Memoranda: Any brief or memorandum filed in support of or in opposition to a motion must be limited to twenty-five (25) pages of double-spaced 12-font text, excluding the table of contents and any attachments or addenda.'
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/amppol.pdf#page=8
+  verified: true
+  pdf_sha256: 784ee54f0ebfabb7bf2a2ac8fd8cf8ebe73e1bc5d344375955d88aa62e076ad7
 checklist:
 - topic: Oral argument
   field: oral_argument_default

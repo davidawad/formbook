@@ -34,12 +34,6 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/file/3d73cbc0-d43a-4ef4-9910-68d2b48ffaaa#page=10
   verified: true
   pdf_sha256: f582f1cb07e553f1401cc489d4d2263627aae13520fae7cf8b26a9ef1f975d16
-- id: words.memorandum
-  value: 7000
-  quote: 'Only rarely and for good cause shown will the Court grant an application to extend these page limitations. [See Judge Valenzuela''s Order Re: Motions for Summary Judgment regarding the length and format of motions for summary judgment: MSJ §1.c Word Limit: Each separately represented party shall be limited to 7,000 words, exclusive of tables of contents and authorities.]'
-  field: page_limits_motions
-  url: https://apps.cacd.uscourts.gov/JpsApi/file/3d73cbc0-d43a-4ef4-9910-68d2b48ffaaa#page=10
-  verified: false
 - id: pages.reply
   value: 15
   quote: Replies shall not exceed fifteen (15) pages.
@@ -104,3 +98,5 @@ checklist:
   field: settlement_notification
   url: https://apps.cacd.uscourts.gov/Jps/honorable-cynthia-valenzuela
   text: Counsel shall notify the Courtroom Deputy Clerk as soon as a settlement of the action has been reached. The Court may assess jury fees against each side under Local Rule 40-3 if the notification of settlement occurs after 4:00 p.m. on the last business day prior to trial absent a showing of good cause.
+review:
+- '(of one kind of motion) [See Judge Valenzuela''s Order Re: Motions for Summary Judgment regarding the length and format of motions for summary judgment: MSJ §1.c Word Limit: Each separately represented party shall be limited to 7,000 words, exclusive of tables of contents and authorities.]'

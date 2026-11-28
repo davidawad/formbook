@@ -20,9 +20,23 @@ facts:
   url: https://www.txnd.uscourts.gov/sites/default/files/documents/BrownJSR.pdf
   verified: true
   pdf_sha256: 5f4668244a133c55ad6629159120a77cd07fa644256d3fa435ebe25025622e9f
+- id: words.opposition
+  value: 6250
+  quote: Limit any motion, response, brief, or memorandum to 6,250 words; limit any reply to 2,500 words.
+  field: page_limits_motions
+  url: https://www.txnd.uscourts.gov/sites/default/files/documents/BrownJSR.pdf
+  verified: true
+  pdf_sha256: 5f4668244a133c55ad6629159120a77cd07fa644256d3fa435ebe25025622e9f
 - id: words.reply
   value: 2500
   quote: Limit any motion, response, brief, or memorandum to 6,250 words; limit any reply to 2,500 words.
+  field: page_limits_motions
+  url: https://www.txnd.uscourts.gov/sites/default/files/documents/BrownJSR.pdf
+  verified: true
+  pdf_sha256: 5f4668244a133c55ad6629159120a77cd07fa644256d3fa435ebe25025622e9f
+- id: certificate.required
+  value: true
+  quote: PROVIDE A CERTIFICATE OF WORD COUNT FOLLOWING THE SIGNATURE BLOCK.
   field: page_limits_motions
   url: https://www.txnd.uscourts.gov/sites/default/files/documents/BrownJSR.pdf
   verified: true

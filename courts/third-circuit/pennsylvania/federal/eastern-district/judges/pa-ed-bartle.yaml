@@ -12,7 +12,28 @@ source:
   feed: https://lawsnap.com/data/pa-ed-judges.json
   last_verified: 2026-10-25
   court_page: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/barpol.pdf
-facts: []
+facts:
+- id: pages.memorandum
+  value: 25
+  quote: Except with leave of Court for good cause shown, no supporting brief and no brief in opposition shall exceed twenty-five (25) pages and no reply brief shall exceed fifteen (15) pages.
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/barpol.pdf#page=4
+  verified: true
+  pdf_sha256: 2e25071b17bd8390e2f837c3f1ec26eefd47f4b0a65c3351eb257d5fcb2d8cff
+- id: pages.opposition
+  value: 25
+  quote: Except with leave of Court for good cause shown, no supporting brief and no brief in opposition shall exceed twenty-five (25) pages and no reply brief shall exceed fifteen (15) pages.
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/barpol.pdf#page=4
+  verified: true
+  pdf_sha256: 2e25071b17bd8390e2f837c3f1ec26eefd47f4b0a65c3351eb257d5fcb2d8cff
+- id: pages.reply
+  value: 15
+  quote: Except with leave of Court for good cause shown, no supporting brief and no brief in opposition shall exceed twenty-five (25) pages and no reply brief shall exceed fifteen (15) pages.
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/barpol.pdf#page=4
+  verified: true
+  pdf_sha256: 2e25071b17bd8390e2f837c3f1ec26eefd47f4b0a65c3351eb257d5fcb2d8cff
 checklist:
 - topic: Oral argument
   field: oral_argument_default

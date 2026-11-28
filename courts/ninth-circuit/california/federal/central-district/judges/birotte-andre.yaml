@@ -22,10 +22,11 @@ facts:
   pdf_sha256: b951ac99e7b2c0212d36b39747643e1ee6a98d67e5753f6ea31d5fad3993bd57
 - id: footnote.same_as_body
   value: true
-  quote: 'Motions – General Requirements. c. Length and Format of Motion Papers: Footnotes must be used sparingly and must be in the same font and the same size as the body of the memorandum.'
+  quote: Footnotes must be used sparingly and must be in the same font and the same size as the body of the memorandum.
   field: footnote_policy
   url: https://apps.cacd.uscourts.gov/JpsApi/file/ca861d04-cd04-4b22-15b1-08defc7bc57b#page=6
-  verified: false
+  verified: true
+  pdf_sha256: b951ac99e7b2c0212d36b39747643e1ee6a98d67e5753f6ea31d5fad3993bd57
 - id: pages.memorandum
   value: 25
   quote: 'Motions – General Requirements. c. Length and Format of Motion Papers: Memoranda of points and authorities in support of or in opposition to motions must not exceed 25 pages.'
@@ -48,8 +49,8 @@ checklist:
 - topic: Notice and briefing schedule
   field: motion_notice_days
   url: https://apps.cacd.uscourts.gov/JpsApi/file/ca861d04-cd04-4b22-15b1-08defc7bc57b#page=5
-  text: 'Judge Birotte hears civil motions on Fridays beginning at 10:00 a.m. The Friday after any Monday holiday is closed to hearings. Closed motion dates are shown on Judge Birotte''s webpage. The parties must adhere to the briefing schedule set forth in Local Rules 7-9 and 7-10, and the schedule herein for motions under Fed. R. Civ. P. 56, so that Chambers has sufficient time to prepare. If a motion is noticed for a date that is not available, the Court may strike or reset the motion. Professional courtesy dictates that the parties should accommodate each other''s schedules, including vacation and holiday schedules, whenever possible. [...] This Court requires an extended briefing schedule for motions under Fed. R. Civ. P. 56, as follows: [...] The above briefing schedule is the default minimum. The parties may stipulate to an extended schedule. Any briefing schedule must provide at least two weeks between the reply deadline and the hearing date.'
-  unverified_sentences: 5
+  text: 'Judge Birotte hears civil motions on Fridays beginning at 10:00 a.m. The Friday after any Monday holiday is closed to hearings. Closed motion dates are shown on Judge Birotte''s webpage. The parties must adhere to the briefing schedule set forth in Local Rules 7-9 and 7-10, and the schedule herein for motions under Fed. R. Civ. P. 56, so that Chambers has sufficient time to prepare. If a motion is noticed for a date that is not available, the Court may strike or reset the motion. Professional courtesy dictates that the parties should accommodate each other''s schedules, including vacation and holiday schedules, whenever possible. [...] This Court requires an extended briefing schedule for motions under Fed. R. Civ. P. 56, as follows: Any Motion Under Fed. R. Civ. P. 56: must be filed at least 5 weeks before the noticed hearing date. Opposition: must be filed 3 weeks before hearing date (2 weeks after the motion is filed). Reply: must be filed 2 weeks before hearing date (1 week after the opposition is filed). The above briefing schedule is the default minimum. The parties may stipulate to an extended schedule. Any briefing schedule must provide at least two weeks between the reply deadline and the hearing date.'
+  unverified_sentences: 2
 - topic: Oral argument
   field: oral_argument_default
   url: https://apps.cacd.uscourts.gov/JpsApi/file/ca861d04-cd04-4b22-15b1-08defc7bc57b#page=7

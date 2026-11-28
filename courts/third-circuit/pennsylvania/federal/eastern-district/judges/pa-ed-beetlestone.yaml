@@ -27,6 +27,13 @@ facts:
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/beepol.pdf#page=6
   verified: true
   pdf_sha256: 0a5951e80fff681edf4df8d69703c119a69fe2d55a5b295ac9de74af1bb079d6
+- id: body.exact_pt
+  value: 12
+  quote: 'Briefs and Memoranda: Any brief or memorandum filed in support of or in opposition to a motion must be limited to thirty (30) pages of double-spaced 12-font text, excluding the table of contents and any attachments or addenda.'
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/beepol.pdf#page=6
+  verified: true
+  pdf_sha256: 0a5951e80fff681edf4df8d69703c119a69fe2d55a5b295ac9de74af1bb079d6
 checklist:
 - topic: Notice and briefing schedule
   field: motion_notice_days

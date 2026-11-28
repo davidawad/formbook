@@ -12,7 +12,49 @@ source:
   feed: https://lawsnap.com/data/pa-ed-judges.json
   last_verified: 2026-09-04
   court_page: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/murpol.pdf
-facts: []
+facts:
+- id: pages.memorandum
+  value: 25
+  quote: 'Opening brief: 25 pages or 6,250 words'
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/murpol.pdf
+  verified: true
+  pdf_sha256: 7bc3c702da8236e228f9a0f7af936d59244959a6b1b57b705ad232ba41f01876
+- id: words.memorandum
+  value: 6250
+  quote: 'Opening brief: 25 pages or 6,250 words'
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/murpol.pdf
+  verified: true
+  pdf_sha256: 7bc3c702da8236e228f9a0f7af936d59244959a6b1b57b705ad232ba41f01876
+- id: pages.opposition
+  value: 25
+  quote: 'Response/opposition: 25 pages or 6,250 words'
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/murpol.pdf
+  verified: true
+  pdf_sha256: 7bc3c702da8236e228f9a0f7af936d59244959a6b1b57b705ad232ba41f01876
+- id: words.opposition
+  value: 6250
+  quote: 'Response/opposition: 25 pages or 6,250 words'
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/murpol.pdf
+  verified: true
+  pdf_sha256: 7bc3c702da8236e228f9a0f7af936d59244959a6b1b57b705ad232ba41f01876
+- id: pages.reply
+  value: 10
+  quote: 'Reply: 10 pages or 2,500 words'
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/murpol.pdf
+  verified: true
+  pdf_sha256: 7bc3c702da8236e228f9a0f7af936d59244959a6b1b57b705ad232ba41f01876
+- id: words.reply
+  value: 2500
+  quote: 'Reply: 10 pages or 2,500 words'
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/murpol.pdf
+  verified: true
+  pdf_sha256: 7bc3c702da8236e228f9a0f7af936d59244959a6b1b57b705ad232ba41f01876
 checklist:
 - topic: Oral argument
   field: oral_argument_default
@@ -25,8 +67,7 @@ checklist:
 - topic: Chambers copies
   field: chambers_copies_details
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/murpol.pdf#page=7
-  text: For any dispositive motion or brief (e.g., Civil Rule 12, 50, 56) or responsive brief that includes exhibits, counsel must send (by e-mail or file transfer service) a PDF courtesy copy to chambers (murphy_chambers@paed.uscourts.gov). [...] Do not send paper courtesy copies to chambers unless requested.
-  unverified_sentences: 5
+  text: For any dispositive motion or brief (e.g., Civil Rule 12, 50, 56) or responsive brief that includes exhibits, counsel must send (by e-mail or file transfer service) a PDF courtesy copy to chambers (murphy_chambers@paed.uscourts.gov). be as-filed, i.e., with the ECF notations at the top of each page; include the main documents and all exhibits in one single PDF file; use PDF bookmarks for exhibits and for sections in longer documents; be text-searchable, including exhibits; and have a file name that reflects the case number, docket number(s), and a description. Do not send paper courtesy copies to chambers unless requested.
 - topic: Filing under seal
   field: under_seal_requirements
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/murpol.pdf#page=4

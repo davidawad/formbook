@@ -20,6 +20,13 @@ facts:
   url: https://www.txs.uscourts.gov/sites/txs/files/Judge%20Alfred%20H.%20Bennett%20Proc_Revised%2007062026.pdf#page=6
   verified: true
   pdf_sha256: 5cbbfc86f9bb65dbded2876b1cca81662aeb9b06a25361e3f1924059a2c35860
+- id: pages.opposition
+  value: 20
+  quote: Absent leave of Court, motions and responses are limited to twenty (20) pages, including the case style, any table of contents or authorities, and signature block.
+  field: page_limits_motions
+  url: https://www.txs.uscourts.gov/sites/txs/files/Judge%20Alfred%20H.%20Bennett%20Proc_Revised%2007062026.pdf#page=6
+  verified: true
+  pdf_sha256: 5cbbfc86f9bb65dbded2876b1cca81662aeb9b06a25361e3f1924059a2c35860
 - id: pages.reply
   value: 5
   quote: A reply must be filed within seven (7) days of the response and must not exceed five (5) pages in length, including the case style, any table of contents or authorities, and signature block.

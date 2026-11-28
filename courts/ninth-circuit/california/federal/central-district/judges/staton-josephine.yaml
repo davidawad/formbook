@@ -12,7 +12,23 @@ source:
   feed: https://lawsnap.com/data/ca-cd-judges.json
   last_verified: 2026-09-04
   court_page: https://apps.cacd.uscourts.gov/Jps/honorable-josephine-l-staton
-facts: []
+facts:
+- id: certificate.required
+  value: true
+  quote: A certification of compliance is required as set forth in Local Rule 11-6.2.
+  field: page_limits_motions
+  url: https://apps.cacd.uscourts.gov/JpsApi/file/86bc0b4c-9e67-4d27-e4c0-08debdb90c5c
+  verified: true
+  pdf_sha256: 44d7ec799b1bf651ce042de9fccd2224f4fbaf71e2bd33a684c172da2ff75dff
+  matched: court-index
+- id: words.reply
+  value: 4200
+  quote: In addition, because reply briefs should by their nature be shorter than motion and opposition briefs, the Court imposes an additional limitation on reply briefs, limiting those to 4,200 words rather than 7,000 words.
+  field: page_limits_motions
+  url: https://apps.cacd.uscourts.gov/JpsApi/file/86bc0b4c-9e67-4d27-e4c0-08debdb90c5c
+  verified: true
+  pdf_sha256: 44d7ec799b1bf651ce042de9fccd2224f4fbaf71e2bd33a684c172da2ff75dff
+  matched: court-index
 checklist:
 - topic: Motion hearing days
   field: motion_hearing_days
@@ -41,7 +57,7 @@ checklist:
 - topic: Filing under seal
   field: under_seal_requirements
   url: https://apps.cacd.uscourts.gov/JpsApi/file/65fe0a76-673e-44a5-cc30-08de73dffb43
-  text: 'FILE A PROPERLY SUPPORTED APPLICATION (L.R. 79-5.2.2(a)) A properly supported application usually consists of five documents: three documents filed publicly and two documents filed non-publicly. Although the Local Rule 79-5 refers to presentation in "paper format," documents are now almost always submitted to the CRD for processing by emailing them in PDF format to the chambers email address. PUBLIC DOCUMENTS (COUNSEL OR PARTIES FILE ON PUBLIC DOCKET) Application for Leave to File Document Under Seal Unless the Application and Proposed Order expressly state that the entire document is proposed to be filed under seal, a Public Redacted Version of the Document to be Filed Under Seal (public filing) (conspicuously labeled "REDACTED VERSION OF DOCUMENT PROPOSED TO BE FILED UNDER SEAL") (filed by counsel or parties after under seal filing is approved) Proposed Order (public filing) Declaration in Support of Filing Under Seal (non-public filing) Unredacted Version of Document to be Filed Under Seal (non-public filing) (confidential portions highlighted in yellow) (conspicuously labeled as "UNREDACTED VERSION OF DOCUMENT PROPOSED TO BE FILED UNDER SEAL")'
+  text: 'FILE A PROPERLY SUPPORTED APPLICATION (L.R. 79-5.2.2(a)) A properly supported application usually consists of five documents: three documents filed publicly and two documents filed non-publicly. Although the Local Rule 79-5 refers to presentation in "paper format," documents are now almost always submitted to the CRD for processing by emailing them in PDF format to the chambers email address. PUBLIC DOCUMENTS (COUNSEL OR PARTIES FILE ON PUBLIC DOCKET) Application for Leave to File Document Under Seal Unless the Application and Proposed Order expressly state that the entire document is proposed to be filed under seal, a Public Redacted Version of the Document to be Filed Under Seal (public filing) (conspicuously labeled "REDACTED VERSION OF DOCUMENT PROPOSED TO BE FILED UNDER SEAL") (filed by counsel or parties after under seal filing is approved) Proposed Order (public filing) B. Declaration in Support of Filing Under Seal (non-public filing) Unredacted Version of Document to be Filed Under Seal (non-public filing) (confidential portions highlighted in yellow) (conspicuously labeled as "UNREDACTED VERSION OF DOCUMENT PROPOSED TO BE FILED UNDER SEAL")'
 - topic: Ex parte applications
   field: ex_parte_notice
   url: https://apps.cacd.uscourts.gov/Jps/honorable-josephine-l-staton

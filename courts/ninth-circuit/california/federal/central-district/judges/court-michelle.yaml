@@ -20,8 +20,8 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/file/7e7a0336-d4d0-4af7-317f-08df0388792c
   verified: true
   pdf_sha256: 3053f3379bc1034149ce88ecf76724ad61ff70d0ccdbe96fc31df4d06ef42241
-- id: footnote.same_as_body
-  value: true
+- id: footnote.min_pt
+  value: 14
   quote: These typeface requirements apply to footnoted material.
   field: font_formatting
   url: https://apps.cacd.uscourts.gov/JpsApi/file/7e7a0336-d4d0-4af7-317f-08df0388792c

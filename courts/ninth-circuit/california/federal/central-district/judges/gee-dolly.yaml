@@ -15,16 +15,18 @@ source:
 facts:
 - id: words.memorandum
   value: 7000
-  quote: 'Length and Format of Motion Papers: Memoranda of points and authorities shall not exceed 7,000 words and 25 pages.'
+  quote: Memoranda of points and authorities shall not exceed 7,000 words and 25 pages.
   field: page_limits_motions
   url: https://apps.cacd.uscourts.gov/JpsApi/file/98a730a2-9aff-4ac0-9e15-08de14d99915
-  verified: false
+  verified: true
+  pdf_sha256: 408da3f3f0f39ce05fee1d5c42a82844310e0fb7efce8f10ee62e3dfde9604e3
 - id: pages.memorandum
   value: 25
-  quote: 'Length and Format of Motion Papers: Memoranda of points and authorities shall not exceed 7,000 words and 25 pages.'
+  quote: Memoranda of points and authorities shall not exceed 7,000 words and 25 pages.
   field: page_limits_motions
   url: https://apps.cacd.uscourts.gov/JpsApi/file/98a730a2-9aff-4ac0-9e15-08de14d99915
-  verified: false
+  verified: true
+  pdf_sha256: 408da3f3f0f39ce05fee1d5c42a82844310e0fb7efce8f10ee62e3dfde9604e3
 checklist:
 - topic: Motion hearing days
   field: motion_hearing_days

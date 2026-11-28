@@ -19,6 +19,10 @@ facts:
   field: page_limits_motions
   url: https://www.txs.uscourts.gov/sites/txs/files/Court_Procedures_and_Local_Rules_%289.15.2025%29.docx
   verified: false
+- id: body.exact_pt
+  value: 14
+  quote: Without leave of Court, all memoranda of law are limited to 25 pages, 14-point type-font, double-spaced, with 1" margins.
+  field: page_limits_motions
+  url: https://www.txs.uscourts.gov/sites/txs/files/Court_Procedures_and_Local_Rules_%289.15.2025%29.docx
+  verified: false
 checklist: []
-review:
-- Without leave of Court, all memoranda of law are limited to 25 pages, 14-point type-font, double-spaced, with 1" margins.

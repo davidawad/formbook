@@ -20,24 +20,10 @@ facts:
   url: https://cand.uscourts.gov/sites/default/files/standing-orders/BLF-Standing-Order-Re-Civil-Cases-Rev-Oct-7-2024-1.pdf
   verified: true
   pdf_sha256: 9172ccb0ad7426fa1779597f65fec1eeb8c839470594382972d773a2f2feb502
-- id: footnote.same_as_body
-  value: true
-  quote: All written text, including footnotes and quotations, shall be no less than 12-point type and shall be double-spaced.
-  field: font_formatting
-  url: https://cand.uscourts.gov/sites/default/files/standing-orders/BLF-Standing-Order-Re-Civil-Cases-Rev-Oct-7-2024-1.pdf
-  verified: true
-  pdf_sha256: 9172ccb0ad7426fa1779597f65fec1eeb8c839470594382972d773a2f2feb502
 - id: footnote.min_pt
   value: 12
-  quote: Footnotes shall be no less than 12-point type and shall be double-spaced.
-  field: footnote_policy
-  url: https://cand.uscourts.gov/sites/default/files/standing-orders/BLF-Standing-Order-Re-Civil-Cases-Rev-Oct-7-2024-1.pdf
-  verified: true
-  pdf_sha256: 9172ccb0ad7426fa1779597f65fec1eeb8c839470594382972d773a2f2feb502
-- id: pages.memorandum
-  value: 10
-  quote: Daubert motions may not exceed 10 pages per expert, and each side is limited to a total of 25 pages for Daubert motions.
-  field: page_limits_motions
+  quote: All written text, including footnotes and quotations, shall be no less than 12-point type and shall be double-spaced.
+  field: font_formatting
   url: https://cand.uscourts.gov/sites/default/files/standing-orders/BLF-Standing-Order-Re-Civil-Cases-Rev-Oct-7-2024-1.pdf
   verified: true
   pdf_sha256: 9172ccb0ad7426fa1779597f65fec1eeb8c839470594382972d773a2f2feb502
@@ -65,4 +51,5 @@ checklist:
   url: https://cand.uscourts.gov/sites/default/files/standing-orders/BLF-Standing-Order-Re-Civil-Cases-Rev-Oct-7-2024-1.pdf
   text: Case Management Conferences are heard on Thursdays at 11:00 a.m. via Zoom Webinar.
 review:
-- Each side is limited to a total of 25 pages for all post-trial motions, which must be presented in a single brief.
+- (of one kind of motion) Daubert motions may not exceed 10 pages per expert, and each side is limited to a total of 25 pages for Daubert motions.
+- (of one kind of motion) Each side is limited to a total of 25 pages for all post-trial motions, which must be presented in a single brief.

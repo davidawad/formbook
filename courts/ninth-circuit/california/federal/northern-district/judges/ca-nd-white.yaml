@@ -13,19 +13,18 @@ source:
   last_verified: 2026-09-04
   court_page: https://cand.uscourts.gov/judges/jsw/white-jeffrey-s
 facts:
-- id: pages.opposition
+- id: pages.memorandum
   value: 15
   quote: Except for motions for summary judgment and claim construction briefs, all briefs, whether in support of, in opposition to, or in reply to any motion may not exceed fifteen (15) pages in length.
   field: page_limits_motions
   url: https://cand.uscourts.gov/sites/default/files/standing-orders/Judge-Jeffrey-S.-Whites-Civil-Standing-Orders-Civil-Standing-Order-Revised-12-24.pdf
   verified: false
-- id: pages.memorandum
-  value: 25
-  quote: All issues shall be contained within one motion, shall not exceed twenty-five (25) pages in length, and shall conform with Civil Local Rule 7-2.
+- id: pages.reply
+  value: 15
+  quote: Except for motions for summary judgment and claim construction briefs, all briefs, whether in support of, in opposition to, or in reply to any motion may not exceed fifteen (15) pages in length.
   field: page_limits_motions
   url: https://cand.uscourts.gov/sites/default/files/standing-orders/Judge-Jeffrey-S.-Whites-Civil-Standing-Orders-Civil-Standing-Order-Revised-12-24.pdf
-  verified: true
-  pdf_sha256: 4cc01e375610f7aa12da517b08ddd2097c9e103a4fc8ebca74075a84b7bc4b12
+  verified: false
 checklist:
 - topic: Motion hearing days
   field: motion_hearing_days
@@ -47,3 +46,5 @@ checklist:
   field: discovery_referral
   url: https://cand.uscourts.gov/sites/default/files/standing-orders/Judge-Jeffrey-S.-Whites-Civil-Standing-Orders-Civil-Standing-Order-Revised-12-24.pdf#page=3
   text: Discovery and Discovery Motions. Except as specifically set forth below, no motions regarding discovery disputes may be filed without prior leave of Court. After the parties have met and conferred, the parties shall prepare a joint letter brief of not more than eight (8) pages explaining the dispute. Up to twelve (12) pages of attachments may be added. The joint letter must be electronically filed under the Civil Events Category of "Motions and Related Filings > Motions – General > Discovery Letter Brief. Discovery disputes may be referred to a Magistrate Judge. If the Court refers discovery disputes to a Magistrate Judge, the Magistrate Judge to whom the matter is assigned will advise the parties of how that judge intends to proceed. The Magistrate Judge may issue a ruling, order more formal briefing, or set a telephone conference or a hearing. After a Magistrate Judge has been assigned, all further discovery matters shall be filed pursuant to that Judge's procedures. If this Court retains supervision of discovery, the Court will then advise the parties if additional briefing or a telephonic conference will be necessary. If this Court has retained supervision of discovery, and if a dispute arises during a deposition that involves a persistent obstruction of the deposition or a refusal to answer a material question on the basis of any ground other than privilege or the work product doctrine, counsel may arrange a telephonic conference with the Court through contact with Chambers at (510) 637-1820. Any such conference shall be attended by the court reporter recording the deposition.
+review:
+- (of one kind of motion) All issues shall be contained within one motion, shall not exceed twenty-five (25) pages in length, and shall conform with Civil Local Rule 7-2.

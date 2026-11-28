@@ -21,6 +21,7 @@ checklist:
 - topic: Notice and briefing schedule
   field: motion_notice_days
   url: https://www.gand.uscourts.gov/sites/gand/files/VMC_CV_Order.pdf#page=36
+  text: Notwithstanding Federal Rule of Bankruptcy Procedure 8013(a)(3)(A) & (B), the fourteen-day response and reply periods of Local Rule 7.1(B) and (C), NDGa, apply to responses and replies to motions filed in a bankruptcy appeal.
   unverified_sentences: 1
 - topic: Oral argument
   field: oral_argument_default
@@ -44,6 +45,6 @@ checklist:
   url: https://www.gand.uscourts.gov/sites/gand/files/VMC_CV_Order.pdf#page=37
   text: Judge Calvert typically holds scheduling and discovery conferences by telephone and all other hearings and oral arguments in person. Requests to appear by video must be made in advance of the hearing or argument and are not routinely granted.
 review:
-- A motion for leave to file a surreply must be filed within seven days of the filing of the reply brief and must be no more than 5 pages.
-- A response to the motion for leave to file the surreply is strongly discouraged and may not exceed 3 pages.
+- (of one kind of motion) A motion for leave to file a surreply must be filed within seven days of the filing of the reply brief and must be no more than 5 pages.
+- (of one kind of motion) A response to the motion for leave to file the surreply is strongly discouraged and may not exceed 3 pages.
 - A surreply may not exceed 5 pages in length without leave of court.

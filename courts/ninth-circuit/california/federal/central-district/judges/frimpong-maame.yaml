@@ -15,10 +15,11 @@ source:
 facts:
 - id: body.face
   value: Times New Roman
-  quote: 'Length and Format of Motion Papers: All briefing must use Times New Roman font.'
+  quote: All briefing must use Times New Roman font.
   field: font_formatting
   url: https://apps.cacd.uscourts.gov/JpsApi/file/4b71648e-34b0-4994-dcbd-08ded8681b20
-  verified: false
+  verified: true
+  pdf_sha256: 33e344ab4d7ac2a25d57db25a0f507b2e2081960c55324d23430125fe32085a5
 - id: body.min_pt
   value: 12
   quote: Text must be no less than twelve (12) point font; footnotes shall be no less than ten (10) point font.

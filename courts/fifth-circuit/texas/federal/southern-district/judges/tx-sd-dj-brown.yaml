@@ -20,6 +20,13 @@ facts:
   url: https://www.txs.uscourts.gov/sites/txs/files/GalvestonDistrictCourtRulesofPractice.pdf
   verified: true
   pdf_sha256: d457d52ea3d76aaedb03034a4ec2028bb1d3356bea78045c9d5c500edce1d268
+- id: pages.opposition
+  value: 30
+  quote: Absent leave of court, any motion or response shall be limited to 30 pages.
+  field: page_limits_motions
+  url: https://www.txs.uscourts.gov/sites/txs/files/GalvestonDistrictCourtRulesofPractice.pdf
+  verified: true
+  pdf_sha256: d457d52ea3d76aaedb03034a4ec2028bb1d3356bea78045c9d5c500edce1d268
 - id: pages.reply
   value: 15
   quote: Replies are limited to 15 pages.

@@ -396,9 +396,14 @@ fn size_at(ts: &[Tok], i: usize) -> Option<f64> {
 /// A type size in `ts` (size_at), or a number right after a floor's "than" or "least" in words about a size or a
 /// font.
 fn type_size(ts: &[Tok]) -> Option<f64> {
+    type_size_at(ts).map(|(_, n)| n)
+}
+
+/// The type size of `ts` (type_size) and where it stands.
+fn type_size_at(ts: &[Tok]) -> Option<(usize, f64)> {
     for (i, t) in ts.iter().enumerate() {
         if let Some(n) = size_at(ts, i) {
-            return Some(n);
+            return Some((i, n));
         }
         let Tok::Num(n) = t else { continue };
         if !(8.0..=18.0).contains(n) {
@@ -408,10 +413,52 @@ fn type_size(ts: &[Tok]) -> Option<f64> {
             && (is(ts.get(i - 1), "than") || is(ts.get(i - 1), "least") || is(ts.get(i - 1), "of"));
         let about = has(ts, "size") || has(ts, "font") || has(ts, "typeface");
         if after_floor && about && floor(ts) {
-            return Some(*n);
+            return Some((i, *n));
         }
     }
     None
+}
+
+/// Whether a floor is said of the type size: "no less than 12-point", "a minimum 12-point font", "14-point or larger".
+/// A floor said of something else ("prepared in 14-point, Times New Roman font, with margins of not less than one
+/// inch") is none; one with another number between it and the size ("NOT LESS THAN ONE INCH MARGINS AND 14 POINT
+/// FONT") may or may not reach it: `None`, no fact.
+fn size_floor(ts: &[Tok]) -> Option<bool> {
+    let Some((i, _)) = type_size_at(ts) else {
+        return Some(false);
+    };
+    let larger = (i + 1..ts.len().min(i + 5)).any(|k| {
+        is(ts.get(k), "or") && matches!(word(ts.get(k + 1)), "larger" | "greater" | "more")
+    });
+    if larger {
+        return Some(true);
+    }
+    const FLOORS: [&[&str]; 6] = [
+        &["no", "less", "than"],
+        &["not", "less", "than"],
+        &["no", "smaller", "than"],
+        &["not", "smaller", "than"],
+        &["at", "least"],
+        &["minimum"],
+    ];
+    let mut ambiguous = false;
+    for p in FLOORS {
+        let mut from = 0;
+        while let Some(s) = find_seq(&ts[from..], p) {
+            let e = from + s + p.len();
+            from = e;
+            if e > i {
+                break;
+            }
+            let between = &ts[e..i];
+            if between.iter().any(|t| matches!(t, Tok::Num(_))) {
+                ambiguous = true;
+            } else if between.len() <= 4 {
+                return Some(true);
+            }
+        }
+    }
+    (!ambiguous).then_some(false)
 }
 
 /// Words that name a face other than Times New Roman, or leave the face open.
@@ -468,10 +515,11 @@ fn body_clause(
     let prop = times_part(ts);
     let mut rule = None;
     if let Some(n) = type_size(prop) {
-        if floor(prop) {
+        let fl = size_floor(prop);
+        if fl == Some(true) {
             out.push(found("body.min_pt", n, quote));
             rule = Some(("min", n));
-        } else if exact(prop) || ordered {
+        } else if fl == Some(false) && (exact(prop) || ordered) {
             out.push(found("body.exact_pt", n, quote));
             rule = Some(("exact", n));
         }
@@ -552,12 +600,14 @@ fn footnote_clause(
         return;
     }
     if let Some(n) = type_size(ts) {
-        if floor(ts) {
+        let fl = size_floor(ts);
+        if fl == Some(true) {
             out.push(found("footnote.min_pt", n, quote));
-        } else if exact(ts)
-            || ordered
-            || has_seq(ts, &["shall", "be", "in"])
-            || has_seq(ts, &["must", "be", "in"])
+        } else if fl == Some(false)
+            && (exact(ts)
+                || ordered
+                || has_seq(ts, &["shall", "be", "in"])
+                || has_seq(ts, &["must", "be", "in"]))
         {
             out.push(found("footnote.exact_pt", n, quote));
         }
@@ -660,7 +710,7 @@ fn scope_label(s: &str) -> Option<bool> {
 /// A sentence without the labels it opens with ("Motions â General Requirements. c. Length and Format of Motion
 /// Papers: Replies must not exceed 15 pages."): the words of a label are no part of a rule's subject. Text before a
 /// colon that states a limit is no label.
-fn without_labels(s: &str) -> &str {
+pub fn without_labels(s: &str) -> &str {
     let mut t = s;
     while let Some(at) = t.find(':') {
         let seg = &t[..at];
@@ -1691,6 +1741,19 @@ mod tests {
                 w("footnote.exact_pt", 10.0)
             ]
         );
+        // a floor said of the margins is not the size's (pa-ed-diamond); one that may reach it is no fact
+        // (tx-sd-dj-hittner)
+        let (f, _) = fonts("Length and Format of Motion Papers: All motion papers must be double-spaced and prepared in 14-point, Times New Roman font, with margins of not less than one inch.");
+        assert_eq!(
+            ids(&f),
+            [
+                w("body.exact_pt", 14.0),
+                ("body.face".to_string(), Value::from("Times New Roman"))
+            ]
+        );
+        let (f, r) = fonts("ALL PLEADINGS (SUBSEQUENT TO THE ORIGINAL COMPLAINT) FILED IN THE COURT MUST BE: DOUBLE SPACED, NOT LESS THAN ONE INCH MARGINS AND 14 POINT FONT.");
+        assert!(f.is_empty());
+        assert_eq!(r.len(), 1);
         // under a floor the second size is ambiguous: no footnote fact
         let (f, _) = fonts("Text must be no less than 12 point, footnotes 10 point.");
         assert_eq!(ids(&f), [w("body.min_pt", 12.0)]);

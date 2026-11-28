@@ -27,12 +27,20 @@ facts:
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/diapol.pdf#page=4
   verified: true
   pdf_sha256: 28b244638a90d09801252f98092fbc34190327682f04729705926e14c5fe9b7b
-- id: body.min_pt
+- id: body.exact_pt
   value: 14
-  quote: 'Length and Format of Motion Papers: All motion papers must be double-spaced and prepared in 14-point, Times New Roman font, with margins of not less than one inch.'
+  quote: All motion papers must be double-spaced and prepared in 14-point, Times New Roman font, with margins of not less than one inch.
   field: page_limits_motions
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/diapol.pdf#page=4
-  verified: false
+  verified: true
+  pdf_sha256: 28b244638a90d09801252f98092fbc34190327682f04729705926e14c5fe9b7b
+- id: body.face
+  value: Times New Roman
+  quote: All motion papers must be double-spaced and prepared in 14-point, Times New Roman font, with margins of not less than one inch.
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/diapol.pdf#page=4
+  verified: true
+  pdf_sha256: 28b244638a90d09801252f98092fbc34190327682f04729705926e14c5fe9b7b
 checklist:
 - topic: Oral argument
   field: oral_argument_default

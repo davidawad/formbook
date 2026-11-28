@@ -20,6 +20,13 @@ facts:
   url: https://www.txs.uscourts.gov/sites/txs/files/Judge%20Ellison%20Court-Procedures%202026.pdf#page=6
   verified: true
   pdf_sha256: 4c2d04a13f8acdb45b0451e87e1441f04993c3ad864c790ceb99ca3d440814fc
+- id: pages.reply
+  value: 10
+  quote: (B) The Reply must be ten (10) pages or fewer.
+  field: page_limits_replies
+  url: https://www.txs.uscourts.gov/sites/txs/files/Judge%20Ellison%20Court-Procedures%202026.pdf#page=7
+  verified: true
+  pdf_sha256: 4c2d04a13f8acdb45b0451e87e1441f04993c3ad864c790ceb99ca3d440814fc
 checklist:
 - topic: Proposed orders
   field: proposed_orders

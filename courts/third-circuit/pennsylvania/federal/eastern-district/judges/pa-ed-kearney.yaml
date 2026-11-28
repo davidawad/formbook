@@ -27,6 +27,13 @@ facts:
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/keapol.pdf#page=14
   verified: true
   pdf_sha256: f37fe176298c97ef49f631d5618c7b798e8119f499f5b18e6c6b416a1f8535c8
+- id: body.exact_pt
+  value: 12
+  quote: Memoranda filed in support of, or in opposition to, a motion is limited to twenty pages of double-spaced twelve-point font.
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/keapol.pdf#page=14
+  verified: true
+  pdf_sha256: f37fe176298c97ef49f631d5618c7b798e8119f499f5b18e6c6b416a1f8535c8
 checklist:
 - topic: Proposed orders
   field: proposed_orders
@@ -49,5 +56,3 @@ checklist:
   field: continuances_calendar_conflicts
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/keapol.pdf#page=11
   text: Unless there is demonstrated good cause in writing to justify a change, the parties are expected to adhere to the schedule contained in Orders setting obligations or, absent an Order, the default dates in the Federal or Local Rules. A request for an extension or continuance of the trial date will not be granted absent extraordinary circumstances. Judge Kearney may approve a timely stipulation for a continuance or extension if the continuance or extension upon a showing of good cause and if it does not affect the trial date. If a non-incarcerated party opposes a continuance or extension, the movant may move under Section III.B below identifying the basis for the continuance or extension and detail the positions of other parties with a proposed order.
-review:
-- Memoranda filed in support of, or in opposition to, a motion is limited to twenty pages of double-spaced twelve-point font.

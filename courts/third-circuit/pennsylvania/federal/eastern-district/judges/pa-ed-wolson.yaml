@@ -13,15 +13,8 @@ source:
   last_verified: 2026-11-18
   court_page: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/wolpol.pdf
 facts:
-- id: pages.opposition
+- id: pages.memorandum
   value: 25
-  quote: Opening briefs in support of and in opposition to a motion shall not exceed 25 pages, unless counsel includes a certification that the brief contains no more than 8,750 words.
-  field: page_limits_motions
-  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/wolpol.pdf#page=13
-  verified: true
-  pdf_sha256: 0be90169978a0461bd18a5feae40ac6f8d5d3216ea94d1be31a1c880d76fcd80
-- id: words.memorandum
-  value: 8750
   quote: Opening briefs in support of and in opposition to a motion shall not exceed 25 pages, unless counsel includes a certification that the brief contains no more than 8,750 words.
   field: page_limits_motions
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/wolpol.pdf#page=13

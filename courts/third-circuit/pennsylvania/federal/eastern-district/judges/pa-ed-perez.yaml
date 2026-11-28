@@ -13,6 +13,20 @@ source:
   last_verified: 2026-09-04
   court_page: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/perpol.pdf
 facts:
+- id: pages.memorandum
+  value: 20
+  quote: Any motion and its supporting memorandum of law, as well as opposition briefs, shall not total more than 20 pages.
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/perpol.pdf#page=4
+  verified: true
+  pdf_sha256: 5f8c93cd81f847289e86d4d82cabf0d90e432bcb3e20226a2024af434cf7b586
+- id: pages.opposition
+  value: 20
+  quote: Any motion and its supporting memorandum of law, as well as opposition briefs, shall not total more than 20 pages.
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/perpol.pdf#page=4
+  verified: true
+  pdf_sha256: 5f8c93cd81f847289e86d4d82cabf0d90e432bcb3e20226a2024af434cf7b586
 - id: pages.reply
   value: 7
   quote: Replies must be responsive to arguments raised by opposing counsel and shall not exceed 7 pages.

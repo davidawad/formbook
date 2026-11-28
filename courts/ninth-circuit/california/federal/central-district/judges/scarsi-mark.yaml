@@ -51,7 +51,7 @@ checklist:
 - topic: Chambers copies
   field: chambers_copies_details
   url: https://apps.cacd.uscourts.gov/JpsApi/file/e3077185-22c0-4917-0e78-08dee28213c9#page=8
-  text: Exhibits provided on a CD or DVD will not be considered and will be destroyed unless the CD or DVD itself is a nonpaper exhibit subject to Local Rule 11-5.1. Chambers copies are not required. Unless subject to Local Rule 5-4.2, paper copies of any documents delivered to the Court will be refused or destroyed and not considered.
+  text: Electronic nonpaper exhibits lodged under Local Rule 5-4.2(b)(1) (e.g., audio and video files) must be provided on a USB flash drive or by sending a link to an Internet file hosting service (e.g., Dropbox) by email to mcs_chambers@cacd.uscourts.gov. Exhibits provided on a CD or DVD will not be considered and will be destroyed unless the CD or DVD itself is a nonpaper exhibit subject to Local Rule 11-5.1. Chambers copies are not required. Unless subject to Local Rule 5-4.2, paper copies of any documents delivered to the Court will be refused or destroyed and not considered.
   unverified_sentences: 1
 - topic: Filing under seal
   field: under_seal_requirements
@@ -60,8 +60,7 @@ checklist:
 - topic: Ex parte applications
   field: ex_parte_notice
   url: https://apps.cacd.uscourts.gov/JpsApi/file/e3077185-22c0-4917-0e78-08dee28213c9#page=2
-  text: In addition to the information required by Local Rule 7-19.1, the notice must advise the other parties of the anticipated deadline to oppose the application. The applicant must serve the application by facsimile, email, or personal service, even if electronic service is effected under Local Rule 5-3.2.1. Oppositions to ex parte applications must be filed within 24 hours of the filing of the application, subject to Rule 6(a)(2). If an opposing party does not intend to oppose the ex parte application, counsel must inform the Courtroom Deputy Clerk by telephone or email as soon as possible. No replies in support of ex parte applications are authorized.
-  unverified_sentences: 1
+  text: Counsel for the applicant must provide advance notice of the application by telephone and email to all other parties. In addition to the information required by Local Rule 7-19.1, the notice must advise the other parties of the anticipated deadline to oppose the application. The applicant must serve the application by facsimile, email, or personal service, even if electronic service is effected under Local Rule 5-3.2.1. Oppositions to ex parte applications must be filed within 24 hours of the filing of the application, subject to Rule 6(a)(2). If an opposing party does not intend to oppose the ex parte application, counsel must inform the Courtroom Deputy Clerk by telephone or email as soon as possible. No replies in support of ex parte applications are authorized.
 - topic: Discovery disputes
   field: discovery_referral
   url: https://apps.cacd.uscourts.gov/JpsApi/file/e3077185-22c0-4917-0e78-08dee28213c9#page=5

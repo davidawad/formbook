@@ -13,14 +13,14 @@ source:
   last_verified: 2026-09-04
   court_page: https://www.txs.uscourts.gov/page/united-states-district-judge-david-hittner
 facts:
-- id: body.min_pt
-  value: 14
-  quote: 'ALL PLEADINGS (SUBSEQUENT TO THE ORIGINAL COMPLAINT) FILED IN THE COURT MUST BE: DOUBLE SPACED, NOT LESS THAN ONE INCH MARGINS AND 14 POINT FONT.'
-  field: font_formatting
-  url: https://www.txs.uscourts.gov/sites/txs/files/Judge_Hittner_Case_Procedures.pdf
+- id: pages.memorandum
+  value: 20
+  quote: Each memorandum or brief filed in the Court shall be limited to 20 pages.
+  field: page_limits_motions
+  url: https://www.txs.uscourts.gov/sites/txs/files/Judge_Hittner_Case_Procedures.pdf#page=10
   verified: true
   pdf_sha256: c2817fc9911ea54a8171cfac7ab12bd5fd308587aab66fc09dd05d4fca3c9ad0
 checklist: []
 review:
-- 'pages.memorandum (two values): Any memorandum that is more than 15 pages must be accompanied by a concise summary, no longer than 3 pages, narrowing the points in the brief.'
-- 'pages.memorandum (two values): Each memorandum or brief filed in the Court shall be limited to 20 pages.'
+- 'ALL PLEADINGS (SUBSEQUENT TO THE ORIGINAL COMPLAINT) FILED IN THE COURT MUST BE: DOUBLE SPACED, NOT LESS THAN ONE INCH MARGINS AND 14 POINT FONT.'
+- Any memorandum that is more than 15 pages must be accompanied by a concise summary, no longer than 3 pages, narrowing the points in the brief.

@@ -17,9 +17,9 @@ checklist:
 - topic: Proposed orders
   field: proposed_orders
   url: https://www.flmd.uscourts.gov/judges/sean-flynn#general
-  text: A party, however, is free to attach a proposed order as an exhibit to any motion.
-  unverified_sentences: 1
+  text: Unless otherwise ordered, proposed orders are not required. A party, however, is free to attach a proposed order as an exhibit to any motion.
 - topic: Filing under seal
   field: under_seal_requirements
   url: https://www.flmd.uscourts.gov/judges/sean-flynn#general
-  unverified_sentences: 3
+  text: 'Each confidentiality agreement or stipulated protective order shall provide, or shall be deemed to provide the following:'
+  unverified_sentences: 2

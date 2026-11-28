@@ -12,7 +12,28 @@ source:
   feed: https://lawsnap.com/data/ca-nd-judges.json
   last_verified: 2026-09-04
   court_page: https://cand.uscourts.gov/judges/jd/donato-james
-facts: []
+facts:
+- id: pages.memorandum
+  value: 15
+  quote: Except for summary judgment and class certification motions, opening and opposition briefs may not exceed 15 pages, and reply briefs may not exceed 10 pages.
+  field: page_limits_motions
+  url: https://cand.uscourts.gov/sites/default/files/standing-orders/JD_Standing-Order-For-Civil-Cases-Before-Judge-Donato.pdf
+  verified: true
+  pdf_sha256: 4ebf516080ed355eee2f4ab7c380787aa03899a17beb96eaaac35ecb0691900f
+- id: pages.opposition
+  value: 15
+  quote: Except for summary judgment and class certification motions, opening and opposition briefs may not exceed 15 pages, and reply briefs may not exceed 10 pages.
+  field: page_limits_motions
+  url: https://cand.uscourts.gov/sites/default/files/standing-orders/JD_Standing-Order-For-Civil-Cases-Before-Judge-Donato.pdf
+  verified: true
+  pdf_sha256: 4ebf516080ed355eee2f4ab7c380787aa03899a17beb96eaaac35ecb0691900f
+- id: pages.reply
+  value: 10
+  quote: Except for summary judgment and class certification motions, opening and opposition briefs may not exceed 15 pages, and reply briefs may not exceed 10 pages.
+  field: page_limits_motions
+  url: https://cand.uscourts.gov/sites/default/files/standing-orders/JD_Standing-Order-For-Civil-Cases-Before-Judge-Donato.pdf
+  verified: true
+  pdf_sha256: 4ebf516080ed355eee2f4ab7c380787aa03899a17beb96eaaac35ecb0691900f
 checklist:
 - topic: Motion hearing days
   field: motion_hearing_days
@@ -27,7 +48,4 @@ checklist:
   url: https://cand.uscourts.gov/sites/default/files/standing-orders/JD_Standing-Order-For-Civil-Cases-Before-Judge-Donato.pdf
   unverified_sentences: 1
 review:
-- 'pages.opposition (two values): Except for summary judgment and class certification motions, opening and opposition briefs may not exceed 15 pages, and reply briefs may not exceed 10 pages.'
-- 'pages.opposition (two values): For summary judgment and class certification motions, opening and opposition briefs may not exceed 25 pages, and reply briefs may not exceed 15 pages.'
-- 'pages.reply (two values): Except for summary judgment and class certification motions, opening and opposition briefs may not exceed 15 pages, and reply briefs may not exceed 10 pages.'
-- 'pages.reply (two values): For summary judgment and class certification motions, opening and opposition briefs may not exceed 25 pages, and reply briefs may not exceed 15 pages.'
+- (of one kind of motion) For summary judgment and class certification motions, opening and opposition briefs may not exceed 25 pages, and reply briefs may not exceed 15 pages.

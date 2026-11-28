@@ -20,6 +20,13 @@ facts:
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/scmpol.pdf#page=5
   verified: true
   pdf_sha256: 044bdcdc77342b0b74c1288d38c468ed8215c50e63a45e1e0f7044dba46a70b9
+- id: pages.reply
+  value: 10
+  quote: Reply briefs, addressing only issues raised in the brief in opposition and not repeating arguments in the brief, may be filed within seven days of service of the opponent's brief in opposition and shall be limited to ten pages.
+  field: page_limits_replies
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/scmpol.pdf
+  verified: true
+  pdf_sha256: 044bdcdc77342b0b74c1288d38c468ed8215c50e63a45e1e0f7044dba46a70b9
 checklist:
 - topic: Oral argument
   field: oral_argument_default
@@ -40,5 +47,3 @@ checklist:
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/scmpol.pdf
   text: Continuance requests must be put in writing via email only. The parties shall not file motions seeking continuances of deadlines. The court will grant a continuance or extension based on a stipulation of all parties if the continuance or extension does not affect the discovery cutoff or trial date. All stipulations shall be submitted directly to chambers via email and shall contain a signature and date line for Judge Schmehl to approve the stipulation. If a continuance or extension will affect the discovery cutoff or trial date, counsel should make a written request via email which sets forth the basis for the continuance or extension and indicates whether the other party or parties agree to or oppose the request.
   unverified_sentences: 1
-review:
-- 'Reply and Surreply Briefs: Reply briefs, addressing only issues raised in the brief in opposition and not repeating arguments in the brief, may be filed within seven days of service of the opponent''s brief in opposition and shall be limited to ten pages.'

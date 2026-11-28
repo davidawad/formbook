@@ -27,6 +27,13 @@ facts:
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/weipol.pdf#page=7
   verified: true
   pdf_sha256: c4478c97523afb86c7bedab531b6c856fc1432e59fc81067ca6048c5a0d73ae0
+- id: body.face
+  value: Times New Roman
+  quote: All documents shall be filed in 12-point Times New Roman font, double spaced with one-inch margins and numbered pages.
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/weipol.pdf#page=7
+  verified: true
+  pdf_sha256: c4478c97523afb86c7bedab531b6c856fc1432e59fc81067ca6048c5a0d73ae0
 checklist:
 - topic: Oral argument
   field: oral_argument_default

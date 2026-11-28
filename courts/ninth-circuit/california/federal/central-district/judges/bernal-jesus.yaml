@@ -15,10 +15,11 @@ source:
 facts:
 - id: pages.memorandum
   value: 25
-  quote: 'Length and Format of Motions: Memoranda of Points and Authorities in support of or in opposition to motions shall not exceed 25 pages.'
+  quote: Memoranda of Points and Authorities in support of or in opposition to motions shall not exceed 25 pages.
   field: page_limits_motions
   url: https://apps.cacd.uscourts.gov/JpsApi/file/5970aa35-f379-447a-1bda-08dee67d17de#page=4
-  verified: false
+  verified: true
+  pdf_sha256: e6241924450f76d22e5482df4619d86cefe8ab82786c1cf8235c03a7a819fdc6
 - id: pages.reply
   value: 12
   quote: Replies shall not exceed 12 pages.

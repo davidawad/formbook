@@ -19,7 +19,14 @@ facts:
   field: font_formatting
   url: https://www.flsd.uscourts.gov/content/judge-darrin-p-gayles
   verified: true
-  pdf_sha256: 8c9f465741dc067532141cea96b6c4c8cfd2a31a7b9dee6021f19644cbd0cb4a
+  pdf_sha256: f7e9bdec66db5c310fa91090e17bbb484acd8fe522ab5b0da16eca05cc538568
+- id: body.face
+  value: Times New Roman
+  quote: Unless otherwise specified by the Court, every motion, response, and reply shall be double-spaced in Times New Roman 12-point typeface.
+  field: font_formatting
+  url: https://www.flsd.uscourts.gov/content/judge-darrin-p-gayles
+  verified: true
+  pdf_sha256: f7e9bdec66db5c310fa91090e17bbb484acd8fe522ab5b0da16eca05cc538568
 checklist:
 - topic: Proposed orders
   field: proposed_orders

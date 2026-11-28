@@ -13,6 +13,12 @@ source:
   last_verified: 2026-11-18
   court_page: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/sanpol.pdf
 facts:
+- id: pages.memorandum
+  value: 15
+  quote: Any motion and its supporting memorandum of law shall not total more than 15 pages.
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/sanpol.pdf#page=5
+  verified: false
 - id: pages.opposition
   value: 15
   quote: Opposition briefs shall not exceed 15 pages.
@@ -25,6 +31,27 @@ facts:
   quote: Replies shall not exceed seven pages and should address only issues raised in the opposition to the motion, without repeating arguments made in the initial brief.
   field: page_limits_replies
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/sanpol.pdf#page=6
+  verified: true
+  pdf_sha256: bfbbda429c2e352fa549205e162927d67a16bf496c58a1bddee7798c12934001
+- id: body.exact_pt
+  value: 12
+  quote: All papers submitted to the Court shall be formatted in Times New Roman size 12 font with one-inch margins and double-spaced.
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/sanpol.pdf#page=5
+  verified: true
+  pdf_sha256: bfbbda429c2e352fa549205e162927d67a16bf496c58a1bddee7798c12934001
+- id: body.face
+  value: Times New Roman
+  quote: All papers submitted to the Court shall be formatted in Times New Roman size 12 font with one-inch margins and double-spaced.
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/sanpol.pdf#page=5
+  verified: true
+  pdf_sha256: bfbbda429c2e352fa549205e162927d67a16bf496c58a1bddee7798c12934001
+- id: footnote.exact_pt
+  value: 12
+  quote: Footnotes should also be in size 12 font.
+  field: page_limits_motions
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/sanpol.pdf#page=5
   verified: true
   pdf_sha256: bfbbda429c2e352fa549205e162927d67a16bf496c58a1bddee7798c12934001
 checklist:

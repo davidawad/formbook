@@ -12,5 +12,12 @@ source:
   feed: https://lawsnap.com/data/tx-sd-judges.json
   last_verified: 2026-09-04
   court_page: https://www.txs.uscourts.gov/page/united-states-district-judge-sim-lake
-facts: []
+facts:
+- id: pages.memorandum
+  value: 25
+  quote: Without leave of court no motion, memorandum of law, or brief may exceed 25 total pages.
+  field: page_limits_motions
+  url: https://www.txs.uscourts.gov/sites/txs/files/SLCourtroomProcedures.pdf#page=5
+  verified: true
+  pdf_sha256: a2af50a0a4685eb553a62883add501fa7c0ae36937464d9f55a20bf0d66c99a8
 checklist: []

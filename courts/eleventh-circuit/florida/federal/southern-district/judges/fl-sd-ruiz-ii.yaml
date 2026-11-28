@@ -20,6 +20,13 @@ facts:
   url: https://www.flsd.uscourts.gov/sites/flsd/files/JudgeRodolfoRuiz-Policies-and-Procedures-6.14.2024edit-RAR.pdf#page=2
   verified: true
   pdf_sha256: e6a0be7e6b1c714988957c16c1f204e70fefd246abd124c744f2fc48e711e404
+- id: body.face
+  value: Times New Roman
+  quote: Unless otherwise specified by the Court, every motion, response, and reply shall be double-spaced in Times New Roman 12-point typeface.
+  field: font_formatting
+  url: https://www.flsd.uscourts.gov/sites/flsd/files/JudgeRodolfoRuiz-Policies-and-Procedures-6.14.2024edit-RAR.pdf#page=2
+  verified: true
+  pdf_sha256: e6a0be7e6b1c714988957c16c1f204e70fefd246abd124c744f2fc48e711e404
 checklist:
 - topic: Proposed orders
   field: proposed_orders

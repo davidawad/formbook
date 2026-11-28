@@ -19,6 +19,12 @@ facts:
   field: page_limits_motions
   url: https://www.txs.uscourts.gov/sites/txs/files/CRE%20Court%20Procedures%202026.10.15.pdf#page=19
   verified: false
+- id: words.opposition
+  value: 5000
+  quote: Limit any motion or response to 5,000 words (approximately twenty-five pages).
+  field: page_limits_motions
+  url: https://www.txs.uscourts.gov/sites/txs/files/CRE%20Court%20Procedures%202026.10.15.pdf#page=19
+  verified: false
 - id: words.reply
   value: 2000
   quote: Limit any reply to 2,000 words (approximately ten pages).

@@ -13,6 +13,13 @@ source:
   last_verified: 2026-09-04
   court_page: https://www.txs.uscourts.gov/page/united-states-magistrate-judge-yvonne-y-ho
 facts:
+- id: words.memorandum
+  value: 6500
+  quote: Primary briefs cannot exceed 6,500 words, and reply briefs are limited to 2,500 words.
+  field: page_limits_motions
+  url: https://www.txs.uscourts.gov/sites/txs/files/2026-09-01%20Updated%20Procedures%20for%20Judge%20Yvonne%20Y.%20Ho.pdf
+  verified: true
+  pdf_sha256: 03a1bec1a1dd598b4ad170897fa1e77f0a3cb641308768d096486aa52c2cfd62
 - id: words.reply
   value: 2500
   quote: Primary briefs cannot exceed 6,500 words, and reply briefs are limited to 2,500 words.

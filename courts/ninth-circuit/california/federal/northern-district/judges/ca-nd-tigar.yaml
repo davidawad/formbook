@@ -13,6 +13,13 @@ source:
   last_verified: 2026-09-04
   court_page: https://cand.uscourts.gov/judges/jst/tigar-jon-s
 facts:
+- id: pages.memorandum
+  value: 15
+  quote: For all other types of motions, the opening and opposition briefs must be no more than 15 pages, and the reply brief must be no more than 10 pages.
+  field: page_limits_motions
+  url: https://cand.uscourts.gov/sites/default/files/standing-orders/JST-CivilStandingOrder-06.03.26.pdf
+  verified: true
+  pdf_sha256: c6a85191557d9fa81c0ccfeb0fcc37af79f2ec7b1367951e9537a2d09b4e5f5a
 - id: pages.opposition
   value: 15
   quote: For all other types of motions, the opening and opposition briefs must be no more than 15 pages, and the reply brief must be no more than 10 pages.

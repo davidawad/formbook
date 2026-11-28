@@ -13,11 +13,18 @@ source:
   last_verified: 2026-09-04
   court_page: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/galpol.pdf
 facts:
-- id: pages.opposition
+- id: pages.memorandum
   value: 20
   quote: Opening briefs filed in support of and in opposition to a motion should be limited to twenty pages.
   field: page_limits_motions
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/galpol.pdf#page=13
+  verified: true
+  pdf_sha256: b8195d96ba04ea5f1cacd025e22249fd3d59a7a9f8b0c7084471264b4c8bfdfd
+- id: pages.reply
+  value: 10
+  quote: Replies and sur-replies, where granted, must be limited to ten and seven pages, respectively.
+  field: page_limits_replies
+  url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/galpol.pdf#page=12
   verified: true
   pdf_sha256: b8195d96ba04ea5f1cacd025e22249fd3d59a7a9f8b0c7084471264b4c8bfdfd
 checklist:
@@ -43,5 +50,3 @@ checklist:
   field: continuances_calendar_conflicts
   url: https://www.paed.uscourts.gov/sites/paed/files/documents/procedures/galpol.pdf#page=11
   text: Unless there is good cause to justify a change, the parties are expected to adhere to the dates contained in the scheduling order. The Court will not entertain extension requests that are based on developments that could reasonably have been anticipated at the time of the Rule 16 conference. Parties' failure to conduct discovery in a timely manner is not good cause for an extension or continuance. If an extension does not affect the deadlines for dispositive motions or trial dates, the parties may present their request for an extension via signed stipulation. Pursuant to Local Rule of Civil Procedure 7.4(b)(2), no stipulation of counsel regarding an extension shall be effective until approved by the Court. If an extension will affect the deadline for filing dispositive motions or the trial dates, counsel must make a written request that sets forth the basis for the extension and indicates whether the other parties agree to or oppose the request and proposes amended dates. A request for an extension of the deadline for filing dispositive motions or a continuance of the trial date must be made sufficiently prior to the due date to allow time for the Court to consider it.
-review:
-- Replies and sur-replies, where granted, must be limited to ten and seven pages, respectively.
