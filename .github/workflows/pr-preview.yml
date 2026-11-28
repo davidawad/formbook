@@ -24,8 +24,8 @@ jobs:
       PR: ${{ github.event.number }}
       SHA: ${{ github.event.pull_request.head.sha }}
       # DEMO (fb-595.101 POC, drop before merge): this PR changes no OUTPUT, so compare a past template commit
-      DEMO_BASE: 76b40eef2~1
-      DEMO_HEAD: 76b40eef2
+      DEMO_BASE: 2dbd8c744~1
+      DEMO_HEAD: 2dbd8c744
     steps:
       - uses: actions/checkout@v4
         with:
