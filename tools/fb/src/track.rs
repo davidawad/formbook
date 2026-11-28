@@ -1,6 +1,6 @@
 //! `fb tracker`: regenerate the tracker. Manifest -> completion logic (tracker module) -> README block,
 //! STATUS.md, per-folder READMEs. Intermediate files go to out/ as before.
-use crate::{fail, manifest, readmes, tracker, Res};
+use crate::{courts, fail, manifest, readmes, tracker, Res};
 use std::fs;
 use std::path::Path;
 use std::process::ExitCode;
@@ -29,12 +29,16 @@ fn check(root: &Path) -> Res<ExitCode> {
     let status_path = root.join("STATUS.md");
     let expected_status = status_md(&s);
     let current_status = fs::read_to_string(&status_path).map_err(|e| io_fail(&status_path, e))?;
-    let stale = stale_files(
+    let mut stale = stale_files(
         &current_readme,
         &expected_readme,
         &current_status,
         &expected_status,
     );
+    let tsv_path = root.join(courts::PATH);
+    if fs::read_to_string(&tsv_path).ok() != Some(courts::expected(root)?) {
+        stale.push(courts::PATH);
+    }
     if stale.is_empty() {
         println!("RESULT: TRACKER CHECK PASS");
         Ok(ExitCode::SUCCESS)
@@ -83,6 +87,7 @@ fn run(root: &Path) -> Res<ExitCode> {
     let current = fs::read_to_string(&readme).map_err(|e| io_fail(&readme, e))?;
     write(&readme, &splice(&current, &block))?;
     write(&root.join("STATUS.md"), &status_md(&s))?;
+    write(&root.join(courts::PATH), &courts::expected(root)?)?;
     println!("{}", readmes::write_all(root, &man, &s.rows, &s.docrows)?);
     Ok(ExitCode::SUCCESS)
 }

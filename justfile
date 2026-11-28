@@ -92,6 +92,12 @@ contribute *ARGS:
 find *ARGS:
     {{fb}} find {{ARGS}}
 
+# select a court (alias, legacy alias or name/path substring) and doc type; WARN on stderr when its rules.md verified
+# date is older than --max-age days (default 180); --strict makes that exit 1 (tools/court.bend, Bend; data/courts.tsv)
+[positional-arguments]
+court QUERY *ARGS:
+    @mkdir -p out && bend tools/court.bend -o out/court >&2 && out/court "$@"
+
 # start a filing from the selected doc type's contract sample
 new ALIAS DOCTYPE MD:
     {{fb}} new {{ALIAS}} {{DOCTYPE}} {{MD}}

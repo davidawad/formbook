@@ -101,6 +101,19 @@ just render-filing courts/first-circuit/court-of-appeals/opening-brief ./my-fili
 
 Then look at every page of the PDF. Each doc type's `README.md` lists its rules, markdown contract and known gaps.
 
+## Select a court and check its rules are current
+
+Before you file with a template, check when its court's rules were last verified. `just court` selects a court by alias, legacy alias or a piece of its name or path (with an optional doc type), prints `alias, name, template folder, verified date`, and warns on stderr when the court's `rules.md` was last verified more than 180 days ago:
+
+```sh
+just court ca1 opening-brief
+# ca1	Court of Appeals for the First Circuit	courts/first-circuit/court-of-appeals/opening-brief	2026-10-17
+just court ca9 --today 2027-12-01 --strict      # exit 1 with:
+# WARN: ca9 rules last verified 2026-10-17 (410 days ago, threshold 180); re-check before filing
+```
+
+`--max-age DAYS` changes the threshold and `--strict` turns the warning into exit 1 (for scripts and agents that must not file on stale rules). A query that matches several courts lists them and exits 2. 180 days because federal rule amendments take effect every December 1 (https://www.uscourts.gov/forms-rules/pending-rules-and-forms-amendments) and state courts amend on their own yearly cycles: a court not re-verified in 180 days may have missed one. The selector is `tools/court.bend` (Bend; `just court` compiles it into `out/court`, needs `bend` and clang) reading `data/courts.tsv`, which `tools/tracker.sh` regenerates from `data/index.json` and each court's `rules.md` ("Verified ... on YYYY-MM-DD").
+
 ## License
 
 GNU GPL v3.0: see [LICENSE](LICENSE).
