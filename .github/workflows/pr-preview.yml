@@ -1,0 +1,113 @@
+# Template previews (fb preview, fb-595.101): for every committed usage/OUTPUT-<id>.typst.pdf a change touches,
+# one image per changed page: top row BEFORE | AFTER, bottom row CHANGES (red = removed, green = added) | the REAL
+# FILED EXAMPLE page with the closest text. Images go to the orphan branch `pr-previews`.
+#   pull request: one comment on the PR, replaced on every push (only the latest revision is kept on pr-previews).
+#   push to master: one comment on the pushed commit (agent jobs land on master without a PR).
+# Forks' PRs get a read-only token: they get the images as a run artifact only, no comment. Same-repo PRs are
+# trusted code, so this job may write. The job (check `preview`) is required on master PRs; admins bypass for
+# direct agent pushes.
+name: pr-preview
+on:
+  # every PR, so the `preview` check can be required; a PR touching no template skips the work and passes
+  pull_request:
+  push:
+    branches: [master]
+    paths:
+      - "courts/**"
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: pr-preview-${{ github.event.number || github.sha }}
+  cancel-in-progress: true
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    env:
+      PR: ${{ github.event.number }}
+      SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Scope
+        run: |
+          if [ -n "$PR" ]; then
+            git diff --name-only "origin/${{ github.base_ref }}...HEAD" > "$RUNNER_TEMP/changed.txt"
+            if ! grep -qE "^(courts|lib|tools/fb/src/preview\.rs|\.github/workflows/pr-preview\.yml)" "$RUNNER_TEMP/changed.txt"; then
+              echo "no template change in this PR: nothing to preview"
+              echo "SKIP=1" >> "$GITHUB_ENV"
+            fi
+          fi
+      - name: Toolchain
+        if: env.SKIP != '1'
+        run: |
+          # bootstrap exits 1 for soffice, bend and br, which preview does not use
+          sh tools/bootstrap.sh || true
+          bin="$HOME/.local/share/formbook/env/bin"
+          for t in magick pdftoppm pdftotext pdfinfo; do test -x "$bin/$t" || { echo "missing $t"; exit 1; }; done
+          echo "$bin" >> "$GITHUB_PATH"
+      - name: Render previews
+        if: env.SKIP != '1'
+        run: |
+          if [ -n "$PR" ]; then
+            dest="pr-$PR/$SHA"
+            prune="pr-$PR"
+            base="origin/${{ github.base_ref }}"
+            head="HEAD"
+          else
+            dest="commit-$SHA"
+            prune="$dest"
+            base="${{ github.event.before }}"
+            head="$SHA"
+          fi
+          printf "DEST=%s\nPRUNE=%s\n" "$dest" "$prune" >> "$GITHUB_ENV"
+          url="https://raw.githubusercontent.com/${{ github.repository }}/pr-previews/$dest"
+          cargo run -q --release --manifest-path tools/fb/Cargo.toml -- \
+            preview --base "$base" --head "$head" --out "$RUNNER_TEMP/preview" --url-prefix "$url"
+          cat "$RUNNER_TEMP/preview/manifest.tsv"
+      - uses: actions/upload-artifact@v4
+        if: env.SKIP != '1'
+        with:
+          name: pr-preview-${{ github.event.number || github.sha }}
+          path: ${{ runner.temp }}/preview
+      - name: Publish images and comment
+        if: env.SKIP != '1' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          src="$RUNNER_TEMP/preview"
+          if [ ! -s "$src/manifest.tsv" ] && [ -z "$PR" ]; then echo "no template change in this push"; exit 0; fi
+          pub="$RUNNER_TEMP/pub"
+          remote="https://x-access-token:$GH_TOKEN@github.com/${{ github.repository }}.git"
+          git config --global user.name "formbook-preview"
+          git config --global user.email "formbook-preview@users.noreply.github.com"
+          if git ls-remote --exit-code origin pr-previews >/dev/null; then
+            git clone -q --depth 1 --branch pr-previews "$remote" "$pub"
+          else
+            git init -q -b pr-previews "$pub"
+            git -C "$pub" remote add origin "$remote"
+          fi
+          # only the latest revision of a PR is kept; the sha stays in the path so GitHub's image cache never serves an old one
+          git -C "$pub" rm -rq --ignore-unmatch "$PRUNE"
+          mkdir -p "$pub/$DEST"
+          cp -R "$src"/. "$pub/$DEST/"
+          rm -f "$pub/$DEST/manifest.tsv" "$pub/$DEST/comment.md"
+          git -C "$pub" add -A
+          git -C "$pub" commit -q -m "preview: $DEST" || echo "no new images"
+          for try in 1 2 3 4 5; do
+            git -C "$pub" push -q origin pr-previews && break
+            sleep $((RANDOM % 10 + try * 3))
+            git -C "$pub" pull -q --rebase origin pr-previews
+          done
+          if [ -z "$PR" ]; then
+            gh api "repos/${{ github.repository }}/commits/$SHA/comments" -F body=@"$src/comment.md" >/dev/null
+            exit 0
+          fi
+          id=$(gh api "repos/${{ github.repository }}/issues/$PR/comments" --paginate \
+            --jq '.[] | select(.body | startswith("<!-- fb-preview -->")) | .id' | head -n 1)
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/${{ github.repository }}/issues/comments/$id" -F body=@"$src/comment.md" >/dev/null
+          else
+            gh pr comment "$PR" --body-file "$src/comment.md"
+          fi

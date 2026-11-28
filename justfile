@@ -27,6 +27,10 @@ overlay DIR:
 overlay-all:
     find courts -type d -name usage | sed 's|/usage$||' | sort | xargs -n1 {{just_executable()}} overlay
 
+# PR previews of every committed OUTPUT the branch changes vs BASE (fb preview; red = before, green = after), into .overlay/preview/
+preview BASE="origin/master":
+    {{fb}} preview --base {{BASE}}
+
 # run the eval-loop gates of DIR (fb check)
 check DIR:
     {{fb}} check {{DIR}}
