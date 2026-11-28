@@ -1,0 +1,10 @@
+# C.D. Cal.: how this court's layout takes a limit a judge's order set (tools/fb/src/judges/apply.rs, docs/JUDGES.md).
+# L.R. 11-6.2 gives the certificate of compliance two forms: the count "complies with the word limit of L.R. 11-6.1",
+# or it "complies with the word limit set by court order dated [date]". The motion-brief layout prints the first;
+# under a judge's own limit the second is printed when the filing's frontmatter gives `word_limit_order_date`.
+# Source: C.D. Cal. Local Civil Rules, Chapter I (June 1, 2026), L.R. 11-6.1, 11-6.2,
+# https://www.cacd.uscourts.gov/sites/default/files/documents/2026-June-LRs-Chap-1.pdf (read 2026-11-28).
+words_basis:
+  find: "complies with the word limit of L.R. 11-6.1."
+  court_order: "complies with the word limit set by court order dated {word_limit_order_date}."
+  rule: "C.D. Cal. L.R. 11-6.2"
