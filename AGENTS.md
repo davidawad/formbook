@@ -43,6 +43,7 @@ Scope: one court folder per claim. Do not edit another court's folder or shared 
    - the tier-1 `check.sh` RESULT line for each engine (typst, latex, docx);
    - the `check-selftest.sh` result;
    - the overlay pages you reviewed (`just overlay <dir>` writes `.overlay/<doc path>/OVERLAY-<id>.pdf`; it is not committed, so attach or describe it);
+   - the template previews: the `pr-preview` workflow (`.github/workflows/pr-preview.yml`) comments one image per changed page of every changed `OUTPUT-<id>.typst.pdf` (top: BEFORE | AFTER; bottom: CHANGES, red = removed, green = added | REAL FILED EXAMPLE) and replaces it on every push; run `just preview` (`.overlay/preview/`) and look at every image before opening the PR;
    - the FILED-EXAMPLEs used, with the filer of each (from `usage/SOURCE.md`);
    - the remaining tier-2 findings, by page (`OPEN` or `ACCEPTED` rows of the Gate 2 review);
    - the docx `BLOCKED` items: each failing check ID and why (a docx may be delivered BLOCKED or partial; silently missing is not acceptable, and the same holds for latex).
