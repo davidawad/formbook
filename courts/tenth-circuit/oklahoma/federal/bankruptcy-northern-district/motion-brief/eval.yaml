@@ -1,0 +1,4 @@
+# Gate 4 CROSS-ENGINE (docs/EVAL-LOOP.md, "Cross-engine gate"): the docx render breaks every line and page where the
+# typst render does (on the cross-engine layout model lib/docx/xengine.lua), so a difference fails.
+params:
+  cross_engine: gate

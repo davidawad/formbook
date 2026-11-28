@@ -12,6 +12,17 @@ local function esc(s)
   return s
 end
 
+-- Pandoc's +smart inserts NBSP after abbreviations; Typst word-compat does not.
+local function unnbsp(blocks)
+  return pandoc.walk_block(pandoc.Div(blocks), {
+    Str = function(el)
+      if el.text:find("\194\160", 1, true) then
+        return pandoc.Str(el.text:gsub("\194\160", " "))
+      end
+    end
+  }).content
+end
+
 -- Frontmatter values are markdown (MetaInlines) or plain Lua strings; return inlines.
 local function inl(v)
   if v == nil then return pandoc.Inlines({}) end
@@ -48,36 +59,40 @@ local function raw_p(style, text, ppr_extra)
 end
 
 local function caption_table(meta)
-  local left_w, gutter_w, right_w = 4896, 432, 4032   -- 3.4 in, 0.3 in, 2.8 in (6.5 in text width)
+  local left_w, gutter_w, right_w = 4896, 400, 4064   -- 3.4 in, ~0.28 in, ~2.82 in (6.5 in text width)
   local indent = (MODE == "complaint") and 2880 or 1728 -- designation: 2 in (complaint), 1.2 in (memo)
   local left = {}
   local debtor = list_of(meta.debtor)
   for _, l in ipairs(debtor) do left[#left + 1] = raw_p("CaptionText", plain(l)) end
-  if #debtor > 0 then left[#left + 1] = raw_p("CaptionText", "") end
+  if #debtor > 0 then left[#left + 1] = raw_p("CaptionText", "", "<w:spacing w:before=\"0\" w:after=\"210\" w:line=\"306\" w:lineRule=\"exact\"/>") end
+  local justify_left = (meta.word and meta.word.justify) and "<w:jc w:val=\"both\"/>" or ""
   local function group(p)
     local out = {}
-    for _, n in ipairs(list_of(p.names)) do out[#out + 1] = raw_p("CaptionText", plain(n)) end
+    for _, n in ipairs(list_of(p.names)) do out[#out + 1] = raw_p("CaptionText", plain(n), justify_left) end
     out[#out + 1] = "<w:p><w:pPr><w:pStyle w:val=\"CaptionParty\"/><w:ind w:left=\"" .. indent .. "\" w:firstLine=\"0\"/></w:pPr><w:r><w:t xml:space=\"preserve\">" .. esc(plain(p.designation)) .. "</w:t></w:r></w:p>"
     return out
   end
   for i, p in ipairs(list_of(meta.parties)) do
-    if i > 1 then left[#left + 1] = raw_p("CaptionText", "v.", "<w:jc w:val=\"center\"/>") end
+    if i > 1 then left[#left + 1] = raw_p("CaptionText", "v.", "<w:jc w:val=\"center\"/><w:spacing w:before=\"0\" w:after=\"468\" w:line=\"306\" w:lineRule=\"exact\"/>") end
     for _, x in ipairs(group(p)) do left[#left + 1] = x end
   end
   local third = list_of(meta.third_party)
   if #third > 0 then
-    left[#left + 1] = "<w:p><w:pPr><w:pStyle w:val=\"CaptionText\"/><w:pBdr><w:bottom w:val=\"single\" w:sz=\"4\" w:space=\"1\" w:color=\"000000\"/></w:pBdr><w:spacing w:before=\"0\" w:after=\"260\" w:line=\"240\" w:lineRule=\"auto\"/></w:pPr></w:p>"
+    left[#left + 1] = "<w:p><w:pPr><w:pStyle w:val=\"CaptionText\"/><w:pBdr><w:bottom w:val=\"single\" w:sz=\"4\" w:space=\"1\" w:color=\"000000\"/></w:pBdr><w:spacing w:before=\"0\" w:after=\"314\" w:line=\"200\" w:lineRule=\"exact\"/></w:pPr></w:p>"
     for i, p in ipairs(third) do
-      if i > 1 then left[#left + 1] = raw_p("CaptionText", "v.", "<w:jc w:val=\"center\"/>") end
+      if i > 1 then left[#left + 1] = raw_p("CaptionText", "v.", "<w:jc w:val=\"center\"/><w:spacing w:before=\"0\" w:after=\"468\" w:line=\"306\" w:lineRule=\"exact\"/>") end
       for _, x in ipairs(group(p)) do left[#left + 1] = x end
     end
   end
   local right = {}
   local keys = { "bankruptcy_case", "adversary" }
   if MODE == "complaint" then keys = { "bankruptcy_case", "chapter", "adversary", "judge" } end
+  local first_right = true
   for _, key in ipairs(keys) do
     if meta[key] ~= nil then
-      right[#right + 1] = raw_p("CaptionText", plain(meta[key]), "<w:spacing w:before=\"0\" w:after=\"312\" w:line=\"240\" w:lineRule=\"auto\"/>")
+      local before = first_right and "288" or "0"
+      first_right = false
+      right[#right + 1] = raw_p("CaptionText", plain(meta[key]), "<w:spacing w:before=\"" .. before .. "\" w:after=\"374\" w:line=\"306\" w:lineRule=\"exact\"/>")
     end
   end
   if #right == 0 then right[#right + 1] = raw_p("CaptionText", "") end
@@ -103,7 +118,6 @@ local function counsel(meta)
   local out = {}
   for _, l in ipairs(list_of(meta.counsel)) do out[#out + 1] = style_para("Counsel", inl(l)) end
   if meta.client ~= nil then out[#out + 1] = style_para("Counsel", pandoc.Inlines({ pandoc.Emph(inl(meta.client)) })) end
-  out[#out + 1] = style_para("CaptionText", pandoc.Inlines({}))
   return out
 end
 
@@ -112,7 +126,7 @@ local function court_title()
   return {
     style_para("CourtTitle", pandoc.Inlines({ pandoc.Strong({ pandoc.Str(first) }) })),
     style_para("CourtTitle", pandoc.Inlines({ pandoc.Strong({ pandoc.Str("FOR THE DISTRICT OF WYOMING") }) })),
-    style_para("CaptionText", pandoc.Inlines({})),
+    pandoc.RawBlock("openxml", '<w:p><w:pPr><w:pStyle w:val="CaptionText"/><w:spacing w:before="0" w:after="0" w:line="220" w:lineRule="exact"/></w:pPr></w:p>'),
   }
 end
 
@@ -124,10 +138,17 @@ local function signature(meta)
   if sig == nil then return out end
   if MODE == "complaint" then
     if sig.firm ~= nil then out[#out + 1] = style_para("Signature", inl(sig.firm)) end
-    out[#out + 1] = style_para("Signature", pandoc.Inlines({}))
+    out[#out + 1] = pandoc.RawBlock("openxml", '<w:p><w:pPr><w:pStyle w:val="Signature"/><w:spacing w:before="0" w:after="0" w:line="312" w:lineRule="exact"/></w:pPr></w:p>')
     out[#out + 1] = style_para("Signature", pandoc.Inlines({ pandoc.Str("/s/ " .. plain(sig.signer)) }))
     out[#out + 1] = style_para("Signature", inl(sig.signer))
-    for _, l in ipairs(list_of(sig.lines)) do out[#out + 1] = style_para("SignatureNote", inl(l)) end
+    local lines = list_of(sig.lines)
+    for i, l in ipairs(lines) do
+      if i == #lines then
+        out[#out + 1] = pandoc.Div({ pandoc.Para(inl(l)) }, { ["custom-style"] = "SignatureNote" })
+      else
+        out[#out + 1] = style_para("SignatureNote", inl(l))
+      end
+    end
   else
     for _, s in ipairs(list_of(sig.signatures)) do out[#out + 1] = style_para("Signature", inl(s)) end
     out[#out + 1] = style_para("Signature", pandoc.Inlines({}))
@@ -161,6 +182,7 @@ function Pandoc(doc)
   blocks[#blocks + 1] = style_para("DocTitle", pandoc.Inlines({ pandoc.Strong(inl(meta.title or (MODE == "complaint" and "COMPLAINT" or "MEMORANDUM"))) }))
 
   -- body: numbered paragraphs (complaint only) and lettered prayer items, counters as in the typst template
+  local gap06 = pandoc.RawInline("openxml", '<w:r><w:rPr><w:spacing w:val="156"/></w:rPr><w:t xml:space="preserve"> </w:t></w:r>')
   local n, letter, in_body = 0, 0, false
   for _, b in ipairs(doc.blocks) do
     if b.t == "Header" then
@@ -172,7 +194,7 @@ function Pandoc(doc)
         letter = letter + 1
         local first = item[1]
         local body = (first and (first.t == "Para" or first.t == "Plain")) and first.content or pandoc.Inlines({})
-        local lead = pandoc.Inlines({ pandoc.Str(UPPER:sub(letter, letter) .. "."), pandoc.Space() })
+        local lead = pandoc.Inlines({ pandoc.Str(UPPER:sub(letter, letter) .. "."), gap06 })
         blocks[#blocks + 1] = style_para("Lettered", lead .. body)
       end
     elseif b.t == "Para" or b.t == "Plain" then
@@ -180,7 +202,7 @@ function Pandoc(doc)
       if text:match("^WHEREFORE") then letter = 0 end
       if MODE == "complaint" and in_body and not text:match("^WHEREFORE") then
         n = n + 1
-        blocks[#blocks + 1] = pandoc.Para(pandoc.Inlines({ pandoc.Str(n .. "."), pandoc.Space() }) .. b.content)
+        blocks[#blocks + 1] = pandoc.Para(pandoc.Inlines({ pandoc.Str(n .. "."), gap06 }) .. b.content)
       else
         letter = (in_body and MODE == "complaint") and letter or letter
         blocks[#blocks + 1] = pandoc.Para(b.content)
@@ -191,5 +213,5 @@ function Pandoc(doc)
   end
   add(signature(meta))
   add(certificate(meta))
-  return pandoc.Pandoc(blocks, pandoc.Meta({}))
+  return pandoc.Pandoc(unnbsp(blocks), pandoc.Meta({}))
 end

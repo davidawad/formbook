@@ -17,9 +17,11 @@ local function styled(style, blocks)
 end
 
 -- Plain text from the frontmatter (court, signature and address lines): no markdown, so "(404)" stays as written.
+-- Replace any non-breaking space before splitting on ASCII whitespace so multi-byte UTF-8 sequences are never split.
 local function plain_inlines(s)
+  local str = pandoc.utils.stringify(s):gsub("\u{00A0}", " ")
   local out = pandoc.Inlines({})
-  for word in pandoc.utils.stringify(s):gmatch("%S+") do
+  for word in str:gmatch("[^ \t\r\n]+") do
     if #out > 0 then out:insert(pandoc.Space()) end
     out:insert(pandoc.Str(word))
   end
@@ -40,12 +42,11 @@ local function xp(style, s, rpr)
 end
 
 -- ---------------------------------------------------------------------------
--- Cover: court heading, caption (a borderless table; the party column has a right rule, as the ")" column
--- does in the typst template), title.
+-- Cover: court heading, caption (a borderless table; the middle column holds ")" for each party line,
+-- matching typst/gamd-complaint.typ), title.
 -- ---------------------------------------------------------------------------
 
 local CAP_LEFT, CAP_GAP, CAP_RIGHT = 4752, 432, 4176 -- 3.3 in, 0.3 in, 2.9 in: the 6.5 in text width
-local RIGHT_RULE = '<w:tcBorders><w:right w:val="single" w:sz="4" w:space="0" w:color="000000"/></w:tcBorders>'
 
 local function cell(width, paras, borders)
   return '<w:tc><w:tcPr><w:tcW w:w="' .. width .. '" w:type="dxa"/>' .. (borders or "") .. '</w:tcPr>'
@@ -64,27 +65,28 @@ local function caption_table(meta)
   for k, p in ipairs(meta.caption.parties) do
     if k > 1 then
       rows[#rows + 1] = row(
-        cell(CAP_LEFT, { xp("CaptionName", "v.") }, RIGHT_RULE),
-        cell(CAP_GAP, { xp("CaptionName", "") }),
+        cell(CAP_LEFT, { xp("CaptionName", "v.") }),
+        cell(CAP_GAP, { xp("CaptionName", ")") }),
         cell(CAP_RIGHT, { xp("CaptionRight", "") }))
     end
-    local lines = {}
+    local lines, marks = {}, {}
     for _, n in ipairs(p.names) do
       lines[#lines + 1] = xp("CaptionName", pandoc.utils.stringify(n))
+      marks[#marks + 1] = xp("CaptionName", ")")
     end
     lines[#lines + 1] = xp("CaptionDesignation", pandoc.utils.stringify(p.designation))
+    marks[#marks + 1] = xp("CaptionName", ")")
     local right = xp("CaptionRight", "")
     if k == 1 then
       right = xp("CaptionRight", ((label .. " " .. number):gsub("%s+$", "")))
     elseif k == 2 and jury then
       right = xp("CaptionRight", "JURY TRIAL DEMANDED", "<w:rPr><w:b/><w:bCs/></w:rPr>")
     end
-    rows[#rows + 1] = row(cell(CAP_LEFT, lines, RIGHT_RULE), cell(CAP_GAP, { xp("CaptionName", "") }),
-      cell(CAP_RIGHT, { right }))
+    rows[#rows + 1] = row(cell(CAP_LEFT, lines), cell(CAP_GAP, marks), cell(CAP_RIGHT, { right }))
   end
-  -- the closing rule under the parties
+  -- the closing rule under the parties, with its ")" mark
   local rule = '<w:p><w:pPr><w:pStyle w:val="CaptionName"/><w:pBdr><w:bottom w:val="single" w:sz="4" w:space="1" w:color="000000"/></w:pBdr></w:pPr></w:p>'
-  rows[#rows + 1] = row(cell(CAP_LEFT, { rule }, RIGHT_RULE), cell(CAP_GAP, { xp("CaptionName", "") }),
+  rows[#rows + 1] = row(cell(CAP_LEFT, { rule }), cell(CAP_GAP, { xp("CaptionName", ")") }),
     cell(CAP_RIGHT, { xp("CaptionRight", "") }))
   return '<w:tbl><w:tblPr><w:tblW w:w="9360" w:type="dxa"/><w:tblInd w:w="0" w:type="dxa"/>'
     .. '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar></w:tblPr>'
@@ -195,6 +197,16 @@ local function body(blocks)
   return out
 end
 
+local function unbind_nbsp(blocks)
+  return pandoc.Blocks(blocks):walk({
+    Str = function(el)
+      if el.text:find("\u{00A0}", 1, true) then
+        return pandoc.Str((el.text:gsub("\u{00A0}", " ")))
+      end
+    end
+  })
+end
+
 function Pandoc(doc)
   local meta = doc.meta
   local out = {}
@@ -212,7 +224,7 @@ function Pandoc(doc)
     out[#out + 1] = styled("AllegationText", { pandoc.Para(inlines_of(pandoc.utils.stringify(meta.lead_in))) })
   end
 
-  for _, b in ipairs(body(doc.blocks)) do out[#out + 1] = b end
+  for _, b in ipairs(body(unbind_nbsp(doc.blocks))) do out[#out + 1] = b end
 
   out[#out + 1] = para("SignatureLead", "Respectfully submitted " .. pandoc.utils.stringify(meta.date) .. ".")
   for _, b in ipairs(signature(meta)) do out[#out + 1] = b end
