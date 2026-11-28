@@ -1,7 +1,7 @@
 //! `fb judges`: a judge's standing-order requirements as a layer over the court's layout (docs/JUDGES.md).
 //!
 //!   fb judges sources                              the courts a judge feed covers (data/judge-sources.json)
-//!   fb judges sync <alias> [--judge <slug>] [--feed FILE] [--no-verify]
+//!   fb judges sync <alias> [--judge <slug>] [--feed FILE] [--no-verify] [--cached]
 //!                                                  read the feed, write <court>/judges/<slug>.yaml
 //!   fb judges list <alias>                         the profiles of a court, one a line
 //!   fb judges show <alias> <slug> [doctype]        a profile, and what it changes in a doc type's layout
@@ -24,7 +24,7 @@ use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 use std::process::{Command, ExitCode};
 
-const USAGE: &str = "usage: fb judges sources | sync <alias> [--judge <slug>] [--feed FILE] [--no-verify] | list <alias> | show <alias> <slug> [doctype] | check <alias> [doctype]";
+const USAGE: &str = "usage: fb judges sources | sync <alias> [--judge <slug>] [--feed FILE] [--no-verify] [--cached] | list <alias> | show <alias> <slug> [doctype] | check <alias> [doctype]";
 
 /// The feeds and the courts they cover (data/judge-sources.json).
 #[derive(Debug, Deserialize)]
@@ -96,6 +96,29 @@ pub struct Fact {
     /// The SHA-256 of the document the sentence was found in.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pdf_sha256: Option<String>,
+    /// Where the sentence was found when not in the document its own field cites: `other-cited` (another document
+    /// the feed cites for the judge) or `court-index` (a document the court's own index lists for the judge).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub matched: Option<String>,
+}
+
+/// Where a candidate document comes from: the field's own citation, another of the feed's citations for the judge,
+/// or the court's own index of the judge's documents.
+#[derive(Debug, Clone, Copy, PartialEq)]
+enum Origin {
+    Cited,
+    OtherCited,
+    CourtIndex,
+}
+
+impl Origin {
+    fn matched(self) -> Option<String> {
+        match self {
+            Origin::Cited => None,
+            Origin::OtherCited => Some("other-cited".into()),
+            Origin::CourtIndex => Some("court-index".into()),
+        }
+    }
 }
 
 /// A requirement the render cannot enforce (a hearing day, a proposed order by email): its topic, where the order
@@ -204,7 +227,7 @@ pub fn profiles(court: &Path) -> Res<Vec<Profile>> {
 }
 
 /// A judge's slug is a file name: lower-case letters, digits and hyphens.
-fn slug_ok(s: &str) -> bool {
+pub fn slug_ok(s: &str) -> bool {
     !s.is_empty()
         && s.len() <= 80
         && s.chars()
@@ -258,25 +281,44 @@ struct Docs<'a> {
     loaded: BTreeMap<String, Result<verify::Corpus, String>>,
 }
 
+/// How a sentence is looked for in a document: a fact's whole sentence (verify::holds_fact), or a checklist
+/// sentence, whose elided pieces may each be found in order (verify::holds).
+#[derive(Clone, Copy)]
+enum Match {
+    Fact,
+    Checklist,
+}
+
 impl Docs<'_> {
-    /// The first of `urls` (court-hosted) whose document holds `quote`: its URL as cited and the document's hash.
-    fn find(&mut self, urls: &[String], quote: &str) -> Option<(String, String)> {
+    /// The first of `urls` (court-hosted) whose document holds `quote`: its URL as cited, the document's hash and
+    /// where the document comes from.
+    fn find(
+        &mut self,
+        urls: &[(String, Origin)],
+        quote: &str,
+        how: Match,
+    ) -> Option<(String, String, Origin)> {
         if !self.on {
             return None;
         }
-        for u in urls {
+        for (u, origin) in urls {
             if !verify::court_hosted(u, self.hosts) {
                 continue;
             }
             let key = verify::bare(u).to_string();
             let cache = self.cache.clone();
+            let hosts = self.hosts;
             let doc = self
                 .loaded
                 .entry(key)
-                .or_insert_with_key(|k| verify::load(k, &cache));
+                .or_insert_with_key(|k| verify::load(k, &cache, hosts));
             if let Ok(c) = doc {
-                if verify::holds(&c.text, quote) {
-                    return Some((u.clone(), c.sha256.clone()));
+                let ok = match how {
+                    Match::Fact => verify::holds_fact(&c.text, quote),
+                    Match::Checklist => verify::holds(&c.text, quote),
+                };
+                if ok {
+                    return Some((u.clone(), c.sha256.clone(), *origin));
                 }
             }
         }
@@ -286,23 +328,30 @@ impl Docs<'_> {
 
 /// The URLs to look a field's sentences up in: the field's own citation first, then the judge's other documents,
 /// then what the court's own index lists for the judge today (`extra`).
-fn candidates(j: &Json, k: &str, extra: &[String]) -> Vec<String> {
-    let mut out: Vec<String> = Vec::new();
-    let mut push = |u: Option<&str>| {
+fn candidates(j: &Json, k: &str, extra: &[String]) -> Vec<(String, Origin)> {
+    let mut out: Vec<(String, Origin)> = Vec::new();
+    let mut push = |u: Option<&str>, origin: Origin| {
         if let Some(u) = u {
-            if !out.iter().any(|o| verify::bare(o) == verify::bare(u)) {
-                out.push(u.to_string());
+            if !out.iter().any(|(o, _)| verify::bare(o) == verify::bare(u)) {
+                out.push((u.to_string(), origin));
             }
         }
     };
-    push(j["citations"][k]["url"].as_str());
+    push(j["citations"][k]["url"].as_str(), Origin::Cited);
     for (_, c) in j["citations"].as_object().into_iter().flatten() {
-        push(c["url"].as_str());
+        push(c["url"].as_str(), Origin::OtherCited);
     }
     for u in extra {
-        push(Some(u));
+        push(Some(u), Origin::CourtIndex);
     }
     out
+}
+
+/// A judge's name in a court index's URLs: Unicode letters and digits and hyphens, nothing that could leave the path.
+fn index_name_ok(name: &str) -> bool {
+    !name.is_empty()
+        && name.chars().count() <= 120
+        && name.chars().all(|c| c.is_alphanumeric() || c == '-')
 }
 
 /// What the court's own index lists for the judge: the API answer of the judge's page, then its documents.
@@ -312,12 +361,12 @@ fn court_listed(j: &Json, index: Option<&CourtIndex>, docs: &Docs) -> Vec<String
     };
     let Some(name) = page
         .strip_prefix(&ix.page_prefix)
-        .filter(|n| !n.is_empty() && docs.on)
+        .filter(|n| index_name_ok(n) && docs.on)
     else {
         return vec![];
     };
     let api = format!("{}{name}", ix.api_prefix);
-    let mut out = verify::listed_documents(&api, &ix.file_prefix, &docs.cache);
+    let mut out = verify::listed_documents(&api, &ix.file_prefix, &docs.cache, docs.hosts);
     out.insert(0, api);
     out
 }
@@ -329,12 +378,18 @@ fn profile_of(j: &Json, alias: &str, src: &Sources, court_slug: &str, docs: &mut
     let listed = court_listed(j, src.court_index.get(alias), docs);
     let mut facts: Vec<Fact> = Vec::new();
     let mut review: Vec<String> = Vec::new();
+    // ids two fields gave two values for: no fact for the rest of the judge (extract::dedupe, across fields)
+    let mut dropped: Vec<String> = Vec::new();
     let mut take = |fields: &[&str], read: fn(&str) -> (Vec<extract::Found>, Vec<String>)| {
         for k in fields {
             let Some(t) = field(j, k) else { continue };
             let (found, rev) = read(t);
             review.extend(rev);
             for f in found {
+                if dropped.contains(&f.id) {
+                    review.push(format!("{} (two values): {}", f.id, f.quote));
+                    continue;
+                }
                 match facts.iter().position(|o| o.id == f.id) {
                     Some(i) if facts[i].value == f.value => {}
                     Some(i) => {
@@ -342,10 +397,11 @@ fn profile_of(j: &Json, alias: &str, src: &Sources, court_slug: &str, docs: &mut
                         let old = facts.remove(i);
                         review.push(format!("{} (two values): {}", old.id, old.quote));
                         review.push(format!("{} (two values): {}", f.id, f.quote));
+                        dropped.push(f.id);
                     }
                     None => {
                         let urls = candidates(j, k, &listed);
-                        let hit = docs.find(&urls, &f.quote);
+                        let hit = docs.find(&urls, &f.quote, Match::Fact);
                         facts.push(Fact {
                             id: f.id,
                             value: f.value,
@@ -354,9 +410,10 @@ fn profile_of(j: &Json, alias: &str, src: &Sources, court_slug: &str, docs: &mut
                             url: hit
                                 .as_ref()
                                 .map(|h| h.0.clone())
-                                .or_else(|| urls.first().cloned()),
+                                .or_else(|| urls.first().map(|u| u.0.clone())),
                             verified: hit.is_some(),
-                            pdf_sha256: hit.map(|h| h.1),
+                            pdf_sha256: hit.as_ref().map(|h| h.1.clone()),
+                            matched: hit.and_then(|h| h.2.matched()),
                         });
                     }
                 }
@@ -381,7 +438,7 @@ fn profile_of(j: &Json, alias: &str, src: &Sources, court_slug: &str, docs: &mut
             if q.chars().count() < 25 {
                 continue;
             }
-            if docs.find(&urls, &q).is_some() {
+            if docs.find(&urls, &q, Match::Checklist).is_some() {
                 if !kept.contains(&q) {
                     kept.push(q);
                 }
@@ -398,7 +455,7 @@ fn profile_of(j: &Json, alias: &str, src: &Sources, court_slug: &str, docs: &mut
         checklist.push(Item {
             topic: topic.to_string(),
             field: k.to_string(),
-            url: urls.first().cloned(),
+            url: urls.first().map(|u| u.0.clone()),
             text: kept.join(" "),
             unverified_sentences: dropped,
         });
@@ -462,6 +519,11 @@ fn sync(args: &[String]) -> Res<ExitCode> {
     })?;
     let court = court_dir(&root, alias)?;
     let cache = root.join("out/judges-cache");
+    // a court replaces an order at the same URL: every sync reads the documents afresh unless told otherwise
+    if !args.iter().any(|a| a == "--cached") && cache.exists() {
+        std::fs::remove_dir_all(&cache)
+            .map_err(|e| fail(2, format!("fb judges sync: {}: {e}", cache.display())))?;
+    }
     let feed: Json = match opt(args, "--feed") {
         Some(f) => {
             let b = std::fs::read(f).map_err(|e| fail(2, format!("fb judges sync: {f}: {e}")))?;
@@ -470,7 +532,18 @@ fn sync(args: &[String]) -> Res<ExitCode> {
         None => {
             let url = src.feed.replace("{slug}", court_slug);
             let out = Command::new("curl")
-                .args(["-fsSL", "--retry", "2", "--max-time", "120", &url])
+                .args([
+                    "-fsSL",
+                    "--proto",
+                    "=https",
+                    "--proto-redir",
+                    "=https",
+                    "--retry",
+                    "2",
+                    "--max-time",
+                    "120",
+                    &url,
+                ])
                 .output()
                 .map_err(|e| fail(2, format!("fb judges sync: curl: {e}")))?;
             if !out.status.success() {
@@ -595,6 +668,13 @@ fn show(args: &[String]) -> Res<ExitCode> {
         [a, s, d] => (a, s, Some(d.as_str())),
         _ => return Err(fail(2, USAGE)),
     };
+    // the slug names a file under the court folder: never a path
+    if !slug_ok(slug) {
+        return Err(fail(
+            2,
+            format!("fb judges show: '{slug}' is not a judge's slug (lower-case letters, digits and hyphens)"),
+        ));
+    }
     let root = repo_root()?;
     let court = court_dir(&root, alias)?;
     let p = read_profile(&profile_path(&court, slug))?;
@@ -626,6 +706,12 @@ fn show(args: &[String]) -> Res<ExitCode> {
         println!("      \u{201C}{}\u{201D}", f.quote);
         if let Some(u) = &f.url {
             println!("      {u}");
+        }
+        match f.matched.as_deref() {
+            Some("other-cited") => println!("      (found in another document the feed cites for the judge, not in the one its field cites: read it in context)"),
+            Some("court-index") => println!("      (found in a document the court's index lists for the judge, not in the one the feed cites: read it in context)"),
+            Some(m) => println!("      (matched: {m})"),
+            None => {}
         }
     }
     for folder in model_folders(&court, doctype) {
@@ -827,6 +913,94 @@ mod tests {
         let yaml = serde_yaml::to_string(&p).unwrap();
         assert!(!yaml.contains("commentary"));
         assert_eq!(serde_yaml::from_str::<Profile>(&yaml).unwrap(), p);
+    }
+
+    #[test]
+    fn two_values_across_fields_drop_the_id_for_the_rest_of_the_judge() {
+        let j = json!({
+            "slug": "doe-jane", "fullName": "Jane Doe",
+            "font_formatting": "Footnotes shall be in 12-point font.",
+            "footnote_policy": "Footnotes shall be in 14-point font.",
+            "page_limits_motions": "Footnotes shall be in 12-point font. Memoranda shall not exceed 7,000 words."
+        });
+        let mut docs = Docs {
+            cache: PathBuf::from("/nonexistent"),
+            hosts: &[],
+            on: false,
+            loaded: BTreeMap::new(),
+        };
+        let p = profile_of(&j, "cacd", &src(), "ca-cd", &mut docs);
+        let ids: Vec<&str> = p.facts.iter().map(|f| f.id.as_str()).collect();
+        assert_eq!(ids, ["words.memorandum"]);
+        assert_eq!(
+            p.review
+                .iter()
+                .filter(|r| r.starts_with("footnote.exact_pt (two values)"))
+                .count(),
+            2,
+            "{:?}",
+            p.review
+        );
+    }
+
+    #[test]
+    fn a_sentence_found_in_another_document_says_where() {
+        let cache = std::env::temp_dir().join(format!("fb-judges-test-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&cache);
+        std::fs::create_dir_all(&cache).unwrap();
+        let put = |url: &str, body: &str| {
+            let name = format!("{}.pdf", &verify::sha256(url.as_bytes())[..24]);
+            std::fs::write(cache.join(name), body).unwrap();
+        };
+        put(
+            "https://ecf.cacd.uscourts.gov/a.html",
+            "<html><body><p>Hearings are on Mondays.</p></body></html>",
+        );
+        put(
+            "https://ecf.cacd.uscourts.gov/b.html",
+            "<html><body><p>Memoranda shall not exceed 7,000 words.</p><p>Replies shall not exceed 4,000 words.</p></body></html>",
+        );
+        let j = json!({
+            "slug": "doe-jane", "fullName": "Jane Doe",
+            "page_limits_motions": "Memoranda shall not exceed 7,000 words.",
+            "page_limits_replies": "Replies shall not exceed 4,000 words.",
+            "citations": {
+                "page_limits_motions": {"url": "https://ecf.cacd.uscourts.gov/a.html"},
+                "page_limits_replies": {"url": "https://ecf.cacd.uscourts.gov/b.html"}
+            }
+        });
+        let hosts = vec!["uscourts.gov".to_string()];
+        let mut docs = Docs {
+            cache: cache.clone(),
+            hosts: &hosts,
+            on: true,
+            loaded: BTreeMap::new(),
+        };
+        let p = profile_of(&j, "cacd", &src(), "ca-cd", &mut docs);
+        let _ = std::fs::remove_dir_all(&cache);
+        let got: Vec<(&str, bool, Option<&str>)> = p
+            .facts
+            .iter()
+            .map(|f| (f.id.as_str(), f.verified, f.matched.as_deref()))
+            .collect();
+        assert_eq!(
+            got,
+            [
+                ("words.memorandum", true, Some("other-cited")),
+                ("words.reply", true, None)
+            ]
+        );
+        let yaml = serde_yaml::to_string(&p).unwrap();
+        assert_eq!(yaml.matches("matched:").count(), 1);
+    }
+
+    #[test]
+    fn a_court_index_name_is_letters_digits_and_hyphens() {
+        assert!(index_name_ok("Aenlle-Rocha"));
+        assert!(index_name_ok("Pe\u{f1}a-Mar\u{ed}a"));
+        for bad in ["", "../x", "a/b", "a?b=c", "a b", "a%2F", "a.b", "a#b"] {
+            assert!(!index_name_ok(bad), "{bad}");
+        }
     }
 
     #[test]

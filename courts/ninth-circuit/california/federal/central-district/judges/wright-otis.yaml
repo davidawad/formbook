@@ -20,6 +20,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/judge/honorable-otis-d-wright-ii
   verified: true
   pdf_sha256: 9b8fbf9c95aa3f8553d0e79d1233dd4afb402e987c8761a53ee383dcffd96a46
+  matched: court-index
 - id: body.face
   value: Times New Roman
   quote: Times New Roman font must be used, and the font size must be 14 point.
@@ -27,6 +28,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/judge/honorable-otis-d-wright-ii
   verified: true
   pdf_sha256: 9b8fbf9c95aa3f8553d0e79d1233dd4afb402e987c8761a53ee383dcffd96a46
+  matched: court-index
 - id: footnote.exact_pt
   value: 12
   quote: Footnotes shall be in 12-point font and shall be used sparingly.
@@ -34,6 +36,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/judge/honorable-otis-d-wright-ii
   verified: true
   pdf_sha256: 9b8fbf9c95aa3f8553d0e79d1233dd4afb402e987c8761a53ee383dcffd96a46
+  matched: court-index
 - id: words.memorandum
   value: 7000
   quote: Length and Format of Motion Papers - Memoranda of points and authorities in support of or in opposition to motions shall not exceed 7,000 words.
@@ -41,6 +44,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/judge/honorable-otis-d-wright-ii
   verified: true
   pdf_sha256: 9b8fbf9c95aa3f8553d0e79d1233dd4afb402e987c8761a53ee383dcffd96a46
+  matched: court-index
 - id: words.reply
   value: 3300
   quote: Replies shall not exceed 3,300 words.
@@ -48,6 +52,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/file/ccb7fc30-df9d-41a1-a29e-15693b621e88
   verified: true
   pdf_sha256: 734746277ed3605910ae8eb8e36180d850a60b877e2d97bf5a2a414db18c7b74
+  matched: other-cited
 checklist:
 - topic: Motion hearing days
   field: motion_hearing_days

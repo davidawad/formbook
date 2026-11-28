@@ -20,6 +20,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/file/8400e036-456a-4f38-088e-08df102b3909
   verified: true
   pdf_sha256: bcd460cf56aa394bc4704916c8e04c7739f1fb04edf06afa009a13e54dcc983e
+  matched: court-index
 - id: body.min_pt
   value: 14
   quote: Text must be no less than fourteen (14) point font; footnotes must be no less than twelve (12) point font.
@@ -27,6 +28,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/file/8400e036-456a-4f38-088e-08df102b3909
   verified: true
   pdf_sha256: bcd460cf56aa394bc4704916c8e04c7739f1fb04edf06afa009a13e54dcc983e
+  matched: court-index
 - id: footnote.min_pt
   value: 12
   quote: Text must be no less than fourteen (14) point font; footnotes must be no less than twelve (12) point font.
@@ -34,6 +36,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/file/8400e036-456a-4f38-088e-08df102b3909
   verified: true
   pdf_sha256: bcd460cf56aa394bc4704916c8e04c7739f1fb04edf06afa009a13e54dcc983e
+  matched: court-index
 - id: words.memorandum
   value: 7000
   quote: Pursuant to Local Rule 11-6, Memoranda of Points and Authorities in support of or in opposition to motions, absent leave of Court, must not exceed 7,000 words, including headings, footnotes, and quotations, but excluding the caption, the table of contents, the table of authorities, the signature block, the certification required by Local Rule 11-6.2, and any indices and exhibits.
@@ -41,6 +44,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/file/8400e036-456a-4f38-088e-08df102b3909
   verified: true
   pdf_sha256: bcd460cf56aa394bc4704916c8e04c7739f1fb04edf06afa009a13e54dcc983e
+  matched: court-index
 - id: pages.reply
   value: 10
   quote: Replies must not exceed ten (10) pages.
@@ -48,6 +52,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/file/8400e036-456a-4f38-088e-08df102b3909
   verified: true
   pdf_sha256: bcd460cf56aa394bc4704916c8e04c7739f1fb04edf06afa009a13e54dcc983e
+  matched: court-index
 checklist:
 - topic: Motion hearing days
   field: motion_hearing_days

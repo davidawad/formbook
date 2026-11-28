@@ -146,6 +146,31 @@ pub fn holds(text: &str, quote: &str) -> bool {
     true
 }
 
+/// Whether the document holds a fact's sentence: the whole of it, as one run, and not as the tail of a longer sentence
+/// or a sentence under a label (the document's text before it ends in `,`, `;` or `:`). A quote the feed elided
+/// ("..." or "…") is never a fact's proof: its pieces could be stitched from far-apart text. Any occurrence that
+/// passes is enough.
+pub fn holds_fact(text: &str, quote: &str) -> bool {
+    if quote.contains('\u{2026}') || quote.contains("...") {
+        return false;
+    }
+    let q = normalize(quote);
+    let q = q.trim().trim_matches('"').trim();
+    if q.chars().count() < 12 || q.contains("...") {
+        return false;
+    }
+    let mut from = 0;
+    while let Some(i) = text[from..].find(q) {
+        let at = from + i;
+        let before = text[..at].trim_end().chars().next_back();
+        if !matches!(before, Some(',' | ';' | ':')) {
+            return true;
+        }
+        from = at + q.chars().next().map_or(1, char::len_utf8);
+    }
+    false
+}
+
 /// A URL without its fragment (`#page=6`).
 pub fn bare(url: &str) -> &str {
     url.split('#').next().unwrap_or(url)
@@ -167,8 +192,12 @@ pub fn host(url: &str) -> Option<&str> {
     )
 }
 
-/// Whether the URL is on one of the court hosts a source list names (`uscourts.gov` covers `apps.cacd.uscourts.gov`).
+/// Whether the URL is an https URL on one of the court hosts a source list names (`uscourts.gov` covers
+/// `apps.cacd.uscourts.gov`).
 pub fn court_hosted(url: &str, hosts: &[String]) -> bool {
+    if !url.starts_with("https://") {
+        return false;
+    }
     host(url).is_some_and(|h| {
         let h = h.to_lowercase();
         hosts
@@ -190,9 +219,13 @@ fn cached(cache: &Path, url: &str) -> PathBuf {
     cache.join(format!("{}.pdf", &sha256(url.as_bytes())[..24]))
 }
 
-/// The file of a court-hosted document, from the cache or fetched into it.
-pub fn fetch(url: &str, cache: &Path) -> Result<PathBuf, String> {
+/// The file of a court-hosted document, from the cache or fetched into it: over https only, redirects included, and
+/// only when the URL the fetch ended at is court-hosted too. `sync` empties the cache first unless `--cached`.
+pub fn fetch(url: &str, cache: &Path, hosts: &[String]) -> Result<PathBuf, String> {
     let url = bare(url);
+    if !court_hosted(url, hosts) {
+        return Err("not a court-hosted https URL".into());
+    }
     let file = cached(cache, url);
     if file.is_file() {
         return Ok(file);
@@ -200,7 +233,20 @@ pub fn fetch(url: &str, cache: &Path) -> Result<PathBuf, String> {
     std::fs::create_dir_all(cache).map_err(|e| format!("{}: {e}", cache.display()))?;
     let tmp = file.with_extension("part");
     let out = Command::new("curl")
-        .args(["-fsSL", "--retry", "2", "--max-time", "120", "-o"])
+        .args([
+            "-fsSL",
+            "--proto",
+            "=https",
+            "--proto-redir",
+            "=https",
+            "--retry",
+            "2",
+            "--max-time",
+            "120",
+            "-w",
+            "%{url_effective}",
+            "-o",
+        ])
         .arg(&tmp)
         .arg(url)
         .output()
@@ -211,6 +257,11 @@ pub fn fetch(url: &str, cache: &Path) -> Result<PathBuf, String> {
             "not fetched (curl exit {})",
             out.status.code().unwrap_or(-1)
         ));
+    }
+    let effective = String::from_utf8_lossy(&out.stdout).trim().to_string();
+    if !court_hosted(&effective, hosts) {
+        let _ = std::fs::remove_file(&tmp);
+        return Err(format!("redirected off the court's host, to {effective}"));
     }
     std::fs::rename(&tmp, &file).map_err(|e| e.to_string())?;
     Ok(file)
@@ -272,8 +323,8 @@ fn run_text(cmd: &mut Command, what: &str) -> Result<String, String> {
 
 /// The court-hosted document at `url` (fragment aside), read and normalized: a PDF (pdftotext), a Word file
 /// (pandoc), or a page or API answer of the court (its markup's text, every string of its JSON).
-pub fn load(url: &str, cache: &Path) -> Result<Corpus, String> {
-    let file = fetch(url, cache)?;
+pub fn load(url: &str, cache: &Path, hosts: &[String]) -> Result<Corpus, String> {
+    let file = fetch(url, cache, hosts)?;
     let bytes = std::fs::read(&file).map_err(|e| format!("{}: {e}", file.display()))?;
     let lead = String::from_utf8_lossy(&bytes[..bytes.len().min(512)])
         .trim_start()
@@ -317,8 +368,13 @@ pub fn load(url: &str, cache: &Path) -> Result<Corpus, String> {
 
 /// The documents a court's own index lists for a judge (`documents: [{id, ..}]` of the API answer at `api`), as
 /// URLs under `file_prefix`: where a quote is looked up when the document the feed cites has been replaced.
-pub fn listed_documents(api: &str, file_prefix: &str, cache: &Path) -> Vec<String> {
-    let Ok(file) = fetch(api, cache) else {
+pub fn listed_documents(
+    api: &str,
+    file_prefix: &str,
+    cache: &Path,
+    hosts: &[String],
+) -> Vec<String> {
+    let Ok(file) = fetch(api, cache, hosts) else {
         return vec![];
     };
     let Some(v) = std::fs::read(&file)
@@ -365,6 +421,34 @@ mod tests {
     }
 
     #[test]
+    fn a_fact_needs_its_whole_sentence_standing_on_its_own() {
+        // C.D. Cal. text: a fact sentence must be in the document as one run
+        let t = pdf_text("Replies shall not exceed 4,200 words or fifteen (15) pages for handwritten briefs. For MSJ: Replies shall not exceed ten (10) pages. Memoranda of points and authorities in support of motions for summary judgment, and oppositions shall not exceed 25 pages.\n");
+        assert!(holds_fact(
+            &t,
+            "Replies shall not exceed 4,200 words or fifteen (15) pages for handwritten briefs."
+        ));
+        // stitched from two places: never a fact, though the checklist matcher takes it
+        let stitched = "Replies shall not exceed 4,200 words ... shall not exceed 25 pages.";
+        assert!(holds(&t, stitched));
+        assert!(!holds_fact(&t, stitched));
+        assert!(!holds_fact(
+            &t,
+            "Replies shall not exceed 4,200 words\u{2026} for handwritten briefs."
+        ));
+        // under a label ("For MSJ:"), or the tail of a longer sentence (after a comma)
+        assert!(!holds_fact(&t, "Replies shall not exceed ten (10) pages."));
+        assert!(!holds_fact(
+            &t,
+            "and oppositions shall not exceed 25 pages."
+        ));
+        // one occurrence standing on its own is enough
+        let t2 = pdf_text("For MSJ: Replies shall not exceed ten (10) pages. B. Replies shall not exceed ten (10) pages.\n");
+        assert!(holds_fact(&t2, "Replies shall not exceed ten (10) pages."));
+        assert!(!holds_fact(&t2, "not exceed"));
+    }
+
+    #[test]
     fn a_numbered_list_keeps_its_numbers() {
         assert_eq!(
             without_line_number("12           Memoranda"),
@@ -403,6 +487,19 @@ mod tests {
             &courts
         ));
         assert!(!court_hosted("https://example.com/uscourts.gov", &courts));
+        // https only
+        assert!(!court_hosted(
+            "http://apps.cacd.uscourts.gov/JpsApi/file/f7",
+            &courts
+        ));
+        assert!(!court_hosted("ftp://uscourts.gov/x.pdf", &courts));
+        // a URL off the court's host is never fetched
+        assert!(fetch(
+            "http://www.cacd.uscourts.gov/x.pdf",
+            Path::new("/nonexistent"),
+            &courts
+        )
+        .is_err());
         assert_eq!(bare("https://a/b.pdf#page=2"), "https://a/b.pdf");
     }
 }

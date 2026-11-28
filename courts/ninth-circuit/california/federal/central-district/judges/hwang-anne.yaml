@@ -20,6 +20,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/file/b2228e14-89de-44ed-487c-08df2f987860
   verified: true
   pdf_sha256: 1d045460d76c656fe991af165c3e7fc9c291c81bd9e027714b5882419adb39b9
+  matched: court-index
 - id: body.face
   value: Times New Roman
   quote: Typeface and spacing shall comply with Local Rule 11-3.1.1, except that the parties are required to use only 14-point Times New Roman font.
@@ -27,6 +28,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/file/b2228e14-89de-44ed-487c-08df2f987860
   verified: true
   pdf_sha256: 1d045460d76c656fe991af165c3e7fc9c291c81bd9e027714b5882419adb39b9
+  matched: court-index
 - id: footnote.same_as_body
   value: true
   quote: Footnotes shall be in the same font and the same size as the body of the memorandum.
@@ -34,6 +36,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/file/b2228e14-89de-44ed-487c-08df2f987860
   verified: true
   pdf_sha256: 1d045460d76c656fe991af165c3e7fc9c291c81bd9e027714b5882419adb39b9
+  matched: court-index
 - id: pages.memorandum
   value: 25
   quote: Memoranda of points and authorities in support of or in opposition to motions shall not exceed twenty-five (25) pages.
@@ -41,6 +44,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/file/b2228e14-89de-44ed-487c-08df2f987860
   verified: true
   pdf_sha256: 1d045460d76c656fe991af165c3e7fc9c291c81bd9e027714b5882419adb39b9
+  matched: court-index
 - id: pages.reply
   value: 12
   quote: Replies shall not exceed twelve (12) pages.
@@ -48,6 +52,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/file/b2228e14-89de-44ed-487c-08df2f987860
   verified: true
   pdf_sha256: 1d045460d76c656fe991af165c3e7fc9c291c81bd9e027714b5882419adb39b9
+  matched: court-index
 checklist:
 - topic: Motion hearing days
   field: motion_hearing_days

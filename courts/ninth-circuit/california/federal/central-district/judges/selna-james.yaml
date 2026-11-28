@@ -20,6 +20,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/file/b2471173-15d0-4941-b342-08df36a00320
   verified: true
   pdf_sha256: 2aa826a84cbc722a26785effb6a604a25574c6b806d37708e6e9ad75d7b45d34
+  matched: court-index
 checklist:
 - topic: Motion hearing days
   field: motion_hearing_days

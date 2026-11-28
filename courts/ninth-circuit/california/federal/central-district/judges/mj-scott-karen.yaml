@@ -20,6 +20,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/judge/honorable-karen-e-scott
   verified: true
   pdf_sha256: eaee748b75f534d0e210cf0aef13854848ef474f6714112caa26a3c1eea1640e
+  matched: court-index
 - id: certificate.required
   value: true
   quote: For briefs subject to the word count limit, a certificate of compliance is required under Local Rule 11-6.2.
@@ -27,6 +28,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/judge/honorable-karen-e-scott
   verified: true
   pdf_sha256: eaee748b75f534d0e210cf0aef13854848ef474f6714112caa26a3c1eea1640e
+  matched: court-index
 checklist:
 - topic: Motion hearing days
   field: motion_hearing_days

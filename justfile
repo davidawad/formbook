@@ -98,7 +98,7 @@ build ALIAS DOCTYPE MD *OUT:
     {{fb}} build {{ALIAS}} {{DOCTYPE}} {{MD}} {{OUT}}
 
 # judges' standing orders as a layer over a court's layout (docs/JUDGES.md):
-# ARGS = sources | sync <alias> [--judge <slug>] | list <alias> | show <alias> <slug> [doctype] | check <alias> [doctype]
+# ARGS = sources | sync <alias> [--judge <slug>] [--cached] | list <alias> | show <alias> <slug> [doctype] | check <alias> [doctype]
 judges *ARGS:
     {{fb}} judges {{ARGS}}
 

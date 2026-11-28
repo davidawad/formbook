@@ -29,6 +29,9 @@ pub struct Line {
     pub text: String,
     /// The sentence of the order the line rests on.
     pub quote: Option<String>,
+    /// The document the sentence is from: shown where the line changes the layout or stops the build, so the filer
+    /// can read the sentence in its context.
+    pub url: Option<String>,
 }
 
 impl std::fmt::Display for Line {
@@ -41,9 +44,14 @@ impl std::fmt::Display for Line {
             Status::Unverified => "UNVERIFIED",
         };
         write!(f, "{tag} {}", self.text)?;
-        match &self.quote {
-            Some(q) => write!(f, "\n             \u{201C}{q}\u{201D}"),
-            None => Ok(()),
+        if let Some(q) = &self.quote {
+            write!(f, "\n             \u{201C}{q}\u{201D}")?;
+        }
+        match (&self.url, self.status) {
+            (Some(u), Status::Applied | Status::Conflict | Status::Unverified) => {
+                write!(f, "\n             {u}")
+            }
+            _ => Ok(()),
         }
     }
 }
@@ -133,12 +141,34 @@ fn set(l: &mut Value, path: &[&str], v: Value) {
     }
 }
 
-/// Every string of the layout with `find` replaced by `to`; the number of strings changed.
+/// Where `needle` stands in `s`, letters compared without their case (ASCII case, so byte offsets hold).
+fn find_ci(s: &str, needle: &str, from: usize) -> Option<usize> {
+    if needle.is_empty() {
+        return None;
+    }
+    let (h, n) = (s.as_bytes(), needle.as_bytes());
+    (from..=h.len().saturating_sub(n.len()))
+        .find(|&i| h.len() >= n.len() && h[i..i + n.len()].eq_ignore_ascii_case(n))
+}
+
+/// Every string of the layout with `find` (matched as `mentions` matches it) replaced by `to`; the number of
+/// replacements.
 fn replace_text(v: &mut Value, find: &str, to: &str) -> usize {
     match v {
-        Value::String(s) if s.contains(find) => {
-            *s = s.replace(find, to);
-            1
+        Value::String(s) => {
+            let mut out = String::new();
+            let (mut from, mut n) = (0, 0);
+            while let Some(i) = find_ci(s, find, from) {
+                out.push_str(&s[from..i]);
+                out.push_str(to);
+                from = i + find.len();
+                n += 1;
+            }
+            if n > 0 {
+                out.push_str(&s[from..]);
+                *s = out;
+            }
+            n
         }
         Value::Sequence(xs) => xs.iter_mut().map(|x| replace_text(x, find, to)).sum(),
         Value::Mapping(m) => m.iter_mut().map(|(_, x)| replace_text(x, find, to)).sum(),
@@ -146,9 +176,10 @@ fn replace_text(v: &mut Value, find: &str, to: &str) -> usize {
     }
 }
 
+/// Whether a string of the layout holds `needle`, case aside.
 fn mentions(v: &Value, needle: &str) -> bool {
     match v {
-        Value::String(s) => s.to_lowercase().contains(needle),
+        Value::String(s) => find_ci(s, needle, 0).is_some(),
         Value::Sequence(xs) => xs.iter().any(|x| mentions(x, needle)),
         Value::Mapping(m) => m.iter().any(|(_, x)| mentions(x, needle)),
         _ => false,
@@ -177,6 +208,7 @@ impl Run<'_> {
             status,
             text: format!("{text}{unverified}"),
             quote: Some(f.quote.clone()),
+            url: f.url.clone(),
         });
     }
 
@@ -185,33 +217,118 @@ impl Run<'_> {
         if f.verified || self.ctx.allow_unverified {
             return true;
         }
-        self.lines.push(Line {
-            status: Status::Unverified,
-            quote: Some(f.quote.clone()),
-            text: format!(
-                "{what}: the sentence was not found in the court's document; read {} and pass --allow-unverified",
-                f.url.as_deref().unwrap_or("the judge's order")
-            ),
-        });
+        self.unverified(f, what);
         false
     }
 
-    fn footnote(&mut self, f: &Fact, to: f64, why: &str) {
+    fn unverified(&mut self, f: &Fact, what: &str) {
+        self.lines.push(Line {
+            status: Status::Unverified,
+            quote: Some(f.quote.clone()),
+            url: f.url.clone(),
+            text: format!(
+                "{what}: the sentence was not found in the court's document; read the order{} and pass --allow-unverified",
+                if f.url.is_some() { " at the URL below" } else { "" }
+            ),
+        });
+    }
+
+    /// Every footnote fact of the profile, together: each is a size the footnotes must be (`same_as_body`,
+    /// `exact_pt`) or a floor (`min_pt`, `max_smaller_pt`). The footnotes take the one exact size, else the highest
+    /// floor (never lower than the court's); sizes that cannot all hold are a conflict. One line a fact.
+    fn footnotes(&mut self, p: &Profile) {
         let body = get(&self.layout, &["size"]).unwrap_or(12.0);
         let now = get(&self.layout, &["footnote", "size"]).unwrap_or(body);
-        if now == to {
-            return self.say(
-                Status::Satisfied,
-                f,
-                format!("footnotes {} pt ({why})", pts(now)),
-            );
+        // (fact, exact size or floor, is it exact, why)
+        let mut rules: Vec<(&Fact, f64, bool, String)> = Vec::new();
+        if let Some(f) = p.fact("footnote.same_as_body") {
+            rules.push((f, body, true, "the judge: the body's size".into()));
         }
-        let what = format!(
-            "footnotes {} pt, not the court layout's {} pt ({why})",
-            pts(to),
-            pts(now)
-        );
-        if !self.may_change(f, &what) {
+        if let Some((f, n)) = p
+            .fact("footnote.exact_pt")
+            .and_then(|f| num(f).map(|n| (f, n)))
+        {
+            rules.push((f, n, true, "the judge: exactly that".into()));
+        }
+        if let Some((f, n)) = p
+            .fact("footnote.min_pt")
+            .and_then(|f| num(f).map(|n| (f, n)))
+        {
+            rules.push((
+                f,
+                n,
+                false,
+                format!("the judge: no less than {} pt", pts(n)),
+            ));
+        }
+        if let Some((f, n)) = p
+            .fact("footnote.max_smaller_pt")
+            .and_then(|f| num(f).map(|n| (f, n)))
+        {
+            rules.push((
+                f,
+                body - n,
+                false,
+                format!("the judge: no more than {} pt under the body's", pts(n)),
+            ));
+        }
+        if rules.is_empty() {
+            return;
+        }
+        let mut exacts: Vec<f64> = rules.iter().filter(|r| r.2).map(|r| r.1).collect();
+        exacts.dedup();
+        let floor = rules
+            .iter()
+            .filter(|r| !r.2)
+            .map(|r| r.1)
+            .fold(f64::MIN, f64::max);
+        let distinct = exacts.windows(2).any(|w| w[0] != w[1]);
+        if distinct || exacts.first().is_some_and(|&e| e < floor) {
+            for (f, n, exact, why) in &rules {
+                let what = if *exact { "exactly" } else { "at least" };
+                self.say(Status::Conflict, f, format!("footnotes {what} {} pt ({why}): the judge's footnote rules cannot all hold; read the order", pts(*n)));
+            }
+            return;
+        }
+        let to = exacts.first().copied().unwrap_or_else(|| now.max(floor));
+        let holds_now = |n: f64, exact: bool| if exact { now == n } else { now >= n };
+        if to == now {
+            for (f, _, _, why) in &rules {
+                self.say(
+                    Status::Satisfied,
+                    f,
+                    format!("footnotes {} pt ({why})", pts(now)),
+                );
+            }
+            return;
+        }
+        // the change rests on the facts the court's size does not already meet
+        let what = |why: &str| {
+            format!(
+                "footnotes {} pt, not the court layout's {} pt ({why})",
+                pts(to),
+                pts(now)
+            )
+        };
+        let blocked: Vec<usize> = (0..rules.len())
+            .filter(|&i| {
+                !holds_now(rules[i].1, rules[i].2)
+                    && !rules[i].0.verified
+                    && !self.ctx.allow_unverified
+            })
+            .collect();
+        if !blocked.is_empty() {
+            for (i, (f, _, _, why)) in rules.iter().enumerate() {
+                if blocked.contains(&i) {
+                    self.unverified(f, &what(why));
+                } else {
+                    self.say(
+                        Status::Satisfied,
+                        f,
+                        format!("footnotes {} pt ({why})", pts(now)),
+                    );
+                }
+            }
             return;
         }
         set(&mut self.layout, &["footnote", "size"], Value::from(to));
@@ -221,7 +338,17 @@ impl Run<'_> {
             Value::from(note_pitch(to))
         };
         set(&mut self.layout, &["footnote", "pitch"], pitch);
-        self.say(Status::Applied, f, what);
+        for (f, n, exact, why) in &rules {
+            if holds_now(*n, *exact) {
+                self.say(
+                    Status::Satisfied,
+                    f,
+                    format!("footnotes {} pt ({why})", pts(to)),
+                );
+            } else {
+                self.say(Status::Applied, f, what(why));
+            }
+        }
     }
 
     fn body(&mut self, p: &Profile) {
@@ -273,37 +400,6 @@ impl Run<'_> {
         }
     }
 
-    fn footnotes(&mut self, p: &Profile) {
-        let body = get(&self.layout, &["size"]).unwrap_or(12.0);
-        let now = get(&self.layout, &["footnote", "size"]).unwrap_or(body);
-        if let Some(f) = p.fact("footnote.same_as_body") {
-            self.footnote(f, body, "the judge: the body's size");
-        } else if let Some((f, n)) = p
-            .fact("footnote.exact_pt")
-            .and_then(|f| num(f).map(|n| (f, n)))
-        {
-            self.footnote(f, n, "the judge: exactly that");
-        } else if let Some((f, n)) = p
-            .fact("footnote.min_pt")
-            .and_then(|f| num(f).map(|n| (f, n)))
-        {
-            self.footnote(
-                f,
-                now.max(n),
-                &format!("the judge: no less than {} pt", pts(n)),
-            );
-        } else if let Some((f, n)) = p
-            .fact("footnote.max_smaller_pt")
-            .and_then(|f| num(f).map(|n| (f, n)))
-        {
-            self.footnote(
-                f,
-                now.max(body - n),
-                &format!("the judge: no more than {} pt under the body's", pts(n)),
-            );
-        }
-    }
-
     fn words(&mut self, p: &Profile) {
         let paper = self.ctx.paper;
         // a reply has its own limit or the court's; an opposition its own, else the memorandum's
@@ -351,12 +447,14 @@ impl Run<'_> {
         let Some(b) = self.ctx.court.words_basis.clone() else {
             return self.say(Status::Note, f, "the certificate's wording is the court layout's: check that it names the limit the judge set".into());
         };
-        if !mentions(&self.layout, &b.find.to_lowercase()) {
+        if !mentions(&self.layout, &b.find) {
             return self.say(Status::Note, f, format!("the certificate's wording is the court layout's (its words on the local rule's limit were not found; {})", b.rule));
         }
         match self.ctx.order_date {
             Some(_) => {
-                replace_text(&mut self.layout, &b.find, &b.court_order);
+                if replace_text(&mut self.layout, &b.find, &b.court_order) == 0 {
+                    return self.say(Status::Conflict, f, format!("the certificate's words on the local rule's limit could not be replaced with the court order's ({})", b.rule));
+                }
                 self.say(Status::Applied, f, format!("the certificate cites the court order that set the limit ({})", b.rule));
             }
             None if court.is_some_and(|c| limit > c) => self.say(Status::Conflict, f, format!("the judge's limit is over the local rule's, so the certificate must cite the order: set `word_limit_order_date` in the frontmatter ({})", b.rule)),
@@ -411,6 +509,7 @@ pub fn apply(layout: &Value, p: &Profile, ctx: &Ctx) -> Outcome {
                 "the feed states no type size or length for this judge: the court's layout stands"
                     .into(),
             quote: None,
+            url: None,
         });
     }
     Outcome {
@@ -453,6 +552,7 @@ mod tests {
                     url: Some("https://c/x.pdf".into()),
                     verified: *verified,
                     pdf_sha256: None,
+                    matched: None,
                 })
                 .collect(),
             checklist: vec![],
@@ -639,5 +739,102 @@ mod tests {
         );
         assert_eq!(statuses(&o), [Status::Note]);
         assert!(o.lines[0].text.contains("25 pages"));
+    }
+
+    #[test]
+    fn a_line_that_changes_or_stops_shows_where_its_sentence_is() {
+        let p = profile(&[
+            ("words.reply", Value::from(4200.0), true),
+            ("body.exact_pt", Value::from(12.0), true),
+        ]);
+        let o = run(&p, "reply", None, false);
+        let shown: Vec<String> = o.lines.iter().map(|l| l.to_string()).collect();
+        // CONFLICT (body), applied (words), note (certificate)
+        assert_eq!(
+            statuses(&o),
+            [Status::Conflict, Status::Applied, Status::Note]
+        );
+        assert!(shown[0].contains("https://c/x.pdf"), "{}", shown[0]);
+        assert!(shown[1].contains("https://c/x.pdf"), "{}", shown[1]);
+        assert!(!shown[2].contains("https://c/x.pdf"), "{}", shown[2]);
+        let o = run(
+            &profile(&[("words.reply", Value::from(4200.0), false)]),
+            "reply",
+            None,
+            false,
+        );
+        assert_eq!(statuses(&o), [Status::Unverified]);
+        assert!(o.lines[0].to_string().contains("https://c/x.pdf"));
+    }
+
+    #[test]
+    fn every_footnote_fact_is_weighed_and_rules_that_cannot_all_hold_conflict() {
+        // a floor and an exact size that agree: the exact size, one line each
+        let p = profile(&[
+            ("footnote.exact_pt", Value::from(12.0), true),
+            ("footnote.min_pt", Value::from(10.0), true),
+        ]);
+        let o = run(&p, "memorandum", None, false);
+        assert_eq!(statuses(&o), [Status::Applied, Status::Satisfied]);
+        assert_eq!(get(&o.layout, &["footnote", "size"]), Some(12.0));
+        // the body's size and a smaller exact size: no layout meets both
+        let p = profile(&[
+            ("footnote.same_as_body", Value::from(true), true),
+            ("footnote.exact_pt", Value::from(12.0), true),
+        ]);
+        let o = run(&p, "memorandum", None, false);
+        assert_eq!(statuses(&o), [Status::Conflict, Status::Conflict]);
+        assert_eq!(o.layout, y(LAYOUT));
+        // an exact size under a floor
+        let p = profile(&[
+            ("footnote.exact_pt", Value::from(10.0), true),
+            ("footnote.min_pt", Value::from(12.0), true),
+        ]);
+        assert_eq!(
+            statuses(&run(&p, "memorandum", None, false)),
+            [Status::Conflict, Status::Conflict]
+        );
+        // two floors: the higher one, never lower than the court's
+        let p = profile(&[
+            ("footnote.min_pt", Value::from(12.0), true),
+            ("footnote.max_smaller_pt", Value::from(1.0), true),
+        ]);
+        let o = run(&p, "memorandum", None, false);
+        assert_eq!(statuses(&o), [Status::Satisfied, Status::Satisfied]);
+        assert_eq!(o.layout, y(LAYOUT));
+        // a change resting on an unverified fact stops; a fact the court already meets does not
+        let p = profile(&[
+            ("footnote.exact_pt", Value::from(12.0), false),
+            ("footnote.min_pt", Value::from(10.0), true),
+        ]);
+        let o = run(&p, "memorandum", None, false);
+        assert_eq!(statuses(&o), [Status::Unverified, Status::Satisfied]);
+        assert_eq!(o.layout, y(LAYOUT));
+    }
+
+    #[test]
+    fn the_certificate_is_matched_and_replaced_the_same_way() {
+        let p = profile(&[("words.reply", Value::from(4200.0), true)]);
+        let layout = y("size: 14\nwords: {limit: 7000}\nafter_tail:\n  - {text: \"this brief contains {xd.words} words, which Complies With The Word Limit Of L.R. 11-6.1.\"}\n");
+        let c = court();
+        let ctx = Ctx {
+            paper: "reply",
+            face: "Times New Roman",
+            order_date: Some("March 3, 2026"),
+            allow_unverified: false,
+            court: &c,
+        };
+        let o = apply(&layout, &p, &ctx);
+        assert_eq!(statuses(&o), [Status::Applied, Status::Applied]);
+        assert!(mentions(&o.layout, "set by court order dated"));
+        assert!(!mentions(&o.layout, "11-6.1"));
+        // the words are not there: a note, and nothing claims to be applied
+        let layout = y("size: 14\nwords: {limit: 7000}\nafter_tail:\n  - {text: \"complies with L.R. 11-6.1\"}\n");
+        let o = apply(&layout, &p, &ctx);
+        assert_eq!(statuses(&o), [Status::Applied, Status::Note]);
+        assert!(!mentions(&o.layout, "court order"));
+        let mut v = Value::from("A b A");
+        assert_eq!(replace_text(&mut v, "a", "x"), 2);
+        assert_eq!(v, Value::from("x b x"));
     }
 }

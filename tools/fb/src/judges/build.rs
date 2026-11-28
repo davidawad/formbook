@@ -187,6 +187,12 @@ fn materialize(
     layout: &Value,
 ) -> Res<PathBuf> {
     let name = folder.file_name().unwrap_or_default();
+    if !super::slug_ok(alias) || !super::slug_ok(slug) || name.is_empty() {
+        return Err(fail(
+            2,
+            format!("fb build: '{alias}/{slug}' is no folder name"),
+        ));
+    }
     let dir = root.join("out/judges").join(alias).join(slug).join(name);
     let bad = |e: std::io::Error| fail(2, format!("fb build: {}: {e}", dir.display()));
     if dir.exists() {
@@ -239,6 +245,16 @@ pub fn build(
     o: &Opts,
     slug: &str,
 ) -> Res<ExitCode> {
+    // the slug and the alias name a profile file and the folder under out/ that `materialize` deletes: never a path
+    if !super::slug_ok(slug) {
+        return Err(fail(
+            2,
+            format!("fb build: --judge '{slug}' is not a judge's slug (lower-case letters, digits and hyphens)"),
+        ));
+    }
+    if !super::slug_ok(alias) {
+        return Err(fail(2, format!("fb build: '{alias}' is not a court alias")));
+    }
     let folder = root.join(folder);
     let court = court_of(&folder)?;
     let profile = read_profile(&profile_path(&court, slug)).map_err(|e| {
@@ -357,6 +373,37 @@ mod tests {
         );
         assert!(split_args(&s(&["a", "--judge"])).is_err());
         assert!(split_args(&s(&["a", "--nope"])).is_err());
+    }
+
+    #[test]
+    fn a_slug_that_is_a_path_is_refused_before_anything_is_read_or_deleted() {
+        let root = Path::new("/nonexistent-root");
+        for slug in ["../../etc", "/tmp/x", "..", "a/b", "Doe", "", "doe jane"] {
+            let e = build(
+                root,
+                "cacd",
+                "courts/x/motion-brief",
+                "b.md",
+                None,
+                &Opts::default(),
+                slug,
+            )
+            .unwrap_err();
+            assert!(e.msg.contains("is not a judge's slug"), "{slug}: {}", e.msg);
+        }
+        let e = build(
+            root,
+            "../x",
+            "courts/x/motion-brief",
+            "b.md",
+            None,
+            &Opts::default(),
+            "doe-jane",
+        )
+        .unwrap_err();
+        assert!(e.msg.contains("not a court alias"), "{}", e.msg);
+        let e = super::super::main(&s(&["show", "cacd", "../../etc/passwd"])).unwrap_err();
+        assert!(e.msg.contains("is not a judge's slug"), "{}", e.msg);
     }
 
     #[test]

@@ -20,6 +20,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/judge/honorable-mark-c-scarsi
   verified: true
   pdf_sha256: 65f225b4e1a472fd25401da22df8637fe5be30ede32cbde491c580aad76f2efb
+  matched: court-index
 - id: words.reply
   value: 3000
   quote: Reply briefs may not exceed 3,000 words, excluding indices and exhibits.
@@ -27,6 +28,7 @@ facts:
   url: https://apps.cacd.uscourts.gov/JpsApi/file/45c481b5-8c26-4eba-2fc4-08df3514c597
   verified: true
   pdf_sha256: b28e8c824be0eb8b357e486f5b6aac17cfed6c819d0af5a3e1d2b2f248a4a57f
+  matched: court-index
 checklist:
 - topic: Motion hearing days
   field: motion_hearing_days
