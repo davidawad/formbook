@@ -32,8 +32,11 @@ jobs:
           fetch-depth: 0
       - name: Toolchain
         run: |
-          sh tools/bootstrap.sh
-          echo "$HOME/.local/share/formbook/env/bin" >> "$GITHUB_PATH"
+          # bootstrap exits 1 for soffice, bend and br, which preview does not use
+          sh tools/bootstrap.sh || true
+          bin="$HOME/.local/share/formbook/env/bin"
+          for t in magick pdftoppm pdftotext pdfinfo; do test -x "$bin/$t" || { echo "missing $t"; exit 1; }; done
+          echo "$bin" >> "$GITHUB_PATH"
       - name: Render previews
         run: |
           base="${DEMO_BASE:-origin/${{ github.base_ref }}}"
