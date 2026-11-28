@@ -155,11 +155,36 @@ end
 -- a double rule left of the text, a single rule right of it).
 -- ---------------------------------------------------------------------------
 
+local function pleading_header()
+  -- DrawingML page-anchored textbox (matching lib/docx/xdoc.lua) so Microsoft Word places 1..28 at x=0..72pt
+  -- instead of shifting legacy w:framePr w:x="0" onto the body text / double rule.
+  local emu = function(twips) return math.floor(twips * 635 + 0.5) end
+  local A = 'xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"'
+  local WPS = 'xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"'
+  local w_emu = emu(LEFT - INDENT)
+  local h_emu = emu(LINES * BODY)
+  local nums = {}
+  for i = 1, LINES do
+    nums[i] = p(xe.runs(tostring(i), { sz = NUM_SIZE }), { line = BODY, jc = "right", sz = NUM_SIZE })
+  end
+  local shape = '<w:r><w:drawing xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">'
+    .. '<wp:anchor distT="0" distB="0" distL="0" distR="0" simplePos="0" relativeHeight="1" '
+    .. 'behindDoc="1" locked="1" layoutInCell="1" allowOverlap="1"><wp:simplePos x="0" y="0"/>'
+    .. '<wp:positionH relativeFrom="page"><wp:posOffset>0</wp:posOffset></wp:positionH>'
+    .. '<wp:positionV relativeFrom="page"><wp:posOffset>' .. emu(TOP) .. '</wp:posOffset></wp:positionV>'
+    .. '<wp:extent cx="' .. w_emu .. '" cy="' .. h_emu .. '"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:wrapNone/>'
+    .. '<wp:docPr id="9911" name="Pleading line numbers"/><wp:cNvGraphicFramePr/><a:graphic ' .. A .. '>'
+    .. '<a:graphicData uri="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"><wps:wsp ' .. WPS .. '>'
+    .. '<wps:cNvSpPr txBox="1"/><wps:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="' .. w_emu .. '" cy="' .. h_emu
+    .. '"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/><a:ln><a:noFill/></a:ln></wps:spPr>'
+    .. '<wps:txbx><w:txbxContent>' .. table.concat(nums) .. '</w:txbxContent></wps:txbx>'
+    .. '<wps:bodyPr rot="0" vert="horz" wrap="square" lIns="0" tIns="0" rIns="0" bIns="0" anchor="t" anchorCtr="0">'
+    .. '<a:noAutofit/></wps:bodyPr></wps:wsp></a:graphicData></a:graphic></wp:anchor></w:drawing></w:r>'
+  return p(shape, { line = 20 })
+end
+
 local function footer()
   local out = {}
-  local frame = '<w:framePr w:w="' .. (LEFT - INDENT) .. '" w:h="' .. (LINES * BODY) .. '" w:hRule="exact" ' ..
-    'w:wrap="notBeside" w:vAnchor="page" w:hAnchor="page" w:x="0" w:y="' .. TOP .. '"/>'
-  for i = 1, LINES do out[#out + 1] = p(xe.runs(tostring(i)), { line = BODY, jc = "right", frame = frame }) end
   -- the page number and the title in a page-anchored frame of their own, footer-gap below the last numbered line: in
   -- the footer's flow LibreOffice grows the footer (it keeps the reference's 45 pt above it) into the 28th line
   local below = '<w:framePr w:w="' .. TEXTW .. '" w:wrap="notBeside" w:vAnchor="page" w:hAnchor="page" w:x="' ..
@@ -183,7 +208,8 @@ end
 -- The footer's distance from the page edge (its flow holds no text: the frames above place it).
 local FOOTER_DIST = 360
 
-local SECT = '<w:sectPr><w:footerReference w:type="default" r:id="rIdCalsuperctPage"/>' ..
+local SECT = '<w:sectPr><w:headerReference w:type="default" r:id="rIdCalsuperctLines"/>' ..
+  '<w:footerReference w:type="default" r:id="rIdCalsuperctPage"/>' ..
   '<w:pgSz w:w="12240" w:h="' .. PAGE_H .. '"/><w:pgMar w:top="' .. TOP .. '" w:right="' .. RIGHT .. '" w:bottom="' ..
   BOTTOM .. '" w:left="' .. LEFT .. '" w:header="720" w:footer="' .. FOOTER_DIST .. '" w:gutter="0"/>' ..
   '<w:pgBorders w:offsetFrom="text"><w:left w:val="double" w:sz="4" w:space="14" w:color="auto"/>' ..
@@ -595,6 +621,7 @@ function Pandoc(doc)
   signature(res)
 
   write_file("FORMBOOK_NEEDLES", table.concat(needles, "\n") .. "\n")
+  write_file("FORMBOOK_HEADERS", "rIdCalsuperctLines\t" .. pleading_header() .. "\n")
   write_file("FORMBOOK_FOOTERS", "rIdCalsuperctPage\t" .. footer() .. "\n")
   write_file("FORMBOOK_FINAL", SECT)
   -- The frontmatter is laid out above; pandoc must not print its title or date.

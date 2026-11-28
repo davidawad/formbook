@@ -63,26 +63,85 @@ local function roman(n)
 end
 
 -- ---------------------------------------------------------------------------------------------
+local function xesc(s)
+  return (s:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"))
+end
+
+local function xp(style, s, rpr)
+  local run = ""
+  if s ~= "" then
+    run = '<w:r>' .. (rpr or "") .. '<w:t xml:space="preserve">' .. xesc(s) .. '</w:t></w:r>'
+  end
+  return '<w:p><w:pPr><w:pStyle w:val="' .. style .. '"/></w:pPr>' .. run .. '</w:p>'
+end
+
+local function est_lines(s, col_pt)
+  -- Conservative line-count estimate in 12pt TNR inside a 3.2 in (230.4 pt) caption column.
+  local w = 0
+  for i = 1, #s do
+    local c = s:sub(i, i)
+    w = w + (c:match("%u") and 7.4 or (c:match("[ ,.]") and 3.0 or 5.4))
+  end
+  return math.max(1, math.ceil(w / col_pt))
+end
+
+local function tbl_cell(w, paras, valign)
+  local v = valign and ('<w:vAlign w:val="' .. valign .. '"/>') or ""
+  return '<w:tc><w:tcPr><w:tcW w:w="' .. w .. '" w:type="dxa"/>' .. v .. '</w:tcPr>' .. table.concat(paras) .. '</w:tc>'
+end
+
+local function fixed_tbl(widths, cells)
+  local grid = {}
+  local total = 0
+  for _, w in ipairs(widths) do
+    grid[#grid + 1] = '<w:gridCol w:w="' .. w .. '"/>'
+    total = total + w
+  end
+  return '<w:tbl><w:tblPr><w:tblW w:w="' .. total .. '" w:type="dxa"/><w:tblInd w:w="0" w:type="dxa"/>'
+    .. '<w:tblLayout w:type="fixed"/><w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/>'
+    .. '<w:bottom w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar></w:tblPr>'
+    .. '<w:tblGrid>' .. table.concat(grid) .. '</w:tblGrid>'
+    .. '<w:tr><w:trPr><w:cantSplit/></w:trPr>' .. table.concat(cells) .. '</w:tr></w:tbl>'
+end
+
+local function caption_table(m)
+  local parties = (m.caption and m.caption.parties) or {}
+  local left_paras, n_lines = {}, 0
+  for k, p in ipairs(parties) do
+    if k > 1 then
+      left_paras[#left_paras + 1] = xp("KsdCaptionV", "v.")
+      n_lines = n_lines + 1
+    end
+    for _, n in ipairs(p.names or {}) do
+      local txt = text_of(n)
+      left_paras[#left_paras + 1] = xp("KsdCaption", txt)
+      n_lines = n_lines + est_lines(txt, 230.4)
+    end
+    local desig = text_of(p.designation)
+    left_paras[#left_paras + 1] = xp("KsdCaptionDesig", desig)
+    n_lines = n_lines + 1
+  end
+  local mark_paras = {}
+  for _ = 1, n_lines do mark_paras[#mark_paras + 1] = xp("KsdCaption", ")") end
+  local number = text_of(m.case_number)
+  if number == "" then number = "____________________" end
+  local right_paras = { xp("KsdCaptionCase", "Case No. " .. number) }
+  if m.jury_demand then
+    right_paras[#right_paras + 1] = xp("KsdCaptionCase", "")
+    right_paras[#right_paras + 1] = xp("KsdCaptionCase", "JURY DEMANDED", "<w:rPr><w:b/><w:bCs/></w:rPr>")
+  end
+  return pandoc.RawBlock("openxml", fixed_tbl({ 4608, 432, 4320 }, {
+    tbl_cell(4608, left_paras),
+    tbl_cell(432, mark_paras),
+    tbl_cell(4320, right_paras, "center"),
+  }))
+end
+
 local function cover(m, out)
   table.insert(out, styled("Ksd Cover", { pandoc.Str("IN THE UNITED STATES DISTRICT COURT") }))
   table.insert(out, styled("Ksd Cover Last", { pandoc.Str("FOR THE DISTRICT OF KANSAS") }))
-  table.insert(out, gap())
-  local parties = (m.caption and m.caption.parties) or {}
-  for k, p in ipairs(parties) do
-    if k > 1 then table.insert(out, styled("Ksd Caption V", { pandoc.Str("v.") })) end
-    for _, n in ipairs(p.names or {}) do table.insert(out, styled("Ksd Caption", inl(n))) end
-    table.insert(out, styled("Ksd Caption Designation", inl(p.designation)))
-  end
-  local number = text_of(m.case_number)
-  if number == "" then number = "____________________" end
-  table.insert(out, styled("Ksd Caption Case", { pandoc.Str("Case No. " .. number) }))
-  if m.jury_demand then
-    table.insert(out, styled("Ksd Caption Case", {}))
-    table.insert(out, styled("Ksd Caption Case", { pandoc.Strong({ pandoc.Str("JURY DEMANDED") }) }))
-  end
-  table.insert(out, gap())
+  table.insert(out, caption_table(m))
   table.insert(out, styled("Ksd Title", upper_inl(md_inlines(text_of(m.title)))))
-  table.insert(out, gap())
 end
 
 -- ---------------------------------------------------------------------------------------------
@@ -145,25 +204,25 @@ end
 local function signature(m, out)
   local sig = m.signature
   if not sig then return end
-  local first = {}
+  local left_paras = {}
   if m.date and text_of(m.date) ~= "" then
-    append(first, { pandoc.Str("DATED:"), pandoc.Space() })
-    append(first, inl(m.date))
+    left_paras[1] = xp("KsdCaption", "DATED: " .. text_of(m.date))
+  else
+    left_paras[1] = xp("KsdCaption", "")
   end
-  table.insert(first, tab())
-  local intro = sig.intro or {}
-  for i, v in ipairs(intro) do
-    if i == 1 then
-      append(first, inl(v))
-      table.insert(out, styled("Ksd Signature First", first))
-    else
-      table.insert(out, styled("Ksd Signature", inl(v)))
-    end
+  local right_paras = {}
+  for _, v in ipairs(sig.intro or {}) do
+    right_paras[#right_paras + 1] = xp("KsdCaption", text_of(v))
   end
-  if #intro == 0 then table.insert(out, styled("Ksd Signature First", first)) end
-  table.insert(out, styled("Ksd Signature", {}))
-  table.insert(out, styled("Ksd Signature", inl(sig.signer)))
-  for _, v in ipairs(sig.lines or {}) do table.insert(out, styled("Ksd Signature", inl(v))) end
+  right_paras[#right_paras + 1] = xp("KsdSigSpacer", "")
+  if sig.signer then right_paras[#right_paras + 1] = xp("KsdCaption", text_of(sig.signer)) end
+  for _, v in ipairs(sig.lines or {}) do
+    right_paras[#right_paras + 1] = xp("KsdCaption", text_of(v))
+  end
+  table.insert(out, pandoc.RawBlock("openxml", fixed_tbl({ 4608, 4752 }, {
+    tbl_cell(4608, left_paras),
+    tbl_cell(4752, right_paras),
+  })))
 end
 
 local function certificate(s, out)
@@ -183,15 +242,26 @@ local function certificate(s, out)
   if s.signer_name then table.insert(out, styled("Ksd Signature", inl(s.signer_name))) end
 end
 
+local function unbind_abbrev_nbsp(blocks)
+  -- pandoc markdown+smart inserts NBSP after abbreviations like "No."; typst/cmarker keeps a normal space.
+  return pandoc.Blocks(blocks):walk({
+    Str = function(el)
+      if el.text:find("No%.\u{00A0}") then
+        return pandoc.Str((el.text:gsub("No%.\u{00A0}", "No. ")))
+      end
+    end
+  })
+end
+
 function Pandoc(doc)
   local m = doc.meta
   local out = {}
   cover(m, out)
   if m.lead_in and text_of(m.lead_in) ~= "" then
-    table.insert(out, pandoc.Para(inl(m.lead_in)))
+    table.insert(out, styled("Ksd Lead In", inl(m.lead_in)))
   end
-  body(doc.blocks, out)
-  table.insert(out, pandoc.Para({}))
+  body(unbind_abbrev_nbsp(doc.blocks), out)
+  table.insert(out, pandoc.RawBlock("openxml", xp("KsdSigSpacer", "")))
   signature(m, out)
   if m.service and KIND == "motion" then
     certificate(m.service, out)

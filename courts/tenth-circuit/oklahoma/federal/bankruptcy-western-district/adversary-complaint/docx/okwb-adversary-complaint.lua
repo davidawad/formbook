@@ -32,8 +32,8 @@ end
 -- Headings are capitals; a statute cited after "§" keeps its lowercase subsections (523(a)(2)(A)).
 local function heading_caps(s)
   local i = s:find("§", 1, true)
-  if not i then return s:upper() end
-  return s:sub(1, i - 1):upper() .. s:sub(i)
+  if not i then return pandoc.text.upper(s) end
+  return pandoc.text.upper(s:sub(1, i - 1)) .. s:sub(i)
 end
 
 -- Pandoc's YAML reader trims the leading space of a caption entry (" Debtor."), which the typst
@@ -64,6 +64,10 @@ local function cell_p(text, opts)
   local ppr = '<w:pStyle w:val="SingleSpaced"/>'
   if opts.indent then ppr = ppr .. '<w:ind w:left="1440" w:firstLine="0"/>' end
   if opts.center then ppr = ppr .. '<w:jc w:val="center"/>' end
+  if text:match("^_+$") then
+    ppr = ppr .. '<w:pBdr><w:bottom w:val="single" w:sz="6" w:space="1" w:color="000000"/></w:pBdr>'
+    return "<w:p><w:pPr>" .. ppr .. "</w:pPr></w:p>"
+  end
   local run = ""
   if text ~= "" then run = '<w:r><w:t xml:space="preserve">' .. esc(text) .. "</w:t></w:r>" end
   return "<w:p><w:pPr>" .. ppr .. "</w:pPr>" .. run .. "</w:p>"
@@ -104,7 +108,7 @@ end
 
 function Pandoc(doc)
   local meta = doc.meta
-  local title = meta.title and stringify(meta.title):upper() or ""
+  local title = meta.title and pandoc.text.upper(stringify(meta.title)) or ""
   meta.title = nil -- the title is set by the cover below, not by pandoc's Title block
   local out = {}
   local function add(b) out[#out + 1] = b end
@@ -117,8 +121,7 @@ function Pandoc(doc)
     add(caption_table(meta.caption.rows, caption_indents()))
   end
   add(blank())
-  add(para("Court Heading", { pandoc.Str(title) }))
-  add(blank())
+  add(para("Doc Title", { pandoc.Str(title) }))
 
   if meta.lead_in then
     add(para("Unnumbered Paragraph", meta.lead_in))
@@ -133,7 +136,8 @@ function Pandoc(doc)
       k = k + 1
       local inl = { pandoc.Str(k .. "."), TAB }
       for _, x in ipairs(b.content) do inl[#inl + 1] = x end
-      add(para("Numbered Paragraph", inl))
+      local style = (k < 10) and "Numbered Paragraph Single" or "Numbered Paragraph"
+      add(para(style, inl))
     elseif b.t == "BlockQuote" then
       for _, x in ipairs(b.content) do
         if x.t == "Para" or x.t == "Plain" then
@@ -155,18 +159,14 @@ function Pandoc(doc)
 
   -- Signature (LR 9004-1.D lines from the sample) and the approval line
   local sig = meta.signature and meta.signature.lines or {}
-  add(blank())
-  add(para("Signature Block", { pandoc.Str("Respectfully Submitted,") }))
-  add(blank())
+  add(para("Signature Right", { pandoc.Str("Respectfully Submitted,") }))
   for _, ln in ipairs(sig) do
     add(para("Signature Block", ln))
   end
   if meta.approval then
-    add(blank())
-    add(para("Single Spaced", { pandoc.Str("Approved by:") }))
-    add(blank())
+    add(para("Approval Header", { pandoc.Str("Approved by:") }))
     for _, ln in ipairs(meta.approval) do
-      add(para("Single Spaced", ln))
+      add(para("Approval Block", ln))
     end
   end
 

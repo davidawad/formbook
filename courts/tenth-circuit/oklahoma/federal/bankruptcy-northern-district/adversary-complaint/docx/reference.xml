@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The Bankr. N.D. Okla. adversary complaint's Word styles: the cross-engine recipe (tools/fb/src/docxxengine.rs)
+     in the face of the typst template ({font}, Times New Roman) at 12 pt (size 24 half points, LBR 9004-1(A)); Body
+     Text in exact 24.5 pt line boxes (490 twips: typst 1.345em leading + Times New Roman 0.695em line box) with a
+     half-inch first-line indent; single lines in 14.3 pt boxes (286 twips: typst 0.495em leading + 0.695em line box);
+     letter page with 1-inch margins (LBR 9004-1(A)) and centered 12 pt page number footer.
+     Added styles: Numbered1/Numbered2/Numbered3 (tabs matching typst #h(0.5in) N. #h(0.3in)), BodyFlush (prayer,
+     no first-line indent), ListAlpha (0.5 in indent, 0.4 in body-indent).
+     docx/oknb-adversary-complaint.lua builds the cover, generated jurisdiction/jury sections, headings, numbered
+     paragraphs and signature block. Twips: 20 x pt. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" base="xengine" pandoc-from="commonmark+smart+yaml_metadata_block" size="24" body="480" single="286" indent="720" heading="480" heading-before="0" heading-after="0" quote="240" note="286" note-size="24" note-after="120" footer="653">
+<w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="{font}" w:hAnsi="{font}" w:eastAsia="{font}" w:cs="{font}"/><w:kern w:val="2"/><w:sz w:val="24"/><w:szCs w:val="24"/><w:lang w:val="en-US" w:eastAsia="en-US" w:bidi="ar-SA"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:widowControl/><w:spacing w:after="0"/></w:pPr></w:pPrDefault></w:docDefaults>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="Numbered1"><w:name w:val="Numbered 1"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1332"/></w:tabs><w:ind w:firstLine="720"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="Numbered2"><w:name w:val="Numbered 2"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1452"/></w:tabs><w:ind w:firstLine="720"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="Numbered3"><w:name w:val="Numbered 3"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1572"/></w:tabs><w:ind w:firstLine="720"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="BodyFlush"><w:name w:val="Body Flush"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:ind w:left="0" w:firstLine="0"/></w:pPr></w:style>
+<w:style w:type="paragraph" w:customStyle="1" w:styleId="ListAlpha"><w:name w:val="List Alpha"/><w:basedOn w:val="BodyText"/><w:qFormat/><w:pPr><w:tabs><w:tab w:val="left" w:pos="1296"/></w:tabs><w:ind w:left="1296" w:hanging="576"/></w:pPr></w:style>
+</reference>

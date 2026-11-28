@@ -12,6 +12,17 @@ local function esc(s)
   return s
 end
 
+-- Pandoc's +smart inserts NBSP after abbreviations (Inc., Mr., No.); Typst smart-punctuation does not.
+local function unnbsp(blocks)
+  return pandoc.walk_block(pandoc.Div(blocks), {
+    Str = function(el)
+      if el.text:find("\194\160", 1, true) then
+        return pandoc.Str(el.text:gsub("\194\160", " "))
+      end
+    end
+  }).content
+end
+
 -- Frontmatter values are markdown (MetaInlines) or plain Lua strings; return inlines.
 local function inl(v)
   if v == nil then return pandoc.Inlines({}) end
@@ -61,23 +72,26 @@ local function caption_table(meta)
     return out
   end
   for i, p in ipairs(list_of(meta.parties)) do
-    if i > 1 then left[#left + 1] = raw_p("CaptionText", "v.", "<w:jc w:val=\"center\"/>") end
+    if i > 1 then left[#left + 1] = raw_p("CaptionText", "v.", "<w:jc w:val=\"center\"/><w:spacing w:before=\"0\" w:after=\"468\" w:line=\"306\" w:lineRule=\"exact\"/>") end
     for _, x in ipairs(group(p)) do left[#left + 1] = x end
   end
   local third = list_of(meta.third_party)
   if #third > 0 then
-    left[#left + 1] = "<w:p><w:pPr><w:pStyle w:val=\"CaptionText\"/><w:pBdr><w:bottom w:val=\"single\" w:sz=\"4\" w:space=\"1\" w:color=\"000000\"/></w:pBdr><w:spacing w:before=\"0\" w:after=\"260\" w:line=\"240\" w:lineRule=\"auto\"/></w:pPr></w:p>"
+    left[#left + 1] = "<w:p><w:pPr><w:pStyle w:val=\"CaptionText\"/><w:pBdr><w:bottom w:val=\"single\" w:sz=\"4\" w:space=\"1\" w:color=\"000000\"/></w:pBdr><w:spacing w:before=\"0\" w:after=\"314\" w:line=\"200\" w:lineRule=\"exact\"/></w:pPr></w:p>"
     for i, p in ipairs(third) do
-      if i > 1 then left[#left + 1] = raw_p("CaptionText", "v.", "<w:jc w:val=\"center\"/>") end
+      if i > 1 then left[#left + 1] = raw_p("CaptionText", "v.", "<w:jc w:val=\"center\"/><w:spacing w:before=\"0\" w:after=\"468\" w:line=\"306\" w:lineRule=\"exact\"/>") end
       for _, x in ipairs(group(p)) do left[#left + 1] = x end
     end
   end
   local right = {}
   local keys = { "bankruptcy_case", "adversary" }
   if MODE == "complaint" then keys = { "bankruptcy_case", "chapter", "adversary", "judge" } end
+  local first_right = true
   for _, key in ipairs(keys) do
     if meta[key] ~= nil then
-      right[#right + 1] = raw_p("CaptionText", plain(meta[key]), "<w:spacing w:before=\"0\" w:after=\"312\" w:line=\"240\" w:lineRule=\"auto\"/>")
+      local before = first_right and "288" or "0"
+      first_right = false
+      right[#right + 1] = raw_p("CaptionText", plain(meta[key]), "<w:spacing w:before=\"" .. before .. "\" w:after=\"374\" w:line=\"306\" w:lineRule=\"exact\"/>")
     end
   end
   if #right == 0 then right[#right + 1] = raw_p("CaptionText", "") end
@@ -103,7 +117,6 @@ local function counsel(meta)
   local out = {}
   for _, l in ipairs(list_of(meta.counsel)) do out[#out + 1] = style_para("Counsel", inl(l)) end
   if meta.client ~= nil then out[#out + 1] = style_para("Counsel", pandoc.Inlines({ pandoc.Emph(inl(meta.client)) })) end
-  out[#out + 1] = style_para("CaptionText", pandoc.Inlines({}))
   return out
 end
 
@@ -112,7 +125,7 @@ local function court_title()
   return {
     style_para("CourtTitle", pandoc.Inlines({ pandoc.Strong({ pandoc.Str(first) }) })),
     style_para("CourtTitle", pandoc.Inlines({ pandoc.Strong({ pandoc.Str("FOR THE DISTRICT OF WYOMING") }) })),
-    style_para("CaptionText", pandoc.Inlines({})),
+    pandoc.RawBlock("openxml", '<w:p><w:pPr><w:pStyle w:val="CaptionText"/><w:spacing w:before="0" w:after="0" w:line="220" w:lineRule="exact"/></w:pPr></w:p>'),
   }
 end
 
@@ -130,8 +143,14 @@ local function signature(meta)
     for _, l in ipairs(list_of(sig.lines)) do out[#out + 1] = style_para("SignatureNote", inl(l)) end
   else
     for _, s in ipairs(list_of(sig.signatures)) do out[#out + 1] = style_para("Signature", inl(s)) end
-    out[#out + 1] = style_para("Signature", pandoc.Inlines({}))
-    for _, l in ipairs(list_of(sig.lines)) do out[#out + 1] = style_para("SignatureSmall", inl(l)) end
+    local lines = list_of(sig.lines)
+    for i, l in ipairs(lines) do
+      if i == #lines then
+        out[#out + 1] = pandoc.RawBlock("openxml", '<w:p><w:pPr><w:pStyle w:val="SignatureSmall"/><w:keepNext w:val="0"/></w:pPr><w:r><w:t xml:space="preserve">' .. esc(plain(l)) .. '</w:t></w:r></w:p>')
+      else
+        out[#out + 1] = style_para("SignatureSmall", inl(l))
+      end
+    end
   end
   return out
 end
@@ -142,11 +161,12 @@ local function certificate(meta)
   if svc == nil then return {} end
   local out = { style_para("CertificateTitle", pandoc.Inlines({ pandoc.Strong({ pandoc.Str("CERTIFICATE OF SERVICE") }) })) }
   local text = "I hereby certify that on " .. plain(svc.date) .. ", I served a true and correct copy of the above and foregoing through the Case Management/Electronic Case Filing (CM/ECF) system of the United States Bankruptcy Court for the District of Wyoming, and the Notice of Electronic Filing of this document sent to the recipients below by the CM/ECF system constitutes service."
-  out[#out + 1] = pandoc.Para(pandoc.read(text, "markdown").blocks[1].content)
+  out[#out + 1] = style_para("CertificateBody", pandoc.read(text, "markdown").blocks[1].content)
+  out[#out + 1] = pandoc.RawBlock("openxml", '<w:p><w:pPr><w:pStyle w:val="CaptionText"/><w:keepNext/><w:spacing w:before="0" w:after="0" w:line="350" w:lineRule="exact"/></w:pPr></w:p>')
   for _, r in ipairs(list_of(svc.recipients)) do out[#out + 1] = style_para("Recipient", inl(r)) end
-  out[#out + 1] = style_para("CaptionText", pandoc.Inlines({}))
-  out[#out + 1] = style_para("Signature", pandoc.Inlines({ pandoc.Str("/s/ " .. plain(svc.signer)) }))
-  out[#out + 1] = style_para("Signature", inl(svc.signer))
+  out[#out + 1] = pandoc.RawBlock("openxml", '<w:p><w:pPr><w:pStyle w:val="CaptionText"/><w:keepNext/><w:spacing w:before="0" w:after="0" w:line="350" w:lineRule="exact"/></w:pPr></w:p>')
+  out[#out + 1] = pandoc.RawBlock("openxml", '<w:p><w:pPr><w:pStyle w:val="Signature"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="exact"/></w:pPr><w:r><w:t xml:space="preserve">' .. esc("/s/ " .. plain(svc.signer)) .. '</w:t></w:r></w:p>')
+  out[#out + 1] = pandoc.RawBlock("openxml", '<w:p><w:pPr><w:pStyle w:val="Signature"/><w:keepNext w:val="0"/><w:spacing w:before="0" w:after="0" w:line="360" w:lineRule="exact"/></w:pPr><w:r><w:t xml:space="preserve">' .. esc(plain(svc.signer)) .. '</w:t></w:r></w:p>')
   return out
 end
 
@@ -191,5 +211,5 @@ function Pandoc(doc)
   end
   add(signature(meta))
   add(certificate(meta))
-  return pandoc.Pandoc(blocks, pandoc.Meta({}))
+  return pandoc.Pandoc(unnbsp(blocks), pandoc.Meta({}))
 end

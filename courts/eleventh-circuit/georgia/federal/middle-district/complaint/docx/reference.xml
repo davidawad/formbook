@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Extracted from docx/reference.docx by fb docx-reference --extract (tools/fb/src/docxextract.rs); {font} is the typst template's face. -->
+<reference xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <!-- gamd complaint: Times New Roman 14 pt, double spacing as an exact 32 pt pitch (typst template: pitch = 32pt). -->
+  <w:docDefaults>
+    <w:rPrDefault>
+      <w:rPr>
+        <w:rFonts w:ascii="{font}" w:hAnsi="{font}" w:eastAsia="{font}" w:cs="{font}"/>
+        <w:sz w:val="28"/>
+        <w:szCs w:val="28"/>
+        <w:lang w:val="en-US" w:eastAsia="en-US" w:bidi="ar-SA"/>
+      </w:rPr>
+    </w:rPrDefault>
+    <w:pPrDefault>
+      <w:pPr>
+        <w:spacing w:before="0" w:after="0" w:line="640" w:lineRule="exact"/>
+      </w:pPr>
+    </w:pPrDefault>
+  </w:docDefaults>
+  <w:style w:type="paragraph" w:default="1" w:styleId="Normal">
+    <w:name w:val="Normal"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:widowControl/>
+      <w:jc w:val="left"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="character" w:default="1" w:styleId="DefaultParagraphFont">
+    <w:name w:val="Default Paragraph Font"/>
+    <w:uiPriority w:val="1"/>
+    <w:semiHidden/>
+    <w:unhideWhenUsed/>
+  </w:style>
+  <w:style w:type="table" w:default="1" w:styleId="TableNormal">
+    <w:name w:val="Normal Table"/>
+    <w:uiPriority w:val="99"/>
+    <w:semiHidden/>
+    <w:unhideWhenUsed/>
+    <w:tblPr>
+      <w:tblInd w:w="0" w:type="dxa"/>
+      <w:tblCellMar>
+        <w:top w:w="0" w:type="dxa"/>
+        <w:left w:w="0" w:type="dxa"/>
+        <w:bottom w:w="0" w:type="dxa"/>
+        <w:right w:w="0" w:type="dxa"/>
+      </w:tblCellMar>
+    </w:tblPr>
+  </w:style>
+  <w:style w:type="numbering" w:default="1" w:styleId="NoList">
+    <w:name w:val="No List"/>
+    <w:uiPriority w:val="99"/>
+    <w:semiHidden/>
+    <w:unhideWhenUsed/>
+  </w:style>
+
+  <!-- Body text: the numbered allegations and the lead-in. Number on its own line (AllegationNumber), text with a
+       0.5 in first-line indent (AllegationText). -->
+  <w:style w:type="paragraph" w:styleId="BodyText">
+    <w:name w:val="Body Text"/>
+    <w:basedOn w:val="Normal"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:spacing w:before="0" w:after="0" w:line="640" w:lineRule="exact"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="FirstParagraph">
+    <w:name w:val="First Paragraph"/>
+    <w:basedOn w:val="BodyText"/>
+    <w:next w:val="BodyText"/>
+    <w:qFormat/>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Compact">
+    <w:name w:val="Compact"/>
+    <w:basedOn w:val="BodyText"/>
+    <w:qFormat/>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="AllegationText">
+    <w:name w:val="Allegation Text"/>
+    <w:basedOn w:val="BodyText"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:ind w:firstLine="720"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="AllegationNumber">
+    <w:name w:val="Allegation Number"/>
+    <w:basedOn w:val="BodyText"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:keepNext/>
+      <w:keepLines/>
+      <w:jc w:val="center"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="PrayerItem">
+    <w:name w:val="Prayer Item"/>
+    <w:basedOn w:val="BodyText"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:tabs><w:tab w:val="left" w:pos="1620"/></w:tabs>
+      <w:ind w:left="1620" w:hanging="900"/>
+    </w:pPr>
+  </w:style>
+
+  <!-- Cover: court heading (single spaced, bold), caption (single spaced), title (double). -->
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="CourtHeading">
+    <w:name w:val="Court Heading"/>
+    <w:basedOn w:val="Normal"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:keepNext/>
+      <w:keepLines/>
+      <w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>
+      <w:jc w:val="center"/>
+    </w:pPr>
+    <w:rPr>
+      <w:b/>
+      <w:bCs/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="CaptionName">
+    <w:name w:val="Caption Name"/>
+    <w:basedOn w:val="Normal"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:keepLines/>
+      <w:spacing w:before="0" w:after="0" w:line="320" w:lineRule="exact"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="CaptionDesignation">
+    <w:name w:val="Caption Designation"/>
+    <w:basedOn w:val="CaptionName"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:ind w:left="1440"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="CaptionRight">
+    <w:name w:val="Caption Right"/>
+    <w:basedOn w:val="CaptionName"/>
+    <w:qFormat/>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="CoverTitle">
+    <w:name w:val="Cover Title"/>
+    <w:basedOn w:val="BodyText"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:keepNext/>
+      <w:keepLines/>
+      <w:jc w:val="center"/>
+    </w:pPr>
+    <w:rPr>
+      <w:b/>
+      <w:bCs/>
+    </w:rPr>
+  </w:style>
+
+  <!-- Headings: level 1 centred bold caps; level 2 centred bold; level 3 bold italic. Exact 32 pt, kept with the next. -->
+  <w:style w:type="paragraph" w:styleId="Heading1">
+    <w:name w:val="heading 1"/>
+    <w:basedOn w:val="BodyText"/>
+    <w:next w:val="AllegationText"/>
+    <w:uiPriority w:val="9"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:keepNext/>
+      <w:keepLines/>
+      <w:jc w:val="center"/>
+      <w:outlineLvl w:val="0"/>
+    </w:pPr>
+    <w:rPr>
+      <w:b/>
+      <w:bCs/>
+      <w:caps/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Heading2">
+    <w:name w:val="heading 2"/>
+    <w:basedOn w:val="BodyText"/>
+    <w:next w:val="AllegationText"/>
+    <w:uiPriority w:val="9"/>
+    <w:unhideWhenUsed/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:keepNext/>
+      <w:keepLines/>
+      <w:jc w:val="center"/>
+      <w:outlineLvl w:val="1"/>
+    </w:pPr>
+    <w:rPr>
+      <w:b/>
+      <w:bCs/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Heading3">
+    <w:name w:val="heading 3"/>
+    <w:basedOn w:val="BodyText"/>
+    <w:next w:val="AllegationText"/>
+    <w:uiPriority w:val="9"/>
+    <w:unhideWhenUsed/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:keepNext/>
+      <w:keepLines/>
+      <w:outlineLvl w:val="2"/>
+    </w:pPr>
+    <w:rPr>
+      <w:b/>
+      <w:bCs/>
+      <w:i/>
+      <w:iCs/>
+    </w:rPr>
+  </w:style>
+
+  <!-- Signature page: "Respectfully submitted", then the firm and signers indented 3 in, then the address flush left. -->
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="SignatureLead">
+    <w:name w:val="Signature Lead"/>
+    <w:basedOn w:val="BodyText"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:keepNext/>
+      <w:keepLines/>
+      <w:spacing w:before="460" w:after="300"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="SignatureBlock">
+    <w:name w:val="Signature Block"/>
+    <w:basedOn w:val="CaptionName"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:keepNext/>
+      <w:ind w:left="4320"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="SignatureBlockGap">
+    <w:name w:val="Signature Block Gap"/>
+    <w:basedOn w:val="SignatureBlock"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:spacing w:after="300"/>
+    </w:pPr>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="AddressBlock">
+    <w:name w:val="Address Block"/>
+    <w:basedOn w:val="CaptionName"/>
+    <w:qFormat/>
+  </w:style>
+  <w:style w:type="paragraph" w:customStyle="1" w:styleId="AddressBlockGap">
+    <w:name w:val="Address Block Gap"/>
+    <w:basedOn w:val="AddressBlock"/>
+    <w:qFormat/>
+    <w:pPr>
+      <w:keepNext/>
+      <w:spacing w:after="300"/>
+    </w:pPr>
+  </w:style>
+
+  <w:style w:type="paragraph" w:styleId="FootnoteText">
+    <w:name w:val="footnote text"/>
+    <w:basedOn w:val="Normal"/>
+    <w:uiPriority w:val="99"/>
+    <w:unhideWhenUsed/>
+    <w:pPr>
+      <w:spacing w:before="0" w:after="80" w:line="240" w:lineRule="auto"/>
+    </w:pPr>
+    <w:rPr>
+      <w:sz w:val="22"/>
+      <w:szCs w:val="22"/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="character" w:styleId="FootnoteReference">
+    <w:name w:val="footnote reference"/>
+    <w:uiPriority w:val="99"/>
+    <w:unhideWhenUsed/>
+    <w:rPr>
+      <w:vertAlign w:val="superscript"/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="paragraph" w:styleId="Footer">
+    <w:name w:val="footer"/>
+    <w:basedOn w:val="Normal"/>
+    <w:uiPriority w:val="99"/>
+    <w:unhideWhenUsed/>
+    <w:pPr>
+      <w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/>
+      <w:jc w:val="center"/>
+    </w:pPr>
+    <w:rPr>
+      <w:sz w:val="24"/>
+      <w:szCs w:val="24"/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="character" w:styleId="Hyperlink">
+    <w:name w:val="Hyperlink"/>
+    <w:uiPriority w:val="99"/>
+    <w:unhideWhenUsed/>
+    <w:rPr>
+      <w:color w:val="000000"/>
+      <w:u w:val="none"/>
+    </w:rPr>
+  </w:style>
+  <w:style w:type="character" w:styleId="VerbatimChar">
+    <w:name w:val="Verbatim Char"/>
+    <w:rPr>
+      <w:rFonts w:ascii="{font}" w:hAnsi="{font}"/>
+    </w:rPr>
+  </w:style>
+</w:styles>
+<footer id="rIdFtrDefault"><w:p><w:pPr><w:pStyle w:val="Footer"/></w:pPr><w:fldSimple w:instr=" PAGE "><w:r><w:rPr><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t>1</w:t></w:r></w:fldSimple></w:p></footer>
+<w:sectPr><w:footerReference w:type="default" r:id="rIdFtrDefault"/><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/><w:cols w:space="720"/></w:sectPr>
+</reference>

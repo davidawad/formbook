@@ -75,7 +75,7 @@ end
 local function cover(meta)
   local blocks = {}
   for _, l in ipairs(list_of(meta.court)) do blocks[#blocks + 1] = styled("Court Name", to_inlines(l)) end
-  blocks[#blocks + 1] = empty("Sig Gap")
+  blocks[#blocks + 1] = empty("Cover Gap")
   blocks[#blocks + 1] = caption(meta)
   blocks[#blocks + 1] = styled("Cover Title", to_inlines(meta.brief_title))
   return blocks
@@ -113,17 +113,26 @@ end
 -- and a heading that is neither resets the state (typst allegations()).
 local function number_allegations(blocks)
   local unnumbered, n = false, 0
+  local out = {}
   for _, b in ipairs(blocks) do
     if b.t == "Header" then
       local t = pandoc.utils.stringify(b.content)
       unnumbered = t:find("PRAYER", 1, true) ~= nil or t:find("JURY", 1, true) ~= nil
+      out[#out + 1] = b
     elseif b.t == "Para" and not unnumbered then
       n = n + 1
       table.insert(b.content, 1, pandoc.RawInline("openxml", '<w:r><w:tab/></w:r>'))
       table.insert(b.content, 1, pandoc.Str(tostring(n) .. "."))
+      if n >= 10 then
+        out[#out + 1] = styled("Body Text Wide", b.content)
+      else
+        out[#out + 1] = b
+      end
+    else
+      out[#out + 1] = b
     end
   end
-  return blocks
+  return out
 end
 
 -- Ordered lists (prayer items): the number is typed in front of each item, at the margin, with the text at 0.5 in
@@ -147,12 +156,26 @@ function OrderedList(el)
   return out
 end
 
+local function url_breaks(blocks)
+  return pandoc.Blocks(blocks):walk({
+    Str = function(el)
+      local s = el.text
+      if s:match("^https?://") then
+        -- Match typst URL breaking: allow breaks after single '/', keep '-' inside URL segments together.
+        s = s:gsub("([^/])/(%w)", "%1/\u{200B}%2")
+        s = s:gsub("%-(%w)", "-\u{2060}%1")
+        return pandoc.Str(s)
+      end
+    end
+  })
+end
+
 function Pandoc(doc)
   local meta = doc.meta
   local blocks = {}
   for _, b in ipairs(cover(meta)) do blocks[#blocks + 1] = b end
   if meta.lead_in then blocks[#blocks + 1] = pandoc.Para(to_inlines(meta.lead_in)) end
-  local body = number_allegations(doc.blocks)
+  local body = number_allegations(url_breaks(doc.blocks))
   for _, b in ipairs(body) do blocks[#blocks + 1] = b end
   blocks[#blocks + 1] = empty("Sig Gap")
   blocks[#blocks + 1] = signature(meta)
