@@ -274,8 +274,8 @@ mont	courts/ninth-circuit/montana/state/supreme-court	Montana Supreme Court	2026
 nevapp	courts/ninth-circuit/nevada/state/court-of-appeals	Court of Appeals of Nevada	2026-10-22	answering-brief,motion-brief,opening-brief,petition-for-writ,reply-brief	
 nev	courts/ninth-circuit/nevada/state/supreme-court	Nevada Supreme Court	2026-10-22	amicus-brief,answering-brief,brief-on-the-merits,motion-brief,petition-for-discretionary-review,petition-for-rehearing,petition-for-review,petition-for-writ,reply-brief	
 nmi	courts/ninth-circuit/northern-mariana-islands/state/supreme-court	Supreme Court of The Commonwealth of The Northern Mariana Islands	2026-10-21	answering-brief	
-orctapp	courts/ninth-circuit/oregon/state/court-of-appeals	Court of Appeals of Oregon	2027-01-01	amicus-brief,motion-brief	
-or	courts/ninth-circuit/oregon/state/supreme-court	Oregon Supreme Court	2027-01-01	amicus-brief,answering-brief,brief-on-the-merits,motion-brief,petition-for-discretionary-review,petition-for-rehearing,petition-for-review,petition-for-writ,reply-brief	
+orctapp	courts/ninth-circuit/oregon/state/court-of-appeals	Court of Appeals of Oregon	2026-10-21	amicus-brief,motion-brief	
+or	courts/ninth-circuit/oregon/state/supreme-court	Oregon Supreme Court	2026-10-21	amicus-brief,answering-brief,brief-on-the-merits,motion-brief,petition-for-discretionary-review,petition-for-rehearing,petition-for-review,petition-for-writ,reply-brief	
 washctapp	courts/ninth-circuit/washington/state/court-of-appeals	Court of Appeals of Washington	2026-10-21	answering-brief,motion-brief,opening-brief,petition-for-discretionary-review,petition-for-review,petition-for-writ,reply-brief	
 wash	courts/ninth-circuit/washington/state/supreme-court	Washington Supreme Court	2026-10-21	amicus-brief,answering-brief,brief-on-the-merits,motion-brief,petition-for-discretionary-review,petition-for-rehearing,petition-for-review,petition-for-writ,reply-brief	
 bap10	courts/tenth-circuit/bankruptcy-appellate-panel	United States Bankruptcy Appellate Panel of The Tenth Circuit	2026-10-20	answering-brief,opening-brief,reply-brief	
@@ -345,4 +345,4 @@ cadc	courts/dc-circuit/court-of-appeals	Court of Appeals for the D.C. Circuit	20
 dcb	courts/dc-circuit/district-of-columbia/federal/bankruptcy-district	United States Bankruptcy Court, District of Columbia	2026-10-17	adversary-complaint,motion-brief	
 dcd	courts/dc-circuit/district-of-columbia/federal/district	District Court, District of Columbia	2026-10-17	complaint,motion-brief	
 dc	courts/dc-circuit/district-of-columbia/state/court-of-appeals	District of Columbia Court of Appeals	2026-10-21	amicus-brief,answering-brief,brief-on-the-merits,motion-brief,petition-for-rehearing,petition-for-review,reply-brief	
-txdistrict-travis	courts/fifth-circuit/texas/state/district-court-travis	District Courts of Travis County, Texas (Austin)	2026-10-26	motion-brief,notice-of-appearance,notice-of-hearing,original-answer,proposed-order,rule-11-agreement	
+txdistrict-travis	courts/fifth-circuit/texas/state/district-court-travis	District Courts of Travis County, Texas (Austin)	2026-10-24	motion-brief,notice-of-appearance,notice-of-hearing,original-answer,proposed-order,rule-11-agreement	

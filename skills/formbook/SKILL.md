@@ -29,6 +29,7 @@ Typst plus poppler is enough to render and look at pages. `tools/check.sh` also 
    just find cand              # court folder + doc types that have a template
    just find "northern district" complaint
    ```
+   Then check the court's rules are current: `just court <alias> [doctype]` prints the template folder and the date its `rules.md` was last verified, and prints `WARN: <alias> rules last verified <date> (<n> days ago, threshold 180); re-check before filing` on stderr when that is over 180 days (`--max-age DAYS` to change, `--strict` to exit 1). On a WARN, tell the user and re-check the court's current rules (cited in `rules.md`) before relying on the template: federal amendments take effect every December 1.
    A doc type exists only if `<court>/<doctype>/typst/main.typ` exists. Empty `typst/` folders are scaffolds. The ninth circuit (`ca9`) is the reference court with its template at the court root (doc type shown as `.`). See `reference/doc-types.md` for what exists.
    If the court or doc type has no template, go to WRITE. Do not substitute another court's template: caption, length limits and certificates differ per court.
 2. **Start from the sample.**
