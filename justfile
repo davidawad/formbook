@@ -31,6 +31,14 @@ overlay-all:
 preview BASE="origin/master":
     {{fb}} preview --base {{BASE}}
 
+# release notes since the latest vX.Y.Z tag (fb release notes)
+release-notes:
+    {{fb}} release notes
+
+# tag origin/master as VERSION (vX.Y.Z, or major|minor|patch after the latest tag) with generated notes and push the tag; the release workflow publishes it. DRY=--dry-run to preview.
+release VERSION="minor" DRY="":
+    {{fb}} release cut {{VERSION}} {{DRY}}
+
 # run the eval-loop gates of DIR (fb check)
 check DIR:
     {{fb}} check {{DIR}}

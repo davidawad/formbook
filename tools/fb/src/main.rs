@@ -37,6 +37,7 @@ mod pin;
 mod preview;
 mod proc;
 mod readmes;
+mod release;
 mod render;
 mod selftest;
 mod sharedlib;
@@ -69,6 +70,7 @@ fn main() -> ExitCode {
         "manifest" => manifest::main(rest),
         "tracker" => track::main(rest),
         "readmes" => readmes::main(rest),
+        "release" => release::main(rest),
         "render" => render::main(rest),
         "render-latex" => render::latex_main(rest),
         "docx-reference" => docxref::main(rest),
@@ -96,7 +98,7 @@ fn main() -> ExitCode {
         "build" => filing::build(rest),
         "new-filing" => filing::new_filing(rest),
         "render-filing" => filing::render_filing(rest),
-        _ => Err(fail(2, "usage: fb check|check-changed|eval|selftest|check-selftest|bootstrap|showcase|render|render-latex|docx-reference|build|new|render-filing|overlay|preview|fonts|manifest|tracker|worklist|claim|contribute|find|new-filing|readmes|measure|diff|calibrate|cross-engine|fetch|lint|match-stamp|diff-selftest|usage|toc-layout|text-overlap|cover-pages|cover-structure ...")),
+        _ => Err(fail(2, "usage: fb check|check-changed|eval|selftest|check-selftest|bootstrap|showcase|render|render-latex|docx-reference|build|new|render-filing|overlay|preview|fonts|manifest|tracker|worklist|claim|contribute|find|new-filing|readmes|release|measure|diff|calibrate|cross-engine|fetch|lint|match-stamp|diff-selftest|usage|toc-layout|text-overlap|cover-pages|cover-structure ...")),
     };
     result.unwrap_or_else(|e| {
         eprintln!("{}", e.msg);
