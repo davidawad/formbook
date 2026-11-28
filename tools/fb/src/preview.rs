@@ -311,15 +311,7 @@ fn preview_one(
         run(
             Command::new("magick")
                 .args(&tiles)
-                .args([
-                    "-background",
-                    "white",
-                    "-gravity",
-                    "north",
-                    "-splice",
-                    "8x0",
-                    "+append",
-                ])
+                .args(["-bordercolor", "white", "-border", "4x0", "+append"])
                 .args(["-bordercolor", "white", "-border", "6"])
                 .arg(out.join(&png)),
             "magick",
