@@ -29,9 +29,6 @@ jobs:
     env:
       PR: ${{ github.event.number }}
       SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-      # DEMO (fb-595.101 POC, drop before merge): this PR changes no OUTPUT, so compare a past template commit (W.D. Wash. motion brief, fb-595.98)
-      DEMO_BASE: 2dbd8c744~1
-      DEMO_HEAD: 2dbd8c744
     steps:
       - uses: actions/checkout@v4
         with:
@@ -48,8 +45,8 @@ jobs:
           if [ -n "$PR" ]; then
             dest="pr-$PR/$SHA"
             prune="pr-$PR"
-            base="${DEMO_BASE:-origin/${{ github.base_ref }}}"
-            head="${DEMO_HEAD:-HEAD}"
+            base="origin/${{ github.base_ref }}"
+            head="HEAD"
           else
             dest="commit-$SHA"
             prune="$dest"
