@@ -92,9 +92,15 @@ find *ARGS:
 new ALIAS DOCTYPE MD:
     {{fb}} new {{ALIAS}} {{DOCTYPE}} {{MD}}
 
-# build an external markdown filing with the selected court template
+# build an external markdown filing with the selected court template; OUT: [out.pdf] and, under a judge's standing
+# order, --judge <slug> [--paper memorandum|opposition|reply] [--engine typst|latex|docx] (docs/JUDGES.md)
 build ALIAS DOCTYPE MD *OUT:
     {{fb}} build {{ALIAS}} {{DOCTYPE}} {{MD}} {{OUT}}
+
+# judges' standing orders as a layer over a court's layout (docs/JUDGES.md):
+# ARGS = sources | sync <alias> [--judge <slug>] | list <alias> | show <alias> <slug> [doctype] | check <alias> [doctype]
+judges *ARGS:
+    {{fb}} judges {{ARGS}}
 
 # start a filing from a doc type's sample input
 new-filing ALIAS DOCTYPE OUT:

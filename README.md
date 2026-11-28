@@ -15,6 +15,8 @@ Every template is checked against public record: each folder's `usage/` carries 
 - **Typst is the reference engine; DOCX is best effort.** Word has no pleading-paper layout of its own: its line numbering counts only body text, so tables, footnotes and single-spaced blocks fall off the court's 28-line grid, and the workaround (the numbers in a page-anchored text box) draws differently in Word and in LibreOffice. Some DOCX outputs, pleading paper above all, will not look right and may never be able to; that is why the templates are written in Typst. Details: [docs/DOCX.md](docs/DOCX.md#pleading-paper-why-typst-is-the-reference-engine).
 - More pictures, and the command that regenerates each: [docs/showcase/README.md](docs/showcase/README.md). Per-court progress is in the [index](#index) at the bottom.
 
+**Judges' standing orders.** For the districts a judge feed covers, `just build <alias> <doctype> brief.md --judge <slug>` renders a filing on the court's layout under one judge's standing order: the judge's word limit for a reply, the footnote size the order sets. Each requirement is read from the order's own sentence and checked against the document the court hosts before it changes anything; what the render cannot enforce (hearing days, proposed orders) is listed for the filer. See [docs/JUDGES.md](docs/JUDGES.md).
+
 These templates are not legal advice and do not check your arguments or citations. Verify every output against the court's current rules before you file; the court index below marks what is finished and what is still in progress.
 
 ## Contribute to open access to the law

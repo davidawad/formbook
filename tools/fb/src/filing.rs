@@ -3,6 +3,7 @@
 //!   fb find <alias|text> [doctype]               court folders and the doc types that have a typst template
 //!   fb new <alias> <doctype> <brief.md>          copy the contract sample to a new markdown file
 //!   fb build <alias> <doctype> <brief.md> [pdf]  render an external markdown filing with repo fonts
+//!       [--judge <slug> ..]                     under a judge's standing order (judges/build.rs, docs/JUDGES.md)
 //!   fb new-filing <alias> <doctype> <out-dir>    copy a doc type's first sample input to <out-dir>/filing.md
 //!   fb render-filing <doctype-dir> <filing.md> [out.pdf]   render a markdown file that lives outside the court folder
 use crate::{fail, repo_root, Res};
@@ -276,14 +277,37 @@ fn copy_contract_sample(root: &Path, folder: &str, out: &Path) -> Res<PathBuf> {
 
 /// `fb build <alias> <doctype> <brief.md> [out.pdf]`: render via the pinned engine configuration.
 pub fn build(args: &[String]) -> Res<ExitCode> {
+    let (args, opts) = crate::judges::build::split_args(args)?;
     if args.len() < 3 || args.len() > 4 {
         return Err(fail(
             2,
-            "usage: fb build <alias> <doctype> <brief.md> [out.pdf]",
+            "usage: fb build <alias> <doctype> <brief.md> [out.pdf] [--judge <slug> [--paper memorandum|opposition|reply] [--engine typst|latex|docx] [--allow-unverified]]",
         ));
     }
     let root = repo_root()?;
     let folder = template_dir(&root, &args[0], &args[1])?;
+    // under a judge's standing order (the option, else the filing's frontmatter `judge_profile`): docs/JUDGES.md
+    if let Some(slug) = opts
+        .judge
+        .clone()
+        .or_else(|| crate::judges::build::judge_named(&args[2]))
+    {
+        return crate::judges::build::build(
+            &root,
+            &args[0],
+            &folder,
+            &args[2],
+            args.get(3).map(String::as_str),
+            &opts,
+            &slug,
+        );
+    }
+    if opts != crate::judges::build::Opts::default() {
+        return Err(fail(
+            2,
+            "fb build: --paper, --engine and --allow-unverified go with --judge",
+        ));
+    }
     let mut render_args = vec![folder, args[2].clone()];
     if let Some(out) = args.get(3) {
         render_args.push(out.clone());

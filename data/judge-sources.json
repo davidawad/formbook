@@ -1,0 +1,26 @@
+{
+  "provider": "lawsnap",
+  "feed": "https://lawsnap.com/data/{slug}-judges.json",
+  "page": "https://lawsnap.com/courts/{slug}/judges/{judge}/",
+  "primary_hosts": ["uscourts.gov"],
+  "courts": {
+    "cacd": "ca-cd",
+    "cand": "ca-nd",
+    "flmd": "fl-md",
+    "flsd": "fl-sd",
+    "gand": "ga-nd",
+    "ilnd": "il-nd",
+    "njd": "nj-d",
+    "nysd": "ny-sd",
+    "paed": "pa-ed",
+    "txnd": "tx-nd",
+    "txsd": "tx-sd"
+  },
+  "court_index": {
+    "cacd": {
+      "page_prefix": "https://apps.cacd.uscourts.gov/Jps/",
+      "api_prefix": "https://apps.cacd.uscourts.gov/JpsApi/judge/",
+      "file_prefix": "https://apps.cacd.uscourts.gov/JpsApi/file/"
+    }
+  }
+}
