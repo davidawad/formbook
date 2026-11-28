@@ -12,7 +12,7 @@ For each exemplar: filer, case, docket number, source URL (also in `usage/SOURCE
 
 ## Previews
 
-The `pr-preview` workflow comments page images of every committed `OUTPUT-<id>.typst.pdf` this PR changes: before | after | red = before only, green = after only | the FILED-EXAMPLE page. Locally: `just preview` (writes `.overlay/preview/`). Nothing to paste here.
+The `pr-preview` workflow comments one image per changed page of every committed `OUTPUT-<id>.typst.pdf` this PR changes: top row BEFORE | AFTER, bottom row CHANGES (red = removed, green = added) | the REAL FILED EXAMPLE page. The comment is replaced on every push, so it always shows the latest revision. Before you open the PR, run `just preview` (writes `.overlay/preview/`) and look at every image. Nothing to paste here.
 
 ## Open tier-2 findings and BLOCKED items
 

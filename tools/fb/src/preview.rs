@@ -1,10 +1,12 @@
 //! `fb preview [--base REF] [--head REF] [--engine typst|latex|docx] [--pages N] [--out DIR] [--url-prefix URL]`:
 //! page images of every committed `usage/OUTPUT-<id>.<engine>.pdf` the branch changes, for a pull request.
-//! Each changed page is one row of four tiles:
-//!   before  = the OUTPUT at the merge base of BASE and HEAD
-//!   after   = the OUTPUT at HEAD
-//!   diff    = red: before only, green: after only, black: both (red multiplied over green)
-//!   filed   = the same-id FILED-EXAMPLE page sharing the most words with the after page (as `fb overlay` pairs)
+//! Each changed page is one image of four tiles in two rows:
+//!   top row     BEFORE  = the OUTPUT at the merge base of BASE and HEAD
+//!               AFTER   = the OUTPUT at HEAD
+//!   bottom row  CHANGES = red: before only, green: after only, black: both (red multiplied over green)
+//!               REAL FILED EXAMPLE = the same-id FILED-EXAMPLE page sharing the most words with the after page
+//!                         (as `fb overlay` pairs)
+//! A doc folder whose template sources changed but whose OUTPUTs are byte-identical is listed as no visual change.
 //! Pages whose before and after rasters are identical are skipped; at most N changed pages (default 3) per OUTPUT.
 //! PDFs are read from git (`git show <rev>:<path>`), not the working tree, so any two refs can be compared.
 //! Writes `<out>/<doc path>/PREVIEW-<id>-p<page>.png`, `<out>/manifest.tsv` (doc, id, page, status, png) and
@@ -12,10 +14,12 @@
 use crate::overlay::{all_words, best_page};
 use crate::proc::{capture, pdf_pages, TempDir};
 use crate::{fail, repo_root, Res};
+use serde_json::Value;
+use std::collections::BTreeSet;
 use std::path::{Path, PathBuf};
 use std::process::{Command, ExitCode};
 
-const DPI: &str = "50";
+const DPI: &str = "72";
 const OLD: &str = "red";
 const NEW: &str = "#00a000";
 const MARKER: &str = "<!-- fb-preview -->";
@@ -152,17 +156,17 @@ fn tile(img: Option<&Path>, geo: &str, caption: &str, font: &Path, dst: &Path) -
                 "-background",
                 "white",
                 "-splice",
-                "0x22",
+                "0x30",
             ])
             .arg("-font")
             .arg(font)
             .args([
                 "-pointsize",
-                "14",
+                "17",
                 "-fill",
-                "gray20",
+                "black",
                 "-annotate",
-                "+0+3",
+                "+0+5",
                 caption,
             ])
             .arg(dst),
@@ -196,6 +200,23 @@ fn diff_tile(old: Option<&Path>, new: Option<&Path>, geo: &str, t: &Path) -> Res
         "magick",
     )?;
     Ok(d)
+}
+
+/// The four tile titles, in layout order: row 1 before | after, row 2 changes | filed example.
+fn captions(page: usize, nb: usize, na: usize, filed: usize, nf: usize) -> [String; 4] {
+    let side = |who: &str, n: usize| match page <= n {
+        true => format!("{who} THIS PR: page {page} of {n}"),
+        false => format!("{who} THIS PR: no page {page}"),
+    };
+    [
+        side("BEFORE", nb),
+        side("AFTER", na),
+        "CHANGES: red = removed, green = added, black = same".to_string(),
+        match filed {
+            0 => "REAL FILED EXAMPLE: none for this sample".to_string(),
+            n => format!("REAL FILED EXAMPLE: page {n} of {nf} (closest text)"),
+        },
+    ]
 }
 
 fn geometry(img: &Path) -> Res<String> {
@@ -287,17 +308,13 @@ fn preview_one(
             _ => None,
         };
         let d = diff_tile(b.as_deref(), a.as_deref(), &geo, t)?;
+        let nf = filed_words.as_ref().map_or(0, Vec::len);
+        let [cb, ca, cd, cf] = captions(page, nb, na, filed_page, nf);
         let caps = [
-            (b.as_deref(), format!("before p.{page}")),
-            (a.as_deref(), format!("after p.{page}")),
-            (Some(d.as_path()), "red = before, green = after".to_string()),
-            (
-                f.as_deref(),
-                match filed_page {
-                    0 => "no FILED-EXAMPLE".to_string(),
-                    n => format!("filed p.{n}"),
-                },
-            ),
+            (b.as_deref(), cb),
+            (a.as_deref(), ca),
+            (Some(d.as_path()), cd),
+            (f.as_deref(), cf),
         ];
         let tiles: Vec<PathBuf> = caps
             .iter()
@@ -310,8 +327,19 @@ fn preview_one(
         let png = format!("{doc}/PREVIEW-{id}-p{page}.png");
         run(
             Command::new("magick")
-                .args(&tiles)
-                .args(["-bordercolor", "white", "-border", "4x0", "+append"])
+                .args(["-background", "white", "-gravity", "north", "("])
+                .args(&tiles[..2])
+                .args(["-bordercolor", "white", "-border", "6", "+append", ")", "("])
+                .args(&tiles[2..])
+                .args([
+                    "-bordercolor",
+                    "white",
+                    "-border",
+                    "6",
+                    "+append",
+                    ")",
+                    "-append",
+                ])
                 .args(["-bordercolor", "white", "-border", "6"])
                 .arg(out.join(&png)),
             "magick",
@@ -336,28 +364,76 @@ fn preview_one(
     })
 }
 
+/// Doc folders whose template sources (`<doc>/typst|latex|docx/...`) the diff touches.
+fn template_docs(changed: &str) -> BTreeSet<String> {
+    changed
+        .lines()
+        .filter(|p| p.starts_with("courts/"))
+        .filter_map(|p| {
+            ["/typst/", "/latex/", "/docx/"]
+                .iter()
+                .find_map(|e| p.find(e).map(|i| p[..i].to_string()))
+        })
+        .collect()
+}
+
+/// The court a doc folder belongs to, by the longest `path` prefix in data/index.json, else the folder itself.
+fn court_of(index: &Value, doc: &str) -> String {
+    index["courts"]
+        .as_object()
+        .into_iter()
+        .flatten()
+        .filter_map(|(_, c)| Some((c["path"].as_str()?, c["name"].as_str()?)))
+        .filter(|(p, _)| doc == *p || doc.starts_with(&format!("{p}/")))
+        .max_by_key(|(p, _)| p.len())
+        .map_or_else(|| doc.to_string(), |(_, n)| n.to_string())
+}
+
+/// `### <court> · <doc type> · sample <id>` and the folder path, for one OUTPUT (or a template-only folder).
+fn heading(r: &Row, court: &str) -> String {
+    let kind = r.doc.rsplit('/').next().unwrap_or(&r.doc);
+    let what = match (r.id.as_str(), r.status) {
+        ("", _) => "template files changed".to_string(),
+        (id, "new") => format!("sample `{id}`, new"),
+        (id, "deleted") => format!("sample `{id}`, deleted"),
+        (id, _) => format!("sample `{id}`"),
+    };
+    format!("\n### {court} · {kind} · {what}\n\n`{}`\n\n", r.doc)
+}
+
 /// The PR comment for `rows`, grouped by OUTPUT, images linked under `prefix`.
-fn comment(rows: &[Row], engine: &str, prefix: &str) -> String {
+fn comment(
+    rows: &[Row],
+    engine: &str,
+    prefix: &str,
+    revs: (&str, &str),
+    court: &dyn Fn(&str) -> String,
+) -> String {
     let head = format!(
-        "{MARKER}\n## Template previews ({engine})\n\nEach row: before | after | red = before only, green = after only, \
-         black = both | the FILED-EXAMPLE page it is modelled on. Pages that did not change are omitted.\n"
+        "{MARKER}\n## Template previews ({engine})\n\nBEFORE = `{}` (base), AFTER = `{}` (this PR's latest commit; this \
+         comment is replaced on every push). Each image: top row BEFORE | AFTER, bottom row CHANGES (red = removed by \
+         this PR, green = added, black = same) | the REAL FILED EXAMPLE page with the closest text. Unchanged pages are \
+         omitted.\n",
+        revs.0, revs.1
     );
     let body: String = rows
         .iter()
         .fold((String::new(), String::new()), |(acc, last), r| {
-            let key = format!("{}/usage/OUTPUT-{}", r.doc, r.id);
+            let key = format!("{}\t{}", r.doc, r.id);
             let title = (key != last)
-                .then(|| format!("\n### `{key}` ({})\n\n", r.status))
+                .then(|| heading(r, &court(&r.doc)))
                 .unwrap_or_default();
-            let line = match r.status {
-                "unchanged" => "No visual change.\n".to_string(),
-                _ => format!("![p.{}]({prefix}/{})\n", r.page, r.png),
+            let line = match (r.id.as_str(), r.status) {
+                ("", _) => "Every rendered OUTPUT is byte-identical to BEFORE: no visual change.\n"
+                    .to_string(),
+                (_, "unchanged") => "No visual change.\n".to_string(),
+                _ => format!("![page {}]({prefix}/{})\n", r.page, r.png),
             };
             (acc + &title + &line, key)
         })
         .0;
     match rows.is_empty() {
-        true => head + "\nNo committed OUTPUT pdf changed.\n",
+        true => head + "\nNo template or committed OUTPUT pdf changed.\n",
         false => head + &body,
     }
 }
@@ -385,13 +461,36 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
     }
     std::fs::create_dir_all(&out)
         .map_err(|e| fail(2, format!("fb preview: {}: {e}", out.display())))?;
+    let with_output: BTreeSet<&str> = outputs.iter().map(|(d, _)| d.as_str()).collect();
     let rows: Vec<Row> = outputs
         .iter()
         .map(|(doc, id)| preview_one(&root, &o, &mb, doc, id, &out, &font))
         .collect::<Res<Vec<_>>>()?
         .into_iter()
         .flatten()
+        .chain(
+            template_docs(&changed)
+                .into_iter()
+                .filter(|d| !with_output.contains(d.as_str()))
+                .map(|doc| Row {
+                    doc,
+                    id: String::new(),
+                    page: 0,
+                    status: "unchanged",
+                    png: String::new(),
+                }),
+        )
         .collect();
+    let index: Value = git(&root, &["show", &format!("{}:data/index.json", o.head)])
+        .ok()
+        .and_then(|b| serde_json::from_slice(&b).ok())
+        .unwrap_or(Value::Null);
+    let short = |r: &str| {
+        git(&root, &["rev-parse", "--short=10", r])
+            .map(|b| String::from_utf8_lossy(&b).trim().to_string())
+            .unwrap_or_else(|_| r.to_string())
+    };
+    let revs = (short(&mb), short(&o.head));
     let tsv: String = rows
         .iter()
         .map(|r| format!("{}\t{}\t{}\t{}\t{}\n", r.doc, r.id, r.page, r.status, r.png))
@@ -400,7 +499,16 @@ pub fn main(args: &[String]) -> Res<ExitCode> {
         std::fs::write(out.join(name), s).map_err(|e| fail(2, format!("fb preview: {name}: {e}")))
     };
     write("manifest.tsv", &tsv)?;
-    write("comment.md", &comment(&rows, &o.engine, &o.prefix))?;
+    write(
+        "comment.md",
+        &comment(
+            &rows,
+            &o.engine,
+            &o.prefix,
+            (&revs.0, &revs.1),
+            &|d: &str| court_of(&index, d),
+        ),
+    )?;
     println!(
         "fb preview: {} OUTPUT pdf(s), {} image(s) in {}",
         outputs.len(),
@@ -469,15 +577,57 @@ mod tests {
                 png: String::new(),
             },
         ];
-        let c = comment(&rows, "typst", "https://x/y");
+        let court = |d: &str| format!("Court {}", &d[7..]);
+        let c = comment(&rows, "typst", "https://x/y", ("aaa", "bbb"), &court);
         assert!(c.starts_with(MARKER));
+        assert!(c.contains("BEFORE = `aaa` (base), AFTER = `bbb`"));
         assert_eq!(
-            c.matches("### `courts/a/usage/OUTPUT-complaint` (changed)")
+            c.matches("### Court a · a · sample `complaint`\n\n`courts/a`")
                 .count(),
             1
         );
-        assert!(c.contains("![p.3](https://x/y/courts/a/PREVIEW-complaint-p3.png)"));
-        assert!(c.contains("### `courts/b/usage/OUTPUT-answer` (unchanged)\n\nNo visual change."));
-        assert!(comment(&[], "typst", ".").contains("No committed OUTPUT pdf changed."));
+        assert!(c.contains("![page 3](https://x/y/courts/a/PREVIEW-complaint-p3.png)"));
+        assert!(c.contains("### Court b · b · sample `answer`\n\n`courts/b`\n\nNo visual change."));
+        let t = Row {
+            doc: "courts/c/motion-brief".into(),
+            id: String::new(),
+            page: 0,
+            status: "unchanged",
+            png: String::new(),
+        };
+        assert!(comment(&[t], "typst", ".", ("a", "b"), &court)
+            .contains("· motion-brief · template files changed"));
+        assert!(comment(&[], "typst", ".", ("a", "b"), &court)
+            .contains("No template or committed OUTPUT pdf changed."));
+    }
+
+    #[test]
+    fn captions_name_each_tile() {
+        let c = captions(2, 3, 1, 7, 31);
+        assert_eq!(c[0], "BEFORE THIS PR: page 2 of 3");
+        assert_eq!(c[1], "AFTER THIS PR: no page 2");
+        assert!(c[2].starts_with("CHANGES: red = removed, green = added"));
+        assert_eq!(c[3], "REAL FILED EXAMPLE: page 7 of 31 (closest text)");
+        assert_eq!(
+            captions(1, 1, 1, 0, 0)[3],
+            "REAL FILED EXAMPLE: none for this sample"
+        );
+    }
+
+    #[test]
+    fn template_docs_are_the_folders_above_an_engine_dir() {
+        let ch = "courts/x/motion-brief/typst/a.typ\ncourts/x/motion-brief/docx/r.xml\ncourts/y/usage/INPUT-a.md\nlib/typst/x.typ\n";
+        assert_eq!(
+            template_docs(ch).into_iter().collect::<Vec<_>>(),
+            vec!["courts/x/motion-brief".to_string()]
+        );
+    }
+
+    #[test]
+    fn court_is_the_longest_index_path_prefix() {
+        let ix: Value = serde_json::json!({"courts": {"a": {"path": "courts/x", "name": "X"}, "b": {"path": "courts/x/y", "name": "Y"}}});
+        assert_eq!(court_of(&ix, "courts/x/y/motion-brief"), "Y");
+        assert_eq!(court_of(&ix, "courts/x/yz"), "X");
+        assert_eq!(court_of(&ix, "courts/q"), "courts/q");
     }
 }
