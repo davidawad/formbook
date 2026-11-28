@@ -1,0 +1,80 @@
+# Posts page images of the templates a pull request changes (fb preview, fb-595.101): for every committed
+# usage/OUTPUT-<id>.typst.pdf the PR changes, before | after | red = before only, green = after only | the
+# FILED-EXAMPLE page. The images go to the orphan branch `pr-previews` (pr-<n>/<head sha>/) and one comment on
+# the PR is created or updated in place. Forks' PRs get a read-only token: they get the images as a run artifact
+# only, no comment. Same-repo PRs are trusted code, so this job may write.
+name: pr-preview
+on:
+  pull_request:
+    paths:
+      - "courts/**"
+      - "lib/**"
+      - "tools/fb/src/preview.rs"
+      - ".github/workflows/pr-preview.yml"
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: pr-preview-${{ github.event.number }}
+  cancel-in-progress: true
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    env:
+      PR: ${{ github.event.number }}
+      SHA: ${{ github.event.pull_request.head.sha }}
+      # DEMO (fb-595.101 POC, drop before merge): this PR changes no OUTPUT, so compare a past template commit
+      DEMO_BASE: 76b40eef2~1
+      DEMO_HEAD: 76b40eef2
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Toolchain
+        run: |
+          sh tools/bootstrap.sh
+          echo "$HOME/.local/share/formbook/env/bin" >> "$GITHUB_PATH"
+      - name: Render previews
+        run: |
+          base="${DEMO_BASE:-origin/${{ github.base_ref }}}"
+          head="${DEMO_HEAD:-HEAD}"
+          url="https://raw.githubusercontent.com/${{ github.repository }}/pr-previews/pr-$PR/$SHA"
+          cargo run -q --release --manifest-path tools/fb/Cargo.toml -- \
+            preview --base "$base" --head "$head" --out "$RUNNER_TEMP/preview" --url-prefix "$url"
+          cat "$RUNNER_TEMP/preview/manifest.tsv"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pr-preview-${{ github.event.number }}
+          path: ${{ runner.temp }}/preview
+      - name: Publish images and comment
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          src="$RUNNER_TEMP/preview"
+          pub="$RUNNER_TEMP/pub"
+          git config --global user.name "formbook-preview"
+          git config --global user.email "formbook-preview@users.noreply.github.com"
+          if git ls-remote --exit-code origin pr-previews >/dev/null; then
+            git clone -q --depth 1 --branch pr-previews "https://x-access-token:$GH_TOKEN@github.com/${{ github.repository }}.git" "$pub"
+          else
+            git init -q -b pr-previews "$pub"
+            git -C "$pub" remote add origin "https://x-access-token:$GH_TOKEN@github.com/${{ github.repository }}.git"
+          fi
+          mkdir -p "$pub/pr-$PR/$SHA"
+          cp -R "$src"/. "$pub/pr-$PR/$SHA/"
+          rm -f "$pub/pr-$PR/$SHA/manifest.tsv" "$pub/pr-$PR/$SHA/comment.md"
+          git -C "$pub" add -A
+          git -C "$pub" commit -q -m "preview: pr-$PR $SHA" || echo "no new images"
+          for try in 1 2 3 4 5; do
+            git -C "$pub" push -q origin pr-previews && break
+            sleep $((RANDOM % 10 + try * 3))
+            git -C "$pub" pull -q --rebase origin pr-previews
+          done
+          id=$(gh api "repos/${{ github.repository }}/issues/$PR/comments" --paginate \
+            --jq '.[] | select(.body | startswith("<!-- fb-preview -->")) | .id' | head -n 1)
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/${{ github.repository }}/issues/comments/$id" -F body=@"$src/comment.md" >/dev/null
+          else
+            gh pr comment "$PR" --body-file "$src/comment.md"
+          fi
