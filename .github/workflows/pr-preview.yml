@@ -4,15 +4,12 @@
 #   pull request: one comment on the PR, replaced on every push (only the latest revision is kept on pr-previews).
 #   push to master: one comment on the pushed commit (agent jobs land on master without a PR).
 # Forks' PRs get a read-only token: they get the images as a run artifact only, no comment. Same-repo PRs are
-# trusted code, so this job may write.
+# trusted code, so this job may write. The job (check `preview`) is required on master PRs; admins bypass for
+# direct agent pushes.
 name: pr-preview
 on:
+  # every PR, so the `preview` check can be required; a PR touching no template skips the work and passes
   pull_request:
-    paths:
-      - "courts/**"
-      - "lib/**"
-      - "tools/fb/src/preview.rs"
-      - ".github/workflows/pr-preview.yml"
   push:
     branches: [master]
     paths:
@@ -33,7 +30,17 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Scope
+        run: |
+          if [ -n "$PR" ]; then
+            git diff --name-only "origin/${{ github.base_ref }}...HEAD" > "$RUNNER_TEMP/changed.txt"
+            if ! grep -qE "^(courts|lib|tools/fb/src/preview\.rs|\.github/workflows/pr-preview\.yml)" "$RUNNER_TEMP/changed.txt"; then
+              echo "no template change in this PR: nothing to preview"
+              echo "SKIP=1" >> "$GITHUB_ENV"
+            fi
+          fi
       - name: Toolchain
+        if: env.SKIP != '1'
         run: |
           # bootstrap exits 1 for soffice, bend and br, which preview does not use
           sh tools/bootstrap.sh || true
@@ -41,6 +48,7 @@ jobs:
           for t in magick pdftoppm pdftotext pdfinfo; do test -x "$bin/$t" || { echo "missing $t"; exit 1; }; done
           echo "$bin" >> "$GITHUB_PATH"
       - name: Render previews
+        if: env.SKIP != '1'
         run: |
           if [ -n "$PR" ]; then
             dest="pr-$PR/$SHA"
@@ -59,11 +67,12 @@ jobs:
             preview --base "$base" --head "$head" --out "$RUNNER_TEMP/preview" --url-prefix "$url"
           cat "$RUNNER_TEMP/preview/manifest.tsv"
       - uses: actions/upload-artifact@v4
+        if: env.SKIP != '1'
         with:
           name: pr-preview-${{ github.event.number || github.sha }}
           path: ${{ runner.temp }}/preview
       - name: Publish images and comment
-        if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+        if: env.SKIP != '1' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository)
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
